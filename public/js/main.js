@@ -1,10 +1,10 @@
 $(function(){
     console.log("hoge");
-    var url = "http://infic.azurewebsites.net/";
+    var apiUrl = "http://infic.azurewebsites.net/api";
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
-	      url + action,
+	      apiUrl + action,
 	      params, 
 	      callback(data),
 	      "json"
