@@ -30,16 +30,24 @@ class Controller_Users extends Controller_Rest
 	 */
 	public function get_index()
 	{
-
-
-		$ret = array('success' => true);
-
+		// ログインしていないのであればログインを
+		if (!Auth::check())
+		{
+		    $ret = array('message' => 'ログインをしてください');
+		}
+		else
+		{
+			$ret = array('success' => true);
+		}
+		
+/*
 		$row = DB::query("SELECT * FROM users")->execute();
 		$data = $row->as_array();
 		$ret = array(
 			'success' => true,
 			'data' => $data,
 		);
+		$sql = "";
 		/*
 		$row = DB::query("SELECT * FROM infic_db.data")->execute();
 		$res = $row->as_array();
@@ -48,41 +56,57 @@ class Controller_Users extends Controller_Rest
  		return $this->response($ret);
 	}
 
-	/**
-	 * The basic welcome message
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
 	public function get_login()
 	{
 		$username = Input::param("username");
 		$password = Input::param("password");
-		$ret = array('success' => true);
+		if (Auth::login($username, $password))
+		{
+			$ret = array('success' => true);
+		}
+		else
+		{
+			$ret = array('success' => false);
+		}
+		
  		return $this->response($ret);
 	}
 
-	/**
-	 * The basic welcome message
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
+	public function get_logout()
+	{
+		Auth::logout();
+		$ret = array('success' => true);
+		return $this->response($ret);
+	}
+
 	public function get_register()
 	{
+		
+		DB::query("DROP TABLE users")->execute();
+		$sql = "CREATE TABLE users (
+  username NVARCHAR(50),
+  password NVARCHAR(255),
+  email NVARCHAR(512),
+  profile_fields NVARCHAR(512),
+  last_login NVARCHAR(512),
+  login_hash NVARCHAR(512),
+  created_at INT
+);";
+		DB::query($sql)->execute();
+
 		$username = Input::param("username");
 		$password = Input::param("password");
 	    if (Input::param())
 	    {
-            Auth::create_user(
+            echo Auth::create_user(
                 $username,
                 $password,
-                $username
+                'ikko615@gmail.com'
             );
+            exit;
             Session::set_flash('success','success create your account.');
 	    }
 	    $ret = array('success' => true);
  		return $this->response($ret);
 	}	
 }
-
