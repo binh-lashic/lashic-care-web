@@ -19,7 +19,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_ApiUser extends Controller_Rest
+class Controller_Api_User extends Controller_Rest
 {
 	protected $format = 'json';
 	/**
