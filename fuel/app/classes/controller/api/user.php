@@ -56,7 +56,7 @@ class Controller_Api_User extends Controller_Rest
  		return $this->response($ret);
 	}
 
-	public function get_login()
+	public function post_login()
 	{
 		$username = Input::param("username");
 		$password = Input::param("password");
