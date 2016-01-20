@@ -1,6 +1,6 @@
 $(function(){
     console.log("hoge");
-    var apiUrl = "http://infic.azurewebsites.net/api";
+    var apiUrl = "http://infic.azurewebsites.net/api/";
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
