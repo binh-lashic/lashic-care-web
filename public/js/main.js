@@ -6,7 +6,7 @@ $(function(){
 	    $.post(
 	      apiUrl + action,
 	      params, 
-	      callback(data),
+	      callback,
 	      "json"
 	    );
     }
