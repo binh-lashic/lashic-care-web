@@ -31,24 +31,20 @@ class Controller_Users extends Controller_Rest
 	public function get_index()
 	{
 
-		/*
-		$q = \DB::select()->from('data')->limit(5);
-		$r = $q->execute();
-		print_r($r);
-		*/
-		
+
 		$ret = array('success' => true);
 
-		$row = DB::query("SELECT * FROM sysobjects WHERE xtype = 'u'")->execute();
-		$res = $row->as_array();
-		print_r($res);
+		$row = DB::query("SELECT * FROM users")->execute();
+		$data = $row->as_array();
+		$ret = array(
+			'success' => true,
+			'data' => $data,
+		);
 		/*
 		$row = DB::query("SELECT * FROM infic_db.data")->execute();
 		$res = $row->as_array();
 		print_r($res);
 		*/
-
-		exit;
  		return $this->response($ret);
 	}
 
@@ -76,7 +72,16 @@ class Controller_Users extends Controller_Rest
 	{
 		$username = Input::param("username");
 		$password = Input::param("password");
-		$ret = array('success' => true);
+	    if (Input::param())
+	    {
+            Auth::create_user(
+                $username,
+                $password,
+                $username
+            );
+            Session::set_flash('success','success create your account.');
+	    }
+	    $ret = array('success' => true);
  		return $this->response($ret);
 	}	
 }
