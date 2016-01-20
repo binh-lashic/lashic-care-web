@@ -12,7 +12,7 @@ $(function(){
     }
 
     $("#login").submit(function() {
-//		console.log("login");
+		console.log("login");
 		var params = {
 			'username': $("#username").val(),
 			'password': $("#password").val()
