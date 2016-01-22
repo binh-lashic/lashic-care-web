@@ -6,7 +6,7 @@ class Controller_Api extends Controller_Rest
 	protected $result;
 
 	public function response($http_status = null) {
-		$this->result['errors'] => $errors;
+		$this->result['errors'] = $this->errors;
 		$res = parent::response($this->result, $http_status);
 		$res->set_header('Access-Control-Allow-Origin', '*');
 		return $res;
