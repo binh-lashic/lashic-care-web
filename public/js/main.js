@@ -11,6 +11,10 @@ $(function(){
 	    );
     }
 
+	api("user/login_check", null, function(data){
+		console.log(data);
+	});
+
     $("#login").submit(function() {
 		console.log("login");
 		var params = {

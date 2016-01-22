@@ -1,6 +1,16 @@
 <?php
 class Controller_Api_User extends Controller_Api
 {
+	public function get_login_check() {
+		if (!Auth::check())
+		{
+		    $this->result = array('message' => 'ログインをしてください');
+		} else {
+			$this->result = array('message' => 'ログインしています');
+		}
+ 		return $this->response();
+	}
+
 	public function get_index()
 	{
 		// ログインしていないのであればログインを
