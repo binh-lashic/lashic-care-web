@@ -11,6 +11,16 @@ class Controller_Api_User extends Controller_Api
  		return $this->result();
 	}
 
+	public function get_login_check() {
+		if (!Auth::check())
+		{
+		    $this->result = array('message' => 'ログインをしてください');
+		} else {
+			$this->result = array('message' => 'ログインしています');
+		}
+ 		return $this->result();
+	}
+
 	public function get_index()
 	{
 		// ログインしていないのであればログインを
@@ -31,7 +41,7 @@ class Controller_Api_User extends Controller_Api
 		$password = Input::param("password");
 		if (Auth::login($username, $password))
 		{
-			$this->ret = array('success' => true);
+			$this->result = array('success' => true);
 		}
 		else
 		{
