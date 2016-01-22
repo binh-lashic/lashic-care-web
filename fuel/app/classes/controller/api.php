@@ -6,6 +6,8 @@ class Controller_Api extends Controller_Rest
 
 	public function response($data = array(), $http_status = null) {
 		$data['hoge'] = true;
-		return parent::response($data, $http_status);
+		$res = parent::response($data, $http_status);
+		$res->set_header('Access-Control-Allow-Origin', '*');
+		return $res;
 	}
 }
