@@ -1,7 +1,7 @@
 <?php
 class Controller_Api_User extends Controller_Api
 {
-	public function get_login_check() {
+	public function post_login_check() {
 		if (!Auth::check())
 		{
 		    $this->result = array('message' => 'ログインをしてください');
