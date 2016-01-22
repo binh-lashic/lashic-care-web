@@ -8,7 +8,7 @@ class Controller_Api_User extends Controller_Api
 		} else {
 			$this->result = array('message' => 'ログインしています');
 		}
- 		return $this->response();
+ 		return $this->result();
 	}
 
 	public function get_index()
@@ -22,7 +22,7 @@ class Controller_Api_User extends Controller_Api
 		{
 			$ret = array('success' => true);
 		}
- 		return $this->response($ret);
+ 		return $this->result($ret);
 	}
 
 	public function post_login()
@@ -39,14 +39,14 @@ class Controller_Api_User extends Controller_Api
 				'message' => "ユーザー名かパスワードが間違っています"
 			);
 		}
- 		return $this->response($ret);
+ 		return $this->result($ret);
 	}
 
 	public function get_logout()
 	{
 		Auth::logout();
 		$ret = array('success' => true);
-		return $this->response($ret);
+		return $this->result($ret);
 	}
 
 	public function get_register()
@@ -77,6 +77,6 @@ class Controller_Api_User extends Controller_Api
             Session::set_flash('success','success create your account.');
 	    }
 	    $ret = array('success' => true);
- 		return $this->response($ret);
+ 		return $this->result($ret);
 	}	
 }
