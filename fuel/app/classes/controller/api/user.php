@@ -31,7 +31,7 @@ class Controller_Api_User extends Controller_Api
 		$password = Input::param("password");
 		if (Auth::login($username, $password))
 		{
-			$ret = array('success' => true);
+			$this->ret = array('success' => true);
 		}
 		else
 		{
@@ -39,7 +39,7 @@ class Controller_Api_User extends Controller_Api
 				'message' => "ユーザー名かパスワードが間違っています"
 			);
 		}
- 		return $this->result($ret);
+ 		return $this->result();
 	}
 
 	public function get_logout()
