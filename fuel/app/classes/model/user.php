@@ -18,6 +18,11 @@ class Model_User extends Orm\Model{
 		$query = DB::query($sql);
 		$query->parameters(array('id' => $id));
 		$res = $query->execute();
-		return $res;
+		if($res[0]) {
+			return $res[0];
+		} else {
+			return null;
+		}
+		
 	}
 }
