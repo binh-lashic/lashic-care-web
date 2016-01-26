@@ -110,11 +110,18 @@ if(isset($admins)) {
 			<div class="panel-heading">担当一覧</div>
 
 			<table class="table table-bordered">
+				<tr>
+					<th>お客様名</th>
+					<th>性別</th>
+					<th>生年月日</th>
+				</tr>
 <?php
 if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
-				<tr class="list-group-item">
+				<tr>
+					<td><?php echo $admin['username']; ?></td>
+					<td><?php echo $admin['username']; ?></td>
 					<td><?php echo $admin['username']; ?></td>
 				</tr>
 <?php
