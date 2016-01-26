@@ -2,7 +2,7 @@
 	<div class="col-sm-3">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<p></p>
+				<p><?php echo $user['username']; ?></p>
 			</div>
 			<div class="panel-heading">管理者一覧</div>
 			<ul class="list-group">
@@ -28,7 +28,7 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="name" class="col-sm-3 control-label">氏名※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="name" placeholder="氏名">
+			      <input type="text" class="form-control" id="name" placeholder="氏名" value="<?php isset($user['name']) ? echo $user['name'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">

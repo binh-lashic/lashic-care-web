@@ -9,8 +9,6 @@ class Controller_Admin_Page extends Controller_Template
         	$id = $this->param("id");
         	if($id) {
         		$data['user'] = Model_User::getUser($id);
-        		print_r($data['user']);
-        		exit;
         	}
         } catch(Exception $e) {
 
