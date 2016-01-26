@@ -123,7 +123,7 @@ class Controller_Api_User extends Controller_Api
 
 	public function get_register()
 	{
-		
+		/*
 		DB::query("DROP TABLE users")->execute();
 		$sql = "CREATE TABLE users (
   id int NOT NULL IDENTITY (1, 1),
@@ -137,7 +137,7 @@ class Controller_Api_User extends Controller_Api
   created_at INT
 ) ON [PRIMARY];";
 		DB::query($sql)->execute();
-
+*/
 		$username = Input::param("username");
 		$password = Input::param("password");
 		$email = $username.'ikko615@gmail.com';
