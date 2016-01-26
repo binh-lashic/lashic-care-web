@@ -1,50 +1,74 @@
 <?php
 class Controller_Api_User extends Controller_Api
 {
-	public function post_login_check() {
-		if (!Auth::check())
-		{
-		    $this->result = array('message' => 'ログインをしてください');
+
+	//ユーザデータを取得
+	public function post_index() {
+		return $this->login_check();
+	}
+
+	public function get_index() {
+		return $this->login_check();
+	}
+
+	private function index() {
+		if (!Auth::check()) {
+		    $profile = Auth::get_profile_fields();
 		} else {
-			$this->result = array('message' => 'ログインしています');
+			$this->result = array(
+				'message' => 'ログインしています',
+				'data' => true,
+			);
 		}
  		return $this->result();
+	}
+
+	public function get_login_error() {
+		$this->result = array(
+			'message' => 'ログインをしていません',
+		);
+ 		return $this->result();
+	}
+
+
+	//ログインチェック
+	public function post_login_check() {
+		return $this->login_check();
 	}
 
 	public function get_login_check() {
+		return $this->login_check();
+	}
+
+	private function login_check() {
 		if (!Auth::check())
 		{
-		    $this->result = array('message' => 'ログインをしてください');
+		    $this->result = array(
+	    		'message' => 'ログインをしていません',
+	    		'data' => false,
+		    );
 		} else {
-			$this->result = array('message' => 'ログインしています');
+			$this->result = array(
+				'message' => 'ログインしています',
+				'data' => true,
+			);
 		}
  		return $this->result();
 	}
 
-	public function get_index()
-	{
-		// ログインしていないのであればログインを
-		if (!Auth::check())
-		{
-		    $ret = array('message' => 'ログインをしてください');
-		}
-		else
-		{
-			$ret = array('success' => true);
-		}
- 		return $this->result($ret);
+	//ログイン処理
+	public function post_login() {
+		return $this->login();
 	}
 
-	public function post_login()
-	{
+	public function get_login() {
+		return $this->login();
+	}
+
+	private function login() {
 		$username = Input::param("username");
 		$password = Input::param("password");
-		if (Auth::login($username, $password))
-		{
-			$this->result = array('success' => true);
-		}
-		else
-		{
+		if (!Auth::login($username, $password)) {
 			$this->errors[] = array(
 				'message' => "ユーザー名かパスワードが間違っています"
 			);
@@ -52,11 +76,18 @@ class Controller_Api_User extends Controller_Api
  		return $this->result();
 	}
 
-	public function get_logout()
-	{
+	//ログアウト処理
+	public function post_logout() {
+		return $this->logout();
+	}
+
+	public function get_logout() {
+		return $this->logout();
+	}
+
+	private function logout() {
 		Auth::logout();
-		$ret = array('success' => true);
-		return $this->result($ret);
+		return $this->result();		
 	}
 
 	public function get_register()
