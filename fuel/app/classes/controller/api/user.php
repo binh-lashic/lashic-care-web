@@ -145,7 +145,7 @@ class Controller_Api_User extends Controller_Api
             echo Auth::create_user(
                 $username,
                 $password,
-                'ikko615@gmail.com'
+                $username + 'ikko615@gmail.com'
             );
             exit;
             Session::set_flash('success','success create your account.');
