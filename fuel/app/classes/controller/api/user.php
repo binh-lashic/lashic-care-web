@@ -43,8 +43,10 @@ class Controller_Api_User extends Controller_Api
 	}
 
 	private function _list() {
-		$users = Model_User::find("all");
-		$this->result = $users;
+		//$users = Model_User::find("all");
+		$sql = "SELECT * FROM users;";
+		$res = DB::query($sql)->execute();
+		$this->result = $res->to_array();
  		return $this->result();
 	}
 
