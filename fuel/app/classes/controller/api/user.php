@@ -140,13 +140,14 @@ class Controller_Api_User extends Controller_Api
 
 		$username = Input::param("username");
 		$password = Input::param("password");
+		$email = $username.'ikko615@gmail.com';
 	    if (Input::param())
 	    {
 	    	try {
 	    		if(Auth::create_user(
 	                $username,
 	                $password,
-	                $username + 'ikko615@gmail.com'
+	                $email
             	)) {
 				    $this->result = array('success' => true);
             	} else {
@@ -156,6 +157,7 @@ class Controller_Api_User extends Controller_Api
 	    	} catch(Exception $e) {
 	    		$this->result = array('success' => false);
 	    		$this->errors[] = array('message' => $e->getMessage());
+	    		$this->errors[] = array('message' => $email);
 	    	}
 	    }
  		return $this->result();
