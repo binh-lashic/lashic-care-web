@@ -2,6 +2,16 @@
 class Controller_Api_User extends Controller_Api
 {
 
+	public function before() {
+		$this->nologin_methods = array(
+	        'api/user/login',
+	        'api/user/login_error',
+	        'api/user/login_check',
+	        'api/user/register',
+	    );
+	    parent::before();
+	}
+
 	//ユーザデータを取得
 	public function post_index() {
 		return $this->login_check();
@@ -20,6 +30,21 @@ class Controller_Api_User extends Controller_Api
 				'data' => true,
 			);
 		}
+ 		return $this->result();
+	}
+
+	//ユーザデータを取得
+	public function post_list() {
+		return $this->list();
+	}
+
+	public function get_list() {
+		return $this->list();
+	}
+
+	private function list() {
+		$users = Model_User::find("all");
+		$this->result = $users;
  		return $this->result();
 	}
 
