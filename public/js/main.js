@@ -17,13 +17,14 @@ $(function(){
 	});
 
     $("#login").submit(function() {
-		console.log("login");
 		var params = {
 			'username': $("#username").val(),
 			'password': $("#password").val()
 		};
-		api("user/login", params, function(data){
-			console.log(data);
+		api("user/login", params, function(result){
+			if(result.data) {
+				location.href = "/user/";
+			}
 		});
 		return false;
 	});
