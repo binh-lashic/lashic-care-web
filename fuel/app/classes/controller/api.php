@@ -8,8 +8,15 @@ class Controller_Api extends Controller_Rest
 	public function before()
 	{
 	    parent::before();
-	    if (!Auth::check()) {
-	        Response::redirect('api/login/error');
+	   	$method = implode("/", Uri::segments());
+		$nologin_methods = array(
+	        'api/user/login',
+	        'api/user/login_error',
+	        'api/user/login_check',
+	    );
+	    if (in_array($method, $nologin_methods)) {     
+	    } else if (!Auth::check()) {
+	        Response::redirect('api/user/login_error');
 	    }
 	}
 
