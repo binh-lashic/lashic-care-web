@@ -126,14 +126,16 @@ class Controller_Api_User extends Controller_Api
 		
 		DB::query("DROP TABLE users")->execute();
 		$sql = "CREATE TABLE users (
+  id int NOT NULL IDENTITY (1, 1),
   username NVARCHAR(50),
   password NVARCHAR(255),
+  name NVARCHAR(50),
   email NVARCHAR(512),
   profile_fields NVARCHAR(512),
   last_login NVARCHAR(512),
   login_hash NVARCHAR(512),
   created_at INT
-);";
+) ON [PRIMARY];";
 		DB::query($sql)->execute();
 
 		$username = Input::param("username");

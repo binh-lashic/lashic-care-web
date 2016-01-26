@@ -98,7 +98,7 @@ if(isset($admins)) {
 
 			  <div class="form-group">
 			    <div class="col-sm-offset-3 col-sm-9">
-			      <button type="submit" class="btn btn-default">
+			      <button type="submit" class="btn btn-primary">
 			      	<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 保存する
 			      </button>
 			    </div>
@@ -116,7 +116,7 @@ if(isset($admins)) {
 					<th>お客様名</th>
 					<th>性別</th>
 					<th>生年月日</th>
-					<th>></th>
+					<th></th>
 				</tr>
 <?php
 if(isset($admins)) {
