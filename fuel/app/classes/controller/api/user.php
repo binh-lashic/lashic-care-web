@@ -142,15 +142,22 @@ class Controller_Api_User extends Controller_Api
 		$password = Input::param("password");
 	    if (Input::param())
 	    {
-            echo Auth::create_user(
-                $username,
-                $password,
-                $username + 'ikko615@gmail.com'
-            );
-            exit;
-            Session::set_flash('success','success create your account.');
+	    	try {
+	    		if(Auth::create_user(
+	                $username,
+	                $password,
+	                $username + 'ikko615@gmail.com'
+            	)) {
+				    $this->result = array('success' => true);
+            	} else {
+				    $this->result = array('success' => false);
+            	}
+
+	    	} catch(Exception $e) {
+	    		$this->result = array('success' => false);
+	    		$this->errors[] = array('message' => $e->getMessage());
+	    	}
 	    }
-	    $ret = array('success' => true);
- 		return $this->result($ret);
+ 		return $this->result();
 	}	
 }
