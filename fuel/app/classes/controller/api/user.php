@@ -46,7 +46,7 @@ class Controller_Api_User extends Controller_Api
 		//$users = Model_User::find("all");
 		$sql = "SELECT * FROM users;";
 		$res = DB::query($sql)->execute();
-		$this->result = $res->to_array();
+		$this->result = $res->as_array();
  		return $this->result();
 	}
 
