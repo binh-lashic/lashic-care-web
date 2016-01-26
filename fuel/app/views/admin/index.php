@@ -6,13 +6,15 @@
 			</div>
 			<div class="panel-heading">管理者一覧</div>
 			<ul class="list-group">
-			<?php
-			foreach($admins as $admin) {
-			?>
+<?php
+if(isset($admins)) {
+	foreach($admins as $admin) {
+?>
 				<li class="list-group-item"><?php echo $admin['username']; ?>
-			<?php
-			}
-			?>
+<?php
+	}
+}
+?>
 				</li>
 			</ul>
 		</div>
@@ -49,48 +51,48 @@
 			  <div class="form-group">
 			    <label for="username" class="col-sm-3 control-label">ID</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="username" placeholder="User Name">
+			      <input type="text" class="form-control" id="username" placeholder="ID">
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="password" class="col-sm-3 control-label">パスワード</label>
+			    <label for="password" class="col-sm-3 control-label">初期パスワード</label>
 			    <div class="col-sm-9">
-			      <input type="password" class="form-control" id="password" placeholder="Password">
-			    </div>
-			  </div>
-
-			  <div class="form-group">
-			    <label for="kana" class="col-sm-3 control-label">電話番号</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="password" class="form-control" id="password" placeholder="初期パスワード">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
-			    <label for="kana" class="col-sm-3 control-label">携帯番号</label>
+			    <label for="phone" class="col-sm-3 control-label">電話番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="text" class="form-control" id="phone" placeholder="電話番号">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
-			    <label for="kana" class="col-sm-3 control-label">アドレス※</label>
+			    <label for="cellular" class="col-sm-3 control-label">携帯番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="text" class="form-control" id="cellular" placeholder="携帯番号">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
-			    <label for="kana" class="col-sm-3 control-label">勤務開始日※</label>
+			    <label for="email" class="col-sm-3 control-label">メールアドレス※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="text" class="form-control" id="email" placeholder="メールアドレス">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
-			    <label for="kana" class="col-sm-3 control-label">備考※</label>
+			    <label for="work_start_date" class="col-sm-3 control-label">勤務開始日</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="text" class="form-control" id="work_start_date" placeholder="勤務開始日">
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="memo" class="col-sm-3 control-label">備考</label>
+			    <div class="col-sm-9">
+			      <textarea class="form-control" id="memo"></textarea>
 			    </div>
 			  </div>
 
@@ -106,16 +108,20 @@
 	<div class="col-sm-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">担当一覧</div>
-			<ul class="list-group">
-			<?php
-			foreach($admins as $admin) {
-			?>
-				<li class="list-group-item"><?php echo $admin['username']; ?>
-			<?php
-			}
-			?>
-				</li>
-			</ul>
+
+			<table class="table table-bordered">
+<?php
+if(isset($admins)) {
+	foreach($admins as $admin) {
+?>
+				<tr class="list-group-item">
+					<td><?php echo $admin['username']; ?></td>
+				</tr>
+<?php
+	}
+}
+?>
+  			</table>
 		</div>
 	</div>
 </div>
