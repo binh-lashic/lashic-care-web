@@ -12,8 +12,8 @@ $(function(){
 	    );
     }
 
-	api("user/login_check", null, function(data){
-		console.log(data);
+	api("user/login_check", null, function(result){
+		console.log(result.data);
 	});
 
     $("#login").submit(function() {

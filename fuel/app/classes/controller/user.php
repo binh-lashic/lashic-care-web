@@ -1,9 +1,11 @@
 <?php
-class Controller_User extends Controller
+class Controller_User extends Controller_Template
 {
-	public function action_index()
+	public function action_login()
 	{
-		return Response::forge(View::forge('user/index'));
+        $data = array();
+        $this->template->title = 'ログインページ';
+        $this->template->content = View::forge('user/index');
 	}
 
 	public function action_hello()
