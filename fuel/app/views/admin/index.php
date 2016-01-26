@@ -35,8 +35,14 @@
 			  <div class="form-group">
 			    <label for="kana" class="col-sm-3 control-label">性別※</label>
 			    <div class="col-sm-9">
-			      <input type="radio" class="form-control" id="gender_m" value="m" /><label for="gender_m">男</label>
-			      <input type="radio" class="form-control" id="gender_f" value="f" /><label for="gender_f">女</label>
+				    <div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-primary active">
+					    <input type="radio" name="gender" id="gender_f" autocomplete="off" checked>女
+					  </label>
+					  <label class="btn btn-primary">
+					    <input type="radio" name="gender" id="gender_M" autocomplete="off">男
+					  </label>
+					</div>
 			    </div>
 			  </div>
 			  <div class="form-group">
