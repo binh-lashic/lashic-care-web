@@ -2,7 +2,7 @@
 <?php
 foreach($admins as $admin) {
 ?>
-	<li><?php echo $admin->username; ?>
+	<li><?php echo $admin['username']; ?>
 <?php
 }
 ?>
