@@ -1,3 +1,10 @@
 <ul>
-	<li><a href="/admin/user/list">ユーザ一覧</a></li>
+<?php
+foreach($admins as $admin) {
+?>
+	<li><?php echo $admin->username; ?>
+<?php
+}
+?>
+	</li>
 </ul>
