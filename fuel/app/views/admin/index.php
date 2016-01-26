@@ -17,7 +17,6 @@ if(isset($admins)) {
 	}
 }
 ?>
-
 			</ul>
 		</div>
 	</div>
@@ -34,7 +33,7 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="kana" class="col-sm-3 control-label">フリガナ※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ" value="<?php echo isset($user['kana']) ? $user['kana'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -53,7 +52,7 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="username" class="col-sm-3 control-label">ID</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="username" placeholder="ID">
+			      <input type="text" class="form-control" id="username" placeholder="ID" value="<?php echo isset($user['username']) ? $user['username'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -66,21 +65,21 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="phone" class="col-sm-3 control-label">電話番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="phone" placeholder="電話番号">
+			      <input type="text" class="form-control" id="phone" placeholder="電話番号" value="<?php echo isset($user['phone']) ? $user['phone'] : ""; ?>">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="cellular" class="col-sm-3 control-label">携帯番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="cellular" placeholder="携帯番号">
+			      <input type="text" class="form-control" id="cellular" placeholder="携帯番号" value="<?php echo isset($user['cellular']) ? $user['cellular'] : ""; ?>">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="email" class="col-sm-3 control-label">メールアドレス※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="email" placeholder="メールアドレス">
+			      <input type="text" class="form-control" id="email" placeholder="メールアドレス" value="<?php echo isset($user['email']) ? $user['email'] : ""; ?>">
 			    </div>
 			  </div>
 
@@ -94,7 +93,7 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="memo" class="col-sm-3 control-label">備考</label>
 			    <div class="col-sm-9">
-			      <textarea class="form-control" id="memo"></textarea>
+			      <textarea class="form-control" id="memo"> value="<?php echo isset($user['memo']) ? $user['memo'] : ""; ?>"</textarea>
 			    </div>
 			  </div>
 
