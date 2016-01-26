@@ -6,8 +6,14 @@ class Controller_Admin_Page extends Controller_Template
         $data = array();
         try {
         	$data['admins'] = Model_User::getAdmins();
+        	$id = $this->param("id");
+        	if($id) {
+        		$data['user'] = Model_User::getUser($id);
+        		print_r($data['user']);
+        		exit;
+        	}
         } catch(Exception $e) {
-        	
+
         }
         
         $this->template->title = '管理ページ トップ';
