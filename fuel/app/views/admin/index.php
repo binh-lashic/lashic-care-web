@@ -18,25 +18,46 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<form class="form-horizontal" id="login">
-		  <div class="form-group">
-		    <label for="username" class="col-sm-2 control-label">ID</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="username" placeholder="User Name">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="password" class="col-sm-2 control-label">パスワード</label>
-		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="password" placeholder="Password">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">ログインする</button>
-		    </div>
-		  </div>
-		</form>
+		<div class="panel panel-default">
+			<form class="form-horizontal" id="login">
+			  <div class="form-group">
+			    <label for="name" class="col-sm-3 control-label">氏名※</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="name" placeholder="氏名">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">フリガナ※</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">性別※</label>
+			    <div class="col-sm-9">
+			      <input type="radio" class="form-control" id="gender_m" value="m" /><label for="gender_m">男</label>
+			      <input type="radio" class="form-control" id="gender_f" value="f" /><label for="gender_f">女</label>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="username" class="col-sm-3 control-label">ID</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="username" placeholder="User Name">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="password" class="col-sm-3 control-label">パスワード</label>
+			    <div class="col-sm-9">
+			      <input type="password" class="form-control" id="password" placeholder="Password">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-3 col-sm-9">
+			      <button type="submit" class="btn btn-default">ログインする</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
 	</div>
 	<div class="col-sm-3">
 		<div class="panel panel-default">
