@@ -16,11 +16,12 @@ class Controller_User extends Controller_Template
         $this->template->content = View::forge('user/login');
 	}
 
-	public function action_hello()
+	public function action_setting()
 	{
-		return Response::forge(Presenter::forge('welcome/hello'));
+        $data = array();
+        $this->template->title = '設定ページ';
+        $this->template->content = View::forge('user/setting');
 	}
-
 	public function action_404()
 	{
 		return Response::forge(Presenter::forge('welcome/404'), 404);

@@ -5,10 +5,10 @@ $(function(){
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
-	      apiUrl + action,
-	      params, 
-	      callback,
-	      "json"
+			apiUrl + action,
+			params, 
+			callback,
+			"json"
 	    );
     }
 
