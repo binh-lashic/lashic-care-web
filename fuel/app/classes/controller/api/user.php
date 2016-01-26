@@ -35,14 +35,14 @@ class Controller_Api_User extends Controller_Api
 
 	//ユーザデータを取得
 	public function post_list() {
-		return $this->list();
+		return $this->_list();
 	}
 
 	public function get_list() {
-		return $this->list();
+		return $this->_list();
 	}
 
-	private function list() {
+	private function _list() {
 		$users = Model_User::find("all");
 		$this->result = $users;
  		return $this->result();
