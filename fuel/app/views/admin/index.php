@@ -10,12 +10,14 @@
 if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
-				<li class="list-group-item"><?php echo $admin['username']; ?>
+				<li class="list-group-item">
+					<a href="/admin/page/<?php echo $admin['username']; ?>"><?php echo $admin['username']; ?></a>
+				</li>
 <?php
 	}
 }
 ?>
-				</li>
+
 			</ul>
 		</div>
 	</div>
