@@ -19,6 +19,7 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="panel panel-default">
+			<p>
 			<form class="form-horizontal" id="login">
 			  <div class="form-group">
 			    <label for="name" class="col-sm-3 control-label">氏名※</label>
@@ -57,12 +58,49 @@
 			      <input type="password" class="form-control" id="password" placeholder="Password">
 			    </div>
 			  </div>
+
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">電話番号</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">携帯番号</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">アドレス※</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">勤務開始日※</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="kana" class="col-sm-3 control-label">備考※</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="kana" placeholder="フリガナ">
+			    </div>
+			  </div>
+
 			  <div class="form-group">
 			    <div class="col-sm-offset-3 col-sm-9">
 			      <button type="submit" class="btn btn-default">ログインする</button>
 			    </div>
 			  </div>
 			</form>
+			</p>
 		</div>
 	</div>
 	<div class="col-sm-3">
