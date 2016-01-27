@@ -124,8 +124,8 @@ class Controller_Api_User extends Controller_Api
 
 	public function get_test() {
 		$sql = "CREATE LOGIN infic_api WITH password=‘2scHOVO6'; CREATE USER infic_api FROM LOGIN infic_api; EXEC sp_addrolemember ‘dbmanager‘, ‘infic_api; EXEC sp_addrolemember ‘loginmanager‘, ‘infic_api';";
-		$sql = "SELECT * FROM sysobjects WHERE xtype = 'u'";
-		$sql = "SELECT * FROM data";
+		//$sql = "SELECT * FROM sysobjects WHERE xtype = 'u'";
+		//$sql = "SELECT * FROM data";
 		$res = DB::query($sql)->execute();
 		print_r($res);
 		exit;
