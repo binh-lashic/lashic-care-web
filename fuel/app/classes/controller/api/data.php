@@ -11,15 +11,23 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_dashboard() {
-		$this->result = array(
-			'data'	=>	array(
-				'temperature' => 14.1,
-				'humidity' => 41.7,
-				'active' => 69.1,
-				'iluminance' =>  1000,
-				'discomfort' => 58,
-			)
-		);
+		$sensor_id = Input::param("sensor_id");
+		if(!$sensor_id) {
+			$this->errors[] = array(
+				'message' => 'センサーIDを指定してください'
+			);
+		} else {
+			$this->result = array(
+				'sensor_id' => $sensor_id,
+				'data'	=>	array(
+					'temperature' => 14.1,
+					'humidity' => 41.7,
+					'active' => 69.1,
+					'iluminance' =>  1000,
+					'discomfort' => 58,
+				)
+			);
+		}
 		return $this->result();	
 	}
 
