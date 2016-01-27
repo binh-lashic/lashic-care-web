@@ -26,6 +26,8 @@ class Controller_Api_Data extends Controller_Api
 	public function get_graph() {
 		$type = Input::param("type");
 		$date = Input::param("date");
+		$sensor_id = Input::param("sensor_id");
+
 		$types = array(
 			'temperature' => true,					//温度
 			'humidity' => true,						//湿度
@@ -55,6 +57,10 @@ class Controller_Api_Data extends Controller_Api
 			$this->errors[] = array(
 				'message' => 'グラフのタイプが間違っています'
 			);
+		} else if(!$sensor_id) {
+			$this->errors[] = array(
+				'message' => 'センサーIDを指定してください'
+			);
 		} else {
 			if(empty($date)) {
 				$date = date("Y-m-d");
@@ -70,6 +76,7 @@ class Controller_Api_Data extends Controller_Api
 				);
 			}
 			$this->result = array(
+				'sensor_id' => $sensor_id,
 				'type' => $type,
 				'date' => $date,
 				'data' => $data,
