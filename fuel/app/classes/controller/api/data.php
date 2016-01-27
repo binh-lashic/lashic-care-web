@@ -6,6 +6,7 @@ class Controller_Api_Data extends Controller_Api
 		$this->nologin_methods = array(
 	        'dashboard',
 	        'graph',
+	        'test',
 	    );
 	    parent::before();
 	}
