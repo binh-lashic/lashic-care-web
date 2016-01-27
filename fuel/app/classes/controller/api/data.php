@@ -10,6 +10,14 @@ class Controller_Api_Data extends Controller_Api
 	    parent::before();
 	}
 
+	public function get_test() {
+		$sql = "SELECT * FROM data";
+		$res = DB::query($sql)->execute("data");
+		print_r($res);
+		exit;
+ 		return $this->result();
+	}
+
 	public function get_dashboard() {
 		$sensor_id = Input::param("sensor_id");
 		if(!$sensor_id) {
