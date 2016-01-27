@@ -9,7 +9,7 @@ class Controller_Api extends Controller_Rest
 	public function before()
 	{
 	    parent::before();
-	   	$method = implode("/", Uri::segments());
+	   	$method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {     
 	    } else if (!Auth::check()) {
 	        Response::redirect('api/user/login_error');
@@ -17,7 +17,13 @@ class Controller_Api extends Controller_Rest
 	}
 
 	public function result($http_status = null) {
-		$this->result['errors'] = $this->errors;
+		if(isset($this->errors)) {
+			$this->result['success'] = false;
+			$this->result['errors'] = $this->errors;
+		} else {
+			$this->result['success'] = true;
+		}
+
 		$res = parent::response($this->result, $http_status);
 		$res->set_header('Access-Control-Allow-Origin', '*');
 		return $res;

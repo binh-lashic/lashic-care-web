@@ -93,7 +93,7 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="memo" class="col-sm-3 control-label">備考</label>
 			    <div class="col-sm-9">
-			      <textarea class="form-control" id="memo"> value="<?php echo isset($user['memo']) ? $user['memo'] : ""; ?>"</textarea>
+			      <textarea class="form-control" id="memo"><?php echo isset($user['memo']) ? $user['memo'] : ""; ?></textarea>
 			    </div>
 			  </div>
 

@@ -4,10 +4,10 @@ class Controller_Api_User extends Controller_Api
 
 	public function before() {
 		$this->nologin_methods = array(
-	        'api/user/login',
-	        'api/user/login_error',
-	        'api/user/login_check',
-	        'api/user/register',
+	        'login',
+	        'login_error',
+	        'login_check',
+	        'register',
 	    );
 	    parent::before();
 	}
