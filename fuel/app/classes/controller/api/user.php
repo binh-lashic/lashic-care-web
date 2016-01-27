@@ -8,6 +8,7 @@ class Controller_Api_User extends Controller_Api
 	        'login_error',
 	        'login_check',
 	        'register',
+	        'test',
 	    );
 	    parent::before();
 	}
