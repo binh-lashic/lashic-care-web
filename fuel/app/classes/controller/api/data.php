@@ -17,14 +17,17 @@ class Controller_Api_Data extends Controller_Api
 				'message' => 'センサーIDを指定してください'
 			);
 		} else {
+			$temperature = 14.1;
+			$humidity = 41.7;
+			$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data'	=>	array(
-					'temperature' => 14.1,
-					'humidity' => 41.7,
+					'temperature' => $temperature,
+					'humidity' => $humidity,
 					'active' => 69.1,
 					'iluminance' =>  1000,
-					'discomfort' => 58,
+					'discomfort' => ceil($discomfort),
 				)
 			);
 		}
@@ -35,6 +38,7 @@ class Controller_Api_Data extends Controller_Api
 		$type = Input::param("type");
 		$date = Input::param("date");
 		$sensor_id = Input::param("sensor_id");
+		$span = Input::param("span");
 
 		$types = array(
 			'temperature' => true,					//温度
@@ -73,11 +77,20 @@ class Controller_Api_Data extends Controller_Api
 			if(empty($date)) {
 				$date = date("Y-m-d");
 			}
+			if(empty($span)) {
+				$span = 10;
+			} else if($span < 0) {
+				$span = 1;
+			} else if($span > 240) {
+				$span = 240;
+			}
 			$data = array();
 			$start_time = strtotime($date." 00:00:00");
 			$end_time = strtotime($date." 24:00:00");
-			for($i = 0; $i <= 144; $i++) {
-				$current_time = date("Y-m-d H:i:s", $start_time + $i * 60 * 10); 
+			$end = 60 * 24 / $span;
+
+			for($i = 0; $i <= $end; $i++) {
+				$current_time = date("Y-m-d H:i:s", $start_time + $i * 60 * $span); 
 				$data[] = array(
 					'time' => $current_time,
 					'value' => mt_rand(10, 40),
@@ -87,6 +100,7 @@ class Controller_Api_Data extends Controller_Api
 				'sensor_id' => $sensor_id,
 				'type' => $type,
 				'date' => $date,
+				'span' => $span,
 				'data' => $data,
 			);
 		}

