@@ -36,10 +36,10 @@ class Controller_Api_Data extends Controller_Api
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data'	=>	array(
-					'temperature' => $temperature,
-					'humidity' => $humidity,
-					'active' => ceil($rows[0]['active'], 1),
-					'illuminance' =>  $rows[0]['illuminance'],
+					'temperature' => round($temperature, 1),
+					'humidity' => round($humidity, 1),
+					'active' => round($rows[0]['active'], 1),
+					'illuminance' =>  (int)$rows[0]['illuminance'],
 					'discomfort' => ceil($discomfort),
 				)
 			);
