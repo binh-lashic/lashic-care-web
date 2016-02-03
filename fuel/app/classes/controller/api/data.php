@@ -26,16 +26,20 @@ class Controller_Api_Data extends Controller_Api
 				'message' => 'センサーIDを指定してください'
 			);
 		} else {
-			$temperature = 14.1;
-			$humidity = 41.7;
+			$sql = "SELECT * FROM data ORDER BY date DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY";
+			$res = DB::query($sql)->execute("data");
+			$rows = $res->as_array();
+
+			$temperature = $rows[0]['temperature'];
+			$humidity = $rows[0]['humidity'];
 			$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data'	=>	array(
 					'temperature' => $temperature,
 					'humidity' => $humidity,
-					'active' => 69.1,
-					'iluminance' =>  1000,
+					'active' => $rows[0]['active'],
+					'iluminance' =>  $rows[0]['iluminance'],
 					'discomfort' => ceil($discomfort),
 				)
 			);
