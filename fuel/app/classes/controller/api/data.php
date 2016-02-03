@@ -13,7 +13,7 @@ class Controller_Api_Data extends Controller_Api
 
 	public function get_test() {
 		$sql = "SELECT * FROM data";
-		$res = DB::query($sql)->execute();
+		$res = DB::query($sql)->execute("data");
 		$data = $res->as_array();
 		$this->result = $data;
  		return $this->result();
