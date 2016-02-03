@@ -38,8 +38,8 @@ class Controller_Api_Data extends Controller_Api
 				'data'	=>	array(
 					'temperature' => $temperature,
 					'humidity' => $humidity,
-					'active' => $rows[0]['active'],
-					'illuminance' =>  ceil($rows[0]['illuminance'], 1),
+					'active' => ceil($rows[0]['active'], 1),
+					'illuminance' =>  $rows[0]['illuminance'],
 					'discomfort' => ceil($discomfort),
 				)
 			);
