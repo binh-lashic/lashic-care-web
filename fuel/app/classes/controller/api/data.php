@@ -12,7 +12,7 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_test() {
-		$sql = "SELECT * FROM data ORDER BY id DESC";
+		$sql = "SELECT * FROM data ORDER BY date DESC FETCH NEXT 10 ROWS ONLY";
 		$res = DB::query($sql)->execute("data");
 		$data = $res->as_array();
 		$this->result = $data;
