@@ -29,6 +29,8 @@ class Controller_Api_Data extends Controller_Api
 			$sql = "SELECT * FROM data ORDER BY date DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY";
 			$res = DB::query($sql)->execute("data");
 			$rows = $res->as_array();
+			print_r($rows);
+			exit;
 
 			$temperature = $rows[0]['temperature'];
 			$humidity = $rows[0]['humidity'];
