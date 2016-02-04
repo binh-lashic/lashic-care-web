@@ -31,6 +31,7 @@ class Controller_Api_Data extends Controller_Api
 			$rows = $res->as_array();
 			$this->result = array(
 				'sensor_id' => $sensor_id,
+				'data' => array(),
 			);
 			if(isset($rows[0])) {
 				$temperature = $rows[0]['temperature'];
