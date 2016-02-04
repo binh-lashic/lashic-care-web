@@ -33,18 +33,17 @@ class Controller_Api_Data extends Controller_Api
 				'sensor_id' => $sensor_id,
 			);
 			if(isset($rows[0])) {
-
+				$temperature = $rows[0]['temperature'];
+				$humidity = $rows[0]['humidity'];
+				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
+				$this->result['data'] = array(
+						'temperature' => round($temperature, 1),
+						'humidity' => round($humidity, 1),
+						'active' => round($rows[0]['active'], 1),
+						'illuminance' =>  (int)$rows[0]['illuminance'],
+						'discomfort' => ceil($discomfort),
+				);
 			}
-			$temperature = $rows[0]['temperature'];
-			$humidity = $rows[0]['humidity'];
-			$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
-			$this->result['data'] = array(
-					'temperature' => round($temperature, 1),
-					'humidity' => round($humidity, 1),
-					'active' => round($rows[0]['active'], 1),
-					'illuminance' =>  (int)$rows[0]['illuminance'],
-					'discomfort' => ceil($discomfort),
-			);
 		}
 		return $this->result();	
 	}
