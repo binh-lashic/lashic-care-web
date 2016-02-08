@@ -9,7 +9,7 @@ class Controller_Api_User extends Controller_Api
 	        'login_check',
 	        'register',
 	        'test',
-	        'authorize',
+	        'set_device_id',
 	    );
 	    parent::before();
 	}
