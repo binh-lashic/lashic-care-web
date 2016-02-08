@@ -152,7 +152,7 @@ class Controller_Api_User extends Controller_Api
 				'data' => false,
 			);
 		} else {
-			$user_id = Auth::get_user_id();
+			list($driver, $user_id) = Auth::get_user_id();
 			$res = \Model_Device::saveDevice($user_id, $device_id);
 			if($res) {
 				$this->result = array(
