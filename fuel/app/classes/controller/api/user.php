@@ -9,6 +9,7 @@ class Controller_Api_User extends Controller_Api
 	        'login_check',
 	        'register',
 	        'test',
+	        'authorize',
 	    );
 	    parent::before();
 	}
@@ -132,9 +133,37 @@ class Controller_Api_User extends Controller_Api
  		return $this->result();
 	}
 
+	//認証
+	public function post_set_device_id() {
+		return $this->set_device_id();
+	}
+
+	public function get_set_device_id() {
+		return $this->set_device_id();
+	}
+
+	private function set_device_id() {
+		$username = Input::param("username");
+		$password = Input::param("password");
+		$device_id = Input::param("device_id");
+		if (!Auth::login($username, $password)) {
+			$this->errors[] = array(
+				'message' => "ユーザー名かパスワードが間違っています",
+				'data' => false,
+			);
+		} else {
+			$user_id = Auth::get_user_id();
+			$sql = "UPDATE user SET device_id='".$user_id."'";
+			$this->result = array(
+				'message' => 'デバイスIDの設定に成功しました',
+				'data' => true,
+			);			
+		}
+		return $this->result();
+	}
+	
 	public function get_register()
 	{
-		/*
 		DB::query("DROP TABLE users")->execute();
 		$sql = "CREATE TABLE users (
   id int NOT NULL IDENTITY (1, 1),
@@ -143,12 +172,12 @@ class Controller_Api_User extends Controller_Api
   name NVARCHAR(50),
   email NVARCHAR(512),
   profile_fields NVARCHAR(512),
+  device_id NVARCHAR(255),
   last_login NVARCHAR(512),
   login_hash NVARCHAR(512),
   created_at INT
 ) ON [PRIMARY];";
 		DB::query($sql)->execute();
-*/
 		$username = Input::param("username");
 		$password = Input::param("password");
 		$email = $username.'ikko615@gmail.com';
