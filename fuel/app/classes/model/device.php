@@ -32,7 +32,7 @@ class Model_Device extends Orm\Model{
 		$query->parameters(array('device_id' => $device_id));
 		$res = $query->execute();
 		if($res[0]) {
-			return $res[0]->user_id;
+			return $res[0]['user_id'];
 		} else {		
 			return null;
 		}
