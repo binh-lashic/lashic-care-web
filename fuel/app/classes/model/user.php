@@ -24,17 +24,4 @@ class Model_User extends Orm\Model{
 			return null;
 		}	
 	}
-
-	public static function setDeviceId($id){
-		$sql = "UPDATE users SET device_id WHERE id = :id;";
-		$query = DB::query($sql);
-		$query->parameters(array('id' => $id));
-		$res = $query->execute();
-		if($res[0]) {
-			return $res[0];
-		} else {
-			return null;
-		}	
-	}
-
 }

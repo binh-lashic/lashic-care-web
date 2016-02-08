@@ -153,11 +153,13 @@ class Controller_Api_User extends Controller_Api
 			);
 		} else {
 			$user_id = Auth::get_user_id();
-			$sql = "UPDATE user SET device_id='".$user_id."'";
-			$this->result = array(
-				'message' => 'デバイスIDの設定に成功しました',
-				'data' => true,
-			);			
+			$res = \Model_Device::saveDevice($user_id, $device_id);
+			if($res) {
+				$this->result = array(
+					'message' => 'デバイスIDの設定に成功しました',
+					'data' => true,
+				);				
+			}
 		}
 		return $this->result();
 	}
