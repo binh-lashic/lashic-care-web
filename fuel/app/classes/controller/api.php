@@ -11,6 +11,13 @@ class Controller_Api extends Controller_Rest
 	    parent::before();
 	   	$method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {     
+	    } else if (Input::param("device_id")){
+	    	$device_id = Input::param("device_id");
+	    	if($user_id = \Model_Device::existDevice($device_id)) {
+	    		\Auth::instance()->force_login((int) $user_id);
+	    	} else {
+    	        Response::redirect('api/user/login_error');
+	    	}
 	    } else if (!Auth::check()) {
 	        Response::redirect('api/user/login_error');
 	    }
