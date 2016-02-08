@@ -3,6 +3,10 @@ class Controller_Admin_Device extends Controller_Template
 {
 
 	public function action_create() {
-		\Model_Device::create();
+		try {
+			\Model_Device::create();
+		} catch(Exception $e) {
+			print_r($e->getMessage());
+		}
 	}
 }
