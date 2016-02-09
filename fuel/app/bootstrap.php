@@ -21,7 +21,7 @@ require COREPATH.'bootstrap.php';
 if(preg_match("/infic.garoo.jp/i", $_SERVER['HTTP_HOST'])) {
 	\Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : \Fuel::DEVELOPMENT);
 } else {
-	\Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : \Fuel::PRODUCTION);
+	\Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : \Fuel::TEST);
 }
 
 // Initialize the framework with the config file.
