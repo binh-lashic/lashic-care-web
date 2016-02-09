@@ -183,7 +183,7 @@ class Controller_Api_User extends Controller_Api
 		try {
 			DB::query("DROP TABLE users")->execute();
 		} catch(Exception $e) {
-			
+
 		}
 		$sql = "CREATE TABLE users (
   id int NOT NULL IDENTITY (1, 1),
@@ -192,7 +192,7 @@ class Controller_Api_User extends Controller_Api
   name NVARCHAR(50),
   kana NVARCHAR(512),
   email NVARCHAR(512),
-  group INT(1),
+  `group` INT(1),
   profile_fields NVARCHAR(512),
   last_login NVARCHAR(512),
   login_hash NVARCHAR(512),
