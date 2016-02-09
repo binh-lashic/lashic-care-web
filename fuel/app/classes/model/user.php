@@ -47,5 +47,4 @@ class Model_User extends Orm\Model{
 			return null;
 		}
 	}
-	*/
 }
