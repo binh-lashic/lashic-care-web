@@ -172,17 +172,24 @@ class Controller_Api_User extends Controller_Api
   username NVARCHAR(50),
   password NVARCHAR(255),
   name NVARCHAR(50),
+  kana NVARCHAR(512),
   email NVARCHAR(512),
+  group INT(1),
   profile_fields NVARCHAR(512),
-  device_id NVARCHAR(255),
   last_login NVARCHAR(512),
   login_hash NVARCHAR(512),
+  gender NCHAR(1),
+  phone NVARCHAR(512),
+  cellular NVARCHAR(255),
+  work_start_date DATE,
+  memo NTEXT,
   created_at INT
 ) ON [PRIMARY];";
+
 		DB::query($sql)->execute();
 		$username = Input::param("username");
 		$password = Input::param("password");
-		$email = $username.'ikko615@gmail.com';
+		$email = $username;
 	    if (Input::param())
 	    {
 	    	try {

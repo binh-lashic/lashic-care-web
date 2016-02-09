@@ -27,13 +27,13 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="name" class="col-sm-3 control-label">氏名※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="name" placeholder="氏名" value="<?php echo isset($user['name']) ? $user['name'] : ""; ?>">
+			      <input type="text" class="form-control" id="name" name="name" placeholder="氏名" value="<?php echo isset($user['name']) ? $user['name'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="kana" class="col-sm-3 control-label">フリガナ※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="kana" placeholder="フリガナ" value="<?php echo isset($user['kana']) ? $user['kana'] : ""; ?>">
+			      <input type="text" class="form-control" id="kana" name="kana" placeholder="フリガナ" value="<?php echo isset($user['kana']) ? $user['kana'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -41,10 +41,10 @@ if(isset($admins)) {
 			    <div class="col-sm-9">
 				    <div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-primary active">
-					    <input type="radio" name="gender" id="gender_f" autocomplete="off" checked>女
+					    <input type="radio" name="gender" id="gender_f" value="f" autocomplete="off" checked>女
 					  </label>
 					  <label class="btn btn-primary">
-					    <input type="radio" name="gender" id="gender_M" autocomplete="off">男
+					    <input type="radio" name="gender" id="gender_m" value="m" autocomplete="off">男
 					  </label>
 					</div>
 			    </div>
@@ -52,48 +52,48 @@ if(isset($admins)) {
 			  <div class="form-group">
 			    <label for="username" class="col-sm-3 control-label">ID</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="username" placeholder="ID" value="<?php echo isset($user['username']) ? $user['username'] : ""; ?>">
+			      <input type="text" class="form-control" id="username" name="username" placeholder="ID" value="<?php echo isset($user['username']) ? $user['username'] : ""; ?>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="password" class="col-sm-3 control-label">初期パスワード</label>
 			    <div class="col-sm-9">
-			      <input type="password" class="form-control" id="password" placeholder="初期パスワード">
+			      <input type="password" class="form-control" id="password" name="password" placeholder="初期パスワード">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="phone" class="col-sm-3 control-label">電話番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="phone" placeholder="電話番号" value="<?php echo isset($user['phone']) ? $user['phone'] : ""; ?>">
+			      <input type="text" class="form-control" id="phone" name="phone" placeholder="電話番号" value="<?php echo isset($user['phone']) ? $user['phone'] : ""; ?>">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="cellular" class="col-sm-3 control-label">携帯番号</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="cellular" placeholder="携帯番号" value="<?php echo isset($user['cellular']) ? $user['cellular'] : ""; ?>">
+			      <input type="text" class="form-control" id="cellular" name="cellular" placeholder="携帯番号" value="<?php echo isset($user['cellular']) ? $user['cellular'] : ""; ?>">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="email" class="col-sm-3 control-label">メールアドレス※</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="email" placeholder="メールアドレス" value="<?php echo isset($user['email']) ? $user['email'] : ""; ?>">
+			      <input type="text" class="form-control" id="email" name="email" placeholder="メールアドレス" value="<?php echo isset($user['email']) ? $user['email'] : ""; ?>">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="work_start_date" class="col-sm-3 control-label">勤務開始日</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="work_start_date" placeholder="勤務開始日">
+			      <input type="text" class="form-control" id="work_start_date" name="work_start_date" placeholder="勤務開始日">
 			    </div>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="memo" class="col-sm-3 control-label">備考</label>
 			    <div class="col-sm-9">
-			      <textarea class="form-control" id="memo"><?php echo isset($user['memo']) ? $user['memo'] : ""; ?></textarea>
+			      <textarea class="form-control" id="memo" name="memo"><?php echo isset($user['memo']) ? $user['memo'] : ""; ?></textarea>
 			    </div>
 			  </div>
 
