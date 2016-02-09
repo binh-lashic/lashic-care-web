@@ -11,7 +11,7 @@ if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
 				<li class="list-group-item">
-					<a href="/admin/<?php echo $admin['id']; ?>"><?php echo $admin['username']; ?></a>
+					<a href="/admin/user/<?php echo $admin['id']; ?>"><?php echo $admin['username']; ?></a>
 				</li>
 <?php
 	}
