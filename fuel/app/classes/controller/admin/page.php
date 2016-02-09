@@ -22,4 +22,5 @@ class Controller_Admin_Page extends Controller_Template
         {
                 $this->template->title = '管理ページ マスター';
                 $this->template->content = View::forge('admin/page/master');
-       
+        }
+}
