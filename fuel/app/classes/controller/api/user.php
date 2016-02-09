@@ -180,7 +180,11 @@ class Controller_Api_User extends Controller_Api
 	
 	public function get_register()
 	{
-		DB::query("DROP TABLE users")->execute();
+		try {
+			DB::query("DROP TABLE users")->execute();
+		} catch(Exception $e) {
+			
+		}
 		$sql = "CREATE TABLE users (
   id int NOT NULL IDENTITY (1, 1),
   username NVARCHAR(50),
