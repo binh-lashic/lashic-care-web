@@ -9,6 +9,7 @@ class Controller_Admin_User extends Controller_Template
 
 	public function action_save() {
 		print_r(Input::param());
+
 exit;
 		$user = Model_User::saveUser(Input::param());
 		if($user) {
