@@ -15,12 +15,11 @@ class Controller_Admin_Page extends Controller_Template
                 }
                 
                 $this->template->title = '管理ページ トップ';
-                $this->template->content = View::forge('admin/index', $data);
+                $this->template->content = View::forge('admin/user/index', $data);
 	}
 
         public function action_master()
         {
                 $this->template->title = '管理ページ マスター';
                 $this->template->content = View::forge('admin/page/master');
-        }
-}
+       

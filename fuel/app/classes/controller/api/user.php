@@ -15,12 +15,24 @@ class Controller_Api_User extends Controller_Api
 	}
 
 	//ユーザデータを取得
-	public function post_index() {
-		return $this->login_check();
+	public function post_get() {
+		return $this->_get();
 	}
 
-	public function get_index() {
-		return $this->login_check();
+	public function get_get() {
+		return $this->_get();
+	}
+
+	public function _get() {
+		$id = Input::param('id');
+		if(!$id) {
+			list($driver, $id) = Auth::get_user_id();
+		}
+		$user = \Model_User::getUser($id);
+		$this->result = array(
+			'data' => $user
+		);
+ 		return $this->result();
 	}
 
 	private function index() {
@@ -34,6 +46,8 @@ class Controller_Api_User extends Controller_Api
 		}
  		return $this->result();
 	}
+
+
 
 	//ユーザデータを取得
 	public function post_list() {
