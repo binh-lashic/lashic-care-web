@@ -24,4 +24,46 @@ class Model_User extends Orm\Model{
 			return null;
 		}	
 	}
+
+/*
+	public static function saveUser($params) {
+
+		if(isset($params['id'])) {
+			$sql = "UPDATE users (username, password, email, gender, kana, phone, mobile, work_start_date, memo) VALUES (:username, :password, :email, :gender, :kana, :phone, :mobile, :work_start_date, :memo);";
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'username' => $params['username'],
+				'password' => $params['password'],
+				'email' => $params['email'],
+				'gender' => $params['gender'],
+				'kana' => $params['kana'],
+				'phone' => $params['phone'],
+				'mobile' => $params['mobile'],
+				'work_start_date' => $params['work_start_date'],
+				'memo' => $params['memo'],
+			));
+		} else {
+			$sql = "INSERT users (username, password, email, gender, kana, phone, mobile, work_start_date, memo) VALUES (:username, :password, :email, :gender, :kana, :phone, :mobile, :work_start_date, :memo);";
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'username' => $params['username'],
+				'password' => $params['password'],
+				'email' => $params['email'],
+				'gender' => $params['gender'],
+				'kana' => $params['kana'],
+				'phone' => $params['phone'],
+				'mobile' => $params['mobile'],
+				'work_start_date' => $params['work_start_date'],
+				'memo' => $params['memo'],
+			));			
+		}
+
+		$res = $query->execute();
+		if($res) {
+			return $res;
+		} else {
+			return null;
+		}
+	}
+	*/
 }

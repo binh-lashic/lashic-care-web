@@ -23,7 +23,7 @@ if(isset($admins)) {
 	<div class="col-sm-6">
 		<div class="panel panel-default">
 			<p>
-			<form class="form-horizontal" id="login">
+			<form class="form-horizontal" id="login" method="post" action="/admin/user/save">
 			  <div class="form-group">
 			    <label for="name" class="col-sm-3 control-label">氏名※</label>
 			    <div class="col-sm-9">
