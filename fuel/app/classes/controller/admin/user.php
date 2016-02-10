@@ -3,17 +3,14 @@ class Controller_Admin_User extends Controller_Template
 {
     public function action_index() {
         $data = array();
-        try {
-        	$data['admins'] = Model_User::getAdmins();
-        	$id = Input::param("id");
-        	if($id) {
-        		$data['user'] = Model_User::getUser($id);
-        		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
-        	}
-        } catch(Exception $e) {
-        	echo $e->getMessage();
-        }
-        
+
+    	$data['admins'] = Model_User::getAdmins();
+    	$id = Input::param("id");
+    	if($id) {
+    		$data['user'] = Model_User::getUser($id);
+    		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
+    	}
+
         $this->template->title = '管理ページ トップ';
         $this->template->content = View::forge('admin/user/index', $data);
 	}
