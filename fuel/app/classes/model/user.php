@@ -1,6 +1,33 @@
 <?php 
 class Model_User extends Orm\Model{
 
+	public static function createTable() {
+		try {
+		    DB::query("DROP TABLE users")->execute();
+		} catch(Exception $e) {
+
+		}
+        $sql = "CREATE TABLE users (
+		 id int NOT NULL IDENTITY (1, 1),
+		 username NVARCHAR(50),
+		 password NVARCHAR(255),
+		 name NVARCHAR(50),
+		 kana NVARCHAR(512),
+		 email NVARCHAR(512),
+		 profile_fields NVARCHAR(512),
+		 last_login NVARCHAR(512),
+		 login_hash NVARCHAR(512),
+		 gender NCHAR(1),
+		 phone NVARCHAR(512),
+		 cellular NVARCHAR(255),
+		 work_start_date DATE,
+		 memo NTEXT,
+		 created_at INT
+		) ON [PRIMARY];";
+		DB::query($sql)->execute();
+
+	}
+
 	public static function getAdmins(){
 		$sql = "SELECT * FROM users;";
 		$res = DB::query($sql)->execute();
@@ -59,7 +86,22 @@ class Model_User extends Orm\Model{
 		} catch(Exception $e) {
 
 		}
+	}
 
-
+	public static function getSensors($user_id) {
+		$sensors = array();
+		if($user_id) {
+			$rows = \Model_User_Sensor::find("all", array(
+				'where' => array(
+					'user_id' => $user_id,
+				),
+				'related' => array('sensor')
+			));
+			foreach($rows as $row) {
+				$sensors[] = $row->sensor;
+			}
+		}
+		return $sensors;
 	}
 }
+		

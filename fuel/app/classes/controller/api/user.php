@@ -35,6 +35,26 @@ class Controller_Api_User extends Controller_Api
  		return $this->result();
 	}
 
+	public function post_update() {
+		return $this->_get();
+	}
+
+	public function get_update() {
+		return $this->_get();
+	}
+
+	public function _update() {
+		$param = Input::param();
+		if(!$param['id']) {
+			list($driver, $param['id']) = Auth::get_user_id();
+		}
+		$user = \Model_User::saveUser($param);
+		$this->result = array(
+			'data' => $user
+		);
+ 		return $this->result();
+	}
+
 	private function index() {
 		if (!Auth::check()) {
 		    $profile = Auth::get_profile_fields();
@@ -177,55 +197,4 @@ class Controller_Api_User extends Controller_Api
 		}
 		return $this->result();
 	}
-	
-	public function get_register()
-	{
-		try {
-			DB::query("DROP TABLE users")->execute();
-		} catch(Exception $e) {
-
-		}
-		$sql = "CREATE TABLE users (
-  id int NOT NULL IDENTITY (1, 1),
-  username NVARCHAR(50),
-  password NVARCHAR(255),
-  name NVARCHAR(50),
-  kana NVARCHAR(512),
-  email NVARCHAR(512),
-  profile_fields NVARCHAR(512),
-  last_login NVARCHAR(512),
-  login_hash NVARCHAR(512),
-  gender NCHAR(1),
-  phone NVARCHAR(512),
-  cellular NVARCHAR(255),
-  work_start_date DATE,
-  memo NTEXT,
-  created_at INT
-) ON [PRIMARY];";
-
-		DB::query($sql)->execute();
-		$username = Input::param("username");
-		$password = Input::param("password");
-		$email = $username;
-	    if (Input::param())
-	    {
-	    	try {
-	    		if(Auth::create_user(
-	                $username,
-	                $password,
-	                $email
-            	)) {
-				    $this->result = array('success' => true);
-            	} else {
-				    $this->result = array('success' => false);
-            	}
-
-	    	} catch(Exception $e) {
-	    		$this->result = array('success' => false);
-	    		$this->errors[] = array('message' => $e->getMessage());
-	    		$this->errors[] = array('message' => $email);
-	    	}
-	    }
- 		return $this->result();
-	}	
 }

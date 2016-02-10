@@ -3,7 +3,7 @@ class Model_Sensor extends Orm\Model{
 
 	public static function createTable(){
 		$sql = "CREATE TABLE sensors (
-  id NVARCHAR(255) NOT NULL IDENTITY (1, 1),
+  id INT NOT NULL IDENTITY (1, 1),
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
