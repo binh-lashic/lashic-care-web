@@ -1,5 +1,9 @@
 <?php 
 class Model_Sensor extends Orm\Model{
+	protected static $_properties = array(
+		'id',
+		'name',
+	);
 
 	public static function createTable(){
 		$sql = "CREATE TABLE sensors (
