@@ -13,4 +13,19 @@ class Model_User_Sensor extends Orm\Model{
         'cascade_save' => true,
         'cascade_delete' => false,
     ));
+
+	public static function createTable(){
+		try {
+		    DB::query("DROP TABLE user_sensors")->execute();
+		} catch(Exception $e) {
+
+		}
+		$sql = "CREATE TABLE user_sensors (
+  id INT NOT NULL IDENTITY (1, 1),
+  user_id INT NOT NULL,
+  sensor_id INT NOT NULL
+) ON [PRIMARY];";
+		return DB::query($sql)->execute();
+	}
+
 }

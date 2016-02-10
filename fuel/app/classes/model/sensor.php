@@ -6,8 +6,14 @@ class Model_Sensor extends Orm\Model{
 	);
 
 	public static function createTable(){
+		try {
+		    DB::query("DROP TABLE sensors")->execute();
+		} catch(Exception $e) {
+
+		}
 		$sql = "CREATE TABLE sensors (
   id INT NOT NULL IDENTITY (1, 1),
+  name NVARCHAR(50)
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
