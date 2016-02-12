@@ -83,6 +83,7 @@ class Model_User extends Orm\Model{
 		$query = DB::query($sql);
 		$query->parameters(array('id' => $id));
 		$res = $query->execute();
+		mb_convert_variables("UTF-8", "auto", $res);
 		$user = $res[0];
 		if($user) {
 			unset($user['password']);
