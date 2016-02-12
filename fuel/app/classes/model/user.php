@@ -5,7 +5,7 @@ class Model_User extends Orm\Model{
 		try {
 		    DB::query("DROP TABLE users")->execute();
 		} catch(Exception $e) {
-			echo $->getMessage();
+			echo $e->getMessage();
 		}
         $sql = "CREATE TABLE users (
 		 id int NOT NULL IDENTITY (1, 1),
