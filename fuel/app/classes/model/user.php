@@ -1,6 +1,29 @@
 <?php 
 class Model_User extends Orm\Model{
 
+	protected static $_properties = array(
+		'id',
+		'username',
+		'password',
+		'name',
+		'kana',
+		'email',
+		'profile_fields',
+		'last_login',
+		'login_hash',
+		'gender',
+		'phone',
+		'cellular',
+		'work_start_date',
+		'memo',
+		'admin',
+		'address',
+		'area',
+		'blood_type',
+		'birthday',
+		'created_at',
+	);
+
 	public static function createTable() {
 		try {
 		    DB::query("DROP TABLE users")->execute();
