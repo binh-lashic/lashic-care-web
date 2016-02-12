@@ -22,6 +22,11 @@ class Model_User extends Orm\Model{
 		 cellular NVARCHAR(255),
 		 work_start_date DATE,
 		 memo NTEXT,
+		 admin INT(1) DEFAULT 0,
+		 address NTEXT,
+		 area NVARCHAR(255),
+		 blood_type NVARCHAR(255),
+		 birthday DATE,
 		 created_at INT
 		) ON [PRIMARY];";
 		DB::query($sql)->execute();
