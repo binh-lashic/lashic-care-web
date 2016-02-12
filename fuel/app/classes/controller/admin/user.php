@@ -1,6 +1,14 @@
 <?php
 class Controller_Admin_User extends Controller_Template
 {
+	public function action_create() {
+		try {
+			\Model_User::createTable();
+		} catch(Exception $e) {
+			print_r($e->getMessage());
+		}
+	}
+
     public function action_index() {
         $data = array();
 
