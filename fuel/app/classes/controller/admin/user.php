@@ -18,8 +18,6 @@ class Controller_Admin_User extends Controller_Template
     	$id = Input::param("id");
     	if($id) {
     		$data['user'] = Model_User::getUser($id);
-            print_r($data);
-            exit;
     		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
     	}
         $this->template->title = '管理ページ トップ';
