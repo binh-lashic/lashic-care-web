@@ -29,7 +29,13 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function getAdmins(){
-		$sql = "SELECT * FROM users;";
+		$sql = "SELECT * FROM users WHERE admin=1;";
+		$res = DB::query($sql)->execute();
+		return $res->as_array();
+	}
+
+	public static function getCustomers(){
+		$sql = "SELECT * FROM users WHERE admin=0;";
 		$res = DB::query($sql)->execute();
 		return $res->as_array();
 	}
@@ -62,29 +68,33 @@ class Model_User extends Orm\Model{
 		if(empty($params['email'])) {
 			$params['email'] = $params['username'];
 		}
+		if(empty($params['admin'])) {
+			$params['admin'] = 0;
+		}
 		try {
-			if($id = Auth::create_user(
+			if(!empty($params['id'])) {
+				$id = $params['id'];
+			} else if($id = Auth::create_user(
 		                $params['username'],
 		                $params['password'],
 		                $params['email'])) {
-			} else if($params['id']) {
-				$id = $params['id'];
-			} else {
-
 			}
 			$user = \Model_User::find($id);
 			unset($params['id']);
 			unset($params['username']);
 			unset($params['password']);
 			unset($params['email']);
-			$user->set($params);
-			if($user->save()) {
-				return $user;
-			} else {
-				return null;
+			if($user) {
+				$user->set($params);
+				if($user->save()) {
+					return $user;
+				} else {
+					return null;
+				}				
 			}
 		} catch(Exception $e) {
-
+			echo $e->getMessage();
+			exit;
 		}
 	}
 

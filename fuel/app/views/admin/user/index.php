@@ -11,7 +11,7 @@ if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
 				<li class="list-group-item">
-					<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['username']; ?></a>
+					<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?></a>
 				</li>
 <?php
 	}
@@ -21,10 +21,11 @@ if(isset($admins)) {
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-body">
+		<div class="panel panel-default">
+			<div class="panel-heading">ユーザの新規登録</div>
+			<div class="panel-body">
 				<form class="form-horizontal" method="post" action="/admin/user/save">
+					<input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">氏名※</label>
 				    <div class="col-sm-9">
@@ -37,19 +38,19 @@ if(isset($admins)) {
 				      <input type="text" class="form-control" id="kana" name="kana" placeholder="フリガナ" value="<?php echo isset($user['kana']) ? $user['kana'] : ""; ?>">
 				    </div>
 				  </div>
+
 				  <div class="form-group">
 				    <label for="kana" class="col-sm-3 control-label">性別※</label>
 				    <div class="col-sm-9">
-					    <div class="btn-group" data-toggle="buttons">
-						  <label class="btn btn-primary active">
-						    <input type="radio" name="gender" id="gender_f" value="f" autocomplete="off" checked>女
-						  </label>
-						  <label class="btn btn-primary">
-						    <input type="radio" name="gender" id="gender_m" value="m" autocomplete="off">男
-						  </label>
-						</div>
+				    	<label class="radio-inline">
+							<input type="radio" name="gender" id="gender_f" value="f" <?php if(isset($user['gender']) && $user['gender'] == "f") { echo "checked"; } ?>>女
+						</label>
+				    	<label class="radio-inline">
+							<input type="radio" name="gender" id="gender_m" value="m" <?php if(isset($user['gender']) && $user['gender'] == "m") { echo "checked"; } ?>>男
+						</label>
 				    </div>
 				  </div>
+
 				  <div class="form-group">
 				    <label for="username" class="col-sm-3 control-label">ID</label>
 				    <div class="col-sm-9">
@@ -87,7 +88,7 @@ if(isset($admins)) {
 				  <div class="form-group">
 				    <label for="work_start_date" class="col-sm-3 control-label">勤務開始日</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="work_start_date" name="work_start_date" placeholder="勤務開始日">
+				      <input type="text" class="form-control" id="work_start_date" name="work_start_date" placeholder="勤務開始日" value="<?php echo isset($user['work_start_date']) ? $user['work_start_date'] : ""; ?>">
 				    </div>
 				  </div>
 
@@ -99,6 +100,15 @@ if(isset($admins)) {
 				  </div>
 
 				  <div class="form-group">
+				    <label for="admin" class="col-sm-3 control-label">管理者※</label>
+				    <div class="col-sm-9">
+				    	<label class="checkbox-inline">
+							<input type="checkbox" name="admin" id="admin" value="1" <?php if(isset($user['admin']) && $user['admin'] == 1) { echo "checked"; } ?>>オン
+						</label>
+				    </div>
+				  </div>
+
+				  <div class="form-group">
 				    <div class="col-sm-offset-3 col-sm-9">
 				      <button type="submit" class="btn btn-primary">
 				      	<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 保存する
@@ -106,13 +116,11 @@ if(isset($admins)) {
 				    </div>
 				  </div>
 				</form>
-				</div>
 			</div>
 		</div>
 <?php
 if(isset($user)) {
 ?>
-		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">機器一覧</div>
 				<ul class="list-group">
@@ -148,14 +156,15 @@ if(isset($user)) {
 				</form>
 				</div>
 			</div>
-		</div>
 <?php
 }
 ?>
 	</div>
 
+<?php
+if(isset($user)) {
+?>
 	<div class="col-sm-3">
-		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">担当一覧</div>
 				<table class="table table-bordered">
@@ -166,13 +175,13 @@ if(isset($user)) {
 						<th></th>
 					</tr>
 <?php
-if(isset($admins)) {
-	foreach($admins as $admin) {
+if(isset($clients)) {
+	foreach($clients as $client) {
 ?>
 				<tr>
-					<td><?php echo $admin['username']; ?></td>
-					<td><?php echo $admin['username']; ?></td>
-					<td><?php echo $admin['username']; ?></td>
+					<td><?php echo $client['name']; ?></td>
+					<td><?php echo $client['gender'] == "f" ? "女" : "男"; ?></td>
+					<td><?php echo $client['username']; ?></td>
 					<td>
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</td>
@@ -182,7 +191,13 @@ if(isset($admins)) {
 }
 ?>
 	  			</table>
+				<div class="panel-body">
+					<a class="btn btn-primary" href="/admin/user/add_client?user_id=<?php echo $user['id']; ?>" role="button">担当を追加</a>
+				</div>
 			</div>
-		</div>
 	</div>
+<?php
+}
+?>
+
 </div>

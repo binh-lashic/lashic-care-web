@@ -5,12 +5,13 @@ class Controller_Admin_User extends Controller_Template
         $data = array();
 
     	$data['admins'] = Model_User::getAdmins();
+    	$data['clients'] = Model_User::getCustomers();
+
     	$id = Input::param("id");
     	if($id) {
     		$data['user'] = Model_User::getUser($id);
     		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
     	}
-
         $this->template->title = '管理ページ トップ';
         $this->template->content = View::forge('admin/user/index', $data);
 	}
@@ -18,8 +19,7 @@ class Controller_Admin_User extends Controller_Template
 	public function action_save() {
 		$user = Model_User::saveUser(Input::param());
 		if($user) {
-            $this->template->title = '会員ページ';
-            $this->template->content = View::forge('admin/user/index');	
+	        Response::redirect('/admin/user/?id='.$user['id']);
 		} else {
         	$this->template->title = '会員ページ';
         	$this->template->content = View::forge('admin/user/index');	
@@ -29,8 +29,8 @@ class Controller_Admin_User extends Controller_Template
     public function action_sensors() {
         $id = Input::param("id");
         if($id) {
-                $user = Model_User::find($id);
-                $data['user'] = $user;
+            $user = Model_User::find($id);
+            $data['user'] = $user;
         }
         $this->template->title = '会員ページ';
         $this->template->content = View::forge('admin/user/sensors', $data);
@@ -65,9 +65,20 @@ class Controller_Admin_User extends Controller_Template
 	        } catch(Exception $e) {
 
 	        }
-    		$data['user'] = Model_User::getUser($user_id);
+    		$user = Model_User::getUser($user_id);
+	        Response::redirect('/admin/user/?id='.$user['id']);
+
     	}
+    }
+
+    public function action_add_client() {
+        $user_id = Input::param("user_id");
+        if($user_id) {
+            $data['user'] = Model_User::find($user_id);
+            $data['sensors'] = \Model_User::getSensors($data['user']['id']);
+            $data['blood_types'] = Config::get("blood_types");
+        }
         $this->template->title = '会員ページ';
-        $this->template->content = View::forge('admin/user/index', $data);
+        $this->template->content = View::forge('admin/user/client', $data);        
     }
 }
