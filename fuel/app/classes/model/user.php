@@ -22,7 +22,7 @@ class Model_User extends Orm\Model{
 		 cellular NVARCHAR(255),
 		 work_start_date DATE,
 		 memo NTEXT,
-		 admin INT(1),
+		 admin INT DEFAULT 0,
 		 address NTEXT,
 		 area NVARCHAR(255),
 		 blood_type NVARCHAR(255),
