@@ -5,7 +5,7 @@ class Model_User extends Orm\Model{
 		try {
 		    DB::query("DROP TABLE users")->execute();
 		} catch(Exception $e) {
-
+			echo $->getMessage();
 		}
         $sql = "CREATE TABLE users (
 		 id int NOT NULL IDENTITY (1, 1),
@@ -22,7 +22,7 @@ class Model_User extends Orm\Model{
 		 cellular NVARCHAR(255),
 		 work_start_date DATE,
 		 memo NTEXT,
-		 admin INT(1) DEFAULT 0,
+		 admin INT(1),
 		 address NTEXT,
 		 area NVARCHAR(255),
 		 blood_type NVARCHAR(255),
@@ -33,6 +33,7 @@ class Model_User extends Orm\Model{
 			DB::query($sql)->execute();
 		} catch(Exception $e) {
 			echo $e->getMessage();
+			exit;
 		}
 	}
 
