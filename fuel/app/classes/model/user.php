@@ -29,8 +29,11 @@ class Model_User extends Orm\Model{
 		 birthday DATE,
 		 created_at INT
 		) ON [PRIMARY];";
-		DB::query($sql)->execute();
-
+		try {
+			DB::query($sql)->execute();
+		} catch(Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
 	public static function getAdmins(){
