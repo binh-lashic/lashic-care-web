@@ -16,11 +16,18 @@ class Controller_Api extends Controller_Rest
 	    	if($user_id = \Model_Device::existDevice($device_id)) {
 	    		\Auth::instance()->force_login((int) $user_id);
 	    	} else {
-    	        Response::redirect('api/user/login_error');
+    	        $this->_error();
 	    	}
 	    } else if (!Auth::check()) {
-	        Response::redirect('api/user/login_error');
+	    	$this->_error();
 	    }
+	}
+
+	public function _error() {
+		$this->result = array(
+			'message' => 'ログインをしていません',
+		);
+ 		return $this->result();
 	}
 
 	public function result($http_status = null) {

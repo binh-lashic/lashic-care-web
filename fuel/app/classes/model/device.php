@@ -27,12 +27,14 @@ class Model_Device extends Orm\Model{
 	}
 
 	public static function existDevice($device_id) {
-		$sql = "SELECT * FROM devices WHERE device_id = :device_id;";
-		$query = DB::query($sql);
-		$query->parameters(array('device_id' => $device_id));
-		$res = $query->execute();
-		if($res[0]) {
-			return $res[0]['user_id'];
+		$device = \Model_Device::find('first', array(
+			'where' => array(
+				'device_id' => $device_id,
+			)
+		));
+		
+		if($device) {
+			return $device['user_id'];
 		} else {		
 			return null;
 		}

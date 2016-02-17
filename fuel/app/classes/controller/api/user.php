@@ -29,6 +29,8 @@ class Controller_Api_User extends Controller_Api
 			list($driver, $id) = Auth::get_user_id();
 		}
 		$user = \Model_User::getUser($id);
+		$sensors = \Model_User::getSensors($id);
+		$user['sensors'] = $sensors;
 		$this->result = array(
 			'data' => $user
 		);
