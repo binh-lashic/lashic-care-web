@@ -30,7 +30,9 @@ class Controller_Api_User extends Controller_Api
 		}
 		$user = \Model_User::getUser($id);
 		$sensors = \Model_User::getSensors($id);
+		$clients = \Model_User::getClients($id);
 		$user['sensors'] = $sensors;
+		$user['clients'] = $clients;
 		$this->result = array(
 			'data' => $user
 		);

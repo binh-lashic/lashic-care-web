@@ -66,6 +66,15 @@ class Model_User extends Orm\Model{
 		return $res->as_array();
 	}
 
+	public static function format($user) {
+		$ret = array();
+		$keys = array('id', 'username', 'name', 'kana', 'email', 'gender', 'phone', 'cellular', 'work_start_date', 'memo', 'admin', 'address', 'area', 'blood_type', 'birthday');
+		foreach($keys as $key) {
+			$ret[$key] = $user[$key];
+		}
+		return $ret;
+	}
+
 	public static function getClients($user_id=null) {
 		$users = array();
 		if($user_id) {
@@ -76,7 +85,7 @@ class Model_User extends Orm\Model{
 				'related' => array('user')
 			));
 			foreach($rows as $row) {
-				$users[] = $row->user;
+				$users[] = \Model_User::format($row->user);
 			}
 		} else {
 			$rows = \Model_User::find("all", array(
@@ -103,12 +112,7 @@ class Model_User extends Orm\Model{
 		
 		$user = $res[0];
 		if($user) {
-			unset($user['password']);
-			unset($user['last_login']);
-			unset($user['login_hash']);
-			unset($user['created_at']);
-			unset($user['profile_fields']);
-			return $user;
+			return \Model_User::format($user);
 		} else {
 			return null;
 		}	
