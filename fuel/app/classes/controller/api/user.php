@@ -139,9 +139,11 @@ class Controller_Api_User extends Controller_Api
 				'data' => false,
 			);
 		} else {
+			list(, $user_id) = Auth::get_user_id();
+			$user = \Model_User::getUser($user_id);
 			$this->result = array(
 				'message' => 'ログインに成功しました',
-				'data' => true,
+				'data' => $user,
 			);			
 		}
  		return $this->result();

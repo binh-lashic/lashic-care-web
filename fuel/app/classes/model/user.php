@@ -22,6 +22,19 @@ class Model_User extends Orm\Model{
 		'blood_type',
 		'birthday',
 		'created_at',
+		'temperature_alert',
+		'fire_alert',
+		'heatstroke_alert',
+		'hypothermia_alert',
+		'humidity_alert',
+		'mold_mites_alert',
+		'illuminance_daytime_alert',
+		'illuminance_night_alert',
+		'disconnection_alert',
+		'reconnection_alert',
+		'wake_up_alert',
+		'abnormal_behavior_alert',
+		'active_non_detection_alert',
 	);
 
 	public static function createTable() {
@@ -50,7 +63,20 @@ class Model_User extends Orm\Model{
 		 area NVARCHAR(255),
 		 blood_type NVARCHAR(255),
 		 birthday DATE,
-		 created_at INT
+		 created_at INT,
+		 temperature_alert INT,
+		 fire_alert INT,
+		 heatstroke_alert INT,
+		 hypothermia_alert INT,
+		 humidity_alert INT,
+		 mold_mites_alert INT,
+		 illuminance_daytime_alert INT,
+		 illuminance_night_alert INT,
+		 disconnection_alert INT,
+		 reconnection_alert INT,
+		 wake_up_alert INT,
+		 abnormal_behavior_alert INT,
+		 active_non_detection_alert INT
 		) ON [PRIMARY];";
 		try {
 			DB::query($sql)->execute();
@@ -68,7 +94,36 @@ class Model_User extends Orm\Model{
 
 	public static function format($user) {
 		$ret = array();
-		$keys = array('id', 'username', 'name', 'kana', 'email', 'gender', 'phone', 'cellular', 'work_start_date', 'memo', 'admin', 'address', 'area', 'blood_type', 'birthday');
+		$keys = array(
+			'id',
+			'username',
+			'name',
+			'kana',
+			'email',
+			'gender',
+			'phone',
+			'cellular',
+			'work_start_date',
+			'memo',
+			'admin',
+			'address',
+			'area',
+			'blood_type',
+			'birthday',
+			'temperature_alert',
+			'fire_alert',
+			'heatstroke_alert',
+			'hypothermia_alert',
+			'humidity_alert',
+			'mold_mites_alert',
+			'illuminance_daytime_alert',
+			'illuminance_night_alert',
+			'disconnection_alert',
+			'reconnection_alert',
+			'wake_up_alert',
+			'abnormal_behavior_alert',
+			'active_non_detection_alert',
+		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
@@ -165,23 +220,7 @@ class Model_User extends Orm\Model{
 							exit;
 						}					
 					}
-					return array(
-						'id' => $user->id,
-						'username' => $user->username,
-						'email' => $user->email,
-						'name' => $user->name,
-						'kana' => $user->kana,
-						'gender' => $user->gender,
-						'phone' => $user->phone,
-						'cellular' => $user->cellular,
-						'address' => $user->address,
-						'area' => $user->area,
-						'blood_type' => $user->blood_type,
-						'birthday' => $user->birthday,
-						'work_start_date' => $user->work_start_date,
-						'memo' => $user->memo,
-						'admin' => $user->admin,
-					);
+					return \Model_User::format($user);
 				} else {
 					return null;
 				}				

@@ -22,6 +22,16 @@ class Controller_Admin_User extends Controller_Template
         $this->template->content = View::forge('admin/user/index', $data);
 	}
 
+    public function action_alert() {
+        $data = array();
+        $id = Input::param("id");
+        if($id) {
+            $data['user'] = Model_User::getUser($id);
+        }
+        $this->template->title = '管理ページ アラート設定';
+        $this->template->content = View::forge('admin/user/alert', $data);
+    }
+
 	public function action_save() {
         $admin_user_id = Input::param("admin_user_id");
 		$user = Model_User::saveUser(Input::param());
@@ -31,11 +41,16 @@ class Controller_Admin_User extends Controller_Template
             } else {
                 Response::redirect('/admin/user/client?admin_user_id='.$admin_user_id.'&client_user_id='.$user['id']);
             }
-		} else {
-        	$this->template->title = '会員ページ';
-        	$this->template->content = View::forge('admin/user/index');	
 		}
 	}
+
+    public function action_alert_save() {
+        $id = Input::param("id");
+        $user = Model_User::saveUser(Input::param());
+        if($user) {
+            Response::redirect('/admin/user/alert?id='.$id);
+        }
+    }
 
     public function action_sensors() {
         $id = Input::param("id");
