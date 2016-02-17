@@ -36,17 +36,17 @@ class Controller_Api_User extends Controller_Api
 	}
 
 	public function post_update() {
-		return $this->_get();
+		return $this->_update();
 	}
 
 	public function get_update() {
-		return $this->_get();
+		return $this->_update();
 	}
 
 	public function _update() {
 		$param = Input::param();
-		if(!$param['id']) {
-			list($driver, $param['id']) = Auth::get_user_id();
+		if(empty($param['id'])) {
+			list(, $param['id']) = Auth::get_user_id();
 		}
 		$user = \Model_User::saveUser($param);
 		$this->result = array(
@@ -196,5 +196,22 @@ class Controller_Api_User extends Controller_Api
 			}
 		}
 		return $this->result();
+	}
+
+	public function post_save_clients() {
+		return $this->_save_clients();
+	}
+
+	public function get_save_clients() {
+		return $this->_save_clients();
+	}
+
+	public function _save_clients() {
+        $user_id = Input::param("user_id");
+        $client_user_ids = Input::param("client_user_ids");
+        if(\Model_User::saveClients($user_id, $client_user_ids)) {
+
+        }
+        return $this->result();
 	}
 }

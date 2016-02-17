@@ -11,7 +11,7 @@ if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
 				<li class="list-group-item">
-					<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?></a>
+					<a href="/admin/user/?admin_user_id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?></a>
 				</li>
 <?php
 	}
@@ -128,7 +128,9 @@ if(isset($user)) {
 	if(isset($sensors)) {
 		foreach($sensors as $sensor) {
 ?>
-					<li class="list-group-item"><?php echo $sensor['name']; ?></li>
+					<li class="list-group-item">
+						<a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a>
+					</li>
 <?php
 		}
 	}
@@ -179,9 +181,9 @@ if(isset($clients)) {
 	foreach($clients as $client) {
 ?>
 				<tr>
-					<td><?php echo $client['name']; ?></td>
+					<td><a href="/admin/user/client?admin_user_id=<?php echo $user['id']; ?>&client_user_id=<?php echo $client['id']; ?>"><?php echo $client['name']; ?></td>
 					<td><?php echo $client['gender'] == "f" ? "女" : "男"; ?></td>
-					<td><?php echo $client['username']; ?></td>
+					<td><?php echo date("Y/m/d", strtotime($client['birthday'])); ?></td>
 					<td>
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</td>
@@ -192,12 +194,10 @@ if(isset($clients)) {
 ?>
 	  			</table>
 				<div class="panel-body">
-					<a class="btn btn-primary" href="/admin/user/add_client?user_id=<?php echo $user['id']; ?>" role="button">担当を追加</a>
+					<a class="btn btn-primary" href="/admin/user/client_list?user_id=<?php echo $user['id']; ?>" role="button">担当を追加</a>
 				</div>
 			</div>
 	</div>
 <?php
 }
 ?>
-
-</div>

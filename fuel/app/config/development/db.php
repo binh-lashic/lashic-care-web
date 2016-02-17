@@ -13,4 +13,13 @@ return array(
 		'identifier'   => '`',
         'profiling' => true,
 	),
+	'data' => array(
+		'connection'  => array(
+			'dsn'        => 'mysql:host=localhost;dbname=infic',
+			'username'   => 'infic',
+			'password'   => 'Vb6HZWqK',
+		),
+		'identifier'   => '`',
+        'profiling' => true,
+	),
 );

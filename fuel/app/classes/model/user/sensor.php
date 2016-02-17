@@ -10,7 +10,7 @@ class Model_User_Sensor extends Orm\Model{
         'model_to' => 'Model_Sensor',
         'key_from' => 'sensor_id',
         'key_to' => 'id',
-        'cascade_save' => true,
+        'cascade_save' => false,
         'cascade_delete' => false,
     ));
 

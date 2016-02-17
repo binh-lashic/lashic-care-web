@@ -11,23 +11,26 @@ class Controller_Admin_User extends Controller_Template
 
     public function action_index() {
         $data = array();
-
     	$data['admins'] = Model_User::getAdmins();
-    	$data['clients'] = Model_User::getCustomers();
-
-    	$id = Input::param("id");
+    	$id = Input::param("admin_user_id");
     	if($id) {
     		$data['user'] = Model_User::getUser($id);
     		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
+            $data['clients'] = Model_User::getClients($id);
     	}
         $this->template->title = '管理ページ トップ';
         $this->template->content = View::forge('admin/user/index', $data);
 	}
 
 	public function action_save() {
+        $admin_user_id = Input::param("admin_user_id");
 		$user = Model_User::saveUser(Input::param());
 		if($user) {
-	        Response::redirect('/admin/user/?id='.$user['id']);
+            if($user['admin']) {
+                Response::redirect('/admin/user/?admin_user_id='.$admin_user_id);
+            } else {
+                Response::redirect('/admin/user/client?admin_user_id='.$admin_user_id.'&client_user_id='.$user['id']);
+            }
 		} else {
         	$this->template->title = '会員ページ';
         	$this->template->content = View::forge('admin/user/index');	
@@ -79,14 +82,48 @@ class Controller_Admin_User extends Controller_Template
     	}
     }
 
-    public function action_add_client() {
-        $user_id = Input::param("user_id");
+    public function action_client() {
+        $user_id = Input::param("admin_user_id");
+        $client_id = Input::param("client_user_id");
+        $data['blood_types'] = Config::get("blood_types");
         if($user_id) {
             $data['user'] = Model_User::find($user_id);
             $data['sensors'] = \Model_User::getSensors($data['user']['id']);
-            $data['blood_types'] = Config::get("blood_types");
+            if($client_id) {
+                $data['client'] = Model_User::find($client_id);
+                $client_sensors = \Model_User::getSensors($data['client']['id']);
+                $data['client_sensor_id'] = $client_sensors[0]->id;
+            }
         }
         $this->template->title = '会員ページ';
         $this->template->content = View::forge('admin/user/client', $data);        
+    }
+
+    public function action_client_list() {
+        $user_id = Input::param("user_id");
+        if($user_id) {
+            $data['user'] = \Model_User::find($user_id);
+            $users = \Model_User::getClients();
+            $clients = \Model_User::getClients($user_id);
+            foreach($clients as $client) {
+                $client_keys[$client->id] = true;
+            }
+            foreach($users as $user) {
+                $user = $user->to_array(true);
+                if(isset($client_keys[$user['id']])) {
+                    $user['flag'] = true;
+                }
+                $data['users'][] = $user;
+            }
+        }
+        $this->template->title = '会員ページ';
+        $this->template->content = View::forge('admin/user/client_list', $data);        
+    }
+
+    public function action_add_client() {
+        $user_id = Input::param("id");
+        $client_user_ids = Input::param("client_user_ids");
+        \Model_User::saveClients($user_id, $client_user_ids);
+        Response::redirect('/admin/user/client_list?user_id='.$user_id);
     }
 }

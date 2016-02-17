@@ -26,21 +26,23 @@ class Controller_Api_Data extends Controller_Api
 			);
 		} else {
 			$sql = "SELECT * FROM data WHERE sensor_id = '".$sensor_id."' ORDER BY date DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY";
-			$res = DB::query($sql)->execute("data");
-			$rows = $res->as_array();
+			//$res = DB::query($sql)->execute("data");
+			$data = \Model_Data::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->connection("data")->get_one();
+
+			//$rows = $res->as_array();
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data' => array(),
 			);
-			if(isset($rows[0])) {
-				$temperature = $rows[0]['temperature'];
-				$humidity = $rows[0]['humidity'];
+			if(isset($data)) {
+				$temperature = $data['temperature'];
+				$humidity = $data['humidity'];
 				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
 						'humidity' => round($humidity, 1),
-						'active' => round($rows[0]['active'], 1),
-						'illuminance' =>  (int)$rows[0]['illuminance'],
+						'active' => round($data['active'], 1),
+						'illuminance' =>  (int)$data['illuminance'],
 						'discomfort' => ceil($discomfort),
 				);
 			}
@@ -120,4 +122,29 @@ class Controller_Api_Data extends Controller_Api
 		}
 		return $this->result();	
 	}
+
+	public function get_import() {
+		$sensor_id = "0001A";
+		$url = "http://infic.papaikuji.info/api/data/dashboard?sensor_id=".$sensor_id."&device_id=11111";
+		$json = json_decode(file_get_contents($url), true);
+		$params = $json['data'];
+		$params['corporate_id'] = '00000';
+		$params['sensor_id'] = $sensor_id;
+		$params['date'] = date("Y-m-d H:i:00");
+
+		unset($params['discomfort']);
+		$data = \Model_Data::forge();
+		$data->set($params);
+		try {
+			if($data->save()) {
+				$this->result['data'] = $params;
+			}
+		} catch(Exception $e) {
+
+		}
+
+		return $this->result();	
+	}
+
+
 }

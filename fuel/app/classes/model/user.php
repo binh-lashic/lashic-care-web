@@ -66,10 +66,27 @@ class Model_User extends Orm\Model{
 		return $res->as_array();
 	}
 
-	public static function getCustomers(){
-		$sql = "SELECT * FROM users WHERE admin=0;";
-		$res = DB::query($sql)->execute();
-		return $res->as_array();
+	public static function getClients($user_id=null) {
+		$users = array();
+		if($user_id) {
+			$rows = \Model_User_Client::find("all", array(
+				'where' => array(
+					'user_id' => $user_id,
+				),
+				'related' => array('user')
+			));
+			foreach($rows as $row) {
+				$users[] = $row->user;
+			}
+		} else {
+			$rows = \Model_User::find("all", array(
+				'where' => array('admin' => 0)
+			));
+			foreach($rows as $row) {
+				$users[] = $row;
+			}			
+		}
+		return $users;
 	}
 
 	public static function getUsers(){
@@ -98,7 +115,7 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function saveUser($params) {
-		if(empty($params['email'])) {
+		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
 		}
 		if(empty($params['admin'])) {
@@ -120,7 +137,47 @@ class Model_User extends Orm\Model{
 			if($user) {
 				$user->set($params);
 				if($user->save()) {
-					return $user;
+					//センサーを保存
+					if(isset($params['sensor_id'])) {
+						$user_sensor = \Model_User_Sensor::find("first", array(
+							'where' => array(
+								'user_id' => $user->id,
+							),
+						));
+						//もし設定が無い場合は新規作成
+						if(empty($user_sensor)){
+							$user_sensor = \Model_User_Sensor::forge();
+						}
+
+						$user_sensor->set(array(
+							'user_id' => $user->id,
+							'sensor_id' => $params['sensor_id'],
+						));
+			
+						try {
+							$user_sensor->save();
+						} catch(Exception $e) {
+							echo $e->getMessage();
+							exit;
+						}					
+					}
+					return array(
+						'id' => $user->id,
+						'username' => $user->username,
+						'email' => $user->email,
+						'name' => $user->name,
+						'kana' => $user->kana,
+						'gender' => $user->gender,
+						'phone' => $user->phone,
+						'cellular' => $user->cellular,
+						'address' => $user->address,
+						'area' => $user->area,
+						'blood_type' => $user->blood_type,
+						'birthday' => $user->birthday,
+						'work_start_date' => $user->work_start_date,
+						'memo' => $user->memo,
+						'admin' => $user->admin,
+					);
 				} else {
 					return null;
 				}				
@@ -145,6 +202,37 @@ class Model_User extends Orm\Model{
 			}
 		}
 		return $sensors;
+	}
+
+	public static function saveClients($user_id, $client_user_ids) {
+        foreach($client_user_ids as $client_user_id => $value) {
+            if($value === "true") {
+                $user_client = \Model_User_Client::forge();
+                $user_client->set(array(
+                    'user_id' => $user_id,
+                    'client_user_id' => $client_user_id,
+                ));
+                try {
+                    if($user_client->save()) {        
+                    }
+                } catch(Exception $e) {
+                }
+            } else {
+                $user_client = \Model_User_Client::find("first", array(
+                    'where' => array(
+                        'user_id' => $user_id,
+                        'client_user_id' => $client_user_id,
+                    ),
+                ));
+                unset($user_client->user);
+                try {
+                    if(isset($user_client) && $user_client->delete()) {
+                    }
+                } catch(Exception $e) {
+                }
+            }
+        }
+        return;
 	}
 }
 		
