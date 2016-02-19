@@ -1,5 +1,10 @@
 <?php 
 class Model_Device extends Orm\Model{
+	protected static $_properties = array(
+		'id',
+		'user_id',
+		'device_id'
+	);
 
 	public static function createTable(){
 		$sql = "CREATE TABLE devices (

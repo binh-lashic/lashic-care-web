@@ -92,7 +92,7 @@ class Controller_Admin_User extends Controller_Template
 
 	        }
     		$user = Model_User::getUser($user_id);
-	        Response::redirect('/admin/user/?id='.$user['id']);
+	        Response::redirect('/admin/user/?admin_user_id='.$user['id']);
 
     	}
     }
