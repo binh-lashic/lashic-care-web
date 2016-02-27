@@ -34,15 +34,14 @@ class Controller_Api_Data extends Controller_Api
 				'data' => array(),
 			);
 			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_id);
-			print_r($sensor);
-			exit;
-			if(isset($data)) {
+
+			if(isset($data) && isset($sensor)) {
 				$temperature = $data['temperature'];
 				$humidity = $data['humidity'];
 				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
-						'temperature_average' => isset($sensor->temperature_average) ? $sensor->temperature_average : null,
+						'temperature_average' => $sensor->temperature_average,
 						'temperature_week_average' => json_decode($sensor->temperature_week_average, true),
 						'humidity' => round($humidity, 1),
 						'humidity_average' => $sensor->humidity_average,
