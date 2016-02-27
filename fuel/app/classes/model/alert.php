@@ -2,9 +2,11 @@
 class Model_Alert extends Orm\Model{
 	protected static $_properties = array(
 		'id',
-		'title',
 		'sensor_id',
+		'title',
+		'description',
 		'date',
+		'type',
 		'reason',
 		'confirm_status',
 		'confirm_user_id',
@@ -12,7 +14,6 @@ class Model_Alert extends Orm\Model{
 		'responder_user_id',
 		'corresponding_type',
 		'expected_description',
-		'description',
 		'corresponding_status',
 		'report_description',
 		'manager_confirm_status',
@@ -33,6 +34,7 @@ class Model_Alert extends Orm\Model{
   title NVARCHAR(255),
   sensor_id INT,
   date DATETIME,
+  type NVARCHAR(50),
   reason NTEXT,
   confirm_status INT,
   confirm_user_id INT, 
@@ -110,5 +112,20 @@ class Model_Alert extends Orm\Model{
 		}
 	
     	return null;
+    }
+
+	//スヌーズ範囲にデータがある場合はアラートしない
+    public static function existsAlert($params) {
+    	$query = array(array('date', ">=", 60 * 60 * 5));
+    	if(!empty($params['sensor_id'])) {
+    		$query['sensor_id'] = $params['sensor_id'];
+    	}
+    	if(!empty($params['type'])) {
+    		$query['type'] = $params['type'];
+    	}
+    	$alert = \Model_Alert::find('first', array(
+    		'where' => $query
+    	));
+    	return $alert;
     }
 }

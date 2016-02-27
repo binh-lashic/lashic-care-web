@@ -1,5 +1,5 @@
 $(function(){
-    var apiUrl = "http://infic.azurewebsites.net/api/";
+    var apiUrl = "http://infic.papaikuji.info/api/";
     //var apiUrl = "http://infic.garoo.jp/api/";
     
     // ユーザ定義関数
@@ -23,6 +23,7 @@ $(function(){
 		};
 		api("user/login", params, function(result){
 			if(result.data) {
+				console.log(result.data);
 				location.href = "/user/";
 			}
 		});

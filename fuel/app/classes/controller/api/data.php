@@ -6,6 +6,8 @@ class Controller_Api_Data extends Controller_Api
 		$this->nologin_methods = array(
 	        'graph',
 	        'test',
+	        'analyze',
+	        'alert',
 	    );
 	    parent::before();
 	}
@@ -25,25 +27,29 @@ class Controller_Api_Data extends Controller_Api
 				'message' => 'センサーIDを指定してください'
 			);
 		} else {
-			$sql = "SELECT * FROM data WHERE sensor_id = '".$sensor_id."' ORDER BY date DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY";
-			//$res = DB::query($sql)->execute("data");
 			$data = \Model_Data::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->connection("data")->get_one();
 
-			//$rows = $res->as_array();
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data' => array(),
 			);
+			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_id);
+
 			if(isset($data)) {
 				$temperature = $data['temperature'];
 				$humidity = $data['humidity'];
 				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
+						'temperature_average' => $sensor->temperature_average,
+						'temperature_week_average' => json_decode($sensor->temperature_week_average, true),
 						'humidity' => round($humidity, 1),
+						'humidity_average' => $sensor->humidity_average,
+						'humidity_week_average' => json_decode($sensor->humidity_week_average, true),
 						'active' => round($data['active'], 1),
 						'illuminance' =>  (int)$data['illuminance'],
 						'discomfort' => ceil($discomfort),
+
 				);
 			}
 		}
@@ -146,5 +152,111 @@ class Controller_Api_Data extends Controller_Api
 		return $this->result();	
 	}
 
+	public function get_analyze() {
+		/*
+起床時間の定義
+
+関連するパラメータの予定デフォルト値
+
+起床判断開始時間：未定
+起床判断終了時間：未定
+運動量閾値：未定
+起床判断期間：5分
+起床不感帯期間：30分
+起床判断期間以上継続して、運動量が運動量閾値を超えた場合に、同連続して運動量閾値を超えた期間の最初の時間を起床時間と定義する。
+なお、途中でセンサーから外れる（運動量がゼロになる）場合などがあるため、起床不感帯期間を設ける。
+起床判断中（起床時間が決定しておらず、運動量が運動量閾値を超えている最中）に、運動量閾値を下回ったとしても、起床不感帯期間以内に運動量が運動量閾値を超えた場合、起床判断を継続する。
+
+
+就寝時間の定義
+
+関連するパラメータの予定デフォルト値
+
+就寝判断開始時間：未定
+就寝判断終了時間：未定
+運動量閾値：
+就寝判断期間：5分
+就寝不感帯期間：30分
+就寝判断期間以上継続して、運動量が運動量閾値を超えた場合に、同連続して運動量閾値を下回った期間の最初の時間を就寝時間と定義する。
+なお、途中でセンサーから外れる（運動量がゼロになる）場合などがあるため、就寝不感帯期間を設ける。
+就寝判断中（就寝時間が決定しておらず、運動量が運動量閾値を超えている最中）に、運動量閾値を下回ったとしても、就寝不感帯期間以内に運動量が運動量閾値を下回った場合、起床判断を継続する。
+		*/
+		$sensors = \Model_Sensor::find("all");
+		foreach($sensors as $sensor) {
+			$sql = 'SELECT * FROM `data` WHERE sensor_id=:sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $sensor->name,
+				'date' => date("Y-m-d H:i:s", strtotime("-30days"))
+			));
+			$result = $query->execute('data');
+			$rows = $result->as_array();
+			$count = count($rows);
+			if($count > 0) {
+				$temperature_total = 0;
+				$temperature_average = 0;
+				$humidity_total = 0;
+				$humidity_average = 0;
+				$temperature_week_total = array(0, 0, 0, 0, 0, 0, 0);
+				$temperature_week_count = array(0, 0, 0, 0, 0, 0, 0);
+				$temperature_week_average = array(0, 0, 0, 0, 0, 0, 0);
+				$humidity_week_total = array(0, 0, 0, 0, 0, 0, 0);
+				$humidity_week_count = array(0, 0, 0, 0, 0, 0, 0);
+				$humidity_week_average = array(0, 0, 0, 0, 0, 0, 0);
+				foreach($rows as $row) {
+					$temperature_total += $row['temperature'];
+					$humidity_total += $row['humidity'];
+					$week = date("w", strtotime($row['date']));
+					$temperature_week_total[$week] += $row['temperature'];
+					$temperature_week_count[$week]++;
+					$humidity_week_total[$week]  += $row['humidity'];
+					$humidity_week_count[$week]++;
+				}
+				$temperature_average = $temperature_total / $count;
+				$humidity_average = $humidity_total / $count;
+				foreach($temperature_week_total as $week => $val) {
+					if($temperature_week_count[$week] === 0) {
+						$temperature_week_average[$week] = 0;
+					} else {
+						$temperature_week_average[$week] = $temperature_week_total[$week] / $temperature_week_count[$week];
+					}
+					if($humidity_week_count[$week] === 0) {
+						$humidity_week_average[$week] = 0;
+					} else {
+						$humidity_week_average[$week] = $humidity_week_total[$week] / $humidity_week_count[$week];
+					}					
+				}
+				$sensor->set(array(
+					'temperature_average' => $temperature_average,
+					'humidity_average' => $humidity_average,
+					'temperature_week_average' => json_encode($temperature_week_average),
+					'humidity_week_average' => json_encode($humidity_week_average),
+				));
+				$sensor->save();
+			}
+		} 
+		return $this->result();	
+	}
+
+	public function get_alert() {
+		$sensors = \Model_Sensor::find("all");
+		foreach($sensors as $sensor) {
+			$this->result['data'][] = array(
+				'sensor_id' => $sensor->id,
+				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
+				'fire' => $sensor->checkFire(),									//火事アラート
+				'temperature' => $sensor->checkTemperature(),					//室温異常通知
+				'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
+				'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
+				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
+				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
+				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
+//低体温症アラート（要確認）
+//通信復帰通知
+//平均起床時間遅延
+			);
+		}
+		return $this->result();	
+	}
 
 }

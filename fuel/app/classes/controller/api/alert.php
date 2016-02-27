@@ -55,4 +55,16 @@ class Controller_Api_Alert extends Controller_Api
 		);
  		return $this->result();
 	}
+
+	public function get_snooze() {
+		return $this->_snooze();
+	}
+
+	public function _snooze() {
+		$alert = \Model_Alert::saveAlert(Input::param());
+		$this->result = array(
+			'data' => $alert
+		);
+ 		return $this->result();
+	}
 }
