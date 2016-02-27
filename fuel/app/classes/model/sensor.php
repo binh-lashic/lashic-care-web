@@ -118,8 +118,12 @@ class Model_Sensor extends Orm\Model{
     }
 
     public static function format($sensor) {
-    	$sensor['temperature_week_average'] = json_decode($sensor['temperature_week_average'], true);
-    	$sensor['humidity_week_average'] = json_decode($sensor['humidity_week_average'], true);
+    	if(empty($sensor['temperature_week_average'])) {
+	    	$sensor['temperature_week_average'] = json_decode($sensor['temperature_week_average'], true);
+	    }
+    	if(empty($sensor['humidity_week_average'])) {
+	    	$sensor['humidity_week_average'] = json_decode($sensor['humidity_week_average'], true);
+    	}
     	return $sensor;
     }
 
