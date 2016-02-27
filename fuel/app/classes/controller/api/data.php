@@ -34,7 +34,8 @@ class Controller_Api_Data extends Controller_Api
 				'data' => array(),
 			);
 			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_id);
-
+			print_r($sensor);
+			exit;
 			if(isset($data)) {
 				$temperature = $data['temperature'];
 				$humidity = $data['humidity'];
