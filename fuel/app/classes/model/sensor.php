@@ -129,7 +129,7 @@ class Model_Sensor extends Orm\Model{
 
     //室温異常通知
     public function checkTemperature() {
-    	$sql = 'SELECT temperature FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT temperature FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -170,7 +170,7 @@ class Model_Sensor extends Orm\Model{
 
     //湿度異常通知
     public function checkHumidity() {
-    	$sql = 'SELECT humidity FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -211,7 +211,7 @@ class Model_Sensor extends Orm\Model{
 
 	//熱中症チェック
 	public function checkHeatstroke() {
-    	$sql = 'SELECT temperature,humidity FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -241,7 +241,7 @@ class Model_Sensor extends Orm\Model{
 
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
-    	$sql = 'SELECT temperature,humidity FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -269,7 +269,7 @@ class Model_Sensor extends Orm\Model{
 
     //通信断のチェック
     public function checkDisconnection() {
-    	$sql = 'SELECT COUNT(*) AS count FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -289,7 +289,7 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
-    	$sql = 'SELECT illuminance,date FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -322,7 +322,7 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
-    	$sql = 'SELECT illuminance,date FROM `data` WHERE sensor_id = :sensor_id AND date >= :date';
+    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -356,7 +356,7 @@ class Model_Sensor extends Orm\Model{
 
     //火事のチェック
     public function checkFire() {
-    	$sql = 'SELECT * FROM `data` WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
+    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
