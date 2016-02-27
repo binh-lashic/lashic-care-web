@@ -6,6 +6,7 @@ class Controller_Admin_Sensor extends Controller_Template
 			\Model_Sensor::createTable();
 		} catch(Exception $e) {
 			print_r($e->getMessage());
+			exit;
 		}
 	}
 

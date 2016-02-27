@@ -65,7 +65,7 @@ class Model_Sensor extends Orm\Model{
   wake_up_period INT,
   wake_up_delay_allowance_duration INT,
   temperature_average FLOAT,
-  humidity_average FLOAT
+  humidity_average FLOAT,
   temperature_week_average NTEXT,
   humidity_week_average NTEXT
 ) ON [PRIMARY];";
