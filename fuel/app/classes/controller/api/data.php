@@ -183,7 +183,7 @@ class Controller_Api_Data extends Controller_Api
 		*/
 		$sensors = \Model_Sensor::find("all");
 		foreach($sensors as $sensor) {
-			$sql = 'SELECT * FROM `data` WHERE sensor_id=:sensor_id AND date >= :date';
+			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $sensor->name,
