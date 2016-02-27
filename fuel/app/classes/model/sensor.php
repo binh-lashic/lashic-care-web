@@ -378,7 +378,7 @@ class Model_Sensor extends Orm\Model{
     public function alert($params) {
     	$params['date'] = date("Y-m-d H:i:s");
     	$params['sensor_id'] = $this->id;
-    	$params['alert'] = "emergency";
+    	$params['category'] = "emergency";
 
     	//既にアラートが出ているかチェック
 		if(\Model_Alert::existsAlert($params)) {
