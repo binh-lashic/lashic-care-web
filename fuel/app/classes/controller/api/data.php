@@ -41,7 +41,7 @@ class Controller_Api_Data extends Controller_Api
 				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
-						'temperature_average' => $sensor->temperature_average,
+						'temperature_average' => isset($sensor->temperature_average) ? $sensor->temperature_average : null,
 						'temperature_week_average' => json_decode($sensor->temperature_week_average, true),
 						'humidity' => round($humidity, 1),
 						'humidity_average' => $sensor->humidity_average,
