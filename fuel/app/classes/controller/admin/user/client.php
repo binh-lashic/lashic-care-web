@@ -12,7 +12,9 @@ class Controller_Admin_User_Client extends Controller_Template
             if($client_id) {
                 $data['client'] = Model_User::find($client_id);
                 $client_sensors = \Model_User::getSensors($data['client']['id']);
-                $data['client_sensor_id'] = $client_sensors[0]->id;
+                if(!empty($client_sensors[0])) {
+                    $data['client_sensor_id'] = $client_sensors[0]->id;
+                }
             }
         }
         $this->template->title = '会員ページ';

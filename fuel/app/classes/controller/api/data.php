@@ -27,8 +27,7 @@ class Controller_Api_Data extends Controller_Api
 				'message' => 'センサーIDを指定してください'
 			);
 		} else {
-			$data = \Model_Data::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->connection("data")->get_one();
-
+			$data = \Model_Data::getLatestData($sensor_id);
 			$this->result = array(
 				'sensor_id' => $sensor_id,
 				'data' => array(),
@@ -38,7 +37,6 @@ class Controller_Api_Data extends Controller_Api
 			if(isset($data) && isset($sensor)) {
 				$temperature = $data['temperature'];
 				$humidity = $data['humidity'];
-				$discomfort = 0.81 * $temperature + 0.01 * $humidity * (0.99 * $temperature - 14.3) + 46.3;
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
 						'temperature_average' => $sensor->temperature_average,
@@ -48,8 +46,11 @@ class Controller_Api_Data extends Controller_Api
 						'humidity_week_average' => $sensor->humidity_week_average,
 						'active' => round($data['active'], 1),
 						'illuminance' =>  (int)$data['illuminance'],
-						'discomfort' => ceil($discomfort),
-
+						'discomfort' => $data['discomfort'],
+						'wake_up_time' => '07:32:51',
+						'wake_up_time_average' => '07:25:22',
+						'sleep_time' => '22:33:43',
+						'sleep_time_average' => '22:22:15',
 				);
 			}
 		}

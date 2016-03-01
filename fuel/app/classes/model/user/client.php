@@ -6,13 +6,23 @@ class Model_User_Client extends Orm\Model{
 		'client_user_id',
 	);
 
-	protected static $_has_one = array('user'=> array(
-        'model_to' => 'Model_User',
-        'key_from' => 'client_user_id',
-        'key_to' => 'id',
-        'cascade_save' => false,
-        'cascade_delete' => false,
-    ));
+	protected static $_has_one = array(
+		'client'=> array(
+	        'model_to' => 'Model_User',
+	        'key_from' => 'client_user_id',
+	        'key_to' => 'id',
+	        'cascade_save' => false,
+	        'cascade_delete' => false,
+	    ),
+		'admin'=> array(
+	        'model_to' => 'Model_User',
+	        'key_from' => 'user_id',
+	        'key_to' => 'id',
+	        'cascade_save' => false,
+	        'cascade_delete' => false,
+    	)
+	);
+
 
 	public static function createTable(){
 		try {

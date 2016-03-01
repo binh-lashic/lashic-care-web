@@ -12,5 +12,20 @@ class Model_Data extends Orm\Model{
         'illuminance',
         'active',
 	);
+
+    public static function getLatestData($sensor_name) {
+        $data = \Model_Data::query()->where('sensor_id', $sensor_name)->order_by('date', 'desc')->connection("data")->get_one();
+        return \Model_Data::format($data);
+    }
+
+    public static function format($data) {
+        if($data) {
+            $data['discomfort'] = 0.81 * $data->temperature + 0.01 * $data->humidity * (0.99 * $data->temperature - 14.3) + 46.3;
+            $data['discomfort'] = round($data['discomfort'], 1);
+        } else {
+            $data['discomfort'] = "";
+        }
+        return $data;
+    }
 }
 		

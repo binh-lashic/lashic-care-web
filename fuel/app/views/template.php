@@ -58,55 +58,9 @@ Shadowbox.init({
 <!-- /light box -->
 </head>
 <body id="home" class="drawer drawer--right">
-<header class="drawer-navbar" role="banner">
-	<div class="drawer-container">
-		<div class="drawer-navbar-header"> <a class="logo" href="./index.html"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
-			<button type="button" class="drawer-toggle drawer-hamburger"> <span class="sr-only">toggle navigation</span> <span class="drawer-hamburger-icon"></span> </button>
-		</div>
-		<nav class="drawer-nav" role="navigation">
-			<ul class="drawer-menu drawer-menu--right">
-				<li class="drawer-dropdown hdr_icon_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> 服部伴之さん <span class="drawer-caret"></span> </a>
-					<ul class="drawer-dropdown-menu">
-						<li class="nav_mypage"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">マイページ</a></li>
-						<li class="nav_user"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ユーザー登録・削除</a></li>
-						<li class="nav_set"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">グラフ設定変更</a></li>
-						<li class="nav_help"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ヘルプ</a></li>
-						<li class="nav_logout"><a href="/user/logout" class="drawer-dropdown-menu-item">ログアウト</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	
-	<!-- blue area -->
-	<div class="hdr_bg">
-		<div class="content clearfix">
-			<div class="user_select clearfix">
-				<div class="hdr_select_text">ユーザー選択</div>
-				<select>
-					<option value="">インフィックさん</option>
-					<option value="">選択肢01</option>
-					<option value="">選択肢02</option>
-					<option value="">選択肢03</option>
-					<option value="">選択肢04</option>
-					<option value="">選択肢05</option>
-				</select>
-			</div>
-			<div id="content_nav">
-				<nav>
-					<ul>
-						<li class="nav_on"><a href="index.html" class="nav_graph"><span></span>ユーザーの様子</a></li>
-						<li><a href="report/index.html" class="nav_report"><span></span>確認・報告</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</div>
-	<!-- /blue area end --> 
-</header>
-
-<!-- content -->
-<?php echo $content; ?>
+<?php echo isset($header) ? $header : ""; ?>
+<?php echo isset($content) ? $content : ""; ?>
+<?php echo isset($footer) ? $footer : ""; ?>
 <footer>
 	<p><a href="#">運営者からのお知らせ</a>　　<a href="#">利用規約</a>　　<a href="#">運営会社</a>　　<a href="#">プライバシーポリシー</a>　　<a href="#">お問い合わせ</a></p>
 	<p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>

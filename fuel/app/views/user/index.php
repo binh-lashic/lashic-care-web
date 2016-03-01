@@ -1,27 +1,7 @@
-<!-- content -->
-<main role="main" class="clearBoth">
-	<div class="clearfix content"> 
-		<!-- ユーザー名 -->
-		<div class="com_usrName">
-			<p>インフィック<span class="com_userSmall">さん</span></p>
-		</div>
-		<!-- /ユーザー名 --> 
-		
-		<!-- お知らせ -->
-		<div class="com_news">
-			<dl class="clearfix">
-				<dt class="com_news_tile"><img src="images/common/hdr_news_megaphone.png" alt="icon"/><br>
-					お知らせ</dt>
-				<dd class="com_news_tile"> <a href="report/index.html" class="com_news_link"> <span class="com_news_text"> インフィック（95）さんが外出から戻られておられないようです。<br>
-					<span class="small">その他未対応事項（18件）</span> </span> </a> </dd>
-			</dl>
-		</div>
-		<!-- /お知らせ --> 
-	</div>
 	<div class="clearfix content"> 
 		<!-- content start -->
 		<section id="contentBox">
-			<h1 class="content_h1 graph_title_icon">インフィックさんの様子</h1>
+			<h1 class="content_h1 graph_title_icon"><?php echo $client['name']; ?>さんの様子</h1>
 			
 			<!-- 現在のグラフ -->
 			<h2 class="content_h2">現在のグラフ</h2>
@@ -41,9 +21,9 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="25.6℃" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="35" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo $data['temperature']; ?>℃" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo $data['temperature']; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
-						<div class="graph_title"><img src="images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
+						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p>室温</p>
 						</div>
 					</div>
@@ -52,9 +32,9 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="28.6%" data-percent="28.6" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo $data['humidity']; ?>%" data-percent="<?php echo $data['humidity']; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
-						<div class="graph_title"><img src="images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
+						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p>湿度</p>
 						</div>
 					</div>
@@ -63,9 +43,9 @@
 					<div class="graph_set">
 						<p class="graph_rank">★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="13.3" data-percent="13.3" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo $data['active']; ?>" data-percent="<?php echo $data['active']; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
-						<div class="graph_title"><img src="images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
+						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p>運動量</p>
 						</div>
 					</div>
@@ -74,9 +54,9 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="1243lux" data-percent="96" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo $data['illuminance']; ?>lux" data-percent="<?php echo $data['illuminance'] / 10; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
-						<div class="graph_title"><img src="images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
+						<div class="graph_title"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
 							<p>照度</p>
 						</div>
 					</div>
@@ -85,10 +65,10 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="70%" data-percent="70" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo $data['discomfort']; ?>%" data-percent="70" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
-						<div class="graph_title"><img src="images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
-							<p>室温</p>
+						<div class="graph_title"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
+							<p>不快指数</p>
 						</div>
 					</div>
 				</li>
@@ -101,32 +81,32 @@
 				<tr>
 					<th>グラフ表示項目選択</th>
 					<td class="clearfix"><input type="checkbox" id="i1">
-						<label for="i1" class="checkbox">室温 <img src="images/graph/graph_select_01.png" width="25" height="9" alt=""/></label>
+						<label for="i1" class="checkbox">室温 <img src="/images/graph/graph_select_01.png" width="25" height="9" alt=""/></label>
 						<input type="checkbox" id="i2">
-						<label for="i2" class="checkbox">湿度 <img src="images/graph/graph_select_02.png" width="25" height="9" alt=""/></label>
+						<label for="i2" class="checkbox">湿度 <img src="/images/graph/graph_select_02.png" width="25" height="9" alt=""/></label>
 						<input type="checkbox" id="i3">
-						<label for="i3" class="checkbox">運動量 <img src="images/graph/graph_select_03.png" width="25" height="15" alt=""/></label>
+						<label for="i3" class="checkbox">運動量 <img src="/images/graph/graph_select_03.png" width="25" height="15" alt=""/></label>
 						<input type="checkbox" id="i4">
-						<label for="i4" class="checkbox">照度 <img src="images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
+						<label for="i4" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
 						<input type="checkbox" id="i5">
-						<label for="i5" class="checkbox">点灯 <img src="images/graph/graph_select_05.png" width="25" height="9" alt=""/></label>
+						<label for="i5" class="checkbox">点灯 <img src="/images/graph/graph_select_05.png" width="25" height="9" alt=""/></label>
 						<br>
 						<input type="checkbox" id="i6">
-						<label for="i6" class="checkbox">起床時間 <img src="images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
+						<label for="i6" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
 						<input type="checkbox" id="i7">
-						<label for="i7" class="checkbox">就寝時間 <img src="images/graph/graph_select_07.png" width="15" height="15" alt=""/></label></td>
+						<label for="i7" class="checkbox">就寝時間 <img src="/images/graph/graph_select_07.png" width="15" height="15" alt=""/></label></td>
 				</tr>
 			</table>
-			<div class="graph24_select_arrow"><img src="images/graph/graph_select_arrow.png" width="21" height="16" alt=""/></div>
+			<div class="graph24_select_arrow"><img src="/images/graph/graph_select_arrow.png" width="21" height="16" alt=""/></div>
 			<div class="graph24_chart_line">
 				<div class="graph24_hdr">
 					<p class="graph24_day">今日 12/31（木）</p>
 					<ul>
-						<li class="graph24_back"><a href="#"><img src="images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
-						<li class="graph24_next"><a href="#"><img src="images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_back"><a href="#"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_next"><a href="#"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
 					</ul>
 					<div class="graph24_calendar">
-						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="images/graph/graph_btn_calender_off.png" width="90" height="41" alt=""/></a>
+						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="/images/graph/graph_btn_calender_off.png" width="90" height="41" alt=""/></a>
 						<!-- カレンダー表示内容 -->
 						<div id="graph24_cal_select" style="display:none;">
 							<div class="graph24_cal_selectInner">
@@ -248,82 +228,8 @@
 						<!-- /カレンダー表示内容 --> 
 					</div>
 				</div>
-				<div class="graph24_lineArea"><img src="images/graph/graph_sample.gif" width="720" height="378" alt=""/> </div>
+				<div class="graph24_lineArea"><img src="/images/graph/graph_sample.gif" width="720" height="378" alt=""/> </div>
 			</div>
 			<!-- /24時間グラフ --> 
 		</section>
 		<!-- /content end --> 
-		
-		<!-- aide start -->
-		<aside id="aside_userDate">
-			<div class="aside_container">
-				<div class="clearfix">
-					<p class="aside_title">基本データ</p>
-					<div class="aside_btn_edit"><a href="#attention_01" rel="shadowbox[cont]" class="btn_text">編集</a></div>
-				</div>
-				<div class="aside_photo"><div class="aside_photoInner"><img src="images/user/sample.jpg" width="179" height="179" alt=""/></div></div>
-				
-				<dl class="aside_userDetail clearfix">
-					<dt><img src="images/common/user_icon_birth.png" width="17" alt="生年月日"/></dt>
-					<dd>1920年3月9日（95歳）</dd>
-					<dt><img src="images/common/user_icon_blood.png" width="19" alt="血液型"/></dt>
-					<dd>O型</dd>
-					<dt><img src="images/common/user_icon_address.png" width="19" alt="住所"/></dt>
-					<dd>静岡市××××3F</dd>
-					<dt><img src="images/common/user_icon_phone.png" width="19" alt="生年月日"/></dt>
-					<dd>054-280-7340</dd>
-					<dt><img src="images/common/user_icon_mobile.png" width="9" alt="生年月日"/></dt>
-					<dd>090-1111-2222</dd>
-				</dl>
-				
-				
-				<!-- 緊急連絡先 -->
-				<div class="aside_emergency">
-					<h3><img src="images/common/user_icon_emergency.png" width="17" alt=""/> 緊急連絡先</h3>
-					<ul>
-						<li>
-							<dl>
-								<dt>斉藤雅和</dt>
-								<dd>018-882-2016<br>
-080-1813-4139</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>斉藤雅和</dt>
-								<dd>018-882-2016<br>
-080-1813-4139</dd>
-							</dl>
-						</li>
-					</ul>
-				</div>
-				<!-- /緊急連絡先 -->
-				
-				
-				<!-- 連絡共有 -->
-				<div class="aside_share">
-					<h3><img src="images/common/user_icon_share.png" width="32" alt=""/> 連絡共有</h3>
-					<div class="aside_shareInner">
-						<ul class="scroll_area">
-							<li>川島　永嗣</li>
-							<li>長友　佑都</li>
-							<li>森重　真人</li>
-							<li>内田　篤人</li>
-							<li>吉田　麻也</li>
-							<li>長谷部　誠</li>
-							<li>川島　永嗣</li>
-							<li>長友　佑都</li>
-							<li>森重　真人</li>
-							<li>内田　篤人</li>
-							<li>吉田　麻也</li>
-							<li>長谷部　誠</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /連絡共有 -->
-				
-			</div>
-		</aside>
-		<!-- /aide end --> 
-	</div>
-</main>

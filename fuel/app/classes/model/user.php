@@ -86,12 +86,6 @@ class Model_User extends Orm\Model{
 		}
 	}
 
-	public static function getAdmins(){
-		$sql = "SELECT * FROM users WHERE admin=1;";
-		$res = DB::query($sql)->execute();
-		return $res->as_array();
-	}
-
 	public static function format($user) {
 		$ret = array();
 		$keys = array(
@@ -137,14 +131,37 @@ class Model_User extends Orm\Model{
 				'where' => array(
 					'user_id' => $user_id,
 				),
-				'related' => array('user')
+				'related' => array('client')
 			));
 			foreach($rows as $row) {
-				$users[] = \Model_User::format($row->user);
+				$users[] = \Model_User::format($row->client);
 			}
 		} else {
 			$rows = \Model_User::find("all", array(
 				'where' => array('admin' => 0)
+			));
+			foreach($rows as $row) {
+				$users[] = $row;
+			}			
+		}
+		return $users;
+	}
+
+	public static function getAdmins($user_id=null) {
+		$users = array();
+		if($user_id) {
+			$rows = \Model_User_Client::find("all", array(
+				'where' => array(
+					'client_user_id' => $user_id,
+				),
+				'related' => array('admin')
+			));
+			foreach($rows as $row) {
+				$users[] = \Model_User::format($row->admin);
+			}
+		} else {
+			$rows = \Model_User::find("all", array(
+				'where' => array('admin' => 1)
 			));
 			foreach($rows as $row) {
 				$users[] = $row;

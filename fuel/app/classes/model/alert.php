@@ -76,23 +76,28 @@ class Model_Alert extends Orm\Model{
 
 		if(isset($params['date'])) {
 			$start_date = $params['date'];
+			$end_date = $start_date." 23:59:59";
 		} else {
-			$start_date = date("Y-m-d");
+			$start_date = date("Y-m-d", strtotime("-3months"));
+			$end_date = date("Y-m-d H:i:s");
 		}
 
-		$end_date = $start_date." 23:59:59";
+
 		$start_date = $start_date." 00:00:00";
 
 		if($sensor_id) {
-			$_alerts = \Model_Alert::query()
+			$query = \Model_Alert::query()
 				->where('sensor_id', $sensor_id)
-				->where('date', 'between', array($start_date, $end_date))
-	        	->get();
+				->where('date', 'between', array($start_date, $end_date));
+			if(!empty($params['confirm_status'])) {
+				$query->where('confirm_status', $params['confirm_status']);
+			}
+	       	$_alerts = $query->get();
 		}
-
+		
 		if($_alerts) {
 			foreach($_alerts as $_alert) {
-				$alerts[] = $_alert;
+				$alerts[] = $_alert->to_array();
 			}
 		}
 		return $alerts;
