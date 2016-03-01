@@ -44,7 +44,6 @@ class Controller_Api_Data extends Controller_Api
 						'temperature_average' => $sensor->temperature_average,
 						'humidity' => round($humidity, 1),
 						'humidity_average' => $sensor->humidity_average,
-						'humidity_week_average' => json_decode($sensor->humidity_week_average, true),
 						'active' => round($data['active'], 1),
 						'illuminance' =>  (int)$data['illuminance'],
 						'discomfort' => ceil($discomfort),
@@ -52,6 +51,9 @@ class Controller_Api_Data extends Controller_Api
 				);
 				if(!empty($sensor->temperature_week_average)) {
 					$this->result['data']['temperature_week_average'] = json_decode($sensor->temperature_week_average, true);
+				}
+				if(!empty($sensor->humidity_week_average)) {
+					$this->result['data']['humidity_week_average'] = json_decode($sensor->humidity_week_average, true);
 				}
 
 			}
