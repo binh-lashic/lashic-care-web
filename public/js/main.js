@@ -16,6 +16,7 @@ $(function(){
 		console.log(result.data);
 	});
 
+/*
     $("#login").submit(function() {
 		var params = {
 			'username': $("#username").val(),
@@ -29,4 +30,5 @@ $(function(){
 		});
 		return false;
 	});
+*/
 });

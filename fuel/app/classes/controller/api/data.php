@@ -42,7 +42,6 @@ class Controller_Api_Data extends Controller_Api
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
 						'temperature_average' => $sensor->temperature_average,
-						'temperature_week_average' => json_decode($sensor->temperature_week_average, true),
 						'humidity' => round($humidity, 1),
 						'humidity_average' => $sensor->humidity_average,
 						'humidity_week_average' => json_decode($sensor->humidity_week_average, true),
@@ -51,6 +50,10 @@ class Controller_Api_Data extends Controller_Api
 						'discomfort' => ceil($discomfort),
 
 				);
+				if(!empty($sensor->temperature_week_average)) {
+					$this->result['data']['temperature_week_average'] = json_decode($sensor->temperature_week_average, true);
+				}
+
 			}
 		}
 		return $this->result();	

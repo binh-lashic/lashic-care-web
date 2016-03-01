@@ -71,7 +71,7 @@ Shadowbox.init({
 						<li class="nav_user"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ユーザー登録・削除</a></li>
 						<li class="nav_set"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">グラフ設定変更</a></li>
 						<li class="nav_help"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ヘルプ</a></li>
-						<li class="nav_logout"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ログアウト</a></li>
+						<li class="nav_logout"><a href="/user/logout" class="drawer-dropdown-menu-item">ログアウト</a></li>
 					</ul>
 				</li>
 			</ul>
