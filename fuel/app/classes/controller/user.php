@@ -29,7 +29,7 @@ class Controller_User extends Controller_Page
 	    );
 
 	    $client = Session::get("client");
-	    if(empty($client) && isset($this->clients)) {
+	    if(empty($client) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    	$this->data['client'] = $client;
 		    $this->data['admins'] = \Model_User::getAdmins($client['id']);
