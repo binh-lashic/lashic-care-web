@@ -2,6 +2,8 @@
 class Controller_Admin_User_Client extends Controller_Admin
 {
 
+
+
     public function action_index() {
         $user_id = Input::param("admin_user_id");
         $client_id = Input::param("client_user_id");
