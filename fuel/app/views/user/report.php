@@ -38,7 +38,9 @@
 			<!-- /情報ソート --> 
 			
 			
-			
+<?php
+if(isset($alert_count)) {
+?>				
 			<!-- ページ操作 -->
 			<div class="report_pageBox clearfix">
 				<div class="report_operation">
@@ -53,7 +55,6 @@
 					</div>
 					<div class="report_btn_apply"><a href="#" class="btn_text">適用</a></div>
 				</div>
-				
 				
 				<div class="report_pager">
 					<span class="report_pager_num"><?php echo $alert_count; ?>項目</span>
@@ -86,9 +87,9 @@ if(isset($page) && $page != $page_count) {
 				<!-- css説明：ページネーションのspanに.report_falseでボタン効かないデザインに変更 -->
 			</div>
 			<!-- /ページ操作 -->
-			
-			
-			
+<?php
+}
+?>						
 			<!-- ページリスト -->
 			<table class="report_pageList_table">
 					<thead>
@@ -131,7 +132,9 @@ if($alerts) {
 			<!-- /ページリスト -->
 			
 			
-			
+<?php
+if(isset($alert_count)) {
+?>
 			<!-- ページ操作 -->
 			<div class="report_pageBox clearfix">
 				<div class="report_operation">
@@ -146,7 +149,6 @@ if($alerts) {
 					</div>
 					<div class="report_btn_apply"><a href="#" class="btn_text">適用</a></div>
 				</div>
-				
 				
 				<div class="report_pager">
 					<span class="report_pager_num"><?php echo $alert_count; ?>項目</span>
@@ -179,7 +181,9 @@ if(isset($page) && $page != $page_count) {
 				<!-- css説明：ページネーションのspanに.report_falseでボタン効かないデザインに変更 -->
 			</div>
 			<!-- /ページ操作 --> 
-			
+<?php
+}
+?>
 			
 			
 			
