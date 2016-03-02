@@ -107,7 +107,7 @@ if(isset($page) && $page != $page_count) {
 					</thead>
 					<tbody>
 <?php
-if($alerts) {
+if(isset($alerts)) {
 	foreach($alerts as $alert) {
 		$corresponding_statuses = array("未対応", "対応済", "対応予定", "対応不要");
 ?>
