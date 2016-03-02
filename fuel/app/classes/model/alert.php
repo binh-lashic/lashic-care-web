@@ -71,7 +71,7 @@ class Model_Alert extends Orm\Model{
 		if(!empty($query)) {
 			if(!empty($params['limit'])) {
 				$query = $query->limit($params['limit']);
-				if(!empty($params['page'])) {
+				if(!empty($params['page']) && $params['page'] > 2) {
 					$query = $query->offset($params['limit'] * ($params['page'] - 1));
 				}
 			}
