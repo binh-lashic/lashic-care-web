@@ -21,7 +21,7 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo $data['temperature']; ?>℃" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo $data['temperature']; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>℃" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p>室温</p>
@@ -32,7 +32,7 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo $data['humidity']; ?>%" data-percent="<?php echo $data['humidity']; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>%" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p>湿度</p>
@@ -43,7 +43,7 @@
 					<div class="graph_set">
 						<p class="graph_rank">★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo $data['active']; ?>" data-percent="<?php echo $data['active']; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p>運動量</p>
@@ -54,7 +54,7 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo $data['illuminance']; ?>lux" data-percent="<?php echo $data['illuminance'] / 10; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['illuminance']) ? $data['illuminance'] : ""; ?>lux" data-percent="<?php echo isset($data['illuminance']) ? $data['illuminance'] / 10 : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
 							<p>照度</p>
@@ -65,7 +65,7 @@
 					<div class="graph_set">
 						<p class="graph_rank">★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo $data['discomfort']; ?>%" data-percent="70" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>%" data-percent="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
 							<p>不快指数</p>
