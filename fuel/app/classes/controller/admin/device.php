@@ -1,5 +1,5 @@
 <?php
-class Controller_Admin_Device extends Controller_Template
+class Controller_Admin_Device extends Controller_Admin
 {
 
 	public function action_create() {

@@ -1,5 +1,5 @@
 <?php
-class Controller_Admin_Page extends Controller_Template
+class Controller_Admin_Page extends Controller_Admin
 {
 	public function action_index()
 	{

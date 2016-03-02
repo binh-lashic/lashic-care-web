@@ -1,5 +1,5 @@
 <?php
-class Controller_Admin_User_Sensor extends Controller_Template
+class Controller_Admin_User_Sensor extends Controller_Admin
 {
 	public function action_create() {
 		try {
