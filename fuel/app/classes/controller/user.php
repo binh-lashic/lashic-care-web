@@ -48,11 +48,11 @@ class Controller_User extends Controller_Page
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
 				$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);
+				$params = array(
+					'sensor_id' => $this->data['sensor']['id'],
+					'limit' => Config::get("report_list_count"),
+				);
 			}
-			$params = array(
-				'sensor_id' => $this->data['sensor']['id'],
-				'limit' => Config::get("report_list_count"),
-			);
 			$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
 		}
 	}
