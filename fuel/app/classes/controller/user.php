@@ -52,8 +52,8 @@ class Controller_User extends Controller_Page
 					'sensor_id' => $this->data['sensor']['id'],
 					'limit' => Config::get("report_list_count"),
 				);
+				$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
 			}
-			$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
 		}
 	}
 
