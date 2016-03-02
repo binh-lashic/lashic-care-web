@@ -22,18 +22,19 @@ class Controller_User extends Controller_Page
 				$this->clients[] = $client;
 			}   	
 	    }
-	    $client = Session::get("client");
-	    if(empty($client)) {
-	    	$client = $this->clients[0];
-	    }
-	    $admins = \Model_User::getAdmins($client['id']);
 
 	    $this->data = array(
 	    	'user' => $this->user,
 	    	'clients' => $this->clients,
 	    	'client' => $client,
-	    	'admins' => $admins,
 	    );
+
+	    $client = Session::get("client");
+	    if(empty($client) && isset($this->clients)) {
+	    	$client = $this->clients[0];
+		    $this->data['admins'] = \Model_User::getAdmins($client['id']);
+	    }
+
 
 	    if(Input::param("page")) {
 	    	$this->data['page'] = Input::param("page");
