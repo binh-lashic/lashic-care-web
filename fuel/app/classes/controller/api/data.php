@@ -131,7 +131,7 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_import() {
-		$sensor_id = "0001A";
+		$sensor_id = "00001";
 		$url = "http://infic.papaikuji.info/api/data/dashboard?sensor_id=".$sensor_id."&device_id=11111";
 		$json = json_decode(file_get_contents($url), true);
 		$params = $json['data'];

@@ -35,17 +35,30 @@ class Controller_User extends Controller_Page
 	    	'admins' => $admins,
 	    );
 
-	}
+	    if(Input::param("page")) {
+	    	$this->data['page'] = Input::param("page");
+	    } else {
+	    	$this->data['page'] = 1;
+	    }
+	    $this->data['next_page'] = $this->data['page'] + 1;
+	    $this->data['prev_page'] = $this->data['page'] - 1;
 
-	public function action_index()
-	{
-		if(!empty($this->data['client']['id'])) {
+	    if(!empty($this->data['client']['id'])) {
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
 				$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);
 			}
+			$params = array(
+				'sensor_id' => $this->data['sensor']['id'],
+				'limit' => Config::get("report_list_count"),
+			);
+			$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
 		}
+	}
+
+	public function action_index()
+	{
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/index', $this->data);
@@ -59,7 +72,13 @@ class Controller_User extends Controller_Page
 		if(!empty($this->data['client']['id'])) {
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
-				$params = array('sensor_id' => $sensors[0]['id']);
+				$params = array(
+					'sensor_id' => $sensors[0]['id'],
+					'limit' => Config::get("report_list_count"),
+				);
+				if(!empty($this->data['page'])) {
+					$params['page'] = $this->data['page'];
+				}
 				if($this->data['corresponding_status']) {
 					$params['corresponding_status'] = $this->data['corresponding_status'];
 				}
@@ -67,6 +86,8 @@ class Controller_User extends Controller_Page
 					$params['confirm_status'] = $this->data['confirm_status'];
 				}
 				$this->data['alerts'] = \Model_Alert::getAlerts($params);
+				$this->data['alert_count'] = \Model_Alert::getAlertCount($params);
+				$this->data['page_count'] = ceil($this->data['alert_count'] / Config::get("report_list_count"));
 			}
 		}
         $this->template->title = 'マイページ';

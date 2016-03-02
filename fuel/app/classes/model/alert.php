@@ -67,6 +67,34 @@ class Model_Alert extends Orm\Model{
 
 	public static function getAlerts($params){
 		$alerts = array();
+		$query = \Model_Alert::buildQuery($params);
+		if(!empty($query)) {
+			if(!empty($params['limit'])) {
+				$query = $query->limit($params['limit']);
+				if(!empty($params['page'])) {
+					$query = $query->offset($params['limit'] * ($params['page'] - 1));
+				}
+			}
+	 		$_alerts = $query->get();
+			if($_alerts) {
+				foreach($_alerts as $_alert) {
+					$alerts[] = $_alert->to_array();
+				}
+			}
+		}
+		return $alerts;
+	}
+
+	public static function getAlertCount($params){
+		$alert_count = 0;
+		$query = \Model_Alert::buildQuery($params);
+		if(!empty($query)) {
+			$alert_count = $query->count();
+		}
+		return $alert_count;
+	}
+
+	public static function buildQuery($params) {
 		if(isset($params['sensor_id'])) {
 			$sensor_id = $params['sensor_id'];
 		} else if(isset($params['client_user_id'])) {
@@ -82,7 +110,6 @@ class Model_Alert extends Orm\Model{
 			$end_date = date("Y-m-d H:i:s");
 		}
 
-
 		$start_date = $start_date." 00:00:00";
 
 		if($sensor_id) {
@@ -92,15 +119,12 @@ class Model_Alert extends Orm\Model{
 			if(!empty($params['confirm_status'])) {
 				$query->where('confirm_status', $params['confirm_status']);
 			}
-	       	$_alerts = $query->get();
-		}
-		
-		if($_alerts) {
-			foreach($_alerts as $_alert) {
-				$alerts[] = $_alert->to_array();
+			if(!empty($params['corresponding_status'])) {
+				$query->where('corresponding_status', $params['corresponding_status']);
 			}
+	       	return $query;
 		}
-		return $alerts;
+		return null;
 	}
 
 	public static function saveAlert($params) {

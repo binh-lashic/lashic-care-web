@@ -346,4 +346,5 @@ return array(
 		'wake_up_period' => 30,
 		'wake_up_delay_allowance_duration' => 120,
 	),
+	'report_list_count' => 10,
 );
