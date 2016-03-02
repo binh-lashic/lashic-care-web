@@ -53,7 +53,6 @@ class Controller_User extends Controller_Page
 					'limit' => Config::get("report_list_count"),
 				);
 				$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
-				print_r($this->data['header_alerts']);
 			}
 		}
 	}
