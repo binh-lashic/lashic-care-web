@@ -104,7 +104,9 @@ class Controller_Admin_User extends Controller_Admin
             $users = \Model_User::getClients();
             $clients = \Model_User::getClients($user_id);
             foreach($clients as $client) {
-                $client_keys[$client->id] = true;
+                if(isset($client->id)) {
+                    $client_keys[$client->id] = true;
+                }
             }
             foreach($users as $user) {
                 $user = $user->to_array(true);
