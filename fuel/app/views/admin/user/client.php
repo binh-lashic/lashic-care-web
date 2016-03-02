@@ -119,7 +119,7 @@ if(isset($admins)) {
 	if(isset($sensors)) {
 		foreach($sensors as $sensor) {
 ?>
-							<option value="<?php echo $sensor['id']; ?>"<?php if($client_sensor_id == $sensor['id']) echo " selected=\"selected\""; ?>><?php echo $sensor['name']; ?></option>
+							<option value="<?php echo $sensor['id']; ?>"<?php if(isset($client_sensor_id) && $client_sensor_id == $sensor['id']) echo " selected=\"selected\""; ?>><?php echo $sensor['name']; ?></option>
 <?php
 		}
 	}
