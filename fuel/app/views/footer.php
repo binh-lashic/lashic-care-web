@@ -1,4 +1,6 @@
-		
+<?php
+if(!empty($client)) {
+?>	
 		<!-- aide start -->
 		<aside id="aside_userDate">
 			<div class="aside_container">
@@ -64,6 +66,9 @@ if(!empty($admins)) {
 				
 			</div>
 		</aside>
+<?php
+}
+?>
 		<!-- /aide end --> 
 	</div>
 </main>
