@@ -1,3 +1,6 @@
+<?php
+if(isset($client)) {
+?>
 	<div class="clearfix content"> 
 		<!-- content start -->
 		<section id="contentBox">
@@ -233,3 +236,6 @@
 			<!-- /24時間グラフ --> 
 		</section>
 		<!-- /content end --> 
+<?php
+}
+?>
