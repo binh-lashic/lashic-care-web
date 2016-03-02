@@ -56,11 +56,17 @@ if(!empty($clients)) {
 <!-- content -->
 <main role="main" class="clearBoth">
 	<div class="clearfix content"> 
+<?php
+if(isset($client['name'])) {
+?>
 		<!-- ユーザー名 -->
 		<div class="com_usrName">
 			<p><?php echo $client['name']; ?><span class="com_userSmall">さん</span></p>
 		</div>
 		<!-- /ユーザー名 --> 
+<?php
+}
+?>
 <?php
 if(!empty($this->data['header_alerts'])) {
 ?>
