@@ -56,6 +56,8 @@ Shadowbox.init({
 });
 </script> 
 <!-- /light box -->
+<script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="/js/amcharts/serial.js" type="text/javascript"></script>
 </head>
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>

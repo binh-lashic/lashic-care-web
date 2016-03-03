@@ -83,16 +83,16 @@ if(isset($client)) {
 			<table class="graph24_select lazy">
 				<tr>
 					<th>グラフ表示項目選択</th>
-					<td class="clearfix"><input type="checkbox" id="i1">
-						<label for="i1" class="checkbox">室温 <img src="/images/graph/graph_select_01.png" width="25" height="9" alt=""/></label>
-						<input type="checkbox" id="i2">
-						<label for="i2" class="checkbox">湿度 <img src="/images/graph/graph_select_02.png" width="25" height="9" alt=""/></label>
-						<input type="checkbox" id="i3">
-						<label for="i3" class="checkbox">運動量 <img src="/images/graph/graph_select_03.png" width="25" height="15" alt=""/></label>
-						<input type="checkbox" id="i4">
-						<label for="i4" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
-						<input type="checkbox" id="i5">
-						<label for="i5" class="checkbox">点灯 <img src="/images/graph/graph_select_05.png" width="25" height="9" alt=""/></label>
+					<td class="clearfix"><input type="checkbox" id="graph_temperature" class="graph_checkbox" checked="checked">
+						<label for="graph_temperature" class="checkbox">室温 <img src="/images/graph/graph_select_01.png" width="25" height="9" alt=""/></label>
+						<input type="checkbox" id="graph_humidity" class="graph_checkbox">
+						<label for="graph_humidity" class="checkbox">湿度 <img src="/images/graph/graph_select_02.png" width="25" height="9" alt=""/></label>
+						<input type="checkbox" id="graph_active" class="graph_checkbox">
+						<label for="graph_active" class="checkbox">運動量 <img src="/images/graph/graph_select_03.png" width="25" height="15" alt=""/></label>
+						<input type="checkbox" id="graph_illuminance" class="graph_checkbox">
+						<label for="graph_illuminance" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
+						<input type="checkbox" id="graph_light" class="graph_checkbox">
+						<label for="graph_light" class="checkbox">点灯 <img src="/images/graph/graph_select_05.png" width="25" height="9" alt=""/></label>
 						<br>
 						<input type="checkbox" id="i6">
 						<label for="i6" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
@@ -101,9 +101,10 @@ if(isset($client)) {
 				</tr>
 			</table>
 			<div class="graph24_select_arrow"><img src="/images/graph/graph_select_arrow.png" width="21" height="16" alt=""/></div>
+
 			<div class="graph24_chart_line">
 				<div class="graph24_hdr">
-					<p class="graph24_day">今日 12/31（木）</p>
+					<p class="graph24_day">今日 <?php echo date("m/d"); ?>（木）</p>
 					<ul>
 						<li class="graph24_back"><a href="#"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
 						<li class="graph24_next"><a href="#"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
@@ -231,7 +232,7 @@ if(isset($client)) {
 						<!-- /カレンダー表示内容 --> 
 					</div>
 				</div>
-				<div class="graph24_lineArea"><img src="/images/graph/graph_sample.gif" width="720" height="378" alt=""/> </div>
+				<div class="graph24_lineArea" id="graph" style="min-width: 720px; height: 328px; margin: 0 auto"></div>
 			</div>
 			<!-- /24時間グラフ --> 
 		</section>

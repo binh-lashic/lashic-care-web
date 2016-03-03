@@ -58,6 +58,14 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_graph() {
+		return $this->_graph();
+	}
+
+	public function post_graph() {
+		return $this->_graph();
+	}
+
+	public function _graph() {
 		$type = Input::param("type");
 		$date = Input::param("date");
 		$sensor_id = Input::param("sensor_id");
@@ -112,11 +120,32 @@ class Controller_Api_Data extends Controller_Api
 			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;
 
+			$sensor = \Model_Sensor::find($sensor_id);
+
+			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date BETWEEN :start_time AND :end_time';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $sensor->name,
+				'start_time' => date("Y-m-d H:i:s", $start_time),
+				'end_time' => date("Y-m-d H:i:s", $end_time),
+			));
+			$results = $query->execute('data');
+			$rows = array();
+			foreach($results as $result) {
+				$rows[$result['date']] = $result;
+			}
+
 			for($i = 0; $i <= $end; $i++) {
-				$current_time = date("Y-m-d H:i:s", $start_time + $i * 60 * $span); 
+				$time = $start_time + $i * 60 * $span;
+				$current_time = date("Y-m-d H:i:s", $time); 
 				$data[] = array(
 					'time' => $current_time,
-					'value' => mt_rand(10, 40),
+					'label' => date("H:i", $time),
+					'value' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
+					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
+					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
+					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
+					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
 				);
 			}
 			$this->result = array(
