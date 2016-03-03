@@ -1,6 +1,6 @@
 $(function(){
-    //var apiUrl = "http://infic.papaikuji.info/api/";
-    var apiUrl = "http://infic.garoo.jp/api/";
+    var apiUrl = "http://infic.papaikuji.info/api/";
+    //var apiUrl = "http://infic.garoo.jp/api/";
     
     // ユーザ定義関数
     function api(action, params, callback){
