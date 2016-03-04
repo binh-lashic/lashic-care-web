@@ -108,8 +108,7 @@ class Controller_Api_Data extends Controller_Api
 			if(empty($date)) {
 				$date = date("Y-m-d");
 			}
-						echo $date;
-			exit;
+
 			if(empty($span)) {
 				$span = 10;
 			} else if($span < 0) {
@@ -127,11 +126,14 @@ class Controller_Api_Data extends Controller_Api
 
 			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date BETWEEN :start_time AND :end_time';
 			$query = DB::query($sql);
-			$query->parameters(array(
+			$params = array(
 				'sensor_id' => $sensor->name,
 				'start_time' => date("Y-m-d H:i:s", $start_time),
 				'end_time' => date("Y-m-d H:i:s", $end_time),
-			));
+			);
+			$query->parameters($params);
+			print_r($params);
+			exit;
 			$results = $query->execute('data');
 			$rows = array();
 			foreach($results as $result) {
