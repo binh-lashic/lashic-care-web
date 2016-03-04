@@ -139,8 +139,6 @@ class Controller_Api_Data extends Controller_Api
 				$date = date("Y-m-d H:i:s", strtotime($result['date']) + 60 * 60 * 9); 
 				$rows[$date] = $result;
 			}
-			print_r($rows);
-			exit;
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span + 60 * 60 * 9;
 				$current_time = date("Y-m-d H:i:s", $time); 
