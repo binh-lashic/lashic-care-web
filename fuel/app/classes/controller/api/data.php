@@ -132,7 +132,7 @@ class Controller_Api_Data extends Controller_Api
 				'end_time' => date("Y-m-d H:i:s", $end_time),
 			);
 			$query->parameters($params);
-			$results = $query->execute('data');
+			$results = $query->cached(0)->execute('data');
 			print_r($results);
 			exit;
 			$rows = array();
