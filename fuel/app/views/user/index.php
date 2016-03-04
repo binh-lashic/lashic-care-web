@@ -1,6 +1,9 @@
 <?php
 if(isset($client)) {
 ?>
+	<script type="text/javascript">
+	var sensor_id = "<?php echo $sensor->id; ?>";
+	</script>
 	<div class="clearfix content"> 
 		<!-- content start -->
 		<section id="contentBox">
@@ -91,8 +94,6 @@ if(isset($client)) {
 						<label for="graph_active" class="checkbox">運動量 <img src="/images/graph/graph_select_03.png" width="25" height="15" alt=""/></label>
 						<input type="checkbox" id="graph_illuminance" class="graph_checkbox">
 						<label for="graph_illuminance" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
-						<input type="checkbox" id="graph_light" class="graph_checkbox">
-						<label for="graph_light" class="checkbox">点灯 <img src="/images/graph/graph_select_05.png" width="25" height="9" alt=""/></label>
 						<br>
 						<input type="checkbox" id="i6">
 						<label for="i6" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>

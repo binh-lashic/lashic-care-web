@@ -39,7 +39,7 @@ $(function(){
 	});
 
 	function drawGraph() {
-		api("data/graph?sensor_id=3&type=temperature&span=10", null, function(result){
+		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10", null, function(result){
 			var values = [];
 			var graphs = [];
 			

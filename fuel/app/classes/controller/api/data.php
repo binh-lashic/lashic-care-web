@@ -108,6 +108,8 @@ class Controller_Api_Data extends Controller_Api
 			if(empty($date)) {
 				$date = date("Y-m-d");
 			}
+						echo $date;
+			exit;
 			if(empty($span)) {
 				$span = 10;
 			} else if($span < 0) {
@@ -116,6 +118,7 @@ class Controller_Api_Data extends Controller_Api
 				$span = 240;
 			}
 			$data = array();
+
 			$start_time = strtotime($date." 00:00:00");
 			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;

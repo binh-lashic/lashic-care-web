@@ -18,7 +18,6 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
-<link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
 <!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->

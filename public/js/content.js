@@ -104,7 +104,7 @@ $(function () {
   
   // メニュー領域外をクリックしたらメニューを閉じる
   $('body').click(function() {
-    if (over_flg == false) {
+    if (typeof(over_flg) != "undefined" && over_flg == false) {
       $('.slide_btn').removeClass('selected');
       $('.graph24_cal_otherMonth').slideUp('fast');
     }
