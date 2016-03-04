@@ -133,15 +133,14 @@ class Controller_Api_Data extends Controller_Api
 			);
 			$query->parameters($params);
 			$results = $query->cached(0)->execute('data');
-			print_r($results);
-			exit;
+
 			$rows = array();
 			foreach($results as $result) {
 				$rows[$result['date']] = $result;
 			}
 
 			for($i = 0; $i <= $end; $i++) {
-				$time = $start_time + $i * 60 * $span;
+				$time = $start_time + $i * 60 * $span + 60 * 60 * 9;
 				$current_time = date("Y-m-d H:i:s", $time); 
 				$data[] = array(
 					'time' => $current_time,
