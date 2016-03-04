@@ -117,7 +117,7 @@ $(function(){
 			if($("#graph_active").prop('checked')) {
 				values.push({
 				        "id":"active",
-				        "axisColor": "#DED31C",
+				        "axisColor": "#EB71B6",
 				        "axisThickness": 2,
 				        "gridAlpha": 0,
 				        "axisAlpha": 1,
@@ -126,7 +126,7 @@ $(function(){
 				    });    
 				graphs.push({
 						"valueAxis": "active",
-				        "columnWidth": 20,
+				        "columnWidth": 1,
 				        "fillAlphas": 1,
 				        "title": "運動量",
 				        "type": "column",
