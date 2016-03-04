@@ -120,8 +120,8 @@ class Controller_Api_Data extends Controller_Api
 			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;
 
-			$start_time = "2016-03-04 19:40:00";
-			$end_time = "2016-03-04 19:45:00";
+			$start_time = strtotime("2016-03-04 19:40:00");
+			$end_time = strtotime("2016-03-04 19:45:00");
 
 
 			$sensor = \Model_Sensor::find($sensor_id);
