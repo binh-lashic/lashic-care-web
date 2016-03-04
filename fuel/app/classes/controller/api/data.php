@@ -108,7 +108,8 @@ class Controller_Api_Data extends Controller_Api
 			if(empty($date)) {
 				$date = date("Y-m-d");
 			}
-
+			echo $date;
+			exit;
 			if(empty($span)) {
 				$span = 10;
 			} else if($span < 0) {
@@ -117,30 +118,27 @@ class Controller_Api_Data extends Controller_Api
 				$span = 240;
 			}
 			$data = array();
-
-			$end_time = strtotime($date." 15:00:00");
-			$start_time = $end_time - 60 * 60  * 24;
+			$start_time = strtotime($date." 00:00:00");
+			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;
 
 			$sensor = \Model_Sensor::find($sensor_id);
 
 			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date BETWEEN :start_time AND :end_time';
 			$query = DB::query($sql);
-			$params = array(
+			$query->parameters(array(
 				'sensor_id' => $sensor->name,
 				'start_time' => date("Y-m-d H:i:s", $start_time),
 				'end_time' => date("Y-m-d H:i:s", $end_time),
-			);
-			$query->parameters($params);
-
+			));
 			$results = $query->execute('data');
 			$rows = array();
 			foreach($results as $result) {
-				$date = date("Y-m-d H:i:s", strtotime($result['date']) + 60 * 60 * 9); 
-				$rows[$date] = $result;
+				$rows[$result['date']] = $result;
 			}
+
 			for($i = 0; $i <= $end; $i++) {
-				$time = $start_time + $i * 60 * $span + 60 * 60 * 9;
+				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
 				$data[] = array(
 					'time' => $current_time,
