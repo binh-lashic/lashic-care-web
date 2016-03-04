@@ -35,6 +35,14 @@ class Controller_User extends Controller_Page
 		    $this->data['admins'] = \Model_User::getAdmins($client['id']);
 	    }
 
+	    if(Input::param("date")) {
+	    	$this->data['date'] = Input::param("date");
+	    } else {
+	    	$this->data['date'] = date("Y-m-d");
+	    }
+
+	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
+	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
 
 	    if(Input::param("page")) {
 	    	$this->data['page'] = Input::param("page");
