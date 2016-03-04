@@ -106,7 +106,7 @@ if(isset($client)) {
 
 			<div class="graph24_chart_line">
 				<div class="graph24_hdr">
-					<p class="graph24_day">今日 <?php echo date("m/d"); ?>（木）</p>
+					<p class="graph24_day">今日 <?php echo date("m/d", strtotime($date)); ?>（木）</p>
 					<ul>
 						<li class="graph24_back"><a href="/user/?date=<?php echo $prev_date; ?>"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
 						<li class="graph24_next"><a href="/user/?date=<?php echo $next_date; ?>"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
