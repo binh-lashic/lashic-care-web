@@ -133,6 +133,8 @@ class Controller_Api_Data extends Controller_Api
 			);
 			$query->parameters($params);
 			$results = $query->execute('data');
+			print_r($results);
+			exit;
 			$rows = array();
 			foreach($results as $result) {
 				$rows[$result['date']] = $result;
