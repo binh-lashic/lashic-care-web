@@ -126,6 +126,7 @@ $(function(){
 				    });    
 				graphs.push({
 						"valueAxis": "active",
+						"lineColor": "#EB71B6",
 				        "columnWidth": 1,
 				        "fillAlphas": 1,
 				        "title": "運動量",
