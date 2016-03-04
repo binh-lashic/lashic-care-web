@@ -39,7 +39,7 @@ $(function(){
 	});
 
 	function drawGraph() {
-		api("data/graph?sensor_id=3&type=temperature&span=60", null, function(result){
+		api("data/graph?sensor_id=3&type=temperature&span=10", null, function(result){
 			var values = [];
 			var graphs = [];
 			
@@ -114,6 +114,26 @@ $(function(){
 						"useLineColorForBulletBorder": true
 					});			
 			}
+			if($("#graph_active").prop('checked')) {
+				values.push({
+				        "id":"active",
+				        "axisColor": "#DED31C",
+				        "axisThickness": 2,
+				        "gridAlpha": 0,
+				        "axisAlpha": 1,
+				        "position": "left",
+       					"offset": values.length * 50,
+				    });    
+				graphs.push({
+						"valueAxis": "active",
+				        "columnWidth": 20,
+				        "fillAlphas": 1,
+				        "title": "運動量",
+				        "type": "column",
+				        "valueField": "active"
+				    });			
+			}
+
 			var chart = AmCharts.makeChart("graph", {
 			    "type": "serial",
 			    "theme": "light",
