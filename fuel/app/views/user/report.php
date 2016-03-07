@@ -113,7 +113,7 @@ if(isset($alerts)) {
 ?>
 						<tr>
 							<th><input type="checkbox" id="check20"><label for="check20" class="checkbox"></label></th>
-							<td><?php echo date("m/d", strtotime($alert['date'])); ?>（木）</td>
+							<td><?php echo date("m/d", strtotime($alert['date'])); ?>（<?php echo Util::format_week(date("w", strtotime($alert['date']))); ?>）</td>
 							<td><span class="report_category_kinkyu">【緊急】</span></td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
 							<td>12/28 （木） 08:30</td>
