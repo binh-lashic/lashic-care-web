@@ -50,7 +50,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['active']) ? round($data['active'], 1) : ""; ?>" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p>運動量</p>
