@@ -24,8 +24,7 @@
 <!-- カレンダー表示・非表示 -->
 <link href="/css/darktooltip.css" type="text/css" rel="stylesheet">
 <!-- /カレンダー表示・非表示 -->
-<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">
-
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <!-- srcoll design -->

@@ -28,7 +28,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">★★★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['temperature']) ? round($data['temperature'], 1) : ""; ?>℃" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['temperature']) ? round($data['temperature'], 1) : ""; ?>°C" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p>室温</p>
