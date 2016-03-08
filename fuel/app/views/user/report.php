@@ -121,7 +121,7 @@ if(isset($alerts)) {
 							<td><?php if($alert['confirm_status'] == 1) { echo "済"; } else { echo "未"; } ?></td>
 							<td><span class="report_state_taiouhuyou"><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></span></td>
 							<td><!--<a href="#" class="btn_text">ゴミ箱</a>&nbsp;&nbsp;-->
-								<a href="/user/report?id=<?php echo $alert['id']; ?>" class="btn_text">確認・報告</a></td>
+								<a href="/user/report?id=<?php echo $alert['id']; ?>" class="btn_text">概要</a></td>
 						</tr>
 <?php
 	}
