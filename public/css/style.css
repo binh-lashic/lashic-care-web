@@ -378,10 +378,10 @@ footer a:hover, footer　a:active{	color:#003c58;	text-decoration:underline;}
 .graph_set{ padding:8px; position:relative;}
 .graph_rank{ font-size:16px; color:#ff8e9c;}
 .graph_text{ text-align:center; color:#003c58; }
-.graph_number{ font-family: 'Dancing Script', cursive, Georgia, "Times New Roman", Times, serif,"ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif ; font-size:36px; color:#003c58; text-align:center}
+.graph_number{ font-family: 'Roboto Condensed', sans-serif, Arial, Helvetica; font-size:38px; color:#003c58; text-align:center}
 .graph_text_gray{ color:#888; text-align:center; font-size:12px;}
 .graph_set hr{ border-top:1px solid #dcdcdc; border-right:none; border-bottom:none; border-left:none; margin:8px 0;}
-.graph_chart{ width:173px; margin:0 auto; font-family: 'Dancing Script', cursive, Georgia, "Times New Roman", Times, serif,"ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif ; }
+.graph_chart{ width:173px; margin:0 auto; font-family: 'Roboto Condensed', sans-serif,Arial Black, Arial, Helvetica; }
 .graph_text_Overlying{ position: absolute; top: 95px; right: 0; bottom: 0; left: 0; margin: auto;}
 .graph_title{ position:absolute; right:10px; bottom:10px; text-align:center; line-height:1.2em}
 
