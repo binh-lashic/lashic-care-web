@@ -73,7 +73,7 @@ class Model_Sensor extends Orm\Model{
   illuminance_night_end_time INT,
   disconnection_duration INT,
   wake_up_period INT,
-  wake_up_delay_allowance_duratio INT,
+  wake_up_delay_allowance_duration INT,
   wake_up_start_time INT,
   wake_up_end_time INT,
   wake_up_threshold INT,
