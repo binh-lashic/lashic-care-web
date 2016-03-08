@@ -1,9 +1,6 @@
 <?php
 class Controller_Admin_User_Client extends Controller_Admin
 {
-
-
-
     public function action_index() {
         $user_id = Input::param("admin_user_id");
         $client_id = Input::param("client_user_id");
@@ -19,6 +16,7 @@ class Controller_Admin_User_Client extends Controller_Admin
                 }
             }
         }
+
         $this->template->title = '会員ページ';
         $this->template->content = View::forge('admin/user/client', $data);        
     }

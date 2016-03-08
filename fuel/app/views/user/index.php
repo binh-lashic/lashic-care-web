@@ -20,8 +20,8 @@ if(isset($client)) {
 						<p class="graph_text_gray">（平均起床時間 5:18）</p>
 						<hr>
 						<p class="graph_rank">★★★★★</p>
-						<p class="graph_text">起床 <span class="graph_number">5:34</span></p>
-						<p class="graph_text_gray">（平均起床時間 5:18）</p>
+						<p class="graph_text">就寝 <span class="graph_number">5:34</span></p>
+						<p class="graph_text_gray">（平均就寝時間 5:18）</p>
 					</div>
 				</li>
 				<li class="graph_tile">

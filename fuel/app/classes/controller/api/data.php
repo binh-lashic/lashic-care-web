@@ -21,19 +21,18 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_dashboard() {
-		$sensor_id = Input::param("sensor_id");
-		if(!$sensor_id) {
+		$sensor_name = Input::param("sensor_name");
+		if(!$sensor_name) {
 			$this->errors[] = array(
 				'message' => 'センサーIDを指定してください'
 			);
 		} else {
-			$data = \Model_Data::getLatestData($sensor_id);
+			$data = \Model_Data::getLatestData($sensor_name);
+			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_name);
 			$this->result = array(
-				'sensor_id' => $sensor_id,
+				'sensor_name' => $sensor_name,
 				'data' => array(),
 			);
-			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_id);
-
 			if(isset($data) && isset($sensor)) {
 				$temperature = $data['temperature'];
 				$humidity = $data['humidity'];
@@ -281,12 +280,15 @@ class Controller_Api_Data extends Controller_Api
 				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
 				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
+				'wake_up' => $sensor->checkWakeUp(),							//起床時間
+				'sleep' => $sensor->checkSleep(),								//就寝時間
+
 //低体温症アラート（要確認）
 //通信復帰通知
 //平均起床時間遅延
-			);
-		}
-		return $this->result();	
-	}
+                       );
+               }
+               return $this->result(); 
+       }
 
 }

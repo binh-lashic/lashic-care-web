@@ -24,7 +24,7 @@ if(isset($admins)) {
 		<div class="panel panel-default">
 			<div class="panel-heading">お客様情報の新規登録</div>
 			<div class="panel-body">
-				<form class="form-horizontal" method="post" action="/admin/user/save">
+				<form class="form-horizontal" method="post" action="/admin/user/save" enctype="multipart/form-data">
 					<input type="hidden" name="admin_user_id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 					<input type="hidden" name="id" value="<?php echo isset($client['id']) ? $client['id'] : ""; ?>" />
 				  <div class="form-group">
@@ -107,6 +107,13 @@ if(isset($admins)) {
 				    <label for="memo" class="col-sm-3 control-label">備考</label>
 				    <div class="col-sm-9">
 				      <textarea class="form-control" id="memo" name="memo"><?php echo isset($client['memo']) ? $user['memo'] : ""; ?></textarea>
+				    </div>
+				  </div>
+
+				  <div class="form-group">
+				    <label for="profile_image" class="col-sm-3 control-label">プロフィール画像</label>
+				    <div class="col-sm-9">
+						<input type="file" name="profile_image" id="profile_image" />
 				    </div>
 				  </div>
 

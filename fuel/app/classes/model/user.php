@@ -17,10 +17,19 @@ class Model_User extends Orm\Model{
 		'work_start_date',
 		'memo',
 		'admin',
+		'zip_code',
+		'prefecture',
 		'address',
 		'area',
 		'blood_type',
 		'birthday',
+		'emergency_name_1',
+		'emergency_phone_1',
+		'emergency_cellular_1',
+		'emergency_name_2',
+		'emergency_phone_2',
+		'emergency_cellular_2',
+		'profile_image',
 		'created_at',
 		'temperature_alert',
 		'fire_alert',
@@ -59,10 +68,19 @@ class Model_User extends Orm\Model{
 		 work_start_date DATE,
 		 memo NTEXT,
 		 admin INT DEFAULT 0,
+		 zip_code NVARCHAR(255),
+		 prefecture NVARCHAR(255),
 		 address NTEXT,
 		 area NVARCHAR(255),
 		 blood_type NVARCHAR(255),
 		 birthday DATE,
+		 emergency_name_1 NVARCHAR(50),
+		 emergency_phone_1 NVARCHAR(50),
+		 emergency_cellular_1 NVARCHAR(50),
+		 emergency_name_2 NVARCHAR(50),
+		 emergency_phone_2 NVARCHAR(50),
+		 emergency_cellular_2 NVARCHAR(50),
+		 profile_image NVARCHAR(255),
 		 created_at INT,
 		 temperature_alert INT,
 		 fire_alert INT,
@@ -100,10 +118,19 @@ class Model_User extends Orm\Model{
 			'work_start_date',
 			'memo',
 			'admin',
+			'zip_code',
+			'prefecture',
 			'address',
 			'area',
 			'blood_type',
 			'birthday',
+			'profile_image',
+			'emergency_name_1',
+			'emergency_phone_1',
+			'emergency_cellular_1',
+			'emergency_name_2',		
+			'emergency_phone_2',
+			'emergency_cellular_2',	
 			'temperature_alert',
 			'fire_alert',
 			'heatstroke_alert',
@@ -121,6 +148,7 @@ class Model_User extends Orm\Model{
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
+		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
 		return $ret;
 	}
 
@@ -191,6 +219,30 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function saveUser($params) {
+        $config = array(
+            'path' => DOCROOT.DS.'images/user',
+            'randomize' => true,
+            'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+        );
+
+        try {
+	        Upload::process($config);
+	        if (Upload::is_valid())
+	        {
+	            Upload::save();
+	            $files = Upload::get_files();
+	            $params['profile_image'] = $files[0]['saved_as'];
+	        }
+
+	        // エラー有り
+	        foreach (Upload::get_errors() as $file)
+	        {
+	            // $file['errors']の中にエラーが入っているのでそれを処理
+	        }
+        } catch (Exception $e) {
+
+        }
+
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
 		}

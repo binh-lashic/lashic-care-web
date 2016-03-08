@@ -26,6 +26,16 @@ class Model_Sensor extends Orm\Model{
 		'disconnection_duration',
 		'wake_up_period',
 		'wake_up_delay_allowance_duration',
+		'wake_up_start_time',
+		'wake_up_end_time',
+		'wake_up_threshold',
+		'wake_up_duration',
+		'wake_up_ignore_duration',
+		'sleep_start_time',
+		'sleep_end_time',
+		'sleep_threshold',
+		'sleep_duration',
+		'sleep_ignore_duration',
 		'temperature_average',
 		'humidity_average',
 		'temperature_week_average',
@@ -63,7 +73,17 @@ class Model_Sensor extends Orm\Model{
   illuminance_night_end_time INT,
   disconnection_duration INT,
   wake_up_period INT,
-  wake_up_delay_allowance_duration INT,
+  wake_up_delay_allowance_duratio INT,
+  wake_up_start_time INT,
+  wake_up_end_time INT,
+  wake_up_threshold INT,
+  wake_up_duration INT,
+  wake_up_ignore_duration INT,
+  sleep_start_time INT,
+  sleep_end_time INT,
+  sleep_threshold INT,
+  sleep_duration INT,
+  sleep_ignore_duration INT,
   temperature_average FLOAT,
   humidity_average FLOAT,
   temperature_week_average NTEXT,
@@ -374,6 +394,144 @@ class Model_Sensor extends Orm\Model{
 		}
 		return true;
     }
+
+	//起床時間のチェック
+	public function checkWakeUp() {
+    	$date = date("Y-m-d");
+		$daily_data = \Model_Data_Daily::find('first', array('where' => array(
+			'sensor_id' => $this->id,
+			'date' => $date,
+		)));
+		if($daily_data['wake_up_time']) {
+			echo $daily_data['wake_up_time'];
+		}
+		exit;
+		//既に起床時間が登録されていたらスキップする
+    	$sql = 'SELECT active FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+    	$query = DB::query($sql);
+    	$start_date = $date." ".$this->wake_up_start_time.":00:00";
+    	$end_date = $date." ".$this->wake_up_end_time.":00:00";
+ 		$query->parameters(array(
+			'sensor_id' => $this->name,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+		));  
+		$result = $query->execute('data');
+		$count = count($result);
+		$active_count = 0;
+		$nonactive_count = 0;
+		if($count) {
+			foreach($result as $row) {
+				if($this->wake_up_threshold < $row['active']) {
+					$active_count++;
+					if($active_count == $this->wake_up_duration) {
+
+						//起床時間の保存
+						$minutes = $nonactive_count + $active_count;
+
+						if(!$daily_data) {
+							$daily_data = \Model_Data_Daily::forge();
+						} 
+						$daily_data->set(array(
+							'sensor_id' => $this->id,
+							'wake_up_date' => date("Y-m-d H:i:00", time() - $minutes * 60),
+							'date' => $date,
+						));
+						$daily_data->save();
+
+					}
+					$nonactive_count = 0;
+				} else {
+					$nonactive_count++;
+					if($nonactive_count == $this->wake_up_ignore_duration) {
+						$active_count = 0;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	//就寝時間のチェック
+	public function checkSleep() {
+    	$date = date("Y-m-d");
+    	$hour = date("h");
+		$daily_data = \Model_Data_Daily::find('first', array('where' => array(
+			'sensor_id' => $this->id,
+			'date' => $date,
+		)));
+		if($daily_data['sleep_up_time']) {
+			echo $daily_data['sleep_up_time'];
+		}
+		exit;
+		//既に起床時間が登録されていたらスキップする
+    	$sql = 'SELECT active FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+    	$query = DB::query($sql);
+
+		/**
+		 * 日替わり前
+		 * 設定：22〜4時
+		 * 現在時刻が23時
+		 * 現在時刻が2時
+		 */
+
+		/**
+		 * 日替わり後
+		 * 設定：25〜4時
+		 * 現在時刻が2時
+		 */
+			
+
+    	if($this->sleep_start_time >= 24) {
+    		$start_date = $date." ".$this->sleep_start_time.":00:00";
+    		$end_date = $date." ".$this->sleep_end_time.":00:00";
+    	} else {
+    		$yesterday = date("Y-m-d", strtotime("-1day"));
+    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
+    		$end_date = $date." ".$this->sleep_end_time.":00:00";
+    	}
+
+    	
+ 		$query->parameters(array(
+			'sensor_id' => $this->name,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+		));  
+		$result = $query->execute('data');
+		$count = count($result);
+		$active_count = 0;
+		$nonactive_count = 0;
+		if($count) {
+			foreach($result as $row) {
+				if($this->sleep_threshold < $row['active']) {
+					$active_count++;
+					if($active_count == $this->sleep_duration) {
+
+						//起床時間の保存
+						$minutes = $nonactive_count + $active_count;
+
+						if(!$daily_data) {
+							$daily_data = \Model_Data_Daily::forge();
+						} 
+						$daily_data->set(array(
+							'sensor_id' => $this->id,
+							'sleep_date' => date("Y-m-d H:i:00", time() - $minutes * 60),
+							'date' => $date,
+						));
+						$daily_data->save();
+
+					}
+					$nonactive_count = 0;
+				} else {
+					$nonactive_count++;
+					if($nonactive_count == $this->sleep_ignore_duration) {
+						$active_count = 0;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
     public function alert($params) {
     	$params['date'] = date("Y-m-d H:i:s");
