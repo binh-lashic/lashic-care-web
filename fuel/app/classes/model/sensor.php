@@ -495,7 +495,7 @@ class Model_Sensor extends Orm\Model{
 		 * 現在時刻が2時
 		 */
 
-    	if($this->sleep_start_time >= 24) {
+    	if($this->sleep_start_time > 24) {
     		$start_date = $date." ".$this->sleep_start_time.":00:00";
     		$end_date = $date." ".$this->sleep_end_time.":00:00";
     	} else {
