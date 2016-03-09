@@ -527,9 +527,6 @@ class Model_Sensor extends Orm\Model{
 						$sleep_time = $row['date'];
 					}
 					if($active_count == $this->sleep_duration) {
-						//起床時間の保存
-						$minutes = $nonactive_count + $active_count;
-
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
@@ -538,6 +535,8 @@ class Model_Sensor extends Orm\Model{
 							'sleep_time' => $sleep_time,
 							'date' => $date,
 						);
+						print_r($params);
+						exit;
 						$daily_data->set($params);
 						$daily_data->save();
 						return true;
