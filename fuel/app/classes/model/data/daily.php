@@ -43,9 +43,24 @@ class Model_Data_Daily extends Orm\Model{
 			exit;
 		}
 	}
-    
+
+    public static function getData($sensor_id, $date=null) {
+        $data = \Model_Data_Daily::query()->where('sensor_id', $sensor_id)->where('date', $date)->order_by('date', 'desc')->get_one();
+        return \Model_Data_Daily::format($data);
+    }
+
     public static function getLatestData($sensor_id) {
         $data = \Model_Data_Daily::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->get_one();
+        return \Model_Data_Daily::format($data);
+    }
+
+    public static function format($data) {
+        if($data) {
+            $data['discomfort_average'] = 0.81 * $data->temperature_average + 0.01 * $data->humidity_average * (0.99 * $data->temperature_average - 14.3) + 46.3;
+            $data['discomfort_average'] = round($data['discomfort_average'], 1);
+        } else {
+            $data['discomfort_average'] = "";
+        }
         return $data;
     }
 }

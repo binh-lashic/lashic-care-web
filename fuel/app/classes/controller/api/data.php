@@ -190,10 +190,6 @@ class Controller_Api_Data extends Controller_Api
 
 		$sensors = \Model_Sensor::find("all");
 		foreach($sensors as $sensor) {
-			$data_daily = \Model_Data_Daily::find('first', array('where' => array(
-				'sensor_id' => $sensor->id,
-				'date' => $date,
-			)));
 			$rows = \Model_Data_Daily::query()
 				->where('sensor_id', $sensor->id)
 				->where('date', 'between', array(
@@ -256,8 +252,17 @@ class Controller_Api_Data extends Controller_Api
 				$params['active_average'] = $active_total / $count;
 				$params['illuminance_average'] = $illuminance_total / $count;
 			}
-			$data_daily->set($params);
-			$data_daily->save();
+			$data_daily = \Model_Data_Daily::find('first', array('where' => array(
+				'sensor_id' => $sensor->id,
+				'date' => $date,
+			)));
+			if(!empty($params)) {
+				if(empty($data_daily)) {
+					$data_daily =  \Model_Data_Daily::forge();
+				}
+				$data_daily->set($params);
+				$data_daily->save();				
+			}
 		} 
 		return $this->result();	
 	}

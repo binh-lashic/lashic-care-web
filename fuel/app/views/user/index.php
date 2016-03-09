@@ -17,11 +17,11 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">★★★★</p>
 						<p class="graph_text">起床 <span class="graph_number"><?php echo !empty($data_daily['wake_up_time']) ? date("H:i", strtotime($data_daily['wake_up_time'])) : ""; ?></span></p>
-						<p class="graph_text_gray">（平均起床時間 5:18）</p>
+						<p class="graph_text_gray">（平均起床時間 <?php echo !empty($data_latest['wake_up_time_average']) ? date("H:i", strtotime($data_latest['wake_up_time_average'])) : ""; ?>）</p>
 						<hr>
 						<p class="graph_rank">★★★★★</p>
 						<p class="graph_text">就寝 <span class="graph_number"><?php echo !empty($data_daily['sleep_time']) ? date("H:i", strtotime($data_daily['sleep_time'])) : ""; ?></span></p>
-						<p class="graph_text_gray">（平均就寝時間 5:18）</p>
+						<p class="graph_text_gray">（平均就寝時間 <?php echo !empty($data_latest['sleep_time_average']) ? date("H:i", strtotime($data_latest['sleep_time_average'])) : ""; ?>）</p>
 					</div>
 				</li>
 				<li class="graph_tile">
@@ -39,7 +39,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">★★★</p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>%" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['humidity']) ? round($data['humidity'], 1) : ""; ?>%" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p>湿度</p>
