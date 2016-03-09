@@ -23,4 +23,11 @@ class Controller_Admin_Page extends Controller_Admin
                 $this->template->title = '管理ページ マスター';
                 $this->template->content = View::forge('admin/page/master');
         }
+
+        public function action_test() {
+                $rows = DB::query("SELECT * FROM sysobjects WHERE xtype = 'u'")->execute();
+                
+                print_r($rows);
+                exit;
+        }
 }
