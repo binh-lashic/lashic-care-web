@@ -428,8 +428,6 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-		echo DB::last_query("data");
-		exit;
 		if($count) {
 
 			foreach($result as $row) {
@@ -450,6 +448,8 @@ class Model_Sensor extends Orm\Model{
 							'wake_up_time' => $wake_up_time,
 							'date' => $date,
 						);
+						print_r($params);
+						exit;
 						$daily_data->set($params);
 						$daily_data->save();
 						return true;
