@@ -160,7 +160,7 @@ class Controller_Api_Data extends Controller_Api
 
 	public function get_import() {
 		$sensor_id = "00001";
-		$url = "http://infic.papaikuji.info/api/data/dashboard?sensor_id=".$sensor_id."&device_id=11111";
+		$url = "http://infic.papaikuji.info/api/data/dashboard?sensor_name=".$sensor_id."&device_id=11111";
 		$json = json_decode(file_get_contents($url), true);
 		$params = $json['data'];
 		$params['corporate_id'] = '00000';
@@ -268,7 +268,11 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_alert() {
-		$sensors = \Model_Sensor::find("all");
+		if(Input::param("sensor_id")) {
+			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
+		} else {
+			$sensors = \Model_Sensor::find("all");
+		}
 		foreach($sensors as $sensor) {
 			$this->result['data'][] = array(
 				'sensor_id' => $sensor->id,

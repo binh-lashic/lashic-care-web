@@ -57,6 +57,7 @@ class Controller_User extends Controller_Page
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
 				$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);
+				$this->data['data_daily'] = \Model_Data_Daily::getLatestData($this->data['sensor']['id']);
 				$params = array(
 					'sensor_id' => $this->data['sensor']['id'],
 					'limit' => Config::get("report_list_count"),

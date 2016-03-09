@@ -397,17 +397,25 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
-    	$date = date("Y-m-d");
+		if(empty($this->wake_up_threshold) || empty($this->wake_up_start_time) || empty($this->wake_up_end_time)) {
+			return false;
+		}
+		if(Input::param("date")) {
+	    	$date = Input::param("date");
+		} else {
+    		$date = date("Y-m-d");
+		}
 		$daily_data = \Model_Data_Daily::find('first', array('where' => array(
 			'sensor_id' => $this->id,
 			'date' => $date,
 		)));
-		if($daily_data['wake_up_time']) {
-			echo $daily_data['wake_up_time'];
-		}
-		exit;
+
 		//既に起床時間が登録されていたらスキップする
-    	$sql = 'SELECT active FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+		if(!empty($daily_data['wake_up_time'])) {
+			return true;
+		}
+		
+    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
     	$start_date = $date." ".$this->wake_up_start_time.":00:00";
     	$end_date = $date." ".$this->wake_up_end_time.":00:00";
@@ -421,24 +429,28 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		if($count) {
+
 			foreach($result as $row) {
 				if($this->wake_up_threshold < $row['active']) {
+					if($active_count === 0) {
+						$wake_up_time = $row['date'];
+					}
 					$active_count++;
 					if($active_count == $this->wake_up_duration) {
-
 						//起床時間の保存
 						$minutes = $nonactive_count + $active_count;
 
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
-						$daily_data->set(array(
+						$params = array(
 							'sensor_id' => $this->id,
-							'wake_up_date' => date("Y-m-d H:i:00", time() - $minutes * 60),
+							'wake_up_time' => $wake_up_time,
 							'date' => $date,
-						));
+						);
+						$daily_data->set($params);
 						$daily_data->save();
-
+						return true;
 					}
 					$nonactive_count = 0;
 				} else {
@@ -454,6 +466,9 @@ class Model_Sensor extends Orm\Model{
 
 	//就寝時間のチェック
 	public function checkSleep() {
+		if(empty($this->sleep_threshold) || empty($this->sleep_start_time) || empty($this->sleep_end_time)) {
+			return false;
+		}
     	$date = date("Y-m-d");
     	$hour = date("h");
 		$daily_data = \Model_Data_Daily::find('first', array('where' => array(
@@ -461,11 +476,10 @@ class Model_Sensor extends Orm\Model{
 			'date' => $date,
 		)));
 		if($daily_data['sleep_up_time']) {
-			echo $daily_data['sleep_up_time'];
+			return true;
 		}
-		exit;
 		//既に起床時間が登録されていたらスキップする
-    	$sql = 'SELECT active FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
 
 		/**
@@ -480,7 +494,6 @@ class Model_Sensor extends Orm\Model{
 		 * 設定：25〜4時
 		 * 現在時刻が2時
 		 */
-			
 
     	if($this->sleep_start_time >= 24) {
     		$start_date = $date." ".$this->sleep_start_time.":00:00";
@@ -491,35 +504,37 @@ class Model_Sensor extends Orm\Model{
     		$end_date = $date." ".$this->sleep_end_time.":00:00";
     	}
 
-    	
  		$query->parameters(array(
 			'sensor_id' => $this->name,
 			'start_date' => $start_date,
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
+
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
 		if($count) {
 			foreach($result as $row) {
 				if($this->sleep_threshold < $row['active']) {
-					$active_count++;
+					if($active_count === 0) {
+						$sleep_time = $row['date'];
+					}
 					if($active_count == $this->sleep_duration) {
-
 						//起床時間の保存
 						$minutes = $nonactive_count + $active_count;
 
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
-						$daily_data->set(array(
+						$params = array(
 							'sensor_id' => $this->id,
-							'sleep_date' => date("Y-m-d H:i:00", time() - $minutes * 60),
+							'sleep_time' => $sleep_time,
 							'date' => $date,
-						));
+						);
+						$daily_data->set($params);
 						$daily_data->save();
-
+						return true;
 					}
 					$nonactive_count = 0;
 				} else {

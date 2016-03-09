@@ -16,11 +16,11 @@ if(isset($client)) {
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">★★★★</p>
-						<p class="graph_text">起床 <span class="graph_number">5:34</span></p>
+						<p class="graph_text">起床 <span class="graph_number"><?php echo !empty($data_daily['wake_up_time']) ? date("H:i", strtotime($data_daily['wake_up_time'])) : ""; ?></span></p>
 						<p class="graph_text_gray">（平均起床時間 5:18）</p>
 						<hr>
 						<p class="graph_rank">★★★★★</p>
-						<p class="graph_text">就寝 <span class="graph_number">5:34</span></p>
+						<p class="graph_text">就寝 <span class="graph_number"><?php echo !empty($data_daily['sleep_time']) ? date("H:i", strtotime($data_daily['sleep_time'])) : ""; ?></span></p>
 						<p class="graph_text_gray">（平均就寝時間 5:18）</p>
 					</div>
 				</li>
