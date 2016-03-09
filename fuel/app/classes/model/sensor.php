@@ -521,8 +521,6 @@ class Model_Sensor extends Orm\Model{
 		if($count) {
 			foreach($result as $row) {
 				if($this->sleep_threshold > $row['active']) {
-					echo $active_count,":",$this->sleep_threshold,">",$row['active'];
-					echo "\n";
 					if($active_count === 0) {
 						$sleep_time = $row['date'];
 					}
@@ -536,8 +534,6 @@ class Model_Sensor extends Orm\Model{
 							'sleep_time' => $sleep_time,
 							'date' => $date,
 						);
-						print_r($params);
-						exit;
 						$daily_data->set($params);
 						$daily_data->save();
 						return true;
