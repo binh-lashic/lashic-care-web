@@ -428,9 +428,10 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-		if($count) {
 			print_r($result);
 			exit;
+		if($count) {
+
 			foreach($result as $row) {
 				if($this->wake_up_threshold < $row['active']) {
 					if($active_count === 0) {
