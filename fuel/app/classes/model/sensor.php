@@ -417,7 +417,7 @@ class Model_Sensor extends Orm\Model{
 		
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
-    	$start_date = date("Y-m-d H:i:s", strotime($date." ".$this->wake_up_start_time.":00:00"))
+    	$start_date = date("Y-m-d H:i:s", strotime($date." ".$this->wake_up_start_time.":00:00"));
     	$end_date = date("Y-m-d H:i:s", strotime($date." ".$this->wake_up_end_time.":00:00"));
  		$query->parameters(array(
 			'sensor_id' => $this->name,
