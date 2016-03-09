@@ -38,11 +38,7 @@ class Controller_Api_Data extends Controller_Api
 				$humidity = $data['humidity'];
 				$this->result['data'] = array(
 						'temperature' => round($temperature, 1),
-						'temperature_average' => $sensor->temperature_average,
-						'temperature_week_average' => $sensor->temperature_week_average,
 						'humidity' => round($humidity, 1),
-						'humidity_average' => $sensor->humidity_average,
-						'humidity_week_average' => $sensor->humidity_week_average,
 						'active' => round($data['active'], 1),
 						'illuminance' =>  (int)$data['illuminance'],
 						'discomfort' => $data['discomfort'],
