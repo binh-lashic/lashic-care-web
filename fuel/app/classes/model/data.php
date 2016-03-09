@@ -22,8 +22,6 @@ class Model_Data extends Orm\Model{
         if($data) {
             $data['discomfort'] = 0.81 * $data->temperature + 0.01 * $data->humidity * (0.99 * $data->temperature - 14.3) + 46.3;
             $data['discomfort'] = round($data['discomfort'], 1);
-        } else {
-            $data['discomfort'] = "";
         }
         return $data;
     }
