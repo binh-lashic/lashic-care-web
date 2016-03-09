@@ -22,15 +22,23 @@ class Controller_Api_Data extends Controller_Api
 
 	public function get_dashboard() {
 		$sensor_name = Input::param("sensor_name");
-		if(!$sensor_name) {
+		$sensor_id = Input::param("sensor_id");
+		if(empty($sensor_name) && empty($sensor_id)) {
 			$this->errors[] = array(
 				'message' => 'センサーIDを指定してください'
 			);
-		} else {
-			$data = \Model_Data::getLatestData($sensor_name);
+		} else if(!empty($sensor_name)) {
 			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_name);
+		} else if(!empty($sensor_id)) {
+			$sensor = \Model_Sensor::getSensor($sensor_id);
+		}
+
+		if($sensor) {
+			$data = \Model_Data::getLatestData($sensor->name);
+			
 			$this->result = array(
-				'sensor_name' => $sensor_name,
+				'sensor_id' => $sensor->id,
+				'sensor_name' => $sensor->name,
 				'data' => array(),
 			);
 			if(isset($data) && isset($sensor)) {
@@ -63,7 +71,6 @@ class Controller_Api_Data extends Controller_Api
 	public function _graph() {
 		$type = Input::param("type");
 		$date = Input::param("date");
-		$sensor_id = Input::param("sensor_id");
 		$span = Input::param("span");
 
 		$types = array(
@@ -75,7 +82,6 @@ class Controller_Api_Data extends Controller_Api
 			'temperature_average' => true,			//温度平均
 			'humidity_average' => true,				//湿度平均
 			'illuminance_average' => true,  		//照度平均
-			'lighting_average' => true,				//点灯平均
 			'active_average' => true,				//運動平均
 			'temperature_week_average' => true,		//温度曜日平均
 			'humidity_week_average' => true,		//湿度曜日平均
@@ -86,6 +92,17 @@ class Controller_Api_Data extends Controller_Api
 			'sleep_time_average' => true,			//起寝平均
 			'sleep_time_week_average' => true,		//起寝曜日平均
 		);
+		$sensor_name = Input::param("sensor_name");
+		$sensor_id = Input::param("sensor_id");
+		if(empty($sensor_name) && empty($sensor_id)) {
+			$this->errors[] = array(
+				'message' => 'センサーIDを指定してください'
+			);
+		} else if(!empty($sensor_name)) {
+			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_name);
+		} else if(!empty($sensor_id)) {
+			$sensor = \Model_Sensor::getSensor($sensor_id);
+		}
 
 		if(!$type) {
 			$this->errors[] = array(
@@ -95,11 +112,7 @@ class Controller_Api_Data extends Controller_Api
 			$this->errors[] = array(
 				'message' => 'グラフのタイプが間違っています'
 			);
-		} else if(!$sensor_id) {
-			$this->errors[] = array(
-				'message' => 'センサーIDを指定してください'
-			);
-		} else {
+		} else if(!empty($sensor)) {
 			if(empty($date)) {
 				$date = date("Y-m-d");
 			}
@@ -115,12 +128,10 @@ class Controller_Api_Data extends Controller_Api
 			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;
 
-			$sensor = \Model_Sensor::find($sensor_id);
-
-			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date BETWEEN :start_time AND :end_time';
+			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_name AND date BETWEEN :start_time AND :end_time';
 			$query = DB::query($sql);
 			$query->parameters(array(
-				'sensor_id' => $sensor->name,
+				'sensor_name' => $sensor->name,
 				'start_time' => date("Y-m-d H:i:s", $start_time),
 				'end_time' => date("Y-m-d H:i:s", $end_time),
 			));
@@ -144,7 +155,8 @@ class Controller_Api_Data extends Controller_Api
 				);
 			}
 			$this->result = array(
-				'sensor_id' => $sensor_id,
+				'sensor_id' => $sensor->id,
+				'sensor_name' => $sensor->name,
 				'type' => $type,
 				'date' => $date,
 				'span' => $span,
