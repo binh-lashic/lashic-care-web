@@ -42,11 +42,9 @@ class Controller_Api_Data extends Controller_Api
 				'data' => array(),
 			);
 			if(isset($data) && isset($sensor)) {
-				$temperature = $data['temperature'];
-				$humidity = $data['humidity'];
 				$this->result['data'] = array(
-						'temperature' => round($temperature, 1),
-						'humidity' => round($humidity, 1),
+						'temperature' => round($data['temperature'], 1),
+						'humidity' => round($data['humidity'], 1),
 						'active' => round($data['active'], 1),
 						'illuminance' =>  (int)$data['illuminance'],
 						'discomfort' => $data['discomfort'],
