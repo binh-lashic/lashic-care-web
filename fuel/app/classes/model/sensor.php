@@ -513,15 +513,14 @@ class Model_Sensor extends Orm\Model{
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
-		echo \DB::last_query('data');
+
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-		print_r($result);
-		exit;
+
 		if($count) {
 			foreach($result as $row) {
-				if($this->sleep_threshold < $row['active']) {
+				if($this->sleep_threshold > $row['active']) {
 					if($active_count === 0) {
 						$sleep_time = $row['date'];
 					}
