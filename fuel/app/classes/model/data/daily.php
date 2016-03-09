@@ -15,6 +15,7 @@ class Model_Data_Daily extends Orm\Model{
 		    DB::query("DROP TABLE data_daily")->execute();
 		} catch(Exception $e) {
 			echo $e->getMessage();
+			exit;
 		}
         $sql = "CREATE TABLE data_daily (
 		 id int NOT NULL IDENTITY (1, 1),
