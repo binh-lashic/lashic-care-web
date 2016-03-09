@@ -428,8 +428,6 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-			print_r($result);
-			exit;
 		if($count) {
 
 			foreach($result as $row) {
