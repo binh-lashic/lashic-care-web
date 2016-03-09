@@ -33,7 +33,7 @@ class Model_Data_Daily extends Orm\Model{
 	}
     
     public static function getLatestData($sensor_id) {
-        $data = \Model_Data_Daily::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->connection("data")->get_one();
+        $data = \Model_Data_Daily::query()->where('sensor_id', $sensor_id)->order_by('date', 'desc')->connection()->get_one();
         return $data;
     }
 }
