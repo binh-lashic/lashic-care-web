@@ -526,6 +526,7 @@ class Model_Sensor extends Orm\Model{
 					if($active_count === 0) {
 						$sleep_time = $row['date'];
 					}
+					$active_count++;
 					if($active_count == $this->sleep_duration) {
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
