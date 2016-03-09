@@ -35,11 +35,7 @@ class Model_Sensor extends Orm\Model{
 		'sleep_end_time',
 		'sleep_threshold',
 		'sleep_duration',
-		'sleep_ignore_duration',
-		'temperature_average',
-		'humidity_average',
-		'temperature_week_average',
-		'humidity_week_average',
+		'sleep_ignore_duration'
 	);
 
 	public static function createTable(){
@@ -83,11 +79,7 @@ class Model_Sensor extends Orm\Model{
   sleep_end_time INT,
   sleep_threshold INT,
   sleep_duration INT,
-  sleep_ignore_duration INT,
-  temperature_average FLOAT,
-  humidity_average FLOAT,
-  temperature_week_average NTEXT,
-  humidity_week_average NTEXT
+  sleep_ignore_duration INT
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
@@ -138,12 +130,14 @@ class Model_Sensor extends Orm\Model{
     }
 
     public static function format($sensor) {
+    	/*
     	if(!empty($sensor['temperature_week_average'])) {
 	    	$sensor['temperature_week_average'] = json_decode($sensor['temperature_week_average'], true);
 	    }
     	if(!empty($sensor['humidity_week_average'])) {
 	    	$sensor['humidity_week_average'] = json_decode($sensor['humidity_week_average'], true);
     	}
+    	*/
     	return $sensor;
     }
 
