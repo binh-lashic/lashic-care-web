@@ -6,5 +6,6 @@
 		<li><a href="/admin/user/sensor/create">user_sensorsテーブル作成</a></li>
 		<li><a href="/admin/user/client/create">user_clientsテーブル作成</a></li>
 		<li><a href="/admin/alert/create">alertsテーブル作成</a></li>
+		<li><a href="/admin/daily/data/create">daily_dataテーブル作成</a></li>
 	</ul>
 </div>

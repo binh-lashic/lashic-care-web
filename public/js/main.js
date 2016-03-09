@@ -84,7 +84,7 @@ $(function(){
 				        "bulletBorderAlpha": 1,
 				        "bulletSize": 8,
 				        "bulletColor": "#FFFFFF",
-				        "title": "室温",
+				        "title": "湿度",
 				        "valueField": "humidity",
 						"fillAlphas": 0,
 						"useLineColorForBulletBorder": true
@@ -108,7 +108,7 @@ $(function(){
 				        "bulletBorderAlpha": 1,
 				        "bulletSize": 8,
 				        "bulletColor": "#FFFFFF",
-				        "title": "室温",
+				        "title": "照度",
 				        "valueField": "illuminance",
 						"fillAlphas": 0,
 						"useLineColorForBulletBorder": true
