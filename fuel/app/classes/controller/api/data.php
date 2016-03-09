@@ -275,7 +275,6 @@ class Controller_Api_Data extends Controller_Api
 		}
 		foreach($sensors as $sensor) {
 			$this->result['data'][] = array(
-				/*
 				'sensor_id' => $sensor->id,
 				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
 				'fire' => $sensor->checkFire(),									//火事アラート
@@ -285,7 +284,6 @@ class Controller_Api_Data extends Controller_Api
 				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
 				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-				*/
 				'wake_up' => $sensor->checkWakeUp(),							//起床時間
 				'sleep' => $sensor->checkSleep(),								//就寝時間
 

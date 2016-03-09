@@ -448,8 +448,6 @@ class Model_Sensor extends Orm\Model{
 							'wake_up_time' => $wake_up_time,
 							'date' => $date,
 						);
-						print_r($params);
-						exit;
 						$daily_data->set($params);
 						$daily_data->save();
 						return true;
