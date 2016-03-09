@@ -41,7 +41,7 @@ class Controller_Api_Data extends Controller_Api
 				'sensor_name' => $sensor->name,
 				'data' => array(),
 			);
-			if(isset($data) && isset($sensor)) {
+			if(!empty($data) && isset($sensor)) {
 				$this->result['data'] = array(
 						'temperature' => round($data['temperature'], 1),
 						'humidity' => round($data['humidity'], 1),
