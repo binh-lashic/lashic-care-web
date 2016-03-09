@@ -181,88 +181,83 @@ class Controller_Api_Data extends Controller_Api
 		return $this->result();	
 	}
 
+	//1日に1回24時に実行する
 	public function get_analyze() {
-		/*
-起床時間の定義
+    	$time = strtotime("-1day");
+    	$date = date("Y-m-d", $time);
+    	$start_date = date("Y-m-d 00:00:00", $time);
+		$end_date = date("Y-m-d 23:59:59", $time);
 
-関連するパラメータの予定デフォルト値
-
-起床判断開始時間：未定
-起床判断終了時間：未定
-運動量閾値：未定
-起床判断期間：5分
-起床不感帯期間：30分
-起床判断期間以上継続して、運動量が運動量閾値を超えた場合に、同連続して運動量閾値を超えた期間の最初の時間を起床時間と定義する。
-なお、途中でセンサーから外れる（運動量がゼロになる）場合などがあるため、起床不感帯期間を設ける。
-起床判断中（起床時間が決定しておらず、運動量が運動量閾値を超えている最中）に、運動量閾値を下回ったとしても、起床不感帯期間以内に運動量が運動量閾値を超えた場合、起床判断を継続する。
-
-
-就寝時間の定義
-
-関連するパラメータの予定デフォルト値
-
-就寝判断開始時間：未定
-就寝判断終了時間：未定
-運動量閾値：
-就寝判断期間：5分
-就寝不感帯期間：30分
-就寝判断期間以上継続して、運動量が運動量閾値を超えた場合に、同連続して運動量閾値を下回った期間の最初の時間を就寝時間と定義する。
-なお、途中でセンサーから外れる（運動量がゼロになる）場合などがあるため、就寝不感帯期間を設ける。
-就寝判断中（就寝時間が決定しておらず、運動量が運動量閾値を超えている最中）に、運動量閾値を下回ったとしても、就寝不感帯期間以内に運動量が運動量閾値を下回った場合、起床判断を継続する。
-		*/
 		$sensors = \Model_Sensor::find("all");
 		foreach($sensors as $sensor) {
-			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_id AND date >= :date';
-			$query = DB::query($sql);
+			$data_daily = \Model_Data_Daily::find('first', array('where' => array(
+				'sensor_id' => $sensor->id,
+				'date' => $date,
+			)));
+			$rows = \Model_Data_Daily::query()
+				->where('sensor_id', $sensor->id)
+				->where('date', 'between', array(
+					date("Y-m-d", strtotime("-31day")),
+					date("Y-m-d", strtotime("-1day"))
+				))
+				->get();
+			$wake_up_time_total = 0;
+			$sleep_time_total = 0;
+			$wake_up_time_count = 0;
+			$sleep_time_count = 0;
+			foreach($rows as $row) {
+				if(!empty($row['wake_up_time'])) {
+					$wake_up_time_count++;
+					$wake_up_time_total += date("h", strtotime($row['wake_up_time'])) * 60 + date("i", strtotime($row['wake_up_time']));
+				}
+				if(!empty($row['sleep_time'])) {
+					$sleep_time_count++;
+					$sleep_time_total += date("h", strtotime($row['sleep_time'])) * 60 + date("i", strtotime($row['sleep_time']));
+				}
+			}
+
+			if($wake_up_time_count > 0) {
+				$minutes = $wake_up_time_total / $wake_up_time_count;
+				$hour = (int)($minutes / 60);
+				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
+				$params['wake_up_time_average'] = $hour.":".$minutes.":00";				
+			}
+
+			if($sleep_time_count > 0) {
+				$minutes = $sleep_time_total / $sleep_time_count;
+				$hour = (int)($minutes / 60);
+				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
+				$params['sleep_time_average'] = $hour.":".$minutes.":00";
+			}
+
+    		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+	    	$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $sensor->name,
-				'date' => date("Y-m-d H:i:s", strtotime("-30days"))
+				'start_date' => $start_date,
+				'end_date' => $end_date,
 			));
 			$result = $query->execute('data');
 			$rows = $result->as_array();
 			$count = count($rows);
 			if($count > 0) {
 				$temperature_total = 0;
-				$temperature_average = 0;
 				$humidity_total = 0;
-				$humidity_average = 0;
-				$temperature_week_total = array(0, 0, 0, 0, 0, 0, 0);
-				$temperature_week_count = array(0, 0, 0, 0, 0, 0, 0);
-				$temperature_week_average = array(0, 0, 0, 0, 0, 0, 0);
-				$humidity_week_total = array(0, 0, 0, 0, 0, 0, 0);
-				$humidity_week_count = array(0, 0, 0, 0, 0, 0, 0);
-				$humidity_week_average = array(0, 0, 0, 0, 0, 0, 0);
+				$active_total = 0;
+				$illuminance_total = 0;
 				foreach($rows as $row) {
 					$temperature_total += $row['temperature'];
 					$humidity_total += $row['humidity'];
-					$week = date("w", strtotime($row['date']));
-					$temperature_week_total[$week] += $row['temperature'];
-					$temperature_week_count[$week]++;
-					$humidity_week_total[$week]  += $row['humidity'];
-					$humidity_week_count[$week]++;
+					$active_total += $row['active'];
+					$illuminance_total += $row['illuminance'];
 				}
-				$temperature_average = $temperature_total / $count;
-				$humidity_average = $humidity_total / $count;
-				foreach($temperature_week_total as $week => $val) {
-					if($temperature_week_count[$week] === 0) {
-						$temperature_week_average[$week] = 0;
-					} else {
-						$temperature_week_average[$week] = $temperature_week_total[$week] / $temperature_week_count[$week];
-					}
-					if($humidity_week_count[$week] === 0) {
-						$humidity_week_average[$week] = 0;
-					} else {
-						$humidity_week_average[$week] = $humidity_week_total[$week] / $humidity_week_count[$week];
-					}					
-				}
-				$sensor->set(array(
-					'temperature_average' => $temperature_average,
-					'humidity_average' => $humidity_average,
-					'temperature_week_average' => json_encode($temperature_week_average),
-					'humidity_week_average' => json_encode($humidity_week_average),
-				));
-				$sensor->save();
+				$params['temperature_average'] = $temperature_total / $count;
+				$params['humidity_average'] = $humidity_total / $count;
+				$params['active_average'] = $active_total / $count;
+				$params['illuminance_average'] = $illuminance_total / $count;
 			}
+			$data_daily->set($params);
+			$data_daily->save();
 		} 
 		return $this->result();	
 	}
