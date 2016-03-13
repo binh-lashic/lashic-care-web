@@ -85,7 +85,11 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	public static function getSensor($id){
-		$sensor = \Model_Sensor::find($id);
+		try {
+			$sensor = \Model_Sensor::find($id);
+		} catch(Exception $e) {
+			return null;
+		}
 		if($sensor) {
 			return \Model_Sensor::format($sensor);
 		} else {
