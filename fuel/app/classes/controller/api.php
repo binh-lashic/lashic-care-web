@@ -8,6 +8,7 @@ class Controller_Api extends Controller_Rest
 
 	public function before()
 	{
+		Log::debug('API '.print_r(Input::param(), true));
 	    parent::before();
 	   	$method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {     
