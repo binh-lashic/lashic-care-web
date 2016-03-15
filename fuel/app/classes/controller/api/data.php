@@ -124,7 +124,6 @@ class Controller_Api_Data extends Controller_Api
 			'temperature' => true,					//温度
 			'humidity' => true,						//湿度
 			'illuminance' => true,					//照度
-			'lighting' => true,						//点灯
 			'active' => true,						//運動
 			'temperature_average' => true,			//温度平均
 			'humidity_average' => true,				//湿度平均
@@ -193,10 +192,11 @@ class Controller_Api_Data extends Controller_Api
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
+				$value = $rows[$current_time][$type];
 				$data[] = array(
 					'time' => $current_time,
 					'label' => date("H:i", $time),
-					'value' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
+					'value' => $value,
 					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
 					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
 					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
