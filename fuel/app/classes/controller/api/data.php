@@ -20,7 +20,6 @@ class Controller_Api_Data extends Controller_Api
  		return $this->result();
 	}
 
-
 	public function get_dashboard() {
 		return $this->_dashboard();
 	}
