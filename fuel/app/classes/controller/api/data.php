@@ -21,6 +21,14 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_dashboard() {
+		return $this->_dashboard();
+	}
+
+	public function post_dashboard() {
+		return $this->_dashboard();
+	}
+
+	public function _dashboard() {
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
 		if(empty($sensor_name) && empty($sensor_id)) {

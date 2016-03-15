@@ -39,6 +39,9 @@ $(function(){
 	});
 
 	function drawGraph() {
+		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+			console.log(result.data);
+		});
 		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
 			var values = [];
 			var graphs = [];
@@ -134,7 +137,6 @@ $(function(){
 				        "valueField": "active"
 				    });			
 			}
-
 			var chart = AmCharts.makeChart("graph", {
 			    "type": "serial",
 			    "theme": "light",
