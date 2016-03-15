@@ -192,7 +192,12 @@ class Controller_Api_Data extends Controller_Api
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
-				$value = $rows[$current_time][$type];
+				if(!empty($rows[$current_time])) {
+					$value = $rows[$current_time][$type];
+				} else {
+					$value = null;
+				}
+				
 				$data[] = array(
 					'time' => $current_time,
 					'label' => date("H:i", $time),
