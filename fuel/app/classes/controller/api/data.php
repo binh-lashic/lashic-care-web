@@ -20,6 +20,7 @@ class Controller_Api_Data extends Controller_Api
  		return $this->result();
 	}
 
+
 	public function get_dashboard() {
 		return $this->_dashboard();
 	}
@@ -181,6 +182,7 @@ class Controller_Api_Data extends Controller_Api
 			foreach($results as $result) {
 				$rows[$result['date']] = $result;
 			}
+
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
@@ -231,12 +233,7 @@ class Controller_Api_Data extends Controller_Api
 
 	//1日に1回24時に実行する
 	public function get_analyze() {
-		if(Input::param("date")) {
-	    	$time = strtotime(Input::param("date"));
-		} else {
-    		$time = strtotime("-1day");
-		}
-    	
+    	$time = strtotime("-1day");
     	$date = date("Y-m-d", $time);
     	$start_date = date("Y-m-d 00:00:00", $time);
 		$end_date = date("Y-m-d 23:59:59", $time);
@@ -254,10 +251,6 @@ class Controller_Api_Data extends Controller_Api
 			$sleep_time_total = 0;
 			$wake_up_time_count = 0;
 			$sleep_time_count = 0;
-			$params = array(
-				'sensor_id' => $sensor->id,
-				'date' => $date,
-			);
 			foreach($rows as $row) {
 				if(!empty($row['wake_up_time'])) {
 					$wake_up_time_count++;
@@ -315,4 +308,41 @@ class Controller_Api_Data extends Controller_Api
 			)));
 			if(!empty($params)) {
 				if(empty($data_daily)) {
-					$data_daily =  \Mode
+					$data_daily =  \Model_Data_Daily::forge();
+				}
+				$data_daily->set($params);
+				$data_daily->save();				
+			}
+		} 
+		return $this->result();	
+	}
+
+	public function get_alert() {
+		if(Input::param("sensor_id")) {
+			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
+		} else {
+			$sensors = \Model_Sensor::find("all");
+		}
+		foreach($sensors as $sensor) {
+			$this->result['data'][] = array(
+				'sensor_id' => $sensor->id,
+				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
+				'fire' => $sensor->checkFire(),									//火事アラート
+				'temperature' => $sensor->checkTemperature(),					//室温異常通知
+				'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
+				'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
+				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
+				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
+				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
+				'wake_up' => $sensor->checkWakeUp(),							//起床時間
+				'sleep' => $sensor->checkSleep(),								//就寝時間
+
+//低体温症アラート（要確認）
+//通信復帰通知
+//平均起床時間遅延
+                       );
+               }
+               return $this->result(); 
+       }
+
+}
