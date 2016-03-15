@@ -32,9 +32,10 @@ class Controller_Admin_Page extends Controller_Admin
         }
 
         public function action_create_index() {
+                /*
                 $rows = DB::query("CREATE INDEX data_date ON data (date)")->execute("data");
                 print_r($rows);
-
+                */
                 $rows = DB::query("CREATE INDEX data_sensor_id ON data (sensor_id)")->execute("data");
                 print_r($rows);
 
