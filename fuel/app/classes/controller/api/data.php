@@ -186,12 +186,14 @@ class Controller_Api_Data extends Controller_Api
 			$results = $query->execute('data');
 			$rows = array();
 			foreach($results as $result) {
+				$result = Model_Data::format($result);
 				$rows[$result['date']] = $result;
 			}
 
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
+
 				if(!empty($rows[$current_time])) {
 					$value = $rows[$current_time][$type];
 				} else {
@@ -206,6 +208,7 @@ class Controller_Api_Data extends Controller_Api
 					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
 					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
 					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
+					'discomfort' => !empty($rows[$current_time]) ? $rows[$current_time]['discomfort'] : null,
 				);
 			}
 			$this->result = array(
