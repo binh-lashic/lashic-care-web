@@ -121,6 +121,8 @@ class Controller_Api_Data extends Controller_Api
 		} else if(!empty($sensor)) {
 			if(empty($date)) {
 				$date = date("Y-m-d");
+			} else {
+				$date = date("Y-m-d", strtotime($date));
 			}
 			if(empty($span)) {
 				$span = 10;
