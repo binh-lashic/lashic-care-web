@@ -40,27 +40,60 @@ class Controller_Api_Data extends Controller_Api
 		} else if(!empty($sensor_id)) {
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
-
+		
 		if($sensor) {
-			$data = \Model_Data::getLatestData($sensor->name);
-			
+			//日付を取得
+			if(Input::param("date")) {
+				$date = date("Y-m-d", strtotime(Input::param("date")));
+			} else {
+				$date = date("Y-m-d");
+			}
+
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
 				'data' => array(),
 			);
-			if(!empty($data) && isset($sensor)) {
-				$this->result['data'] = array(
-						'temperature' => round($data['temperature'], 1),
-						'humidity' => round($data['humidity'], 1),
-						'active' => round($data['active'], 1),
-						'illuminance' =>  (int)$data['illuminance'],
-						'discomfort' => $data['discomfort'],
-						'wake_up_time' => '07:32:51',
-						'wake_up_time_average' => '07:25:22',
-						'sleep_time' => '22:33:43',
-						'sleep_time_average' => '22:22:15',
-				);
+
+			//今日だったら最新データにする
+			if($date === date("Y-m-d")) {
+				$data = \Model_Data::getLatestData($sensor->name);
+				if(!empty($data) && isset($sensor)) {
+					$this->result['data'] = array(
+							'temperature' => round($data['temperature'], 1),
+							'humidity' => round($data['humidity'], 1),
+							'active' => round($data['active'], 1),
+							'illuminance' =>  (int)$data['illuminance'],
+							'discomfort' => $data['discomfort'],
+					);
+				}
+			}
+			
+			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
+			if($data_daily) {
+				//今日以外だったら集計データを使う
+				if(empty($this->result['data'])) {
+					$this->result['data'] = array(
+							'temperature' => round($data_daily['temperature_average'], 1),
+							'humidity' => round($data_daily['humidity_average'], 1),
+							'active' => round($data_daily['active_average'], 1),
+							'illuminance' =>  (int)$data_daily['illuminance_average'],
+							'discomfort' => $data_daily['discomfort_average'],
+					);
+				}
+				if(!empty($data_daily['wake_up_time'])) {
+					$this->result['data']['wake_up_time'] = date("H:i:s", strtotime($data_daily['wake_up_time']));
+				}
+				if(!empty($data_daily['wake_up_time_average'])) {
+					$this->result['data']['wake_up_time_average'] = $data_daily['wake_up_time_average'];
+				}
+				if(!empty($data_daily['sleep_time'])) {
+					$this->result['data']['sleep_time'] = date("H:i:s", strtotime($data_daily['sleep_time']));
+				}
+				if(!empty($data_daily['sleep_time_average'])) {
+					$this->result['data']['sleep_time_average'] = $data_daily['sleep_time_average'];
+				}
+
 			}
 		}
 		return $this->result();	
@@ -148,7 +181,6 @@ class Controller_Api_Data extends Controller_Api
 			foreach($results as $result) {
 				$rows[$result['date']] = $result;
 			}
-
 			for($i = 0; $i <= $end; $i++) {
 				$time = $start_time + $i * 60 * $span;
 				$current_time = date("Y-m-d H:i:s", $time); 
@@ -199,7 +231,12 @@ class Controller_Api_Data extends Controller_Api
 
 	//1日に1回24時に実行する
 	public function get_analyze() {
-    	$time = strtotime("-1day");
+		if(Input::param("date")) {
+	    	$time = strtotime(Input::param("date"));
+		} else {
+    		$time = strtotime("-1day");
+		}
+    	
     	$date = date("Y-m-d", $time);
     	$start_date = date("Y-m-d 00:00:00", $time);
 		$end_date = date("Y-m-d 23:59:59", $time);
@@ -217,6 +254,10 @@ class Controller_Api_Data extends Controller_Api
 			$sleep_time_total = 0;
 			$wake_up_time_count = 0;
 			$sleep_time_count = 0;
+			$params = array(
+				'sensor_id' => $sensor->id,
+				'date' => $date,
+			);
 			foreach($rows as $row) {
 				if(!empty($row['wake_up_time'])) {
 					$wake_up_time_count++;
@@ -274,41 +315,4 @@ class Controller_Api_Data extends Controller_Api
 			)));
 			if(!empty($params)) {
 				if(empty($data_daily)) {
-					$data_daily =  \Model_Data_Daily::forge();
-				}
-				$data_daily->set($params);
-				$data_daily->save();				
-			}
-		} 
-		return $this->result();	
-	}
-
-	public function get_alert() {
-		if(Input::param("sensor_id")) {
-			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
-		} else {
-			$sensors = \Model_Sensor::find("all");
-		}
-		foreach($sensors as $sensor) {
-			$this->result['data'][] = array(
-				'sensor_id' => $sensor->id,
-				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
-				'fire' => $sensor->checkFire(),									//火事アラート
-				'temperature' => $sensor->checkTemperature(),					//室温異常通知
-				'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
-				'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
-				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
-				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
-				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-				'wake_up' => $sensor->checkWakeUp(),							//起床時間
-				'sleep' => $sensor->checkSleep(),								//就寝時間
-
-//低体温症アラート（要確認）
-//通信復帰通知
-//平均起床時間遅延
-                       );
-               }
-               return $this->result(); 
-       }
-
-}
+					$data_daily =  \Mode
