@@ -75,7 +75,7 @@ class Model_Alert extends Orm\Model{
 					$query = $query->offset($params['limit'] * ($params['page'] - 1));
 				}
 			}
-	 		$_alerts = $query->get();
+	 		$_alerts = $query->order_by('id', 'desc')->get();
 			if($_alerts) {
 				foreach($_alerts as $_alert) {
 					$alerts[] = $_alert->to_array();
