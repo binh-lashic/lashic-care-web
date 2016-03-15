@@ -188,12 +188,6 @@ class Controller_Api_Data extends Controller_Api
 				} else {
 					$value = null;
 				}
-
-				if($type === "temperature") {
-					if(!empty($rows[$current_time])) {
-						$value = $rows[$current_time]["discomfort"];
-					}
-				}
 				
 				$data[] = array(
 					'time' => $current_time,
