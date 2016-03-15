@@ -96,10 +96,10 @@ if(isset($client)) {
 						<input type="checkbox" id="graph_illuminance" class="graph_checkbox">
 						<label for="graph_illuminance" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
 						<br>
-						<input type="checkbox" id="i6">
-						<label for="i6" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
-						<input type="checkbox" id="i7">
-						<label for="i7" class="checkbox">就寝時間 <img src="/images/graph/graph_select_07.png" width="15" height="15" alt=""/></label></td>
+						<input type="checkbox" id="graph_wake_up_time">
+						<label for="graph_wake_up_time" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
+						<input type="checkbox" id="graph_sleep_time">
+						<label for="graph_sleep_time" class="checkbox">就寝時間 <img src="/images/graph/graph_select_07.png" width="15" height="15" alt=""/></label></td>
 				</tr>
 			</table>
 			<div class="graph24_select_arrow"><img src="/images/graph/graph_select_arrow.png" width="21" height="16" alt=""/></div>

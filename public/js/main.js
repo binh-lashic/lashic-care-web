@@ -39,20 +39,33 @@ $(function(){
 	});
 
 	function drawGraph() {
-		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
-			console.log(result.data);
-		});
+
 		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
 			var values = [];
 			var graphs = [];
-			
+			if($("#graph_wake_up_time").prop('checked') || $("#graph_sleep_time").prop('checked')) {
+				api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+					/*
+					if($("#graph_wake_up_time").prop('checked')) {
+						graphs.push({
+						        "valueAxis": "wake_up_time",
+						        "bullet": "round",
+						        "bulletBorderAlpha": 1,
+						        "bulletSize": 8,
+						        "bulletColor": "#FFFFFF",
+						        "title": "湿度",
+						        "valueField": "humidity",
+								"fillAlphas": 0
+							});							
+					}*/
+				});
+			}		
 			if($("#graph_temperature").prop('checked')) {
 				values.push({
 				        "id":"temperature",
-				        "axisColor": "#FF9900",
-				        "axisThickness": 2,
+				        "color": "#FF9900",
 				        "gridAlpha": 0,
-				        "axisAlpha": 1,
+				        "axisAlpha": 0,
 				        "position": "left"
 				    });
 				graphs.push({
