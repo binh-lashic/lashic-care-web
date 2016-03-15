@@ -192,7 +192,8 @@ class Controller_Api_Data extends Controller_Api
 				$data[] = array(
 					'time' => $current_time,
 					'label' => date("H:i", $time),
-					'value' => $value,
+//					'value' => $value,
+					'value' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
 					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
 					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
 					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
