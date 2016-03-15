@@ -190,7 +190,9 @@ class Controller_Api_Data extends Controller_Api
 				}
 
 				if($type === "temperature") {
-					$value = $rows[$current_time]["discomfort"];
+					if(!empty($rows[$current_time])) {
+						$value = $rows[$current_time]["discomfort"];
+					}
 				}
 				
 				$data[] = array(
