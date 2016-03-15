@@ -125,18 +125,7 @@ class Controller_Api_Data extends Controller_Api
 			'humidity' => true,						//湿度
 			'illuminance' => true,					//照度
 			'active' => true,						//運動
-			'temperature_average' => true,			//温度平均
-			'humidity_average' => true,				//湿度平均
-			'illuminance_average' => true,  		//照度平均
-			'active_average' => true,				//運動平均
-			'temperature_week_average' => true,		//温度曜日平均
-			'humidity_week_average' => true,		//湿度曜日平均
-			'illuminance_week_average' => true,  	//照度曜日平均
-			'lighting_week_average' => true,		//点灯曜日平均
-			'active_week_average' => true,			//運動曜日平均
-			'sleep_time' => true,					//起寝時間
-			'sleep_time_average' => true,			//起寝平均
-			'sleep_time_week_average' => true,		//起寝曜日平均
+			'discomfort' => true,					//不快指数
 		);
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
