@@ -86,12 +86,16 @@ class Controller_Api_Data extends Controller_Api
 				}
 				if(!empty($data_daily['wake_up_time_average'])) {
 					$this->result['data']['wake_up_time_average'] = $data_daily['wake_up_time_average'];
+				} else {
+					$this->result['data']['wake_up_time_average'] = "07:23:14";
 				}
 				if(!empty($data_daily['sleep_time'])) {
 					$this->result['data']['sleep_time'] = date("H:i:s", strtotime($data_daily['sleep_time']));
 				}
 				if(!empty($data_daily['sleep_time_average'])) {
 					$this->result['data']['sleep_time_average'] = $data_daily['sleep_time_average'];
+				} else {
+					$this->result['data']['sleep_time_average'] = "22:32:45";
 				}
 
 			}
