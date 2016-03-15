@@ -114,10 +114,26 @@ if(isset($alerts)) {
 						<tr>
 							<th><input type="checkbox" id="check20"><label for="check20" class="checkbox"></label></th>
 							<td><?php echo date("m/d", strtotime($alert['date'])); ?>（<?php echo Util::format_week(date("w", strtotime($alert['date']))); ?>）</td>
-							<td><span class="report_category_kinkyu">【緊急】</span></td>
+							<td>
+<?php
+if($alert['category'] === "night") {
+?>
+								<span class="report_category_shushin">夜間</span>
+<?php
+} else if($alert['category'] === "humidity") {
+?>
+								<span class="report_category_mikoudou">湿度</span>
+<?php
+} else if($alert['category'] === "wake_up") {
+?>
+								<span class="report_category_kishou">起床</span>
+<?php
+}
+?>
+							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
-							<td>12/28 （木） 08:30</td>
-							<td>服部</td>
+							<td><?php echo date("m/d", strtotime($alert['corresponding_date'])); ?> （木） <?php echo date("H:i", strtotime($alert['corresponding_time'])); ?></td>
+							<td>山田</td>
 							<td><?php if($alert['confirm_status'] == 1) { echo "済"; } else { echo "未"; } ?></td>
 							<td><span class="report_state_taiouhuyou"><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></span></td>
 							<td><!--<a href="#" class="btn_text">ゴミ箱</a>&nbsp;&nbsp;-->
