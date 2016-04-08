@@ -10,14 +10,20 @@
     Base
 \*!------------------------------------*/
 .drawer-nav {
-  position: fixed;
   z-index: 101;
   top: 0;
   overflow: hidden;
   width: 100%;
   height: 100%;
   color: #222;
-  background-color: #fff;
+}
+.drawer-nav-mainMenu{
+	position:absolute;
+	right:10px;
+	}
+.drawer-nav-userMenu{
+	position:absolute;
+	right:10px;
 }
 
 .drawer-brand {
@@ -41,9 +47,8 @@
 }
 
 .drawer-menu-item:hover {
-  text-decoration: underline;
-  color: #555;
-  background-color: transparent;
+  text-decoration: none;
+  opacity:0.7;
 }
 
 /*! overlay */
@@ -78,6 +83,84 @@
 
 .drawer--right.drawer-open .drawer-hamburger {
   right: 160px;
+}
+
+/*!------------------------------------*\
+    Hamburger
+\*!------------------------------------*/
+.drawer-hamburger {
+  position: fixed;
+  z-index: 104;
+  top: 0;
+  display: block;
+  box-sizing: content-box;
+  width: 2rem;
+  padding: 0;
+  padding-top: 18px;
+  padding-right: .75rem;
+  padding-bottom: 30px;
+  padding-left: .75rem;
+  -webkit-transition: all .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  transition: all .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+.drawer-hamburger:hover {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.drawer-hamburger-icon {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+}
+
+.drawer-hamburger-icon,
+.drawer-hamburger-icon:before,
+.drawer-hamburger-icon:after {
+  width: 100%;
+  height: 2px;
+  -webkit-transition: all .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  transition: all .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  background-color: #222;
+}
+
+.drawer-hamburger-icon:before,
+.drawer-hamburger-icon:after {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  content: ' ';
+}
+
+.drawer-hamburger-icon:after {
+  top: 10px;
+}
+
+.drawer-open .drawer-hamburger-icon {
+  background-color: transparent;
+}
+
+.drawer-open .drawer-hamburger-icon:before,
+.drawer-open .drawer-hamburger-icon:after {
+  top: 0;
+}
+
+.drawer-open .drawer-hamburger-icon:before {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.drawer-open .drawer-hamburger-icon:after {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 /*!------------------------------------*\
@@ -179,6 +262,7 @@
 }
 
 .drawer-navbar {
+	height:60px;
   z-index: 102;
   top: 0;
   width: 100%;
@@ -237,14 +321,20 @@
   }
 
   .drawer-navbar .drawer-menu li ul li{
-	border-bottom:1px solid #cbe7f4;
+	border-bottom:1px solid #DDD;
+	float:none;
   }
 
-  .drawer-navbar .drawer-menu-item {
+  .drawer-navbar .drawer-menu li ul li:last-child{
+	  border-bottom:none;
+  }
+
+a.drawer-menu-item {
     line-height: 36px;
     padding-top: 0;
     padding-bottom: 0;
 	padding-left:20px;
+    color:#4b4948;
   }
 
   .drawer-navbar .drawer-hamburger {
@@ -252,8 +342,6 @@
   }
 
   .drawer-navbar .drawer-nav {
-    position: relative;
-    left: 0;
     overflow: visible;
     width: auto;
     height: 60px;
@@ -269,22 +357,21 @@
   /*! dropdown */
   .drawer-navbar .drawer-dropdown-menu {
     position: absolute;
-    width: 162px;
+    width: 230px;
 	box-shadow:0 0 5px #ccc;
-	background-color:#dcf1fb;
-	right:10px;
+	background-color:#FFF;
+	margin-left:-110px;
+	overflow:hidden;
   }
 
-  .drawer-navbar .drawer-dropdown-menu-item {
-    padding-left: 40px;
-  }
+ 
 /*!------------------------------------*\
     Dropdown
 \*!------------------------------------*/
 .drawer-dropdown-menu {
   display: none;
   box-sizing: border-box;
-  width: 100%;
+  width: 200px;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -294,22 +381,22 @@
   width: 100%;
   list-style: none;
 }
+.drawer-dropdown-menu li:hover{ opacity:0.7;}
 
-.drawer-dropdown-menu-item {
+a.drawer-dropdown-menu-item {
   line-height: 3.75rem;
   display: block;
   padding: 0;
-  padding-right: .75rem;
-  padding-left: 1.5rem;
   text-decoration: none;
-  color: #222;
+  color: #4b4948;
 }
 
 .drawer-dropdown-menu-item:hover {
-  text-decoration: underline;
-  color: #555;
   background-color: transparent;
+  text-decoration:none;
 }
+.drawer-dropdown{ padding-left:15px; margin-right:20px;}
+.drawer-dropdown:last-child{ margin-right:0;}
 
 /*! open */
 .drawer-dropdown.open > .drawer-dropdown-menu {

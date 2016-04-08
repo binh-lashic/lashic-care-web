@@ -17,9 +17,9 @@ if(!empty($client)) {
 					<dd><?php echo $client['blood_type']; ?>型</dd>
 					<dt><img src="/images/common/user_icon_address.png" width="19" alt="住所"/></dt>
 					<dd><?php echo $client['address']; ?></dd>
-					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="生年月日"/></dt>
+					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="電話番号1"/></dt>
 					<dd><?php echo $client['phone']; ?></dd>
-					<dt><img src="/images/common/user_icon_mobile.png" width="9" alt="生年月日"/></dt>
+					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="電話番号2"/></dt>
 					<dd><?php echo $client['cellular']; ?></dd>
 				</dl>
 				

@@ -34,36 +34,35 @@ if(isset($user)) {
 			</ul>
 		</nav>
 	</div>
-	
-	<!-- blue area -->
-	<div class="hdr_bg">
-		<div class="content clearfix">
-			<div class="user_select clearfix">
-				<div class="hdr_select_text">ユーザー選択</div>
-				<select>
+</header>
+<!-- blue area -->
+<div class="hdr_bg">
+	<div class="content clearfix">
+		<div class="user_select clearfix">
+			<div class="hdr_select_text">ユーザー選択</div>
+			<select>
 <?php
 if(!empty($clients)) {
-	foreach($clients as $client) {
+foreach($clients as $client) {
 ?>
-					<option value=""><?php echo $client['name']; ?>さん</option>
+				<option value=""><?php echo $client['name']; ?>さん</option>
 <?php
-	}
+}
 }
 ?>
-				</select>
-			</div>
-			<div id="content_nav">
-				<nav>
-					<ul>
-						<li class="nav_on"><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
-						<li><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
-					</ul>
-				</nav>
-			</div>
+			</select>
+		</div>
+		<div id="content_nav">
+			<nav>
+				<ul>
+					<li class="nav_on"><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
+					<li><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
+				</ul>
+			</nav>
 		</div>
 	</div>
-	<!-- /blue area end --> 
-</header>
+</div>
+<!-- /blue area end --> 
 <!-- content -->
 <main role="main" class="clearBoth">
 	<div class="clearfix content"> 
