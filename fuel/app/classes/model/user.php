@@ -307,7 +307,11 @@ class Model_User extends Orm\Model{
 				'where' => array(
 					'user_id' => $user_id,
 				),
-				'related' => array('sensor')
+				'related' => array(
+					'sensor' => array(
+						'order_by' => array('name' => 'asc'),
+					)
+				),
 			));
 			foreach($rows as $row) {
 				$sensors[] = $row->sensor;

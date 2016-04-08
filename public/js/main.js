@@ -72,14 +72,8 @@ $(function(){
 				        "valueAxis": "temperature",
 				        "lineColor": "#FF9900",
 				        "lineThickness": 2,
-				        "bullet": "round",
-				        "bulletBorderAlpha": 1,
-				        "bulletSize": 8,
-				        "bulletColor": "#FFFFFF",
 				        "title": "室温",
 				        "valueField": "temperature",
-						"fillAlphas": 0,
-						"useLineColorForBulletBorder": true
 					});			
 			}
 			if($("#graph_humidity").prop('checked')) {
@@ -96,14 +90,8 @@ $(function(){
 				        "valueAxis": "humidity",
 				        "lineColor": "#88D3F5",
 				        "lineThickness": 2,
-				        "bullet": "round",
-				        "bulletBorderAlpha": 1,
-				        "bulletSize": 8,
-				        "bulletColor": "#FFFFFF",
 				        "title": "湿度",
 				        "valueField": "humidity",
-						"fillAlphas": 0,
-						"useLineColorForBulletBorder": true
 					});			
 			}
 			if($("#graph_illuminance").prop('checked')) {
@@ -120,14 +108,8 @@ $(function(){
 				        "valueAxis": "illuminance",
 				        "lineColor": "#DED31C",
 				        "lineThickness": 2,
-				        "bullet": "round",
-				        "bulletBorderAlpha": 1,
-				        "bulletSize": 8,
-				        "bulletColor": "#FFFFFF",
 				        "title": "照度",
 				        "valueField": "illuminance",
-						"fillAlphas": 0,
-						"useLineColorForBulletBorder": true
 					});			
 			}
 			if($("#graph_active").prop('checked')) {

@@ -1,6 +1,17 @@
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
-		<div class="drawer-navbar-header"> <a class="logo" href="/"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
+		<div class="drawer-navbar-header">
+<?php
+if(isset($user)) {
+?>
+			<a class="logo" href="/user"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
+<?php
+} else {
+?>
+			<a class="logo" href="/"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
+<?php
+}
+?>
 			<button type="button" class="drawer-toggle drawer-hamburger"> <span class="sr-only">toggle navigation</span> <span class="drawer-hamburger-icon"></span> </button>
 		</div>
 		<nav class="drawer-nav" role="navigation">

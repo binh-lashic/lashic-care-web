@@ -13,6 +13,20 @@ class Model_Data extends Orm\Model{
         'active',
 	);
 
+    public static function createTable(){
+        $sql = "CREATE TABLE data (
+  id int NOT NULL IDENTITY (1, 1),
+  corporate_id NVARCHAR(255),
+  sensor_id NVARCHAR(255),
+  date DATETIME,
+  temperature FLOAT,
+  humidity FLOAT,
+  illuminance INT,
+  active FLOAT
+) ON [PRIMARY];";
+        return DB::query($sql)->execute("data");
+    }
+
     public static function getLatestData($sensor_name) {
         $data = \Model_Data::query()->where('sensor_id', $sensor_name)->order_by('date', 'desc')->connection("data")->get_one();
         return \Model_Data::format($data);
