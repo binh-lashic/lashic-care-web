@@ -291,12 +291,12 @@ class Model_Sensor extends Orm\Model{
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->disconnection_duration * 60)
+			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60 * -1)
 		));
 		$result = $query->execute('data');
 		echo \DB::last_query('data');
 		exit;
-		
+
 		if($result[0]['count'] == 0) {
 			$params = array(
 				'type' => 'disconnection',
