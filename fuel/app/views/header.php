@@ -24,8 +24,13 @@ if(isset($user)) {
 ?>
 				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> <?php echo $user['name']; ?>さん <span class="drawer-caret"></span> </a>
 					<ul class="drawer-dropdown-menu">
-						<li class="nav_userList"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">齋藤恵子さん</a></li>
-						<li class="nav_userList"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">山田花子さん</a></li>
+<?php
+foreach($clients as $_client) {
+?>
+						<li class="nav_userList"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
+<?php
+}
+?>
 						<li class="nav_user-admin"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
 						<li class="nav_userListRegist"><a href="#attention_01" rel="shadowbox[cont]" class="btn_darkBlue">ユーザーを追加する</a></li>
 					</ul>
