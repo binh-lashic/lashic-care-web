@@ -169,11 +169,14 @@ abstract class Database_Query_Builder extends \Database_Query
 				$value = $this->_parameters[$value];
 			}
 
+/*
 			if(is_string($value)) {
 				$set[$column] = $column.' = N'.$db->quote($value);
 			} else {
-				$set[$column] = $column.' = '.$db->quote($value);
+				
 			}
+			*/
+			$set[$column] = $column.' = '.$db->quote($value);
 		}
 
 		return implode(', ', $set);
