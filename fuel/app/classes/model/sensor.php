@@ -38,6 +38,21 @@ class Model_Sensor extends Orm\Model{
 		'sleep_ignore_duration'
 	);
 
+	// Model_Post の中身は、多くのユーザーに属しています。
+	// = ユーザーごとに複数のポストとポストごとに複数のユーザ（著者）があります。
+	protected static $_many_many = array(
+	    'users' => array(
+	        'key_from' => 'id',
+	        'key_through_from' => 'sensor_id', // テーブル間のカラム1は、posts.idと一致する必要があります
+	        'table_through' => 'user_sensors', // アルファベット順にプレフィックスなしの複数のmodel双方に
+	        'key_through_to' => 'user_id', // テーブル間のカラム2は、users.idと一致する必要があります
+	        'model_to' => 'Model_User',
+	        'key_to' => 'id',
+	        'cascade_save' => true,
+	        'cascade_delete' => false,
+	    )
+	);
+
 	public static function createTable(){
 		try {
 		    DB::query("DROP TABLE sensors")->execute();
@@ -290,7 +305,7 @@ class Model_Sensor extends Orm\Model{
     	if(empty($this->disconnection_duration)) {
     		$this->disconnection_duration = Config::get("sensor_default_setting.disconnection_duration");
     	}
-    	
+
      	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
@@ -298,7 +313,6 @@ class Model_Sensor extends Orm\Model{
 			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60)
 		));
 		$result = $query->execute('data');
-
 		if($result[0]['count'] == 0) {
 			$params = array(
 				'type' => 'disconnection',
@@ -561,14 +575,36 @@ class Model_Sensor extends Orm\Model{
     	$params['category'] = "emergency";
 
     	//既にアラートが出ているかチェック
-		if(\Model_Alert::existsAlert($params)) {
+		if(\Model_Alert::existsAlert($params)) {		
 			//スヌーズ処理が5回以上なら再度通知
 			return false;
 		} else {
-	    	$alert = \Model_Alert::forge();
-	    	$alert->set($params);
+			$alert = \Model_Alert::forge();
+    		$alert->set($params);
+    		foreach($this->users as $user) {
+	    		$this->send_alert(array(
+	    			'email' => $user['email'],
+	    			'title' => $params['title'],
+	    			'description' => $params['description'],
+	    		));
+    		}
 	    	return $alert->save();
 		}
+    }
 
+    public function send_alert($params) {
+		$sendgrid = new SendGrid(Config::get("sendgrid"));
+		$email = new SendGrid\Email();
+		$email
+		    ->addTo($params['email'])
+		    ->setFrom(Config::get("email.from"))
+		    ->setSubject($params['title'])
+		    ->setText($params['description']);
+		try {
+		    $sendgrid->send($email);
+		    return true;
+		} catch(\SendGrid\Exception $e) {
+		    return false;
+		}
     }
 }

@@ -348,4 +348,8 @@ return array(
 		'wake_up_delay_allowance_duration' => 120,
 	),
 	'report_list_count' => 10,
+	'sendgrid' => 'SG.GSIAUMMsSnS_5gFBES79mA.9XXsIFFEuqiSMFzLa9FUDDM_MqF_N7O6revl5dzF3U4',
+	'email' => array(
+		'from' => 'info@careeye.jp',
+	),
 );

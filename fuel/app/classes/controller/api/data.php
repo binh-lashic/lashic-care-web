@@ -328,6 +328,7 @@ class Controller_Api_Data extends Controller_Api
 			$sensors = \Model_Sensor::find("all");
 		}
 		foreach($sensors as $sensor) {
+			$sensor->users;
 			$this->result['data'][] = array(
 				'sensor_id' => $sensor->id,
 				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
