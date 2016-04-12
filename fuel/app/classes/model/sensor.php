@@ -374,23 +374,25 @@ class Model_Sensor extends Orm\Model{
 
     //火事のチェック
     public function checkFire() {
-    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'temperature' => $this->fire_temperature_upper_limit,
-			'date' => date("Y-m-d H:i:s", -60)
-		));
-		$result = $query->execute('data');
-		if($result) {
-			$params = array(
-				'type' => 'fire',
-				'title' => '火事',
-				'description' => '火事',
-			);
-			return $this->alert($params);
-		}
-		return true;
+    	if($this->fire_temperature_upper_limit > 30) {
+	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'temperature' => $this->fire_temperature_upper_limit,
+				'date' => date("Y-m-d H:i:s", -60)
+			));
+			$result = $query->execute('data');
+			if($result) {
+				$params = array(
+					'type' => 'fire',
+					'title' => '火事',
+					'description' => '火事',
+				);
+				return $this->alert($params);
+			}
+    	}
+		return false;
     }
 
 	//起床時間のチェック
