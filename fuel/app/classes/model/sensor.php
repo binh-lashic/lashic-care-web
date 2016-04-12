@@ -287,11 +287,16 @@ class Model_Sensor extends Orm\Model{
 
     //通信断のチェック
     public function checkDisconnection() {
-    	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+    	if(empty($this->disconnection_duration)) {
+    		$this->disconnection_duration = Config::get("sensor_default_setting.disconnection_duration");
+    	}
+    	echo $this->disconnection_duration;
+
+     	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60 * -1)
+			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60)
 		));
 		$result = $query->execute('data');
 		echo \DB::last_query('data');
@@ -305,7 +310,7 @@ class Model_Sensor extends Orm\Model{
 			);
 			return $this->alert($params);
 		}
-		return true;
+		return false;
     }
 
     //室内照度異常（日中）
