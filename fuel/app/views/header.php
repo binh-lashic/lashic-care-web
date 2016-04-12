@@ -27,7 +27,7 @@ if(isset($user)) {
 <?php
 foreach($clients as $_client) {
 ?>
-						<li class="nav_userList"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
+						<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
 <?php
 }
 ?>

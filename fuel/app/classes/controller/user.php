@@ -16,9 +16,6 @@ class Controller_User extends Controller_Page
 			$clients = \Model_User::getClients($user_id);
 			foreach($clients as $client) {
 				$client['sensors'] = \Model_User::getSensors($client['id']);
-				$now = date("Ymd");
-				$birthday = date("Ymd", strtotime($client['birthday']));
-				$client['age'] = (int)(floor((int)$now - (int)$birthday) / 10000);
 				$this->clients[] = $client;
 			}   	
 	    }
@@ -28,12 +25,15 @@ class Controller_User extends Controller_Page
 	    	'clients' => $this->clients,
 	    );
 
-	    $client = Session::get("client");
-	    if(empty($client) && isset($this->clients[0])) {
+	    $client_id = Session::get("client_id");
+	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
-	    	$this->data['client'] = $client;
-		    $this->data['admins'] = \Model_User::getAdmins($client['id']);
+	    } else {
+	    	$client = \Model_User::getUser($client_id);
 	    }
+
+    	$this->data['client'] = $client;
+	    $this->data['admins'] = \Model_User::getAdmins($client['id']);
 
 	    if(Input::param("date")) {
 	    	$this->data['date'] = Input::param("date");
@@ -161,8 +161,15 @@ class Controller_User extends Controller_Page
         $this->template->title = '設定ページ';
         $this->template->content = View::forge('user/setting');
 	}
+
 	public function action_404()
 	{
 		return Response::forge(Presenter::forge('welcome/404'), 404);
+	}
+
+	public function action_set_client() {
+		$client_id = Input::param("id");
+		Session::set("client_id", $client_id);
+		Response::redirect('/user');
 	}
 }

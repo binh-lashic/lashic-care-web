@@ -149,6 +149,13 @@ class Model_User extends Orm\Model{
 			$ret[$key] = $user[$key];
 		}
 		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		if(isset($ret['birthday'])) {
+			$now = date("Ymd");
+			$birthday = date("Ymd", strtotime($ret['birthday']));
+			$ret['age'] = (int)(floor((int)$now - (int)$birthday) / 10000);
+		} else {
+			$ret['age'] = null;
+		}
 		return $ret;
 	}
 
