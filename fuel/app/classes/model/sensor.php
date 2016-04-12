@@ -290,8 +290,7 @@ class Model_Sensor extends Orm\Model{
     	if(empty($this->disconnection_duration)) {
     		$this->disconnection_duration = Config::get("sensor_default_setting.disconnection_duration");
     	}
-    	echo $this->disconnection_duration;
-
+    	
      	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
@@ -299,8 +298,6 @@ class Model_Sensor extends Orm\Model{
 			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60)
 		));
 		$result = $query->execute('data');
-		echo \DB::last_query('data');
-		exit;
 
 		if($result[0]['count'] == 0) {
 			$params = array(
