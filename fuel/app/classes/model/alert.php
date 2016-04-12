@@ -147,7 +147,7 @@ class Model_Alert extends Orm\Model{
 
 	//スヌーズ範囲にデータがある場合はアラートしない
     public static function existsAlert($params) {
-    	$query = array(array('date', ">=", 60 * 60 * 5));
+    	$query = array(array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 5)));
     	if(!empty($params['sensor_id'])) {
     		$query['sensor_id'] = $params['sensor_id'];
     	}
