@@ -11,4 +11,11 @@ class Controller_Admin_Alert extends Controller_Admin
 		echo "作成しました";
 		exit;
 	}
+
+	public function action_list() {
+        $data['alerts'] = \Model_Alert::find("all");
+        $this->template->title = '会員ページ';
+        $this->template->content = View::forge('admin/alert/list', $data);        
+    }
+
 }

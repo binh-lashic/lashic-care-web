@@ -22,6 +22,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/admin/user">担当者</a></li>
+        <li><a href="/admin/alert/list">アラート</a></li>
         <li><a href="/admin/sensor">機器</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -22,7 +22,6 @@ if(!empty($client)) {
 					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="電話番号2"/></dt>
 					<dd><?php echo $client['cellular']; ?></dd>
 				</dl>
-				
 <?php
 if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
 ?>
@@ -50,7 +49,6 @@ if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
 <?php
 }
 ?>
-				
 				<!-- 連絡共有 -->
 				<div class="aside_share">
 					<h3><img src="/images/common/user_icon_share.png" width="32" alt=""/> 連絡共有</h3>
