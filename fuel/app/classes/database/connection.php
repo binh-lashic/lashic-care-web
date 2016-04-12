@@ -12,8 +12,6 @@
  * @license    http://kohanaphp.com/license
  */
 
-namespace Fuel\Core;
-
 abstract class Database_Connection
 {
 	/**
