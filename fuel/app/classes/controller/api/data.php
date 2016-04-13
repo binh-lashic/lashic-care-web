@@ -254,7 +254,6 @@ class Controller_Api_Data extends Controller_Api
 
 			$rows = array();
 			foreach($results as $result) {
-				$result = Model_Data::format($result);
 				$key = (int)date("d", strtotime($result['date']));
 				$rows[$key] = $result;
 			}
