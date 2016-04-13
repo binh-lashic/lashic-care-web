@@ -187,13 +187,19 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'temperature',
 					'title' => '室温異常',
 					'description' => '室温異常',
+					'logs' => array(
+						'temperature_upper_limit' => $this->temperature_upper_limit
+					),
 				);
 				return $this->alert($params);			
-			} else if($temperature_upper_limit_count == $count) {
+			} else if($temperature_lower_limit_count == $count) {
 				$params = array(
 					'type' => 'temperature',
 					'title' => '室温異常',
 					'description' => '室温異常',
+					'logs' => array(
+						'temperature_lower_limit' => $this->temperature_lower_limit
+					),
 				);
 				return $this->alert($params);	
 			}			
@@ -228,6 +234,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'humidity',
 					'title' => '湿度異常',
 					'description' => '湿度異常',
+					'logs' => array(
+						'humidity_upper_limit' => $this->humidity_upper_limit
+					),
 				);
 				return $this->alert($params);			
 			} else if($humidity_upper_limit_count == $count) {
@@ -235,6 +244,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'humidity',
 					'title' => '湿度異常',
 					'description' => '湿度異常',
+					'logs' => array(
+						'humidity_lower_limit' => $this->humidity_lower_limit,
+					),
 				);
 				return $this->alert($params);	
 			}			
@@ -265,6 +277,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'heatstroke',
 					'title' => '熱中症',
 					'description' => '熱中症',
+					'logs' => array(
+						'heatstroke_wbgt_upper_limit' => $this->heatstroke_wbgt_upper_limit,
+					),
 				);
 				return $this->alert($params);			
 			}	
@@ -293,6 +308,10 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'mold_mites',
 					'title' => 'カビ・ダニ',
 					'description' => 'カビ・ダニ',
+					'logs' => array(
+						'mold_mites_humidity_upper_limit' => $this->mold_mites_humidity_upper_limit,
+						'mold_mites_temperature_upper_limit' => $this->mold_mites_temperature_upper_limit,
+					),
 				);
 				return $this->alert($params);			
 			}	
@@ -357,6 +376,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'illuminance_daytime',
 					'title' => $title,
 					'description' => $description,
+					'logs' => array(
+						'illuminance_daytime_lower_limit' => $this->illuminance_daytime_lower_limit,
+					),
 				);
 				return $this->alert($params);			
 			}	
@@ -390,6 +412,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'illuminance_night',
 					'title' => '室内照度異常（深夜）',
 					'description' => '室内照度異常（深夜）',
+					'logs' => array(
+						'illuminance_night_lower_limit' => $this->illuminance_night_lower_limit,
+					),
 				);
 				return $this->alert($params);			
 			}	
@@ -414,6 +439,9 @@ class Model_Sensor extends Orm\Model{
 					'type' => 'fire',
 					'title' => '火事',
 					'description' => '火事',
+					'logs' => array(
+						'fire_temperature_upper_limit' => $this->fire_temperature_upper_limit,
+					),
 				);
 				return $this->alert($params);
 			}
@@ -607,7 +635,7 @@ class Model_Sensor extends Orm\Model{
 		$params['logs']['sensor_name'] = $this->name;
 		if(isset($params['logs'])) {
 			foreach($params['logs'] as $key => $value) {
-				$description .= "\n".$key."=".$value;
+				$description .= "\r\n".$key."=".$value;
 			}
 		}
 		$email = new SendGrid\Email();
