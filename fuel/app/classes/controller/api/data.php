@@ -252,7 +252,7 @@ class Controller_Api_Data extends Controller_Api
 			if(empty($date)) {
 				$start_date = date("Y-m-01");
 			} else {
-				$start_date = date("Y-m", strtotime($date));
+				$start_date = date("Y-m-01", strtotime($date));
 			}
 			$data = array();
 
