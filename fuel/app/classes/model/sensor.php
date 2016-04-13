@@ -266,7 +266,7 @@ class Model_Sensor extends Orm\Model{
 
 	//熱中症チェック
 	public function checkHeatstroke() {
-		if(isset($this->heatstroke_duration) && isset($this->heatstroke_wbgt_upper_limit)) {
+		if(!empty($this->heatstroke_duration) && !empty($this->heatstroke_wbgt_upper_limit)) {
 	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
