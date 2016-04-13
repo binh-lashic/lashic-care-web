@@ -382,6 +382,8 @@ class Model_Sensor extends Orm\Model{
 						if($this->illuminance_daytime_lower_limit < $row['illuminance']) {
 							$count--;
 						}					
+					} else {
+						$count++;
 					}
 
 				}
@@ -393,6 +395,9 @@ class Model_Sensor extends Orm\Model{
 						'title' => $title,
 						'description' => $description,
 						'logs' => array(
+							'illuminance_daytime_start_time' => $this->illuminance_daytime_start_time,
+							'illuminance_daytime_end_time' => $this->illuminance_daytime_end_time,
+							'hour' => $hour,
 							'illuminance_daytime_lower_limit' => $this->illuminance_daytime_lower_limit,
 						),
 					);
@@ -422,6 +427,8 @@ class Model_Sensor extends Orm\Model{
 						if($this->illuminance_night_lower_limit < $row['illuminance']) {
 							$count--;
 						}					
+					} else {
+						$count++;
 					}
 
 				}
@@ -431,6 +438,9 @@ class Model_Sensor extends Orm\Model{
 						'title' => '室内照度異常（深夜）',
 						'description' => '室内照度異常（深夜）',
 						'logs' => array(
+							'illuminance_night_start_time' => $this->illuminance_night_start_time,
+							'illuminance_night_end_time' => $this->illuminance_night_end_time,
+							'hour' => $hour,
 							'illuminance_night_lower_limit' => $this->illuminance_night_lower_limit,
 						),
 					);
