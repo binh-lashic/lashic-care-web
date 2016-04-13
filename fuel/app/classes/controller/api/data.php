@@ -261,10 +261,6 @@ class Controller_Api_Data extends Controller_Api
 			$end = date("t", strtotime($start_date));
 			$month = date("Y-m", strtotime($start_date));
 			for($current_time = 1; $current_time <= $end; $current_time++) {
-				if(!empty($rows[$current_time])) {
-					print_r($rows[$current_time]);
-					exit;
-				}
 				$data[] = array(
 					'date' => $month."-".$current_time,
 					'label' => $current_time,
@@ -272,6 +268,8 @@ class Controller_Api_Data extends Controller_Api
 					'sleep_time' => !empty($rows[$current_time]) ? $rows[$current_time]['sleep_time'] : null,
 				);
 			}
+			print_r($data);
+			exit;
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
