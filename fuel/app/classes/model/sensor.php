@@ -162,160 +162,169 @@ class Model_Sensor extends Orm\Model{
 
     //室温異常通知
     public function checkTemperature() {
-    	$sql = 'SELECT temperature FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->temperature_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = count($result);
-		$temperature_upper_limit_count = 0;
-		$temperature_lower_limit_count = 0;
+    	if(isset($this->temperature_duration) && isset($this->temperature_upper_limit) && isset($this->temperature_lower_limit)) {
+	    	$sql = 'SELECT temperature FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->temperature_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = count($result);
+			$temperature_upper_limit_count = 0;
+			$temperature_lower_limit_count = 0;
 
-		if($count) {
-			foreach($result as $row) {
-				if($this->temperature_upper_limit < $row['temperature']) {
-					$temperature_upper_limit_count++;
-				} else if($this->temperature_lower_limit > $row['temperature']) {
-					$temperature_lower_limit_count++;
+			if($count) {
+				foreach($result as $row) {
+					if($this->temperature_upper_limit < $row['temperature']) {
+						$temperature_upper_limit_count++;
+					} else if($this->temperature_lower_limit > $row['temperature']) {
+						$temperature_lower_limit_count++;
+					}
 				}
-			}
 
-			if($temperature_upper_limit_count == $count) {
-				$params = array(
-					'type' => 'temperature',
-					'title' => '室温異常',
-					'description' => '室温異常',
-					'logs' => array(
-						'temperature_upper_limit' => $this->temperature_upper_limit
-					),
-				);
-				return $this->alert($params);			
-			} else if($temperature_lower_limit_count == $count) {
-				$params = array(
-					'type' => 'temperature',
-					'title' => '室温異常',
-					'description' => '室温異常',
-					'logs' => array(
-						'temperature_lower_limit' => $this->temperature_lower_limit
-					),
-				);
-				return $this->alert($params);	
-			}			
-		}
+				if($temperature_upper_limit_count == $count) {
+					$params = array(
+						'type' => 'temperature',
+						'title' => '室温異常',
+						'description' => '室温異常',
+						'logs' => array(
+							'temperature_upper_limit' => $this->temperature_upper_limit
+						),
+					);
+					return $this->alert($params);			
+				} else if($temperature_lower_limit_count == $count) {
+					$params = array(
+						'type' => 'temperature',
+						'title' => '室温異常',
+						'description' => '室温異常',
+						'logs' => array(
+							'temperature_lower_limit' => $this->temperature_lower_limit
+						),
+					);
+					return $this->alert($params);	
+				}			
+			}
+    	}
 		return false;
 	}
 
     //湿度異常通知
     public function checkHumidity() {
-    	$sql = 'SELECT humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->humidity_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = count($result);
-		$humidity_upper_limit_count = 0;
-		$humidity_lower_limit_count = 0;
+    	if(isset($this->humidity_duration) && isset($this->humidity_upper_limit) && isset($this->humidity_lower_limit )) {
+	    	$sql = 'SELECT humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->humidity_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = count($result);
+			$humidity_upper_limit_count = 0;
+			$humidity_lower_limit_count = 0;
 
-		if($count) {
-			foreach($result as $row) {
-				if($this->humidity_upper_limit < $row['humidity']) {
-					$humidity_upper_limit_count++;
-				} else if($this->humidity_lower_limit > $row['humidity']) {
-					$humidity_lower_limit_count++;
+			if($count) {
+				foreach($result as $row) {
+					if($this->humidity_upper_limit < $row['humidity']) {
+						$humidity_upper_limit_count++;
+					} else if($this->humidity_lower_limit > $row['humidity']) {
+						$humidity_lower_limit_count++;
+					}
 				}
-			}
 
-			if($humidity_upper_limit_count == $count) {
-				$params = array(
-					'type' => 'humidity',
-					'title' => '湿度異常',
-					'description' => '湿度異常',
-					'logs' => array(
-						'humidity_upper_limit' => $this->humidity_upper_limit
-					),
-				);
-				return $this->alert($params);			
-			} else if($humidity_upper_limit_count == $count) {
-				$params = array(
-					'type' => 'humidity',
-					'title' => '湿度異常',
-					'description' => '湿度異常',
-					'logs' => array(
-						'humidity_lower_limit' => $this->humidity_lower_limit,
-					),
-				);
-				return $this->alert($params);	
-			}			
-		}
+				if($humidity_upper_limit_count == $count) {
+					$params = array(
+						'type' => 'humidity',
+						'title' => '湿度異常',
+						'description' => '湿度異常',
+						'logs' => array(
+							'humidity_upper_limit' => $this->humidity_upper_limit
+						),
+					);
+					return $this->alert($params);			
+				} else if($humidity_upper_limit_count == $count) {
+					$params = array(
+						'type' => 'humidity',
+						'title' => '湿度異常',
+						'description' => '湿度異常',
+						'logs' => array(
+							'humidity_lower_limit' => $this->humidity_lower_limit,
+						),
+					);
+					return $this->alert($params);	
+				}			
+			}    		
+    	}
 		return false;
 	}
 
 	//熱中症チェック
 	public function checkHeatstroke() {
-    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->heatstroke_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = count($result);
-		if($count) {
-			foreach($result as $row) {
-				//温度×0.7＋湿度×0.3
-				$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
-				if($this->heatstroke_wbgt_upper_limit < $wbgt) {
-					$count--;
+		if(isset($this->heatstroke_duration) && isset($this->heatstroke_wbgt_upper_limit)) {
+	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->heatstroke_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = count($result);
+			if($count) {
+				foreach($result as $row) {
+					//温度×0.7＋湿度×0.3
+					$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
+					if($this->heatstroke_wbgt_upper_limit < $wbgt) {
+						$count--;
+					}
 				}
+				if($count == 0) {
+					$params = array(
+						'type' => 'heatstroke',
+						'title' => '熱中症',
+						'description' => '熱中症',
+						'logs' => array(
+							'heatstroke_wbgt_upper_limit' => $this->heatstroke_wbgt_upper_limit,
+						),
+					);
+					return $this->alert($params);			
+				}	
 			}
-			if($count == 0) {
-				$params = array(
-					'type' => 'heatstroke',
-					'title' => '熱中症',
-					'description' => '熱中症',
-					'logs' => array(
-						'heatstroke_wbgt_upper_limit' => $this->heatstroke_wbgt_upper_limit,
-					),
-				);
-				return $this->alert($params);			
-			}	
 		}
 		return false;
 	}
 
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
-    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->mold_mites_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = count($result);
-		if($count) {
-			foreach($result as $row) {
-				if($this->mold_mites_humidity_upper_limit < $row['humidity'] && $this->mold_mites_temperature_upper_limit < $row['temperature']) {
-					$count--;
+		if(isset($this->mold_mites_duration) && isset($this->mold_mites_humidity_upper_limit) && isset($this->mold_mites_temperature_upper_limit)) {
+	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->mold_mites_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = count($result);
+			if($count) {
+				foreach($result as $row) {
+					if($this->mold_mites_humidity_upper_limit < $row['humidity'] && $this->mold_mites_temperature_upper_limit < $row['temperature']) {
+						$count--;
+					}
 				}
-			}
-			if($count == 0) {
-				$params = array(
-					'type' => 'mold_mites',
-					'title' => 'カビ・ダニ',
-					'description' => 'カビ・ダニ',
-					'logs' => array(
-						'mold_mites_humidity_upper_limit' => $this->mold_mites_humidity_upper_limit,
-						'mold_mites_temperature_upper_limit' => $this->mold_mites_temperature_upper_limit,
-					),
-				);
-				return $this->alert($params);			
-			}	
+				if($count == 0) {
+					$params = array(
+						'type' => 'mold_mites',
+						'title' => 'カビ・ダニ',
+						'description' => 'カビ・ダニ',
+						'logs' => array(
+							'mold_mites_humidity_upper_limit' => $this->mold_mites_humidity_upper_limit,
+							'mold_mites_temperature_upper_limit' => $this->mold_mites_temperature_upper_limit,
+						),
+					);
+					return $this->alert($params);			
+				}	
+			}			
 		}
+
 		return false;
 	}
 
@@ -390,38 +399,41 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
-    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->illuminance_night_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = 0;
-		if(count($result)) {
-			foreach($result as $row) {
-				$hour = date("h", strtotime($row['date']));
-				if($this->illuminance_night_start_time < $hour && $this->illuminance_night_end_time > $hour) {
-					$count++;
-					if($this->illuminance_night_lower_limit < $row['illuminance']) {
-						$count--;
-					}					
-				}
+    	if($this->illuminance_night_duration && $this->illuminance_night_start_time && $this->illuminance_night_end_time && $this->illuminance_night_lower_limit) {
+	    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->illuminance_night_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = 0;
+			if(count($result)) {
+				foreach($result as $row) {
+					$hour = date("h", strtotime($row['date']));
+					if($this->illuminance_night_start_time < $hour && $this->illuminance_night_end_time > $hour) {
+						$count++;
+						if($this->illuminance_night_lower_limit < $row['illuminance']) {
+							$count--;
+						}					
+					}
 
+				}
+				if($count == 0) {
+					$params = array(
+						'type' => 'illuminance_night',
+						'title' => '室内照度異常（深夜）',
+						'description' => '室内照度異常（深夜）',
+						'logs' => array(
+							'illuminance_night_lower_limit' => $this->illuminance_night_lower_limit,
+						),
+					);
+					return $this->alert($params);			
+				}	
 			}
-			if($count == 0) {
-				$params = array(
-					'type' => 'illuminance_night',
-					'title' => '室内照度異常（深夜）',
-					'description' => '室内照度異常（深夜）',
-					'logs' => array(
-						'illuminance_night_lower_limit' => $this->illuminance_night_lower_limit,
-					),
-				);
-				return $this->alert($params);			
-			}	
-		}
-		return false;
+
+    	}
+		return false;   
     }
 
 
