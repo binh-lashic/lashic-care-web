@@ -257,6 +257,8 @@ class Controller_Api_Data extends Controller_Api
 				$key = (int)date("d", strtotime($result['date']));
 				$rows[$key] = $result;
 			}
+			print_r($rows);
+			exit;
 
 			$end = date("t", strtotime($start_date));
 			$month = date("Y-m", strtotime($start_date));
