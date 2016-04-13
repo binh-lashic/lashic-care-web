@@ -282,7 +282,6 @@ class Controller_Api_Data extends Controller_Api
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
-				'type' => $type,
 				'date' => $date,
 				'data' => $data,
 			);
