@@ -646,13 +646,11 @@ class Model_Sensor extends Orm\Model{
 		$data = implode("<>", $tmp);
 
     	//既にアラートが出ているかチェック
-    	/*
 		if(\Model_Alert::existsAlert($params)) {		
 			//スヌーズ処理が5回以上なら再度通知
 	    	Log::info($data, 'no alert');
 			return false;
 		} else {
-			*/
 	    	Log::info($data, 'alert');
 
 	    	$description = $params['description'];
