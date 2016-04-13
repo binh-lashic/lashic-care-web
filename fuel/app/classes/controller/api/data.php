@@ -222,12 +222,7 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function _graph_daily() {
-		$type = Input::param("type");
 		$date = Input::param("date");
-		$types = array(
-			'wake_up_time' => true,					//起床時間
-			'sleep_time' => true,					//睡眠時間
-		);
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
 		if(empty($sensor_name) && empty($sensor_id)) {
@@ -240,15 +235,7 @@ class Controller_Api_Data extends Controller_Api
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
 
-		if(!$type) {
-			$this->errors[] = array(
-				'message' => 'グラフのタイプを指定してください'
-			);
-		} else if(empty($types[$type])) {
-			$this->errors[] = array(
-				'message' => 'グラフのタイプが間違っています'
-			);
-		} else if(!empty($sensor)) {
+		if(!empty($sensor)) {
 			if(empty($date)) {
 				$start_date = date("Y-m-01");
 			} else {
