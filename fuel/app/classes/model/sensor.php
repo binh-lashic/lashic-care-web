@@ -295,7 +295,7 @@ class Model_Sensor extends Orm\Model{
 
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
-		if(isset($this->mold_mites_duration) && isset($this->mold_mites_humidity_upper_limit) && isset($this->mold_mites_temperature_upper_limit)) {
+		if(!empty($this->mold_mites_duration) && !empty($this->mold_mites_humidity_upper_limit) && !empty($this->mold_mites_temperature_upper_limit)) {
 	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
