@@ -251,16 +251,17 @@ class Controller_Api_Data extends Controller_Api
 				'end_date' => date("Y-m-t", strtotime($start_date)),
 			));
 			$results = $query->execute();
-			foreach($results as $result) {
-				$data[] = $result;
-			}
-			/*
-			print_r($rows);
-			exit;
-			for($i = 0; $i <= $end; $i++) {
-				$time = $start_time + $i * 60 * $span;
-				$current_time = date("Y-m-d H:i:s", $time); 
 
+			$rows = array();
+			foreach($results as $result) {
+				$result = Model_Data::format($result);
+				$key = (int)date("d", strtotime($result['date']));
+				$rows[$key] = $result;
+			}
+
+			$end = date("t", strtotime($start_date));
+			$month = date("Y-m", strtotime($start_date));
+			for($current_time = 1; $current_time <= $end; $current_time++) {
 				if(!empty($rows[$current_time])) {
 					$value = $rows[$current_time][$type];
 				} else {
@@ -268,17 +269,13 @@ class Controller_Api_Data extends Controller_Api
 				}
 				
 				$data[] = array(
-					'time' => $current_time,
-					'label' => date("H:i", $time),
+					'date' => $month."-".$current_time,
+					'label' => $current_time,
 					'value' => $value,
-					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
-					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
-					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
-					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
-					'discomfort' => !empty($rows[$current_time]) ? $rows[$current_time]['discomfort'] : null,
+					'wake_up_time' => !empty($rows[$current_time]) ? $rows[$current_time]['wake_up_time'] : null,
+					'sleep_time' => !empty($rows[$current_time]) ? $rows[$current_time]['sleep_time'] : null,
 				);
 			}
-			*/
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
