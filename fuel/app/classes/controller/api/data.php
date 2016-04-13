@@ -257,12 +257,14 @@ class Controller_Api_Data extends Controller_Api
 				$key = (int)date("d", strtotime($result['date']));
 				$rows[$key] = $result;
 			}
-			print_r($rows);
-			exit;
 
 			$end = date("t", strtotime($start_date));
 			$month = date("Y-m", strtotime($start_date));
 			for($current_time = 1; $current_time <= $end; $current_time++) {
+				if(!empty($rows[$current_time])) {
+					print_r($rows[$current_time]);
+					exit;
+				}
 				$data[] = array(
 					'date' => $month."-".$current_time,
 					'label' => $current_time,
