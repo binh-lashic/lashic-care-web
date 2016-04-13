@@ -256,9 +256,7 @@ class Controller_Api_Data extends Controller_Api
 			foreach($results as $result) {
 				$key = (int)date("d", strtotime($result['date']));
 				$rows[$key] = $result;
-			}
-			print_r($rows);
-			
+			}			
 
 			$end = date("t", strtotime($start_date));
 			$month = date("Y-m", strtotime($start_date));
@@ -270,8 +268,7 @@ class Controller_Api_Data extends Controller_Api
 					'sleep_time' => !empty($rows[$current_time]) ? $rows[$current_time]['sleep_time'] : null,
 				);
 			}
-			print_r($data);
-			exit;
+
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
