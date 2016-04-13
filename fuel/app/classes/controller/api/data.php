@@ -243,10 +243,10 @@ class Controller_Api_Data extends Controller_Api
 			}
 			$data = array();
 
-			$sql = 'SELECT * FROM data_daily WHERE sensor_id=:sensor_name AND date BETWEEN :start_date AND :end_date';
+			$sql = 'SELECT * FROM data_daily WHERE sensor_id=:sensor_id AND date BETWEEN :start_date AND :end_date';
 			$query = DB::query($sql);
 			$query->parameters(array(
-				'sensor_name' => $sensor->name,
+				'sensor_id' => $sensor->id,
 				'start_date' => $start_date,
 				'end_date' => date("Y-m-t", strtotime($start_date)),
 			));
