@@ -314,10 +314,15 @@ class Model_Sensor extends Orm\Model{
 		));
 		$result = $query->execute('data');
 		if($result[0]['count'] == 0) {
+			$title = "通信断";
+			$description = "通信断";
 			$params = array(
 				'type' => 'disconnection',
-				'title' => '通信断',
-				'description' => '通信断',
+				'title' => $title,
+				'description' => $description,
+				'logs' => array(
+					'disconnection_duration' => $this->disconnection_duration,
+				),
 			);
 			return $this->alert($params);
 		}
@@ -345,11 +350,13 @@ class Model_Sensor extends Orm\Model{
 				}
 
 			}
+			$title = "室内照度異常（日中）";
+			$description = "室内照度異常（日中）";
 			if($count == 0) {
 				$params = array(
 					'type' => 'illuminance_daytime',
-					'title' => '室内照度異常（日中）',
-					'description' => '室内照度異常（日中）',
+					'title' => $title,
+					'description' => $description,
 				);
 				return $this->alert($params);			
 			}	
@@ -573,6 +580,7 @@ class Model_Sensor extends Orm\Model{
     	$params['date'] = date("Y-m-d H:i:s");
     	$params['sensor_id'] = $this->id;
     	$params['category'] = "emergency";
+    	$params['logs'] = isset($params['logs']) ? $params['logs'] : array();
 
     	//既にアラートが出ているかチェック
 		if(\Model_Alert::existsAlert($params)) {		
@@ -586,6 +594,7 @@ class Model_Sensor extends Orm\Model{
 	    			'email' => $user['email'],
 	    			'title' => $params['title'],
 	    			'description' => $params['description'],
+	    			'logs' => $params['logs'],
 	    		));
     		}
 	    	return $alert->save();
@@ -594,12 +603,19 @@ class Model_Sensor extends Orm\Model{
 
     public function send_alert($params) {
 		$sendgrid = new SendGrid(Config::get("sendgrid"));
+		$description = $params['description'];
+		$params['logs']['sensor_name'] = $this->name;
+		if(isset($params['logs'])) {
+			foreach($params['logs'] as $key => $value) {
+				$description .= "\n".$key."=".$value;
+			}
+		}
 		$email = new SendGrid\Email();
 		$email
 		    ->addTo($params['email'])
 		    ->setFrom(Config::get("email.from"))
-		    ->setSubject($params['title'])
-		    ->setText($params['description']);
+		    ->setSubject($params['title']." ".$this->name)
+		    ->setText($description);
 		try {
 		    $sendgrid->send($email);
 		    return true;
