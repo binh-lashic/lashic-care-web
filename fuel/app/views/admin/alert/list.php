@@ -7,9 +7,10 @@
 			    	<th>ID</th>
 			    	<th>Sensor ID</th>
 			    	<th>日付</th>
-			    	<th>内容</th>
+			    	<th>タイトル</th>
 			    	<th>タイプ</th>
 			    	<th>カテゴリー</th>
+			    	<th>内容</th>
 			    </tr>
 <?php
 foreach($alerts as $alert) {
@@ -22,6 +23,7 @@ foreach($alerts as $alert) {
 			    	<td><?php echo $alert['title']; ?></td>
 			    	<td><?php echo $alert['type']; ?></td>
 			    	<td><?php echo $alert['category']; ?></td>
+			    	<td><?php echo $alert['description']; ?></td>
 			    </tr>
 <?php
 }
