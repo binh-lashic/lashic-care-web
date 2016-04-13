@@ -263,7 +263,7 @@ class Controller_Api_Data extends Controller_Api
 				'start_date' => $start_date,
 				'end_date' => date("Y-m-t", strtotime($start_date)),
 			));
-			$results = $query->execute('data');
+			$results = $query->execute();
 			foreach($results as $result) {
 				$data[] = $result;
 			}
