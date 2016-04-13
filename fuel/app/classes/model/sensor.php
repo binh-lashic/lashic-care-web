@@ -633,6 +633,7 @@ class Model_Sensor extends Orm\Model{
 		$sendgrid = new SendGrid(Config::get("sendgrid"));
 		$description = $params['description'];
 		$params['logs']['sensor_name'] = $this->name;
+		$params['logs']['sql'] = \DB::last_query("data");
 		if(isset($params['logs'])) {
 			foreach($params['logs'] as $key => $value) {
 				$description .= "\r\n".$key."=".$value;
