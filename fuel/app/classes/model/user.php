@@ -31,6 +31,19 @@ class Model_User extends Orm\Model{
 		'emergency_cellular_2',
 		'profile_image',
 		'created_at',
+		'temperature_alert',
+		'fire_alert',
+		'heatstroke_alert',
+		'hypothermia_alert',
+		'humidity_alert',
+		'mold_mites_alert',
+		'illuminance_daytime_alert',
+		'illuminance_night_alert',
+		'disconnection_alert',
+		'reconnection_alert',
+		'wake_up_alert',
+		'abnormal_behavior_alert',
+		'active_non_detection_alert',
 	);
 
 	public static function createTable() {

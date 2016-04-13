@@ -4,19 +4,6 @@ class Model_User_Sensor extends Orm\Model{
 		'id',
 		'user_id',
 		'sensor_id',
-		'temperature_alert',
-		'fire_alert',
-		'heatstroke_alert',
-		'hypothermia_alert',
-		'humidity_alert',
-		'mold_mites_alert',
-		'illuminance_daytime_alert',
-		'illuminance_night_alert',
-		'disconnection_alert',
-		'reconnection_alert',
-		'wake_up_alert',
-		'abnormal_behavior_alert',
-		'active_non_detection_alert',
 	);
 
 	protected static $_has_one = array('sensor'=> array(
