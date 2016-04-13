@@ -350,40 +350,42 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
-    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->illuminance_daytime_duration * 60)
-		));
-		$result = $query->execute('data');
-		$count = 0;
-		if(count($result)) {
-			foreach($result as $row) {
-				$hour = date("h", strtotime($row['date']));
-				if($this->illuminance_daytime_start_time < $hour && $this->illuminance_daytime_end_time > $hour) {
-					$count++;
-					if($this->illuminance_daytime_lower_limit < $row['illuminance']) {
-						$count--;
-					}					
-				}
+    	if($this->illuminance_daytime_start_time && $this->illuminance_daytime_end_time) {
+	    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->illuminance_daytime_duration * 60)
+			));
+			$result = $query->execute('data');
+			$count = 0;
+			if(count($result)) {
+				foreach($result as $row) {
+					$hour = date("h", strtotime($row['date']));
+					if($this->illuminance_daytime_start_time < $hour && $this->illuminance_daytime_end_time > $hour) {
+						$count++;
+						if($this->illuminance_daytime_lower_limit < $row['illuminance']) {
+							$count--;
+						}					
+					}
 
+				}
+				$title = "室内照度異常（日中）";
+				$description = "室内照度異常（日中）";
+				if($count == 0) {
+					$params = array(
+						'type' => 'illuminance_daytime',
+						'title' => $title,
+						'description' => $description,
+						'logs' => array(
+							'illuminance_daytime_lower_limit' => $this->illuminance_daytime_lower_limit,
+						),
+					);
+					return $this->alert($params);			
+				}	
 			}
-			$title = "室内照度異常（日中）";
-			$description = "室内照度異常（日中）";
-			if($count == 0) {
-				$params = array(
-					'type' => 'illuminance_daytime',
-					'title' => $title,
-					'description' => $description,
-					'logs' => array(
-						'illuminance_daytime_lower_limit' => $this->illuminance_daytime_lower_limit,
-					),
-				);
-				return $this->alert($params);			
-			}	
-		}
-		return false;
+			return false;    		
+    	}
     }
 
     //室内照度異常（深夜）
@@ -608,13 +610,20 @@ class Model_Sensor extends Orm\Model{
     	$params['date'] = date("Y-m-d H:i:s");
     	$params['sensor_id'] = $this->id;
     	$params['category'] = "emergency";
-    	$params['logs'] = isset($params['logs']) ? $params['logs'] : array();
+		$params['logs']['sensor_name'] = $this->name;
+		$params['logs']['sql'] = \DB::last_query("data");
+
+		$tmp = $params;
+		$tmp['logs'] = implode("<>", $tmp['logs']);
+		$data = implode("<>", $tmp);
 
     	//既にアラートが出ているかチェック
 		if(\Model_Alert::existsAlert($params)) {		
 			//スヌーズ処理が5回以上なら再度通知
+	    	Log::info($data, 'no alert');
 			return false;
 		} else {
+	    	Log::info($data, 'alert');
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
     		foreach($this->users as $user) {
@@ -632,8 +641,7 @@ class Model_Sensor extends Orm\Model{
     public function send_alert($params) {
 		$sendgrid = new SendGrid(Config::get("sendgrid"));
 		$description = $params['description'];
-		$params['logs']['sensor_name'] = $this->name;
-		$params['logs']['sql'] = \DB::last_query("data");
+
 		if(isset($params['logs'])) {
 			foreach($params['logs'] as $key => $value) {
 				$description .= "\r\n".$key."=".$value;
