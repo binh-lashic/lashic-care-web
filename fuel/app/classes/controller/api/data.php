@@ -314,10 +314,14 @@ class Controller_Api_Data extends Controller_Api
 
 	//1日に1回24時に実行する
 	public function get_analyze() {
-    	$time = strtotime("-1day");
+		if(Input::param("date")) {
+			$time = strtotime(Input::param("date"));
+		} else {
+    		$time = strtotime("-1day");
+		}
     	$date = date("Y-m-d", $time);
     	$start_date = date("Y-m-d 00:00:00", $time);
-		$end_date = date("Y-m-d 23:59:59", $time);
+		$end_date = date("Y-m-d 23:59:59", $time);	
 
 		$sensors = \Model_Sensor::find("all");
 		foreach($sensors as $sensor) {
