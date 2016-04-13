@@ -2,7 +2,7 @@
 class Model_Sensor extends Orm\Model{
 	private $time;
 
-	public static function setTime($_time) {
+	public function setTime($_time) {
 		$this->time = $_time;
 	}
 
