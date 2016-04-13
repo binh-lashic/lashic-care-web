@@ -38,7 +38,7 @@ class Model_Alert extends Orm\Model{
   category NVARCHAR(50),
   type NVARCHAR(50),
   reason NTEXT,
-  confirm_status INT,
+  confirm_status INT DEFAULT 0,
   confirm_user_id INT, 
   confirm_date DATE, 
   responder_user_id INT, 

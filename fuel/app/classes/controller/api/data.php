@@ -212,6 +212,97 @@ class Controller_Api_Data extends Controller_Api
 		return $this->result();	
 	}
 
+
+	public function get_graph_daily() {
+		return $this->_graph_daily();
+	}
+
+	public function post_graph_daily() {
+		return $this->_graph_daily();
+	}
+
+	public function _graph_daily() {
+		$type = Input::param("type");
+		$date = Input::param("date");
+		$types = array(
+			'wake_up_time' => true,					//起床時間
+			'sleep_time' => true,					//睡眠時間
+		);
+		$sensor_name = Input::param("sensor_name");
+		$sensor_id = Input::param("sensor_id");
+		if(empty($sensor_name) && empty($sensor_id)) {
+			$this->errors[] = array(
+				'message' => 'センサーIDを指定してください'
+			);
+		} else if(!empty($sensor_name)) {
+			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_name);
+		} else if(!empty($sensor_id)) {
+			$sensor = \Model_Sensor::getSensor($sensor_id);
+		}
+
+		if(!$type) {
+			$this->errors[] = array(
+				'message' => 'グラフのタイプを指定してください'
+			);
+		} else if(empty($types[$type])) {
+			$this->errors[] = array(
+				'message' => 'グラフのタイプが間違っています'
+			);
+		} else if(!empty($sensor)) {
+			if(empty($date)) {
+				$start_date = date("Y-m-01");
+			} else {
+				$start_date = date("Y-m", strtotime($date));
+			}
+			$data = array();
+
+			$sql = 'SELECT * FROM data_daily WHERE sensor_id=:sensor_name AND date BETWEEN :start_date AND :end_date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_name' => $sensor->name,
+				'start_date' => $start_date,
+				'end_date' => date("Y-m-t", strtotime($start_date)),
+			));
+			$results = $query->execute('data');
+			foreach($results as $result) {
+				$data[] = $result;
+			}
+			/*
+			print_r($rows);
+			exit;
+			for($i = 0; $i <= $end; $i++) {
+				$time = $start_time + $i * 60 * $span;
+				$current_time = date("Y-m-d H:i:s", $time); 
+
+				if(!empty($rows[$current_time])) {
+					$value = $rows[$current_time][$type];
+				} else {
+					$value = null;
+				}
+				
+				$data[] = array(
+					'time' => $current_time,
+					'label' => date("H:i", $time),
+					'value' => $value,
+					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
+					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
+					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
+					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
+					'discomfort' => !empty($rows[$current_time]) ? $rows[$current_time]['discomfort'] : null,
+				);
+			}
+			*/
+			$this->result = array(
+				'sensor_id' => $sensor->id,
+				'sensor_name' => $sensor->name,
+				'type' => $type,
+				'date' => $date,
+				'data' => $data,
+			);
+		}
+		return $this->result();	
+	}
+
 	public function get_import() {
 		$sensor_id = "00001";
 		$url = "http://infic.papaikuji.info/api/data/dashboard?sensor_name=".$sensor_id."&device_id=11111";
@@ -244,6 +335,10 @@ class Controller_Api_Data extends Controller_Api
 
 		$sensors = \Model_Sensor::find("all");
 		foreach($sensors as $sensor) {
+			$params = array(
+				'sensor_id' => $sensor->id,
+				'date' => $date,
+			);
 			$rows = \Model_Data_Daily::query()
 				->where('sensor_id', $sensor->id)
 				->where('date', 'between', array(
@@ -305,17 +400,16 @@ class Controller_Api_Data extends Controller_Api
 				$params['humidity_average'] = $humidity_total / $count;
 				$params['active_average'] = $active_total / $count;
 				$params['illuminance_average'] = $illuminance_total / $count;
-			}
-			$data_daily = \Model_Data_Daily::find('first', array('where' => array(
-				'sensor_id' => $sensor->id,
-				'date' => $date,
-			)));
-			if(!empty($params)) {
+
+				$data_daily = \Model_Data_Daily::find('first', array('where' => array(
+					'sensor_id' => $sensor->id,
+					'date' => $date,
+				)));
 				if(empty($data_daily)) {
 					$data_daily =  \Model_Data_Daily::forge();
 				}
 				$data_daily->set($params);
-				$data_daily->save();				
+				$data_daily->save();	
 			}
 		} 
 		return $this->result();	
