@@ -674,7 +674,7 @@ class Model_Sensor extends Orm\Model{
 	    		));
     		}
 	    	return $alert->save();
-		//}
+		}
     }
 
     public function send_alert($params) {
