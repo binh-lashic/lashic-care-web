@@ -322,6 +322,7 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function get_alert() {
+		$time = strtotime(date("Y-m-d H:i:00"));
 		if(Input::param("sensor_id")) {
 			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
 		} else {
@@ -329,6 +330,7 @@ class Controller_Api_Data extends Controller_Api
 		}
 		foreach($sensors as $sensor) {
 			$sensor->users;
+			$sensor->setTime($time);
 			$this->result['data'][] = array(
 				'sensor_id' => $sensor->id,
 				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート

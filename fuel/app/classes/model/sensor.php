@@ -1,5 +1,11 @@
 <?php 
 class Model_Sensor extends Orm\Model{
+	private $time;
+
+	public static function setTime($_time) {
+		$this->time = $_time;
+	}
+
 	protected static $_properties = array(
 		'id',
 		'name',
@@ -167,7 +173,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->temperature_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->temperature_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
@@ -216,7 +222,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->humidity_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->humidity_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
@@ -265,7 +271,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->heatstroke_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->heatstroke_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
@@ -300,7 +306,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->mold_mites_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->mold_mites_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
@@ -338,7 +344,7 @@ class Model_Sensor extends Orm\Model{
 		$query = DB::query($sql);
 		$query->parameters(array(
 			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", time() - $this->disconnection_duration * 60)
+			'date' => date("Y-m-d H:i:s", $this->time - $this->disconnection_duration * 60)
 		));
 		$result = $query->execute('data');
 		if($result[0]['count'] == 0) {
@@ -364,7 +370,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->illuminance_daytime_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->illuminance_daytime_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = 0;
@@ -404,7 +410,7 @@ class Model_Sensor extends Orm\Model{
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->illuminance_night_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $this->illuminance_night_duration * 60)
 			));
 			$result = $query->execute('data');
 			$count = 0;
@@ -445,7 +451,7 @@ class Model_Sensor extends Orm\Model{
 			$query->parameters(array(
 				'sensor_id' => $this->name,
 				'temperature' => $this->fire_temperature_upper_limit,
-				'date' => date("Y-m-d H:i:s", -60)
+				'date' => date("Y-m-d H:i:s", $this->time - 60)
 			));
 			$result = $query->execute('data');
 			if($result) {
@@ -619,7 +625,7 @@ class Model_Sensor extends Orm\Model{
 	}
 
     public function alert($params) {
-    	$params['date'] = date("Y-m-d H:i:s");
+    	$params['date'] = date("Y-m-d H:i:s", $this->time);
     	$params['sensor_id'] = $this->id;
     	$params['category'] = "emergency";
 		$params['logs']['sensor_name'] = $this->name;
