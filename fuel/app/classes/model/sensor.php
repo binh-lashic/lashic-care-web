@@ -638,13 +638,22 @@ class Model_Sensor extends Orm\Model{
 		} else {
 			*/
 	    	Log::info($data, 'alert');
+
+	    	$description = $params['description'];
+
+			if(isset($params['logs'])) {
+				foreach($params['logs'] as $key => $value) {
+					$description .= "\r\n".$key."=".$value;
+				}
+			}
+
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
     		foreach($this->users as $user) {
 	    		$this->send_alert(array(
 	    			'email' => $user['email'],
 	    			'title' => $params['title'],
-	    			'description' => $params['description'],
+	    			'description' => $description,
 	    			'logs' => $params['logs'],
 	    		));
     		}
@@ -654,19 +663,12 @@ class Model_Sensor extends Orm\Model{
 
     public function send_alert($params) {
 		$sendgrid = new SendGrid(Config::get("sendgrid"));
-		$description = $params['description'];
-
-		if(isset($params['logs'])) {
-			foreach($params['logs'] as $key => $value) {
-				$description .= "\r\n".$key."=".$value;
-			}
-		}
 		$email = new SendGrid\Email();
 		$email
 		    ->addTo($params['email'])
 		    ->setFrom(Config::get("email.from"))
 		    ->setSubject($params['title']." ".$this->name)
-		    ->setText($description);
+		    ->setText($params['description']);
 		try {
 		    $sendgrid->send($email);
 		    return true;
