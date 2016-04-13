@@ -647,6 +647,8 @@ class Model_Sensor extends Orm\Model{
 				}
 			}
 
+			$params['description'] = $description;
+
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
     		foreach($this->users as $user) {
