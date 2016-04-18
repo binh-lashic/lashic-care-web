@@ -96,6 +96,34 @@ class Controller_User extends Controller_Page
         $this->template->footer = View::forge('footer', $this->data);
 	}
 
+	public function action_info()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info', $this->data);
+    }
+
+	public function action_info_basic_form()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info_basic_form', $this->data);
+    }
+
+	public function action_info_contact_form()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info_contact_form', $this->data);
+    }
+
+	public function action_info_option_form()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info_option_form', $this->data);
+    }
+
 	public function action_report()
 	{
 		$this->data['corresponding_status'] = Input::param("corresponding_status");

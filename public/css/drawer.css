@@ -335,6 +335,7 @@ a.drawer-menu-item {
     padding-bottom: 0;
 	padding-left:20px;
     color:#4b4948;
+	text-decoration:none;
   }
 
   .drawer-navbar .drawer-hamburger {

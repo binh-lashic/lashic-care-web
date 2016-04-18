@@ -104,7 +104,7 @@ $(function () {
   
   // メニュー領域外をクリックしたらメニューを閉じる
   $('body').click(function() {
-    if (typeof(over_flg) != "undefined" && over_flg == false) {
+    if (over_flg == false) {
       $('.slide_btn').removeClass('selected');
       $('.graph24_cal_otherMonth').slideUp('fast');
     }
@@ -114,3 +114,22 @@ $(function () {
       $('.graph24_cal_otherMonth').hide();
   });
 });
+
+
+
+
+
+
+
+/* ページ開閉 */
+/* 表示を切り替えるための JavaScript */
+function show_body(d){
+	document.getElementById('toggle_on'+d).style.display = 'none';
+	document.getElementById('toggle_off'+d).style.display = 'block';
+	document.getElementById('body'+d).style.display = '';
+}
+function hide_body(d){
+	document.getElementById('toggle_on'+d).style.display = 'block';
+	document.getElementById('toggle_off'+d).style.display = 'none';
+	document.getElementById('body'+d).style.display = 'none';
+}

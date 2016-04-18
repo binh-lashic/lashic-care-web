@@ -5,7 +5,6 @@ if(isset($client)) {
 	var sensor_id = "<?php echo $sensor->id; ?>";
 	var date = "<?php echo $date; ?>";
 	</script>
-	<div class="clearfix content"> 
 		<!-- content start -->
 		<section id="contentBox">
 			<h1 class="content_h1 graph_title_icon"><?php echo $client['name']; ?>さんの様子</h1>

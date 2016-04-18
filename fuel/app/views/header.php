@@ -100,3 +100,4 @@ if(!empty($this->data['header_alerts'])) {
 }
 ?>
 	</div>
+	<div class="clearfix content"> 

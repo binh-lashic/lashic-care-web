@@ -6,7 +6,7 @@ if(!empty($client)) {
 			<div class="aside_container">
 				<div class="clearfix">
 					<p class="aside_title">基本データ</p>
-					<div class="aside_btn_edit"><a href="#attention_01" rel="shadowbox[cont]" class="btn_text">編集</a></div>
+					<div class="aside_btn_edit"><a href="/user/info" class="btn_text">編集</a></div>
 				</div>
 				<div class="aside_photo"><div class="aside_photoInner"><img src="<?php echo $client['profile_image']; ?>" width="179" height="179" alt=""/></div></div>
 				
@@ -73,6 +73,3 @@ if(!empty($admins)) {
 <?php
 }
 ?>
-		<!-- /aide end --> 
-	</div>
-</main>

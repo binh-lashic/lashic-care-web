@@ -98,17 +98,16 @@ if(isset($page) && $page != $page_count) {
 							<th>日付</th>
 							<th>カテゴリー</th>
 							<th>発生時間</th>
-							<th>対応予定時間</th>
-							<th>担当者</th>
-							<th>管理者確認</th>
-							<th>状態</th>
+							<th>内容確認状況</th>
+							<th>最終確認者</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 <?php
 if(isset($alerts)) {
-	foreach($alerts as $alert) {
+	foreach($alerts as $key => $alert) {
+		$key++;
 		$corresponding_statuses = array("未対応", "対応済", "対応予定", "対応不要");
 ?>
 						<tr>
@@ -132,12 +131,64 @@ if($alert['category'] === "night") {
 ?>
 							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
-							<td><?php echo date("m/d", strtotime($alert['corresponding_date'])); ?> （木） <?php echo date("H:i", strtotime($alert['corresponding_time'])); ?></td>
-							<td>山田</td>
 							<td><?php if($alert['confirm_status'] == 1) { echo "済"; } else { echo "未"; } ?></td>
-							<td><span class="report_state_taiouhuyou"><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></span></td>
-							<td><!--<a href="#" class="btn_text">ゴミ箱</a>&nbsp;&nbsp;-->
-								<a href="/user/report?id=<?php echo $alert['id']; ?>" class="btn_text">概要</a></td>
+							<td><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></td>
+							<td>
+								<a name="1"></a>
+								<span class="toggle" id="toggle_on1"><a href="javascript:show_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
+								<span class="toggle hide_btn" id="toggle_off1"><a href="javascript:hide_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
+							</td>
+						</tr>
+						<tr id="body<?php echo $key; ?>" class="hide_onload report_itemSet" style="display:none">
+							<td colspan="7">
+								<div class="report_arrow"></div>
+								<div class="report_itemInner">
+									<strong class="large"><?php echo date("m/d", strtotime($alert['date'])); ?>（<?php echo Util::format_week(date("w", strtotime($alert['date']))); ?>）</strong><br><?php echo $alert['description']; ?>
+									<div class="clearfix mgt20">
+												<div class="floatL common_select mgr20">
+													<select id="confirm<?php echo $key; ?>">
+														<option value="0"<?php if($alert['confirm_status'] == 0) { echo "selected=\"selected\""; } ?>>未確認</option>
+														<option value="1"<?php if($alert['confirm_status'] == 1) { echo "selected=\"selected\""; } ?>>確認済み</option>
+													</select>
+												</div>
+												　
+												<div class="floatL common_select">
+													<select id="restart<?php echo $key; ?>">
+														<option value="">今すぐ</option>
+														<option value="1">1時間後</option>
+														<option value="2">2時間後</option>
+														<option value="3">3時間後</option>
+														<option value="4">4時間後</option>
+														<option value="5">5時間後</option>
+														<option value="6">6時間後</option>
+														<option value="7">7時間後</option>
+														<option value="8">8時間後</option>
+														<option value="9">9時間後</option>
+														<option value="10">10時間後</option>
+														<option value="11">11時間後</option>
+														<option value="12">12時間後</option>
+														<option value="13">13時間後</option>
+														<option value="14">14時間後</option>
+														<option value="15">15時間後</option>
+														<option value="16">16時間後</option>
+														<option value="17">17時間後</option>
+														<option value="18">18時間後</option>
+														<option value="19">19時間後</option>
+														<option value="20">20時間後</option>
+														<option value="21">21時間後</option>
+														<option value="22">22時間後</option>
+														<option value="23">23時間後</option>
+														<option value="24">24時間後</option>
+													</select>
+												</div>
+												<div class="floatL pdt5">　に見守りを再開する</div>
+												　
+												<div class="floatR">
+												<a href="#" class="btn_darkBlue">保存</a>
+												</div>
+											</div>
+								</div>
+							</td>
 						</tr>
 <?php
 	}

@@ -59,13 +59,10 @@ Shadowbox.init({
 <script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
 </head>
-<body id="home" class="drawer drawer--right">
+<body id="home" class="drawer drawer--right loginBg">
 <?php echo isset($header) ? $header : ""; ?>
 <?php echo isset($content) ? $content : ""; ?>
 <?php echo isset($footer) ? $footer : ""; ?>
-    <!-- /aide end --> 
-  </div>
-</main>
 <footer>
 	<p><a href="#">運営者からのお知らせ</a>　　<a href="#">利用規約</a>　　<a href="#">運営会社</a>　　<a href="#">プライバシーポリシー</a>　　<a href="#">お問い合わせ</a></p>
 	<p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>

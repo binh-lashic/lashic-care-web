@@ -97,6 +97,7 @@ input, select {
 }
 
 table {
+	border-spacing:0;
 }
 .fc-header-title {
 	font-size: 20px;
