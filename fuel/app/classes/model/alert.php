@@ -22,6 +22,7 @@ class Model_Alert extends Orm\Model{
 		'corresponding_time',
 		'corresponding_description',
 		'corresponding_user_id',
+		'expiration_time'
 	);
 
 	public static function createTable(){
@@ -51,7 +52,8 @@ class Model_Alert extends Orm\Model{
   corresponding_date DATE, 
   corresponding_time TIME, 
   corresponding_description NTEXT, 
-  corresponding_user_id INT
+  corresponding_user_id INT,
+  expiration_time DATETIME
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}

@@ -298,10 +298,10 @@ class Controller_Api_Data extends Controller_Api
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
+				'date' => $date,
 				'average' => array(
 					'sleeping_hours' => $sleeping_hours,
 				),
-				'date' => $date,
 				'data' => $data,
 			);
 		}
