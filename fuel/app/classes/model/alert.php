@@ -161,6 +161,7 @@ class Model_Alert extends Orm\Model{
 		}
 		$alert->set($params);
 		if($alert->save()) {
+			\Model_Log::saveLog("alertを更新しました");
 			return $alert;
 		}
 	
