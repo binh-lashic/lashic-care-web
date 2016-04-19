@@ -91,6 +91,7 @@ class Controller_Api_Data extends Controller_Api
 							'discomfort' => $data_daily['discomfort_average'],
 					);
 				}
+
 				if(!empty($data_daily['wake_up_time'])) {
 					$this->result['data']['wake_up_time'] = date("H:i:s", strtotime($data_daily['wake_up_time']));
 				} else {
@@ -270,7 +271,13 @@ class Controller_Api_Data extends Controller_Api
 
 			$end = date("t", strtotime($start_date));
 			$month = date("Y-m", strtotime($start_date));
+			$sleeping_hourses = array();
 			for($current_time = 1; $current_time <= $end; $current_time++) {
+				if(!empty($rows[$current_time]) && !empty($rows[$current_time]['wake_up_time']) && !empty($rows[$current_time]['sleep_time'])) {
+					$diff = strtotime($rows[$current_time]['wake_up_time']) - strtotime($rows[$current_time]['sleep_time']);
+					$sleeping_hourses[] = $diff;
+				}
+
 				$data[] = array(
 					'date' => $month."-".$current_time,
 					'label' => $current_time,
@@ -278,10 +285,15 @@ class Controller_Api_Data extends Controller_Api
 					'sleep_time' => !empty($rows[$current_time]) ? $rows[$current_time]['sleep_time'] : null,
 				);
 			}
-
+			if($sleeping_hourses) {
+				$sleeping_hours = gmdate("H:i:s", array_sum($sleeping_hourses) / count($sleeping_hourses));
+			} else {
+				$sleeping_hours = null;
+			}
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
+				'sleeping_hours' => $sleeping_hours,
 				'date' => $date,
 				'data' => $data,
 			);

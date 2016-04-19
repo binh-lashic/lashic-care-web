@@ -20,12 +20,6 @@
 						<input type="checkbox" id="i6" checked="checked">
 						<label for="i6" class="checkbox">緊急</label>
 					</dd>
-					<dt>状態</dt>
-					<dd><a href="/user/report?confirm_status=<?php echo $confirm_status; ?>&corresponding_status=" class="report_sort_<?php echo !isset($corresponding_status) || $corresponding_status === "" ? "on" : "off"; ?>">すべて</a>
-						<a href="/user/report?confirm_status=<?php echo $confirm_status; ?>&corresponding_status=0" class="report_sort_<?php echo ($corresponding_status === "0") ? "on" : "off"; ?>">未対応</a>
-						<a href="/user/report?confirm_status=<?php echo $confirm_status; ?>&corresponding_status=1" class="report_sort_<?php echo ($corresponding_status === "1") ? "on" : "off"; ?>">対応済み</a>
-						<a href="/user/report?confirm_status=<?php echo $confirm_status; ?>&corresponding_status=2" class="report_sort_<?php echo ($corresponding_status === "2") ? "on" : "off"; ?>">対応予定</a>
-						<a href="/user/report?confirm_status=<?php echo $confirm_status; ?>&corresponding_status=3" class="report_sort_<?php echo ($corresponding_status === "3") ? "on" : "off"; ?>">対応不要</a></dd>
 					<dt>管理者確認</dt>
 					<dd>
 						<a href="/user/report?confirm_status=&corresponding_status=<?php echo $corresponding_status; ?>" class="report_sort_<?php echo !isset($confirm_status) || $confirm_status === "" ? "on" : "off"; ?>">すべて</a>
