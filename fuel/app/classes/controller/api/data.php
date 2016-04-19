@@ -41,7 +41,7 @@ class Controller_Api_Data extends Controller_Api
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
 		
-		if($sensor) {
+		if(!empty($sensor)) {
 			//日付を取得
 			if(Input::param("date")) {
 				$date = date("Y-m-d", strtotime(Input::param("date")));
@@ -67,6 +67,16 @@ class Controller_Api_Data extends Controller_Api
 							'discomfort' => $data['discomfort'],
 					);
 				}
+			}
+
+			//アラートの最新データ1件を取得する
+			$alerts = \Model_Alert::getAlerts(array(
+				'sensor_id' => $sensor->id,
+				'confirm_status' => 0,
+				'limit' => 1,
+			));
+			if(!empty($alerts[0])) {
+				$this->result['data']['alert'] = $alerts[0];
 			}
 			
 			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
