@@ -249,6 +249,7 @@ class Controller_Api_Data extends Controller_Api
 		if(!empty($sensor)) {
 			if(empty($date)) {
 				$start_date = date("Y-m-01");
+				$date = date("Y-m");
 			} else {
 				$start_date = date("Y-m-01", strtotime($date));
 			}
