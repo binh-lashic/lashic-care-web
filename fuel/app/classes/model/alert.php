@@ -156,6 +156,9 @@ class Model_Alert extends Orm\Model{
 			list(, $user_id) = Auth::get_user_id();
 			$params['confirm_user_id'] = $user_id;
 		}
+		if(!empty($params['expiration_hour'])) {
+			$params['expiration_time'] = date("Y-m-d H:i:s", time() + $params['expiration_hour'] * 60 * 60);
+		}
 		$alert->set($params);
 		if($alert->save()) {
 			return $alert;
