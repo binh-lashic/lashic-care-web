@@ -7,5 +7,6 @@
 		<li><a href="/admin/user/client/create">user_clientsテーブル作成</a></li>
 		<li><a href="/admin/alert/create">alertsテーブル作成</a></li>
 		<li><a href="/admin/data/daily/create">data_dailyテーブル作成</a></li>
+		<li><a href="/admin/data/log/create">logテーブル作成</a></li>
 	</ul>
 </div>
