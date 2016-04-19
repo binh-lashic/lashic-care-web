@@ -147,7 +147,7 @@ if($alert['category'] === "night") {
 												</div>
 												　
 												<div class="floatL common_select">
-													<select id="restart<?php echo $key; ?>">
+													<select id="expiration_hour<?php echo $key; ?>">
 														<option value="">今すぐ</option>
 														<option value="1">1時間後</option>
 														<option value="2">2時間後</option>
