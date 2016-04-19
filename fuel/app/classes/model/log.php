@@ -6,6 +6,7 @@ class Model_Log extends Orm\Model{
         'date',
         'user_id',
         'description',
+        'data'
 	);
 
     public static function createTable(){
@@ -14,18 +15,16 @@ class Model_Log extends Orm\Model{
             date DATETIME,
             user_id int,
             description NTEXT,
+            data NTEXT,
         ) ON [PRIMARY];";
         return DB::query($sql)->execute();
     }
 
-    public static function saveLog($description) {
-        $log = \Model_Alert::forge();
+    public static function saveLog($params) {
+        $log = \Model_Log::forge();
         list(, $user_id) = Auth::get_user_id();
-        $params = array(
-            'date' => date("Y-m-d H:i:s"),
-            'user_id' => $user_id,
-            'description' => $description,
-        );
+        $params['date'] = date("Y-m-d H:i:s");
+        $params['user_id']  = $user_id;
         $log->set($params);
         return $log->save();
     }

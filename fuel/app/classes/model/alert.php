@@ -150,8 +150,6 @@ class Model_Alert extends Orm\Model{
 			$alert = \Model_Alert::forge();
 		}
 
-		unset($params['q']);
-		unset($params['id']);
 		if(!empty($params['confirm_status'])) {
 			list(, $user_id) = Auth::get_user_id();
 			$params['confirm_user_id'] = $user_id;
@@ -159,9 +157,17 @@ class Model_Alert extends Orm\Model{
 		if(!empty($params['expiration_hour'])) {
 			$params['expiration_time'] = date("Y-m-d H:i:s", time() + $params['expiration_hour'] * 60 * 60);
 		}
+
+		$data = json_encode($params);
+		unset($params['q']);
+		unset($params['id']);
 		$alert->set($params);
 		if($alert->save()) {
-			\Model_Log::saveLog("alertを更新しました");
+			$params = array(
+				'data' => $data,
+				'description' => "alertを更新しました",
+			);
+			\Model_Log::saveLog($params);
 			return $alert;
 		}
 	
