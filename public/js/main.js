@@ -1,6 +1,5 @@
 $(function(){
     var apiUrl = "http://infic.papaikuji.info/api/";
-    //var apiUrl = "http://infic.garoo.jp/api/";
     
     // ユーザ定義関数
     function api(action, params, callback){
@@ -32,10 +31,20 @@ $(function(){
 		return false;
 	});
 */
-	drawGraph();
+	if(typeof sensor_id != "undefined") {
+		drawGraph();
+	}
 
 	$(".graph_checkbox").change(function() {
 		drawGraph();
+	});
+
+	$(".save_alert").click(function() {
+		var id = $(this).attr('data-id');
+		var confirm = $("#confirm" + id).val();
+		api("alert/save", { id : id, confirm_status : confirm }, function(result){
+			hide_body(id);
+		});
 	});
 
 	function drawGraph() {

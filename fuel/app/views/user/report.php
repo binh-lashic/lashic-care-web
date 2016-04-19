@@ -106,8 +106,9 @@ if(isset($page) && $page != $page_count) {
 					<tbody>
 <?php
 if(isset($alerts)) {
-	foreach($alerts as $key => $alert) {
-		$key++;
+	foreach($alerts as $alert) {
+		$key = $alert['id'];
+		print_r($alert['confirm_status']);
 		$corresponding_statuses = array("未対応", "対応済", "対応予定", "対応不要");
 ?>
 						<tr>
@@ -135,8 +136,8 @@ if($alert['category'] === "night") {
 							<td><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></td>
 							<td>
 								<a name="1"></a>
-								<span class="toggle" id="toggle_on1"><a href="javascript:show_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
-								<span class="toggle hide_btn" id="toggle_off1"><a href="javascript:hide_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
+								<span class="toggle" id="toggle_on<?php echo $key; ?>"><a href="javascript:show_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
+								<span class="toggle hide_btn" id="toggle_off<?php echo $key; ?>"><a href="javascript:hide_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
 							</td>
 						</tr>
 						<tr id="body<?php echo $key; ?>" class="hide_onload report_itemSet" style="display:none">
@@ -184,7 +185,7 @@ if($alert['category'] === "night") {
 												<div class="floatL pdt5">　に見守りを再開する</div>
 												　
 												<div class="floatR">
-												<a href="#" class="btn_darkBlue">保存</a>
+													<a class="btn_darkBlue save_alert" data-id="<?php echo $key; ?>">保存</a>
 												</div>
 											</div>
 								</div>
