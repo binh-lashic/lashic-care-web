@@ -56,6 +56,14 @@ class Model_Alert extends Orm\Model{
 		return DB::query($sql)->execute();
 	}
 
+	protected static $_has_one = array('confirm_user'=> array(
+        'model_to' => 'Model_User',
+        'key_from' => 'confirm_user_id',
+        'key_to' => 'id',
+        'cascade_save' => false,
+        'cascade_delete' => false,
+    ));
+
 	public static function getAlert($id){
 		$sensor = \Model_Alert::find($id);
 		if($sensor) {
@@ -75,10 +83,15 @@ class Model_Alert extends Orm\Model{
 					$query = $query->offset($params['limit'] * ($params['page'] - 1));
 				}
 			}
-	 		$_alerts = $query->order_by('id', 'desc')->get();
+	 		$_alerts = $query->related("confirm_user")->order_by('id', 'desc')->get();
 			if($_alerts) {
 				foreach($_alerts as $_alert) {
-					$alerts[] = $_alert->to_array();
+					$alert = $_alert->to_array();
+					if(!empty($alert['confirm_user'])) {
+						$alert['confirm_user'] = Model_User::format($alert['confirm_user']);
+					}
+
+					$alerts[] = $alert;
 				}
 			}
 		}
@@ -112,7 +125,7 @@ class Model_Alert extends Orm\Model{
 
 		$start_date = $start_date." 00:00:00";
 
-		if($sensor_id) {
+		if(!empty($sensor_id)) {
 			$query = \Model_Alert::query()
 				->where('sensor_id', $sensor_id)
 				->where('date', 'between', array($start_date, $end_date));
@@ -137,6 +150,10 @@ class Model_Alert extends Orm\Model{
 
 		unset($params['q']);
 		unset($params['id']);
+		if(!empty($params['confirm_status'])) {
+			list(, $user_id) = Auth::get_user_id();
+			$params['confirm_user_id'] = $user_id;
+		}
 		$alert->set($params);
 		if($alert->save()) {
 			return $alert;

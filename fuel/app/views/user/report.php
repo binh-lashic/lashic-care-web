@@ -108,7 +108,6 @@ if(isset($page) && $page != $page_count) {
 if(isset($alerts)) {
 	foreach($alerts as $alert) {
 		$key = $alert['id'];
-		print_r($alert['confirm_status']);
 		$corresponding_statuses = array("未対応", "対応済", "対応予定", "対応不要");
 ?>
 						<tr>
@@ -133,7 +132,7 @@ if($alert['category'] === "night") {
 							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
 							<td><?php if($alert['confirm_status'] == 1) { echo "済"; } else { echo "未"; } ?></td>
-							<td><?php echo $corresponding_statuses[(int)$alert['corresponding_status']]; ?></td>
+							<td><?php if($alert['confirm_user']) echo $alert['confirm_user']['name']; ?></td>
 							<td>
 								<a name="1"></a>
 								<span class="toggle" id="toggle_on<?php echo $key; ?>"><a href="javascript:show_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>
