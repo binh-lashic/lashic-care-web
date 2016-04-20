@@ -67,8 +67,14 @@ Shadowbox.init({
   </div>
 </main>
 <footer>
-	<p><a href="#">運営者からのお知らせ</a>　　<a href="#">利用規約</a>　　<a href="#">運営会社</a>　　<a href="#">プライバシーポリシー</a>　　<a href="#">お問い合わせ</a></p>
-	<p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
+  <ul>
+    <li><a href="news/index.html">運営者からのお知らせ</a></li>
+    <li><a href="terms/index.html">利用規約</a></li>
+    <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
+    <li><a href="privacy/index.html">プライバシーポリシー</a></li>
+    <li><a href="contact/index.html">お問い合わせ</a></li>
+  </ul>
+  <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <div id="attention_01">

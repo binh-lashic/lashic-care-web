@@ -95,7 +95,7 @@ a.logo {
 	float: left;
 	padding: 14px 0 0;
 }
-.hdr_select_text p{ font-size:24px; font-weight:bold; color:#003c58;}
+.hdr_select_text p{ font-size:24px; color:#003c58;}
 .com_userSmall{ font-size:12px; font-weight:normal}
 
 
@@ -181,35 +181,6 @@ a.logo {
 .com_news dd:hover{ opacity:0.7}
 .com_news_text{ width:468px; color:#FFF; }
 .com_news_link{ display:block;  padding:13px 12px 12px 12px; text-decoration:none !important;}
-
-
-
-
-
-
-
-
-
-
-/* ----------------------------------------------------------
-
-コンテンツ
-
----------------------------------------------------------- */
-#contentBox{ width:770px; float:right;}
-#contentBoxLarge{ width:100%; }
-.content_h1{ background-color:#7ecef4; font-size:24px; color:#003c58; padding:10px 10px 10px 41px; margin-bottom:30px;}
-.content_h2{ font-size:20px; color:#4b4948; font-weight:bold; padding-bottom:10px; border-bottom:1px solid #d6e9f2; margin-bottom:20px;}
-.content_h3{ font-size:16px; color:#003c58; font-weight:bold; margin-bottom:10px; border-left:3px solid #003c58; padding-left:8px; line-height:1em;}
-.contentLarge_h1{ font-size:32px; color:#003c58;  margin:10px 0 30px; font-weight:normal}
-.contentLarge_h2{ border-bottom:1px dotted #003c58; margin-bottom:30px; padding-bottom:8px }
-.contentLarge_h2 h2{ font-size:20px; color:#003c58;  border-left:3px solid #003c58; padding-left:8px; font-weight:normal}
-
-p + .content_h2 , p + .content_h3 , p + .contentLarge_h2 { margin-top:30px;}
-div + .content_h2 , div + .content_h3 , div + .contentLarge_h2{ margin-top:50px;}
-
-#pankuzu{ background-color:#EEE; margin-bottom:30px; padding:6px 0; font-size:12px;}
-#pankuzu a{ color:#4b4948; text-decoration:none}
 
 
 
@@ -311,8 +282,10 @@ footer
 footer{ width:100%; background-color:#7ecef4; margin-top:60px; padding:20px 0; text-align:center; font-size:12px; color:#003c58; }
 footer a:link, footer a:visited{	color:#003c58;	text-decoration:none;}
 footer a:hover, footer　a:active{	color:#003c58;	text-decoration:underline;}
+footer ul li{ display:inline-block; padding:0 10px;}
 .ftr_copyrights{ font-size:20px; vertical-align: sub}
 @media  (max-width: 736px) {
+footer ul{ padding:0 10px;}
 footer{ background-color:#7ecef4; margin-top:60px; padding:5px 0; text-align:center; font-size:12px; color:#003c58; line-height:1.4em}
 }
 
@@ -593,8 +566,9 @@ a.report_btn:hover{ opacity:0.7}
 	text-align: center;
 	font-weight: bold;
 	font-size: 18px;
+	color:#003c58;
 }
-p + .form_title , div + .form_title{ margin-top:30px;}
+p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .form_set_container{ width:978px; border:1px solid #cbe7f4; display:table; padding:0 20px; }
 .form_set_container + .form_set_container{ border-top:none; margin-top:-1px}
 .form_left_container{ width:760px; display:table-cell; vertical-align:middle; border-right:1px solid #cbe7f4; padding-right:20px;}
@@ -704,6 +678,82 @@ p + .form_title , div + .form_title{ margin-top:30px;}
 
 
 
+/* ----------------------------------------------------------
+
+グラフ設定値変更
+
+---------------------------------------------------------- */
+.form_set_container.graph_form table th{ background-color:#cbe7f4;}
+
+.settingContainer{ display:table;}
+.settingInner{ display:table-cell; text-align:center; vertical-align:middle;}
+.graphSettingTrue{ width:60%; margin:0 auto 20px; display:block;}
+.graphSettingFalse{ width:40%; margin:0 auto; display:block;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------
+
+ヘルプ
+
+---------------------------------------------------------- */
+.allOpenBtn .switchOn{ background:url(../images/help/btn_open_all.png) 0 1px no-repeat; background-size:24px 60px; padding-left:30px; padding:5px 0 5px 30px; }
+.allOpenBtn .switchOn.nowOpen { background-position: 0 -35px;}
+
+.qList{ margin-bottom:60px;}
+.qList dt.switchOn{ padding: 5px 15px;
+     background:url(../images/help/btn_open_all.png) 5px 5px no-repeat #CBE7F5; background-size:24px 60px; padding-left:38px; min-height:28px; 
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+	color:#003c58;
+	margin-bottom:10px;
+}
+.qList dt.switchOn.nowOpen { background-position: 5px -29px;}
+.qList dd{ margin-bottom:20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------
+
+ニュース
+
+---------------------------------------------------------- */
+.news_titleSet{ position:relative;}
+.news_btn_detail{ position:absolute; top:0; right:0;}
+.newsList dt{ width:100px; float:left; clear:left; font-size:12px; color:#999; margin-bottom:10px;}
+.newsList dd{ margin-left:100px; margin-bottom:10px;}
+ul.pagingList{ width:100%;text-align: center;}
+ul.pagingList li{ display: inline; padding:10px;}
+a.nowHere{ background-color:#EEE; padding:10px; }
+a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#4b4948 !important; text-decoration:none}
+.news_h2{ font-size:34px; line-height:1.6em; font-weight:bold; color:#003c58; margin-bottom:20px; }
+.news_detail_time{ color:#999; background:url(../images/news/icon_time.png) 0 5px no-repeat; background-size:16px; padding-left:20px;}
+.post-body{ margin-top:20px; padding-bottom:40px;}
+
+
+
+
+
 
 /* ----------------------------------------------------------
 
@@ -747,4 +797,6 @@ p + .form_title , div + .form_title{ margin-top:30px;}
 @media  (min-width: 774px) and  (max-height: 560px) {
 #loginTop{ width:800px; height:460px; margin:0 auto; position:relative;}
 }
-.attention_01{ display:none;}
+
+
+#attention_01{ display:none;}

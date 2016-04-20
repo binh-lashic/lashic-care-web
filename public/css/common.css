@@ -48,6 +48,7 @@ body {
 /* End hide from IE-mac */
 
 
+.dispayNone{ display:none;}
 .hidden {
 	overflow: hidden;
 	text-indent: 100%;
@@ -56,6 +57,9 @@ body {
 /* margin */
 .mgt0 {
 	margin-top: 0 !important;
+}
+.mgt5 {
+	margin-top: 5px !important;
 }
 .mgt10 {
 	margin-top: 10px !important;
@@ -318,6 +322,7 @@ strong {
 	font-size: 18px;
 	line-height: 24px;
 }
+.txt_normal{ font-weight:normal;}
 
 
 
@@ -358,8 +363,8 @@ a.alpha:hover img, a.alpha:active img {
 
 
 
-.link_next:before{ font-size: 8px;
-    padding: 0 .5em 0 0;
+.link_next:after{ font-size: 8px;
+    padding: 0 0 0 .5em;
     content: "\25b6";
     color: #003c58;
 }
@@ -394,6 +399,9 @@ a.alpha:hover img, a.alpha:active img {
 
 
 /* button */
+.radius20 {
+	border-radius: 20px !important;
+}
 
 .btn_text {
 	border:none;
@@ -415,17 +423,17 @@ a.alpha:hover img, a.alpha:active img {
 .btn_lightGray {
 	border:none;
 	border-radius: 6px;
-    background-image: -moz-linear-gradient( 90deg, rgb(204,204,204) 0%, rgb(221,221,221) 100%);
-    background-image: -webkit-linear-gradient( 90deg, rgb(204,204,204) 0%, rgb(221,221,221) 100%);
-    background-image: -ms-linear-gradient( 90deg, rgb(204,204,204) 0%, rgb(221,221,221) 100%);
+    background-image: -moz-linear-gradient( 90deg, rgb(180,180,180) 0%, rgb(245,245,245) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(180,180,180) 0%, rgb(245,245,245) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(180,180,180) 0%, rgb(245,245,245) 100%);
 	font-size: 14px;
-	line-height: 1em;
 	padding: 5px 10px;
 	text-align: center;
 	color:#4b4948 !important;
 	outline:none;
 	cursor:pointer;
 	text-decoration:none !important;
+	text-shadow:1px 0 1px #FFF;
 }
 .btn_text:hover{ opacity:0.7; text-decoration:none;}
 .btn_text_large{ padding:8px; text-decoration:none;}
@@ -475,6 +483,7 @@ a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
 	text-decoration:none;
 }
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+.center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 
 .center_container [type=submit]:hover {
@@ -512,8 +521,43 @@ a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
 
 
 
+/* ----------------------------------------------------------
 
-/* form */
+コンテンツ
+
+---------------------------------------------------------- */
+#contentBox{ width:770px; float:right;}
+#contentBoxLarge{ width:100%; min-height:400px;}
+.contentHalf{ width:47%;}
+.content_h1{ background-color:#7ecef4; font-size:22px; font-weight:normal; color:#003c58; padding:10px 10px 10px 41px; margin-bottom:30px;}
+.content_h2{ font-size:20px; color:#003c58; font-weight:normal; padding-bottom:10px; border-bottom:1px solid #DDD; margin-bottom:20px;}
+.content_h3{ font-size:16px; color:#003c58; font-weight:normal; margin-bottom:10px; border-left:3px solid #003c58; padding-left:8px; line-height:1em;}
+.contentLarge_h1{ font-size:32px; color:#003c58; margin:10px 0 30px; font-weight:normal}
+.contentLarge_h2{ font-size:20px; font-weight:normal; border-bottom:1px dotted #003c58; color:#003c58; margin-bottom:30px; padding-bottom:8px }
+.contentLarge_h2 h2{ font-size:20px; color:#003c58; border-left:3px solid #003c58; padding-left:8px; font-weight:normal}
+
+p + .content_h2 , p + .content_h3 , p + .contentLarge_h2 { margin-top:30px;}
+div + .content_h2 , div + .content_h3 , div + .contentLarge_h2 , .contentLarge_h1 + .contentLarge_h2{ margin-top:50px;}
+
+#pankuzu{ background-color:#EEE; margin-bottom:50px; padding:6px 0; font-size:12px;}
+#pankuzu a{ color:#4b4948; text-decoration:none}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------
+
+フォーム
+
+---------------------------------------------------------- */
 .icon_Required{ background-color:#c5001f; padding:5px; color:#FFF; font-size:12px;}
 .input_text {
 	border: 1px solid #DDD;
@@ -529,6 +573,7 @@ a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
 .input_large {
 	width: 80%;
 }
+.input_textarea{ width:80%; height:200px;}
 .common_select select {
 	padding: 5px 40px 5px 10px;
 	-webkit-appearance: none;
@@ -630,6 +675,84 @@ input[type=checkbox]:checked + label::after {
 }
 
 
+/* スライダー */
+input[type=range]{ width:500px; -webkit-appearance: none; outline:none !important; margin:0; cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track {
+    height: 20px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 20px;
+    background: #003c58;
+	padding:0;
+	margin:0;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+/* スライダー firefox */
+input[type=range]::-moz-range-track {
+    height: 20px;
+    background: #ddd;
+    border-radius: 3px;
+	outline:none;
+}
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 20px;
+
+    background: #003c58;
+	padding:0;
+	margin:0;
+	outline:none;
+}
+/* スライダー 3段階の場合 */
+input[type=range].rangeNo03::-webkit-slider-thumb {
+    width: 33.3333%;
+}
+input[type=range].rangeNo03::-moz-range-thumb {
+    width: 33.3333%;
+}
+/* スライダー 4段階の場合 */
+input[type=range].rangeNo04::-webkit-slider-thumb {
+    width: 25%;
+}
+input[type=range].rangeNo04::-moz-range-thumb {
+    width: 25%;
+}
+/* スライダー 5段階の場合 */
+input[type=range].rangeNo05::-webkit-slider-thumb {
+    width: 20%;
+}
+input[type=range].rangeNo05::-moz-range-thumb {
+    width: 20%;
+}
+/* スライダー 6段階の場合 */
+input[type=range].rangeNo06::-webkit-slider-thumb {
+    width: 16.66%;
+}
+input[type=range].rangeNo06::-moz-range-thumb {
+    width: 16.66%;
+}
+
+
+
+.form_set_container table.rangeCount{ width:500px; table-layout: fixed; margin-top:8px; margin-bottom:0;}
+.form_set_container table.rangeCount tr{ border:0;}
+.form_set_container table.rangeCount td{ text-align:center; border-right:1px dotted #DDD; font-size:12px; padding:0;}
+.form_set_container table.rangeCount td:first-child{ border-left:1px dotted #DDD;}
+
 
 
 
@@ -638,6 +761,7 @@ input[type=checkbox]:checked + label::after {
 
 
 /* flow矢印 */
+p + .flowSet{ margin-top:30px;}
 .flowSet ol{ width: 100%; height: 55px; display:table; border:1px solid #003c58; margin-bottom:30px;}
 .flowSet ol li {
 	display:table-cell;
