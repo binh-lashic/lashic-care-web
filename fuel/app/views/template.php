@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Care Eye ケア　アイ - ユーザーの様子</title>
+<title>Care Eye ケア　アイ - <?php echo $title; ?></title>
 <meta name="keywords" content="ケア　アイ,ケア,アイ,見守り">
 <meta name="description" content="ケア　アイの管理画面です。">
 <meta name="robots" content="all">
@@ -68,22 +68,20 @@ Shadowbox.init({
 </main>
 <footer>
   <ul>
-    <li><a href="news/index.html">運営者からのお知らせ</a></li>
-    <li><a href="terms/index.html">利用規約</a></li>
+    <li><a href="/page/news">運営者からのお知らせ</a></li>
+    <li><a href="/page/terms">利用規約</a></li>
     <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-    <li><a href="privacy/index.html">プライバシーポリシー</a></li>
-    <li><a href="contact/index.html">お問い合わせ</a></li>
+    <li><a href="/page/privacy">プライバシーポリシー</a></li>
+    <li><a href="/page/contact">お問い合わせ</a></li>
   </ul>
   <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
-<div id="attention_01">
-  <div class="attention_01"><p>ただ今制作<br>5月中旬公開予定</p></div>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 
 <script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
 <script src="/js/drawer.min.js" charset="utf-8"></script> 
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
+
 <!-- 円グラフ --> 
 <script src="/js/jquery.circliful.min.js"></script> 
 <script>
@@ -95,5 +93,6 @@ $(document).ready(function(){
 <script src="/js/jquery.tile.js" type="text/javascript"></script> 
 <script src="/js/content.js" type="text/javascript"></script>
 <script src="/js/main.js" type="text/javascript"></script> 
+<script src="/js/jquery.switchHat.js" charset="utf-8"></script> 
 </body>
 </html>

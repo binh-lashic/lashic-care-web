@@ -31,20 +31,18 @@ class Model_User extends Orm\Model{
 		'emergency_cellular_2',
 		'profile_image',
 		'created_at',
-		'temperature_alert',
-		'fire_alert',
-		'heatstroke_alert',
-		'hypothermia_alert',
-		'humidity_alert',
-		'mold_mites_alert',
-		'illuminance_daytime_alert',
-		'illuminance_night_alert',
-		'disconnection_alert',
-		'reconnection_alert',
-		'wake_up_alert',
-		'abnormal_behavior_alert',
-		'active_non_detection_alert',
 	);
+
+    public static function validate($factory)
+	{
+		$val = Validation::forge($factory);
+		$val->add_field('name', '', 'required');
+		$val->add_field('kana', '', 'required');
+		$val->add_field('email', '', 'required');
+		$val->add_field('gender', '', 'required');
+		$val->add_field('phone', '', 'required');
+		return $val;
+	}
 
 	public static function createTable() {
 		try {
@@ -81,20 +79,7 @@ class Model_User extends Orm\Model{
 		 emergency_phone_2 NVARCHAR(50),
 		 emergency_cellular_2 NVARCHAR(50),
 		 profile_image NVARCHAR(255),
-		 created_at INT,
-		 temperature_alert INT,
-		 fire_alert INT,
-		 heatstroke_alert INT,
-		 hypothermia_alert INT,
-		 humidity_alert INT,
-		 mold_mites_alert INT,
-		 illuminance_daytime_alert INT,
-		 illuminance_night_alert INT,
-		 disconnection_alert INT,
-		 reconnection_alert INT,
-		 wake_up_alert INT,
-		 abnormal_behavior_alert INT,
-		 active_non_detection_alert INT
+		 created_at INT
 		) ON [PRIMARY];";
 		try {
 			DB::query($sql)->execute();
@@ -131,19 +116,6 @@ class Model_User extends Orm\Model{
 			'emergency_name_2',		
 			'emergency_phone_2',
 			'emergency_cellular_2',	
-			'temperature_alert',
-			'fire_alert',
-			'heatstroke_alert',
-			'hypothermia_alert',
-			'humidity_alert',
-			'mold_mites_alert',
-			'illuminance_daytime_alert',
-			'illuminance_night_alert',
-			'disconnection_alert',
-			'reconnection_alert',
-			'wake_up_alert',
-			'abnormal_behavior_alert',
-			'active_non_detection_alert',
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];

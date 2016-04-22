@@ -31,8 +31,8 @@ foreach($clients as $_client) {
 <?php
 }
 ?>
-						<li class="nav_user-admin"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
-						<li class="nav_userListRegist"><a href="#attention_01" rel="shadowbox[cont]" class="btn_darkBlue">ユーザーを追加する</a></li>
+						<li class="nav_user-admin"><a href="/user/list" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
+						<li class="nav_userListRegist"><a href="/user/add" class="btn_darkBlue">ユーザーを追加する</a></li>
 					</ul>
 				</li>
 				<li class="drawer-dropdown nav_mainMenu">
@@ -40,10 +40,10 @@ foreach($clients as $_client) {
 					  メニュー <span class="drawer-caret"></span>
 					</a>
 					<ul class="drawer-dropdown-menu">
-						<li class="nav_mypage"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">マイページ</a></li>
-						<li class="nav_set"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">グラフ設定変更</a></li>
-						<li class="nav_help"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ヘルプ</a></li>
-						<li class="nav_logout"><a href="#attention_01" rel="shadowbox[cont]" class="drawer-dropdown-menu-item">ログアウト</a></li>
+						<li class="nav_mypage"><a href="/user/account" class="drawer-dropdown-menu-item">マイページ</a></li>
+						<li class="nav_set"><a href="/user/setting" class="drawer-dropdown-menu-item">グラフ設定変更</a></li>
+						<li class="nav_help"><a href="/page/help" class="drawer-dropdown-menu-item">ヘルプ</a></li>
+						<li class="nav_logout"><a href="/user/logout" class="drawer-dropdown-menu-item">ログアウト</a></li>
 					</ul>
          		 </li>
 <?php	
@@ -53,32 +53,34 @@ foreach($clients as $_client) {
 		</nav>
 	</div>
 </header>
+<?php
+if(isset($client['name'])) {
+?>
 <!-- blue area -->
 <div class="hdr_bg">
 	<div class="content clearfix">
 		<!-- ユーザー名 -->
 		<div class="user_select">
-		<?php
-if(isset($client['name'])) {
-?>
+
 			<div class="hdr_select_text"><p><?php echo $client['name']; ?><span class="com_userSmall">さん</span></p></div>
-<?php
-}
-?>
+
 
 		</div>
 		<!-- /ユーザー名 --> 
 		<div id="content_nav">
 			<nav>
 				<ul>
-					<li class="nav_on"><a href="index.html" class="nav_graph"><span></span>ユーザーの様子</a></li>
-					<li><a href="report/index.html" class="nav_report"><span></span>確認・報告</a></li>
+					<li class="nav_on"><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
+					<li><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 </div>
 <!-- /blue area end --> 
+<?php
+}
+?>
 <!-- content -->
 <main role="main" class="clearBoth">
 	<div class="clearfix content"> 
@@ -100,4 +102,22 @@ if(!empty($this->data['header_alerts'])) {
 }
 ?>
 	</div>
+<?php
+if(!empty($breadcrumbs)) {
+?>
+	<div id="pankuzu">
+		<div class="content">
+		<a href="/user/">ホーム</a>
+<?php
+	foreach($breadcrumbs as $breadcrumb) {
+?>
+		&nbsp;&gt;&nbsp; <?php echo $breadcrumb; ?>
+<?php
+	}
+?>
+		</div>
+	</div>
+<?php
+}
+?>
 	<div class="clearfix content"> 

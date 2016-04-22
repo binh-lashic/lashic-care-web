@@ -655,12 +655,14 @@ class Model_Sensor extends Orm\Model{
 
 	    	$description = $params['description'];
 
+/*
 			if(isset($params['logs'])) {
 				foreach($params['logs'] as $key => $value) {
 					$description .= "\r\n".$key."=".$value;
 				}
 			}
-
+*/
+			
 			$params['description'] = $description;
 
 			$alert = \Model_Alert::forge();

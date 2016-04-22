@@ -62,6 +62,16 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->content = View::forge('admin/user/sensors', $data);
     }
 
+    public function action_contract() {
+        $id = Input::param("user_id");
+        if($id) {
+            $user = Model_User::find($id);
+            $data['user'] = $user;
+        }
+        $this->template->title = '会員ページ';
+        $this->template->content = View::forge('admin/user/contract_list', $data);
+    }
+
     public function action_add_sensor() {
         $user_id = Input::param("user_id");
         $name = Input::param("name");

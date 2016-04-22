@@ -21,6 +21,13 @@ if(isset($admins)) {
 		</div>
 	</div>
 	<div class="col-sm-6">
+		<div>
+			<ul class="nav nav-tabs">
+				<li><a href="/admin/user/contract?user_id=<?php echo $admin['id']; ?>">契約</a></li>
+				<li><a href="#">機器</a></li>
+				<li><a href="#">担当</a></li>
+			</ul>
+		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">ユーザの新規登録</div>
 			<div class="panel-body">
