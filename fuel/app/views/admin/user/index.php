@@ -23,7 +23,7 @@ if(isset($admins)) {
 	<div class="col-sm-6">
 		<div>
 			<ul class="nav nav-tabs">
-				<li><a href="/admin/user/contract?user_id=<?php echo $admin['id']; ?>">契約</a></li>
+				<li><a href="/admin/user/contract?user_id=<?php echo isset($admin['id']) ? $admin['id'] : ""; ?>">契約</a></li>
 				<li><a href="#">機器</a></li>
 				<li><a href="#">担当</a></li>
 			</ul>
