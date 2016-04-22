@@ -121,11 +121,27 @@ if($alert['category'] === "night") {
 ?>
 								<span class="report_category_kishou">起床</span>
 <?php
+} else {
+?>
+								<span class="report_category_kinkyu">【緊急】</span>
+<?php
 }
 ?>
 							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
-							<td><?php if($alert['confirm_status'] == 1) { echo "済"; } else { echo "未"; } ?></td>
+							<td>
+<?php
+if($alert['confirm_status'] == 1) {
+?>
+								<span class="report_state_taiouzumi">対応済み</span>
+<?php
+} else {
+?>
+								<span class="report_state_mitaiou">未対応</span>
+<?php
+} 
+?>
+							</td>
 							<td><?php if($alert['confirm_user']) echo $alert['confirm_user']['name']; ?></td>
 							<td>
 								<a name="1"></a>
