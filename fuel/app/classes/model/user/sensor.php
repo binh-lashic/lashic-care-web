@@ -75,4 +75,18 @@ class Model_User_Sensor extends Orm\Model{
     	}
     	return null;
     }
+
+    public static function getUserSensor($params) {
+		if(!empty($params['id'])) {
+	    	$user_sensor = \Model_User_Sensor::find($params['id']);
+		} else {
+			$user_sensor = \Model_User_Sensor::find("first", array(
+				"where" => array(
+					"user_id" => $params['user_id'],
+					"sensor_id" => $params['sensor_id'],
+				)
+			));
+		}
+    	return $user_sensor;
+    }
 }

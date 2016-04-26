@@ -218,20 +218,4 @@ class Controller_Api_User extends Controller_Api
         }
         return $this->result();
 	}
-
-	public function post_save_sensor() {
-		return $this->_save_sensor();
-	}
-
-	public function get_save_sensor() {
-		return $this->_save_sensor();
-	}
-
-	public function _save_sensor() {
-		$sensor = \Model_User_Sensor::saveUserSensor(Input::param());
-		$this->result = array(
-			'data' => $sensor
-		);
- 		return $this->result();
-	}
 }
