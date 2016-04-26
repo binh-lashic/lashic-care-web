@@ -88,6 +88,7 @@ $(function(){
 				        "lineColor": "#FF9900",
 				        "lineThickness": 2,
 				        "title": "室温",
+				        "connect": false,
 				        "valueField": "temperature",
 					});			
 			}
@@ -106,6 +107,7 @@ $(function(){
 				        "lineColor": "#88D3F5",
 				        "lineThickness": 2,
 				        "title": "湿度",
+				        "connect": false,
 				        "valueField": "humidity",
 					});			
 			}
@@ -124,6 +126,7 @@ $(function(){
 				        "lineColor": "#DED31C",
 				        "lineThickness": 2,
 				        "title": "照度",
+				        "connect": false,
 				        "valueField": "illuminance",
 					});			
 			}
@@ -144,7 +147,8 @@ $(function(){
 				        "fillAlphas": 1,
 				        "title": "運動量",
 				        "type": "column",
-				        "valueField": "active"
+				        "connect": false,
+				        "valueField": "active",
 				    });			
 			}
 			var chart = AmCharts.makeChart("graph", {
