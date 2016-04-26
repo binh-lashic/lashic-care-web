@@ -160,6 +160,12 @@ class Controller_User extends Controller_Page
 
         if(Input::post()) {
         	$val = \Model_User::validate("save");
+        	if(!Input::post('new_email')) {
+        		$this->data['errors']['new_email'] = true;
+        	}
+        	if(!Input::post('new_email_confirm')) {
+        		$this->data['errors']['new_email_confirm'] = true;
+        	}
         	if(Input::post('new_email') != Input::post('new_email_confirm')) {
         		$this->data['errors']['new_email_confirm'] = true;
         	}

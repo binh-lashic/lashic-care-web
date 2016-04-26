@@ -42,6 +42,16 @@ class Model_Sensor extends Orm\Model{
 		'sleep_threshold',
 		'sleep_duration',
 		'sleep_ignore_duration'
+		'temperature_level',
+		'fire_level',
+		'heatstroke_level',
+		'humidity_level',
+		'mold_mites_level',
+		'illuminance_daytime_level',
+		'illuminance_night_level',
+		'disconnection_level',
+		'wake_up_level',
+		'sleep_level',
 	);
 
 	// Model_Post の中身は、多くのユーザーに属しています。
@@ -100,7 +110,17 @@ class Model_Sensor extends Orm\Model{
   sleep_end_time INT,
   sleep_threshold INT,
   sleep_duration INT,
-  sleep_ignore_duration INT
+  sleep_ignore_duration INT,
+  temperature_level INT DEFAULT 2,
+  fire_level INT DEFAULT 2,
+  heatstroke_level INT DEFAULT 2,
+  humidity_level INT DEFAULT 2,
+  mold_mites_level INT DEFAULT 2,
+  illuminance_daytime_level INT DEFAULT 2,
+  illuminance_night_level INT DEFAULT 2,
+  disconnection_level INT DEFAULT 2,
+  wake_up_level INT DEFAULT 2,
+  sleep_level INT DEFAULT 2,
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
