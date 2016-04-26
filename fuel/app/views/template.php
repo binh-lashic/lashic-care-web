@@ -58,6 +58,7 @@ Shadowbox.init({
 <!-- /light box -->
 <script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
+<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 </head>
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>

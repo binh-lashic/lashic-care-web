@@ -38,7 +38,7 @@ class Model_User extends Orm\Model{
 		$val = Validation::forge($factory);
 		$val->add_field('name', '', 'required');
 		$val->add_field('kana', '', 'required');
-		$val->add_field('email', '', 'required');
+//		$val->add_field('email', '', 'required');
 		$val->add_field('gender', '', 'required');
 		$val->add_field('phone', '', 'required');
 		return $val;
@@ -225,9 +225,11 @@ class Model_User extends Orm\Model{
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
 		}
+		/*
 		if(empty($params['admin'])) {
 			$params['admin'] = 0;
 		}
+		*/
 		try {
 			if(!empty($params['id'])) {
 				$id = $params['id'];

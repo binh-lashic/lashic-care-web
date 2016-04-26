@@ -39,6 +39,11 @@ $(function(){
 		drawGraph();
 	});
 
+	$(".link_back").click(function() {
+		history.back();
+	});
+
+
 	$(".save_alert").click(function() {
 		var id = $(this).attr('data-id');
 		var confirm = $("#confirm" + id).val();

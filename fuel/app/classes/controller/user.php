@@ -108,30 +108,49 @@ class Controller_User extends Controller_Page
         $this->template->title = 'マイページ';
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
+        
+        $this->template->header = View::forge('header', $this->data);
 
         if(Input::post()) {
-        	print_r(Input::post());
         	$val = \Model_User::validate("save");
         	if($val->run()) {
-				//print_r($val);
+        		$params = Input::post();
+				if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+					$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+				}
+				$this->data['data'] = $params;
+        		$this->template->content = View::forge('user/account_basic_confirm', $this->data);
+        		return;
         	} else {
-        		print_r($val->error());
+        		$errors = $val->error();
+        		foreach($errors as $key => $error) {
+          			print_r($key);
+        		}
         	}
         }
-        exit;
 
         if(empty($this->data['user']['birthday'])) {
         	$this->data['user']['year'] = "1945";
+	        $this->data['user']['month'] = 1;
+	        $this->data['user']['day'] = 1;
         } else {
 	        $this->data['user']['year'] = date("Y", strtotime($this->data['user']['birthday']));
 	        $this->data['user']['month'] = date("n", strtotime($this->data['user']['birthday']));
 	        $this->data['user']['day'] = date("j", strtotime($this->data['user']['birthday']));
         }
-        print_r($this->data['user']);
-        $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/account_basic_form', $this->data);
     }
 
+	public function action_account_basic_complete()
+	{
+        $this->template->title = 'マイページ';
+
+        if(Input::post()) {
+        	\Model_User::saveUser(Input::post());
+        }
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/account_basic_complete', $this->data);
+    }
 	public function action_info()
 	{
         $this->template->title = 'マイページ';

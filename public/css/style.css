@@ -536,9 +536,9 @@ a.report_btn:hover{ opacity:0.7}
 
 
 /* 状態 */
-.report_state_mitaiou{ background-color:#ffc7c7; border:1px solid #f5a2a2; color:#ff4040; padding:5px;}
-.report_state_taiouzumi{ background-color:#DDD; border:1px solid #CCC; color:#4c4948; padding:5px;}
-.report_state_taiouyotei{ background-color:#c5ecdf; border:1px solid #a4dfcb; color:#3faf44; padding:5px;}
+.report_state_mitaiou{ background-color:#ffc7c7; border:1px solid #f5a2a2; color:#ff4040; padding:0; display:block}
+.report_state_taiouzumi{ background-color:#DDD; border:1px solid #CCC; color:#4c4948; padding:0; display:block}
+.report_state_taiouyotei{ background-color:#c5ecdf; border:1px solid #a4dfcb; color:#3faf44; padding:0; display:block}
 .report_state_taiouhuyou{ color:#aaaaaa; padding:5px;}
 
 
@@ -578,7 +578,7 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .form_set_container table{ width:100%; margin-top:15px; border-collapse:collapse; margin-bottom:20px;}
 .form_set_container table tr{ border-bottom: 1px dotted #c2c2c2;}
 .form_set_container table tr:nth-child(even) { background-color:#f6f6f6; }
-.form_set_container table th{ width:138px; padding:10px; text-align:left; vertical-align:top}
+.form_set_container table th{ width:138px; padding:10px; text-align:left; vertical-align:top;}
 .form_set_container table th.largeTh{ width:250px; padding:10px; text-align:left; vertical-align:top}
 .form_set_container table td{ padding:10px; }
 

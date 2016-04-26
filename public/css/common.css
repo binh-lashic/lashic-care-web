@@ -558,7 +558,7 @@ div + .content_h2 , div + .content_h3 , div + .contentLarge_h2 , .contentLarge_h
 フォーム
 
 ---------------------------------------------------------- */
-.icon_Required{ background-color:#c5001f; padding:5px; color:#FFF; font-size:12px;}
+.icon_Required{ background-color:#c5001f; padding:0 5px; color:#FFF; font-size:12px; float:right;}
 .input_text {
 	border: 1px solid #DDD;
 	font-size: 14px;
