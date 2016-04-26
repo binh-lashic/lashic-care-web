@@ -31,16 +31,23 @@ class Model_User extends Orm\Model{
 		'emergency_cellular_2',
 		'profile_image',
 		'created_at',
+		'subscription',
 	);
 
     public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('name', '', 'required');
-		$val->add_field('kana', '', 'required');
-//		$val->add_field('email', '', 'required');
-		$val->add_field('gender', '', 'required');
-		$val->add_field('phone', '', 'required');
+		switch($factory) {
+			case "basic":
+				$val->add_field('name', '', 'required');
+				$val->add_field('kana', '', 'required');
+				$val->add_field('gender', '', 'required');
+				$val->add_field('phone', '', 'required');				
+				break;
+			case "email":
+				$val->add_field('email', '', 'required');
+				break;
+		}
 		return $val;
 	}
 
@@ -79,7 +86,8 @@ class Model_User extends Orm\Model{
 		 emergency_phone_2 NVARCHAR(50),
 		 emergency_cellular_2 NVARCHAR(50),
 		 profile_image NVARCHAR(255),
-		 created_at INT
+		 created_at INT,
+		 subscription INT DEFAULT 1,
 		) ON [PRIMARY];";
 		try {
 			DB::query($sql)->execute();
@@ -116,6 +124,7 @@ class Model_User extends Orm\Model{
 			'emergency_name_2',		
 			'emergency_phone_2',
 			'emergency_cellular_2',	
+			'subscription',
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];

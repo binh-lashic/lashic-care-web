@@ -151,6 +151,36 @@ class Controller_User extends Controller_Page
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/account_basic_complete', $this->data);
     }
+
+    	public function action_account_mail_form()
+	{
+        $this->template->title = 'マイページ';
+        
+        $this->template->header = View::forge('header', $this->data);
+
+        if(Input::post()) {
+        	$val = \Model_User::validate("save");
+        	if(Input::post('new_email') != Input::post('new_email_confirm')) {
+        		$this->data['errors']['new_email_confirm'] = true;
+        	}
+			$this->data['data'] = Input::post();
+    		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
+    		return;
+        }
+        $this->template->content = View::forge('user/account_mail_form', $this->data);
+    }
+
+	public function action_account_mail_complete()
+	{
+        $this->template->title = 'マイページ';
+
+        if(Input::post()) {
+        	\Model_User::saveUser(Input::post());
+        }
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/account_mail_complete', $this->data);
+    }
+
 	public function action_info()
 	{
         $this->template->title = 'マイページ';

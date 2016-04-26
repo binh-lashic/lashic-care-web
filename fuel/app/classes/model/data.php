@@ -28,7 +28,7 @@ class Model_Data extends Orm\Model{
     }
 
     public static function getLatestData($sensor_name) {
-        $data = \Model_Data::query()->where('sensor_id', $sensor_name)->order_by('date', 'desc')->connection("data")->get_one();
+        $data = \Model_Data::query()->where('sensor_id', $sensor_name)->where('date', '>', date("Y-m-d H:i:s", strtotime("-10minutes")))->order_by('date', 'desc')->connection("data")->get_one();
         return \Model_Data::format($data);
     }
 

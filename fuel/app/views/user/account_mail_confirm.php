@@ -2,13 +2,13 @@
 		
 		<!-- content start メールアドレス確認 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" method="/user/account_mail_complete" method="post">
 				<h1 class="contentLarge_h1">アカウント　メールアドレス変更申し込み確認</h1>
 				<p>以下の入力内容でお間違いないかご確認ください。</p>
 				<!-- /メールアドレス -->
 				<h2 class="form_title">メールアドレス</h2>
 				<div class="form_set_container">
-						<p class="center mgt20 mgb20">info@dm02.org</p>
+						<p class="center mgt20 mgb20"><?php echo $data['new_email']; ?></p>
 				</div>
 				<!-- /メールアドレス--> 
 				

@@ -65,6 +65,7 @@ class Controller_Api_Data extends Controller_Api
 							'active' => round($data['active'], 1),
 							'illuminance' =>  (int)$data['illuminance'],
 							'discomfort' => $data['discomfort'],
+							'date' => $data['date'],
 					);
 				}
 			}

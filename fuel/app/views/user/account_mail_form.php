@@ -1,6 +1,7 @@
 		<!-- content start メールアドレス変更エラー -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user/account_mail_form" method="post">
+				<input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 				<h1 class="contentLarge_h1">アカウント　メールアドレス変更申し込み入力</h1>
 				<p>新しいメールアドレスを入力してください。<br>
 <span class="text_red">※携帯メールアドレスをご登録の際はPCメールの受信設定を確認し、「×××@×××.com」を受信できるように設定してください。</span></p>
@@ -10,30 +11,33 @@
 						<table>
 								<tbody>
 									<tr>
-										<th class="largeTh"><span class="icon_Required">必須</span> 現在のメールアドレス</th>
-										<td><input type="text" class="input_text input_medium"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
-											<p class="error">現在のメールアドレスを入力してください。</p>
-											<p class="error">現在のメールアドレスが一致しません。</p>
-										</td>
-									</tr>
-									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス</th>
-										<td><input type="text" class="input_text input_medium"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+										<td><input type="text" class="input_text input_medium" name="new_email"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+<?php
+if(!empty($errors['new_email'])) {
+?>
 											<p class="error">変更するメールアドレスを入力してください。</p>
-										</td>
+<?php
+}
+?>										</td>
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス　確認</th>
-										<td><input type="text" class="input_text input_medium"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+										<td><input type="text" class="input_text input_medium" name="new_email_confirm"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+<?php
+if(!empty($errors['new_email_confirm'])) {
+?>
 											<p class="error">変更するメールアドレスが一致しません。</p>
-										</td>
+<?php
+}
+?>										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 当社からのメール案内</th>
 										<td>
-											<input type="radio" id="yes" name="news_mail" checked >
+											<input type="radio" id="yes" name="subscription" <?php if($user['subscription'] == 1) { echo "checked=\"checked\""; } ?>>
 											<label for="yes" class="checkbox">受け取る</label>
-											<input type="radio" id="no" name="news_mail" >
+											<input type="radio" id="no" name="subscription" <?php if($user['subscription'] == 0) { echo "checked=\"checked\""; } ?>>
 											<label for="no" class="checkbox">受け取らない</label></td>
 									</tr>
 								</tbody>

@@ -16,11 +16,11 @@
 								</tr>
 								<tr>
 									<th>性別</th>
-									<td colspan="3"><?php echo $user['gender']; ?></td>
+									<td colspan="3"><?php echo $user['gender'] == "m" ? "男性" : "女性"; ?></td>
 								</tr>
 								<tr>
 									<th>生年月日</th>
-									<td colspan="3"><?php echo $user['birthday']; ?></td>
+									<td colspan="3"><?php echo date("Y年m月d日", strtotime($user['birthday'])); ?></td>
 								</tr>
 								<tr>
 								<th>住所</th>
@@ -54,7 +54,7 @@
 							<tr>
 								<th>当社からの<br>
 メール案内</th>
-								<td colspan="3">受け取る</td>
+								<td colspan="3"><?php if($user['subscription']) { echo "受け取る"; } else { echo "受け取らない"; } ?></td>
 							</tr>
 							</tbody>
 						</table>
