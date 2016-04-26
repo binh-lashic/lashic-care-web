@@ -41,7 +41,7 @@ class Model_Sensor extends Orm\Model{
 		'sleep_end_time',
 		'sleep_threshold',
 		'sleep_duration',
-		'sleep_ignore_duration'
+		'sleep_ignore_duration',
 		'temperature_level',
 		'fire_level',
 		'heatstroke_level',
