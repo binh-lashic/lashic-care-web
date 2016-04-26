@@ -54,6 +54,7 @@ class Model_Sensor extends Orm\Model{
 		'sleep_level',
 		'abnormal_behavior_level',
 		'active_non_detection_level',
+		'active_night_level',
 	);
 
 	// Model_Post の中身は、多くのユーザーに属しています。
@@ -124,7 +125,8 @@ class Model_Sensor extends Orm\Model{
   wake_up_level INT DEFAULT 2,
   sleep_level INT DEFAULT 2,
   abnormal_behavior_level INT DEFAULT 2,
-  active_non_detection_level INT DEFAULT 2
+  active_non_detection_level INT DEFAULT 2,
+  active_night_level INT DEFAULT 2
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
