@@ -170,6 +170,7 @@ class Controller_User extends Controller_Page
         		$this->data['errors']['new_email_confirm'] = true;
         	}
 			$this->data['data'] = Input::post();
+			print_r($this->data['data']);
     		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
     		return;
         }

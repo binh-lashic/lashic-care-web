@@ -7,16 +7,15 @@ class Model_User_Sensor extends Orm\Model{
 		'temperature_alert',
 		'fire_alert',
 		'heatstroke_alert',
-		'hypothermia_alert',
 		'humidity_alert',
 		'mold_mites_alert',
 		'illuminance_daytime_alert',
 		'illuminance_night_alert',
-		'disconnection_alert',
-		'reconnection_alert',
 		'wake_up_alert',
+		'sleep_alert',
 		'abnormal_behavior_alert',
 		'active_non_detection_alert',
+		'active_night_alert'
 	);
 
 	protected static $_has_one = array('sensor'=> array(
@@ -40,16 +39,15 @@ class Model_User_Sensor extends Orm\Model{
 	temperature_alert INT DEFAULT 1,
 	fire_alert INT DEFAULT 1,
 	heatstroke_alert INT DEFAULT 1,
-	hypothermia_alert INT DEFAULT 1,
 	humidity_alert INT DEFAULT 1,
 	mold_mites_alert INT DEFAULT 1,
 	illuminance_daytime_alert INT DEFAULT 1,
 	illuminance_night_alert INT DEFAULT 1,
-	disconnection_alert INT DEFAULT 1,
-	reconnection_alert INT DEFAULT 1,
 	wake_up_alert INT DEFAULT 1,
+	sleep_alert INT DEFAULT 1,
 	abnormal_behavior_alert INT DEFAULT 1,
 	active_non_detection_alert INT DEFAULT 1
+	active_night_alert INT DEFAULT 1
 ) ON [PRIMARY];";
 		return DB::query($sql)->execute();
 	}
@@ -89,4 +87,33 @@ class Model_User_Sensor extends Orm\Model{
 		}
     	return $user_sensor;
     }
+
+    public static function format($user) {
+		$ret = array();
+		$keys = array(
+			'temperature_alert',
+			'fire_alert',
+			'heatstroke_alert',
+			'humidity_alert',
+			'mold_mites_alert',
+			'illuminance_daytime_alert',
+			'illuminance_night_alert',
+			'wake_up_alert',
+			'sleep_alert',
+			'abnormal_behavior_alert',
+			'active_non_detection_alert',
+		);
+		foreach($keys as $key) {
+			$ret[$key] = $user[$key];
+		}
+		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		if(isset($ret['birthday'])) {
+			$now = date("Ymd");
+			$birthday = date("Ymd", strtotime($ret['birthday']));
+			$ret['age'] = (int)(floor((int)$now - (int)$birthday) / 10000);
+		} else {
+			$ret['age'] = null;
+		}
+		return $ret;
+	}
 }
