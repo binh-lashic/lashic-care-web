@@ -55,21 +55,6 @@ class Controller_Api_Data extends Controller_Api
 				'data' => array(),
 			);
 
-			//今日だったら最新データにする
-			if($date === date("Y-m-d")) {
-				$data = \Model_Data::getLatestData($sensor->name);
-				if(!empty($data) && isset($sensor)) {
-					$this->result['data'] = array(
-							'temperature' => round($data['temperature'], 1),
-							'humidity' => round($data['humidity'], 1),
-							'active' => round($data['active'], 1),
-							'illuminance' =>  (int)$data['illuminance'],
-							'discomfort' => $data['discomfort'],
-							'date' => $data['date'],
-					);
-				}
-			}
-
 			//アラートの最新データ1件を取得する
 			$alerts = \Model_Alert::getAlerts(array(
 				'sensor_id' => $sensor->id,
@@ -79,20 +64,10 @@ class Controller_Api_Data extends Controller_Api
 			if(!empty($alerts[0])) {
 				$this->result['data']['alert'] = $alerts[0];
 			}
-			
-			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
-			if($data_daily) {
-				//今日以外だったら集計データを使う
-				if(empty($this->result['data'])) {
-					$this->result['data'] = array(
-							'temperature' => round($data_daily['temperature_average'], 1),
-							'humidity' => round($data_daily['humidity_average'], 1),
-							'active' => round($data_daily['active_average'], 1),
-							'illuminance' =>  (int)$data_daily['illuminance_average'],
-							'discomfort' => $data_daily['discomfort_average'],
-					);
-				}
 
+			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
+
+			if($data_daily) {
 				if(!empty($data_daily['wake_up_time'])) {
 					$this->result['data']['wake_up_time'] = date("H:i:s", strtotime($data_daily['wake_up_time']));
 				} else {
@@ -113,7 +88,30 @@ class Controller_Api_Data extends Controller_Api
 				} else {
 					$this->result['data']['sleep_time_average'] = "22:32:45";
 				}
+			}
 
+			//今日だったら最新データにする
+			if($date === date("Y-m-d")) {
+				$data = \Model_Data::getLatestData($sensor->name);
+				if(!empty($data) && isset($sensor)) {
+					$this->result['data'] = array(
+							'temperature' => round($data['temperature'], 1),
+							'humidity' => round($data['humidity'], 1),
+							'active' => round($data['active'], 1),
+							'illuminance' =>  (int)$data['illuminance'],
+							'discomfort' => $data['discomfort'],
+							'date' => $data['date'],
+					);
+				}
+			} else if($data_daily) {
+				//今日以外だったら集計データを使う
+				$this->result['data'] = array(
+						'temperature' => round($data_daily['temperature_average'], 1),
+						'humidity' => round($data_daily['humidity_average'], 1),
+						'active' => round($data_daily['active_average'], 1),
+						'illuminance' =>  (int)$data_daily['illuminance_average'],
+						'discomfort' => $data_daily['discomfort_average'],
+				);
 			}
 		}
 		return $this->result();	
