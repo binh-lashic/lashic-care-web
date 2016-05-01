@@ -88,6 +88,21 @@ class Controller_Api_Data extends Controller_Api
 				} else {
 					$this->result['data']['sleep_time_average'] = "22:32:45";
 				}
+				if(!empty($data_daily['temperature_average'])) {
+					$this->result['data']['temperature']  = round($data_daily['temperature_average'], 1);
+				}
+				if(!empty($data_daily['humidity_average'])) {
+					$this->result['data']['humidity']  = round($data_daily['humidity_average'], 1);
+				}
+				if(!empty($data_daily['active_average'])) {
+					$this->result['data']['active']  = round($data_daily['active_average'], 1);
+				}
+				if(!empty($data_daily['illuminance_average'])) {
+					$this->result['data']['illuminance']  = (int)$data_daily['illuminance_average'];
+				}
+				if(!empty($data_daily['discomfort_average'])) {
+					$this->result['data']['discomfort']  = $data_daily['discomfort_average'];
+				}
 			}
 
 			//今日だったら最新データにする
@@ -103,15 +118,6 @@ class Controller_Api_Data extends Controller_Api
 							'date' => $data['date'],
 					);
 				}
-			} else if(!empty($data_daily)) {
-				//今日以外だったら集計データを使う
-				$this->result['data'] = array(
-						'temperature' => round($data_daily['temperature_average'], 1),
-						'humidity' => round($data_daily['humidity_average'], 1),
-						'active' => round($data_daily['active_average'], 1),
-						'illuminance' =>  (int)$data_daily['illuminance_average'],
-						'discomfort' => $data_daily['discomfort_average'],
-				);
 			}
 		}
 		return $this->result();	
