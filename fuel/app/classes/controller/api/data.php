@@ -67,7 +67,7 @@ class Controller_Api_Data extends Controller_Api
 
 			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
 
-			if($data_daily) {
+			if(!empty($data_daily)) {
 				if(!empty($data_daily['wake_up_time'])) {
 					$this->result['data']['wake_up_time'] = date("H:i:s", strtotime($data_daily['wake_up_time']));
 				} else {
@@ -103,7 +103,7 @@ class Controller_Api_Data extends Controller_Api
 							'date' => $data['date'],
 					);
 				}
-			} else if($data_daily) {
+			} else if(!empty($data_daily)) {
 				//今日以外だったら集計データを使う
 				$this->result['data'] = array(
 						'temperature' => round($data_daily['temperature_average'], 1),
