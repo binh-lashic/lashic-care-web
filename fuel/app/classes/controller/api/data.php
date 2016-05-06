@@ -64,8 +64,7 @@ class Controller_Api_Data extends Controller_Api
 			if(!empty($alerts[0])) {
 				$this->result['data']['alert'] = $alerts[0];
 			}
-			echo \DB::last_query();
-			exit;
+
 			$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
 
 			if(!empty($data_daily)) {
