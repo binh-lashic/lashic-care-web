@@ -109,14 +109,12 @@ class Controller_Api_Data extends Controller_Api
 			if($date === date("Y-m-d")) {
 				$data = \Model_Data::getLatestData($sensor->name);
 				if(!empty($data) && isset($sensor)) {
-					$this->result['data'] = array(
-							'temperature' => round($data['temperature'], 1),
-							'humidity' => round($data['humidity'], 1),
-							'active' => round($data['active'], 1),
-							'illuminance' =>  (int)$data['illuminance'],
-							'discomfort' => $data['discomfort'],
-							'date' => $data['date'],
-					);
+					$this->result['data']['temperature'] = round($data['temperature'], 1);
+					$this->result['data']['humidity'] = round($data['humidity'], 1);
+					$this->result['data']['active'] = round($data['active'], 1);
+					$this->result['data']['illuminance' =  (int)$data['illuminance'],
+					$this->result['data']['discomfort'] = $data['discomfort'];
+					$this->result['data']['date'] = $data['date'];
 				}
 			}
 		}
