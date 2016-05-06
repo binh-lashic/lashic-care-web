@@ -1,8 +1,8 @@
-
-		
 		<!-- content start メールアドレス確認 -->
 		<section id="contentBoxLarge">
-			<form class="form" method="/user/account_mail_complete" method="post">
+			<form class="form" action="/user/account_mail_complete" method="post">
+				<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
+				<input type="hidden" name="email" value="<?php echo $data['new_email']; ?>" />
 				<h1 class="contentLarge_h1">アカウント　メールアドレス変更申し込み確認</h1>
 				<p>以下の入力内容でお間違いないかご確認ください。</p>
 				<!-- /メールアドレス -->

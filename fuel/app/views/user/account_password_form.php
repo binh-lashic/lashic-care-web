@@ -1,6 +1,6 @@
 		<!-- content start パスワード変更　エラー -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="user/account_password_form" method="post">
 				<h1 class="contentLarge_h1">アカウント　パスワード変更入力</h1>
 				<p>新しいパスワードを入力してください。</p>
 				<!-- パスワード -->
@@ -10,20 +10,37 @@
 								<tbody>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 現在のパスワード</th>
-										<td><input type="text" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁</span>
+										<td><input type="password" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁</span>
+<?php
+if(!empty($errors['password'])) {
+?>
 										<p class="error">現在のパスワードが間違っています。</p>
+<?php
+}
+?>	
 									</td>
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード</th>
-										<td><input type="text" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁で、できるだけ複雑な文字の組み合わせでご入力ください。　例）W4eHvmCE</span>
+										<td><input type="password" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁で、できるだけ複雑な文字の組み合わせでご入力ください。　例）W4eHvmCE</span>
+<?php
+if(!empty($errors['new_password'])) {
+?>
 										<p class="error">新しいパスワードを入力してください。</p>
-									</td>
+<?php
+}
+?>										</td>
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード　確認</th>
-										<td><input type="text" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁</span>
+										<td><input type="password" class="input_text input_short" maxlength="8"> <span class="small text_red">※半角英数 8桁</span>
+<?php
+if(!empty($errors['new_password_confirm'])) {
+?>
 										<p class="error">新しいパスワードが一致しません。</p>
+<?php
+}
+?>
 									</td>
 									</tr>
 								</tbody>

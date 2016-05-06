@@ -152,7 +152,7 @@ class Controller_User extends Controller_Page
         $this->template->content = View::forge('user/account_basic_complete', $this->data);
     }
 
-    	public function action_account_mail_form()
+    public function action_account_mail_form()
 	{
         $this->template->title = 'マイページ';
         
@@ -170,7 +170,6 @@ class Controller_User extends Controller_Page
         		$this->data['errors']['new_email_confirm'] = true;
         	}
 			$this->data['data'] = Input::post();
-			print_r($this->data['data']);
     		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
     		return;
         }
@@ -184,10 +183,49 @@ class Controller_User extends Controller_Page
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
         }
+        $this->data['data'] = Input::post();
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/account_mail_complete', $this->data);
     }
 
+    public function action_account_password_form()
+	{
+        $this->template->title = 'マイページ';
+        
+        $this->template->header = View::forge('header', $this->data);
+
+        if(Input::post()) {
+        	$val = \Model_User::validate("save");
+         	if(!Input::post('password')) {
+        		$this->data['errors']['password'] = true;
+        	}
+        	if(!Input::post('new_password')) {
+        		$this->data['errors']['new_password'] = true;
+        	}
+        	if(!Input::post('new_password_confirm')) {
+        		$this->data['errors']['new_password_confirm'] = true;
+        	}
+        	if(Input::post('new_password') != Input::post('new_password_confirm')) {
+        		$this->data['errors']['new_password_confirm'] = true;
+        	}
+			$this->data['data'] = Input::post();
+    		$this->template->content = View::forge('user/account_password_confirm', $this->data);
+    		return;
+        }
+        $this->template->content = View::forge('user/account_password_form', $this->data);
+    }
+
+	public function action_account_password_complete()
+	{
+        $this->template->title = 'マイページ';
+
+        if(Input::post()) {
+        	\Model_User::saveUser(Input::post());
+        }
+        $this->data['data'] = Input::post();
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/account_password_complete', $this->data);
+    }
 	public function action_info()
 	{
         $this->template->title = 'マイページ';

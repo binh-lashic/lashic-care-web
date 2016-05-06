@@ -1,6 +1,6 @@
 		<!-- content start メールアドレス完了 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user/account" method="post">
 				<h1 class="contentLarge_h1">アカウント　メールアドレス変更申し込み完了</h1>
 				
 				<table class="tableBeige form_result mgt20">
@@ -16,7 +16,7 @@ Care Eyeからのメール（@***.jp）が受信できるように設定のう�
 							<table class="tableGray">
 								<tr>
 									<th>メールアドレス</th>
-									<td><strong class="text_blue large">info@dm02.org</strong></td>
+									<td><strong class="text_blue large"><?php echo $data['email']; ?></strong></td>
 								</tr>
 							</table>
 </td>

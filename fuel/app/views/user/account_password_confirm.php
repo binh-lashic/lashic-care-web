@@ -1,6 +1,3 @@
-
-		
-		
 		<!-- content start パスワード変更確認 -->
 		<section id="contentBoxLarge">
 			<form class="form">
