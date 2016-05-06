@@ -112,7 +112,7 @@ class Controller_Api_Data extends Controller_Api
 					$this->result['data']['temperature'] = round($data['temperature'], 1);
 					$this->result['data']['humidity'] = round($data['humidity'], 1);
 					$this->result['data']['active'] = round($data['active'], 1);
-					$this->result['data']['illuminance'] =  (int)$data['illuminance'],
+					$this->result['data']['illuminance'] =  (int)$data['illuminance'];
 					$this->result['data']['discomfort'] = $data['discomfort'];
 					$this->result['data']['date'] = $data['date'];
 				}
