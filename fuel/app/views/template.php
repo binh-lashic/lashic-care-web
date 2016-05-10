@@ -18,7 +18,8 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
-<link href="css/print.css" type="text/css" rel="stylesheet" media="print" />
+<link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
+<link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
 <!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
@@ -63,8 +64,7 @@ Shadowbox.init({
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>
 <?php echo isset($content) ? $content : ""; ?>
-<?php echo isset($footer) ? $footer : ""; ?>
-    <!-- /aide end --> 
+<?php echo isset($sidebar) ? $sidebar : ""; ?>
   </div>
 </main>
 <footer>
@@ -73,7 +73,7 @@ Shadowbox.init({
     <li><a href="/page/terms">利用規約</a></li>
     <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
     <li><a href="/page/privacy">プライバシーポリシー</a></li>
-    <li><a href="/page/contact">お問い合わせ</a></li>
+    <li><a href="/contact">お問い合わせ</a></li>
   </ul>
   <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
 </footer>
@@ -93,7 +93,7 @@ $(document).ready(function(){
 <!-- /円グラフ --> 
 <script src="/js/jquery.tile.js" type="text/javascript"></script> 
 <script src="/js/content.js" type="text/javascript"></script>
+<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/main.js" type="text/javascript"></script> 
-<script src="/js/jquery.switchHat.js" charset="utf-8"></script> 
 </body>
 </html>

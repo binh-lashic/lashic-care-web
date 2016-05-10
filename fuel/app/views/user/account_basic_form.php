@@ -46,10 +46,11 @@ if(!empty($error['kana'])) {
 if(!empty($error['gender'])) {
 ?>
 
-											<p class="error">エラー：性別を選択してください。</p></td>
+											<p class="error">エラー：性別を選択してください。</p>
 <?php
 }
 ?>
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 生年月日</th>
@@ -105,7 +106,8 @@ if(!empty($error['birthday'])) {
 									</tr>
 									<tr>
 										<th>郵便番号</th>
-										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $user['zip_code']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span></td>
+										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $user['zip_code']; ?>">
+										<span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span></td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県</th>

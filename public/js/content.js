@@ -3,7 +3,11 @@
 
 
 
-/* pagetop*/
+/* ------------------------------------------------------
+
+pagetop
+
+------------------------------------------------------ */
 $(function() {
 			var topBtn = $('#page-top');	
 			topBtn.hide();
@@ -27,7 +31,11 @@ $(function() {
 
 		
 		
-/* mouse over */
+/* ------------------------------------------------------
+
+mouse over
+
+------------------------------------------------------ */
 function smartRollover() {
 	if(document.getElementsByTagName) {
 		var images = document.getElementsByTagName("img");
@@ -53,19 +61,83 @@ else if(window.attachEvent) {
 	window.attachEvent("onload", smartRollover);
 }
 
-/* メニューバー */
 
-    $(document).ready(function() {
-      $('.drawer').drawer();
-    });
+
+
+
+
+/* ------------------------------------------------------
+
+メニューバー drawer.js設定
+
+------------------------------------------------------ */
+
+	
+/* 高さ設定 */
+$(function(){
+	//*********************************
+	//初期設定
+	
+	var minus = 80　//Header+要素AのHeight値（要素B、要素Cと追加していきたい分だけ高さを足してください。）
+	var mainID = 'mainMenu'　//高さを動的にするdivのID名
+	hsize = $('.drawer-dropdown-menu').height();
+	
+	//*********************************
+	if ($(window).height() < hsize) {
+	function heightSetting(){
+		windowH = $(window).height();
+		mainH = windowH - minus;
+		$('#'+mainID).height(mainH+'px');
+	}
+	
+	heightSetting();
+ 
+	$(window).resize(function() {
+		heightSetting();
+	});
+	}
+});
+
+
+
+
+
+
+
+/* メニュースクロール設定 jquery.mCustomScrollbar.concat.min.js */
+
+		(function($){
+			$(window).load(function(){
+				
+				$("#mainMenu").mCustomScrollbar({
+					theme:"minimal-dark"
+				});
+				
+			});
+		})(jQuery);
 	
 
-/* 縦ライン揃え */
+
+/* ------------------------------------------------------
+
+縦ライン揃え tile.js設定
+
+------------------------------------------------------ */
+
   $(function() {
     $(".graph_tile").tile(3);
   });
+  $(function() {
+    $(".tile").tile(3);
+  });
 
-/* カレンダー表示・非表示 */
+
+
+/* ------------------------------------------------------
+
+カレンダー表示・非表示
+
+------------------------------------------------------ */
 $(document).ready( function(){
     //With some options
     $('#def-html').darkTooltip({
@@ -75,8 +147,6 @@ $(document).ready( function(){
 		theme:'light'
 	});
 });
-
-
 
 
 /* toggle */
@@ -121,7 +191,12 @@ $(function () {
 
 
 
-/* ページ開閉 */
+
+/* ------------------------------------------------------
+
+確認・報告ページ　開閉
+
+------------------------------------------------------ */
 /* 表示を切り替えるための JavaScript */
 function show_body(d){
 	document.getElementById('toggle_on'+d).style.display = 'none';

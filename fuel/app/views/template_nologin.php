@@ -113,11 +113,11 @@ function rebuild(){ location.reload();}
 <?php echo isset($content) ? $content : ""; ?>
 <footer>
   <ul>
-    <li><a href="news/index.html">運営者からのお知らせ</a></li>
-    <li><a href="terms/index.html">利用規約</a></li>
+    <li><a href="/page/news">運営者からのお知らせ</a></li>
+    <li><a href="/page/terms">利用規約</a></li>
     <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-    <li><a href="privacy/index.html">プライバシーポリシー</a></li>
-    <li><a href="contact/index.html">お問い合わせ</a></li>
+    <li><a href="/page/privacy">プライバシーポリシー</a></li>
+    <li><a href="/page/contact">お問い合わせ</a></li>
   </ul>
   <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
 </footer>

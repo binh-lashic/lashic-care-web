@@ -23,17 +23,23 @@ if(isset($user)) {
 if(isset($user)) {
 ?>
 				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> <?php echo $user['name']; ?>さん <span class="drawer-caret"></span> </a>
-					<ul class="drawer-dropdown-menu">
+					<div class="drawer-dropdown-menu mainMenu">
+						<div id="mainMenu">
+							<ul>
 <?php
-foreach($clients as $_client) {
+if(!empty($clients)) {
+	foreach($clients as $_client) {
 ?>
-						<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
+								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
 <?php
+	}
 }
 ?>
-						<li class="nav_user-admin"><a href="/user/list" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
-						<li class="nav_userListRegist"><a href="/user/add" class="btn_darkBlue">ユーザーを追加する</a></li>
-					</ul>
+								<li class="nav_user-admin"><a href="/user/list" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
+								<li class="nav_userListRegist"><a href="/user/add" class="btn_darkBlue">ユーザーを追加する</a></li>
+							</ul>
+						</div>
+					</div>
 				</li>
 				<li class="drawer-dropdown nav_mainMenu">
 					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -9,6 +9,11 @@ body {
 	color: #4b4948;
 	border-top: 2px solid #7ecef4;
 }
+
+.noScroll {
+  position: fixed;
+  overflow-y: scroll;
+}
 .content {
 	width: 1020px;
 	margin: 0 auto;
@@ -61,22 +66,23 @@ a.logo {
 	background: url(../images/common/hdr_icon_main-menu.png) no-repeat 11px 11px;
 	background-size: 15px 13px;
 }
-.nav_mypage {
+.nav_mypage a{
 	background: url(../images/common/hdr_icon_mypage.png) no-repeat 11px 11px;
 	background-size: 21px 15px;
     padding-left: 40px;
+	padding-right:20px;
 }
-.nav_set {
+.nav_set a{
 	background: url(../images/common/hdr_icon_set.png) no-repeat 13px 11px;
 	background-size: 14px 14px;
     padding-left: 40px;
 }
-.nav_help {
+.nav_help a{
 	background: url(../images/common/hdr_icon_help.png) no-repeat 14px 11px;
 	background-size: 10px 17px;
     padding-left: 40px;
 }
-.nav_logout {
+.nav_logout a{
 	background: url(../images/common/hdr_icon_logout.png) no-repeat 11px 11px;
 	background-size: 19px 19px;
     padding-left: 40px;
@@ -798,5 +804,27 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 #loginTop{ width:800px; height:460px; margin:0 auto; position:relative;}
 }
 
+
+
+
+
+
+
+/* ----------------------------------------------------------
+
+初期登録
+
+---------------------------------------------------------- */
+.regist_h2{ font-size:27px; line-height:1.4em; color:#003c58; font-weight:normal; margin-bottom:10px;}
+.regist_h3{ font-size:27px; line-height:1.4em; color:#00b7f1; font-weight:normal; margin-bottom:10px;}
+.regist_h4{ font-size:22px; line-height:1.4em; color:#003c58; font-weight:normal; margin-bottom:10px;}
+.moreInfoInner{ width:95%; margin:20px auto;}
+.regist_waku{ border:1px solid #7fcef4; border-radius:6px; margin:30px 0; padding:19px; background-color:#FFF;}
+.regist_waku_right{ width:739px;}
+.regist_waku_right ul{ width:753px; margin-right:-14px; overflow:hidden;}
+.regist_waku_right ul li{ width:237px; float:left; margin-right:14px; font-size:12px; line-height:1.4em;}
+.regist_btn_close{ width:20%; margin:0 auto; display:block;}
+.regist_border{ border-bottom:1px solid #00b7f1; text-align:left; padding-bottom:30px; margin-bottom:30px;}
+.regist_waku_left{ width:513px;}
 
 #attention_01{ display:none;}

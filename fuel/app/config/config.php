@@ -348,9 +348,15 @@ return array(
 		'wake_up_delay_allowance_duration' => 120,
 	),
 	'report_list_count' => 10,
-	'sendgrid' => 'SG.GSIAUMMsSnS_5gFBES79mA.9XXsIFFEuqiSMFzLa9FUDDM_MqF_N7O6revl5dzF3U4',
+	'sendgrid' => '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',
 	'email' => array(
 		'from' => 'info@careeye.jp',
+		'templates' => array(
+			'user_update' => array(
+				'subject' => "ユーザ情報更新",
+				'text'	  => "ユーザ情報が更新されました",
+			),
+		),
 	),
 	'eras' => array(
 		"1900" => "1900/明治33",

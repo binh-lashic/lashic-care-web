@@ -1,75 +1,32 @@
-<?php
-if(!empty($client)) {
-?>	
-		<!-- aide start -->
-		<aside id="aside_userDate">
-			<div class="aside_container">
-				<div class="clearfix">
-					<p class="aside_title">基本データ</p>
-					<div class="aside_btn_edit"><a href="/user/info" class="btn_text">編集</a></div>
-				</div>
-				<div class="aside_photo"><div class="aside_photoInner"><img src="<?php echo $client['profile_image']; ?>" width="179" height="179" alt=""/></div></div>
-				
-				<dl class="aside_userDetail clearfix">
-					<dt><img src="/images/common/user_icon_birth.png" width="17" alt="生年月日"/></dt>
-					<dd><?php echo date("Y年m月d日", strtotime($client['birthday'])); ?>（<?php echo $client['age']; ?>歳）</dd>
-					<dt><img src="/images/common/user_icon_blood.png" width="19" alt="血液型"/></dt>
-					<dd><?php echo $client['blood_type']; ?>型</dd>
-					<dt><img src="/images/common/user_icon_address.png" width="19" alt="住所"/></dt>
-					<dd><?php echo $client['address']; ?></dd>
-					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="電話番号1"/></dt>
-					<dd><?php echo $client['phone']; ?></dd>
-					<dt><img src="/images/common/user_icon_phone.png" width="19" alt="電話番号2"/></dt>
-					<dd><?php echo $client['cellular']; ?></dd>
-				</dl>
-<?php
-if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
-?>
-				<!-- 緊急連絡先 -->
-				<div class="aside_emergency">
-					<h3><img src="/images/common/user_icon_emergency.png" width="17" alt=""/> 緊急連絡先</h3>
-					<ul>
-						<li>
-							<dl>
-								<dt><?php echo isset($client['emergency_name_1']) ? $client['emergency_name_1'] : ""; ?></dt>
-								<dd><?php echo isset($client['emergency_phone_1']) ? $client['emergency_phone_1'] : ""; ?><br>
-									<?php echo isset($client['emergency_cellular_1']) ? $client['emergency_cellular_1'] : ""; ?></dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt><?php echo isset($client['emergency_name_2']) ? $client['emergency_name_2'] : ""; ?></dt>
-								<dd><?php echo isset($client['emergency_phone_2']) ? $client['emergency_phone_2'] : ""; ?><br>
-									<?php echo isset($client['emergency_cellular_2']) ? $client['emergency_cellular_2'] : ""; ?></dd>
-							</dl>
-						</li>
-					</ul>
-				</div>
-				<!-- /緊急連絡先 -->
-<?php
-}
-?>
-				<!-- 連絡共有 -->
-				<div class="aside_share">
-					<h3><img src="/images/common/user_icon_share.png" width="32" alt=""/> 連絡共有</h3>
-					<div class="aside_shareInner">
-						<ul class="scroll_area">
-<?php
-if(!empty($admins)) {
-	foreach($admins as $admin) {
-?>
-							<li><?php echo $admin['name']; ?></li>
-<?php
-	}
-}
-?>
-						</ul>
-					</div>
-				</div>
-				<!-- /連絡共有 -->
-				
-			</div>
-		</aside>
-<?php
-}
-?>
+  </div>
+</main>
+<footer>
+  <ul>
+    <li><a href="/page/news">運営者からのお知らせ</a></li>
+    <li><a href="/page/terms">利用規約</a></li>
+    <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
+    <li><a href="/page/privacy">プライバシーポリシー</a></li>
+    <li><a href="/page/contact">お問い合わせ</a></li>
+  </ul>
+  <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
+</footer>
+<p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 
+<script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
+<script src="/js/drawer.min.js" charset="utf-8"></script> 
+<script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
+
+<!-- 円グラフ --> 
+<script src="/js/jquery.circliful.min.js"></script> 
+<script>
+$(document).ready(function(){
+    $('.myStat').circliful();
+});
+</script> 
+<!-- /円グラフ --> 
+<script src="/js/jquery.tile.js" type="text/javascript"></script> 
+<script src="/js/content.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script> 
+<script src="/js/jquery.switchHat.js" charset="utf-8"></script> 
+</body>
+</html>

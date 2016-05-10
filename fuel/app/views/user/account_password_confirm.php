@@ -1,6 +1,8 @@
 		<!-- content start パスワード変更確認 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user/account_password_complete" method="post">
+				<input type="hidden" name="password" value="<?php echo $data['password']; ?>" />
+				<input type="hidden" name="new_password" value="<?php echo $data['new_password']; ?>" />  
 				<h1 class="contentLarge_h1">アカウント　パスワード変更確認</h1>
 				<p class="mgb80 mgt80 center">パスワードを変更します。よろしいですか？</p>
 				

@@ -242,10 +242,11 @@ class Model_User extends Orm\Model{
 		try {
 			if(!empty($params['id'])) {
 				$id = $params['id'];
-			} else if($id = Auth::create_user(
+			} else {
+				$id = Auth::create_user(
 		                $params['username'],
 		                $params['password'],
-		                $params['email'])) {
+		                $params['email']);
 			}
 			$user = \Model_User::find($id);
 			unset($params['id']);
@@ -279,6 +280,19 @@ class Model_User extends Orm\Model{
 							exit;
 						}					
 					}
+
+					$sendgrid = new SendGrid(Config::get("sendgrid"));
+					$email = new SendGrid\Email();
+					$email
+					    ->addTo($user['email'])
+					    ->setFrom(Config::get("email.from"))
+					    ->setSubject(Config::get("email.templates.user_update.subject"))
+					    ->setText(Config::get("email.templates.user_update.text"));
+					try {
+					    $sendgrid->send($email);
+					} catch(\SendGrid\Exception $e) {
+						echo $e->getMessage();
+					}
 					return \Model_User::format($user);
 				} else {
 					return null;
@@ -287,6 +301,32 @@ class Model_User extends Orm\Model{
 		} catch(Exception $e) {
 			echo $e->getMessage();
 			exit;
+		}
+	}
+
+	public static function changePassword($params) {
+		if(!empty($params['id'])) {
+			$id = $params['id'];
+			$user = \Model_User::find($id);
+		}
+		if($user) {
+			if(Auth::change_password($params['password'], $params['new_password'], $user['username'])) {
+				$sendgrid = new SendGrid(Config::get("sendgrid"));
+				$email = new SendGrid\Email();
+				$email
+				    ->addTo($user['email'])
+				    ->setFrom(Config::get("email.from"))
+				    ->setSubject(Config::get("email.templates.user_update.subject"))
+				    ->setText(Config::get("email.templates.user_update.text"));
+				try {
+				    $sendgrid->send($email);
+				} catch(\SendGrid\Exception $e) {
+					echo $e->getMessage();
+				}
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 

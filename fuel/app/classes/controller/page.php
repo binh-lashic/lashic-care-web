@@ -1,25 +1,21 @@
 <?php
 class Controller_Page extends Controller_Template
 {
-    //デフォルトのテンプレートのViewファイル
-    public $template = 'template';
-
-	protected $nologin_methods = array();
-
-	public function before()
-	{
-	    $method = Request::active()->action;
-	    if (in_array($method, $this->nologin_methods))
-	    {     
-	    	$this->template = 'template_nologin';
-		}
-		else if (!Auth::check())
-		{
-	    	Response::redirect('/user/login');
-		}
-	    parent::before();
-	}
-
+    public function before() {
+        $this->nologin_methods = array(
+            'index',
+            'news',
+            'news_list',
+            'news_detail',
+            'news_maintenance_list',
+            'news_maintenance_detail',
+            'terms',
+            'privacy',
+            'contact',
+            'help'
+        );
+        parent::before();
+    }
 	public function action_index()
 	{
         $data = array();
@@ -90,15 +86,6 @@ class Controller_Page extends Controller_Template
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('page/privacy');
-        $this->template->footer = View::forge('footer');
-	}
-
-	public function action_contact()
-	{        
-        $this->template->title = 'お問い合わせ';
-         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header', $this->data);
-        $this->template->content = View::forge('page/contact');
         $this->template->footer = View::forge('footer');
 	}
 

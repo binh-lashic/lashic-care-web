@@ -565,7 +565,7 @@ div + .content_h2 , div + .content_h3 , div + .contentLarge_h2 , .contentLarge_h
 	padding: 5px 10px;
 }
 .input_short {
-	width: 100px;
+	width: 120px;
 }
 .input_medium {
 	width: 50%;

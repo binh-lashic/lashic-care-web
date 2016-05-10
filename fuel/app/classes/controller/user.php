@@ -1,5 +1,5 @@
 <?php
-class Controller_User extends Controller_Page
+class Controller_User extends Controller_Base
 {
 	private $user;
 	private $clients = array();
@@ -93,7 +93,7 @@ class Controller_User extends Controller_Page
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/index', $this->data);
-        $this->template->footer = View::forge('footer', $this->data);
+        $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
 	public function action_account()
@@ -193,9 +193,7 @@ class Controller_User extends Controller_Page
         $this->template->title = 'マイページ';
         
         $this->template->header = View::forge('header', $this->data);
-
         if(Input::post()) {
-        	$val = \Model_User::validate("save");
          	if(!Input::post('password')) {
         		$this->data['errors']['password'] = true;
         	}
@@ -209,8 +207,10 @@ class Controller_User extends Controller_Page
         		$this->data['errors']['new_password_confirm'] = true;
         	}
 			$this->data['data'] = Input::post();
-    		$this->template->content = View::forge('user/account_password_confirm', $this->data);
-    		return;
+			if(empty($this->data['errors'])) {
+	    		$this->template->content = View::forge('user/account_password_confirm', $this->data);
+	    		return;
+			}
         }
         $this->template->content = View::forge('user/account_password_form', $this->data);
     }
@@ -220,12 +220,15 @@ class Controller_User extends Controller_Page
         $this->template->title = 'マイページ';
 
         if(Input::post()) {
-        	\Model_User::saveUser(Input::post());
+        	$params = Input::post();
+        	$params['id'] = $this->user['id'];
+        	\Model_User::changePassword($params);
         }
         $this->data['data'] = Input::post();
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/account_password_complete', $this->data);
     }
+
 	public function action_info()
 	{
         $this->template->title = 'マイページ';
@@ -282,7 +285,7 @@ class Controller_User extends Controller_Page
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/report', $this->data);
-        $this->template->footer = View::forge('footer', $this->data);
+        $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
 	public function action_login_form()
