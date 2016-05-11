@@ -428,7 +428,11 @@ class Controller_Api_Data extends Controller_Api
 		if(Input::param("sensor_id")) {
 			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
 		} else {
-			$sensors = \Model_Sensor::find("all");
+			$sensors = \Model_Sensor::find("all", array(
+				'where' => array(
+					'enable' => 1,
+				)
+			));
 		}
 		foreach($sensors as $sensor) {
 			$sensor->users;
