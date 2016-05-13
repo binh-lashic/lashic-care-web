@@ -29,6 +29,9 @@ if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
 				<div class="aside_emergency">
 					<h3><img src="/images/common/user_icon_emergency.png" width="17" alt=""/> 緊急連絡先</h3>
 					<ul>
+<?php
+if(!empty($client['emergency_name_1'])) {
+?>
 						<li>
 							<dl>
 								<dt><?php echo isset($client['emergency_name_1']) ? $client['emergency_name_1'] : ""; ?></dt>
@@ -36,6 +39,10 @@ if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
 									<?php echo isset($client['emergency_cellular_1']) ? $client['emergency_cellular_1'] : ""; ?></dd>
 							</dl>
 						</li>
+<?php
+}
+if(!empty($client['emergency_name_2'])) {
+?>
 						<li>
 							<dl>
 								<dt><?php echo isset($client['emergency_name_2']) ? $client['emergency_name_2'] : ""; ?></dt>
@@ -43,6 +50,9 @@ if(!empty($client['emergency_name_1']) || !empty($client['emergency_name_2'])) {
 									<?php echo isset($client['emergency_cellular_2']) ? $client['emergency_cellular_2'] : ""; ?></dd>
 							</dl>
 						</li>
+<?php
+}
+?>
 					</ul>
 				</div>
 				<!-- /緊急連絡先 -->

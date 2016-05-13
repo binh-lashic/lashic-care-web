@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Care Eye ケア　アイ - <?php echo $title; ?></title>
+<title>Care Eye ケア　アイ - <?php if(!empty($title)) { echo $title; } ?></title>
 <meta name="keywords" content="ケア　アイ,ケア,アイ,見守り">
 <meta name="description" content="ケア　アイの管理画面です。">
 <meta name="robots" content="all">

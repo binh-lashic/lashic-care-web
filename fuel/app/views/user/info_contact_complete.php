@@ -1,6 +1,6 @@
 		<!-- content start 住所・電話番号完了 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user/">
 				<h1 class="contentLarge_h1">見守り対象ユーザー　住所・電話番号変更完了</h1>
 				
 				<table class="tableBeige form_result mgt20">

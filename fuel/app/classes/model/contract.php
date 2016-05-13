@@ -6,6 +6,7 @@ class Model_Contract extends Orm\Model{
         'user_id',
         'title',
         'sensor_id',
+        'description'
 	);
 
     public static function createTable(){
@@ -13,7 +14,8 @@ class Model_Contract extends Orm\Model{
             id int NOT NULL IDENTITY (1, 1),
             user_id int,
             sensor_id int,
-            title NTEXT
+            title NTEXT,
+            description NTEXT
         ) ON [PRIMARY];";
         return DB::query($sql)->execute();
     }

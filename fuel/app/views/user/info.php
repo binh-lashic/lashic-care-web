@@ -76,7 +76,7 @@
 					<table>
 						<tbody>
 <?php
-if(!empty($client['emergency_name_1']))
+if(!empty($client['emergency_last_name_1']))
 {
 ?>
 							<tr>
@@ -87,7 +87,7 @@ if(!empty($client['emergency_name_1']))
 							</tr>
 <?php
 }
-if(!empty($client['emergency_name_2']))
+if(!empty($client['emergency_last_name_2']))
 {
 ?>
 							<tr>

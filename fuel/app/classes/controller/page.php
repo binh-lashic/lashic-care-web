@@ -92,9 +92,17 @@ class Controller_Page extends Controller_Template
 	public function action_help()
 	{        
         $this->template->title = 'ヘルプ';
-         $this->data['breadcrumbs'] = array($this->template->title);
+        $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('page/help');
         $this->template->footer = View::forge('footer');
 	}
+
+    public function action_careeye() {
+        echo "CareEye";
+    }
+
+    public function action_infic() {
+        echo "infic";
+    }
 }

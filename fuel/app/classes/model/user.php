@@ -7,6 +7,10 @@ class Model_User extends Orm\Model{
 		'password',
 		'name',
 		'kana',
+		'first_name',
+		'last_name',
+		'first_kana',
+		'last_kana',
 		'email',
 		'profile_fields',
 		'last_login',
@@ -23,10 +27,16 @@ class Model_User extends Orm\Model{
 		'area',
 		'blood_type',
 		'birthday',
-		'emergency_name_1',
+		'emergency_first_name_1',
+		'emergency_last_name_1',
+		'emergency_first_kana_1',
+		'emergency_last_kana_1',
 		'emergency_phone_1',
 		'emergency_cellular_1',
-		'emergency_name_2',
+		'emergency_first_name_2',
+		'emergency_last_name_2',
+		'emergency_first_kana_2',
+		'emergency_last_kana_2',
 		'emergency_phone_2',
 		'emergency_cellular_2',
 		'profile_image',
@@ -103,7 +113,11 @@ class Model_User extends Orm\Model{
 			'id',
 			'username',
 			'name',
+			'first_name',
+			'last_name',
 			'kana',
+			'first_kana',
+			'last_kana',
 			'email',
 			'gender',
 			'phone',
@@ -118,17 +132,24 @@ class Model_User extends Orm\Model{
 			'blood_type',
 			'birthday',
 			'profile_image',
-			'emergency_name_1',
+			'emergency_first_name_1',
+			'emergency_last_name_1',
+			'emergency_first_kana_1',
+			'emergency_last_kana_1',
 			'emergency_phone_1',
 			'emergency_cellular_1',
-			'emergency_name_2',		
+			'emergency_first_name_2',
+			'emergency_last_name_2',
+			'emergency_first_kana_2',
+			'emergency_last_kana_2',
 			'emergency_phone_2',
-			'emergency_cellular_2',	
+			'emergency_cellular_2',
 			'subscription',
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
+
 		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
 		if(isset($ret['birthday'])) {
 			$now = date("Ymd");
@@ -163,12 +184,15 @@ class Model_User extends Orm\Model{
 		return $users;
 	}
 
-	public static function getAdmins($user_id=null) {
+	public static function getAdmins($client_user_id=null) {
 		$users = array();
-		if($user_id) {
+		list(, $user_id) = Auth::get_user_id();
+
+		if($client_user_id) {
 			$rows = \Model_User_Client::find("all", array(
 				'where' => array(
-					'client_user_id' => $user_id,
+					'client_user_id' => $client_user_id,
+					array('user_id', "!=", $user_id),
 				),
 				'related' => array('admin')
 			));

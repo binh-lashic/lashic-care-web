@@ -30,13 +30,12 @@ if(isset($user)) {
 if(!empty($clients)) {
 	foreach($clients as $_client) {
 ?>
-								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item"><?php echo $_client['name']; ?>さん</a></li>
+								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item <?php if($client['id'] == $_client['id']) { echo "nowStay"; } ?>"><?php echo $_client['name']; ?>さん</a></li>
 <?php
 	}
 }
 ?>
 								<li class="nav_user-admin"><a href="/user/list" class="drawer-dropdown-menu-item">ユーザー管理</a></li>
-								<li class="nav_userListRegist"><a href="/user/add" class="btn_darkBlue">ユーザーを追加する</a></li>
 							</ul>
 						</div>
 					</div>

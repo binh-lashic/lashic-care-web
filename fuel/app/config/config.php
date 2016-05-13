@@ -312,7 +312,6 @@ return array(
 
 	),
 	'blood_types' => array(
-		'不明',
 		'A',
 		'B',
 		'AB',

@@ -14,18 +14,18 @@ if(isset($client)) {
 			<ul class="graph_list">
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★★★★</p>
+						<p class="graph_rank">    </p>
 						<p class="graph_text">起床 <span class="graph_number"><?php echo !empty($data_daily['wake_up_time']) ? date("H:i", strtotime($data_daily['wake_up_time'])) : ""; ?></span></p>
 						<p class="graph_text_gray">（平均起床時間 <?php echo !empty($data_latest['wake_up_time_average']) ? date("H:i", strtotime($data_latest['wake_up_time_average'])) : ""; ?>）</p>
 						<hr>
-						<p class="graph_rank">★★★★★</p>
+						<p class="graph_rank">     </p>
 						<p class="graph_text">就寝 <span class="graph_number"><?php echo !empty($data_daily['sleep_time']) ? date("H:i", strtotime($data_daily['sleep_time'])) : ""; ?></span></p>
 						<p class="graph_text_gray">（平均就寝時間 <?php echo !empty($data_latest['sleep_time_average']) ? date("H:i", strtotime($data_latest['sleep_time_average'])) : ""; ?>）</p>
 					</div>
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★★★★★</p>
+						<p class="graph_rank">     </p>
 						<div class="graph_chart">
 							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['temperature']) ? round($data['temperature'], 1) : ""; ?>°C" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
@@ -36,7 +36,7 @@ if(isset($client)) {
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★★★</p>
+						<p class="graph_rank">   </p>
 						<div class="graph_chart">
 							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['humidity']) ? round($data['humidity'], 1) : ""; ?>%" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
@@ -47,7 +47,7 @@ if(isset($client)) {
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★</p>
+						<p class="graph_rank"> </p>
 						<div class="graph_chart">
 							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['active']) ? round($data['active'], 1) : ""; ?>" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
@@ -58,7 +58,7 @@ if(isset($client)) {
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★★★★★</p>
+						<p class="graph_rank">     </p>
 						<div class="graph_chart">
 							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['illuminance']) ? $data['illuminance'] : ""; ?>lux" data-percent="<?php echo isset($data['illuminance']) ? $data['illuminance'] / 10 : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
@@ -69,7 +69,7 @@ if(isset($client)) {
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
-						<p class="graph_rank">★★★★</p>
+						<p class="graph_rank">    </p>
 						<div class="graph_chart">
 							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>%" data-percent="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>

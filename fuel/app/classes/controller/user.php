@@ -96,6 +96,13 @@ class Controller_User extends Controller_Base
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
+	public function action_list()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/list', $this->data);
+	}
+
 	public function action_account()
 	{
         $this->template->title = 'マイページ';
@@ -240,16 +247,69 @@ class Controller_User extends Controller_Base
 	{
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
+
+		if(Input::post()) {
+		    $params = Input::post();
+			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+			}
+			$this->data['data'] = $params;
+        	$this->template->content = View::forge('user/info_basic_confirm', $this->data);
+        	return;
+        }
+
+		$this->data['eras'] = Config::get("eras");
+        $this->data['blood_types'] = Config::get("blood_types");
+
+        if(empty($this->data['client']['birthday'])) {
+        	$this->data['client']['year'] = "1945";
+	        $this->data['client']['month'] = 1;
+	        $this->data['client']['day'] = 1;
+        } else {
+	        $this->data['client']['year'] = date("Y", strtotime($this->data['client']['birthday']));
+	        $this->data['client']['month'] = date("n", strtotime($this->data['client']['birthday']));
+	        $this->data['client']['day'] = date("j", strtotime($this->data['client']['birthday']));
+        }
         $this->template->content = View::forge('user/info_basic_form', $this->data);
+    }
+
+    public function action_info_basic_complete() {
+    	$this->template->title = 'マイページ';
+
+        if(Input::post()) {
+        	\Model_User::saveUser(Input::post());
+        }
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info_basic_complete', $this->data);
     }
 
 	public function action_info_contact_form()
 	{
+		$this->template->title = 'マイページ';
+		$this->template->header = View::forge('header', $this->data);
+
+		$this->data['prefectures'] = Config::get("prefectures");
+		if(Input::post()) {
+		    $params = Input::post();
+			$this->data['data'] = $params;
+        	$this->template->content = View::forge('user/info_contact_confirm', $this->data);
+        	return;
+        }
+
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/info_contact_form', $this->data);
     }
 
+    public function action_info_contact_complete() {
+    	$this->template->title = 'マイページ';
+
+        if(Input::post()) {
+        	\Model_User::saveUser(Input::post());
+        }
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/info_contact_complete', $this->data);
+    }
+    
 	public function action_info_option_form()
 	{
         $this->template->title = 'マイページ';
