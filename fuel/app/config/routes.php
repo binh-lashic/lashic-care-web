@@ -7,4 +7,5 @@ return array(
 	'contents/infic' => 'page/infic',
 	'contents/info' => 'page/news',
 	'contents/kiyaku' => 'page/terms',
+	'contents/privacy' => 'page/privacy',
 );
