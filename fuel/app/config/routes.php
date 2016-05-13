@@ -6,5 +6,5 @@ return array(
 	'contents/careeye' => 'page/careeye',
 	'contents/infic' => 'page/infic',
 	'contents/info' => 'page/news',
-	'contents/kiyaku' => 'page/term',
+	'contents/kiyaku' => 'page/terms',
 );
