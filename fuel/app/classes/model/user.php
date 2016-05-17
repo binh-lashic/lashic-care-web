@@ -149,9 +149,14 @@ class Model_User extends Orm\Model{
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
-		$ret['name'] = $ret['last_name'].$ret['first_name'];
-		$ret['kana'] = $ret['last_kana'].$ret['first_kana'];
+		if(empty($ret['name'])) {
+			$ret['name'] = $ret['last_name'].$ret['first_name'];
+		}
 
+		if(empty($ret['kana'])) {
+			$ret['kana'] = $ret['last_kana'].$ret['first_kana'];
+		}
+		
 		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
 		if(isset($ret['birthday'])) {
 			$now = date("Ymd");
