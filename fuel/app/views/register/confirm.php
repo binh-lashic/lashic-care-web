@@ -16,13 +16,19 @@
 			<div class="contentLarge_h2"><h2>アカウント情報　確認</h2></div>
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
-				<form action="register/complete" method="post">
+				<form action="/register/complete" method="post">
 					<input type="hidden" name="first_name" value="<?php if(!empty($data['first_name'])) { echo $data['first_name']; } ?>" />
 					<input type="hidden" name="last_name" value="<?php if(!empty($data['last_name'])) { echo $data['last_name']; } ?>" />
 					<input type="hidden" name="first_kana" value="<?php if(!empty($data['first_kana'])) { echo $data['first_kana']; } ?>" />
 					<input type="hidden" name="last_kana" value="<?php if(!empty($data['last_kana'])) { echo $data['last_kana']; } ?>" />
 					<input type="hidden" name="gender" value="<?php if(!empty($data['gender'])) { echo $data['gender']; } ?>" />
 					<input type="hidden" name="birthday" value="<?php if(!empty($data['birthday'])) { echo $data['birthday']; } ?>" />
+					<input type="hidden" name="zip_code" value="<?php if(!empty($data['zip_code'])) { echo $data['zip_code']; } ?>" />
+					<input type="hidden" name="address" value="<?php if(!empty($data['address'])) { echo $data['address']; } ?>" />
+					<input type="hidden" name="phone" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>" />
+					<input type="hidden" name="cellular" value="<?php if(!empty($data['cellular'])) { echo $data['cellular']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>" />
+					<input type="hidden" name="password" value="<?php if(!empty($data['password'])) { echo $data['password']; } ?>" />
 				<div class="form_set_container">
 						<div class="form_base_data_edit">
 							<table>

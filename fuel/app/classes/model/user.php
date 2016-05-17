@@ -149,6 +149,8 @@ class Model_User extends Orm\Model{
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
+		$ret['name'] = $ret['last_name'].$ret['first_name'];
+		$ret['kana'] = $ret['last_kana'].$ret['first_kana'];
 
 		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
 		if(isset($ret['birthday'])) {
@@ -257,6 +259,9 @@ class Model_User extends Orm\Model{
 
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
+		}
+		if(empty($params['username'])) {
+			$params['username'] = sha1($params['email'].mt_rand());
 		}
 		/*
 		if(empty($params['admin'])) {

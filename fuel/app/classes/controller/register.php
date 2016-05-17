@@ -32,4 +32,11 @@ class Controller_Register extends Controller_Base
 
         $this->template->content = View::forge('register/form', $this->data);
 	}
+
+	public function action_complete() {
+		\Model_User::saveUser(Input::post());
+		$this->template->title = 'Care Eye 新規登録  >  アカウント情報　入力';
+        $this->template->header = View::forge('header', $this->data);
+		$this->template->content = View::forge('register/complete', $this->data);
+	}
 }

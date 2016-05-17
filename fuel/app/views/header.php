@@ -22,7 +22,7 @@ if(isset($user)) {
 <?php
 if(isset($user)) {
 ?>
-				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> <?php echo $user['name']; ?>さん <span class="drawer-caret"></span> </a>
+				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">ユーザー選択<span class="drawer-caret"></span> </a>
 					<div class="drawer-dropdown-menu mainMenu">
 						<div id="mainMenu">
 							<ul>

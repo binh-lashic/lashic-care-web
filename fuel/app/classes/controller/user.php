@@ -106,6 +106,7 @@ class Controller_User extends Controller_Base
 	public function action_account()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/account', $this->data);
     }
@@ -113,6 +114,7 @@ class Controller_User extends Controller_Base
 	public function action_account_basic_form()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
         
@@ -151,6 +153,7 @@ class Controller_User extends Controller_Base
 	public function action_account_basic_complete()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
 
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
@@ -162,6 +165,7 @@ class Controller_User extends Controller_Base
     public function action_account_mail_form()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
         
         $this->template->header = View::forge('header', $this->data);
 
@@ -186,6 +190,7 @@ class Controller_User extends Controller_Base
 	public function action_account_mail_complete()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
 
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
@@ -198,6 +203,7 @@ class Controller_User extends Controller_Base
     public function action_account_password_form()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
         
         $this->template->header = View::forge('header', $this->data);
         if(Input::post()) {
@@ -225,6 +231,7 @@ class Controller_User extends Controller_Base
 	public function action_account_password_complete()
 	{
         $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
 
         if(Input::post()) {
         	$params = Input::post();
