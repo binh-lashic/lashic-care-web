@@ -110,6 +110,7 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
 										<td><input type="text" name="email" class="input_text input_medium"><br>
+										
 										<span class="text_red">※</span><span class="small ">初期設定では変更ができません。ご登録完了後、マイページにてメールアドレスをご変更ください。<br>
 										<span class="text_red">※</span>携帯電話メールでご登録の場合はPCメール受信設定をご確認いただき、hoge.comのメールアドレスを受信可能にご設定ください。</span>
 <?php

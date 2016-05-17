@@ -494,7 +494,7 @@ class Model_Sensor extends Orm\Model{
 				$params = array(
 					'type' => 'fire',
 					'title' => '火事',
-					'description' => '火事',
+					'description' => '火事です。室温が'.$this->fire_temperature_upper_limit.'を越えています。現在'.$result['temperature'].'度です。',
 					'logs' => array(
 						'fire_temperature_upper_limit' => $this->fire_temperature_upper_limit,
 					),
