@@ -585,9 +585,7 @@ class Model_Sensor extends Orm\Model{
 			'sensor_id' => $this->id,
 			'date' => $date,
 		)));
-		if($daily_data['sleep_up_time']) {
-			return true;
-		}
+		
 		//既に起床時間が登録されていたらスキップする
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);

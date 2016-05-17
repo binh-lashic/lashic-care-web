@@ -3,7 +3,9 @@ class Model_Device extends Orm\Model{
 	protected static $_properties = array(
 		'id',
 		'user_id',
-		'device_id'
+		'device_id',
+		'os',
+		'push_id'
 	);
 
 	public static function createTable(){
@@ -15,20 +17,18 @@ class Model_Device extends Orm\Model{
 		return DB::query($sql)->execute();
 	}
 
-	public static function saveDevice($user_id, $device_id) {
-		$sql = "SELECT * FROM devices WHERE user_id = :user_id AND device_id = :device_id;";
-		$query = DB::query($sql);
-		$query->parameters(array('user_id' => $user_id, 'device_id' => $device_id));
-		$res = $query->execute();
-		if($res[0]) {
-			throw new Exception("既にデバイスは登録されています。");
-		} else {
-			$sql = "INSERT INTO devices (user_id, device_id) VALUES (:user_id, :device_id);";
-			$query = DB::query($sql);
-			$query->parameters(array('user_id' => $user_id, 'device_id' => $device_id));
-			$res = $query->execute();			
-			return $res;
+	public static function saveDevice($params) {
+		$device = \Model_Device::find("first", array(
+			'where' => array(
+					'user_id' => $params['user_id'],
+					'device_id' => $params['device_id'],
+				)
+		));
+		if(!$device) {
+			$device = \Model_Device::forge();
 		}
+		$device->set($params);
+		return $device->save();
 	}
 
 	public static function existDevice($device_id) {

@@ -184,14 +184,24 @@ class Controller_Api_User extends Controller_Api
 		$username = Input::param("username");
 		$password = Input::param("password");
 		$device_id = Input::param("device_id");
-		if (!Auth::login($username, $password)) {
-			$this->errors[] = array(
-				'message' => "ユーザー名かパスワードが間違っています",
-				'data' => false,
+		if(!empty($username) && !empty($password)) {
+			if (!Auth::login($username, $password)) {
+				$this->errors[] = array(
+					'message' => "ユーザー名かパスワードが間違っています",
+					'data' => false,
+				);
+				return $this->result();
+			} 
+		}
+		list($driver, $user_id) = Auth::get_user_id();
+		if($user_id) {
+			$params = array(
+				'user_id' => $user_id,
+				'device_id' => $device_id,
+				'push_id' => Input::param("push_id"),
+				'os' => Input::param("os"),
 			);
-		} else {
-			list($driver, $user_id) = Auth::get_user_id();
-			$res = \Model_Device::saveDevice($user_id, $device_id);
+			$res = \Model_Device::saveDevice($params);
 			if($res) {
 				$this->result = array(
 					'message' => 'デバイスIDの設定に成功しました',
