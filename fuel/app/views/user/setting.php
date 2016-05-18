@@ -1,122 +1,337 @@
-<div class="panel panel-default" style="padding:45px;">
-	<form class="form-horizontal" id="login">
-	  <div class="form-group">
-	    <label for="username" class="col-sm-2 control-label">見守り</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="username" placeholder="User Name">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="username" class="col-sm-2 control-label">温度上限設定</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="username" placeholder="User Name">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="username" class="col-sm-2 control-label">温度上限設定</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="username" placeholder="User Name">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="password" class="col-sm-2 control-label">Password</label>
-	    <div class="col-sm-10">
-	      <input type="password" class="form-control" id="password" placeholder="Password">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default">保存する</button>
-	    </div>
-	  </div>
-	</form>
-</div>
-ログイン／ログオフ
-見守りＯＮ／ＯＦＦ
-温度下限設定
-温度設定（対象外）
-湿度上限設定
-湿度下限設定
-湿度設問（対象外）
-起床判断開始時間
-起床判断終了時間
-就寝判断開始時間
-就寝判断終了時間
-運動量閾値（日中）
-運動量閾値（夜間）
-運動量閾値（平均）
-夜間徘徊用運動量閾値（夜間）
-運動平均対象日数
-曜日別運動平均対象週数
-起床判断時間（分）
-起床不感帯判断時間（分）
-就寝判断時間（分）
-就寝不感帯判断時間（分）
-日替わり時刻（時）
-起床時刻早め限度（分）
-起床時刻遅め限度（分）
-就寝時刻早め限度（分）
-就寝時刻遅め限度（分）
-起床平均アラート通知
-起床曜日平均アラート通知
-就寝平均アラート通知
-就寝曜日平均アラート通知
-起床許容時間終了
-起床許容時間開始
-就寝許容時間終了
-就寝許容時間開始
-起床基準時間
-就寝基準時間
-非常呼出ボタン０１名称
-非常呼出ボタン０２名称
-非常呼出ボタン０３名称
-非常呼出ボタン０４名称
-温度上限不感帯時間
-温度下限不感帯時間
-湿度上限不感帯時間
-湿度下限不感帯時間
-温度上限アラート通知
-温度下限アラート通知
-湿度上限アラート通知
-湿度下限アラート通知
-上下限判断時間抑制判断時間（分）
-夏季冬季切り替え（月日月日）
-未行動１アラート通知
-未行動１判断時間帯（時分時分）
-未行動１行動判断時間（分）
-未行動１行動判断不感帯時間（分）
-未行動１行動判断運動量閾値（しきいち）
-未行動１お知らせ文言
-未行動２アラート通知
-未行動２判断時間帯（時分時分）
-未行動２行動判断時間（分）
-未行動２行動判断不感帯時間（分）
-未行動２行動判断運動量閾値（しきいち）
-未行動２お知らせ文言
-未行動３アラート通知
-未行動３判断時間帯（時分時分）
-未行動３行動判断時間（分）
-未行動３行動判断不感帯時間（分）
-未行動３行動判断運動量閾値（しきいち）
-未行動３お知らせ文言
-
-
-
-
-
-
-平均運動量対象日数
-曜日別平均運動量対象週数
-運動量上限閾値（しきいち）増分（％）
-運動量下限閾値（しきいち）減分（％）
-平均運動量上限判定活殺
-平均運動量下限判定活殺
-運動量上限判定（曜日別平均）活殺
-運動量下限判定（曜日別平均）活殺
-起床就寝運動平均判定活殺
-起床就寝曜日別運動平均判定活殺
-平均運動量上限判定活殺
-平均運動量下限判定活殺
-運動量上限判定（曜日別平均）活殺
-運動量下限判定（曜日別平均）活殺
-グラフ表示間隔（分）
+		<!-- content start グラフ設定値変更 -->
+		<section id="contentBoxLarge">
+			<form class="form">
+				<h1 class="contentLarge_h1">グラフ設定値変更</h1>
+				<p>変更したい内容を入力してください。</p>
+				<!-- 設定値 -->
+				<div class="form_set_container graph_form">
+						<div class="form_base_data_edit">
+							<table>
+								<tbody>
+									<tr>
+										<th>再通知設定</th>
+										<td colspan="2">
+											<label for="snooze" class="floatL pdt5">スヌーズ期間　</label>
+											<div class="common_select floatL">
+												<select name="snooze" id="snooze">
+													<option value="0分" >0分</option>
+													<option value="10分" >10分</option>
+													<option value="20分" >20分</option>
+													<option value="30分" >30分</option>
+													<option value="40分" >40分</option>
+													<option value="50分" >50分</option>
+													<option value="60分" selected>60分</option>
+												</select>
+												</div>
+											<label for="snoozeTimes" class="floatL pdt5">　繰り返し回数　</label>
+											<div class="common_select floatL">
+												<select name="snoozeTimes" id="snoozeTimes">
+													<option value="1回" >1回</option>
+													<option value="2回" >2回</option>
+													<option value="3回" >3回</option>
+													<option value="4回" >4回</option>
+													<option value="5回" selected>5回</option>
+													<option value="6回" >6回</option>
+													<option value="7回" >7回</option>
+													<option value="8回" >8回</option>
+													<option value="9回" >9回</option>
+													<option value="10回" >10回</option>
+												</select>
+												</div>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<th>目盛り5つ</th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り5つ class="rangeNo05"</label>
+											<input type="range" min="0" max="4" value="2" list="scale" class="rangeNo05" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：最弱</td>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+													<td>感度：最強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<th>目盛り3つ<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<th rowspan="2">起床判断設定<br>
+<p class="small text_red txt_normal">※人感センサーが室内の動きを捉え、起床かどうか判断します。</p></th>
+										<td>起床判断開始時間</td>
+										<td>
+											<div class="common_select floatL">
+													<select name="kisho-kaishi-h" id="kisho-kaishi-h">
+														<option value="00">00</option>
+														  <option value="01">01</option>
+														  <option value="02">02</option>
+														  <option value="03">03</option>
+														  <option value="04">04</option>
+														  <option value="05">05</option>
+														  <option value="06">06</option>
+														  <option value="07">07</option>
+														  <option value="08">08</option>
+														  <option value="09">09</option>
+														  <option value="10">10</option>
+														  <option value="11">11</option>
+														  <option value="12">12</option>
+														  <option value="13">13</option>
+														  <option value="14">14</option>
+														  <option value="15">15</option>
+														  <option value="16">16</option>
+														  <option value="17">17</option>
+														  <option value="18">18</option>
+														  <option value="19">19</option>
+														  <option value="20">20</option>
+														  <option value="21">21</option>
+														  <option value="22">22</option>
+														  <option value="23">23</option>
+													</select>
+											</div>
+											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
+											<div class="common_select floatL">
+													<select name="snoozeTimes" id="snoozeTimes">
+														<option value="00">00</option>
+														  <option value="01">01</option>
+														  <option value="02">02</option>
+														  <option value="03">03</option>
+														  <option value="04">04</option>
+														  <option value="05">05</option>
+														  <option value="06">06</option>
+														  <option value="07">07</option>
+														  <option value="08">08</option>
+														  <option value="09">09</option>
+														  <option value="10">10</option>
+														  <option value="11">11</option>
+														  <option value="12">12</option>
+														  <option value="13">13</option>
+														  <option value="14">14</option>
+														  <option value="15">15</option>
+														  <option value="16">16</option>
+														  <option value="17">17</option>
+														  <option value="18">18</option>
+														  <option value="19">19</option>
+														  <option value="20">20</option>
+														  <option value="21">21</option>
+														  <option value="22">22</option>
+														  <option value="23">23</option>
+														  <option value="24">24</option>
+														  <option value="25">25</option>
+														  <option value="26">26</option>
+														  <option value="27">27</option>
+														  <option value="28">28</option>
+														  <option value="29">29</option>
+														  <option value="30">30</option>
+														  <option value="31">31</option>
+														  <option value="32">32</option>
+														  <option value="33">33</option>
+														  <option value="34">34</option>
+														  <option value="35">35</option>
+														  <option value="36">36</option>
+														  <option value="37">37</option>
+														  <option value="38">38</option>
+														  <option value="39">39</option>
+														  <option value="40">40</option>
+														  <option value="41">41</option>
+														  <option value="42">42</option>
+														  <option value="43">43</option>
+														  <option value="44">44</option>
+														  <option value="45">45</option>
+														  <option value="46">46</option>
+														  <option value="47">47</option>
+														  <option value="48">48</option>
+														  <option value="49">49</option>
+														  <option value="50">50</option>
+														  <option value="51">51</option>
+														  <option value="52">52</option>
+														  <option value="53">53</option>
+														  <option value="54">54</option>
+														  <option value="55">55</option>
+														  <option value="56">56</option>
+														  <option value="57">57</option>
+														  <option value="58">58</option>
+														  <option value="59">59</option>
+													</select>
+											</div>
+											<span class="floatL pdt5">&nbsp;&nbsp;分&nbsp;&nbsp;〜&nbsp;&nbsp;</span>
+											<div class="common_select floatL">
+													<select name="kisho-kaishi-h" id="kisho-kaishi-h">
+														<option value="00">00</option>
+														  <option value="01">01</option>
+														  <option value="02">02</option>
+														  <option value="03">03</option>
+														  <option value="04">04</option>
+														  <option value="05">05</option>
+														  <option value="06">06</option>
+														  <option value="07">07</option>
+														  <option value="08">08</option>
+														  <option value="09">09</option>
+														  <option value="10">10</option>
+														  <option value="11">11</option>
+														  <option value="12">12</option>
+														  <option value="13">13</option>
+														  <option value="14">14</option>
+														  <option value="15">15</option>
+														  <option value="16">16</option>
+														  <option value="17">17</option>
+														  <option value="18">18</option>
+														  <option value="19">19</option>
+														  <option value="20">20</option>
+														  <option value="21">21</option>
+														  <option value="22">22</option>
+														  <option value="23">23</option>
+													</select>
+											</div>
+											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
+											<div class="common_select floatL">
+													<select name="snoozeTimes" id="snoozeTimes">
+														<option value="00">00</option>
+														  <option value="01">01</option>
+														  <option value="02">02</option>
+														  <option value="03">03</option>
+														  <option value="04">04</option>
+														  <option value="05">05</option>
+														  <option value="06">06</option>
+														  <option value="07">07</option>
+														  <option value="08">08</option>
+														  <option value="09">09</option>
+														  <option value="10">10</option>
+														  <option value="11">11</option>
+														  <option value="12">12</option>
+														  <option value="13">13</option>
+														  <option value="14">14</option>
+														  <option value="15">15</option>
+														  <option value="16">16</option>
+														  <option value="17">17</option>
+														  <option value="18">18</option>
+														  <option value="19">19</option>
+														  <option value="20">20</option>
+														  <option value="21">21</option>
+														  <option value="22">22</option>
+														  <option value="23">23</option>
+														  <option value="24">24</option>
+														  <option value="25">25</option>
+														  <option value="26">26</option>
+														  <option value="27">27</option>
+														  <option value="28">28</option>
+														  <option value="29">29</option>
+														  <option value="30">30</option>
+														  <option value="31">31</option>
+														  <option value="32">32</option>
+														  <option value="33">33</option>
+														  <option value="34">34</option>
+														  <option value="35">35</option>
+														  <option value="36">36</option>
+														  <option value="37">37</option>
+														  <option value="38">38</option>
+														  <option value="39">39</option>
+														  <option value="40">40</option>
+														  <option value="41">41</option>
+														  <option value="42">42</option>
+														  <option value="43">43</option>
+														  <option value="44">44</option>
+														  <option value="45">45</option>
+														  <option value="46">46</option>
+														  <option value="47">47</option>
+														  <option value="48">48</option>
+														  <option value="49">49</option>
+														  <option value="50">50</option>
+														  <option value="51">51</option>
+														  <option value="52">52</option>
+														  <option value="53">53</option>
+														  <option value="54">54</option>
+														  <option value="55">55</option>
+														  <option value="56">56</option>
+														  <option value="57">57</option>
+														  <option value="58">58</option>
+														  <option value="59">59</option>
+													</select>
+											</div>
+											<span class="floatL pdt5">&nbsp;&nbsp;分</span>
+											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト5時00分〜9時00分</span></div>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<td>目盛り4つ</td>
+										<td>
+											<div class="floatL">
+											<label class="dispayNone">範囲0～100、目盛り4つ class="rangeNo04"</label>
+											<input type="range" min="0" max="3" value="1" list="scale" class="rangeNo04" />
+												<table class="rangeCount">
+													<tr>
+														<td>0</td>
+														<td>1</td>
+														<td>2</td>
+														<td>3</td>
+													</tr>
+												</table>
+											</div>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<th>あいうえお</th>
+										<td>目盛り6つ</td>
+										<td>
+											<label class="dispayNone">範囲0～100、目盛り6つ class="rangeNo04"</label>
+											<input type="range" min="0" max="5" value="1" list="scale" class="rangeNo06" />
+												<table class="rangeCount">
+													<tr>
+														<td>0</td>
+														<td>1</td>
+														<td>2</td>
+														<td>3</td>
+														<td>4</td>
+														<td>5</td>
+													</tr>
+												</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+					</div>
+				</div>
+				<!-- /設定値 --> 
+				
+				<div class="set_container">
+					<div class="left_container"></div>
+					<div class="center_container"><a class="fancybox btn_darkBlue" href="#settingChange">変更する</a>
+					</div>
+					<div class="right_container"></div>
+				</div>
+			</form>
+		</section>
+		<!-- /content end グラフ設定値変更 --> 
