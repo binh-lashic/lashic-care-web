@@ -490,7 +490,7 @@ class Model_Sensor extends Orm\Model{
 				'date' => date("Y-m-d H:i:s", $this->time - 60)
 			));
 			$result = $query->execute('data');
-			if($result) {
+			if(!empty($result['temperature'])) {
 				$params = array(
 					'type' => 'fire',
 					'title' => '火事',
