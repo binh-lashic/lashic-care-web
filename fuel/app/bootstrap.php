@@ -22,7 +22,7 @@ if(preg_match("/infic.garoo.jp/i", $_SERVER['HTTP_HOST'])) {
 	    'Database_Query_Builder' => APPPATH.'classes/database/query/builder.php',
 	    'Database_Query_Builder_Select' => APPPATH.'classes/database/query/builder/select.php',
 	    'Database_Connection' => APPPATH.'classes/database/connection.php',
-	    'Validation' => APPPATH.'classes/validation.php',
+//	    'Validation' => APPPATH.'classes/validation.php',
 	));
 	\Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : \Fuel::TEST);
 }
