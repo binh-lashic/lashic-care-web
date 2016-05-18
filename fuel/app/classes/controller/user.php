@@ -82,8 +82,14 @@ class Controller_User extends Controller_Base
 				$params = array(
 					'sensor_id' => $this->data['sensor']['id'],
 					'limit' => Config::get("report_list_count"),
+					'confirm_status' => 0,
 				);
 				$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
+				$params = array(
+					'sensor_id' => $this->data['sensor']['id'],
+					'confirm_status' => 0,
+				);
+				$this->data['header_alert_count'] = \Model_Alert::getAlertCount($params);
 			}
 		}
 	}
@@ -341,7 +347,7 @@ class Controller_User extends Controller_Base
 				if($this->data['corresponding_status']) {
 					$params['corresponding_status'] = $this->data['corresponding_status'];
 				}
-				if(!empty($this->data['confirm_status'])) {
+				if(isset($this->data['confirm_status'])) {
 					$params['confirm_status'] = $this->data['confirm_status'];
 				}
 				$this->data['alerts'] = \Model_Alert::getAlerts($params);
@@ -354,6 +360,24 @@ class Controller_User extends Controller_Base
         $this->template->content = View::forge('user/report', $this->data);
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
+
+	public function action_report_save()
+	{
+		$this->data['confirm_status'] = Input::param("confirm_status");
+		$this->data['alerts'] = Input::post("alerts");
+		list(, $user_id) = Auth::get_user_id();
+		foreach($this->data['alerts'] as $alert_id) {
+			$alert = \Model_Alert::find($alert_id);
+			$params = array(
+				'confirm_user_id' => $user_id,
+				'confirm_status' => $this->data['confirm_status'],
+			);
+			$alert->set($params);
+			$alert->save();
+		}
+		Response::redirect('/user/report');	
+    }
+
 
 	public function action_login_form()
 	{

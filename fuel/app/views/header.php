@@ -90,22 +90,23 @@ if(isset($client['name'])) {
 <main role="main" class="clearBoth">
 	<div class="clearfix content"> 
 
-<?php
-if(!empty($this->data['header_alerts'])) {
-?>
 		<!-- お知らせ -->
 		<div class="com_news">
+		<?php
+if(!empty($this->data['header_alerts'])) {
+?>
 			<dl class="clearfix">
 				<dt class="com_news_tile"><img src="/images/common/hdr_news_megaphone.png" alt="icon"/><br>
 					お知らせ</dt>
 				<dd class="com_news_tile"> <a href="/user/report" class="com_news_link"> <span class="com_news_text"><?php echo $this->data['header_alerts'][0]['description']; ?><br>
-					<span class="small">その他未対応事項（<?php echo count($this->data['header_alerts']); ?>件）</span> </span> </a> </dd>
+					<span class="small">その他未対応事項（<?php echo $this->data['header_alert_count']; ?>件）</span> </span> </a> </dd>
 			</dl>
-		</div>
-		<!-- /お知らせ --> 
 <?php
 }
 ?>
+		</div>
+		<!-- /お知らせ --> 
+
 	</div>
 <?php
 if(!empty($breadcrumbs)) {

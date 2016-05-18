@@ -31,7 +31,7 @@
 			</div>
 			<!-- /情報ソート --> 
 			
-			
+			<form action="/user/report_save" method="post" name="alerts" id="alerts">			
 <?php
 if(isset($alert_count)) {
 ?>				
@@ -39,15 +39,13 @@ if(isset($alert_count)) {
 			<div class="report_pageBox clearfix">
 				<div class="report_operation">
 					<div class="report_select common_select clearfix">
-						<select>
+						<select name="confirm_status" class="confirm_status_top">
 							<option value="">選択項目一括操作</option>
-							<!-- <option value="">ゴミ箱に入れる</option>-->
-							<option value="">未対応にする</option>
-							<option value="">対応済みにする</option>
-							<option value="">対応不要にする</option>
+							<option value="0">未対応にする</option>
+							<option value="1">対応済みにする</option>
 						</select>
 					</div>
-					<div class="report_btn_apply"><a href="#" class="btn_text">適用</a></div>
+					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
 				</div>
 				
 				<div class="report_pager">
@@ -105,7 +103,7 @@ if(isset($alerts)) {
 		$corresponding_statuses = array("未対応", "対応済", "対応予定", "対応不要");
 ?>
 						<tr>
-							<th><input type="checkbox" id="check20"><label for="check20" class="checkbox"></label></th>
+							<th><input type="checkbox" class="alert_check" id="check<?php echo $key; ?>" name="alerts[]" value="<?php echo $alert['id']; ?>"><label for="check<?php echo $key; ?>" class="checkbox"></label></th>
 							<td><?php echo date("m/d", strtotime($alert['date'])); ?>（<?php echo Util::format_week(date("w", strtotime($alert['date']))); ?>）</td>
 							<td>
 <?php
@@ -216,15 +214,13 @@ if(isset($alert_count)) {
 			<div class="report_pageBox clearfix">
 				<div class="report_operation">
 					<div class="report_select common_select clearfix">
-						<select>
+						<select name="confirm_status" class="confirm_status_bottom">
 							<option value="">選択項目一括操作</option>
-							<option value="">ゴミ箱に入れる</option>
-							<option value="">未対応にする</option>
-							<option value="">対応済みにする</option>
-							<option value="">対応不要にする</option>
+							<option value="0">未対応にする</option>
+							<option value="1">対応済みにする</option>
 						</select>
 					</div>
-					<div class="report_btn_apply"><a href="#" class="btn_text">適用</a></div>
+					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
 				</div>
 				
 				<div class="report_pager">
@@ -261,7 +257,7 @@ if(isset($page) && $page != $page_count) {
 <?php
 }
 ?>
-			
+			</form>
 			
 			
 		</section>

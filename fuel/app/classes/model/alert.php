@@ -77,15 +77,19 @@ class Model_Alert extends Orm\Model{
 
 	public static function getAlerts($params){
 		$alerts = array();
+		
 		$query = \Model_Alert::buildQuery($params);
 		if(!empty($query)) {
+			
 			if(!empty($params['limit'])) {
 				$query = $query->limit($params['limit']);
 				if(!empty($params['page']) && $params['page'] > 2) {
 					$query = $query->offset($params['limit'] * ($params['page'] - 1));
 				}
 			}
+
 	 		$_alerts = $query->related("confirm_user")->order_by('id', 'desc')->get();
+
 			if($_alerts) {
 				foreach($_alerts as $_alert) {
 					$alert = $_alert->to_array();
@@ -96,6 +100,7 @@ class Model_Alert extends Orm\Model{
 					$alerts[] = $alert;
 				}
 			}
+
 		}
 		return $alerts;
 	}
@@ -103,6 +108,7 @@ class Model_Alert extends Orm\Model{
 	public static function getAlertCount($params){
 		$alert_count = 0;
 		$query = \Model_Alert::buildQuery($params);
+		unset($query->confirm_user);
 		if(!empty($query)) {
 			$alert_count = $query->count();
 		}
@@ -131,10 +137,11 @@ class Model_Alert extends Orm\Model{
 			$query = \Model_Alert::query()
 				->where('sensor_id', $sensor_id)
 				->where('date', 'between', array($start_date, $end_date));
-			if(!empty($params['confirm_status'])) {
+
+			if(isset($params['confirm_status']) && $params['confirm_status'] !== "") {
 				$query->where('confirm_status', $params['confirm_status']);
 			}
-			if(!empty($params['corresponding_status'])) {
+			if(isset($params['corresponding_status']) && $params['corresponding_status'] !== "") {
 				$query->where('corresponding_status', $params['corresponding_status']);
 			}
 	       	return $query;
@@ -150,11 +157,11 @@ class Model_Alert extends Orm\Model{
 			$alert = \Model_Alert::forge();
 		}
 
-		if(!empty($params['confirm_status'])) {
+		if(isset($params['confirm_status'])) {
 			list(, $user_id) = Auth::get_user_id();
 			$params['confirm_user_id'] = $user_id;
 		}
-		if(!empty($params['expiration_hour'])) {
+		if(isset($params['expiration_hour'])) {
 			$params['expiration_time'] = date("Y-m-d H:i:s", time() + $params['expiration_hour'] * 60 * 60);
 		}
 

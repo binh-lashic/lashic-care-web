@@ -48,6 +48,19 @@ class Model_User extends Orm\Model{
 	{
 		$val = Validation::forge($factory);
 		switch($factory) {
+			case "register":
+				$val->add_field('email', '', 'required');	
+				$val->add_field('first_name', '', 'required');
+				$val->add_field('first_kana', '', 'required');
+				$val->add_field('last_name', '', 'required');
+				$val->add_field('last_kana', '', 'required');
+				$val->add_field('gender', '', 'required');
+				$val->add_field('phone', '', 'required');
+				$val->add_field('prefecture', '', 'required');	
+				$val->add_field('address', '', 'required');	
+				$val->add_field('password', '', 'required');
+				$val->add_field('password_confirm', '', 'required');	
+				break;			
 			case "basic":
 				$val->add_field('name', '', 'required');
 				$val->add_field('kana', '', 'required');
@@ -272,6 +285,9 @@ class Model_User extends Orm\Model{
 			} else {
 				if(empty($params['username'])) {
 					$params['username'] = sha1($params['email'].mt_rand());
+				}
+				if(empty($params['admin'])) {
+					$params['admin'] = 1;
 				}
 				$id = Auth::create_user(
 		                $params['username'],

@@ -688,6 +688,7 @@ class Model_Sensor extends Orm\Model{
 */
 			
 			$params['description'] = $description;
+			$params['confirm_status'] = 0;
 
 			$alert = \Model_Alert::forge();
     		$alert->set($params);

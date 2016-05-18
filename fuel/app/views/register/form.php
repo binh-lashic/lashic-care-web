@@ -109,12 +109,12 @@
 								<tbody>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
-										<td><input type="text" name="email" class="input_text input_medium"><br>
+										<td><input type="text" name="email" class="input_text input_medium" value="<?php if(isset($data['email'])) { echo $data['email']; } ?>"><br>
 										
 										<span class="text_red">※</span><span class="small ">初期設定では変更ができません。ご登録完了後、マイページにてメールアドレスをご変更ください。<br>
 										<span class="text_red">※</span>携帯電話メールでご登録の場合はPCメール受信設定をご確認いただき、<?php echo Config::get('email.domain'); ?>のメールアドレスを受信可能にご設定ください。</span>
 <?php
-if(!empty($error['email'])) {
+if(isset($errors['email'])) {
 ?>
 											<p class="error">メールアドレスを入力してください。</p>
 <?php
@@ -124,9 +124,9 @@ if(!empty($error['email'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎">
+										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-if(!empty($error['name'])) {
+if(isset($errors['last_name']) || isset($errors['first_name'])) {
 ?>
 											<p class="error">お名前を入力してください。</p>
 <?php
@@ -136,9 +136,9 @@ if(!empty($error['name'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう">
+										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">
 <?php
-if(!empty($error['kana'])) {
+if(isset($errors['last_kana']) || isset($errors['first_kana'])) {
 ?>
 											<p class="error">ふりがなを入力してください。</p>
 <?php
@@ -149,12 +149,12 @@ if(!empty($error['kana'])) {
 									<tr>
 										<th><span class="icon_Required">必須</span> 性別</th>
 										<td>
-											<input type="radio" id="male" name="gender" value="m" <?php if(!empty($user) && $user['gender'] === "m") { echo "checked=\"checked\""; } ?>>
+											<input type="radio" id="male" name="gender" value="m" <?php if(isset($data['gender']) && $data['gender'] === "m") { echo "checked=\"checked\""; } ?>>
 											<label for="male" class="checkbox">男性</label>
-											<input type="radio" id="female" name="gender" value="f" <?php if(!empty($user) && $user['gender'] === "f") { echo "checked=\"checked\""; } ?>>
+											<input type="radio" id="female" name="gender" value="f" <?php if(isset($data['gender']) && $data['gender'] === "f") { echo "checked=\"checked\""; } ?>>
 											<label for="female" class="checkbox">女性</label>
 <?php
-if(!empty($error['gender'])) {
+if(isset($errors['gender'])) {
 ?>
 
 											<p class="error">エラー：性別を選択してください。</p>
@@ -172,7 +172,7 @@ if(!empty($error['gender'])) {
 <?php
 foreach($eras as $key => $era) {
 ?>
-														<option value="<?php echo $key; ?>" <?php if(!empty($user) && $user['year'] == $key) { echo "selected=\"selected\""; } ?>><?php echo $era; ?></option>
+														<option value="<?php echo $key; ?>" <?php if(isset($data) && $data['year'] == $key) { echo "selected=\"selected\""; } ?>><?php echo $era; ?></option>
 <?php
 }
 ?>
@@ -185,7 +185,7 @@ foreach($eras as $key => $era) {
 <?php
 for($i = 1; $i <= 12; $i++) {
 ?>
-														<option value="<?php echo $i; ?>" <?php if(!empty($user) && $user['month'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
+														<option value="<?php echo $i; ?>" <?php if(isset($data) && $data['month'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
 <?php
 }
 ?>
@@ -198,7 +198,7 @@ for($i = 1; $i <= 12; $i++) {
 <?php
 for($i = 1; $i <= 31; $i++) {
 ?>
-														<option value="<?php echo $i; ?>" <?php if(!empty($user) && $user['day'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
+														<option value="<?php echo $i; ?>" <?php if(isset($data) && $data['day'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
 <?php
 }
 ?>
@@ -207,7 +207,7 @@ for($i = 1; $i <= 31; $i++) {
 												<div class="floatL pdt5">　日</div>
 											</div>
 <?php
-if(!empty($error['birthday'])) {
+if(isset($errors['birthday'])) {
 ?>
 											<p class="error">エラー：生年月日を選択してください。</p>
 <?php
@@ -218,7 +218,7 @@ if(!empty($error['birthday'])) {
 									<tr>
 										<th>郵便番号</th>
 										<td>
-											<input type="text" name="zip_code" class="input_text input_short p-postal-code" maxlength="7" placeholder="例）1234567"> &nbsp;&nbsp;<a href="http://www.post.japanpost.jp/zipcode/" target="_blank">郵便番号検索</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+											<input type="text" name="zip_code" class="input_text input_short p-postal-code" maxlength="7" placeholder="例）1234567" value="<?php if(isset($data['zip_code'])) { echo $data['zip_code']; } ?>"> &nbsp;&nbsp;<a href="http://www.post.japanpost.jp/zipcode/" target="_blank">郵便番号検索</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
 										</td>
 									</tr>
 									<tr>
@@ -231,7 +231,7 @@ if(!empty($error['birthday'])) {
 <?php
 foreach($prefectures as $prefecture) {
 ?>
-														<option value="<?php echo $prefecture; ?>"<?php if(!empty($user) && $prefecture == $user['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?>
+														<option value="<?php echo $prefecture; ?>"<?php if(isset($data) && $prefecture == $data['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?>
 														</option>
 <?php
 }
@@ -240,7 +240,7 @@ foreach($prefectures as $prefecture) {
 												</div>
 											</div>
 <?php
-if(!empty($error['prefecture'])) {
+if(isset($errors['prefecture'])) {
 ?>
 											<p class="error">都道府県を入力してください。</p>
 <?php
@@ -250,10 +250,10 @@ if(!empty($error['prefecture'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県以下</th>
-										<td><input type="text" name="address" class="input_text input_large p-locality p-street-address p-extended-address" placeholder="例）静岡市インフィックマンション302号"><br>
+										<td><input type="text" name="address" class="input_text input_large p-locality p-street-address p-extended-address" placeholder="例）静岡市インフィックマンション302号" value="<?php if(isset($data['address'])) { echo $data['address']; } ?>"><br>
 <span class="small text_red">※</span><span class="small">市町村、番地、建物名、室番号までご入力ください。</span>
 <?php
-if(!empty($error['address'])) {
+if(isset($errors['address'])) {
 ?>
 											<p class="error">都道府県以下を入力してください。</p>
 <?php
@@ -263,9 +263,9 @@ if(!empty($error['address'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号1</th>
-										<td><input type="text" name="phone" class="input_text input_short" maxlength="11" placeholder="例）0542666201"> <span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></span>
+										<td><input type="text" name="phone" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['phone'])) { echo $data['phone']; } ?>"> <span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></span>
 <?php
-if(!empty($error['phone'])) {
+if(isset($errors['phone'])) {
 ?>
 											<p class="error">電話番号1を入力してください。</p>
 <?php
@@ -275,7 +275,7 @@ if(!empty($error['phone'])) {
 									</tr>
 									<tr>
 										<th>電話番号2</th>
-										<td><input type="text" name="cellular" class="input_text input_short" maxlength="11" placeholder="例）0542666201">
+										<td><input type="text" name="cellular" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['cellular'])) { echo $data['cellular']; } ?>">
 										<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
 									</tr>
 									<tr>
@@ -286,7 +286,7 @@ if(!empty($error['phone'])) {
 										<span class="text_red">※</span>必ず英字と数字の両方を使って入力してください。大文字小文字は区別されます。<br>
 									<span class="text_red">※</span>ユーザーID、郵便番号、電話番号、誕生日など推測できる文字は避けてください。</span>
 <?php
-if(!empty($error['password'])) {
+if(isset($errors['password'])) {
 ?>
 											<p class="error">エラー：パスワードを入力してください。</p>
 <?php
@@ -299,7 +299,7 @@ if(!empty($error['password'])) {
 										<td><input type="password" name="password_confirm" class="input_text input_short" maxlength="8" placeholder="パスワード入力">
 										 <span class="small "><span class="text_red">※</span>確認のため再度ご入力ください。</span></span>
 <?php
-if(!empty($errors['password_confirm'])) {
+if(isset($errors['password_confirm'])) {
 ?>
 										<p class="error">エラー：パスワードが一致しません。</p>
 <?php

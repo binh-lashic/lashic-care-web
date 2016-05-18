@@ -53,6 +53,22 @@ $(function(){
 		});
 	});
 
+	$("#checkAll").change(function() {
+		if($("#checkAll").prop('checked')) {
+			$(".alert_check").prop("checked",true);
+		}
+		
+	});
+	
+
+	$(".confirm_status_top").change(function() {
+		$(".confirm_status_bottom").val($(".confirm_status_top").val());
+	});
+
+	$(".confirm_status_bottom").change(function() {
+		$(".confirm_status_top").val($(".confirm_status_bottom").val());
+	});
+
 	function drawGraph() {
 
 		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
