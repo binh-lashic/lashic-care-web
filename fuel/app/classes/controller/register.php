@@ -6,6 +6,7 @@ class Controller_Register extends Controller_Base
 	public function before() {
 		$this->nologin_methods = array(
 	        'index',
+	        'complete'
 	    );
 	    $this->template = 'template';
 

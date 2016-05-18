@@ -44,26 +44,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th>目盛り5つ</th>
-										<td colspan="2">
-											<label class="dispayNone">範囲0～100、目盛り5つ class="rangeNo05"</label>
-											<input type="range" min="0" max="4" value="2" list="scale" class="rangeNo05" />
-											<table class="rangeCount">
-												<tr>
-													<td>感度：最弱</td>
-													<td>感度：弱</td>
-													<td>感度：中</td>
-													<td>感度：強</td>
-													<td>感度：最強</td>
-												</tr>
-										</table>
-										</td>
-										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
-										</td>
-									</tr>
-									<tr>
-										<th>目盛り3つ<br>
+										<th>室内温度異常アラート<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
@@ -81,7 +62,230 @@
 										</td>
 									</tr>
 									<tr>
-										<th rowspan="2">起床判断設定<br>
+										<th>火事アラート<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+									<th>熱中症アラート<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>室内湿度異常アラート<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>カビ・ダニアラート<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>室内照度異常（日中）<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>室内照度異常（深夜）<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>データ送信エラー<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>平均起床時間遅延<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>平均睡眠時間遅延<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>平均睡眠時間遅延<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>異常行動<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>一定時間人感センサー未感知<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<th>夜間起床回数、夜間人感センサー感知回数<br>
+<p class="small text_red txt_normal">※テキスト</p></th>
+										<td colspan="2">
+											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
+											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<table class="rangeCount">
+												<tr>
+													<td>感度：弱</td>
+													<td>感度：中</td>
+													<td>感度：強</td>
+												</tr>
+										</table>
+										</td>
+										<td>
+												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+										</td>
+									</tr>
+									<tr>
+										<th>起床判断設定<br>
 <p class="small text_red txt_normal">※人感センサーが室内の動きを捉え、起床かどうか判断します。</p></th>
 										<td>起床判断開始時間</td>
 										<td>
@@ -279,47 +483,7 @@
 												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
 										</td>
 									</tr>
-									<tr>
-										<td>目盛り4つ</td>
-										<td>
-											<div class="floatL">
-											<label class="dispayNone">範囲0～100、目盛り4つ class="rangeNo04"</label>
-											<input type="range" min="0" max="3" value="1" list="scale" class="rangeNo04" />
-												<table class="rangeCount">
-													<tr>
-														<td>0</td>
-														<td>1</td>
-														<td>2</td>
-														<td>3</td>
-													</tr>
-												</table>
-											</div>
-										</td>
-										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
-										</td>
-									</tr>
-									<tr>
-										<th>あいうえお</th>
-										<td>目盛り6つ</td>
-										<td>
-											<label class="dispayNone">範囲0～100、目盛り6つ class="rangeNo04"</label>
-											<input type="range" min="0" max="5" value="1" list="scale" class="rangeNo06" />
-												<table class="rangeCount">
-													<tr>
-														<td>0</td>
-														<td>1</td>
-														<td>2</td>
-														<td>3</td>
-														<td>4</td>
-														<td>5</td>
-													</tr>
-												</table>
-										</td>
-										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
-										</td>
-									</tr>
+									
 								</tbody>
 							</table>
 					</div>

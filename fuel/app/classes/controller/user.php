@@ -411,6 +411,8 @@ class Controller_User extends Controller_Base
 	{
         $data = array();
         $this->template->title = '設定ページ';
+        
+        $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/setting');
 	}
 
