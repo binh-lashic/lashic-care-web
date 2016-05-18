@@ -156,7 +156,7 @@ class Model_User extends Orm\Model{
 		if(empty($ret['kana'])) {
 			$ret['kana'] = $ret['last_kana'].$ret['first_kana'];
 		}
-		
+
 		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
 		if(isset($ret['birthday'])) {
 			$now = date("Ymd");
@@ -268,11 +268,7 @@ class Model_User extends Orm\Model{
 		if(empty($params['username'])) {
 			$params['username'] = sha1($params['email'].mt_rand());
 		}
-		/*
-		if(empty($params['admin'])) {
-			$params['admin'] = 0;
-		}
-		*/
+		
 		try {
 			if(!empty($params['id'])) {
 				$id = $params['id'];

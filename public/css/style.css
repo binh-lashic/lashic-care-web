@@ -61,7 +61,7 @@ a.logo {
     padding-left: 40px;
 }
 .nav_userListRegist{margin:10px;}
-.nav_userListRegist a{ width:210px; padding:10px 0;}
+.nav_userListRegist a{ padding:10px 0;}
 .nav_mainMenu{
 	background: url(../images/common/hdr_icon_main-menu.png) no-repeat 11px 11px;
 	background-size: 15px 13px;
@@ -91,6 +91,8 @@ a.logo {
 .nav_mypage:hover , .nav_set:hover , .nav_help:hover , .nav_logout:hover {
 	
 }
+.user_alert{ min-width:20px; position:absolute; top:10px; right:14px; padding:3px 6px; background-color:#ef5656; border-radius:10px; color:#FFF; font-size:10px; text-align:center;line-height:1em; }
+
 
 /* blue area */
 .hdr_bg {
@@ -163,7 +165,6 @@ a.logo {
 	background-size: 22px 23px;
 	text-decoration:none;
 }
-
 
 
 
@@ -398,8 +399,9 @@ footer{ background-color:#7ecef4; margin-top:60px; padding:5px 0; text-align:cen
 
 .graph24_cal_table tbody span{ display:block; cursor:pointer;}
 .graph24_cal_table tbody span:hover{ background-color:#d6e9f2;}
-.graph24_cal-today span{ border:1px solid #FF0000; font-weight:bold; background-color:#ffebeb; line-height:1.4em}
 .graph24_cal-selected span{ background-color:#7ecef4; color:#FFF;}
+.graph24_cal-today span{ border:1px solid #FF0000; font-weight:bold; background-color:#ffebeb; line-height:1.4em}
+.graph24_cal-today.graph24_cal-selected span{ border:1px solid #FF0000; font-weight:bold; background-color:#ffebeb; line-height:1.4em; color:#4b4948;}
 .graph24_btnArea { text-align:center;}
 .graph24_btnArea .btn_text {
   font-size:14px;
@@ -586,7 +588,7 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .form_set_container table tr:nth-child(even) { background-color:#f6f6f6; }
 .form_set_container table th{ width:138px; padding:10px; text-align:left; vertical-align:top;}
 .form_set_container table th.largeTh{ width:250px; padding:10px; text-align:left; vertical-align:top}
-.form_set_container table td{ padding:10px; }
+.form_set_container table td{ padding:10px; position:relative;}
 
 .userDate_photo{ width:178px; float:left; clear:left; margin:10px 0;}
 .userDate_photo + .form_base_data{ width:560px; margin-left:200px;}
@@ -695,6 +697,38 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .settingInner{ display:table-cell; text-align:center; vertical-align:middle;}
 .graphSettingTrue{ width:60%; margin:0 auto 20px; display:block;}
 .graphSettingFalse{ width:40%; margin:0 auto; display:block;}
+.mailSetting { margin-top:-4px;}
+a.mail_on{
+	width:100px;
+	display:block;
+	float:right;
+	border:none;
+	background-color:#ef5656;
+	border-radius:6px;
+	margin:5px 0 0;  
+	padding:5px 0;
+	line-height:1.4em;
+	text-align:center;
+	color:#FFF;
+	font-size:10px;
+	text-decoration:none;
+}
+a.mail_off{
+	width:100px;
+	height:15px;
+	display:block;
+	float:right;
+	background-color:#ccc;
+	border-radius:6px;
+	margin:5px 0 0;  
+	padding:5px 0;
+	line-height:1.4em;
+	text-align:center;
+	color:#FFF;
+	font-size:10px;
+	text-decoration:none;
+}
+a.mail_on:hover , a.mail_off:hover{ opacity:1;}
 
 
 
@@ -710,7 +744,7 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 
 /* ----------------------------------------------------------
 
-ヘルプ
+Q＆A
 
 ---------------------------------------------------------- */
 .allOpenBtn .switchOn{ background:url(../images/help/btn_open_all.png) 0 1px no-repeat; background-size:24px 60px; padding-left:30px; padding:5px 0 5px 30px; }
@@ -773,9 +807,9 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 
 }
 @media  (min-width: 774px) {
-#loginTop{ width:800px; margin:0 auto; position:relative;}
-#loginTitle{ font-size:30px; color:#4b4948; line-height:1.6em; text-shadow: 1px 1px 2px #FFF; position:absolute; left:30px;}
-#loginContainer{ width:300px; position:absolute; right:30px; border-radius:6px; background-color:#FFF; box-shadow:0 0 5px #DDD;}
+#loginTop{ width:840px; margin:0 auto; position:relative;}
+#loginTitle{ width:413px; height:140px; background:url(../images/login/login_text.png) no-repeat; background-size:413px 140px; text-indent:-9999px; position:absolute; left:0;}
+#loginContainer{ width:300px; position:absolute; right:0; border-radius:6px; background-color:#FFF; box-shadow:0 0 5px #DDD;}
 #loginContainerInner{ padding:30px;}
 #loginContainer dl{ margin-bottom:20px;}
 #loginContainer dl dt{ width:80px; float:left; clear:left; margin-bottom:10px;}
@@ -793,6 +827,7 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 #loginContainer dl dt{ width:80px; float:left; clear:left; margin-bottom:10px;}
 #loginContainer dl dd{ margin-left:80px; margin-bottom:10px;}
 #loginContainer dl dt:last-child, #loginContainer dl dd:last-child{ margin-bottom:0;}
+.sp_noWrap{ display:block;}
 }
 @media  (max-height: 560px) {
 .loginBg footer{ margin-top:30px; position:relative}
@@ -828,3 +863,9 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 .regist_waku_left{ width:513px;}
 
 #attention_01{ display:none;}
+
+
+
+/* 会員ID・パスワード忘れ */
+.password_start{ width:25%;}
+.password_start .btn_text{ padding:15px 20px;}

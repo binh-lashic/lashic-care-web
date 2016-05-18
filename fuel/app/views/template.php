@@ -11,10 +11,14 @@
 <meta property="og:type" content="website" >
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
-<meta property="og:image" content="/images/ogp.jpg" >
+<meta property="og:image" content="/images/common/ogp.jpg" >
 <meta property="og:site_name" content="" >
 <meta property="og:description" content="ケア　アイの管理画面です。" >
 <link href="/css/reset.css" type="text/css" rel="stylesheet">
+<meta name="viewport" content="width=360,initial-scale=0.1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">

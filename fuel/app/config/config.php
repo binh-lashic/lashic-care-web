@@ -357,6 +357,7 @@ return array(
 	'report_list_count' => 10,
 	'sendgrid' => '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',
 	'email' => array(
+		'domain' => 'careeye.jp',
 		'from' => 'info@careeye.jp',
 		'templates' => array(
 			'user_update' => array(

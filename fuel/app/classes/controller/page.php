@@ -91,7 +91,7 @@ class Controller_Page extends Controller_Template
 
 	public function action_help()
 	{        
-        $this->template->title = 'ヘルプ';
+        $this->template->title = 'Q &amp; A';
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('page/help');

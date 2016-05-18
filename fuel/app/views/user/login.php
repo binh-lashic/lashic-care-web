@@ -11,7 +11,7 @@
 	<!-- content start -->
 	<div id="loginTop">
 	<form class="form-horizontal" id="login" method="post" name="login" action="/user/login">
-		<div id="loginTitle"><p>高齢者の"自立"をささえ<br>"あんしん"を共有する</p></div>
+		<div id="loginTitle"><p>高齢者の"自立"をささえ<span class="sp_noWrap">"あんしん"を共有する</span></p></div>
 		<div id="loginContainer">
 			<div id="loginContainerInner">
 				<dl>
@@ -23,7 +23,6 @@
 				<input type="checkbox" id="password_check">
 				<label for="password_check" class="checkbox">ログインを保持する</label>
 				<a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt20">ログインする</a>
-				<a href="/register" class="btn_redRadius20 mgt10">新規登録する</a>
 			</div>
 		</div>
 	</form>
