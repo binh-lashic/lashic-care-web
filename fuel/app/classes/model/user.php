@@ -265,14 +265,14 @@ class Model_User extends Orm\Model{
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
 		}
-		if(empty($params['username'])) {
-			$params['username'] = sha1($params['email'].mt_rand());
-		}
 		
 		try {
 			if(!empty($params['id'])) {
 				$id = $params['id'];
 			} else {
+				if(empty($params['username'])) {
+					$params['username'] = sha1($params['email'].mt_rand());
+				}
 				$id = Auth::create_user(
 		                $params['username'],
 		                $params['password'],
