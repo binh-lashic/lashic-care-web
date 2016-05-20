@@ -60,8 +60,7 @@ class Controller_User extends Controller_Base
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
-				print_r($this->data['sensor']);
-				//exit;
+				
 				$this->data['data_daily'] = \Model_Data_Daily::getData($this->data['sensor']['id'], $this->data['date']);
 
 				$this->data['data_latest'] = \Model_Data_Daily::getData($this->data['sensor']['id'], date("Y-m-d", strtotime("-1day")));
