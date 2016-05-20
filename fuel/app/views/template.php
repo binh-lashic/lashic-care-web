@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 <title>Care Eye ケア　アイ - <?php if(!empty($title)) { echo $title; } ?></title>
 <meta name="keywords" content="ケア　アイ,ケア,アイ,見守り">
 <meta name="description" content="ケア　アイの管理画面です。">
@@ -12,18 +12,21 @@
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
 <meta property="og:image" content="/images/common/ogp.jpg" >
-<meta property="og:site_name" content="" >
-<meta property="og:description" content="ケア　アイの管理画面です。" >
-<link href="/css/reset.css" type="text/css" rel="stylesheet">
-<meta name="viewport" content="width=360,initial-scale=0.1">
+<meta property="og:site_name" content="Care Eye（ケア　アイ）　管理ページ" >
+<meta property="og:description" content="Care Eye（ケア　アイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
+<!--<meta name="viewport" content="width=360,initial-scale=0.1">-->
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
+
+<link href="/css/reset.css" type="text/css" rel="stylesheet">
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
+<!--<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">-->
+<!--<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />-->
 <!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
@@ -33,25 +36,18 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- light box -->
-<link type="text/css" href="/css/shadowbox.css" rel="stylesheet" media="all" />
-<script type="text/javascript" src="/js/shadowbox.js"></script>
-<script type="text/javascript">  
-Shadowbox.init({
-  //modal:true
-  //slideshowDelay:1
-  //showOverlay:false
-  //overlayColor:'#f60'
-  //animate:false,
-  //animateFade:false
-  //continuous:true
-  //displayNav: false
-});
-</script> 
-<!-- /light box -->
 <script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+<!-- srcoll design -->
+<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+<script type="text/javascript">
+$(function(){
+  $('.scroll_area').jScrollPane();
+});
+</script>
+<!-- /srcoll design -->
 </head>
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>

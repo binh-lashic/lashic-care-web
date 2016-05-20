@@ -2,7 +2,7 @@
 if(isset($client)) {
 ?>
 	<script type="text/javascript">
-	var sensor_id = "<?php echo !empty($sensor->id) ? $sensor->id : ""; ?>";
+	var sensor_id = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var date = "<?php echo $date; ?>";
 	</script>
 		<!-- content start -->
