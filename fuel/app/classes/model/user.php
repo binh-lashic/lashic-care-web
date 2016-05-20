@@ -399,6 +399,9 @@ class Model_User extends Orm\Model{
 				unset($user_sensor['id']);
 				unset($user_sensor['user_id']);
 				unset($user_sensor['sensor_id']);
+				print_r($user_sensor);
+				print_r($sensor);
+				exit;
 				$sensors[] = array_merge($sensor, $user_sensor);
 			}
 		}
