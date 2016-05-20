@@ -1,6 +1,6 @@
 $(function(){
     var apiUrl = "http://careeye.jp/api/";
-    
+
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
@@ -119,7 +119,6 @@ $(function(){
 		});
 	});
 	function drawGraph() {
-		if(typeof(date) != "undefined") {
 			api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
 				var values = [];
 				var graphs = [];
@@ -236,7 +235,6 @@ $(function(){
 				    },
 				});
 			});			
-		} 
 
 	}
 });
