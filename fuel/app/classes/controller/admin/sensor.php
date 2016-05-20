@@ -17,6 +17,13 @@ class Controller_Admin_Sensor extends Controller_Admin
         $this->template->content = View::forge('admin/sensor/index', $data);
 	}
 
+	public function action_list() {
+    	$id = Input::param("id");
+    	$data['sensors'] = \Model_Sensor::getAll();
+        $this->template->title = '管理ページ センサー設定';
+        $this->template->content = View::forge('admin/sensor/list', $data);
+	}
+
 	public function action_save() {
 		$sensor = \Model_Sensor::saveSensor(Input::param());
         $this->template->title = '管理ページ センサー設定';

@@ -22,6 +22,13 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->content = View::forge('admin/user/index', $data);
 	}
 
+    public function action_list() {
+        $data = array();
+        $data['admins'] = Model_User::getAdmins();
+        $this->template->title = '管理ページ トップ';
+        $this->template->content = View::forge('admin/user/list', $data);
+    }
+
     public function action_alert() {
         $data = array();
         $id = Input::param("id");
@@ -37,7 +44,7 @@ class Controller_Admin_User extends Controller_Admin
 		$user = Model_User::saveUser(Input::param());
 		if($user) {
             if($user['admin']) {
-                Response::redirect('/admin/user/?admin_user_id='.$admin_user_id);
+                Response::redirect('/admin/user/?admin_user_id='.$user['id']);
             } else {
                 Response::redirect('/admin/user/client?admin_user_id='.$admin_user_id.'&client_user_id='.$user['id']);
             }

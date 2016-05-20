@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Care Eye ケア　アイ - <?php if(!empty($title)) { echo $title; } ?></title>
 <meta name="keywords" content="ケア　アイ,ケア,アイ,見守り">
 <meta name="description" content="ケア　アイの管理画面です。">
@@ -14,7 +14,7 @@
 <meta property="og:image" content="/images/common/ogp.jpg" >
 <meta property="og:site_name" content="Care Eye（ケア　アイ）　管理ページ" >
 <meta property="og:description" content="Care Eye（ケア　アイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
-<!--<meta name="viewport" content="width=360,initial-scale=0.1">-->
+<meta name="viewport" content="width=360,initial-scale=0.1">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">

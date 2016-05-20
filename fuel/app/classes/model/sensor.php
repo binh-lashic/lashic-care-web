@@ -167,6 +167,17 @@ class Model_Sensor extends Orm\Model{
 		return \Model_Sensor::format($sensor);
 	}
 
+	public static function getAll() {
+		$_sensors = \Model_Sensor::find('all',array(
+			'order_by' => array('name' => 'asc')
+		));
+		foreach($_sensors as $_sensor) {
+			$sensors[] = \Model_Sensor::format($_sensor);
+		}
+		return $sensors;
+	}
+
+
 	public static function saveSensor($params) {
     	$sensor = \Model_Sensor::find($params['id']);
     	if($sensor) {

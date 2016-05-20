@@ -35,14 +35,20 @@ if(isset($admins)) {
 				  <input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">氏名※</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="name" name="name" placeholder="氏名" value="<?php echo isset($user['name']) ? $user['name'] : ""; ?>">
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="name" name="last_name" placeholder="姓" value="<?php echo isset($user['last_name']) ? $user['last_name'] : ""; ?>">
+				    </div>
+					<div class="col-sm-4">
+				      <input type="text" class="form-control" id="name" name="first_name" placeholder="名" value="<?php echo isset($user['first_name']) ? $user['first_name'] : ""; ?>">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="kana" class="col-sm-3 control-label">フリガナ※</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="kana" name="kana" placeholder="フリガナ" value="<?php echo isset($user['kana']) ? $user['kana'] : ""; ?>">
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="kana" name="last_kana" placeholder="姓" value="<?php echo isset($user['last_kana']) ? $user['last_kana'] : ""; ?>">
+				    </div>
+					<div class="col-sm-4">
+				      <input type="text" class="form-control" id="kana" name="first_kana" placeholder="名" value="<?php echo isset($user['first_kana']) ? $user['first_kana'] : ""; ?>">
 				    </div>
 				  </div>
 
@@ -116,7 +122,7 @@ if(isset($user)) {
 		foreach($sensors as $sensor) {
 ?>
 					<li class="list-group-item">
-						<a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a>
+						<a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo isset($sensor['name']) ? $sensor['name'] : "未設定"; ?></a>
 					</li>
 <?php
 		}
