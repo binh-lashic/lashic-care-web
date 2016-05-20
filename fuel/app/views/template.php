@@ -24,8 +24,6 @@
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
-<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">
-<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 <!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
@@ -72,13 +70,11 @@ Shadowbox.init({
   <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 
 <script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
-<script src="/js/drawer.min.js" charset="utf-8"></script> 
-<script src="/js/content.js" type="text/javascript"></script>
-<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
-
 <!-- 円グラフ --> 
 <script src="/js/jquery.circliful.min.js"></script> 
 <script>
@@ -87,7 +83,10 @@ $(document).ready(function(){
 });
 </script> 
 <!-- /円グラフ --> 
+<script src="/js/drawer.min.js" charset="utf-8"></script> 
 <script src="/js/jquery.tile.js" type="text/javascript"></script> 
+<script src="/js/content.js" type="text/javascript"></script>
+<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/main.js" type="text/javascript"></script> 
 </body>
 </html>
