@@ -4,16 +4,12 @@ class Controller_Admin_Page extends Controller_Admin
 	public function action_index()
 	{
                 $data = array();
-                try {
-                	$data['admins'] = Model_User::getAdmins();
-                	$id = $this->param("id");
-                	if($id) {
-                		$data['user'] = Model_User::getUser($id);
-                	}
-                } catch(Exception $e) {
-
+                $data['admins'] = Model_User::getAdmins();
+                $id = $this->param("id");
+                if($id) {
+                        $data['user'] = Model_User::getUser($id);
                 }
-                
+
                 $this->template->title = '管理ページ トップ';
                 $this->template->content = View::forge('admin/user/index', $data);
 	}

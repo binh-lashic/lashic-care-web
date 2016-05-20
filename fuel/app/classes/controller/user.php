@@ -56,10 +56,11 @@ class Controller_User extends Controller_Base
 	    $this->data['next_page'] = $this->data['page'] + 1;
 	    $this->data['prev_page'] = $this->data['page'] - 1;
 
-	    if(!empty($this->data['client']['id'])) {
+	    if(isset($this->data['client']['id'])) {
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
-				$this->data['sensor'] = $sensors[0];
+				$this->data['user_sensor'] = $sensors[0];
+				$this->data['sensor'] = $sensors[0]['sensor'];
 				$this->data['data_daily'] = \Model_Data_Daily::getData($this->data['sensor']['id'], $this->data['date']);
 
 				$this->data['data_latest'] = \Model_Data_Daily::getData($this->data['sensor']['id'], date("Y-m-d", strtotime("-1day")));
@@ -263,6 +264,7 @@ class Controller_User extends Controller_Base
 
 		if(Input::post()) {
 		    $params = Input::post();
+			$params['profile_image'] = \Model_User::uploadProfileImage();
 			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
 			}
@@ -411,9 +413,9 @@ class Controller_User extends Controller_Base
 	{
         $data = array();
         $this->template->title = '設定ページ';
-        
+
         $this->template->header = View::forge('header', $this->data);
-        $this->template->content = View::forge('user/setting');
+        $this->template->content = View::forge('user/setting', $this->data);
 	}
 
 	public function action_404()

@@ -1,10 +1,11 @@
 		<!-- content start グラフ設定値変更 -->
 		<section id="contentBoxLarge">
-			<form class="form">
 				<h1 class="contentLarge_h1">グラフ設定値変更</h1>
 				<p>変更したい内容を入力してください。</p>
 				<!-- 設定値 -->
 				<div class="form_set_container graph_form">
+						<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_sensor['user_id']; ?>" />
+						<input type="hidden" name="sensor_id" id="sensor_id" value="<?php echo $sensor['id']; ?>" />
 						<div class="form_base_data_edit">
 							<table>
 								<tbody>
@@ -40,7 +41,6 @@
 												</div>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<tr>
@@ -48,7 +48,7 @@
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['temperature_level']; ?>" list="scale" class="rangeNo03" id="temperature_level" name="temperature_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -58,7 +58,7 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['temperature_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="temperature_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<tr>
@@ -66,7 +66,7 @@
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['fire_level']; ?>" list="scale" class="rangeNo03" id="fire_level" name="fire_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -76,7 +76,7 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['fire_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="fire_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<tr>
@@ -84,7 +84,7 @@
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['heatstroke_level']; ?>" list="scale" class="rangeNo03" id="heatstroke_level" name="heatstroke_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -94,14 +94,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['heatstroke_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="heatstroke_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>室内湿度異常アラート<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['humidity_level']; ?>" list="scale" class="rangeNo03" id="humidity_level" name="humidity_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -111,14 +111,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['humidity_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="humidity_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>カビ・ダニアラート<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['mold_mites_level']; ?>" list="scale" class="rangeNo03" id="mold_mites_level" name="mold_mites_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -128,14 +128,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['mold_mites_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="mold_mites_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>室内照度異常（日中）<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['illuminance_daytime_level']; ?>" list="scale" class="rangeNo03" id="illuminance_daytime_level" name="illuminance_daytime_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -145,14 +145,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['illuminance_daytime_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_daytime_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>室内照度異常（深夜）<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['illuminance_night_level']; ?>" list="scale" class="rangeNo03" id="illuminance_night_level" name="illuminance_night_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -162,31 +162,26 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['illuminance_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_night_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+<?php
+/*
 									<th>データ送信エラー<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
-											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
-											<table class="rangeCount">
-												<tr>
-													<td>感度：弱</td>
-													<td>感度：中</td>
-													<td>感度：強</td>
-												</tr>
-										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['data_send_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="data_send_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+*/
+?>
 									<th>平均起床時間遅延<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['wake_up_level']; ?>" list="scale" class="rangeNo03" id="wake_up_level" name="wake_up_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -196,14 +191,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['wake_up_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="wake_up_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>平均睡眠時間遅延<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['sleep_level']; ?>" list="scale" class="rangeNo03" id="sleep_level" name="sleep_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -213,31 +208,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
-										</td>
-									</tr>
-									<th>平均睡眠時間遅延<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
-										<td colspan="2">
-											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
-											<table class="rangeCount">
-												<tr>
-													<td>感度：弱</td>
-													<td>感度：中</td>
-													<td>感度：強</td>
-												</tr>
-										</table>
-										</td>
-										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['sleep_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="sleep_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>異常行動<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['abnormal_behavior_level']; ?>" list="scale" class="rangeNo03" id="abnormal_behavior_level" name="abnormal_behavior_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -247,14 +225,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['abnormal_behavior_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="abnormal_behavior_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>一定時間人感センサー未感知<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['active_non_detection_level']; ?>" list="scale" class="rangeNo03" id="active_non_detection_level" name="active_non_detection_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -264,14 +242,14 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['active_non_detection_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_non_detection_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<th>夜間起床回数、夜間人感センサー感知回数<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="1" list="scale" class="rangeNo03" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['active_night_level']; ?>" list="scale" class="rangeNo03" id="active_night_level" name="active_night_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -281,7 +259,7 @@
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($user_sensor['active_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_night_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<tr>
@@ -318,71 +296,7 @@
 													</select>
 											</div>
 											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
-											<div class="common_select floatL">
-													<select name="snoozeTimes" id="snoozeTimes">
-														<option value="00">00</option>
-														  <option value="01">01</option>
-														  <option value="02">02</option>
-														  <option value="03">03</option>
-														  <option value="04">04</option>
-														  <option value="05">05</option>
-														  <option value="06">06</option>
-														  <option value="07">07</option>
-														  <option value="08">08</option>
-														  <option value="09">09</option>
-														  <option value="10">10</option>
-														  <option value="11">11</option>
-														  <option value="12">12</option>
-														  <option value="13">13</option>
-														  <option value="14">14</option>
-														  <option value="15">15</option>
-														  <option value="16">16</option>
-														  <option value="17">17</option>
-														  <option value="18">18</option>
-														  <option value="19">19</option>
-														  <option value="20">20</option>
-														  <option value="21">21</option>
-														  <option value="22">22</option>
-														  <option value="23">23</option>
-														  <option value="24">24</option>
-														  <option value="25">25</option>
-														  <option value="26">26</option>
-														  <option value="27">27</option>
-														  <option value="28">28</option>
-														  <option value="29">29</option>
-														  <option value="30">30</option>
-														  <option value="31">31</option>
-														  <option value="32">32</option>
-														  <option value="33">33</option>
-														  <option value="34">34</option>
-														  <option value="35">35</option>
-														  <option value="36">36</option>
-														  <option value="37">37</option>
-														  <option value="38">38</option>
-														  <option value="39">39</option>
-														  <option value="40">40</option>
-														  <option value="41">41</option>
-														  <option value="42">42</option>
-														  <option value="43">43</option>
-														  <option value="44">44</option>
-														  <option value="45">45</option>
-														  <option value="46">46</option>
-														  <option value="47">47</option>
-														  <option value="48">48</option>
-														  <option value="49">49</option>
-														  <option value="50">50</option>
-														  <option value="51">51</option>
-														  <option value="52">52</option>
-														  <option value="53">53</option>
-														  <option value="54">54</option>
-														  <option value="55">55</option>
-														  <option value="56">56</option>
-														  <option value="57">57</option>
-														  <option value="58">58</option>
-														  <option value="59">59</option>
-													</select>
-											</div>
-											<span class="floatL pdt5">&nbsp;&nbsp;分&nbsp;&nbsp;〜&nbsp;&nbsp;</span>
+											<span class="floatL pdt5">&nbsp;&nbsp;〜&nbsp;&nbsp;</span>
 											<div class="common_select floatL">
 													<select name="kisho-kaishi-h" id="kisho-kaishi-h">
 														<option value="00">00</option>
@@ -412,8 +326,17 @@
 													</select>
 											</div>
 											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
+											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト5時〜9時</span></div>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<th>就寝判断設定<br>
+<p class="small text_red txt_normal">※人感センサーが室内の動きを捉え、就寝したかどうか判断します。</p></th>
+										<td>就寝判断開始時間</td>
+										<td>
 											<div class="common_select floatL">
-													<select name="snoozeTimes" id="snoozeTimes">
+													<select name="kisho-kaishi-h" id="kisho-kaishi-h">
 														<option value="00">00</option>
 														  <option value="01">01</option>
 														  <option value="02">02</option>
@@ -438,52 +361,43 @@
 														  <option value="21">21</option>
 														  <option value="22">22</option>
 														  <option value="23">23</option>
-														  <option value="24">24</option>
-														  <option value="25">25</option>
-														  <option value="26">26</option>
-														  <option value="27">27</option>
-														  <option value="28">28</option>
-														  <option value="29">29</option>
-														  <option value="30">30</option>
-														  <option value="31">31</option>
-														  <option value="32">32</option>
-														  <option value="33">33</option>
-														  <option value="34">34</option>
-														  <option value="35">35</option>
-														  <option value="36">36</option>
-														  <option value="37">37</option>
-														  <option value="38">38</option>
-														  <option value="39">39</option>
-														  <option value="40">40</option>
-														  <option value="41">41</option>
-														  <option value="42">42</option>
-														  <option value="43">43</option>
-														  <option value="44">44</option>
-														  <option value="45">45</option>
-														  <option value="46">46</option>
-														  <option value="47">47</option>
-														  <option value="48">48</option>
-														  <option value="49">49</option>
-														  <option value="50">50</option>
-														  <option value="51">51</option>
-														  <option value="52">52</option>
-														  <option value="53">53</option>
-														  <option value="54">54</option>
-														  <option value="55">55</option>
-														  <option value="56">56</option>
-														  <option value="57">57</option>
-														  <option value="58">58</option>
-														  <option value="59">59</option>
 													</select>
 											</div>
-											<span class="floatL pdt5">&nbsp;&nbsp;分</span>
-											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト5時00分〜9時00分</span></div>
+											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
+											<span class="floatL pdt5">&nbsp;&nbsp;〜&nbsp;&nbsp;</span>
+											<div class="common_select floatL">
+													<select name="kisho-kaishi-h" id="kisho-kaishi-h">
+														<option value="00">00</option>
+														  <option value="01">01</option>
+														  <option value="02">02</option>
+														  <option value="03">03</option>
+														  <option value="04">04</option>
+														  <option value="05">05</option>
+														  <option value="06">06</option>
+														  <option value="07">07</option>
+														  <option value="08">08</option>
+														  <option value="09">09</option>
+														  <option value="10">10</option>
+														  <option value="11">11</option>
+														  <option value="12">12</option>
+														  <option value="13">13</option>
+														  <option value="14">14</option>
+														  <option value="15">15</option>
+														  <option value="16">16</option>
+														  <option value="17">17</option>
+														  <option value="18">18</option>
+														  <option value="19">19</option>
+														  <option value="20">20</option>
+														  <option value="21">21</option>
+														  <option value="22">22</option>
+														  <option value="23">23</option>
+													</select>
+											</div>
+											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
+											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト19時〜23時</span></div>
 										</td>
-										<td>
-												<div class="mailSetting"><a href="javascript:();" class="mail_on">メール通知 ON</a></div>
-										</td>
-									</tr>
-									
+										<td></td>
+									</tr>									
 								</tbody>
 							</table>
 					</div>
@@ -496,6 +410,42 @@
 					</div>
 					<div class="right_container"></div>
 				</div>
-			</form>
 		</section>
 		<!-- /content end グラフ設定値変更 --> 
+
+	<div id="settingChange" class="settingContainer" style="display: none; width:400px; height:300px; ">
+		<div class="settingInner">
+			<p class="mgb20">システム設定値を変更します。よろしいですか？</p>
+			<a href="#settingComp" class="fancybox btn_darkBlue graphSettingTrue graph_setting">変更する</a>
+			<a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a>
+		</div>
+	</div>
+	<div id="settingComp" class="settingContainer" style="display: none; width:400px; height:300px; ">
+		<div class="settingInner">
+			<p class="mgb20">設定を変更しました。</p>
+			<a href="javascript:$.fancybox.close();" class="fancybox btn_darkBlue graphSettingTrue">ページへ戻る</a>
+		</div>
+	</div>
+		<!--このページのjs -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function() {
+		$(".fancybox").fancybox();
+	}); 
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
+<!-- /このページのjs -->

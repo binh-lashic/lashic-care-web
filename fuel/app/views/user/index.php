@@ -117,35 +117,35 @@ if(isset($client)) {
 							<div class="graph24_cal_selectInner">
 							<ul class="graph24_cal_head clearfix">
 								<li class="graph24_cal_back"><span>&lt;</span></li>
-								<li class="graph24_cal_thisMonth"><span class="slide_btn">2月 2016</span>
+								<li class="graph24_cal_thisMonth"><span class="slide_btn" id="calendar_year_month">2月 2016</span>
 									<div class="graph24_cal_otherMonth">
 										<p class="pdt20 pdb10">年月を選択してください</p>
 										<div class="common_select">
-											<select>
-												<option value="">2012年</option>
-												<option value="">2013年</option>
-												<option value="">2014年</option>
-												<option value="">2015年</option>
-												<option value="" selected>2016年</option>
+											<select class="calendar_year_select">
+												<option value="2012">2012年</option>
+												<option value="2013">2013年</option>
+												<option value="2014">2014年</option>
+												<option value="2015">2015年</option>
+												<option value="2016" selected>2016年</option>
 											</select>
 										</div>
 										<div class="common_select mgt15 mgb20">
-											<select>
-												<option value="">1月</option>
-												<option value="">2月</option>
-												<option value="">3月</option>
-												<option value="">4月</option>
-												<option value="">5月</option>
-												<option value="">6月</option>
-												<option value="">7月</option>
-												<option value="">8月</option>
-												<option value="">9月</option>
-												<option value="">10月</option>
-												<option value="">11月</option>
-												<option value="">12月</option>
+											<select name="calendar_month_select" class="calendar_month_select">
+												<option value="1">1月</option>
+												<option value="2">2月</option>
+												<option value="3">3月</option>
+												<option value="4">4月</option>
+												<option value="5">5月</option>
+												<option value="6">6月</option>
+												<option value="7">7月</option>
+												<option value="8">8月</option>
+												<option value="9">9月</option>
+												<option value="10">10月</option>
+												<option value="11">11月</option>
+												<option value="12">12月</option>
 											</select>
 										</div>
-										<span class="slide_btn_back btn_red mgb10">OK</span>
+										<span class="slide_btn_ok btn_red mgb10">OK</span>
 										<span class="slide_btn_back btn_text">キャンセル</span>
 									</div>
 								</li>
@@ -241,3 +241,12 @@ if(isset($client)) {
 <?php
 }
 ?>
+<!-- srcoll design -->
+<script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mousewheel.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.scroll_area').jScrollPane();
+});
+</script>
+<!-- /srcoll design -->

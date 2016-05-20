@@ -32,7 +32,7 @@ if(isset($admins)) {
 			<div class="panel-heading">ユーザの新規登録</div>
 			<div class="panel-body">
 				<form class="form-horizontal" method="post" action="/admin/user/save">
-					<input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
+				  <input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">氏名※</label>
 				    <div class="col-sm-9">
@@ -59,12 +59,6 @@ if(isset($admins)) {
 				  </div>
 
 				  <div class="form-group">
-				    <label for="username" class="col-sm-3 control-label">ID</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="username" name="username" placeholder="ID" value="<?php echo isset($user['username']) ? $user['username'] : ""; ?>">
-				    </div>
-				  </div>
-				  <div class="form-group">
 				    <label for="password" class="col-sm-3 control-label">初期パスワード</label>
 				    <div class="col-sm-9">
 				      <input type="password" class="form-control" id="password" name="password" placeholder="初期パスワード">
@@ -89,20 +83,6 @@ if(isset($admins)) {
 				    <label for="email" class="col-sm-3 control-label">メールアドレス※</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="email" name="email" placeholder="メールアドレス" value="<?php echo isset($user['email']) ? $user['email'] : ""; ?>">
-				    </div>
-				  </div>
-
-				  <div class="form-group">
-				    <label for="work_start_date" class="col-sm-3 control-label">勤務開始日</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="work_start_date" name="work_start_date" placeholder="勤務開始日" value="<?php echo isset($user['work_start_date']) ? $user['work_start_date'] : ""; ?>">
-				    </div>
-				  </div>
-
-				  <div class="form-group">
-				    <label for="memo" class="col-sm-3 control-label">備考</label>
-				    <div class="col-sm-9">
-				      <textarea class="form-control" id="memo" name="memo"><?php echo isset($user['memo']) ? $user['memo'] : ""; ?></textarea>
 				    </div>
 				  </div>
 
@@ -201,7 +181,8 @@ if(isset($clients)) {
 ?>
 	  			</table>
 				<div class="panel-body">
-					<a class="btn btn-primary" href="/admin/user/client_list?user_id=<?php echo $user['id']; ?>" role="button">担当を追加</a>
+					<a class="btn btn-primary" href="/admin/user/client_list?user_id=<?php echo $user['id']; ?>" role="button">ユーザの割当</a>
+					<a class="btn btn-primary" href="/admin/user/client?admin_user_id=<?php echo $user['id']; ?>" role="button">ユーザの新規追加</a>
 				</div>
 			</div>
 	</div>

@@ -1,6 +1,6 @@
 		<!-- content start 基本情報変更 -->
 		<section id="contentBoxLarge">
-			<form class="form" action="/user/info_basic_form" method="post">
+			<form class="form" action="/user/info_basic_form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<?php echo $client['id']; ?>">
 				<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報変更入力</h1>
 				<p>変更したい内容を入力してください。</p>
@@ -13,7 +13,7 @@
 							</div>
 									<div class="uploadButton btn_text">ファイルを選択<br>
 （最大00MB）
-										<input type="file" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
+										<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
 										<input type="text" id="uv" class="uploadValue" disabled />
 									</div>
 						</div>

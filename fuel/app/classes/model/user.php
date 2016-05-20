@@ -224,7 +224,7 @@ class Model_User extends Orm\Model{
 				'where' => array('admin' => 1)
 			));
 			foreach($rows as $row) {
-				$users[] = $row;
+				$users[] = \Model_User::format($row);
 			}			
 		}
 		return $users;
@@ -250,8 +250,8 @@ class Model_User extends Orm\Model{
 		}	
 	}
 
-	public static function saveUser($params) {
-        $config = array(
+	public static function uploadProfileImage() {
+		$config = array(
             'path' => DOCROOT.DS.'images/user',
             'randomize' => true,
             'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
@@ -263,17 +263,20 @@ class Model_User extends Orm\Model{
 	        {
 	            Upload::save();
 	            $files = Upload::get_files();
-	            $params['profile_image'] = $files[0]['saved_as'];
+	            return $files[0]['saved_as'];
 	        }
 
 	        // エラー有り
 	        foreach (Upload::get_errors() as $file)
 	        {
-	            // $file['errors']の中にエラーが入っているのでそれを処理
+	            return null;
 	        }
         } catch (Exception $e) {
-
+        	return null;
         }
+	}
+	public static function saveUser($params) {
+		\Model_User::uploadProfileImage();
 
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
@@ -390,7 +393,7 @@ class Model_User extends Orm\Model{
 				),
 			));
 			foreach($rows as $row) {
-				$sensors[] = $row->sensor;
+				$sensors[] = $row->to_array();
 			}
 		}
 		return $sensors;

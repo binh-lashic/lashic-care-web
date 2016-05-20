@@ -10,6 +10,7 @@
 				<input type="hidden" name="gender" value="<?php if(!empty($data['gender'])) { echo $data['gender']; } ?>" />
 				<input type="hidden" name="birthday" value="<?php if(!empty($data['birthday'])) { echo $data['birthday']; } ?>" />
 				<input type="hidden" name="blood_type" value="<?php if(!empty($data['blood_type'])) { echo $data['blood_type']; } ?>" />
+				<input type="hidden" name="profile_image" value="<?php if(!empty($data['profile_image'])) { echo $data['profile_image']; } ?>" />
 				<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報変更確認</h1>
 				<p>以下の入力内容でお間違いないかご確認ください。</p>
 				<!-- 基本情報 -->
@@ -17,7 +18,7 @@
 				<div class="form_set_container">
 						<div class="userDate_photo">
 							<div class="aside_photo">
-								<div class="aside_photoInner"><img src="../images/user/sample.jpg" width="179" height="179" alt=""/></div>
+								<div class="aside_photoInner"><img src="/images/user/<?php echo $data['profile_image']; ?>" width="179" height="179" alt=""/></div>
 							</div>
 						</div>
 						<div class="form_base_data_edit">

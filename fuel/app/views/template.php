@@ -24,6 +24,8 @@
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">
+<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 <!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
@@ -33,18 +35,6 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-<!-- srcoll design -->
-<script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="/js/jquery.mousewheel.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.scroll_area').jScrollPane();
-});
-</script>
-<!-- /srcoll design -->
-
-
 <!-- light box -->
 <link type="text/css" href="/css/shadowbox.css" rel="stylesheet" media="all" />
 <script type="text/javascript" src="/js/shadowbox.js"></script>
@@ -85,6 +75,8 @@ Shadowbox.init({
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 
 <script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
 <script src="/js/drawer.min.js" charset="utf-8"></script> 
+<script src="/js/content.js" type="text/javascript"></script>
+<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
 
 <!-- 円グラフ --> 
@@ -96,8 +88,6 @@ $(document).ready(function(){
 </script> 
 <!-- /円グラフ --> 
 <script src="/js/jquery.tile.js" type="text/javascript"></script> 
-<script src="/js/content.js" type="text/javascript"></script>
-<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/js/main.js" type="text/javascript"></script> 
 </body>
 </html>
