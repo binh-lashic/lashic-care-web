@@ -394,19 +394,16 @@ class Model_User extends Orm\Model{
 			));
 			foreach($rows as $row) {
 				$user_sensor = $row->to_array();
-				$sensor = $user_sensor['sensor'];
-				unset($user_sensor['sensor']);
-				unset($user_sensor['id']);
+				$user_sensor['id'] = $user_sensor['sensor_id'];
 				unset($user_sensor['user_id']);
 				unset($user_sensor['sensor_id']);
-				try {
+				if(isset($user_sensor['sensor'])) {
+					$sensor = $user_sensor['sensor'];
+					unset($user_sensor['sensor']);
 					$sensors[] = array_merge($sensor, $user_sensor);
-				} catch(Exception $e) {
-					print_r($sensor);
-					print_r($user_sensor);
-					exit;
-				}
-				
+				} else {
+					$sensors[] = $user_sensor;
+				}				
 			}
 		}
 		return $sensors;
