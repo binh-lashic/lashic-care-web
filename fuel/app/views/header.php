@@ -25,7 +25,7 @@ if(isset($user)) {
 				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">ユーザー選択<span class="drawer-caret"></span> </a>
 					<div class="drawer-dropdown-menu mainMenu">
 						<div id="mainMenu">
-							<ul>
+							<ul class="scroll_area">
 <?php
 if(!empty($clients)) {
 	foreach($clients as $_client) {

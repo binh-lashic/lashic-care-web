@@ -31,7 +31,7 @@ $(function(){
 		return false;
 	});
 */
-	if(typeof sensor_id != "undefined") {
+	if(typeof sensor_id != "undefined" && typeof date != "undefined" ) {
 		drawGraph();
 	}
 

@@ -26,8 +26,7 @@
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
 <!--<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">-->
-<!--<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />-->
-<!-- 円グラフ -->
+<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" /><!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
 <!-- カレンダー表示・非表示 -->
@@ -40,8 +39,8 @@
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <!-- srcoll design -->
-<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mousewheel.js"></script>
 <script type="text/javascript">
 $(function(){
   $('.scroll_area').jScrollPane();
