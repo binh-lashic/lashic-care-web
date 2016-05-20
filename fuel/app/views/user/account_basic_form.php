@@ -13,9 +13,11 @@
 								<tbody>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" class="input_text input_medium" name="name" value="<?php echo $user['name']; ?>">
+										<td>
+										<input type="text" class="input_text input_short" name="last_name" value="<?php echo $user['last_name']; ?>">
+										<input type="text" class="input_text input_short" name="first_name" value="<?php echo $user['first_name']; ?>">
 <?php
-if(!empty($error['name'])) {
+if(!empty($error['last_name']) || !empty($error['first_name']) ) {
 ?>
 											<p class="error">お名前を入力してください。</p>
 <?php
@@ -25,9 +27,11 @@ if(!empty($error['name'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" class="input_text input_medium" name="kana" value="<?php echo $user['kana']; ?>">
+										<td>
+											<input type="text" class="input_text input_short" name="last_kana" value="<?php echo $user['last_kana']; ?>">
+											<input type="text" class="input_text input_short" name="first_kana" value="<?php echo $user['first_kana']; ?>">
 <?php
-if(!empty($error['kana'])) {
+if(!empty($error['last_kana']) || !empty($error['first_kana'])) {
 ?>
 											<p class="error">ふりがなを入力してください。</p>
 <?php

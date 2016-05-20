@@ -12,7 +12,7 @@
 							<tbody>
 								<tr>
 									<th>お名前（ふりがな）</th>
-									<td colspan="3"><?php echo $user['name']; ?>（<?php echo $user['kana']; ?>）</td>
+									<td colspan="3"><?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>（<?php echo $user['last_kana']; ?><?php echo $user['first_kana']; ?>）</td>
 								</tr>
 								<tr>
 									<th>性別</th>

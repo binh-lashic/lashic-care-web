@@ -29,14 +29,20 @@ if(isset($admins)) {
 					<input type="hidden" name="id" value="<?php echo isset($client['id']) ? $client['id'] : ""; ?>" />
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">氏名※</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="name" name="name" placeholder="氏名" value="<?php echo isset($client['name']) ? $client['name'] : ""; ?>">
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="姓" value="<?php echo isset($client['last_name']) ? $client['last_name'] : ""; ?>">
+				    </div>
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="名" value="<?php echo isset($client['first_name']) ? $client['first_name'] : ""; ?>">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="kana" class="col-sm-3 control-label">フリガナ※</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="kana" name="kana" placeholder="フリガナ" value="<?php echo isset($client['kana']) ? $client['kana'] : ""; ?>">
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="last_kana" name="last_kana" placeholder="セイ" value="<?php echo isset($client['last_kana']) ? $client['last_kana'] : ""; ?>">
+				    </div>
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" id="first_kana" name="first_kana" placeholder="メイ" value="<?php echo isset($client['first_kana']) ? $client['first_kana'] : ""; ?>">
 				    </div>
 				  </div>
 

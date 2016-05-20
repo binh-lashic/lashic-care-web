@@ -2,8 +2,10 @@
 		<section id="contentBoxLarge">
 			<form class="form" action="/user/account_basic_complete" method="post">
 				<input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-				<input type="hidden" name="name" value="<?php echo $data['name']; ?>">
-				<input type="hidden" name="kana" value="<?php echo $data['kana']; ?>">
+				<input type="hidden" name="last_name" value="<?php echo $data['last_name']; ?>">
+				<input type="hidden" name="first_name" value="<?php echo $data['first_name']; ?>">
+				<input type="hidden" name="last_kana" value="<?php echo $data['last_kana']; ?>">
+				<input type="hidden" name="first_kana" value="<?php echo $data['first_kana']; ?>">
 				<input type="hidden" name="birthday" value="<?php echo $data['birthday']; ?>">
 				<input type="hidden" name="prefecture" value="<?php echo $data['prefecture']; ?>">
 				<input type="hidden" name="addrses" value="<?php echo $data['address']; ?>">
@@ -19,11 +21,11 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td><?php echo $data['name']; ?></td>
+										<td><?php echo $data['last_name']; ?><?php echo $data['first_name']; ?></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td><?php echo $data['kana']; ?></td>
+										<td><?php echo $data['last_kana']; ?><?php echo $data['first_kana']; ?></td>
 									</tr>
 									<tr>
 										<th>生年月日</th>
