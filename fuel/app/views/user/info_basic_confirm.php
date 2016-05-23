@@ -18,7 +18,7 @@
 				<div class="form_set_container">
 						<div class="userDate_photo">
 							<div class="aside_photo">
-								<div class="aside_photoInner"><img src="/images/user/<?php echo $data['profile_image']; ?>" width="179" height="179" alt=""/></div>
+								<div class="aside_photoInner"><img src="<?php if(isset($data['profile_image'])) { ?>/images/user/<?php echo $data['profile_image']; } else { ?>/images/common/img_no-image.jpg<?php } ?>" width="179" height="179" alt=""/></div>
 							</div>
 						</div>
 						<div class="form_base_data_edit">
