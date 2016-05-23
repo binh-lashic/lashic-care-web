@@ -652,13 +652,7 @@ class Model_Sensor extends Orm\Model{
 				}
 			}
 		}
-		print_r($this);
-		echo "\n";
-		echo "nonactive_count:".$nonactive_count;
-		echo "\n";
-		echo "sleep_time:".$sleep_time;
-		echo "\n";
-		exit;
+
 		if($nonactive_count >= $this->sleep_duration) {
 			if(!$daily_data) {
 				$daily_data = \Model_Data_Daily::forge();

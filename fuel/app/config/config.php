@@ -352,7 +352,7 @@ return array(
 		'sleep_end_time' => 23,
 		'sleep_threshold' => 5,
 		'sleep_duration' => 5,
-		'sleep_ignore_duration' => 30,
+		'sleep_ignore_duration' => 10,
 	),
 	'report_list_count' => 10,
 	'sendgrid' => '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',
