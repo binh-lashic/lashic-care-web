@@ -597,7 +597,7 @@ class Model_Sensor extends Orm\Model{
 			'date' => $date,
 		)));
 		
-    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date DESC';
+    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
 
 		/**
@@ -613,13 +613,13 @@ class Model_Sensor extends Orm\Model{
 		 * 現在時刻が2時
 		 */
 
-    	if($this->sleep_start_time > 24) {
+    	if($this->sleep_end_time > 24) {
     		$start_date = $date." ".$this->sleep_start_time.":00:00";
     		$end_date = $date." ".$this->sleep_end_time.":00:00";
     	} else {
     		$yesterday = date("Y-m-d", strtotime("-1day"));
     		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
-    		$end_date = $date." ".$this->sleep_end_time.":00:00";
+    		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
     	}
 
     	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
@@ -631,8 +631,6 @@ class Model_Sensor extends Orm\Model{
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
-		echo \DB::last_query('data');
-		exit;
 
 		$count = count($result);
 		$active_count = 0;
@@ -641,31 +639,31 @@ class Model_Sensor extends Orm\Model{
 		if($count) {
 			foreach($result as $row) {
 				if($this->sleep_threshold > $row['active']) {
-					if($active_count === 0) {
+					if($nonactive_count === 0) {
 						$sleep_time = $row['date'];
 					}
-					$active_count++;
-					if($active_count == $this->sleep_duration) {
-						if(!$daily_data) {
-							$daily_data = \Model_Data_Daily::forge();
-						} 
-						$params = array(
-							'sensor_id' => $this->id,
-							'sleep_time' => $sleep_time,
-							'date' => $date,
-						);
-						$daily_data->set($params);
-						$daily_data->save();
-						return true;
-					}
-					$nonactive_count = 0;
-				} else {
 					$nonactive_count++;
-					if($nonactive_count == $this->sleep_ignore_duration) {
-						$active_count = 0;
+					$active_count = 0;
+				} else {
+					$active_count++;
+					if($active_count == $this->sleep_ignore_duration) {
+						$nonactive_count = 0;
 					}
 				}
 			}
+		}
+		if($nonactive_count >= $this->sleep_duration) {
+			if(!$daily_data) {
+				$daily_data = \Model_Data_Daily::forge();
+			} 
+			$params = array(
+				'sensor_id' => $this->id,
+				'sleep_time' => $sleep_time,
+				'date' => $date,
+			);
+			$daily_data->set($params);
+			$daily_data->save();
+			return true;
 		}
 		return false;
 	}
