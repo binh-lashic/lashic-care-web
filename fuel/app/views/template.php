@@ -18,35 +18,27 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
-
 <link href="/css/reset.css" type="text/css" rel="stylesheet">
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
-<!--<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">-->
-<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" /><!-- 円グラフ -->
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">
+<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 円グラフ -->
 <link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
 <!-- /円グラフ -->
 <!-- カレンダー表示・非表示 -->
 <link href="/css/darktooltip.css" type="text/css" rel="stylesheet">
 <!-- /カレンダー表示・非表示 -->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
+
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
-<!-- srcoll design -->
-<script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="/js/jquery.mousewheel.js"></script>
-<script type="text/javascript">
-$(function(){
-  $('.scroll_area').jScrollPane();
-});
-</script>
-<!-- /srcoll design -->
 </head>
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>
