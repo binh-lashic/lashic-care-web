@@ -631,6 +631,8 @@ class Model_Sensor extends Orm\Model{
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
+		echo \DB::last_query('data');
+		exit;
 
 		$count = count($result);
 		$active_count = 0;
