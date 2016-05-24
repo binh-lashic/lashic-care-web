@@ -638,6 +638,35 @@ class Model_Sensor extends Orm\Model{
 
 		if($count) {
 			foreach($result as $row) {
+				echo $row['date'];
+				echo "\t";
+				echo $row['active'];
+				echo "\t";
+				if($this->sleep_threshold > $row['active']) {
+					echo "◯";
+					echo "\t";
+				} else {
+					echo "\t";
+				}
+				echo $nonactive_count;
+				echo "\t";
+				echo $active_count;
+				echo "\t";				
+				if($nonactive_count === 0) {
+					echo $row['date'];
+					echo "\t";
+				} else {
+					echo "\t";
+				}
+
+				if($active_count == $this->sleep_ignore_duration) {
+					echo "無効";
+					echo "\t";
+				} else {
+					echo "\t";
+				}
+				echo "\n";
+
 				if($this->sleep_threshold > $row['active']) {
 					if($nonactive_count === 0) {
 						$sleep_time = $row['date'];
@@ -652,7 +681,7 @@ class Model_Sensor extends Orm\Model{
 				}
 			}
 		}
-
+exit;
 		if($nonactive_count >= $this->sleep_duration) {
 			if(!$daily_data) {
 				$daily_data = \Model_Data_Daily::forge();
