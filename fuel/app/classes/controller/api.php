@@ -20,8 +20,9 @@ class Controller_Api extends Controller_Rest
     	        $this->_error();
 	    	}
 	    } else if (!Auth::check()) {
-	    	Response::redirect('/api/user/login_error');
-	    	return;
+	    	$this->_error();
+//	    	Response::redirect('/api/user/login_error');
+//	    	return;
 	    }
 	}
 
