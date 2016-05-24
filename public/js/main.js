@@ -1,5 +1,10 @@
 $(function(){
-    var apiUrl = "http://careeye.jp/api/";
+	if(window.location.href.match(/careeye\.jp/i)) {
+		var apiUrl = "http://careeye.jp/api/";
+	} else if(window.location.href.match(/garoo\.jp/i)) {
+		var apiUrl = "http://infic.garoo.jp/api/";
+	}
+    
 
     // ユーザ定義関数
     function api(action, params, callback){
@@ -92,6 +97,10 @@ $(function(){
 			abnormal_behavior_level:$('#abnormal_behavior_level').val(),
 			active_non_detection_level:$('#active_non_detection_level').val(),
 			active_night_level:$('#active_night_level').val(),
+			wake_up_start_time:$('#wake_up_start_time').val(),
+			wake_up_end_time:$('#wake_up_end_time').val(),
+			sleep_start_time:$('#sleep_start_time').val(),
+			sleep_end_time:$('#sleep_end_start_time').val(),
 		};
 		api("sensor/save", params, function(result){
 			console.log("sensor success");
@@ -116,6 +125,7 @@ $(function(){
 		};
 		api("/user/sensor/save", params, function(result){
 			console.log("user sensor success");
+			console.log(params);
 		});
 	});
 	function drawGraph() {

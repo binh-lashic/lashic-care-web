@@ -597,7 +597,7 @@ class Model_Sensor extends Orm\Model{
 			'date' => $date,
 		)));
 		
-    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
+    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
     	$query = DB::query($sql);
 
 		/**

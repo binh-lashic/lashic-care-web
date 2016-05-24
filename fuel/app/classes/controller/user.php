@@ -187,6 +187,13 @@ class Controller_User extends Controller_Base
         	if(Input::post('new_email') != Input::post('new_email_confirm')) {
         		$this->data['errors']['new_email_confirm'] = true;
         	}
+        	if(empty($this->data['errors'])) {
+        		$this->data['data'] = Input::post();
+	    		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
+        		return;
+        	}
+        	
+			
 			$this->data['data'] = Input::post();
     		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
     		return;
@@ -200,7 +207,11 @@ class Controller_User extends Controller_Base
         $this->data['breadcrumbs'] = array($this->template->title);
 
         if(Input::post()) {
-        	\Model_User::saveUser(Input::post());
+        	$params = Input::post();
+        	$date = date("Y-m-d H:i:s", strtotime("+1day"));
+        	$params['email_confirm_token'] = sha1($params['new_email'].$date);
+        	$params['email_confirm_expired'] = $date;
+        	\Model_User::saveUser($params);
         }
         $this->data['data'] = Input::post();
         $this->template->header = View::forge('header', $this->data);
@@ -414,6 +425,11 @@ class Controller_User extends Controller_Base
         $data = array();
         $this->template->title = '設定ページ';
 
+        $params = array(
+        	'user_id' => $this->data['user']['id'],
+        	'sensor_id' => $this->data['sensor']['id']
+        );
+        $this->data['user_sensor'] = \Model_User_Sensor::getUserSensor($params);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/setting', $this->data);
 	}

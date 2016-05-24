@@ -12,11 +12,11 @@
 メールボックスをご確認ください。<br>
 確認メールの有効時間は、送信後約24時間となります。24時間以内にご登録を完了させてください。<br>
 確認メールが届かない場合、ご入力に間違いがあるか、ドメイン拒否の設定をされている可能性があります。<br>
-Care Eyeからのメール（@***.jp）が受信できるように設定のうえ、再度メールアドレスの変更手続きをお願いします。<br><br>
+Care Eyeからのメール（<?php echo Config::get('email.noreply'); ?>）が受信できるように設定のうえ、再度メールアドレスの変更手続きをお願いします。<br><br>
 							<table class="tableGray">
 								<tr>
 									<th>メールアドレス</th>
-									<td><strong class="text_blue large"><?php echo $data['email']; ?></strong></td>
+									<td><strong class="text_blue large"><?php echo $data['new_email']; ?></strong></td>
 								</tr>
 							</table>
 </td>

@@ -8,10 +8,10 @@ class Controller_Api extends Controller_Rest
 
 	public function before()
 	{
-		Log::debug('API '.print_r(Input::param(), true));
 	    parent::before();
+
 	   	$method = Request::active()->action;
-	    if (in_array($method, $this->nologin_methods)) {     
+	    if (in_array($method, $this->nologin_methods)) {    
 	    } else if (Input::param("device_id")){
 	    	$device_id = Input::param("device_id");
 	    	if($user_id = \Model_Device::existDevice($device_id)) {
@@ -20,7 +20,8 @@ class Controller_Api extends Controller_Rest
     	        $this->_error();
 	    	}
 	    } else if (!Auth::check()) {
-	    	$this->_error();
+	    	Response::redirect('/api/user/login_error');
+	    	return;
 	    }
 	}
 
@@ -28,6 +29,7 @@ class Controller_Api extends Controller_Rest
 		$this->result = array(
 			'message' => 'ログインをしていません',
 		);
+
  		return $this->result();
 	}
 

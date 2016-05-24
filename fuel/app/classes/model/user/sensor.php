@@ -91,7 +91,7 @@ class Model_User_Sensor extends Orm\Model{
 				)
 			));
 		}
-    	return $user_sensor;
+    	return $user_sensor->to_array();
     }
 
     public static function format($user) {

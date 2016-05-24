@@ -42,6 +42,10 @@ class Model_User extends Orm\Model{
 		'profile_image',
 		'created_at',
 		'subscription',
+		'email_confirm',
+		'new_email',
+		'email_confirm_token',
+		'email_confirm_expired',
 	);
 
     public static function validate($factory)
@@ -158,6 +162,10 @@ class Model_User extends Orm\Model{
 			'emergency_phone_2',
 			'emergency_cellular_2',
 			'subscription',
+			'email_confirm',
+			'new_email',
+			'email_confirm_token',
+			'email_confirm_expired',
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];

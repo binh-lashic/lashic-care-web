@@ -24,6 +24,7 @@
 					<input type="hidden" name="gender" value="<?php if(!empty($data['gender'])) { echo $data['gender']; } ?>" />
 					<input type="hidden" name="birthday" value="<?php if(!empty($data['birthday'])) { echo $data['birthday']; } ?>" />
 					<input type="hidden" name="zip_code" value="<?php if(!empty($data['zip_code'])) { echo $data['zip_code']; } ?>" />
+					<input type="hidden" name="prefecture" value="<?php if(!empty($data['prefecture'])) { echo $data['prefecture']; } ?>" />
 					<input type="hidden" name="address" value="<?php if(!empty($data['address'])) { echo $data['address']; } ?>" />
 					<input type="hidden" name="phone" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>" />
 					<input type="hidden" name="cellular" value="<?php if(!empty($data['cellular'])) { echo $data['cellular']; } ?>" />
@@ -62,6 +63,7 @@
 									<tr>
 										<th>住所</th>
 										<td>〒<?php if(!empty($data['zip_code'])) { echo $data['zip_code']; } ?><br>
+										    <?php if(!empty($data['prefecture'])) { echo $data['prefecture']; } ?>
 											<?php if(!empty($data['address'])) { echo $data['address']; } ?>
 										</td>
 									</tr>
