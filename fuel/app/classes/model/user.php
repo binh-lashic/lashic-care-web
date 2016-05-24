@@ -250,6 +250,19 @@ class Model_User extends Orm\Model{
 		}	
 	}
 
+	public static function getUserFromEmail($email){
+		$user = \Model_User::find("first", array(
+			'where' => array(
+				'email' => $email,
+			)
+		));
+		if($user) {
+			return \Model_User::format($user);
+		} else {
+			return null;
+		}	
+	}
+
 	public static function uploadProfileImage() {
 		$config = array(
             'path' => DOCROOT.DS.'images/user',

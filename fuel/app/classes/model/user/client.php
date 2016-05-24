@@ -38,4 +38,44 @@ class Model_User_Client extends Orm\Model{
 		return DB::query($sql)->execute();
 	}
 
+	public static function saveUserClient($params) {
+		if(isset($params['id'])) {
+	    	$user_sensor = \Model_User_Client::find($params['id']);
+		} else {
+			if(empty($params['user_id']) && isset($params['email'])) {
+				$user = \Model_User::getUserFromEmail($params['email']);
+				if(!$user) {
+					$data = array(
+						'last_name' => $params['last_name'],
+						'first_name' => $params['first_name'],
+						'last_kana' => $params['last_kana'],
+						'first_kana' => $params['first_kana'],
+						'email' => $params['email'],
+						'password' => sha1($params['email']),
+					);
+					$user = \Model_User::saveUser($data);
+				}
+				$params['user_id'] = $user['id'];
+			}
+			if(isset($params['user_id'])) {
+				$user_sensor = \Model_User_Client::find("first", array(
+					"where" => array(
+						"user_id" => $params['user_id'],
+						"client_user_id" => $params['client_user_id'],
+					)
+				));				
+			}
+
+			if(empty($user_sensor)) {
+				$user_sensor = \Model_User_Client::forge();
+	    	}
+		}
+    	unset($params['q']);
+    	unset($params['id']);
+	    $user_sensor->set($params);
+		if($user_sensor->save()) {
+			return $user_sensor;
+		}
+    	return null;
+    }
 }
