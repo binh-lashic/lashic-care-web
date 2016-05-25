@@ -3,7 +3,7 @@
 		
 		<!-- content start オプション設定変更完了 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user">
 				<h1 class="contentLarge_h1">見守り対象ユーザー　オプション設定変更完了</h1>
 				
 				<table class="tableBeige form_result mgt20">
