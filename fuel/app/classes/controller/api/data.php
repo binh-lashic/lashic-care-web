@@ -219,19 +219,19 @@ class Controller_Api_Data extends Controller_Api
 				}
 
 				if($temperature_total > 0) {
-					$averages['temperature'] = $temperature_total / $temperature_total;
+					$averages['temperature'] = $temperature_total / 10;
 				}
 				if($humidity_total > 0) {
-					$averages['humidity'] = $humidity_total / $humidity_total;
+					$averages['humidity'] = $humidity_total / 10;
 				}
 				if($illuminance_total > 0) {
-					$averages['illuminance'] = $illuminance_total / $illuminance_total;
+					$averages['illuminance'] = $illuminance_total / 10;
 				}
 				if($active_total > 0) {
-					$averages['active'] = $active_total / $active_total;
+					$averages['active'] = $active_total / 10;
 				}
 				if($discomfort_total > 0) {
-					$averages['discomfort'] = $discomfort_total / $discomfort_total;
+					$averages['discomfort'] = $discomfort_total / 10;
 				}
 				$value = $averages[$type];
 
