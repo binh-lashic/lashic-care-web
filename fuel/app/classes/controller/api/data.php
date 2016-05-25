@@ -173,7 +173,7 @@ class Controller_Api_Data extends Controller_Api
 			$data = array();
 			$start_time = strtotime($date." 00:00:00");
 			$end_time = strtotime($date." 24:00:00");
-			$end = 60 * 24 / $span;
+
 
 			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_name AND date BETWEEN :start_time AND :end_time';
 			$query = DB::query($sql);
@@ -189,25 +189,61 @@ class Controller_Api_Data extends Controller_Api
 				$rows[$result['date']] = $result;
 			}
 
-			for($i = 0; $i <= $end; $i++) {
-				$time = $start_time + $i * 60 * $span;
-				$current_time = date("Y-m-d H:i:s", $time); 
-
-				if(!empty($rows[$current_time])) {
-					$value = $rows[$current_time][$type];
-				} else {
-					$value = null;
-				}
+			$end = 6 * 24; //10分毎に行う
+			for($i = 0; $i <= $end; $i = $i + 10) {
+				$time = $start_time + $i * 60;
+				$temperature_total = 0;
+				$humidity_total = 0;
+				$illuminance_total = 0;
+				$active_total = 0;
+				$discomfort_total = 0;
+				$averages = array(
+					'temperature' => null,
+					'humidity' => null,
+					'illuminance' => null,
+					'active' => null,
+					'discomfort' => null,
+				);
 				
+				for($j = 0; $j < 10; $j++) {
+					$current_time = date("Y-m-d H:i:s", $start_time + ($i + $j)* 60);
+					if(isset($rows[$current_time])) {
+						$temperature_total += $rows[$current_time]['temperature'];
+						$humidity_total += $rows[$current_time]['humidity'];
+						$illuminance_total += $rows[$current_time]['illuminance'];
+						$active_total += $rows[$current_time]['active'];
+						$discomfort_total += $rows[$current_time]['discomfort'];
+					} else {
+						$value = null;
+					}					
+				}
+
+				if($temperature_total > 0) {
+					$averages['temperature'] = $temperature_total / $temperature_total;
+				}
+				if($humidity_total > 0) {
+					$averages['humidity'] = $humidity_total / $humidity_total;
+				}
+				if($illuminance_total > 0) {
+					$averages['illuminance'] = $illuminance_total / $illuminance_total;
+				}
+				if($active_total > 0) {
+					$averages['active'] = $active_total / $active_total;
+				}
+				if($discomfort_total > 0) {
+					$averages['discomfort'] = $discomfort_total / $discomfort_total;
+				}
+				$value = $averages[$type];
+
 				$data[] = array(
 					'time' => $current_time,
 					'label' => date("H:i", $time),
 					'value' => $value,
-					'temperature' => !empty($rows[$current_time]) ? $rows[$current_time]['temperature'] : null,
-					'humidity' => !empty($rows[$current_time]) ? $rows[$current_time]['humidity'] : null,
-					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
-					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
-					'discomfort' => !empty($rows[$current_time]) ? $rows[$current_time]['discomfort'] : null,
+					'temperature' => $averages['temperature'],
+					'humidity' => $averages['humidity'],
+					'illuminance' => $averages['illuminance'],
+					'active' => $averages['active'],
+					'discomfort' => $averages['discomfort'],
 				);
 			}
 			$this->result = array(
