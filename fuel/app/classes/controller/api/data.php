@@ -189,8 +189,8 @@ class Controller_Api_Data extends Controller_Api
 				$rows[$result['date']] = $result;
 			}
 
-			$end = 6 * 24; //10分毎に行う
-			for($i = 0; $i <= $end; $i = $i++) {
+			$end = 60 * 24; //10分毎に行う
+			for($i = 0; $i <= $end; $i = $i + 10) {
 				$time = $start_time + $i * 60;
 				$temperature_total = 0;
 				$humidity_total = 0;
