@@ -190,7 +190,7 @@ class Controller_Api_Data extends Controller_Api
 			}
 
 			$end = 6 * 24; //10分毎に行う
-			for($i = 0; $i <= $end; $i = $i + 10) {
+			for($i = 0; $i <= $end; $i = $i++) {
 				$time = $start_time + $i * 60;
 				$temperature_total = 0;
 				$humidity_total = 0;
