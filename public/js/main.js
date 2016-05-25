@@ -73,13 +73,93 @@ $(function(){
 		$(".confirm_status_top").val($(".confirm_status_bottom").val());
 	});
 
-	$(".calendar_year_select").change(function() {
-		console.log($(".calendar_year_select").val());
+
+	$(".graph24_cal_back").click(function(){
+		selected_date = new Date(selected_date.getFullYear(),selected_date.getMonth()-1, 1);
+		drawCalender();
 	});
 
-	$(".calendar_month_select").change(function() {
-		console.log($(".calendar_month_select option:selected").val());
+	$(".graph24_cal_next").click(function(){
+		selected_date = new Date(selected_date.getFullYear(),selected_date.getMonth()+1, 1);
+		drawCalender();
 	});
+
+	$(".graph24_cal_today").click(function(){
+		selected_date = new Date();
+		drawCalender();
+	});
+
+	$("ins .slide_btn_ok").click(function() {
+		var year = $("ins .calendar_year_select").val();
+		var month = $("ins .calendar_month_select").val();
+		selected_date = new Date(year, month - 1, 1);
+		drawCalender();
+	});
+	var selected_date = new Date(date); 
+	$(".calendar_year_select").val(selected_date.getFullYear());
+	$(".calendar_month_select").val(selected_date.getMonth() + 1);
+	drawCalender();
+
+	function drawCalender() {
+		$('.calendar_body').html("");
+		$(".calendar_year_month").text((selected_date.getMonth() + 1) + "月 " + selected_date.getFullYear());
+		var today = new Date();
+		var first_date = new Date(selected_date.getFullYear(),selected_date.getMonth(), 1);
+		var last_date = new Date(selected_date.getFullYear(),selected_date.getMonth()+1, 0);
+		$tr = $('<tr>');
+		for(var i = 0; i < first_date.getDay(); i++) {
+			var current_date = new Date(selected_date.getFullYear(),selected_date.getMonth(), i - first_date.getDay());
+			$td = $('<td>');
+			$td.addClass('graph24_cal-prevday');
+			$span = $('<span>');
+			$span.text(current_date.getDate());
+			$td.append($span);
+			$tr.append($td);
+		}
+		for(var i = 1; i <= last_date.getDate(); i++) {
+			var week = (i + first_date.getDay() - 1) % 7;
+			$td = $('<td>');
+			$td.addClass('graph24_cal-active');
+			$span = $('<span>');
+			$span.attr('data-date', selected_date.getFullYear() + "-" + (selected_date.getMonth() + 1)+ "-" +  i);
+
+			if(selected_date.getDate() == i) {
+				$td.addClass('graph24_cal-selected');
+			}
+			if(today.getFullYear() == selected_date.getFullYear() && today.getMonth() == selected_date.getMonth() && today.getDate() == i) {
+				$td.addClass('graph24_cal-today');
+				$span.html(i + "<br>今日");
+			} else {
+				$span.text(i);
+			}
+			
+			$td.append($span);
+			$tr.append($td);
+			if(week == 6) {
+				$('.calendar_body').append($tr);
+				$tr = $('<tr>');
+			}
+		}
+
+		if(week < 6) {
+			var j = 1;
+			for(var i = week + 1; i <= 6; i++) {
+				var current_date = new Date(selected_date.getFullYear(),selected_date.getMonth(), last_date.getDate() + j);
+				$td = $('<td>');
+				$td.addClass('graph24_cal-nextday');
+				$span = $('<span>');
+				$span.text(current_date.getDate());
+				$td.append($span);
+				$tr.append($td);
+				j++;
+			}	
+			$('.calendar_body').append($tr);
+		}
+
+		$(".graph24_cal-active span").on("click", function() {
+			location.href = "/user/?date=" + $(this).attr("data-date");
+		});
+	}
 
 	$(".graph_setting").click(function() {
 		//センサーの設定

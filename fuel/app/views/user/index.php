@@ -117,16 +117,15 @@ if(isset($client)) {
 							<div class="graph24_cal_selectInner">
 							<ul class="graph24_cal_head clearfix">
 								<li class="graph24_cal_back"><span>&lt;</span></li>
-								<li class="graph24_cal_thisMonth"><span class="slide_btn" id="calendar_year_month">2月 2016</span>
+								<li class="graph24_cal_thisMonth"><span class="slide_btn calendar_year_month"></span>
 									<div class="graph24_cal_otherMonth">
 										<p class="pdt20 pdb10">年月を選択してください</p>
 										<div class="common_select">
 											<select class="calendar_year_select">
-												<option value="2012">2012年</option>
-												<option value="2013">2013年</option>
-												<option value="2014">2014年</option>
-												<option value="2015">2015年</option>
 												<option value="2016" selected>2016年</option>
+												<option value="2017">2017年</option>
+												<option value="2018">2018年</option>
+												<option value="2019">2019年</option>
 											</select>
 										</div>
 										<div class="common_select mgt15 mgb20">
@@ -145,7 +144,7 @@ if(isset($client)) {
 												<option value="12">12月</option>
 											</select>
 										</div>
-										<span class="slide_btn_ok btn_red mgb10">OK</span>
+										<span class="slide_btn_back btn_red mgb10 slide_btn_ok">OK</span>
 										<span class="slide_btn_back btn_text">キャンセル</span>
 									</div>
 								</li>
@@ -166,67 +165,12 @@ if(isset($client)) {
 										<th role="columnheader" aria-label="土曜日">土</th>
 									</tr>
 								</thead>
-								<tbody>
-											<tr>
-												<td class="graph24_cal-prevday"><span>31</span></td>
-												<td class="graph24_cal-active"><span>1</span></td>
-												<td class="graph24_cal-active"><span>2</span></td>
-												<td class="graph24_cal-active"><span>3</span></td>
-												<td class="graph24_cal-active"><span>4</span></td>
-												<td class="graph24_cal-active"><span>5</span></td>
-												<td class="graph24_cal-active"><span>6</span></td>
-											</tr>
-											<tr>
-												<td class="graph24_cal-active"><span>7</span></td>
-												<td class="graph24_cal-active"><span>8</span></td>
-												<td class="graph24_cal-active"><span>9</span></td>
-												<td class="graph24_cal-active"><span>10</span></td>
-												<td class="graph24_cal-active"><span>11</span></td>
-												<td class="graph24_cal-active"><span>12</span></td>
-												<td class="graph24_cal-active"><span>13</span></td>
-											</tr>
-											<tr>
-												<td class="graph24_cal-active"><span>14</span></td>
-												<td class="graph24_cal-active"><span>15</span></td>
-												<td class="graph24_cal-active"><span>16</span></td>
-												<td class="graph24_cal-active graph24_cal-selected"><span>17</span></td>
-												<td class="graph24_cal-active graph24_cal-today"><span>18<br>今日</span></td>
-												<td class="graph24_cal-active"><span>19</span></td>
-												<td class="graph24_cal-active"><span>20</span></td>
-											</tr>
-											<tr>
-												<td class="graph24_cal-active"><span>21</span></td>
-												<td class="graph24_cal-active"><span>22</span></td>
-												<td class="graph24_cal-active"><span>23</span></td>
-												<td class="graph24_cal-active"><span>24</span></td>
-												<td class="graph24_cal-active"><span>25</span></td>
-												<td class="graph24_cal-active"><span>26</span></td>
-												<td class="graph24_cal-active"><span>27</span></td>
-											</tr>
-											<tr>
-												<td class="graph24_cal-active"><span>28</span></td>
-												<td class="graph24_cal-active"><span>29</span></td>
-												<td class="graph24_cal-nextday"><span>1</span></td>
-												<td class="graph24_cal-nextday"><span>2</span></td>
-												<td class="graph24_cal-nextday"><span>3</span></td>
-												<td class="graph24_cal-nextday"><span>4</span></td>
-												<td class="graph24_cal-nextday"><span>5</span></td>
-											</tr>
-											<tr>
-												<td class="graph24_cal-nextday"><span>6</span></td>
-												<td class="graph24_cal-nextday"><span>7</span></td>
-												<td class="graph24_cal-nextday"><span>8</span></td>
-												<td class="graph24_cal-nextday"><span>9</span></td>
-												<td class="graph24_cal-nextday"><span>10</span></td>
-												<td class="graph24_cal-nextday"><span>11</span></td>
-												<td class="graph24_cal-nextday"><span>12</span></td>
-											</tr>
-										</tbody>
+								<tbody class="calendar_body"></tbody>
 							</table>
 						
 						
 							<div class="graph24_btnArea">
-							<button class="btn_text" type="button">今日</button>
+							<button class="btn_text graph24_cal_today" type="button">今日</button>
 							</div>
 						</div>
 						</div>
