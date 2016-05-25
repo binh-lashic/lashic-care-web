@@ -296,9 +296,13 @@ class Model_User extends Orm\Model{
         	return null;
         }
 	}
+
 	public static function saveUser($params) {
 		\Model_User::uploadProfileImage();
+		return \Model_User::saveAdminUser($params);
+	}
 
+	public static function saveAdminUser($params) {
 		if(empty($params['email']) && isset($params['username'])) {
 			$params['email'] = $params['username'];
 		}

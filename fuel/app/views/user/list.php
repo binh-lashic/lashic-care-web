@@ -37,20 +37,38 @@ if(!empty($clients)) {
 ?>
 
 			
-			
+<?php
+if($user['admin'] == 0) {
+?>
 			
 			<div class="contentLarge_h2 mgt60"><h2>閲覧中のユーザー一覧</h2></div>
-			
+
+<?php
+if(!empty($clients)) {
+?>		
 			<!-- ユーザーSet -->
 			<div class="form_set_container">
 				<ul class="usrMn_list">
-					<li><a href="../index.html" class="link_next">齋藤　恵子（さいとう　けいこ）さん</a></li>
-					<li><a href="../index.html" class="link_next">齋藤　恵子（さいとう　けいこ）さん</a></li>
-					<li><a href="../index.html" class="link_next">齋藤　恵子（さいとう　けいこ）さん</a></li>
-					<li><a href="../index.html" class="link_next">齋藤　恵子（さいとう　けいこ）さん</a></li>
+<?php
+
+	foreach($clients as $_client) {
+?>
+					<li><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="link_next"><?php echo $_client['name']; ?>（<?php echo $_client['kana']; ?>）さん</a></li>
+<?php
+	} //foreach
+?>
 				</ul>
 			</div>
-			
+<?php
+} else {
+?>
+			<p class="center">現在管理中のユーザーはいません</p>
+<?php
+}
+?>
+<?php
+}
+?>			
 			<!-- /ユーザーSet --> 
 			
 			

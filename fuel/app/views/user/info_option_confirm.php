@@ -1,7 +1,25 @@
 		
 		<!-- content start オプション設定変更確認 -->
 		<section id="contentBoxLarge">
-			<form class="form">
+			<form class="form" action="/user/info_option_complete" method="post">
+				<input type="hidden" name="emergency_last_name_1" value="<?php echo $data['emergency_last_name_1']; ?>">
+				<input type="hidden" name="emergency_first_name_1" value="<?php echo $data['emergency_first_name_1']; ?>">
+				<input type="hidden" name="emergency_last_kana_1" value="<?php echo $data['emergency_last_kana_1']; ?>">
+				<input type="hidden" name="emergency_first_kana_1" value="<?php echo $data['emergency_first_kana_1']; ?>">
+				<input type="hidden" name="emergency_phone_1" value="<?php echo $data['emergency_phone_1']; ?>">
+				<input type="hidden" name="emergency_cellular_1" value="<?php echo $data['emergency_cellular_1']; ?>">
+				<input type="hidden" name="emergency_last_name_2" value="<?php echo $data['emergency_last_name_2']; ?>">
+				<input type="hidden" name="emergency_first_name_2" value="<?php echo $data['emergency_first_name_2']; ?>">
+				<input type="hidden" name="emergency_last_kana_2" value="<?php echo $data['emergency_last_kana_2']; ?>">
+				<input type="hidden" name="emergency_first_kana_2" value="<?php echo $data['emergency_first_kana_2']; ?>">
+				<input type="hidden" name="emergency_phone_2" value="<?php echo $data['emergency_phone_2']; ?>">
+				<input type="hidden" name="emergency_cellular_2" value="<?php echo $data['emergency_cellular_2']; ?>">
+				<input type="hidden" name="client_user_id" value="<?php echo $client['id']; ?>">
+				<input type="hidden" name="last_name" value="<?php echo $data['last_name']; ?>">
+				<input type="hidden" name="first_name" value="<?php echo $data['first_name']; ?>">
+				<input type="hidden" name="last_kana" value="<?php echo $data['last_kana']; ?>">
+				<input type="hidden" name="first_kana" value="<?php echo $data['first_kana']; ?>">
+				<input type="hidden" name="email" value="<?php echo $data['email']; ?>">
 				<h1 class="contentLarge_h1">見守り対象ユーザー　オプション設定変更確認</h1>
 				<!-- 緊急連絡先の設定 -->
 				<h2 class="form_title">緊急連絡先の設定</h2>
@@ -11,19 +29,19 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td>山田太郎</td>
+										<td><?php echo $data['emergency_last_name_1']; ?><?php echo $data['emergency_first_name_1']; ?></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td>やまだたろう</td>
+										<td><?php echo $data['emergency_last_kana_1']; ?><?php echo $data['emergency_first_kana_1']; ?></td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
-										<td>0000000</td>
+										<td><?php echo $data['emergency_phone_1']; ?></td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
-										<td>0000000</td>
+										<td><?php echo $data['emergency_cellular_1']; ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -32,27 +50,24 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td>山田太郎</td>
+										<td><?php echo $data['emergency_last_name_2']; ?><?php echo $data['emergency_first_name_2']; ?></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td>やまだたろう</td>
+										<td><?php echo $data['emergency_last_kana_2']; ?><?php echo $data['emergency_first_kana_2']; ?></td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
-										<td>0000000</td>
+										<td><?php echo $data['emergency_phone_2']; ?></td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
-										<td>0000000</td>
+										<td><?php echo $data['emergency_cellular_2']; ?></td>
 									</tr>
 								</tbody>
 							</table>
 				</div>
 				<!-- /緊急連絡先の設定 --> 
-				
-				
-				
 				
 				
 				<!-- 連絡共有先の設定 -->
@@ -62,15 +77,15 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td>山田太郎</td>
+										<td><?php echo $data['last_name']; ?><?php echo $data['first_name']; ?></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td>やまだたろう</td>
+										<td><?php echo $data['last_kana']; ?><?php echo $data['first_kana']; ?></td>
 									</tr>
 									<tr>
 										<th>メールアドレス</th>
-										<td>hoge@hoge.com</td>
+										<td><?php echo $data['email']; ?></td>
 									</tr>
 								</tbody>
 							</table>

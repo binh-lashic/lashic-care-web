@@ -321,8 +321,6 @@ class Controller_User extends Controller_Base
         	$this->template->content = View::forge('user/info_contact_confirm', $this->data);
         	return;
         }
-
-        $this->template->title = 'マイページ';
         $this->template->content = View::forge('user/info_contact_form', $this->data);
     }
 
@@ -340,7 +338,57 @@ class Controller_User extends Controller_Base
 	{
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
+
+		if(Input::post()) {
+		    $params = Input::post();
+			$this->data['data'] = $params;
+        	$this->template->content = View::forge('user/info_option_confirm', $this->data);
+        	return;
+        }
+
         $this->template->content = View::forge('user/info_option_form', $this->data);
+    }
+
+	public function action_info_option_complete()
+	{
+        $this->template->title = 'マイページ';
+        $this->template->header = View::forge('header', $this->data);
+
+		if(Input::post()) {
+		    $params = Input::post();
+		    $client_params = array(
+		    	'id'					 => $params['client_user_id'],
+				'emergency_first_name_1' => $params['emergency_first_name_1'],
+				'emergency_last_name_1'  => $params['emergency_last_name_1'],
+				'emergency_first_kana_1' => $params['emergency_first_kana_1'],
+				'emergency_last_kana_1'  => $params['emergency_last_kana_1'],
+				'emergency_phone_1'      => $params['emergency_phone_1'],
+				'emergency_cellular_1'   => $params['emergency_cellular_1'],
+				'emergency_first_name_2' => $params['emergency_first_name_2'],
+				'emergency_last_name_2'  => $params['emergency_last_name_2'],
+				'emergency_first_kana_2' => $params['emergency_first_kana_2'],
+				'emergency_last_kana_2'  => $params['emergency_last_kana_2'],
+				'emergency_phone_2'      => $params['emergency_phone_2'],
+				'emergency_cellular_2'   => $params['emergency_cellular_2'],
+		    );
+		    $client_user = \Model_User::saveUser($client_params);
+
+		    $admin_params = array(
+		    	'last_name' => $params['last_name'],
+		    	'first_name' => $params['first_name'],
+		    	'last_kana' => $params['last_kana'],
+		    	'first_kana' => $params['first_kana'],
+		    	'email' 	=> $params['email'],
+		    );
+		    $admin_params['admin'] = 0;
+	        $admin_params['password'] = sha1(mt_rand());
+	        $admin_user = \Model_User::saveAdminUser($admin_params);
+			if($admin_user) {
+	            \Model_User::saveClients($admin_user['id'], array($params['client_user_id'] => "true"));
+			}
+        }
+
+        $this->template->content = View::forge('user/info_option_complete', $this->data);
     }
 
 	public function action_report()
