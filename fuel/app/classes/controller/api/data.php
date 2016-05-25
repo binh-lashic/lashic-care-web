@@ -311,6 +311,7 @@ class Controller_Api_Data extends Controller_Api
 					'discomfort' => null,
 				);
 				$span_time = date("Y-m-d H:i:s", $time);
+				$data_count = 0;
 				for($j = 0; $j < 10; $j++) {
 					$current_time = date("Y-m-d H:i:s", $start_time + ($i + $j)* 60);
 					if(isset($rows[$current_time])) {
@@ -319,23 +320,24 @@ class Controller_Api_Data extends Controller_Api
 						$illuminance_total += $rows[$current_time]['illuminance'];
 						$active_total += $rows[$current_time]['active'];
 						$discomfort_total += $rows[$current_time]['discomfort'];
+						$data_count;
 					}					
 				}
 
 				if($temperature_total > 0) {
-					$averages['temperature'] = $temperature_total / 10;
+					$averages['temperature'] = $temperature_total / $data_count;
 				}
 				if($humidity_total > 0) {
-					$averages['humidity'] = $humidity_total / 10;
+					$averages['humidity'] = $humidity_total / $data_count;
 				}
 				if($illuminance_total > 0) {
-					$averages['illuminance'] = $illuminance_total / 10;
+					$averages['illuminance'] = $illuminance_total / $data_count;
 				}
 				if($active_total > 0) {
-					$averages['active'] = $active_total / 10;
+					$averages['active'] = $active_total / $data_count;
 				}
 				if($discomfort_total > 0) {
-					$averages['discomfort'] = $discomfort_total / 10;
+					$averages['discomfort'] = $discomfort_total / $data_count;
 				}
 				$value = $averages[$type];
 
