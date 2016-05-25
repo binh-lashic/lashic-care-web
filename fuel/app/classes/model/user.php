@@ -310,7 +310,7 @@ class Model_User extends Orm\Model{
 				if(empty($params['username'])) {
 					$params['username'] = sha1($params['email'].mt_rand());
 				}
-				if(empty($params['admin'])) {
+				if(!isset($params['admin'])) {
 					$params['admin'] = 1;
 				}
 				$id = Auth::create_user(

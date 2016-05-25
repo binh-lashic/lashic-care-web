@@ -41,12 +41,18 @@ class Controller_Admin_User extends Controller_Admin
 
 	public function action_save() {
         $admin_user_id = Input::param("admin_user_id");
-		$user = Model_User::saveUser(Input::param());
+        $parmas = Input::param();
+        if(empty($parmas['email'])) {
+            $parmas['email'] = mt_rand()."@example.com";
+            $parmas['password'] = sha1(mt_rand());
+        }
+		$user = Model_User::saveUser($parmas);
 		if($user) {
             if($user['admin']) {
                 Response::redirect('/admin/user/?admin_user_id='.$user['id']);
             } else {
-                Response::redirect('/admin/user/client?admin_user_id='.$admin_user_id.'&client_user_id='.$user['id']);
+                \Model_User::saveClients($admin_user_id, array($user['id'] => "true"));
+                Response::redirect('/admin/user/?admin_user_id='.$admin_user_id);
             }
 		}
 	}

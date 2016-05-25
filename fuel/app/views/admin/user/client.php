@@ -27,6 +27,7 @@ if(isset($admins)) {
 				<form class="form-horizontal" method="post" action="/admin/user/save" enctype="multipart/form-data">
 					<input type="hidden" name="admin_user_id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 					<input type="hidden" name="id" value="<?php echo isset($client['id']) ? $client['id'] : ""; ?>" />
+					<input type="hidden" name="admin" value="0" />
 				  <div class="form-group">
 				    <label for="name" class="col-sm-3 control-label">氏名※</label>
 				    <div class="col-sm-4">

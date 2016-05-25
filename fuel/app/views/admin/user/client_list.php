@@ -11,7 +11,7 @@ if(isset($admins)) {
 	foreach($admins as $admin) {
 ?>
 				<li class="list-group-item">
-					<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?></a>
+					<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['last_name']; ?><?php echo $admin['first_name']; ?></a>
 				</li>
 <?php
 	}
@@ -21,11 +21,12 @@ if(isset($admins)) {
 		</div>
 	</div>
 	<div class="col-sm-6">
+					<form class="form-horizontal" method="post" action="/admin/user/add_client">
+
 		<div class="panel panel-default">
 			<div class="panel-heading">担当者の選択</div>
-			<div class="panel-body">
-				<form class="form-horizontal" method="post" action="/admin/user/add_client">
-				  <div class="col-sm-12">
+
+
 				  <input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ""; ?>" />
 				  	<ul class="list-group">
 <?php
@@ -36,7 +37,8 @@ if(isset($admins)) {
 							<div class="checkbox">
 								<label>
 									<input type="hidden" name="client_user_ids[<?php echo $user['id']; ?>]" value="false">
-									<input type="checkbox" name="client_user_ids[<?php echo $user['id']; ?>]" value="true" <?php if(isset($user['flag'])) { echo "checked=\"checked\""; } ?> /><?php echo $user['name']; ?>
+									<input type="checkbox" name="client_user_ids[<?php echo $user['id']; ?>]" value="true" <?php if(isset($user['flag'])) { echo "checked=\"checked\""; } ?> />
+									<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>
 								</label>
 							</div>
 						</li>
@@ -45,18 +47,15 @@ if(isset($admins)) {
 	}
 ?>
 				    </ul>
-				  </div>
 
-				  <div class="form-group">
-				    <div class="col-sm-offset-3 col-sm-9">
+				  <div class="pannel-body">
 				      <button type="submit" class="btn btn-primary">
 				      	<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 保存する
 				      </button>
-				    </div>
 				  </div>
-				</form>
-			</div>
+		</form>
 		</div>
+
 
 	</div>
 </div>

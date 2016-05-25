@@ -12,7 +12,7 @@ class Controller_Admin_User_Client extends Controller_Admin
                 $data['client'] = Model_User::find($client_id);
                 $client_sensors = \Model_User::getSensors($data['client']['id']);
                 if(!empty($client_sensors[0])) {
-                    $data['client_sensor_id'] = $client_sensors[0]->id;
+                    $data['client_sensor_id'] = $client_sensors[0]['id'];
                 }
             }
         }
