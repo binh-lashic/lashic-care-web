@@ -470,13 +470,17 @@ a.drawer-dropdown-menu-item.nowStay{ background-color:#e5f6ff; color:#003c58; ma
 @media (max-width: 640px) {
 
 .drawer-navbar {
-	height:80px;
+	height:60px;
   z-index: 102;
   top: 0;
   width: 100%;
+  margin-top:-18px;
 }
 .drawer-navbar .drawer-navbar-header {
 		float:none;
+	}
+.drawer-navbar .drawer-navbar-header .logo img{
+	margin-top:17px;
 	}
 
   .drawer-navbar .drawer-menu--right {

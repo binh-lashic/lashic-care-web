@@ -818,15 +818,29 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 .loginBg footer{ width:100%; margin-top:0; position:absolute; bottom:0}
  }
 
-@media  (max-width: 773px) {
+@media  (min-width: 641px)  and (max-width: 773px) {
 #loginTop{ position:relative;}
 #loginTitle{ font-size:24px; color:#4b4948; line-height:1.6em; text-shadow: 1px 1px 2px #FFF; text-align:center; padding:20px 0}
 #loginContainer{ width:280px; margin:0 auto; border-radius:6px; background-color:#FFF; box-shadow:0 0 5px #DDD;}
 #loginContainerInner{ padding:20px;}
 #loginContainer dl{ margin-bottom:20px;}
-#loginContainer dl dt{ width:80px; float:left; clear:left; margin-bottom:10px;}
-#loginContainer dl dd{ margin-left:80px; margin-bottom:10px;}
+#loginContainer dl dt{ margin-bottom:5px;}
+#loginContainer dl dd{ margin-bottom:10px;}
 #loginContainer dl dt:last-child, #loginContainer dl dd:last-child{ margin-bottom:0;}
+#loginContainer dl dd input{ width:90%; height:20px;}
+.sp_noWrap{ display:block;}
+}
+
+@media  (max-width: 640px) {
+#loginTop{ position:relative;}
+#loginTitle{ font-size:24px; color:#4b4948; line-height:1.6em; text-shadow: 1px 1px 2px #FFF; text-align:center; padding:20px 0}
+#loginContainer{ width:280px; margin:0 auto; border-radius:6px; background-color:#FFF; box-shadow:0 0 5px #DDD;}
+#loginContainerInner{ padding:20px;}
+#loginContainer dl{ margin-bottom:20px;}
+#loginContainer dl dt{ margin-bottom:5px;}
+#loginContainer dl dd{ margin-bottom:10px;}
+#loginContainer dl dt:last-child, #loginContainer dl dd:last-child{ margin-bottom:0;}
+#loginContainer dl dd input{ width:90%; height:20px;}
 .sp_noWrap{ display:block;}
 }
 @media  (max-height: 560px) {
