@@ -55,6 +55,8 @@ class Model_Sensor extends Orm\Model{
 		'active_non_detection_level',
 		'active_night_level',
 		'enable',
+		'snoose_count',
+		'snoose_span',
 	);
 
 	// Model_Post の中身は、多くのユーザーに属しています。
@@ -681,7 +683,8 @@ class Model_Sensor extends Orm\Model{
 		$data = implode("<>", $tmp);
 
     	//既にアラートが出ているかチェック
-		if(\Model_Alert::existsAlert($params)) {		
+    	$alert = \Model_Alert::getLatestAlert($params);
+		if(isset($alert)) {
 			//スヌーズ処理が5回以上なら再度通知
 	    	Log::info($data, 'no alert');
 			return false;

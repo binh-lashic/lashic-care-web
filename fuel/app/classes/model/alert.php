@@ -22,7 +22,8 @@ class Model_Alert extends Orm\Model{
 		'corresponding_time',
 		'corresponding_description',
 		'corresponding_user_id',
-		'expiration_time'
+		'expiration_time',
+		'snooze_count'
 	);
 
 	public static function createTable(){
@@ -180,10 +181,9 @@ class Model_Alert extends Orm\Model{
 	
     	return null;
     }
-
 	//スヌーズ範囲にデータがある場合はアラートしない
-    public static function existsAlert($params) {
-    	$query = array(array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 5)));
+    public static function getLatestAlert($params) {
+    	//$query = array(array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24)));
     	if(!empty($params['sensor_id'])) {
     		$query['sensor_id'] = $params['sensor_id'];
     	}
@@ -191,7 +191,24 @@ class Model_Alert extends Orm\Model{
     		$query['type'] = $params['type'];
     	}
     	$alert = \Model_Alert::find('first', array(
-    		'where' => $query
+    		'where' => $query,
+    		'order_by' => array('date' => 'desc'),
+    	));
+    	return $alert;
+    }
+
+	//スヌーズ範囲にデータがある場合はアラートしない
+    public static function existsAlert($params) {
+    	$query = array(array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24)));
+    	if(!empty($params['sensor_id'])) {
+    		$query['sensor_id'] = $params['sensor_id'];
+    	}
+    	if(!empty($params['type'])) {
+    		$query['type'] = $params['type'];
+    	}
+    	$alert = \Model_Alert::find('first', array(
+    		'where' => $query,
+    		'order_by' => array('date' => 'desc'),
     	));
     	return $alert;
     }

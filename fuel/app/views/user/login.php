@@ -22,7 +22,9 @@
 				</dl>
 				<input type="checkbox" id="password_check">
 				<label for="password_check" class="checkbox">ログインを保持する</label>
-				<a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt20">ログインする</a>
+				<p class="pdt10 center"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
+				<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt20">ログインする</a></p>
+				<p><a href="/register" class="btn_redRadius20 mgt10">新規登録する</a></p>
 			</div>
 		</div>
 	</form>
