@@ -319,8 +319,6 @@ class Controller_Api_Data extends Controller_Api
 						$illuminance_total += $rows[$current_time]['illuminance'];
 						$active_total += $rows[$current_time]['active'];
 						$discomfort_total += $rows[$current_time]['discomfort'];
-					} else {
-						$value = null;
 					}					
 				}
 
@@ -351,8 +349,6 @@ class Controller_Api_Data extends Controller_Api
 					'active' => $averages['active'],
 					'discomfort' => $averages['discomfort'],
 				);
-				print_r($data);
-				exit;
 			}
 			$this->result = array(
 				'sensor_id' => $sensor->id,
