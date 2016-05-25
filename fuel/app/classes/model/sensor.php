@@ -55,8 +55,6 @@ class Model_Sensor extends Orm\Model{
 		'active_non_detection_level',
 		'active_night_level',
 		'enable',
-		'snoose_count',
-		'snoose_span',
 	);
 
 	// Model_Post の中身は、多くのユーザーに属しています。

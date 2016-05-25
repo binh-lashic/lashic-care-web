@@ -14,29 +14,29 @@
 										<td colspan="2">
 											<label for="snooze" class="floatL pdt5">スヌーズ期間　</label>
 											<div class="common_select floatL">
-												<select name="snooze" id="snooze">
-													<option value="0分" >0分</option>
-													<option value="10分" >10分</option>
-													<option value="20分" >20分</option>
-													<option value="30分" >30分</option>
-													<option value="40分" >40分</option>
-													<option value="50分" >50分</option>
-													<option value="60分" selected>60分</option>
+												<select name="snooze_interval" id="snooze_interval">
+													<option value="0" >0分</option>
+													<option value="10" >10分</option>
+													<option value="20" >20分</option>
+													<option value="30" >30分</option>
+													<option value="40" >40分</option>
+													<option value="50" >50分</option>
+													<option value="60" selected>60分</option>
 												</select>
 												</div>
 											<label for="snoozeTimes" class="floatL pdt5">　繰り返し回数　</label>
 											<div class="common_select floatL">
-												<select name="snoozeTimes" id="snoozeTimes">
-													<option value="1回" >1回</option>
-													<option value="2回" >2回</option>
-													<option value="3回" >3回</option>
-													<option value="4回" >4回</option>
-													<option value="5回" selected>5回</option>
-													<option value="6回" >6回</option>
-													<option value="7回" >7回</option>
-													<option value="8回" >8回</option>
-													<option value="9回" >9回</option>
-													<option value="10回" >10回</option>
+												<select name="snooze_times" id="snooze_times">
+													<option value="1" >1回</option>
+													<option value="2" >2回</option>
+													<option value="3" >3回</option>
+													<option value="4" >4回</option>
+													<option value="5" selected>5回</option>
+													<option value="6" >6回</option>
+													<option value="7" >7回</option>
+													<option value="8" >8回</option>
+													<option value="9" >9回</option>
+													<option value="10" >10回</option>
 												</select>
 												</div>
 										</td>

@@ -15,7 +15,9 @@ class Model_User_Sensor extends Orm\Model{
 		'sleep_alert',
 		'abnormal_behavior_alert',
 		'active_non_detection_alert',
-		'active_night_alert'
+		'active_night_alert',
+		'snooze_times',
+		'snooze_interval',
 	);
 
 	protected static $_has_one = array('sensor'=> array(
@@ -116,6 +118,8 @@ class Model_User_Sensor extends Orm\Model{
 			'abnormal_behavior_alert',
 			'active_non_detection_alert',
 			'active_night_alert',
+			'snooze_times',
+			'snooze_interval',
 		);
 		foreach($keys as $key) {
 			if(isset($params[$key])) {
