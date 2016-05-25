@@ -18,8 +18,12 @@ class Controller_Api_Sensor extends Controller_Api
 	}
 
 	public function _get() {
-		$id = Input::param('id');
-		$sensor = \Model_Sensor::getSensor($id);
+        list(, $user_id) = Auth::get_user_id();
+        $params = array(
+            'user_id' => $user_id,
+            'sensor_id' => Input::param('id'),
+        );
+		$sensor = \Model_User_Sensor::getUserSensor($params);
 		$this->result = array(
 			'data' => $sensor
 		);

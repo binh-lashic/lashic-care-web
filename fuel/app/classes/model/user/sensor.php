@@ -88,13 +88,17 @@ class Model_User_Sensor extends Orm\Model{
 				"where" => array(
 					"user_id" => $params['user_id'],
 					"sensor_id" => $params['sensor_id'],
-				)
+				),
+				'related' => array('sensor'),
 			));
 		}
-    	return $user_sensor;
+		if(isset($user_sensor)) {
+			$user_sensor = $user_sensor->to_array();
+		}
+    	return \Model_User_Sensor::format($user_sensor);
     }
 
-    public static function format($user) {
+    public static function format($params) {
 		$ret = array();
 		$keys = array(
 			'temperature_alert',
@@ -108,11 +112,17 @@ class Model_User_Sensor extends Orm\Model{
 			'sleep_alert',
 			'abnormal_behavior_alert',
 			'active_non_detection_alert',
+			'active_night_alert',
 		);
 		foreach($keys as $key) {
-			$ret[$key] = $user[$key];
+			$ret[$key] = $params[$key];
 		}
-		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		if(isset($params['sensor'])) {
+			$ret = array_merge($ret, $params['sensor']);
+		}
+		if(isset($ret['profile_image'])) {
+			$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		}
 		if(isset($ret['birthday'])) {
 			$now = date("Ymd");
 			$birthday = date("Ymd", strtotime($ret['birthday']));

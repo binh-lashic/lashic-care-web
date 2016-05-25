@@ -429,7 +429,7 @@ class Controller_User extends Controller_Base
         	'user_id' => $this->data['user']['id'],
         	'sensor_id' => $this->data['sensor']['id']
         );
-        $this->data['user_sensor'] = \Model_User_Sensor::getUserSensor($params);
+        $this->data['sensor'] = \Model_User_Sensor::getUserSensor($params);
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/setting', $this->data);
 	}
