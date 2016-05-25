@@ -118,7 +118,9 @@ class Model_User_Sensor extends Orm\Model{
 			'active_night_alert',
 		);
 		foreach($keys as $key) {
-			$ret[$key] = $params[$key];
+			if(isset($params[$key])) {
+				$ret[$key] = $params[$key];
+			}
 		}
 		if(isset($params['sensor'])) {
 			$ret = array_merge($ret, $params['sensor']);
