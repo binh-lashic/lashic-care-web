@@ -120,6 +120,8 @@ class Model_User_Sensor extends Orm\Model{
 		foreach($keys as $key) {
 			if(isset($params[$key])) {
 				$ret[$key] = $params[$key];
+			} else {
+				$ret[$key] = 0;
 			}
 		}
 		if(isset($params['sensor'])) {
