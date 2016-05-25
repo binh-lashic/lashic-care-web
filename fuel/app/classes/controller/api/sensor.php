@@ -24,6 +24,7 @@ class Controller_Api_Sensor extends Controller_Api
             'sensor_id' => Input::param('id'),
         );
 		$sensor = \Model_User_Sensor::getUserSensor($params);
+        unset($sensor['active_non_detection_alert']);
 		$this->result = array(
 			'data' => $sensor
 		);
