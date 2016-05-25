@@ -73,6 +73,8 @@ class Controller_Page extends Controller_Template
 
 	public function action_terms()
 	{        
+        Response::redirect('http://infic-c.net/careeye/kiyaku.htm');
+        return;
         $this->template->title = '利用規約';
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
@@ -82,6 +84,8 @@ class Controller_Page extends Controller_Template
 
 	public function action_privacy()
 	{        
+        Response::redirect('http://infic-c.net/careeye/privacy.htm');
+        return;
         $this->template->title = 'プライバシーポリシー';
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);

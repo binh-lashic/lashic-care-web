@@ -1,0 +1,25 @@
+# -------------- BEGIN custom sancert.cnf -----
+HOME = .
+oid_section = new_oids
+[ new_oids ]
+[ req ]
+default_days = 730
+distinguished_name = req_distinguished_name
+encrypt_key = no
+string_mask = nombstr
+req_extensions = v3_req # Extensions to add to certificate request
+[ req_distinguished_name ]
+countryName = Country Name (2 letter code)
+countryName_default =
+stateOrProvinceName = State or Province Name (full name)
+stateOrProvinceName_default =
+localityName = Locality Name (eg, city)
+localityName_default =
+organizationalUnitName  = Organizational Unit Name (eg, section)
+organizationalUnitName_default  =
+commonName              = careeye.jp (eg, domain name)
+commonName_default      = *.careeye.jp
+commonName_max = 64
+[ v3_req ]
+subjectAltName=DNS:*.careeye.jp
+# -------------- END custom sancert.cnf -----
