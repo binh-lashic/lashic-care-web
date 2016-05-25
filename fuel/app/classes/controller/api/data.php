@@ -310,7 +310,7 @@ class Controller_Api_Data extends Controller_Api
 					'active' => null,
 					'discomfort' => null,
 				);
-				
+				$span_time = date("Y-m-d H:i:s", $time);
 				for($j = 0; $j < 10; $j++) {
 					$current_time = date("Y-m-d H:i:s", $start_time + ($i + $j)* 60);
 					if(isset($rows[$current_time])) {
@@ -342,7 +342,7 @@ class Controller_Api_Data extends Controller_Api
 				$value = $averages[$type];
 
 				$data[] = array(
-					'time' => $current_time,
+					'time' => $span_time,
 					'label' => date("H:i", $time),
 					'value' => $value,
 					'temperature' => $averages['temperature'],
