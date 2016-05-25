@@ -373,7 +373,7 @@ class Controller_User extends Controller_Base
 		    );
 		    $client_user = \Model_User::saveUser($client_params);
 
-		    if(isset($params['email'])) {
+		    if(!empty($params['email'])) {
 			    $admin_params = array(
 			    	'last_name' => $params['last_name'],
 			    	'first_name' => $params['first_name'],
