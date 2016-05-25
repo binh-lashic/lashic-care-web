@@ -373,19 +373,23 @@ class Controller_User extends Controller_Base
 		    );
 		    $client_user = \Model_User::saveUser($client_params);
 
-		    $admin_params = array(
-		    	'last_name' => $params['last_name'],
-		    	'first_name' => $params['first_name'],
-		    	'last_kana' => $params['last_kana'],
-		    	'first_kana' => $params['first_kana'],
-		    	'email' 	=> $params['email'],
-		    );
-		    $admin_params['admin'] = 0;
-	        $admin_params['password'] = sha1(mt_rand());
-	        $admin_user = \Model_User::saveAdminUser($admin_params);
-			if($admin_user) {
-	            \Model_User::saveClients($admin_user['id'], array($params['client_user_id'] => "true"));
-			}
+		    if(isset($params['email'])) {
+			    $admin_params = array(
+			    	'last_name' => $params['last_name'],
+			    	'first_name' => $params['first_name'],
+			    	'last_kana' => $params['last_kana'],
+			    	'first_kana' => $params['first_kana'],
+			    	'email' 	=> $params['email'],
+			    );		    	
+			    $admin_params['admin'] = 0;
+		        $admin_params['password'] = sha1(mt_rand());
+		        $admin_user = \Model_User::saveAdminUser($admin_params);
+				if($admin_user) {
+		            \Model_User::saveClients($admin_user['id'], array($params['client_user_id'] => "true"));
+				}
+		    }
+
+
         }
 
         $this->template->content = View::forge('user/info_option_complete', $this->data);
