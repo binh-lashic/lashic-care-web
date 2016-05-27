@@ -15,6 +15,7 @@
 <meta property="og:site_name" content="Care Eye（ケア　アイ）　管理ページ" >
 <meta property="og:description" content="Care Eye（ケア　アイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
 <meta name="viewport" content="width=360,initial-scale=0.1">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
