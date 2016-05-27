@@ -228,4 +228,30 @@ class Controller_Api_User extends Controller_Api
         }
         return $this->result();
 	}
+
+	public function post_save_admin() {
+		return $this->_save_admin();
+	}
+
+	public function get_save_admin() {
+		return $this->_save_admin();
+	}
+
+	public function _save_admin() {
+		$params = Input::param();
+		if(!empty($params['email'])) {
+		    $params['admin'] = 0;
+	        $params['password'] = sha1(mt_rand());
+	        $user = \Model_User::saveAdminUser($params);
+			if($user) {
+				$clients = array();
+				$clients[$params['client_user_id']] = true;
+				\Model_User::saveClients($user['id'], $clients);
+			}
+			$this->result = array(
+				'data' => $user
+			);
+	    }
+        return $this->result();
+	}
 }

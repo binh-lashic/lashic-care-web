@@ -40,7 +40,7 @@ class Model_User_Client extends Orm\Model{
 
 	public static function saveUserClient($params) {
 		if(isset($params['id'])) {
-	    	$user_sensor = \Model_User_Client::find($params['id']);
+	    	$user_client = \Model_User_Client::find($params['id']);
 		} else {
 			if(empty($params['user_id']) && isset($params['email'])) {
 				$user = \Model_User::getUserFromEmail($params['email']);
@@ -51,6 +51,7 @@ class Model_User_Client extends Orm\Model{
 						'last_kana' => $params['last_kana'],
 						'first_kana' => $params['first_kana'],
 						'email' => $params['email'],
+						'admin' => 0,
 						'password' => sha1($params['email']),
 					);
 					$user = \Model_User::saveUser($data);
@@ -58,7 +59,7 @@ class Model_User_Client extends Orm\Model{
 				$params['user_id'] = $user['id'];
 			}
 			if(isset($params['user_id'])) {
-				$user_sensor = \Model_User_Client::find("first", array(
+				$user_client = \Model_User_Client::find("first", array(
 					"where" => array(
 						"user_id" => $params['user_id'],
 						"client_user_id" => $params['client_user_id'],
@@ -66,15 +67,15 @@ class Model_User_Client extends Orm\Model{
 				));				
 			}
 
-			if(empty($user_sensor)) {
-				$user_sensor = \Model_User_Client::forge();
+			if(empty($user_client)) {
+				$user_client = \Model_User_Client::forge();
 	    	}
 		}
     	unset($params['q']);
     	unset($params['id']);
-	    $user_sensor->set($params);
-		if($user_sensor->save()) {
-			return $user_sensor;
+	    $user_client->set($params);
+		if($user_client->save()) {
+			return $user_client;
 		}
     	return null;
     }
