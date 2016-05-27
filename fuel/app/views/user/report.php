@@ -7,7 +7,7 @@
 			<!-- 情報ソート -->
 			<div id="report_sort">
 				<dl class="clearfix">
-					<dt>アラート項目</dt>
+					<dt>カテゴリー</dt>
 					<dd>
 						<input type="checkbox" id="i2">
 						<label for="i2" class="checkbox">予定</label>
@@ -88,7 +88,7 @@ if(isset($page) && $page != $page_count) {
 						<tr>
 							<td><input type="checkbox" id="checkAll"><label for="checkAll" class="checkbox"></label></td>
 							<th>日付</th>
-							<th>アラート項目</th>
+							<th>カテゴリー</th>
 							<th>発生時間</th>
 							<th>内容確認状況</th>
 							<th>最終確認者</th>
