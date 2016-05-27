@@ -75,8 +75,8 @@ if(isset($client['name'])) {
 		<div id="content_nav">
 			<nav>
 				<ul>
-					<li class="nav_on"><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
-					<li><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
+					<li <?php if(Request::active()->action == "index") { echo "class=\"nav_on\""; } ?>><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
+					<li <?php if(Request::active()->action == "report") { echo "class=\"nav_on\""; } ?>><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
 				</ul>
 			</nav>
 		</div>
