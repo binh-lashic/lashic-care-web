@@ -97,6 +97,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['heatstroke_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="heatstroke_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>室内湿度異常アラート<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -114,6 +115,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['humidity_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="humidity_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>カビ・ダニアラート<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -131,6 +133,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['mold_mites_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="mold_mites_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>室内照度異常（日中）<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -148,6 +151,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['illuminance_daytime_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_daytime_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>室内照度異常（深夜）<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -194,6 +198,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['wake_up_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="wake_up_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>平均睡眠時間遅延<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -211,6 +216,7 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['sleep_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="sleep_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+									<tr>
 									<th>異常行動<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -228,8 +234,8 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['abnormal_behavior_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="abnormal_behavior_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
-									<th>一定時間人感センサー未感知<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+									<tr>
+										<th>一定時間人感センサー未感知<br><p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
 											<input type="range" min="0" max="2" value="<?php echo $sensor['active_non_detection_level']; ?>" list="scale" class="rangeNo03" id="active_non_detection_level" name="active_non_detection_level" />
@@ -245,6 +251,8 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_non_detection_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_non_detection_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+<?php
+/*
 									<th>夜間起床回数、夜間人感センサー感知回数<br>
 <p class="small text_red txt_normal">※テキスト</p></th>
 										<td colspan="2">
@@ -262,6 +270,8 @@
 												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_night_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
+*/
+?>
 									<tr>
 										<th>起床判断設定<br>
 <p class="small text_red txt_normal">※人感センサーが室内の動きを捉え、起床かどうか判断します。</p></th>

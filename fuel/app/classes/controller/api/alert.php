@@ -67,4 +67,31 @@ class Controller_Api_Alert extends Controller_Api
 		);
  		return $this->result();
 	}
+
+	public function get_test() {
+		return $this->_test();
+	}
+
+	public function post_test() {
+		return $this->_test();
+	}
+
+	public function _test(){
+		require_once APPPATH.'vendor/ApnsPHP/Autoload.php';
+
+        $push = new ApnsPHP_Push(
+	            ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION,
+                    APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem'
+                );
+        $push->setRootCertificationAuthority(APPPATH.'vendor/ApnsPHP/certificates/entrust_root_certification_authority.pem');
+        $push->connect();
+
+        $message = new ApnsPHP_Message("1b1ca6c9607c33734175fb828160f45e2dfa39f20f02e9644db3866d0699242d");
+        $message->setText("test");
+        $message->setSound();
+        $message->setExpiry(30);
+        $push->add($message);
+        $push->send();
+        $push->disconnect();
+	}
 }
