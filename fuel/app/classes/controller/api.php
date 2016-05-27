@@ -26,11 +26,10 @@ class Controller_Api extends Controller_Rest
 	    }
 	}
 
-	public function _error() {
+	public function _error($msg = 'ログインをしていません') {
 		$this->result = array(
-			'message' => 'ログインをしていません',
+			'message' => $msg,
 		);
-
  		return $this->result();
 	}
 

@@ -303,78 +303,74 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function saveAdminUser($params) {
-		if(empty($params['email']) && isset($params['username'])) {
-			$params['email'] = $params['username'];
+		if(isset($params['id'])) {
+			$id = $params['id'];
+		} else {
+			if(empty($params['username'])) {
+				$params['username'] = sha1($params['email'].mt_rand());
+			}
+			if(!isset($params['admin'])) {
+				$params['admin'] = 1;
+			}
+			$id = Auth::create_user(
+	                $params['username'],
+	                $params['password'],
+	                $params['email']);
+			$params['email_confirm'] = 0;
+			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
 		}
-		
-		try {
-			if(!empty($params['id'])) {
-				$id = $params['id'];
+		$user = \Model_User::find($id);
+		unset($params['id']);
+		unset($params['username']);
+		unset($params['password']);
+		unset($params['email']);
+		if($user) {
+			$user->set($params);
+			if($user->save()) {
+				//センサーを保存
+				$params['user_id'] = $user['id'];
+				\Model_User::saveSensor($params);
+				return \Model_User::format($user);
 			} else {
-				if(empty($params['username'])) {
-					$params['username'] = sha1($params['email'].mt_rand());
-				}
-				if(!isset($params['admin'])) {
-					$params['admin'] = 1;
-				}
-				$id = Auth::create_user(
-		                $params['username'],
-		                $params['password'],
-		                $params['email']);
-			}
-			$user = \Model_User::find($id);
-			unset($params['id']);
-			unset($params['username']);
-			unset($params['password']);
-			unset($params['email']);
-			if($user) {
-				$user->set($params);
-				if($user->save()) {
-					//センサーを保存
-					if(isset($params['sensor_id'])) {
-						$user_sensor = \Model_User_Sensor::find("first", array(
-							'where' => array(
-								'user_id' => $user->id,
-							),
-						));
-						//もし設定が無い場合は新規作成
-						if(empty($user_sensor)){
-							$user_sensor = \Model_User_Sensor::forge();
-						}
+				return null;
+			}				
+		}
+	}
 
-						$user_sensor->set(array(
-							'user_id' => $user->id,
-							'sensor_id' => $params['sensor_id'],
-						));
-			
-						try {
-							$user_sensor->save();
-						} catch(Exception $e) {
-							echo $e->getMessage();
-							exit;
-						}					
-					}
+	public static function sendEmail($params) {
+		if(empty($params['from'])) {
+			$params['from'] = Config::get("email.from");
+		}
+		$sendgrid = new SendGrid(Config::get("sendgrid"));
+		$email = new SendGrid\Email();
+		$email
+		    ->addTo($params['to'])
+		    ->setFrom($params['from'])
+		    ->setSubject($params['subject'])
+		    ->setHtml($params['text']);
+		return $sendgrid->send($email);
+	}
 
-					$sendgrid = new SendGrid(Config::get("sendgrid"));
-					$email = new SendGrid\Email();
-					$email
-					    ->addTo($user['email'])
-					    ->setFrom(Config::get("email.from"))
-					    ->setSubject(Config::get("email.templates.user_update.subject"))
-					    ->setText(Config::get("email.templates.user_update.text"));
-					try {
-					    $sendgrid->send($email);
-					} catch(\SendGrid\Exception $e) {
-						echo $e->getMessage();
-					}
-					return \Model_User::format($user);
-				} else {
-					return null;
-				}				
+	public static function saveSensor($params) {
+		if(isset($params['sensor_id'])) {
+			$user_sensor = \Model_User_Sensor::find("first", array(
+				'where' => array(
+					'user_id' => $params['user_id'],
+					'sensor_id' => $params['sensor_id'],
+				),
+			));
+			//もし設定が無い場合は新規作成
+			if(empty($user_sensor)){
+				$user_sensor = \Model_User_Sensor::forge();
 			}
-		} catch(Exception $e) {
-			echo $e->getMessage();
-			exit;
+
+			$user_sensor->set(array(
+				'user_id' => $params['user_id'],
+				'sensor_id' => $params['sensor_id'],
+			));
+
+			return $user_sensor->save();			
 		}
 	}
 
@@ -385,18 +381,7 @@ class Model_User extends Orm\Model{
 		}
 		if($user) {
 			if(Auth::change_password($params['password'], $params['new_password'], $user['username'])) {
-				$sendgrid = new SendGrid(Config::get("sendgrid"));
-				$email = new SendGrid\Email();
-				$email
-				    ->addTo($user['email'])
-				    ->setFrom(Config::get("email.from"))
-				    ->setSubject(Config::get("email.templates.user_update.subject"))
-				    ->setText(Config::get("email.templates.user_update.text"));
-				try {
-				    $sendgrid->send($email);
-				} catch(\SendGrid\Exception $e) {
-					echo $e->getMessage();
-				}
+				\Model_User::sendEmail($user);
 				return true;
 			} else {
 				return false;
@@ -463,6 +448,18 @@ class Model_User extends Orm\Model{
             }
         }
         return;
+	}
+
+	public static function sendConfirmEmail($user) {
+		$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
+			'token' => $user['email_confirm_token'],
+		));
+		$params = array(
+			'to' => $user['email'],
+			'subject' => "新規登録確認",
+			'text' => \View::forge('email/user/save_admin', array("url" => $url))
+		);
+		return \Model_User::sendEmail($params);
 	}
 }
 		

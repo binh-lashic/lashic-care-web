@@ -8,6 +8,7 @@ class Controller_User extends Controller_Base
 	public function before() {
 		$this->nologin_methods = array(
 	        'login',
+	        'email_confirm'
 	    );
 	    parent::before();
 	    if(empty($this->user)) {
@@ -496,5 +497,23 @@ class Controller_User extends Controller_Base
 		$client_id = Input::param("id");
 		Session::set("client_id", $client_id);
 		Response::redirect('/user');
+	}
+
+	public function action_email_confirm() {
+		$user = \Model_User::find("first", array(
+			'where' => array(
+				'email_confirm_token' => Input::param("token"),
+				array('email_confirm_expired', ">", date("Y-m-d H:i:s"))
+			)
+		));
+		$user->set(array(
+			"email_confirm" => 1,
+			//"email_confirm_token" => null,
+			//"email_confirm_expired" => null,
+		));
+		if($user->save()) {
+			\Auth::force_login($user['id']);
+			Response::redirect('/user');
+		}
 	}
 }
