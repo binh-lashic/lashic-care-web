@@ -6,7 +6,7 @@
 <?php
 foreach($sensors as $sensor){
 ?>
-				<li class="list-group-item"><a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a></li>
+				<li class="list-group-item <?php if($sensor['enalbed'] == 0) { echo "disabled"; } ?>"><a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a></li>
 <?php	
 } 
 ?>
