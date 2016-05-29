@@ -55,6 +55,7 @@ class Model_Sensor extends Orm\Model{
 		'active_non_detection_level',
 		'active_night_level',
 		'enable',
+		'shipping_date',
 	);
 
 	// Model_Post の中身は、多くのユーザーに属しています。
@@ -179,7 +180,27 @@ class Model_Sensor extends Orm\Model{
 
 
 	public static function saveSensor($params) {
-    	$sensor = \Model_Sensor::find($params['id']);
+		if(!empty($params['shipping_year']) && !empty($params['shipping_month']) && !empty($params['shipping_day'])) {
+			$params['shipping_date'] = $params['shipping_year']."-".$params['shipping_month']."-".$params['shipping_day'];
+		}
+		if(isset($params['id'])) {
+	    	$sensor = \Model_Sensor::find($params['id']);
+		} else {
+			$sensor = \Model_Sensor::forge();
+			$params['temperature_level'] = 2;
+			$params['fire_level'] = 2;
+			$params['heatstroke_level'] = 2;
+			$params['mold_mites_level'] = 2;
+			$params['humidity_level'] = 2;
+			$params['illuminance_daytime_level'] = 2;
+			$params['illuminance_night_level'] = 2;
+			$params['wake_up_level'] = 2;
+			$params['sleep_level'] = 2;
+			$params['abnormal_behavior_level'] = 2;
+			$params['active_non_detection_level'] = 2;
+			$params['active_night_level'] = 2;
+			$params['enable'] = 0;
+		}
     	if($sensor) {
     		unset($params['q']);
     		unset($params['id']);
