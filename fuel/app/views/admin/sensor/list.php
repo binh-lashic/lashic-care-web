@@ -6,7 +6,7 @@
 <?php
 foreach($sensors as $sensor){
 ?>
-				<tr <?php if($sensor['enable'] == 0) { echo "disabled"; } ?>">
+				<tr class="<?php if($sensor['enable'] == 0) { echo "active"; } ?>">
 					<td class="col-sm-4">
 						<a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a>
 					</td>
