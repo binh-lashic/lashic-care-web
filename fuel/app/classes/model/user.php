@@ -170,15 +170,21 @@ class Model_User extends Orm\Model{
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
 		}
-		if(empty($ret['name'])) {
+
+		if(isset($ret['last_name']) && isset($ret['first_name'])) {
 			$ret['name'] = $ret['last_name'].$ret['first_name'];
 		}
 
-		if(empty($ret['kana'])) {
+		if(isset($ret['last_kana']) && isset($ret['first_kana'])) {
 			$ret['kana'] = $ret['last_kana'].$ret['first_kana'];
 		}
 
-		$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		if(!empty($ret['profile_image'])) {
+			$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
+		} else {
+			$ret['profile_image'] = Uri::base()."images/common/img_no-image.jpg";
+		}
+
 		if(isset($ret['birthday'])) {
 			$now = date("Ymd");
 			$birthday = date("Ymd", strtotime($ret['birthday']));
@@ -186,6 +192,7 @@ class Model_User extends Orm\Model{
 		} else {
 			$ret['age'] = null;
 		}
+		
 		return $ret;
 	}
 

@@ -17,7 +17,7 @@
 							<tbody>
 								<tr>
 									<th>お名前（ふりがな）</th>
-									<td><?php echo $client['name']; ?>（<?php echo $client['kana']; ?>）</td>
+									<td><?php echo $client['last_name'].$client['first_name']; ?>（<?php echo $client['last_kana'].$client['first_kana']; ?>）</td>
 								</tr>
 								<tr>
 									<th>性別</th>

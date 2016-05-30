@@ -140,7 +140,7 @@ if($alert['confirm_status'] == 1) {
 } 
 ?>
 							</td>
-							<td><?php if($alert['confirm_user']) echo $alert['confirm_user']['name']; ?></td>
+							<td><?php if($alert['confirm_user']) echo $alert['confirm_user']['last_name'].$alert['confirm_user']['first_name']; ?></td>
 							<td>
 								<a name="1"></a>
 								<span class="toggle" id="toggle_on<?php echo $key; ?>"><a href="javascript:show_body('<?php echo $key; ?>')" class="btn_text">確認・報告</a></span>

@@ -14,7 +14,7 @@ if(!empty($clients)) {
 	foreach($clients as $_client) {
 ?>
 					<tr>
-						<th colspan="2" class="center large"><?php echo $_client['name']; ?>（<?php echo $_client['kana']; ?>）さん
+						<th colspan="2" class="center large"><?php echo $_client['last_name'].$_client['first_name']; ?>（<?php echo $_client['last_kana'].$_client['first_kana']; ?>）さん
 							<div class="usrMn_btn_edit"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="btn_text">ユーザー情報を編集する</a></div>
 						</th>
 					</tr>
@@ -53,7 +53,7 @@ if(!empty($clients)) {
 
 	foreach($clients as $_client) {
 ?>
-					<li><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="link_next"><?php echo $_client['name']; ?>（<?php echo $_client['kana']; ?>）さん</a></li>
+					<li><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="link_next"><?php echo $_client['last_name'].$_client['first_name']; ?>（<?php echo $_client['last_kana'].$_client['first_kana']; ?>）さん</a></li>
 <?php
 	} //foreach
 ?>

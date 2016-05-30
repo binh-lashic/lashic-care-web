@@ -30,7 +30,7 @@ if(isset($user)) {
 if(!empty($clients)) {
 	foreach($clients as $_client) {
 ?>
-								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item <?php if($client['id'] == $_client['id']) { echo "nowStay"; } ?>"><?php echo $_client['name']; ?>さん</a></li>
+								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item <?php if($client['id'] == $_client['id']) { echo "nowStay"; } ?>"><?php echo $_client['last_name'].$_client['first_name']; ?>さん</a></li>
 <?php
 	}
 }
@@ -59,7 +59,7 @@ if(!empty($clients)) {
 	</div>
 </header>
 <?php
-if(isset($client['name'])) {
+if(isset($client['id'])) {
 ?>
 <!-- blue area -->
 <div class="hdr_bg">
@@ -67,7 +67,7 @@ if(isset($client['name'])) {
 		<!-- ユーザー名 -->
 		<div class="user_select">
 
-			<div class="hdr_select_text"><p><?php echo $client['name']; ?><span class="com_userSmall">さん</span></p></div>
+			<div class="hdr_select_text"><p><?php echo $client['last_name'].$client['first_name']; ?><span class="com_userSmall">さん</span></p></div>
 
 
 		</div>

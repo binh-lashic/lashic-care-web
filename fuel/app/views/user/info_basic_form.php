@@ -9,10 +9,10 @@
 				<div class="form_set_container">
 						<div class="userDate_photo">
 							<div class="aside_photo">
-								<div class="aside_photoInner"><img src="/images/common/img_no-image.jpg" width="179" height="179" alt=""/></div>
+								<div class="aside_photoInner"><img src="<?php echo $client['profile_image']; ?>" width="179" height="179" alt=""/></div>
 							</div>
 									<div class="uploadButton btn_text">ファイルを選択<br>
-（最大00MB）
+（最大2MB）
 										<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
 										<input type="text" id="uv" class="uploadValue" disabled />
 									</div>

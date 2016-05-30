@@ -7,7 +7,7 @@ if(isset($client)) {
 	</script>
 		<!-- content start -->
 		<section id="contentBox">
-			<h1 class="content_h1 graph_title_icon"><?php echo $client['name']; ?>さんの様子</h1>
+			<h1 class="content_h1 graph_title_icon"><?php echo $client['last_name'].$client['first_name']; ?>さんの様子</h1>
 			
 			<!-- 現在のグラフ -->
 			<h2 class="content_h2">現在のグラフ</h2>

@@ -213,14 +213,6 @@ class Model_Sensor extends Orm\Model{
     }
 
     public static function format($sensor) {
-    	/*
-    	if(!empty($sensor['temperature_week_average'])) {
-	    	$sensor['temperature_week_average'] = json_decode($sensor['temperature_week_average'], true);
-	    }
-    	if(!empty($sensor['humidity_week_average'])) {
-	    	$sensor['humidity_week_average'] = json_decode($sensor['humidity_week_average'], true);
-    	}
-    	*/
     	return $sensor;
     }
 
@@ -250,8 +242,6 @@ class Model_Sensor extends Orm\Model{
 				if($temperature_upper_limit_count == $count) {
 					$params = array(
 						'type' => 'temperature',
-						'title' => '室温異常',
-						'description' => '室温異常',
 						'logs' => array(
 							'temperature_upper_limit' => $this->temperature_upper_limit
 						),
@@ -260,8 +250,6 @@ class Model_Sensor extends Orm\Model{
 				} else if($temperature_lower_limit_count == $count) {
 					$params = array(
 						'type' => 'temperature',
-						'title' => '室温異常',
-						'description' => '室温異常',
 						'logs' => array(
 							'temperature_lower_limit' => $this->temperature_lower_limit
 						),
@@ -299,8 +287,6 @@ class Model_Sensor extends Orm\Model{
 				if($humidity_upper_limit_count == $count) {
 					$params = array(
 						'type' => 'humidity',
-						'title' => '湿度異常',
-						'description' => '湿度異常',
 						'logs' => array(
 							'humidity_upper_limit' => $this->humidity_upper_limit
 						),
@@ -309,8 +295,6 @@ class Model_Sensor extends Orm\Model{
 				} else if($humidity_upper_limit_count == $count) {
 					$params = array(
 						'type' => 'humidity',
-						'title' => '湿度異常',
-						'description' => '湿度異常',
 						'logs' => array(
 							'humidity_lower_limit' => $this->humidity_lower_limit,
 						),
@@ -344,8 +328,6 @@ class Model_Sensor extends Orm\Model{
 				if($count == 0) {
 					$params = array(
 						'type' => 'heatstroke',
-						'title' => '熱中症',
-						'description' => '熱中症',
 						'logs' => array(
 							'heatstroke_wbgt_upper_limit' => $this->heatstroke_wbgt_upper_limit,
 						),
@@ -377,8 +359,6 @@ class Model_Sensor extends Orm\Model{
 				if($count == 0) {
 					$params = array(
 						'type' => 'mold_mites',
-						'title' => 'カビ・ダニ',
-						'description' => 'カビ・ダニ',
 						'logs' => array(
 							'mold_mites_humidity_upper_limit' => $this->mold_mites_humidity_upper_limit,
 							'mold_mites_temperature_upper_limit' => $this->mold_mites_temperature_upper_limit,
@@ -445,13 +425,9 @@ class Model_Sensor extends Orm\Model{
 					}
 
 				}
-				$title = "室内照度異常（日中）";
-				$description = "室内照度異常（日中）";
 				if($count == 0) {
 					$params = array(
 						'type' => 'illuminance_daytime',
-						'title' => $title,
-						'description' => $description,
 						'logs' => array(
 							'illuminance_daytime_start_time' => $this->illuminance_daytime_start_time,
 							'illuminance_daytime_end_time' => $this->illuminance_daytime_end_time,
@@ -493,8 +469,6 @@ class Model_Sensor extends Orm\Model{
 				if($count == 0) {
 					$params = array(
 						'type' => 'illuminance_night',
-						'title' => '室内照度異常（深夜）',
-						'description' => '室内照度異常（深夜）',
 						'logs' => array(
 							'illuminance_night_start_time' => $this->illuminance_night_start_time,
 							'illuminance_night_end_time' => $this->illuminance_night_end_time,
@@ -525,8 +499,6 @@ class Model_Sensor extends Orm\Model{
 			if(!empty($result['temperature'])) {
 				$params = array(
 					'type' => 'fire',
-					'title' => '火事',
-					'description' => '火事です。室温が'.$this->fire_temperature_upper_limit.'を越えています。現在'.$result['temperature'].'度です。',
 					'logs' => array(
 						'fire_temperature_upper_limit' => $this->fire_temperature_upper_limit,
 					),
@@ -608,7 +580,7 @@ class Model_Sensor extends Orm\Model{
 
 	//就寝時間のチェック
 	public function checkSleep() {
-		if(empty($this->sleep_threshold) || empty($this->sleep_start_time) || empty($this->sleep_end_time)) {
+		if(empty($this->sleep_threshold) || empty($this->sleep_start_time) || empty($this->sleep_end_time) || empty($this->sleep_duration)) {
 			return false;
 		}
     	$date = date("Y-m-d");
@@ -697,6 +669,12 @@ class Model_Sensor extends Orm\Model{
 		$params['logs']['sensor_name'] = $this->name;
 		$params['logs']['sql'] = \DB::last_query("data");
 
+		$template = Config::get("template.alert");
+		if(isset($template[$params['type']])) {
+			$params['title'] = $template[$params['type']]['title'];
+			$params['description'] = $template[$params['type']]['description'];
+		}
+
 		$tmp = $params;
 		$tmp['logs'] = implode("<>", $tmp['logs']);
 		$data = implode("<>", $tmp);
@@ -710,17 +688,6 @@ class Model_Sensor extends Orm\Model{
 		} else {
 	    	Log::info($data, 'alert');
 
-	    	$description = $params['description'];
-
-/*
-			if(isset($params['logs'])) {
-				foreach($params['logs'] as $key => $value) {
-					$description .= "\r\n".$key."=".$value;
-				}
-			}
-*/
-			
-			$params['description'] = $description;
 			$params['confirm_status'] = 0;
 
 			$alert = \Model_Alert::forge();
@@ -729,7 +696,7 @@ class Model_Sensor extends Orm\Model{
 	    		$this->send_alert(array(
 	    			'email' => $user['email'],
 	    			'title' => $params['title'],
-	    			'description' => $description,
+	    			'description' => $params['description'],
 	    			'logs' => $params['logs'],
 	    		));
     		}

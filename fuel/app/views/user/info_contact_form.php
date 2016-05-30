@@ -12,7 +12,7 @@
 								<tbody>
 									<tr>
 										<th>郵便番号</th>
-										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $user['zip_code']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span>
+										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $client['zip_code']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span>
 										</td>
 									</tr>
 									<tr>
@@ -45,7 +45,7 @@ if(!empty($errors['prefecture'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県以下</th>
-										<td><input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $user['address']; ?>"><br>
+										<td><input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $client['address']; ?>"><br>
 <span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
 <?php
 if(!empty($errors['address'])) {
@@ -57,7 +57,7 @@ if(!empty($errors['address'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号1</th>
-										<td><input type="text" class="input_text input_short" maxlength="11" name="phone" value="<?php echo $user['phone']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
+										<td><input type="text" class="input_text input_short" maxlength="11" name="phone" value="<?php echo $client['phone']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
 <?php
 if(!empty($errors['phone'])) {
 ?>
@@ -68,7 +68,7 @@ if(!empty($errors['phone'])) {
 									</tr>
 									<tr>
 										<th>電話番号2</th>
-										<td><input type="text" class="input_text input_short" maxlength="11" name="cellular" value="<?php echo $user['cellular']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span></td>
+										<td><input type="text" class="input_text input_short" maxlength="11" name="cellular" value="<?php echo $client['cellular']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span></td>
 									</tr>
 								</tbody>
 							</table>

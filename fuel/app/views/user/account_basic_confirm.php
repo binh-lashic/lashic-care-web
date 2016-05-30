@@ -8,7 +8,8 @@
 				<input type="hidden" name="first_kana" value="<?php echo $data['first_kana']; ?>">
 				<input type="hidden" name="birthday" value="<?php echo $data['birthday']; ?>">
 				<input type="hidden" name="prefecture" value="<?php echo $data['prefecture']; ?>">
-				<input type="hidden" name="addrses" value="<?php echo $data['address']; ?>">
+				<input type="hidden" name="zip_code" value="<?php echo $data['zip_code']; ?>">
+				<input type="hidden" name="address" value="<?php echo $data['address']; ?>">
 				<input type="hidden" name="phone" value="<?php echo $data['phone']; ?>">
 				<input type="hidden" name="cellular" value="<?php echo $data['cellular']; ?>">
 				<h1 class="contentLarge_h1">アカウント　基本情報変更確認</h1>
