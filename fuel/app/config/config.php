@@ -354,6 +354,55 @@ return array(
 		'sleep_duration' => 30,
 		'sleep_ignore_duration' => 5,
 	),
+	'template' => array(
+		'alert' => 
+			array(
+				'temperature'	=> array(
+					'title' => '室内温度異常',
+					'description' => 'CareEyeセンサーが設置された環境で設定値を上回った（高温）下回った（低温）場合に異常と判断して通知します。',
+				),
+				'fire'			=>	array(
+					'title' => '火事アラート',
+					'description' => 'CareEyeセンサーが設置された環境で室温が50度を超えた場合に火事と判断して通知します。',
+				),
+				'heatstroke' 	=> array(
+					'title' => '熱中症アラート',
+					'description' => 'CareEyeセンサーが設置された環境で熱中症指数（WBGT値）が設定値を超えた場合に熱中症の危険があると判断して通知します。',
+				),
+				'mold_mites'	=>	array(
+					'title' => 'カビ・ダニアラート',
+					'description' => 'CareEyeセンサーが設置された環境でカビやダニが発生しやすい環境として、指数が設定値をこえた場合に異常と判断して通知します。',
+				),
+				'humidity'		=>	array(
+					'title' => '室内湿度異常',
+					'description' => 'CareEyeセンサーが設置された環境で、室内湿度が設定値を設定値を上回った場合に異常と判断して通知します。',
+				),
+				'illuminance_daytime'		=>	array(
+					'title' => '室内照度異常（日中）',
+					'description' => 'CareEyeセンサーが設置された環境で、日中（5時～22時）の室内照度が設定値を下回った場合に異常と判断して通知します。',
+				),
+				'illuminance_night'	=> array(
+					'title' => '室内照度異常（深夜）',
+					'description' => 'CareEyeセンサーが設置された環境で、深夜（22時～5時）の室内照度が設定値を上回った場合に異常と判断して通知します。',
+				),
+				'wake_up'		=>	array(
+					'title' => '平均起床時間遅延',
+					'description' => 'CareEyeセンサーが設置された環境で、過去一ヶ月の起床時間と前後3時間以上、起床時間がずれた場合に異常と判断して通知します。',
+				),
+				'sleep'		=>	array(
+					'title' => '平均睡眠時間遅延',
+					'description' => 'CareEyeセンサーが設置された環境で、過去一ヶ月の睡眠時間と前後3時間以上、睡眠時間がずれた場合に異常と判断して通知します。',
+				),	
+				'abnormal_behavior'		=>	array(
+					'title' => '異常行動（夜間行動）',
+					'description' => 'CareEyeセンサーが設置された環境で、照明がついていない状況で30分以上の行動を感知した場合に異常と判断して通知します。',
+				),	
+				'active_non_detection'		=>	array(
+					'title' => '一定時間センサー未感知',
+					'description' => 'CareEyeセンサーが設置された環境で、設定値を上回って行動センサーに反応がなかった場合に異常と判断して通知します。',
+				),
+		),
+	),
 	'report_list_count' => 10,
 	'sendgrid' => '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',
 	'email' => array(
