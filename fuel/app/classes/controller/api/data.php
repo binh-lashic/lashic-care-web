@@ -571,7 +571,10 @@ class Controller_Api_Data extends Controller_Api
 					    ->where('sensor_id', $sensor->name)
 					    ->where('date', date("Y-m-d H:i:00", $time - 60))
 					    ->execute('data');
-			print_r($result);
+			if(isset($result)) {
+				$sensor->set(array('enable' => 1));
+				$sensor->save();
+			}
 		}
 		exit;
 
