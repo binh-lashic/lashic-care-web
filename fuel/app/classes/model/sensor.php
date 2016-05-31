@@ -710,6 +710,7 @@ class Model_Sensor extends Orm\Model{
 
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
+
     		foreach($this->users as $user) {
 	    		$this->send_alert(array(
 	    			'email' => $user['email'],

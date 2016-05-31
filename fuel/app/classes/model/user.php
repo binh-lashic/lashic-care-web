@@ -435,7 +435,7 @@ class Model_User extends Orm\Model{
 		        	$params = array(
 		        		'user_id' => $user_id,
 		        		'sensor_id' => $sensors[0]['id'],
-		        		'admin' => 1,
+		        		'admin' => 0,
 		        	);
 	        		\Model_User_Sensor::saveUserSensor($params);
 	        	}

@@ -71,7 +71,11 @@ class Model_User_Sensor extends Orm\Model{
 					"sensor_id" => $params['sensor_id'],
 				)
 			));
+			if(empty($user_sensor)) {
+				$user_sensor = \Model_User_Sensor::forge();
+			}
 		}
+
     	if($user_sensor) {
     		unset($params['q']);
     		unset($params['id']);
