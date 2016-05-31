@@ -67,7 +67,9 @@ class Controller_User extends Controller_Base
 				$this->data['data_latest'] = \Model_Data_Daily::getData($this->data['sensor']['id'], date("Y-m-d", strtotime("-1day")));
 
 				if($is_today) {
-					$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);					
+					if(isset($this->data['sensor']['name'])) {
+						$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);					
+					}
 				} else {
 					if(!empty($this->data['data_daily']['temperature_average'])) {
 						$this->data['data'] = array(
