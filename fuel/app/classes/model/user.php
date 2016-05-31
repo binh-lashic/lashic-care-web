@@ -428,7 +428,18 @@ class Model_User extends Orm\Model{
 
 	public static function saveClients($user_id, $client_user_ids) {
         foreach($client_user_ids as $client_user_id => $value) {
+        	//センサー機器の設定
+        	$sensors = \Model_User::getSensors($client_user_id);
             if($value === "true") {
+            	if(!empty($sensors[0])) {
+		        	$params = array(
+		        		'user_id' => $user_id,
+		        		'sensor_id' => $sensors[0]['id'],
+		        		'admin' => 1,
+		        	);
+	        		\Model_User_Sensor::saveUserSensor($params);
+	        	}
+
                 $user_client = \Model_User_Client::forge();
                 $user_client->set(array(
                     'user_id' => $user_id,
@@ -440,6 +451,24 @@ class Model_User extends Orm\Model{
                 } catch(Exception $e) {
                 }
             } else {
+            	if(!empty($sensors[0])) {
+            		$sensor = \Model_User_Sensor::find('first' , array(
+            			'where' => array(
+            				'sensor_id' => $sensors[0]['id']
+            			),
+           			));
+           			try {
+           				$sensor->delete(false);
+           			} catch(Exception $e) {
+           			}
+            	}
+            	$user_client = \Model_User_Client::find("first", array(
+                    'where' => array(
+                        'user_id' => $user_id,
+                        'client_user_id' => $client_user_id,
+                    ),
+                ));
+
                 $user_client = \Model_User_Client::find("first", array(
                     'where' => array(
                         'user_id' => $user_id,
