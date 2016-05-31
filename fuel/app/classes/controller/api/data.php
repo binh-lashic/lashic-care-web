@@ -576,7 +576,6 @@ class Controller_Api_Data extends Controller_Api
 				$sensor->save();
 			}
 		}
-		exit;
 
 		if(Input::param("sensor_id")) {
 			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
