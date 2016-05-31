@@ -4,6 +4,7 @@ class Model_User_Sensor extends Orm\Model{
 		'id',
 		'user_id',
 		'sensor_id',
+		'admin',
 		'temperature_alert',
 		'fire_alert',
 		'heatstroke_alert',
@@ -106,6 +107,7 @@ class Model_User_Sensor extends Orm\Model{
     public static function format($params) {
 		$ret = array();
 		$keys = array(
+			'admin',
 			'temperature_alert',
 			'fire_alert',
 			'heatstroke_alert',

@@ -9,6 +9,7 @@ class Model_Sensor extends Orm\Model{
 	protected static $_properties = array(
 		'id',
 		'name',
+/*
 		'temperature_upper_limit',
 		'temperature_lower_limit',
 		'temperature_duration',
@@ -42,6 +43,7 @@ class Model_Sensor extends Orm\Model{
 		'sleep_threshold',
 		'sleep_duration',
 		'sleep_ignore_duration',
+*/
 		'temperature_level',
 		'fire_level',
 		'heatstroke_level',
