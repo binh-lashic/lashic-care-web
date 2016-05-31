@@ -354,7 +354,205 @@ return array(
 		'sleep_duration' => 30,
 		'sleep_ignore_duration' => 5,
 	),
-	'sensor_levels' => array(
+	'sensor' => array(
+		'levels' => array(
+			'temperature' => array(
+				array(
+					'upper_limit' => 30,
+					'lower_limit' => 5,
+					'duration' => 60,
+				),
+				array(
+					'upper_limit' => 30,
+					'lower_limit' => 5,
+					'duration' => 60,
+				),
+				array(
+					'upper_limit' => 30,
+					'lower_limit' => 5,
+					'duration' => 60,
+				),
+			),
+			'fire' => array(
+				array(
+		'temperature_upper_limit' => 45,
+				),
+				array(
+		'temperature_upper_limit' => 45,
+				),
+				array(
+		'temperature_upper_limit' => 45,
+				),
+			),
+			'heatstroke' => array(
+				array(
+		'wbgt_upper_limit' => 28,
+		'duration' => 60,
+				),
+				array(
+		'wbgt_upper_limit' => 28,
+		'duration' => 60,
+				),
+				array(
+		'wbgt_upper_limit' => 28,
+		'duration' => 60,
+				),
+			),
+			'mold_mites' => array(
+				array(
+		'humidity_upper_limit' => 70,
+		'temperature_upper_limit' => 20,
+		'duration' => 60,
+				),
+				array(
+		'humidity_upper_limit' => 70,
+		'temperature_upper_limit' => 20,
+		'duration' => 60,
+				),
+				array(
+		'mold_mites_humidity_upper_limit' => 70,
+		'mold_mites_temperature_upper_limit' => 20,
+		'mold_mites_duration' => 60,
+				),
+			),
+			'humidity' => array(
+				array(
+		'upper_limit' => 70,
+		'lower_limit' => 40,
+		'duration' => 60,
+				),
+				array(
+		'upper_limit' => 70,
+		'lower_limit' => 40,
+		'duration' => 60,
+				),
+				array(
+		'upper_limit' => 70,
+		'lower_limit' => 40,
+		'duration' => 60,
+				),
+			),
+			'illuminance_daytime' => array(
+				array(
+		'lower_limit' => 50,
+		'duration' => 60,
+		'start_time' => 7,
+		'end_time' => 17,
+				),
+				array(
+		'lower_limit' => 50,
+		'duration' => 60,
+		'start_time' => 7,
+		'end_time' => 17,
+				),
+				array(
+		'lower_limit' => 50,
+		'duration' => 60,
+		'start_time' => 7,
+		'end_time' => 17,
+				),
+			),
+			'illuminance_night' => array(
+				array(
+		'lower_limit' => 30,
+		'duration' => 30,
+		'start_time' => 0,
+		'end_time' => 4,
+				),
+				array(
+		'lower_limit' => 30,
+		'duration' => 30,
+		'start_time' => 0,
+		'end_time' => 4,
+				),
+				array(
+		'lower_limit' => 30,
+		'duration' => 30,
+		'start_time' => 0,
+		'end_time' => 4,
+				),
+			),
+			'wake_up' => array(
+				array(
+		'start_time' => 5,
+		'end_time' => 9,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+				array(
+		'start_time' => 5,
+		'end_time' => 9,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+				array(
+		'start_time' => 5,
+		'end_time' => 9,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+			),
+			'sleep' => array(
+				array(
+		'start_time' => 19,
+		'end_time' => 23,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+				array(
+		'start_time' => 19,
+		'end_time' => 23,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+				array(
+		'start_time' => 19,
+		'end_time' => 23,
+		'threshold' => 5,
+		'duration' => 30,
+		'ignore_duration' => 5,
+				),
+			),
+			'abnormal_behavior' => array(
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+			),
+			'active_non_detection' => array(
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+				array(
+					'temperature_upper_limit' => 30,
+					'temperature_lower_limit' => 5,
+					'temperature_duration' => 60,
+				),
+			)
+		),
 	),
 	'template' => array(
 		'alert' => 
