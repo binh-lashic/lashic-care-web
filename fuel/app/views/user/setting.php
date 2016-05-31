@@ -1,6 +1,6 @@
 		<!-- content start グラフ設定値変更 -->
 		<section id="contentBoxLarge">
-				<h1 class="contentLarge_h1">グラフ設定値変更</h1>
+				<h1 class="contentLarge_h1">アラート通知設定変更</h1>
 				<p>変更したい内容を入力してください。</p>
 				<!-- 設定値 -->
 				<div class="form_set_container graph_form">

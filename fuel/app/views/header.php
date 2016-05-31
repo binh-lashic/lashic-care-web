@@ -46,7 +46,7 @@ if(!empty($clients)) {
 					</a>
 					<ul class="drawer-dropdown-menu">
 						<li class="nav_mypage"><a href="/user/account" class="drawer-dropdown-menu-item">マイページ</a></li>
-						<li class="nav_set"><a href="/user/setting" class="drawer-dropdown-menu-item">グラフ設定変更</a></li>
+						<li class="nav_set"><a href="/user/setting" class="drawer-dropdown-menu-item">アラート通知設定変更</a></li>
 						<li class="nav_help"><a href="/page/help" class="drawer-dropdown-menu-item">Q &amp; A</a></li>
 						<li class="nav_logout"><a href="/user/logout" class="drawer-dropdown-menu-item">ログアウト</a></li>
 					</ul>
