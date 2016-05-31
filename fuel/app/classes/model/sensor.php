@@ -664,7 +664,7 @@ class Model_Sensor extends Orm\Model{
 			}
 		}
 
-		if($nonactive_count >= $level['duration']) {
+		if($nonactive_count >= $level['duration'] && isset($sleep_time)) {
 			if(!$daily_data) {
 				$daily_data = \Model_Data_Daily::forge();
 			} 
