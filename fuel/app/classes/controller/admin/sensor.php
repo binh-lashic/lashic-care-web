@@ -34,7 +34,7 @@ class Controller_Admin_Sensor extends Controller_Admin
 
 	public function action_register() {
 		$sensor_names_data = Input::param("sensor_names");
-		$sensor_names = explode("\r\n|\r|\n", $sensor_names_data);
+		$sensor_names = explode(PHP_EOL, $sensor_names_data);
 		foreach($sensor_names as $sensor_name) {
 			$sensor = \Model_Sensor::saveSensor(array('name' => $sensor_name));
 		}
