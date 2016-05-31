@@ -52,7 +52,7 @@ class Controller_Api_Data extends Controller_Api
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
-				'data' => array(),
+				'data' => array("_dummy" => true),
 			);
 
 			//アラートの最新データ1件を取得する
