@@ -657,6 +657,7 @@ class Model_Sensor extends Orm\Model{
 					$active_count = 0;
 				} else {
 					$active_count++;
+					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
 					}
