@@ -354,6 +354,8 @@ return array(
 		'sleep_duration' => 30,
 		'sleep_ignore_duration' => 5,
 	),
+	'sensor_levels' => array(
+	),
 	'template' => array(
 		'alert' => 
 			array(

@@ -107,6 +107,7 @@ class Controller_Admin_User extends Controller_Admin
            	$user_sensor->set(array(
            		'user_id' => $user_id,
            		'sensor_id' => $sensor->id,
+                'admin' => 1,
            	));
            	try {
 	           	if(!$user_sensor->save()) {
