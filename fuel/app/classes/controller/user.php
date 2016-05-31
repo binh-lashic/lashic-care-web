@@ -383,13 +383,15 @@ class Controller_User extends Controller_Base
 			    	'last_kana' => $params['last_kana'],
 			    	'first_kana' => $params['first_kana'],
 			    	'email' 	=> $params['email'],
+			    	'client_user_id' => $params['client_user_id'],
 			    );		    	
 			    $admin_params['admin'] = 0;
 		        $admin_params['password'] = sha1(mt_rand());
-		        $admin_user = \Model_User::saveAdminUser($admin_params);
-				if($admin_user) {
-		            \Model_User::saveClients($admin_user['id'], array($params['client_user_id'] => "true"));
-				}
+		        try { 
+			        $admin_user = \Model_User::saveShareUser($admin_params);
+		        } catch(Exception $e) {
+
+		        }
 		    }
 
 

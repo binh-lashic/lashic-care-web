@@ -24,7 +24,12 @@ class Controller_Register extends Controller_Base
         if(Input::post()) {
      		$params = Input::post();
      		$val = \Model_User::validate("register");
+     		//メールアドレスチェック
         	if($val->run()) {
+	     		$user = \Model_User::getUserFromEmail($params['email']);
+	     		if(isset($user)){
+	     			$this->data['errors']['email'] = true;
+	     		}
         	} else {
 			    // バリデーション失敗の場合ここに入ってくる
 			    foreach($val->error() as $key=>$value){

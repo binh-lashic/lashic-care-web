@@ -7,11 +7,11 @@ class Controller_Api_User_Sensor extends Controller_Api
 	}
 
 	public function post_get() {
-		return $this->_save();
+		return $this->_get();
 	}
 
 	public function get_get() {
-		return $this->_save();
+		return $this->_get();
 	}
 
 	public function _get() {

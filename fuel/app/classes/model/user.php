@@ -345,6 +345,44 @@ class Model_User extends Orm\Model{
 		}
 	}
 
+	public static function saveShareUser($params) {
+		//連絡共有先人数を取得
+		$admins = \Model_User::getAdmins($params['client_user_id']);
+		if(count($admins) >= 4) {
+			throw new Exception('連絡共有先は3人まで共有できます');
+		}
+
+		$params['username'] = sha1($params['email'].mt_rand());
+		$params['password'] =
+		$user = \Model_User::getUserFromEmail($params['email']);
+		if(isset($user)) {
+			$user = \Model_User::find($user['id']);
+		} else {
+			$id = Auth::create_user(
+	                $params['username'],
+	                $params['password'],
+	                $params['email']);
+			$params['email_confirm'] = 0;
+			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
+			unset($params['id']);
+			unset($params['username']);
+			unset($params['password']);
+			unset($params['email']);
+			$user = \Model_User::find($id);
+			$user->set($params);
+			if($user->save()) {
+				\Model_User::sendConfirmEmail($user);
+			}
+		}
+
+		if(isset($user) && isset($params)) {
+			\Model_User::saveClients($user['id'], array($params['client_user_id'] => "true"));
+			return \Model_User::format($user);	
+		}
+		return null;
+	}
+
 	public static function sendEmail($params) {
 		if(empty($params['from'])) {
 			$params['from'] = Config::get("email.from");

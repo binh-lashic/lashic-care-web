@@ -17,6 +17,8 @@ class Model_User_Sensor extends Orm\Model{
 		'abnormal_behavior_alert',
 		'active_non_detection_alert',
 		'active_night_alert',
+		'disconnection_alert',
+		'reconnection_alert',
 		'snooze_times',
 		'snooze_interval',
 	);
@@ -73,6 +75,22 @@ class Model_User_Sensor extends Orm\Model{
 			));
 			if(empty($user_sensor)) {
 				$user_sensor = \Model_User_Sensor::forge();
+				$params['temperature_alert'] = 1;
+				$params['fire_alert'] = 1;
+				$params['heatstroke_alert'] = 1;
+				$params['humidity_alert'] = 1;
+				$params['mold_mites_alert'] = 1;
+				$params['illuminance_daytime_alert'] = 1;
+				$params['illuminance_night_alert'] = 1;
+				$params['wake_up_alert'] = 1;
+				$params['sleep_alert'] = 1;
+				$params['abnormal_behavior_alert'] = 1;
+				$params['active_non_detection_alert'] = 1;
+				$params['active_night_alert'] = 1;
+				$params['disconnection_alert'] = 1;
+				$params['reconnection_alert'] = 1;
+				$params['snooze_times'] = 5;
+				$params['snooze_interval'] = 60;
 			}
 		}
 
@@ -91,9 +109,15 @@ class Model_User_Sensor extends Orm\Model{
 		if(!empty($params['id'])) {
 	    	$user_sensor = \Model_User_Sensor::find($params['id']);
 		} else {
+			if(isset($params['user_id'])){
+				$user_id = $params['user_id'];				
+			} else {
+				list(, $user_id) = Auth::get_user_id();
+			}
+
 			$user_sensor = \Model_User_Sensor::find("first", array(
 				"where" => array(
-					"user_id" => $params['user_id'],
+					"user_id" => $user_id,
 					"sensor_id" => $params['sensor_id'],
 				),
 				'related' => array('sensor'),
@@ -111,6 +135,9 @@ class Model_User_Sensor extends Orm\Model{
     public static function format($params) {
 		$ret = array();
 		$keys = array(
+			'id',
+			'user_id',
+			'sensor_id',
 			'admin',
 			'temperature_alert',
 			'fire_alert',
@@ -124,28 +151,22 @@ class Model_User_Sensor extends Orm\Model{
 			'abnormal_behavior_alert',
 			'active_non_detection_alert',
 			'active_night_alert',
+			'disconnection_alert',
+			'reconnection_alert',
 			'snooze_times',
 			'snooze_interval',
 		);
+
 		foreach($keys as $key) {
-			if(isset($params[$key])) {
+			if(!empty($params[$key])) {
 				$ret[$key] = $params[$key];
 			} else {
 				$ret[$key] = 0;
 			}
 		}
 		if(isset($params['sensor'])) {
+			unset($params['sensor']['id']);
 			$ret = array_merge($ret, $params['sensor']);
-		}
-		if(isset($ret['profile_image'])) {
-			$ret['profile_image'] = Uri::base()."images/user/".$ret['profile_image'];
-		}
-		if(isset($ret['birthday'])) {
-			$now = date("Ymd");
-			$birthday = date("Ymd", strtotime($ret['birthday']));
-			$ret['age'] = (int)(floor((int)$now - (int)$birthday) / 10000);
-		} else {
-			$ret['age'] = null;
 		}
 		return $ret;
 	}

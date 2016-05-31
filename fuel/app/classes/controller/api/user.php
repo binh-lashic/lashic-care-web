@@ -239,17 +239,13 @@ class Controller_Api_User extends Controller_Api
 	public function _save_admin() {
 		try {
 			$params = Input::param();
-			if(!empty($params['email'])) {
-			    $params['admin'] = 0;
-		        $params['password'] = sha1(mt_rand());
-		        $user = \Model_User::saveAdminUser($params);
-				if($user) {
-					\Model_User::saveClients($user['id'], array($params['client_user_id'] => "true"));
-					\Model_User::sendConfirmEmail($user);
-				}
+			if(!empty($params['email']) && !empty($params['client_user_id'])) {
+		        $user = \Model_User::saveShareUser($params);
 				$this->result = array(
 					'data' => $user
 				);
+		    } else {
+				$this->errors['query'] = "パラメーターが足りません";
 		    }
 		} catch(Exception $e) {
 			$this->errors[get_class($e)] = $e->getMessage();
