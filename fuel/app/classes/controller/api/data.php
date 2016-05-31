@@ -52,7 +52,7 @@ class Controller_Api_Data extends Controller_Api
 			$this->result = array(
 				'sensor_id' => $sensor->id,
 				'sensor_name' => $sensor->name,
-				'data' => array('_dummy' => true),
+				'data' => (object)array(),
 			);
 
 			//アラートの最新データ1件を取得する
@@ -558,6 +558,23 @@ class Controller_Api_Data extends Controller_Api
 
 	public function get_alert() {
 		$time = strtotime(date("Y-m-d H:i:00"));
+		//開通確認
+		$sensors = \Model_Sensor::find("all", array(
+			'where' => array(
+				'enable' => 0,
+				array('shipping_date', "<", date("Y-m-d H:i:s"))
+			)
+		));
+		foreach($sensors as $sensor) {
+			$result = DB::select("*")
+					    ->from('data')
+					    ->where('sensor_id', $sensor->name)
+					    ->where('date', date("Y-m-d H:i:00", $time - 60))
+					    ->execute('data');
+			print_r($result);
+		}
+		exit;
+
 		if(Input::param("sensor_id")) {
 			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
 		} else {
@@ -582,7 +599,6 @@ class Controller_Api_Data extends Controller_Api
 				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
 				'wake_up' => $sensor->checkWakeUp(),							//起床時間
 				'sleep' => $sensor->checkSleep(),								//就寝時間
-//低体温症アラート（要確認）
 //通信復帰通知
 //平均起床時間遅延
                        );
