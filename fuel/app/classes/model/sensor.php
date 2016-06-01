@@ -555,6 +555,7 @@ class Model_Sensor extends Orm\Model{
 		$result = $query->execute('data');
 
 		echo $this->wake_up_level;
+		print_r($levels);
 		print_r($level);
     	echo "hoge";
     	echo \DB::last_query('data');
