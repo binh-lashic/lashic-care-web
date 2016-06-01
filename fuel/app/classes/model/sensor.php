@@ -562,9 +562,18 @@ class Model_Sensor extends Orm\Model{
 		$nonactive_count = 0;
 		$wake_up_time = null;
 		if($count) {
-
+echo "<table>";
 			foreach($result as $row) {
+echo "<tr>";
+echo "<td>";
+echo $row['date'];
+echo "</td>";
+echo "<td>";
+echo $row['active'];
+echo "</td>";
+
 				if($level['threshold'] < $row['active']) {
+echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$wake_up_time = $row['date'];
 					}
@@ -583,10 +592,13 @@ class Model_Sensor extends Orm\Model{
 						);
 						$daily_data->set($params);
 						$daily_data->save();
+						echo "</tr>";
+						echo "</table>";
 						return true;
 					}
 					$nonactive_count = 0;
 				} else {
+echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -594,7 +606,9 @@ class Model_Sensor extends Orm\Model{
 						$wake_up_time = null;
 					}
 				}
+echo "</tr>";
 			}
+echo "</table>";
 		}
 		return false;
 	}
@@ -644,7 +658,6 @@ class Model_Sensor extends Orm\Model{
 		$nonactive_count = 0;
 		$sleep_time = null;
 
-echo \DB::last_query("data");
 echo "<table>";
 		if($count) {
 			foreach($result as $row) {
