@@ -638,7 +638,8 @@ echo "\n";
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-
+		$sleep_time = null;
+		
 echo \DB::last_query("data");
 echo "<table>";
 		if($count) {
@@ -652,8 +653,8 @@ echo $row['active'];
 echo "</td>";
 
 				if($level['threshold'] > $row['active']) {
-					if($nonactive_count === 0) {
-						$sleep_time = $row['date'];
+					if(empty($current_sleep_time)) {
+						$current_sleep_time = $row['date'];
 					}
 					$nonactive_count++;
 					$active_count = 0;
@@ -663,7 +664,11 @@ echo "<td>×</td>";
 					$active_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
+						$current_sleep_time = null;
 					}
+				}
+				if($nonactive_count >= $level['duration'] && isset($current_sleep_time)) {
+					$sleep_time = $current_sleep_time;
 				}
 if(isset($sleep_time)) {
 	echo "<td>".$sleep_time."</td>";
@@ -676,7 +681,7 @@ echo "</tr>";
 			}
 		}
 echo "</table>";
-		if($nonactive_count >= $level['duration'] && isset($sleep_time)) {
+		if(isset($sleep_time)) {
 			if(!$daily_data) {
 				$daily_data = \Model_Data_Daily::forge();
 			} 
