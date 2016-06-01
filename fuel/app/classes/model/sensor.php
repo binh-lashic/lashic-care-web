@@ -554,10 +554,12 @@ class Model_Sensor extends Orm\Model{
 		));  
 		$result = $query->execute('data');
 
+		echo $this->wake_up_level;
+		exit;
     	echo "hoge";
     	echo \DB::last_query('data');
     	echo "hoge2";
-    	
+
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
