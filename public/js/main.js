@@ -95,10 +95,12 @@ $(function(){
 		selected_date = new Date(year, month - 1, 1);
 		drawCalender();
 	});
-	var selected_date = new Date(date); 
-	$(".calendar_year_select").val(selected_date.getFullYear());
-	$(".calendar_month_select").val(selected_date.getMonth() + 1);
-	drawCalender();
+	if(typeof date != "undefined") {
+		var selected_date = new Date(date); 
+		$(".calendar_year_select").val(selected_date.getFullYear());
+		$(".calendar_month_select").val(selected_date.getMonth() + 1);
+		drawCalender();
+	}
 
 	function drawCalender() {
 		$('.calendar_body').html("");
