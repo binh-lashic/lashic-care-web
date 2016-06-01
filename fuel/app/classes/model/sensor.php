@@ -562,24 +562,14 @@ class Model_Sensor extends Orm\Model{
 		$nonactive_count = 0;
 		$wake_up_time = null;
 		if($count) {
-echo "<table>";
 			foreach($result as $row) {
-echo "<tr>";
-echo "<td>";
-echo $row['date'];
-echo "</td>";
-echo "<td>";
-echo $row['active'];
-echo "</td>";
-
 				if($level['threshold'] < $row['active']) {
-echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
 					}
 					$active_count++;
-					if($active_count > $level['duration'] && isset($wake_up_time)) {
+					if($active_count >= $level['duration'] && isset($wake_up_time)) {
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
@@ -596,7 +586,6 @@ echo "<td>◯</td>";
 					}
 					$nonactive_count = 0;
 				} else {
-echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -605,11 +594,7 @@ echo "<td>×</td>";
 						$wake_up_time = null;
 					}
 				}
-echo "<td>".$active_count."</td>";
-echo "<td>".$nonactive_count."</td>";
-echo "</tr>";
 			}
-echo "</table>";
 		}
 		return false;
 	}
@@ -672,6 +657,7 @@ echo "</td>";
 
 				if($level['threshold'] > $row['active']) {
 					if(empty($current_sleep_time)) {
+						$nonactive_count = 0;
 						$current_sleep_time = $row['date'];
 					}
 					$nonactive_count++;
@@ -683,6 +669,7 @@ echo "<td>×</td>";
 					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
+						$active_count = 0;
 						$current_sleep_time = null;
 					}
 				}
