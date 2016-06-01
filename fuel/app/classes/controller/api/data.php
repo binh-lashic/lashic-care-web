@@ -506,6 +506,8 @@ class Controller_Api_Data extends Controller_Api
 				}
 				if(!empty($row['sleep_time'])) {
 					$sleep_time_count++;
+					echo strtotime($row['date']) - strtotime($row['sleep_time']);
+					echo " ------ ";
 					echo $row['sleep_time'];
 					echo "<br>";
 					$sleep_time_total += date("h", strtotime($row['sleep_time'])) * 60 + date("i", strtotime($row['sleep_time']));
