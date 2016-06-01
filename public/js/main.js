@@ -162,6 +162,7 @@ $(function(){
 	}
 
 	$(".graph_setting").click(function() {
+		console.log("graph_setting");
 		//センサーの設定
 		var params = {
 			id:$('#sensor_id').val(),

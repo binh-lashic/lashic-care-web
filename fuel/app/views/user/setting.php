@@ -327,7 +327,7 @@ for($i = 0; $i < 24; $i++) {
 											<div class="common_select floatL">
 													<select name="sleep_end_time" id="sleep_end_time">
 <?php
-for($i = 0; $i < 24; $i++) {
+for($i = 0; $i < 29; $i++) {
 ?>
 														  <option value="<?php echo $i; ?>" <?php if($sensor['sleep_end_time'] == $i) { echo "selected=\"selected\""; }?>><?php echo $i; ?></option>
 <?php	
@@ -336,7 +336,7 @@ for($i = 0; $i < 24; $i++) {
 													</select>
 											</div>
 											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
-											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト19時〜23時</span></div>
+											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト19時〜26時</span></div>
 										</td>
 										<td></td>
 									</tr>									
