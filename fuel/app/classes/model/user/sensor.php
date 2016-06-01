@@ -158,11 +158,7 @@ class Model_User_Sensor extends Orm\Model{
 		);
 
 		foreach($keys as $key) {
-			if(!empty($params[$key])) {
-				$ret[$key] = $params[$key];
-			} else {
-				$ret[$key] = "1";
-			}
+			$ret[$key] = $params[$key];
 		}
 		if(isset($params['sensor'])) {
 			unset($params['sensor']['id']);
