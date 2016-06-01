@@ -629,6 +629,9 @@ class Model_Sensor extends Orm\Model{
     		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
     	}
 
+    	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
+    	$end_date = date("Y-m-d H:i:s", strtotime($end_date));
+
  		$query->parameters(array(
 			'sensor_id' => $this->name,
 			'start_date' => $start_date,
