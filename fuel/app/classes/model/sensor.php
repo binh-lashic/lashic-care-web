@@ -544,9 +544,6 @@ class Model_Sensor extends Orm\Model{
 
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
-    	echo "hoge";
-    	echo \DB::last_query('data');
-    	echo "hoge2";
 
     	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$level['start_time'].":00:00"));
     	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$level['end_time'].":00:00"));
@@ -556,6 +553,11 @@ class Model_Sensor extends Orm\Model{
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
+
+    	echo "hoge";
+    	echo \DB::last_query('data');
+    	echo "hoge2";
+    	
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
