@@ -647,6 +647,7 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
+echo \DB::last_query("data");
 echo "<table>";
 		if($count) {
 			foreach($result as $row) {
