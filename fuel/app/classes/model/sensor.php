@@ -560,15 +560,16 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
+		$wake_up_time = null;
 		if($count) {
 
 			foreach($result as $row) {
 				if($level['threshold'] < $row['active']) {
-					if($active_count === 0) {
+					if(empty($wake_up_time)) {
 						$wake_up_time = $row['date'];
 					}
 					$active_count++;
-					if($active_count == $level['duration']) {
+					if($active_count == $level['duration'] && isset($wake_up_time)) {
 						//起床時間の保存
 						$minutes = $nonactive_count + $active_count;
 
@@ -587,8 +588,10 @@ class Model_Sensor extends Orm\Model{
 					$nonactive_count = 0;
 				} else {
 					$nonactive_count++;
+					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
 						$active_count = 0;
+						$wake_up_time = null;
 					}
 				}
 			}
@@ -601,8 +604,12 @@ class Model_Sensor extends Orm\Model{
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
-    	$date = date("Y-m-d");
-    	$hour = date("h");
+		if(Input::param("date")) {
+	    	$date = Input::param("date");
+		} else {
+    		$date = date("Y-m-d");
+		}
+
 		$daily_data = \Model_Data_Daily::find('first', array('where' => array(
 			'sensor_id' => $this->id,
 			'date' => $date,
@@ -621,12 +628,9 @@ class Model_Sensor extends Orm\Model{
     		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
     		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
     	}
-echo $end_date;
-echo "\n";
+
     	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
     	$end_date = date("Y-m-d H:i:s", strtotime($end_date));
-echo $end_date;
-echo "\n";
 
  		$query->parameters(array(
 			'sensor_id' => $this->name,
@@ -639,7 +643,7 @@ echo "\n";
 		$active_count = 0;
 		$nonactive_count = 0;
 		$sleep_time = null;
-		
+
 echo \DB::last_query("data");
 echo "<table>";
 		if($count) {
@@ -662,6 +666,7 @@ echo "<td>◯</td>";
 				} else {
 echo "<td>×</td>";
 					$active_count++;
+					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
 						$current_sleep_time = null;
