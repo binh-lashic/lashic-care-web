@@ -575,6 +575,7 @@ echo "</td>";
 				if($level['threshold'] < $row['active']) {
 echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
+						$active_count = 0;
 						$wake_up_time = $row['date'];
 					}
 					$active_count++;
