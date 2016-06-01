@@ -474,7 +474,15 @@ class Controller_Api_Data extends Controller_Api
     	$start_date = date("Y-m-d 00:00:00", $time);
 		$end_date = date("Y-m-d 23:59:59", $time);	
 
-		$sensors = \Model_Sensor::find("all");
+		if(Input::param("sensor_id")) {
+			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
+		} else {
+			$sensors = \Model_Sensor::find("all", array(
+				'where' => array(
+					'enable' => 1,
+				)
+			));
+		}
 		foreach($sensors as $sensor) {
 			$params = array(
 				'sensor_id' => $sensor->id,
@@ -492,16 +500,18 @@ class Controller_Api_Data extends Controller_Api
 			$wake_up_time_count = 0;
 			$sleep_time_count = 0;
 			foreach($rows as $row) {
-				if(!empty($row['wake_up_time'])) {
+				if(isset($row['wake_up_time'])) {
 					$wake_up_time_count++;
 					$wake_up_time_total += date("h", strtotime($row['wake_up_time'])) * 60 + date("i", strtotime($row['wake_up_time']));
 				}
-				if(!empty($row['sleep_time'])) {
+				if(isset($row['sleep_time'])) {
 					$sleep_time_count++;
+					echo $row['sleep_time'];
+					echo "<br>";
 					$sleep_time_total += date("h", strtotime($row['sleep_time'])) * 60 + date("i", strtotime($row['sleep_time']));
 				}
 			}
-
+			exit;
 			if($wake_up_time_count > 0) {
 				$minutes = $wake_up_time_total / $wake_up_time_count;
 				$hour = (int)($minutes / 60);
