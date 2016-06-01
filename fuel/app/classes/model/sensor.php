@@ -611,19 +611,6 @@ class Model_Sensor extends Orm\Model{
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
     	$query = DB::query($sql);
 
-		/**
-		 * 日替わり前
-		 * 設定：22〜4時
-		 * 現在時刻が23時
-		 * 現在時刻が2時
-		 */
-
-		/**
-		 * 日替わり後
-		 * 設定：25〜4時
-		 * 現在時刻が2時
-		 */
-
     	if($this->sleep_end_time > 24) {
     		$sleep_end_time = $this->sleep_end_time - 24;
     		$yesterday = date("Y-m-d", strtotime("-1day"));
@@ -671,7 +658,6 @@ echo "</td>";
 					$nonactive_count++;
 					$active_count = 0;
 echo "<td>◯</td>";
-
 				} else {
 echo "<td>×</td>";
 					$active_count++;
@@ -680,13 +666,17 @@ echo "<td>×</td>";
 						$nonactive_count = 0;
 					}
 				}
+if(isset($sleep_time)) {
+	echo "<td>".$sleep_time."</td>";
+} else {
+	echo "<td></td>";
+}
 echo "<td>".$nonactive_count."</td>";
 echo "<td>".$active_count."</td>";
 echo "</tr>";
 			}
 		}
 echo "</table>";
-
 		if($nonactive_count >= $level['duration'] && isset($sleep_time)) {
 			if(!$daily_data) {
 				$daily_data = \Model_Data_Daily::forge();
