@@ -611,17 +611,36 @@ class Model_Sensor extends Orm\Model{
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
     	$query = DB::query($sql);
 
+		/**
+		 * 日替わり前
+		 * 設定：22〜4時
+		 * 現在時刻が23時
+		 * 現在時刻が2時
+		 */
 
-		$yesterday = date("Y-m-d", strtotime("-1day"));
-		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
-		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
-    
+		/**
+		 * 日替わり後
+		 * 設定：25〜4時
+		 * 現在時刻が2時
+		 */
+
+    	if($this->sleep_end_time > 24) {
+    		$sleep_end_time = $this->sleep_end_time - 24;
+    		$yesterday = date("Y-m-d", strtotime("-1day"));
+    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
+    		$end_date = $date." ".$sleep_end_time.":00:00";
+    	} else {
+    		$yesterday = date("Y-m-d", strtotime("-1day"));
+    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
+    		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
+    	}
 echo $end_date;
 echo "\n";
     	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
     	$end_date = date("Y-m-d H:i:s", strtotime($end_date));
 echo $end_date;
 echo "\n";
+
  		$query->parameters(array(
 			'sensor_id' => $this->name,
 			'start_date' => $start_date,
