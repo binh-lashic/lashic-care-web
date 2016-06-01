@@ -647,9 +647,13 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-
+echo "<table>";
 		if($count) {
 			foreach($result as $row) {
+echo "<tr>";
+echo "<td>";
+echo $row['date'];
+echo "</td>";
 				if($level['threshold'] > $row['active']) {
 					if($nonactive_count === 0) {
 						$sleep_time = $row['date'];
