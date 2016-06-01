@@ -6,7 +6,7 @@ class Model_User_Sensor extends Orm\Model{
 		'sensor_id',
 		'admin',
 		'temperature_alert',
-		'fire_alert',
+		'fire_alert' => array('default' => 1),
 		'heatstroke_alert',
 		'humidity_alert',
 		'mold_mites_alert',
