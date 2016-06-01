@@ -579,7 +579,7 @@ echo "<td>◯</td>";
 						$wake_up_time = $row['date'];
 					}
 					$active_count++;
-					if($active_count == $level['duration'] && isset($wake_up_time)) {
+					if($active_count > $level['duration'] && isset($wake_up_time)) {
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
