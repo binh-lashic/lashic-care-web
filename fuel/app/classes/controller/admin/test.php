@@ -22,4 +22,8 @@ class Controller_Admin_Test extends Controller_Admin
         $this->template->content = View::forge('admin/user/index');
 	}
 
+    public function action_wake_up() {
+        $sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
+        $sensor->checkWakeUp();
+    }
 }
