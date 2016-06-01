@@ -625,7 +625,8 @@ class Model_Sensor extends Orm\Model{
 		 */
 
     	if($level['end_time'] > 24) {
-    		$start_date = $date." ".$level['start_time'].":00:00";
+    		$yesterday = date("Y-m-d", strtotime("-1day"));
+    		$start_date = $yesterday." ".$level['start_time'].":00:00";
     		$end_date = $date." ".$level['end_time'].":00:00";
     	} else {
     		$yesterday = date("Y-m-d", strtotime("-1day"));

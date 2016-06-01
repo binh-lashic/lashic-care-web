@@ -161,7 +161,7 @@ class Model_User_Sensor extends Orm\Model{
 			if(!empty($params[$key])) {
 				$ret[$key] = $params[$key];
 			} else {
-				$ret[$key] = 0;
+				$ret[$key] = "1";
 			}
 		}
 		if(isset($params['sensor'])) {
