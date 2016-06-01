@@ -532,6 +532,13 @@ class Model_Sensor extends Orm\Model{
     	$levels = Config::get("sensor");
     	$level = $levels[$this->wake_up_level - 1];
 
+		echo $this->wake_up_level;
+		print_r($levels);
+		print_r($level);
+    	echo "hoge";
+    	echo \DB::last_query('data');
+    	echo "hoge2";
+    	exit;
 		if(Input::param("date")) {
 	    	$date = Input::param("date");
 		} else {
@@ -554,12 +561,6 @@ class Model_Sensor extends Orm\Model{
 		));  
 		$result = $query->execute('data');
 
-		echo $this->wake_up_level;
-		print_r($levels);
-		print_r($level);
-    	echo "hoge";
-    	echo \DB::last_query('data');
-    	echo "hoge2";
 
 		$count = count($result);
 		$active_count = 0;
