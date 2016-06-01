@@ -600,6 +600,7 @@ echo "<td>◯</td>";
 				} else {
 echo "<td>×</td>";
 					$nonactive_count++;
+					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
 						$active_count = 0;
 						$wake_up_time = null;
