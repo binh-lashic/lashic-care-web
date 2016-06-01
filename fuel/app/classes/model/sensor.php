@@ -633,7 +633,7 @@ class Model_Sensor extends Orm\Model{
     		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
     		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
     	}
-
+echo $end_date;
     	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
     	$end_date = date("Y-m-d H:i:s", strtotime($end_date));
 
@@ -647,7 +647,7 @@ class Model_Sensor extends Orm\Model{
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
-print_r($this);
+
 echo \DB::last_query("data");
 echo "<table>";
 		if($count) {
