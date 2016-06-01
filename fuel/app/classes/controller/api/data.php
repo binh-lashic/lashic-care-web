@@ -500,11 +500,11 @@ class Controller_Api_Data extends Controller_Api
 			$wake_up_time_count = 0;
 			$sleep_time_count = 0;
 			foreach($rows as $row) {
-				if(isset($row['wake_up_time'])) {
+				if(!empty($row['wake_up_time'])) {
 					$wake_up_time_count++;
 					$wake_up_time_total += date("h", strtotime($row['wake_up_time'])) * 60 + date("i", strtotime($row['wake_up_time']));
 				}
-				if(isset($row['sleep_time'])) {
+				if(!empty($row['sleep_time'])) {
 					$sleep_time_count++;
 					echo $row['sleep_time'];
 					echo "<br>";
