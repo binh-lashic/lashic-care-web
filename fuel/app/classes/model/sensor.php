@@ -606,6 +606,8 @@ echo "<td>×</td>";
 						$wake_up_time = null;
 					}
 				}
+echo "<td>".$nonactive_count."</td>";
+echo "<td>".$active_count."</td>";
 echo "</tr>";
 			}
 echo "</table>";
