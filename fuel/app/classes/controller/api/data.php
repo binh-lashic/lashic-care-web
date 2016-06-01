@@ -506,14 +506,10 @@ class Controller_Api_Data extends Controller_Api
 				}
 				if(!empty($row['sleep_time'])) {
 					$sleep_time_count++;
-					echo strtotime($row['sleep_time']) - (strtotime($row['date']) - 60 * 60 * 24);
-					echo " ------ ";
-					echo $row['sleep_time'];
-					echo "<br>";
-					$sleep_time_total += date("h", strtotime($row['sleep_time'])) * 60 + date("i", strtotime($row['sleep_time']));
+					$sleep_time_total += (strtotime($row['sleep_time']) - (strtotime($row['date']) - 60 * 60 * 24)) / 60;
 				}
 			}
-			exit;
+
 			if($wake_up_time_count > 0) {
 				$minutes = $wake_up_time_total / $wake_up_time_count;
 				$hour = (int)($minutes / 60);
@@ -527,6 +523,8 @@ class Controller_Api_Data extends Controller_Api
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
 				$params['sleep_time_average'] = $hour.":".$minutes.":00";
 			}
+			print_r($params);
+			exit;
 
     		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
 	    	$query = DB::query($sql);
