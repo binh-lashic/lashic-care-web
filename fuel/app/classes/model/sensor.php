@@ -661,7 +661,6 @@ echo "<td>◯</td>";
 				} else {
 echo "<td>×</td>";
 					$active_count++;
-					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
 					}
