@@ -27,7 +27,7 @@ class Controller_Admin_Test extends Controller_Admin
         print_r($levels);
          $levels = Config::get("sensor");
         print_r($levels);
-         $levels = Config::get("sensor.levels");
+         $levels = Config::get("sensor_levels");
         print_r($levels);
 
          $levels = Config::get("sensor_default_setting");
