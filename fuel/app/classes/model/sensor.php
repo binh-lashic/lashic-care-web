@@ -529,7 +529,7 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
-    	$levels = Config::get("sensor.levels.wake_up");
+    	$levels = Config::get("sensor.levels");
     	$level = $levels[$this->wake_up_level - 1];
 
 		if(Input::param("date")) {
