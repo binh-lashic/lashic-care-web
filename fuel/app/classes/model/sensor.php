@@ -549,8 +549,8 @@ class Model_Sensor extends Orm\Model{
 
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
-    	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$level['start_time'].":00:00"));
-    	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$level['end_time'].":00:00"));
+    	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$this->wake_up_start_time.":00:00"));
+    	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$this->wake_up_end_time.":00:00"));
  		$query->parameters(array(
 			'sensor_id' => $this->name,
 			'start_date' => $start_date,
@@ -626,12 +626,12 @@ class Model_Sensor extends Orm\Model{
 
     	if($level['end_time'] > 24) {
     		$yesterday = date("Y-m-d", strtotime("-1day"));
-    		$start_date = $yesterday." ".$level['start_time'].":00:00";
-    		$end_date = $date." ".$level['end_time'].":00:00";
+    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
+    		$end_date = $date." ".$this->sleep_end_time.":00:00";
     	} else {
     		$yesterday = date("Y-m-d", strtotime("-1day"));
-    		$start_date = $yesterday." ".$level['start_time'].":00:00";
-    		$end_date = $yesterday." ".$level['end_time'].":00:00";
+    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
+    		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
     	}
 
     	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
