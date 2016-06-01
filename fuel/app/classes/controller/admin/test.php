@@ -23,7 +23,7 @@ class Controller_Admin_Test extends Controller_Admin
 	}
 
     public function action_wake_up() {
-        $levels = Config::get("sensor");
+        $levels = Config::get("blood_types");
         print_r($levels);
         $sensor = \Model_Sensor::find(Input::param("sensor_id"));
         $sensor->checkWakeUp();
