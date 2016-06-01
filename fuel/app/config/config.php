@@ -354,8 +354,7 @@ return array(
 		'sleep_duration' => 30,
 		'sleep_ignore_duration' => 5,
 	),
-	'sensor' => array(
-		'levels' => array(
+	'sensor_levels' => array(
 			'temperature' => array(
 				array(
 					'upper_limit' => 30,
@@ -551,7 +550,6 @@ return array(
 					'temperature_lower_limit' => 5,
 					'temperature_duration' => 60,
 				),
-			)
 		),
 	),
 	'template' => array(
