@@ -524,8 +524,6 @@ class Controller_Api_Data extends Controller_Api
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
 				$params['sleep_time_average'] = $hour.":".$minutes.":00";
 			}
-			print_r($params);
-			exit;
 
     		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
 	    	$query = DB::query($sql);
