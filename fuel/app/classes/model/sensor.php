@@ -29,14 +29,12 @@ class Model_Sensor extends Orm\Model{
 		'shipping_date',
 	);
 
-	// Model_Post の中身は、多くのユーザーに属しています。
-	// = ユーザーごとに複数のポストとポストごとに複数のユーザ（著者）があります。
 	protected static $_many_many = array(
 	    'users' => array(
 	        'key_from' => 'id',
-	        'key_through_from' => 'sensor_id', // テーブル間のカラム1は、posts.idと一致する必要があります
-	        'table_through' => 'user_sensors', // アルファベット順にプレフィックスなしの複数のmodel双方に
-	        'key_through_to' => 'user_id', // テーブル間のカラム2は、users.idと一致する必要があります
+	        'key_through_from' => 'sensor_id', 
+	        'table_through' => 'user_sensors',
+	        'key_through_to' => 'user_id',
 	        'model_to' => 'Model_User',
 	        'key_to' => 'id',
 	        'cascade_save' => true,

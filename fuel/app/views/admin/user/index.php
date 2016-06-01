@@ -122,7 +122,7 @@ if(isset($user)) {
 		foreach($sensors as $sensor) {
 ?>
 					<li class="list-group-item">
-						<a href="/admin/sensor?id=<?php echo $sensor['id']; ?>"><?php echo isset($sensor['name']) ? $sensor['name'] : "未設定"; ?></a>
+						<?php echo isset($sensor['name']) ? $sensor['name'] : "未設定"; ?>
 					</li>
 <?php
 		}
