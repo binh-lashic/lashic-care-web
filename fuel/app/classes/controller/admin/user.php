@@ -89,32 +89,36 @@ class Controller_Admin_User extends Controller_Admin
         $user_id = Input::param("user_id");
         $name = Input::param("name");
         if($user_id && $name) {
-            $sensors = Model_Sensor::find("all" , array(
+            $sensor = Model_Sensor::find("first" , array(
                 'where' => array(
                         array('name', $name),
                     )
                 ));
-           	if(!$sensors) {
+           	if(!$sensor) {
 	            $sensor = Model_Sensor::forge();
 	            $sensor->set(array('name' => $name));
 	            if(!$sensor->save()) {
 	            }
-           	} else {
-           		$sensor = array_shift($sensors);
            	}
 
-           	$user_sensor = Model_User_Sensor::forge();
-           	$user_sensor->set(array(
-           		'user_id' => $user_id,
-           		'sensor_id' => $sensor->id,
-                'admin' => 1,
-           	));
-           	try {
-	           	if(!$user_sensor->save()) {
-	           	}
-	        } catch(Exception $e) {
+            if($sensor->id > 0) {
+                $user_sensor = Model_User_Sensor::forge();
+                $user_sensor->set(array(
+                    'user_id' => $user_id,
+                    'sensor_id' => $sensor->id,
+                    'admin' => 1,
+                ));
+                try {
+                    if(!$user_sensor->save()) {
+                    }
+                } catch(Exception $e) {
 
-	        }
+                }                
+            } else {
+                echo "センサー機器の登録に失敗しました";
+                exit;
+            }
+
     		$user = Model_User::getUser($user_id);
 	        Response::redirect('/admin/user/?admin_user_id='.$user['id']);
 
