@@ -542,13 +542,10 @@ class Model_Sensor extends Orm\Model{
 			'date' => $date,
 		)));
 
-		//既に起床時間が登録されていたらスキップする
-		if(!empty($daily_data['wake_up_time'])) {
-			return true;
-		}
-
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
+    	echo "hoge";
+
     	echo DB::last_query('data');
     	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$level['start_time'].":00:00"));
     	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$level['end_time'].":00:00"));
