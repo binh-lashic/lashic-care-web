@@ -580,9 +580,6 @@ echo "<td>◯</td>";
 					}
 					$active_count++;
 					if($active_count == $level['duration'] && isset($wake_up_time)) {
-						//起床時間の保存
-						$minutes = $nonactive_count + $active_count;
-
 						if(!$daily_data) {
 							$daily_data = \Model_Data_Daily::forge();
 						} 
@@ -604,6 +601,7 @@ echo "<td>×</td>";
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
 						$active_count = 0;
+						$nonactive_count = 0;
 						$wake_up_time = null;
 					}
 				}
