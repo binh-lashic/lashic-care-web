@@ -654,21 +654,32 @@ echo "<tr>";
 echo "<td>";
 echo $row['date'];
 echo "</td>";
+echo "<td>";
+echo $row['active'];
+echo "</td>";
+
 				if($level['threshold'] > $row['active']) {
 					if($nonactive_count === 0) {
 						$sleep_time = $row['date'];
 					}
 					$nonactive_count++;
 					$active_count = 0;
+echo "<td>◯</td>";
+
 				} else {
+echo "<td>×</td>";
 					$active_count++;
 					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
 						$nonactive_count = 0;
 					}
 				}
+echo "<td>".$nonactive_count."</td>";
+echo "<td>".$active_count."</td>";
+echo "</tr>";
 			}
 		}
+echo "</table>";
 
 		if($nonactive_count >= $level['duration'] && isset($sleep_time)) {
 			if(!$daily_data) {
