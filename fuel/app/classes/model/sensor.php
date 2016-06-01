@@ -220,7 +220,7 @@ class Model_Sensor extends Orm\Model{
 
     //室温異常通知
     public function checkTemperature() {
-    	$levels = Config::get("sensor.levels.temperature");
+    	$levels = Config::get("sensor_levels.temperature");
     	$level = $levels[$this->temperature_level - 1];
 
     	if($this->temperature_level > 0) {
@@ -313,7 +313,7 @@ class Model_Sensor extends Orm\Model{
 
 	//熱中症チェック
 	public function checkHeatstroke() {
-    	$levels = Config::get("sensor.levels.heatstroke");
+    	$levels = Config::get("sensor_levels.heatstroke");
     	$level = $levels[$this->heatstroke_level - 1];
 
 		if($this->heatstroke_level > 0) {
@@ -411,7 +411,7 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
-    	$levels = Config::get("sensor.levels.illuminance_daytime");
+    	$levels = Config::get("sensor_levels.illuminance_daytime");
     	$level = $levels[$this->illuminance_daytime_level - 1];
 
 		if($this->illuminance_daytime_level > 0) {
@@ -455,7 +455,7 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
-    	$levels = Config::get("sensor.levels.illuminance_night");
+    	$levels = Config::get("sensor_levels.illuminance_night");
     	$level = $levels[$this->illuminance_night_level - 1];
 
 		if($this->illuminance_night_level > 0) {
@@ -501,7 +501,7 @@ class Model_Sensor extends Orm\Model{
 
     //火事のチェック
     public function checkFire() {
-    	$levels = Config::get("sensor.levels.fire");
+    	$levels = Config::get("sensor_levels.fire");
     	$level = $levels[$this->fire_level - 1];
 
     	if($this->fire_level > 0) {
@@ -529,16 +529,9 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
-    	$levels = Config::get("sensor");
+    	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
-		echo $this->wake_up_level;
-		print_r($levels);
-		print_r($level);
-    	echo "hoge";
-    	echo \DB::last_query('data');
-    	echo "hoge2";
-    	exit;
 		if(Input::param("date")) {
 	    	$date = Input::param("date");
 		} else {
@@ -549,9 +542,13 @@ class Model_Sensor extends Orm\Model{
 			'date' => $date,
 		)));
 
+		//既に起床時間が登録されていたらスキップする
+		if(!empty($daily_data['wake_up_time'])) {
+			return true;
+		}
+
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
     	$query = DB::query($sql);
-
     	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$level['start_time'].":00:00"));
     	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$level['end_time'].":00:00"));
  		$query->parameters(array(
@@ -560,8 +557,6 @@ class Model_Sensor extends Orm\Model{
 			'end_date' => $end_date,
 		));  
 		$result = $query->execute('data');
-
-
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
@@ -603,7 +598,7 @@ class Model_Sensor extends Orm\Model{
 
 	//就寝時間のチェック
 	public function checkSleep() {
-    	$levels = Config::get("sensor.levels.sleep");
+    	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
     	$date = date("Y-m-d");
