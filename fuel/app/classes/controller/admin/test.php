@@ -23,7 +23,7 @@ class Controller_Admin_Test extends Controller_Admin
 	}
 
     public function action_wake_up() {
-        $sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
+        $sensors = \Model_Sensor::find(Input::param("sensor_id"));
         $sensor->checkWakeUp();
     }
 }
