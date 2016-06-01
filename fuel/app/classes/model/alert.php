@@ -183,7 +183,6 @@ class Model_Alert extends Orm\Model{
     }
 	//スヌーズ範囲にデータがある場合はアラートしない
     public static function getLatestAlert($params) {
-    	//$query = array(array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24)));
     	if(!empty($params['sensor_id'])) {
     		$query['sensor_id'] = $params['sensor_id'];
     	}
@@ -191,9 +190,18 @@ class Model_Alert extends Orm\Model{
     		$query['type'] = $params['type'];
     	}
     	$alert = \Model_Alert::find('first', array(
-    		'where' => $query,
+    		'where' => array(
+    			array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24))
+    		),
     		'order_by' => array('date' => 'desc'),
     	));
+
+		if(!empty($alert['expiration_time'])) {
+			if(strtotime($alert['expiration_time']) < time()) {
+				return null;
+			}
+			
+		}
     	return $alert;
     }
 

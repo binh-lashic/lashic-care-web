@@ -608,6 +608,7 @@ class Model_Sensor extends Orm\Model{
     	$params['date'] = date("Y-m-d H:i:s", $this->time);
     	$params['sensor_id'] = $this->id;
     	$params['category'] = "emergency";
+    	$params['confirm_status'] = 0;
 		$params['logs']['sensor_name'] = $this->name;
 		$params['logs']['sql'] = \DB::last_query("data");
 
@@ -627,21 +628,30 @@ class Model_Sensor extends Orm\Model{
 			//スヌーズ処理が5回以上なら再度通知
 	    	Log::info($data, 'no alert');
 			return false;
-		} else {
+		}
+		 else {
 	    	Log::info($data, 'alert');
-
-			$params['confirm_status'] = 0;
 
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
 
     		foreach($this->users as $user) {
-	    		$this->send_alert(array(
-	    			'email' => $user['email'],
-	    			'title' => $params['title'],
-	    			'description' => $params['description'],
-	    			'logs' => $params['logs'],
-	    		));
+    			$user_sensor = \Model_User_Sensor::find('first', array(
+    				'where' => array(
+    					'user_id' => $user['id'],
+    					'sensor_id' => $this->id,
+    				),
+    			))->to_array();
+    			if(isset($user_sensor)) {
+    				if($user_sensor[$params['type']."_alert"] == 1) {
+		  	    		$this->send_alert(array(
+			    			'email' => $user['email'],
+			    			'title' => $params['title'],
+			    			'description' => $params['description'],
+			    			'logs' => $params['logs'],
+			    		));  	    					
+    				}
+    			}
     		}
 	    	return $alert->save();
 		}
