@@ -28,7 +28,7 @@ class Controller_Admin_Test extends Controller_Admin
         exit;
     }
 
-    public function action_wake_up() {
+    public function action_sleep() {
         $sensor = \Model_Sensor::find(Input::param("sensor_id"));
         $sensor->checkSleep();
         exit;
