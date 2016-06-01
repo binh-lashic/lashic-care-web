@@ -135,7 +135,6 @@ class Model_User_Sensor extends Orm\Model{
     public static function format($params) {
 		$ret = array();
 		$keys = array(
-			'id',
 			'user_id',
 			'sensor_id',
 			'admin',
@@ -165,7 +164,6 @@ class Model_User_Sensor extends Orm\Model{
 			}
 		}
 		if(isset($params['sensor'])) {
-			unset($params['sensor']['id']);
 			$ret = array_merge($ret, $params['sensor']);
 		}
 		return $ret;

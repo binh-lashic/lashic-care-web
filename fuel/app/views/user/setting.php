@@ -5,7 +5,7 @@
 				<!-- 設定値 -->
 				<div class="form_set_container graph_form">
 						<input type="hidden" name="user_id" id="user_id" value="<?php echo $user['id']; ?>" />
-						<input type="hidden" name="sensor_id" id="sensor_id" value="<?php echo $sensor['id']; ?>" />
+						<input type="hidden" name="sensor_id" id="sensor_id" value="<?php echo $sensor['sensor_id']; ?>" />
 						<div class="form_base_data_edit">
 							<table>
 								<tbody>
@@ -15,28 +15,25 @@
 											<label for="snooze" class="floatL pdt5">スヌーズ期間　</label>
 											<div class="common_select floatL">
 												<select name="snooze_interval" id="snooze_interval">
-													<option value="0" >0分</option>
-													<option value="10" >10分</option>
-													<option value="20" >20分</option>
-													<option value="30" >30分</option>
-													<option value="40" >40分</option>
-													<option value="50" >50分</option>
-													<option value="60" selected>60分</option>
-												</select>
+<?php
+for($i = 0; $i <= 6; $i++) {
+	$time = $i * 10;
+?>
+													<option value="<?php echo $time; ?>"  <?php if($sensor['snooze_interval'] == $time) { echo "selected=\"selected\""; } ?>><?php echo $time; ?>分</option>
+<?php
+}
+?>												</select>
 												</div>
 											<label for="snoozeTimes" class="floatL pdt5">　繰り返し回数　</label>
 											<div class="common_select floatL">
 												<select name="snooze_times" id="snooze_times">
-													<option value="1" >1回</option>
-													<option value="2" >2回</option>
-													<option value="3" >3回</option>
-													<option value="4" >4回</option>
-													<option value="5" selected>5回</option>
-													<option value="6" >6回</option>
-													<option value="7" >7回</option>
-													<option value="8" >8回</option>
-													<option value="9" >9回</option>
-													<option value="10" >10回</option>
+<?php
+for($i = 1; $i <= 10; $i++) {
+?>
+													<option value="<?php echo $i; ?>" <?php if($sensor['snooze_times'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?>回</option>
+<?php
+}
+?>
 												</select>
 												</div>
 										</td>

@@ -183,7 +183,7 @@ $(function(){
 			wake_up_start_time:$('#wake_up_start_time').val(),
 			wake_up_end_time:$('#wake_up_end_time').val(),
 			sleep_start_time:$('#sleep_start_time').val(),
-			sleep_end_time:$('#sleep_end_start_time').val(),
+			sleep_end_time:$('#sleep_end_time').val(),
 		};
 		api("sensor/save", params, function(result){
 			console.log("sensor success");
