@@ -4,7 +4,7 @@ class Model_User_Sensor extends Orm\Model{
 		'id',
 		'user_id',
 		'sensor_id',
-		'admin',
+		'admin' => array('default' => 0),
 		'temperature_alert' => array('default' => 1),
 		'fire_alert' => array('default' => 1),
 		'heatstroke_alert' => array('default' => 1),
@@ -76,17 +76,11 @@ class Model_User_Sensor extends Orm\Model{
 				$user_sensor = \Model_User_Sensor::forge();
 			}
 		}
-		    		print_r($params);
-
     	if($user_sensor) {
     		unset($params['q']);
     		unset($params['id']);
-    		unset($params['user_id']);
-    		unset($params['sensor_id']);
     		$user_sensor->set($params);
     		if($user_sensor->save(false)) {
-    					print_r($params);
-		exit;
     			return $user_sensor;
     		}
     	}
