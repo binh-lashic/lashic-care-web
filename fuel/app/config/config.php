@@ -537,12 +537,15 @@ return array(
 			'active_non_detection' => array(
 				array(
 		'threshold' => 5,
+		'duration' => 60 * 12,
 				),
 				array(
 		'threshold' => 5,
+		'duration' => 60 * 12,
 				),
 				array(
 		'threshold' => 5,
+		'duration' => 60 * 12,
 				),
 		),
 

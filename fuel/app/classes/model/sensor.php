@@ -687,43 +687,47 @@ class Model_Sensor extends Orm\Model{
 	//	継続時間：30分
 	public function checkAbnormalBehavior() {
 		if($this->abnormal_behavior_level > 0) {
-	    	$levels = Config::get("sensor_levels.abnormal_behavior_level");
-		 	$level = $levels[$this->abnormal_behavior_level- 1];
 			if(Input::param("date")) {
 		    	$date = Input::param("date");
 			} else {
 	    		$date = date("Y-m-d");
 			}
-		 	$sql = 'SELECT active,illuminance,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
-	    	$query = DB::query($sql);
-    		$start_date = $date." 00:00:00";
+			$start_date = $date." 00:00:00";
     		$end_date = $date." 04:00:00";
 
-    		$query->parameters(array(
-				'sensor_id' => $this->name,
-				'start_date' => $start_date,
-				'end_date' => $end_date,
-			));  
-			$result = $query->execute('data');
+			if($this->time > strtotime($date." 00:00:00") && $this->time <= strtotime($date." 00:00:00")) {
+	    		$levels = Config::get("sensor_levels.abnormal_behavior_level");
+			 	$level = $levels[$this->abnormal_behavior_level- 1];
 
-			$count = count($result);
+			 	$sql = 'SELECT active,illuminance,date FROM data WHERE sensor_id = :sensor_id AND date > :date ORDER BY date ASC';
+		    	$query = DB::query($sql);
 
-			if($count) {
-				$active_count = 0;
-				foreach($result as $row) {
-					if($level['active_threshold'] < $row['active'] && $level['illuminance_threshold'] < $row['illuminance'] ) {
-						$active_count++;
-						if($active_count >= $level['duration'] ) {
-							$params = array(
-								'type' => 'abnormal_behavior',
-							);
-							return $this->alert($params);
+	    		$query->parameters(array(
+					'sensor_id' => $this->name,
+					'date' => date("Y-m-d H:i:s", $this->time - 60)
+				));  
+				$result = $query->execute('data');
+
+				$count = count($result);
+
+				if($count) {
+					$active_count = 0;
+					foreach($result as $row) {
+						if($level['active_threshold'] < $row['active'] && $level['illuminance_threshold'] < $row['illuminance'] ) {
+							$active_count++;
+							if($active_count >= $level['duration'] ) {
+								$params = array(
+									'type' => 'abnormal_behavior',
+								);
+								return $this->alert($params);
+							}
+						} else {
+							$active_count = 0;
 						}
-					} else {
-						$active_count = 0;
 					}
-				}
+				}				
 			}
+
 		 }
 		return false;
 	}
@@ -732,7 +736,35 @@ class Model_Sensor extends Orm\Model{
 	public function checkActiveNonDetection() {
 		if($this->active_non_detection_level > 0) {
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
-		 	$level = $levels[$this->active_non_detection_level- 1];
+		 	$level = $levels[$this->active_non_detection_level - 1];
+
+		 	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date > :date ORDER BY date ASC';
+	    	$query = DB::query($sql);
+
+    		$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->time - 60)
+			));  
+			$result = $query->execute('data');
+
+			$count = count($result);
+
+			if($count) {
+				$nonactive_count = 0;
+				foreach($result as $row) {
+					if($level['threshold'] > $row['active']) {
+						$nonactive_count++;
+						if($nonactive_count >= $level['duration'] ) {
+							$params = array(
+								'type' => 'active_non_detection',
+							);
+							return $this->alert($params);
+						}
+					} else {
+						$nonactive_count = 0;
+					}
+				}
+			}
 		 }
 		return false;
 	}

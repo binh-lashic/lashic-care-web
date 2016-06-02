@@ -609,11 +609,11 @@ class Controller_Api_Data extends Controller_Api
 				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
 				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-				'wake_up' => $sensor->checkWakeUp(),							//起床時間
-				'sleep' => $sensor->checkSleep(),								//就寝時間
+				'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
+				'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
 				'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
+				'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
 //通信復帰通知
-//平均起床時間遅延
                        );
                }
                return $this->result(); 
