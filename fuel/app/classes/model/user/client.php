@@ -6,7 +6,7 @@ class Model_User_Client extends Orm\Model{
 		'client_user_id',
 	);
 
-	protected static $_has_one = array(
+	protected static $_belongs_to = array(
 		'client'=> array(
 	        'model_to' => 'Model_User',
 	        'key_from' => 'client_user_id',
