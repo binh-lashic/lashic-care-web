@@ -60,8 +60,41 @@ class Controller_Api_Alert extends Controller_Api
 		return $this->_snooze();
 	}
 
+	public function post_snooze() {
+		return $this->_snooze();
+	}
+
 	public function _snooze() {
-		$alert = \Model_Alert::saveAlert(Input::param());
+		$alerts = \Model_Alert::find("all", array(
+			'where' => array(
+				'confirm_status' => 0,
+				array("date", ">", time() - 60 * 60 * 10)
+			),
+		));
+		foreach($alerts as $alert) {
+			$user_sensors = \Model_User_Sensor::find("all", array(
+				'where' => array(
+					'sensor_id' => $alert['sensor_id'],
+				)
+			));
+			foreach($user_sensors as $user_sensor) {
+				if($user_sensor[$alert['type']."_alert"] == 1) {
+					$devices = \Model_Device::find('all', array(
+						'where' => array(
+							'user_id' => $user_sensor['user_id'],
+						),
+					));
+					foreach($devices as $device) {
+						\Model_Alert::pushAlert(array(
+							'push_id' => $device['push_id'],
+							'text' => $alert['description'],
+						));
+					}
+				}
+				print_r();
+			}
+		}
+		exit;
 		$this->result = array(
 			'data' => $alert
 		);
@@ -79,14 +112,11 @@ class Controller_Api_Alert extends Controller_Api
 	public function _test(){
 		require_once APPPATH.'vendor/ApnsPHP/Autoload.php';
 
-        $push = new ApnsPHP_Push(
-	            ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION,
-                    APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem'
-                );
+        $push = new ApnsPHP_Push(ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION, APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem');
         $push->setRootCertificationAuthority(APPPATH.'vendor/ApnsPHP/certificates/entrust_root_certification_authority.pem');
         $push->connect();
 
-        $message = new ApnsPHP_Message("1b1ca6c9607c33734175fb828160f45e2dfa39f20f02e9644db3866d0699242d");
+        $message = new ApnsPHP_Message("19a67c020ec7071ca16fa7f15e494dde43f6611d85b73010d30c4701725cf1e6");
         $message->setText("test");
         $message->setSound();
         $message->setExpiry(30);

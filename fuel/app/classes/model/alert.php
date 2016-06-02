@@ -220,4 +220,24 @@ class Model_Alert extends Orm\Model{
     	));
     	return $alert;
     }
+
+	public static function pushAlert($params) {
+		try {
+			require_once APPPATH.'vendor/ApnsPHP/Autoload.php';
+
+			$push = new ApnsPHP_Push(ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION, APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem');
+	        $push->setRootCertificationAuthority(APPPATH.'vendor/ApnsPHP/certificates/entrust_root_certification_authority.pem');
+	        $push->connect();
+
+	        $message = new ApnsPHP_Message($params['push_id']);
+	        $message->setText($params['text']);
+	        $message->setSound();
+	        $message->setExpiry(30);
+	        $push->add($message);
+	        $push->send();
+	        $push->disconnect();
+		} catch(Exception $e) {
+
+		}
+	}
 }

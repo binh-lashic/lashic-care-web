@@ -606,7 +606,7 @@ return array(
 	'email' => array(
 		'domain' => 'careeye.jp',
 		'from' => 'info@careeye.jp',
-		'noreply' => 'noreply@careeye.jp',
+		'noreply' => 'no-reply@careeye.jp',
 		'templates' => array(
 			'user_update' => array(
 				'subject' => "ユーザ情報更新",

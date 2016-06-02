@@ -75,22 +75,6 @@ class Model_User_Sensor extends Orm\Model{
 			));
 			if(empty($user_sensor)) {
 				$user_sensor = \Model_User_Sensor::forge();
-				$params['temperature_alert'] = 1;
-				$params['fire_alert'] = 1;
-				$params['heatstroke_alert'] = 1;
-				$params['humidity_alert'] = 1;
-				$params['mold_mites_alert'] = 1;
-				$params['illuminance_daytime_alert'] = 1;
-				$params['illuminance_night_alert'] = 1;
-				$params['wake_up_alert'] = 1;
-				$params['sleep_alert'] = 1;
-				$params['abnormal_behavior_alert'] = 1;
-				$params['active_non_detection_alert'] = 1;
-				$params['active_night_alert'] = 1;
-				$params['disconnection_alert'] = 1;
-				$params['reconnection_alert'] = 1;
-				$params['snooze_times'] = 5;
-				$params['snooze_interval'] = 60;
 			}
 		}
 

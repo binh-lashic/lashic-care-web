@@ -644,11 +644,22 @@ class Model_Sensor extends Orm\Model{
     			))->to_array();
     			if(isset($user_sensor)) {
     				if($user_sensor[$params['type']."_alert"] == 1) {
+    					/*
+    					$devices = \Model_Device::find('all', array(
+    						'where' => array(
+    							'user_id' => $user['id'],
+    						),
+    					));
+    					foreach($devices as $device) {
+    						\Model_Alert::pushAlert(array(
+    							'push_id' => $device['push_id'],
+    							'text' => $params['description'],
+    						));
+    					}*/
 		  	    		$this->send_alert(array(
 			    			'email' => $user['email'],
 			    			'title' => $params['title'],
 			    			'description' => $params['description'],
-			    			'logs' => $params['logs'],
 			    		));  	    					
     				}
     			}
@@ -662,8 +673,8 @@ class Model_Sensor extends Orm\Model{
 		$email = new SendGrid\Email();
 		$email
 		    ->addTo($params['email'])
-		    ->setFrom(Config::get("email.from"))
-		    ->setSubject($params['title']." ".$this->name)
+		    ->setFrom(Config::get("email.noreply"))
+		    ->setSubject($params['title'])
 		    ->setText($params['description']);
 		try {
 		    $sendgrid->send($email);
