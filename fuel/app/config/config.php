@@ -519,38 +519,33 @@ return array(
 			),
 			'abnormal_behavior' => array(
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'illuminance_threshold' => 50,
+		'active_threshold' => 5,
+		'duration' => 30,
 				),
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'illuminance_threshold' => 50,
+		'active_threshold' => 5,
+		'duration' => 30,
 				),
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'illuminance_threshold' => 50,
+		'active_threshold' => 5,
+		'duration' => 30,
 				),
 			),
 			'active_non_detection' => array(
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'threshold' => 5,
 				),
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'threshold' => 5,
 				),
 				array(
-					'temperature_upper_limit' => 30,
-					'temperature_lower_limit' => 5,
-					'temperature_duration' => 60,
+		'threshold' => 5,
 				),
 		),
+			
 	),
 	'template' => array(
 		'alert' => 
@@ -598,14 +593,6 @@ return array(
 				'active_non_detection'		=>	array(
 					'title' => '一定時間センサー未感知',
 					'description' => 'CareEyeセンサーが設置された環境で、設定値を上回って行動センサーに反応がなかった場合に異常と判断して通知します。',
-				),
-				'disconnection'		=>	array(
-					'title' => '接続断アラート',
-					'description' => '',
-				),
-				'reconnection'		=>	array(
-					'title' => '接続再開アラート',
-					'description' => '',
 				),
 		),
 	),
@@ -789,9 +776,5 @@ return array(
 		"宮崎県",
 		"鹿児島県",
 		"沖縄県",
-	),
-        'gender' => array(
-                "m" => "男性",
-                "f" => "女性",
 	),
 );

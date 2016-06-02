@@ -562,7 +562,6 @@ class Model_Sensor extends Orm\Model{
     	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
     	$query = DB::query($sql);
 
-
     	$yesterday = date("Y-m-d", strtotime($date) - 60 * 60 * 24);
     	if($this->sleep_end_time > 24) {
     		$sleep_end_time = $this->sleep_end_time - 24;
@@ -627,6 +626,116 @@ class Model_Sensor extends Orm\Model{
 		return false;
 	}
 
+	public checkActiveNight() {
+		if($this->active_non_detection_level > 0) {
+	    	$levels = Config::get("sensor_levels.active_non_detection_level");
+		 	$level = $levels[$this->active_non_detection_level- 1];
+			if(Input::param("date")) {
+		    	$date = Input::param("date");
+			} else {
+	    		$date = date("Y-m-d");
+			}
+    		$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
+	    	$query = DB::query($sql);
+    		$start_date = $date." 00:00:00";
+    		$end_date = $date." 04:00:00";
+
+	 		$query->parameters(array(
+				'sensor_id' => $this->name,
+				'start_date' => $start_date,
+				'end_date' => $end_date,
+			));  
+			$result = $query->execute('data');
+
+			$count = count($result);
+
+			if($count) {
+				$start_time = null;
+				$end_time = null;
+				$times = array();
+				foreach($result as $row) {
+					if($level['threshold'] < $row['active']) {
+						if(empty($start_time)) {
+							$start_time = $row['date'];
+						}
+					} else {
+						if(isset($start_time)) {
+							$end_time = $row['date'];
+						}
+					}
+					if(isset($start_time) && isset($end_time)) {
+						$times[] = array(
+							'start_time' => $start_time,
+							'end_time' => $end_time,
+						);
+						$start_time = null;
+						$end_time = null;
+					}
+				}
+			}
+			print_R($times);
+			exit;
+		}
+		return false;		
+	}
+
+	//異常行動（夜間、照明をつけずに動いている）
+	//	照度下限：50lux
+	//	人感閾値：5
+	//	時間帯：24時〜4時
+	//	継続時間：30分
+	public checkAbnormalBehavior() {
+		if($this->abnormal_behavior_level > 0) {
+	    	$levels = Config::get("sensor_levels.abnormal_behavior_level");
+		 	$level = $levels[$this->abnormal_behavior_level- 1];
+			if(Input::param("date")) {
+		    	$date = Input::param("date");
+			} else {
+	    		$date = date("Y-m-d");
+			}
+		 	$sql = 'SELECT active,illuminance,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
+	    	$query = DB::query($sql);
+    		$start_date = $date." 00:00:00";
+    		$end_date = $date." 04:00:00";
+
+    		$query->parameters(array(
+				'sensor_id' => $this->name,
+				'start_date' => $start_date,
+				'end_date' => $end_date,
+			));  
+			$result = $query->execute('data');
+
+			$count = count($result);
+
+			if($count) {
+				$active_count = 0;
+				foreach($result as $row) {
+					if($level['active_threshold'] < $row['active'] && $level['illuminance_threshold'] < $row['illuminance'] ) {
+						$active_count++;
+						if($active_count >= $level['duration'] ) {
+							$params = array(
+								'type' => 'abnormal_behavior',
+							);
+							return $this->alert($params);
+						}
+					} else {
+						$active_count = 0;
+					}
+				}
+			}
+		 }
+		return false;
+	}
+
+	//一定時間人感センサー未感知
+	public checkActiveNonDetection() {
+		if($this->active_non_detection_level > 0) {
+	    	$levels = Config::get("sensor_levels.active_non_detection_level");
+		 	$level = $levels[$this->active_non_detection_level- 1];
+		 }
+		return false;
+	}
+
     public function alert($params) {
     	$params['date'] = date("Y-m-d H:i:s", $this->time);
     	$params['sensor_id'] = $this->id;
@@ -679,6 +788,7 @@ class Model_Sensor extends Orm\Model{
     							'text' => $params['description'],
     						));
     					}*/
+    					
 		  	    		$this->send_alert(array(
 			    			'email' => $user['email'],
 			    			'title' => $params['title'],

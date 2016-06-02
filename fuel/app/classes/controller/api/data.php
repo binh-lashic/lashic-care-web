@@ -586,6 +586,7 @@ class Controller_Api_Data extends Controller_Api
 			}
 		}
 
+
 		if(Input::param("sensor_id")) {
 			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
 		} else {
@@ -610,6 +611,7 @@ class Controller_Api_Data extends Controller_Api
 				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
 				'wake_up' => $sensor->checkWakeUp(),							//起床時間
 				'sleep' => $sensor->checkSleep(),								//就寝時間
+				'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
 //通信復帰通知
 //平均起床時間遅延
                        );

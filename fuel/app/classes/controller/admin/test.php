@@ -22,4 +22,11 @@ class Controller_Admin_Test extends Controller_Admin
         $sensor->checkSleep();
         exit;
     }
+
+    public function action_active() {
+        $sensor = \Model_Sensor::find(Input::param("sensor_id"));
+        $sensor->checkActiveNonDetection();
+        exit;
+    }
+    
 }

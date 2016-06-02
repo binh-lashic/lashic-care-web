@@ -204,6 +204,7 @@ class Model_Alert extends Orm\Model{
 		}
     	return $alert;
     }
+    
 
 	//スヌーズ範囲にデータがある場合はアラートしない
     public static function existsAlert($params) {
