@@ -80,6 +80,8 @@ class Model_User_Sensor extends Orm\Model{
     		unset($params['q']);
     		unset($params['id']);
     		$user_sensor->set($params);
+    		print_r($user_sensor);
+    		exit;
     		if($user_sensor->save()) {
     					print_r($params);
 		exit;
