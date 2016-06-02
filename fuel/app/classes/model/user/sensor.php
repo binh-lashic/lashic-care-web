@@ -23,7 +23,7 @@ class Model_User_Sensor extends Orm\Model{
 		'snooze_interval' => array('default' => 60),
 	);
 
-	protected static $_has_one = array('sensor'=> array(
+	protected static $_belongs_to = array('sensor'=> array(
         'model_to' => 'Model_Sensor',
         'key_from' => 'sensor_id',
         'key_to' => 'id',
