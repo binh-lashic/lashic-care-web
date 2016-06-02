@@ -482,6 +482,7 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		$wake_up_time = null;
+echo \DB::last_query("data");
 		if($count) {
 echo "<table>";
 			foreach($result as $row) {
