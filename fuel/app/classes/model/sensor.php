@@ -483,8 +483,12 @@ class Model_Sensor extends Orm\Model{
 		$nonactive_count = 0;
 		$wake_up_time = null;
 		if($count) {
+echo "<table>";
 			foreach($result as $row) {
+echo "<tr>";
+echo "<td>".$row['date']."</td>";
 				if($level['threshold'] < $row['active']) {
+echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
@@ -507,6 +511,7 @@ class Model_Sensor extends Orm\Model{
 					}
 					$nonactive_count = 0;
 				} else {
+echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -515,8 +520,13 @@ class Model_Sensor extends Orm\Model{
 						$wake_up_time = null;
 					}
 				}
-			}
-		}
+echo "<td>".$active_count."</td>";
+echo "<td>".$nonactive_count."</td>";
+echo "<td>".$$wake_up_time."</td>";
+echo "</tr>";
+			}//foreach
+echo "</table>";
+		}//if
 		return false;
 	}
 
