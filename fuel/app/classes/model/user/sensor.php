@@ -23,6 +23,7 @@ class Model_User_Sensor extends Orm\Model{
 		'snooze_interval' => array('default' => 60),
 	);
 
+/*
 	protected static $_has_one = array('sensor'=> array(
         'model_to' => 'Model_Sensor',
         'key_from' => 'sensor_id',
@@ -30,7 +31,8 @@ class Model_User_Sensor extends Orm\Model{
         'cascade_save' => false,
         'cascade_delete' => false,
     ));
-
+*/
+    
 	public static function createTable(){
 		try {
 		    DB::query("DROP TABLE user_sensors")->execute();
