@@ -22,7 +22,7 @@ CareEyeセンサーを居室内に設置します。
 　↓
 CareEyeセンサーをインターネット回線に接続します。
 以上の３ステップで簡単に見守りが開始されます。パソコン、スマートフォン、タブレット端末などのインターネット閲覧ソフト（ブラウザ）で「careeye.jp」にアクセスし、ご登録頂いたID（メールアドレス）とパスワードを入力してログインしてください。
-最初にユーザー（見守り対象者）の情報をhttp://www.careeye.jp/user/infoからご入力頂くことをオススメします。
+最初にユーザー（見守り対象者）の情報をhttp://careeye.jp/user/infoからご入力頂くことをオススメします。
 
 
 ■アカウント登録情報
@@ -35,7 +35,7 @@ CareEyeセンサーをインターネット回線に接続します。
 メール ： <?php echo $email; ?>
 
 入力された項目を修正するには、
-http://www.careeye.jp/user/account
+http://careeye.jp/user/account
 にて修正してください。
 
 
@@ -44,7 +44,7 @@ http://www.careeye.jp/user/account
 ↓Ｑ＆Ａ
 http://www.infic-c.net/careeye/help.htm
 ↓お問い合わせ
-http://www.careeye.jp/contact
+http://careeye.jp/contact
 ↓運営会社
 http://www.infic.net
 http://www.infic-c.net
