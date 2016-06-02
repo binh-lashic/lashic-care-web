@@ -53,10 +53,15 @@ class Controller_Register extends Controller_Base
 	}
 
 	public function action_complete() {
-		$user = \Model_User::saveUser(Input::post());
-		if($user) {
-			\Model_User::sendConfirmEmail($user);
+		try {
+			$user = \Model_User::saveUser(Input::post());
+			if($user) {
+				\Model_User::sendConfirmEmail($user);
+			}			
+		} catch(Exception $e) {
+			
 		}
+
 		$this->template->title = 'Care Eye 新規登録  >  アカウント情報　入力';
         $this->template->header = View::forge('header', $this->data);
 		$this->template->content = View::forge('register/complete', $this->data);
