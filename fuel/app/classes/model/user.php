@@ -532,13 +532,13 @@ class Model_User extends Orm\Model{
                 $prefectures = Config::get("prefectures");
                 $data = array(
                             'url'      => $url,
-                            'name'     => $user->last_name.'　'.$user->first_name,
+                            'name'     => $user['last_name'].'　'.$user['first_name'],
                             'date'     => date('Y年m月d日'),
-                            'gender'   => $gender[$user->gender],
-                            'birthday' => date('Y年m月d日', $user->birthday),
-                            'address'  => $prefectures[$user->prefecture].$user->address.$user->area,
-                            'phone'    => $user->phone,
-                            'email'    => $user->email,
+                            'gender'   => $gender[$user['gender']],
+                            'birthday' => date('Y年m月d日', $user['birthday']),
+                            'address'  => $prefectures[$user['prefecture']].$user['address'],
+                            'phone'    => $user['phone'],
+                            'email'    => $user['email'],
                         );
 		$params = array(
 			'to' => $user['email'],
