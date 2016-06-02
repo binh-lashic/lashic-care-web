@@ -58,7 +58,7 @@
 									</tr>
 									<tr>
 										<th>生年月日</th>
-										<td><?php echo date("Y年m月d日", strtotime($data['birthday'])); ?></td>
+										<td><?php echo $data['birthday_display']; ?></td>
 									</tr>
 									<tr>
 										<th>住所</th>

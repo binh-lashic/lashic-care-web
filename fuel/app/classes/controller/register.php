@@ -38,6 +38,7 @@ class Controller_Register extends Controller_Base
         	}
 			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+				$params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
 			} else {
 				$this->data['errors']['birthday'] = true;
 			}
