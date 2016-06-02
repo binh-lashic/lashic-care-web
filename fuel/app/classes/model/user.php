@@ -528,10 +528,22 @@ class Model_User extends Orm\Model{
 		$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
 			'token' => $user['email_confirm_token'],
 		));
+                $gender = Config::get("gender");
+                $prefectures = Config::get("prefectures");
+                $data = array(
+                            'url'      => $url,
+                            'name'     => $user->last_name.'　'.$user->first_name,
+                            'date'     => date('Y年m月d日'),
+                            'gender'   => $gender[$user->gender],
+                            'birthday' => date('Y年m月d日', $user->birthday),
+                            'address'  => $prefectures[$user->prefecture].$user->address.$user->area,
+                            'phone'    => $user->phone,
+                            'email'    => $user->email,
+                        );
 		$params = array(
 			'to' => $user['email'],
 			'subject' => "新規登録確認",
-			'text' => \View::forge('email/user/save_admin', array("url" => $url))
+			'text' => \View::forge('email/user/save_admin', $data)
 		);
 		return \Model_User::sendEmail($params);
 	}
