@@ -58,8 +58,6 @@ class Model_User_Sensor extends Orm\Model{
 	}
 
 	public static function saveUserSensor($params) {
-		print_r($params);
-		exit;
 		if(isset($params['id'])) {
 	    	$user_sensor = \Model_User_Sensor::find($params['id']);
 		} else {
@@ -68,7 +66,8 @@ class Model_User_Sensor extends Orm\Model{
 			} else {
 				list(, $user_id) = Auth::get_user_id();
 			}
-
+		print_r($params);
+		exit;
 			$user_sensor = \Model_User_Sensor::find("first", array(
 				"where" => array(
 					"user_id" => $user_id,
