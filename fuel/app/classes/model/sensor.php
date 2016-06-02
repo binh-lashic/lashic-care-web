@@ -523,7 +523,11 @@ echo "<td>×</td>";
 				}
 echo "<td>".$active_count."</td>";
 echo "<td>".$nonactive_count."</td>";
-echo "<td>".$$wake_up_time."</td>";
+if(isset($$wake_up_time)) {
+	echo "<td>".$$wake_up_time."</td>";
+} else {
+	echo "<td></td>";
+}
 echo "</tr>";
 			}//foreach
 echo "</table>";
