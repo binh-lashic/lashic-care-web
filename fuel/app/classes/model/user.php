@@ -535,7 +535,7 @@ class Model_User extends Orm\Model{
                             'name'     => $user['last_name'].'　'.$user['first_name'],
                             'date'     => date('Y年m月d日'),
                             'gender'   => $gender[$user['gender']],
-                            'birthday' => date('Y年m月d日', $user['birthday']),
+                            'birthday' => date('Y年m月d日', strtotime($user['birthday'])),
                             'address'  => $prefectures[$user['prefecture']].$user['address'],
                             'phone'    => $user['phone'],
                             'email'    => $user['email'],
