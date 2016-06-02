@@ -76,13 +76,13 @@ class Model_User_Sensor extends Orm\Model{
 				$user_sensor = \Model_User_Sensor::forge();
 			}
 		}
-		print_r($params);
-		exit;
     	if($user_sensor) {
     		unset($params['q']);
     		unset($params['id']);
     		$user_sensor->set($params);
     		if($user_sensor->save()) {
+    					print_r($params);
+		exit;
     			return $user_sensor;
     		}
     	}
