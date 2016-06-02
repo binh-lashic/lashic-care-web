@@ -529,14 +529,13 @@ class Model_User extends Orm\Model{
 			'token' => $user['email_confirm_token'],
 		));
                 $gender = Config::get("gender");
-                $prefectures = Config::get("prefectures");
                 $data = array(
                             'url'      => $url,
                             'name'     => $user['last_name'].'　'.$user['first_name'],
                             'date'     => date('Y年m月d日'),
                             'gender'   => $gender[$user['gender']],
                             'birthday' => date('Y年m月d日', strtotime($user['birthday'])),
-                            'address'  => $prefectures[$user['prefecture']].$user['address'],
+                            'address'  => $user['prefecture'].$user['address'],
                             'phone'    => $user['phone'],
                             'email'    => $user['email'],
                         );
