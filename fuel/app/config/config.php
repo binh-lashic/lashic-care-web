@@ -545,7 +545,7 @@ return array(
 		'threshold' => 5,
 				),
 		),
-			
+
 	),
 	'template' => array(
 		'alert' => 
@@ -593,6 +593,14 @@ return array(
 				'active_non_detection'		=>	array(
 					'title' => '一定時間センサー未感知',
 					'description' => 'CareEyeセンサーが設置された環境で、設定値を上回って行動センサーに反応がなかった場合に異常と判断して通知します。',
+				),
+				'disconnection'		=>	array(
+					'title' => '接続断アラート',
+					'description' => '',
+				),
+				'reconnection'		=>	array(
+					'title' => '接続再開アラート',
+					'description' => '',
 				),
 		),
 	),
@@ -776,5 +784,9 @@ return array(
 		"宮崎県",
 		"鹿児島県",
 		"沖縄県",
+	),
+    'gender' => array(
+                "m" => "男性",
+                "f" => "女性",
 	),
 );
