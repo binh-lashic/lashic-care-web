@@ -626,7 +626,8 @@ class Model_Sensor extends Orm\Model{
 		return false;
 	}
 
-	public checkActiveNight() {
+
+	public function checkActiveNight() {
 		if($this->active_non_detection_level > 0) {
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level- 1];
@@ -684,7 +685,7 @@ class Model_Sensor extends Orm\Model{
 	//	人感閾値：5
 	//	時間帯：24時〜4時
 	//	継続時間：30分
-	public checkAbnormalBehavior() {
+	public function checkAbnormalBehavior() {
 		if($this->abnormal_behavior_level > 0) {
 	    	$levels = Config::get("sensor_levels.abnormal_behavior_level");
 		 	$level = $levels[$this->abnormal_behavior_level- 1];
@@ -728,7 +729,7 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	//一定時間人感センサー未感知
-	public checkActiveNonDetection() {
+	public function checkActiveNonDetection() {
 		if($this->active_non_detection_level > 0) {
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level- 1];
@@ -788,7 +789,7 @@ class Model_Sensor extends Orm\Model{
     							'text' => $params['description'],
     						));
     					}*/
-    					
+
 		  	    		$this->send_alert(array(
 			    			'email' => $user['email'],
 			    			'title' => $params['title'],
