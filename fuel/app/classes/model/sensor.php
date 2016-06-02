@@ -141,6 +141,9 @@ class Model_Sensor extends Orm\Model{
 
     //室温異常通知
     public function checkTemperature() {
+    	if($this->temperature_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.temperature");
     	$level = $levels[$this->temperature_level - 1];
 
@@ -189,6 +192,9 @@ class Model_Sensor extends Orm\Model{
 
     //湿度異常通知
     public function checkHumidity() {
+    	if($this->humidity_level == 0) {
+    		return null;
+    	}
     	if(isset($this->humidity_duration) && isset($this->humidity_upper_limit) && isset($this->humidity_lower_limit )) {
 	    	$sql = 'SELECT humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
@@ -234,6 +240,9 @@ class Model_Sensor extends Orm\Model{
 
 	//熱中症チェック
 	public function checkHeatstroke() {
+    	if($this->heatstroke_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.heatstroke");
     	$level = $levels[$this->heatstroke_level - 1];
 
@@ -270,6 +279,9 @@ class Model_Sensor extends Orm\Model{
 
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
+    	if($this->mold_mites_level == 0) {
+    		return null;
+    	}
 		if(!empty($this->mold_mites_duration) && !empty($this->mold_mites_humidity_upper_limit) && !empty($this->mold_mites_temperature_upper_limit)) {
 	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
@@ -332,6 +344,9 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
+    	if($this->illuminance_daytime_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.illuminance_daytime");
     	$level = $levels[$this->illuminance_daytime_level - 1];
 
@@ -376,6 +391,9 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
+    	if($this->illuminance_night_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.illuminance_night");
     	$level = $levels[$this->illuminance_night_level - 1];
 
@@ -422,6 +440,9 @@ class Model_Sensor extends Orm\Model{
 
     //火事のチェック
     public function checkFire() {
+    	if($this->fire_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.fire");
     	$level = $levels[$this->fire_level - 1];
 
@@ -450,6 +471,9 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
+    	if($this->wake_up_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
@@ -482,14 +506,14 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		$wake_up_time = null;
-echo \DB::last_query("data");
+//echo \DB::last_query("data");
 		if($count) {
-echo "<table>";
+//echo "<table>";
 			foreach($result as $row) {
-echo "<tr>";
-echo "<td>".$row['date']."</td>";
+//echo "<tr>";
+//echo "<td>".$row['date']."</td>";
 				if($level['threshold'] < $row['active']) {
-echo "<td>◯</td>";
+//echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
@@ -506,13 +530,13 @@ echo "<td>◯</td>";
 						);
 						$daily_data->set($params);
 						$daily_data->save();
-						echo "</tr>";
-						echo "</table>";
+//						echo "</tr>";
+//						echo "</table>";
 						return true;
 					}
 					$nonactive_count = 0;
 				} else {
-echo "<td>×</td>";
+//echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -521,22 +545,25 @@ echo "<td>×</td>";
 						$wake_up_time = null;
 					}
 				}
-echo "<td>".$active_count."</td>";
-echo "<td>".$nonactive_count."</td>";
-if(isset($$wake_up_time)) {
-	echo "<td>".$$wake_up_time."</td>";
-} else {
-	echo "<td></td>";
-}
-echo "</tr>";
+//echo "<td>".$active_count."</td>";
+//echo "<td>".$nonactive_count."</td>";
+//if(isset($$wake_up_time)) {
+//	echo "<td>".$$wake_up_time."</td>";
+//} else {
+//	echo "<td></td>";
+///}
+//echo "</tr>";
 			}//foreach
-echo "</table>";
+//echo "</table>";
 		}//if
 		return false;
 	}
 
 	//就寝時間のチェック
 	public function checkSleep() {
+    	if($this->sleep_level == 0) {
+    		return null;
+    	}
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
