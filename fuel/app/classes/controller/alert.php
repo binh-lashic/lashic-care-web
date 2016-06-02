@@ -1,10 +1,11 @@
 <?php
 class Controller_Alert extends Controller
 {
-	public function action_index($type)
+	public function action_info($type)
         {
 		$template = Config::get("template");
-                $data = $template[$type];
+                $alert = $template['alert'];
+                $data = $alert[$type];
 		return Response::forge(View::forge('alert', $data));
     	}
 }
