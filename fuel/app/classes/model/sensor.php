@@ -538,6 +538,16 @@ class Model_Sensor extends Orm\Model{
 ///}
 //echo "</tr>";
 			}//foreach
+
+			//平均起床時間遅延アラート
+			if(isset($daily_data['wake_up_average'])) {
+				if($this->time - strtotime($date." ".$daily_data['wake_up_average']) >= $level['delay_duration'])
+					$params = array(
+						'type' => 'wake_up',
+					);
+					return $this->alert($params);
+				}							
+			}
 //echo "</table>";
 		}//if
 		return false;

@@ -478,6 +478,7 @@ return array(
 		'threshold' => 5,
 		'duration' => 30,
 		'ignore_duration' => 5,
+		'delay_duration' => 120,
 				),
 				array(
 		'start_time' => 5,
@@ -485,6 +486,7 @@ return array(
 		'threshold' => 5,
 		'duration' => 30,
 		'ignore_duration' => 5,
+		'delay_duration' => 120,
 				),
 				array(
 		'start_time' => 5,
@@ -492,6 +494,7 @@ return array(
 		'threshold' => 5,
 		'duration' => 30,
 		'ignore_duration' => 5,
+		'delay_duration' => 120,
 				),
 			),
 			'sleep' => array(
