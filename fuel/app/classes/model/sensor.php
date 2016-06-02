@@ -192,15 +192,15 @@ class Model_Sensor extends Orm\Model{
 
     //湿度異常通知
     public function checkHumidity() {
-    	if($this->humidity_level == 0) {
-    		return null;
-    	}
-    	if(isset($this->humidity_duration) && isset($this->humidity_upper_limit) && isset($this->humidity_lower_limit )) {
+    	if($this->humidity_level > 0) {
+    		$levels = Config::get("sensor_levels.humidity");
+	    	$level = $levels[$this->humidity_level - 1];
+
 	    	$sql = 'SELECT humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $this->humidity_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
@@ -209,9 +209,9 @@ class Model_Sensor extends Orm\Model{
 
 			if($count) {
 				foreach($result as $row) {
-					if($this->humidity_upper_limit < $row['humidity']) {
+					if($level['upper_limit'] < $row['humidity']) {
 						$humidity_upper_limit_count++;
-					} else if($this->humidity_lower_limit > $row['humidity']) {
+					} else if($level['lower_limit'] > $row['humidity']) {
 						$humidity_lower_limit_count++;
 					}
 				}
@@ -220,7 +220,7 @@ class Model_Sensor extends Orm\Model{
 					$params = array(
 						'type' => 'humidity',
 						'logs' => array(
-							'humidity_upper_limit' => $this->humidity_upper_limit
+							'humidity_upper_limit' => $level['upper_limit']
 						),
 					);
 					return $this->alert($params);			
@@ -228,7 +228,7 @@ class Model_Sensor extends Orm\Model{
 					$params = array(
 						'type' => 'humidity',
 						'logs' => array(
-							'humidity_lower_limit' => $this->humidity_lower_limit,
+							'humidity_lower_limit' => $level['lower_limit'],
 						),
 					);
 					return $this->alert($params);	
@@ -240,13 +240,10 @@ class Model_Sensor extends Orm\Model{
 
 	//熱中症チェック
 	public function checkHeatstroke() {
-    	if($this->heatstroke_level == 0) {
-    		return null;
-    	}
-    	$levels = Config::get("sensor_levels.heatstroke");
-    	$level = $levels[$this->heatstroke_level - 1];
-
 		if($this->heatstroke_level > 0) {
+    		$levels = Config::get("sensor_levels.heatstroke");
+	    	$level = $levels[$this->heatstroke_level - 1];
+
 	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
@@ -279,21 +276,21 @@ class Model_Sensor extends Orm\Model{
 
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
-    	if($this->mold_mites_level == 0) {
-    		return null;
-    	}
-		if(!empty($this->mold_mites_duration) && !empty($this->mold_mites_humidity_upper_limit) && !empty($this->mold_mites_temperature_upper_limit)) {
+		if($this->mold_mites_level > 0) {
+    		$levels = Config::get("sensor_levels.mold_mites");
+	    	$level = $levels[$this->mold_mites_level - 1];
+
 	    	$sql = 'SELECT temperature,humidity FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $this->mold_mites_duration * 60)
+				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
 			$result = $query->execute('data');
 			$count = count($result);
 			if($count) {
 				foreach($result as $row) {
-					if($this->mold_mites_humidity_upper_limit < $row['humidity'] && $this->mold_mites_temperature_upper_limit < $row['temperature']) {
+					if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
 						$count--;
 					}
 				}
@@ -301,8 +298,8 @@ class Model_Sensor extends Orm\Model{
 					$params = array(
 						'type' => 'mold_mites',
 						'logs' => array(
-							'mold_mites_humidity_upper_limit' => $this->mold_mites_humidity_upper_limit,
-							'mold_mites_temperature_upper_limit' => $this->mold_mites_temperature_upper_limit,
+							'mold_mites_humidity_upper_limit' => $level['humidity_upper_limit'],
+							'mold_mites_temperature_upper_limit' => $level['temperature_upper_limit'],
 						),
 					);
 					return $this->alert($params);			
@@ -344,13 +341,10 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
-    	if($this->illuminance_daytime_level == 0) {
-    		return null;
-    	}
-    	$levels = Config::get("sensor_levels.illuminance_daytime");
-    	$level = $levels[$this->illuminance_daytime_level - 1];
-
 		if($this->illuminance_daytime_level > 0) {
+    		$levels = Config::get("sensor_levels.illuminance_daytime");
+	    	$level = $levels[$this->illuminance_daytime_level - 1];
+
 	    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
@@ -391,13 +385,10 @@ class Model_Sensor extends Orm\Model{
 
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
-    	if($this->illuminance_night_level == 0) {
-    		return null;
-    	}
-    	$levels = Config::get("sensor_levels.illuminance_night");
-    	$level = $levels[$this->illuminance_night_level - 1];
-
 		if($this->illuminance_night_level > 0) {
+    		$levels = Config::get("sensor_levels.illuminance_night");
+	    	$level = $levels[$this->illuminance_night_level - 1];
+
 	    	$sql = 'SELECT illuminance,date FROM data WHERE sensor_id = :sensor_id AND date >= :date';
 			$query = DB::query($sql);
 			$query->parameters(array(
@@ -440,13 +431,9 @@ class Model_Sensor extends Orm\Model{
 
     //火事のチェック
     public function checkFire() {
-    	if($this->fire_level == 0) {
-    		return null;
-    	}
-    	$levels = Config::get("sensor_levels.fire");
-    	$level = $levels[$this->fire_level - 1];
-
     	if($this->fire_level > 0) {
+    		$levels = Config::get("sensor_levels.fire");
+		   	$level = $levels[$this->fire_level - 1];
 
 	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
 			$query = DB::query($sql);
@@ -471,9 +458,6 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
-    	if($this->wake_up_level == 0) {
-    		return null;
-    	}
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
@@ -561,9 +545,6 @@ class Model_Sensor extends Orm\Model{
 
 	//就寝時間のチェック
 	public function checkSleep() {
-    	if($this->sleep_level == 0) {
-    		return null;
-    	}
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
