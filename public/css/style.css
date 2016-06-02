@@ -36,7 +36,7 @@ header
 
 ---------------------------------------------------------- */
 header { display:block; background-color:#FFF;}
-a.logo {
+.logo {
 	width: 111px;
 	height: 26px;
 	margin: 18px 10px 15px;
