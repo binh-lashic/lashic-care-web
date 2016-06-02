@@ -66,19 +66,18 @@ class Model_User_Sensor extends Orm\Model{
 			} else {
 				list(, $user_id) = Auth::get_user_id();
 			}
-
 			$user_sensor = \Model_User_Sensor::find("first", array(
 				"where" => array(
 					"user_id" => $user_id,
 					"sensor_id" => $params['sensor_id'],
 				)
 			));
-			
 			if(empty($user_sensor)) {
 				$user_sensor = \Model_User_Sensor::forge();
 			}
 		}
-
+		print_r($params);
+		exit;
     	if($user_sensor) {
     		unset($params['q']);
     		unset($params['id']);
