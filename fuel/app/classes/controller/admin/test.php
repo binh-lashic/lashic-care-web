@@ -39,6 +39,7 @@ class Controller_Admin_Test extends Controller_Admin
                 "sensor_id" => $params['sensor_id'],
             )
         ));
+        $user_sensor->sensor = null;
         $params['fire_alert'] = 0;
         unset($params['q']);
         unset($params['id']);
