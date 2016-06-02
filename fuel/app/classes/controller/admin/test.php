@@ -28,5 +28,24 @@ class Controller_Admin_Test extends Controller_Admin
         $sensor->checkActiveNonDetection();
         exit;
     }
+
+    public function action_save_sensor() {
+        $user_id = 87;
+        $params['sensor_id'] = 5;
+
+        $user_sensor = \Model_User_Sensor::find("first", array(
+            "where" => array(
+                "user_id" => $user_id,
+                "sensor_id" => $params['sensor_id'],
+            )
+        ));
+        $params['fire_alert'] = 0;
+        unset($params['q']);
+        unset($params['id']);
+        unset($params['user_id']);
+        unset($params['sensor_id']);
+        $user_sensor->set($params);
+        $user_sensor->save(false);
+    }
     
 }
