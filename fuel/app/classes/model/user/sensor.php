@@ -74,6 +74,7 @@ class Model_User_Sensor extends Orm\Model{
 			));
 			if(empty($user_sensor)) {
 				$user_sensor = \Model_User_Sensor::forge();
+				echo "insert";
 			}
 		}
     	if($user_sensor) {
