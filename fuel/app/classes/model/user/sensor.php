@@ -58,6 +58,8 @@ class Model_User_Sensor extends Orm\Model{
 	}
 
 	public static function saveUserSensor($params) {
+		print_r($params);
+		exit;
 		if(isset($params['id'])) {
 	    	$user_sensor = \Model_User_Sensor::find($params['id']);
 		} else {
