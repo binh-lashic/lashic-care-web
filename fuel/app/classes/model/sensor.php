@@ -322,6 +322,8 @@ class Model_Sensor extends Orm\Model{
 		));
 		$result = $query->execute('data');
 		echo \DB::last_query('data');
+		echo "<br>";
+		echo $result[0]['count'];
 		if($result[0]['count'] == 0) {
 			$params = array(
 				'type' => 'disconnection',
