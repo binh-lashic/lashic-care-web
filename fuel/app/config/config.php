@@ -562,7 +562,7 @@ return array(
 				),
 				'fire'			=>	array(
 					'title' => '火事アラート',
-					'description' => 'CareEyeセンサーが設置された環境で室温が50度を超えた場合に火事と判断して通知します。',
+					'description' => 'CareEyeセンサーが設置された環境で室温が45度を超えた場合に火事と判断して通知します。',
 				),
 				'heatstroke' 	=> array(
 					'title' => '熱中症アラート',
