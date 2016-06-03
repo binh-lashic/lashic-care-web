@@ -328,7 +328,6 @@ class Model_Sensor extends Orm\Model{
 					'disconnection_duration' => $this->disconnection_duration,
 				),
 			);
-			print_r($params);
 			return $this->alert($params);
 		}
 		return false;
