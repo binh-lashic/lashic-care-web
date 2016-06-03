@@ -819,6 +819,7 @@ echo "</table>";
     	//既にアラートが出ているかチェック
     	$alert = \Model_Alert::getLatestAlert($params);
 		if(isset($alert)) {
+			print_r($alert);
 			//スヌーズ処理が5回以上なら再度通知
 	    	Log::info($data, 'no alert');
 			return false;
