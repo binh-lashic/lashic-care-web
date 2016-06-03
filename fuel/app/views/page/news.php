@@ -13,7 +13,7 @@
 					</div>
 					<dl class="newsList">
 						<dt>2016/06/01</dt>
-						<dd><a href="/page/news_detail">CareEye開発中です</a></dd>
+						<dd><a href="/page/news_detail">CareEye公開準備中</a></dd>
 					</dl>
 				</div>
 				<!-- /お知らせ --> 
