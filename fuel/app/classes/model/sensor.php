@@ -496,6 +496,8 @@ echo "<table>";
 			foreach($result as $row) {
 echo "<tr>";
 echo "<td>".$row['date']."</td>";
+echo "<td>".$level['threshold']."</td>";
+echo "<td>".$row['active']."</td>";
 				if($level['threshold'] < $row['active']) {
 echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
