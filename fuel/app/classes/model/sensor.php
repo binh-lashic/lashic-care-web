@@ -533,8 +533,8 @@ echo "<td>×</td>";
 				}
 echo "<td>".$active_count."</td>";
 echo "<td>".$nonactive_count."</td>";
-if(isset($$wake_up_time)) {
-	echo "<td>".$$wake_up_time."</td>";
+if(isset($wake_up_time)) {
+	echo "<td>".$wake_up_time."</td>";
 } else {
 	echo "<td></td>";
 }
@@ -598,10 +598,18 @@ echo "</table>";
 		$active_count = 0;
 		$nonactive_count = 0;
 		$sleep_time = null;
+echo \DB::last_query("data");
+echo "<table>";
 
 		if($count) {
 			foreach($result as $row) {
+echo "<tr>";
+echo "<td>".$row['date']."</td>";
+echo "<td>".$level['threshold']."</td>";
+echo "<td>".$row['active']."</td>";
 				if($level['threshold'] > $row['active']) {
+echo "<td>◯</td>";
+
 					if(empty($current_sleep_time)) {
 						$nonactive_count = 0;
 						$current_sleep_time = $row['date'];
@@ -609,6 +617,8 @@ echo "</table>";
 					$nonactive_count++;
 					$active_count = 0;
 				} else {
+echo "<td>×</td>";
+
 					$active_count++;
 					$nonactive_count++;
 					if($active_count == $level['ignore_duration']) {
@@ -620,7 +630,16 @@ echo "</table>";
 				if($nonactive_count >= $level['duration'] && isset($current_sleep_time)) {
 					$sleep_time = $current_sleep_time;
 				}
+echo "<td>".$active_count."</td>";
+echo "<td>".$nonactive_count."</td>";
+if(isset($sleep_time)) {
+	echo "<td>".$sleep_time."</td>";
+} else {
+	echo "<td></td>";
+}
+echo "</tr>";
 			}
+echo "</table>";
 		}
 		if(isset($sleep_time)) {
 			if(!$daily_data) {
