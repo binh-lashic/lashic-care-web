@@ -321,9 +321,6 @@ class Model_Sensor extends Orm\Model{
 			'date' => date("Y-m-d H:i:s", $this->time - $this->disconnection_duration * 60)
 		));
 		$result = $query->execute('data');
-		echo \DB::last_query('data');
-		echo "<br>";
-		echo $result[0]['count'];
 		if($result[0]['count'] == 0) {
 			$params = array(
 				'type' => 'disconnection',
