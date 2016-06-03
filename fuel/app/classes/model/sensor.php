@@ -333,6 +333,33 @@ class Model_Sensor extends Orm\Model{
 		return false;
     }
 
+    //再通信のチェック
+    public function checkReconnection() {
+     	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date = :date';
+		$query = DB::query($sql);
+		$query->parameters(array(
+			'sensor_id' => $this->name,
+			'date' => date("Y-m-d H:i:s", $this->time)
+		));
+		$result = $query->execute('data');
+		if($result[0]['count'] != 0) {
+      		$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date = :date';
+			$query = DB::query($sql);
+			$query->parameters(array(
+				'sensor_id' => $this->name,
+				'date' => date("Y-m-d H:i:s", $this->time - 60)
+			));
+			$result = $query->execute('data');      		
+			if($result[0]['count'] == 0) {
+				$params = array(
+					'type' => 'reconnection',
+				);
+				return $this->alert($params);
+			}
+		}
+		return false;
+    }
+
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
 		if($this->illuminance_daytime_level > 0) {
