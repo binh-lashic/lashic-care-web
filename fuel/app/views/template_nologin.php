@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Care Eye ケア　アイ - ユーザーの様子</title>
-<meta name="keywords" content="ケア　アイ,ケア,アイ,見守り">
-<meta name="description" content="ケア　アイの管理画面です。">
+<title>CareEye ケアアイ - ユーザーの様子</title>
+<meta name="keywords" content="ケアアイ,ケア,アイ,見守り">
+<meta name="description" content="ケアアイの管理画面です。">
 <meta name="robots" content="all">
 <meta property="og:type" content="website" >
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
 <meta property="og:image" content="/images/common/ogp.jpg" >
-<meta property="og:site_name" content="Care Eye（ケア　アイ）　管理ページ" >
-<meta property="og:description" content="Care Eye（ケア　アイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
+<meta property="og:site_name" content="CareEye（ケアアイ）　管理ページ" >
+<meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
@@ -124,7 +124,7 @@ function rebuild(){ location.reload();}
     <li><a href="/page/help">Q&amp;A</a></li>
     <li><a href="/contact">お問い合わせ</a></li>
   </ul>
-  <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
+  <p><span class="ftr_copyrights">&copy;</span> CareEye. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 

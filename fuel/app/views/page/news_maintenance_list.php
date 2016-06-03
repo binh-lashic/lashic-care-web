@@ -4,46 +4,8 @@
 			
 				<!-- メンテナンス・障害・その他　一覧 -->
 				<dl class="newsList">
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="/page/news_maintenance_detail">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
+						<dt>2016/06/01</dt>
+						<dd><a href="/page/news_maintenance_detail">現在、メンテナンス、障害の情報はありません</a></dd>
 					</dl>
 				<!-- /メンテナンス・障害・その他　一覧 --> 
 				

@@ -4,46 +4,8 @@
 			
 				<!-- お知らせ　一覧 -->
 				<dl class="newsList">
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
-						<dt>2015/07/21</dt>
-						<dd><a href="news_detail.html">Androidアプリにファイルプレビュー機能を追加！ファイル閲覧がより便利に！</a></dd>
+						<dt>2016/06/01</dt>
+						<dd><a href="news_detail.html">CareEye開発中です</a></dd>
 					</dl>
 				<!-- /お知らせ　一覧 --> 
 				
