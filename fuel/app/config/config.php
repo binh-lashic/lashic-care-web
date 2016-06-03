@@ -614,8 +614,10 @@ return array(
 	'sendgrid' => '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',
 	'email' => array(
 		'domain' => 'careeye.jp',
+		'info' => 'info@careeye.jp',
+		'master' => 'master@careeye.jp',
 		'from' => 'info@careeye.jp',
-		'noreply' => 'no-reply@careeye.jp',
+		'noreply' => 'noreply@careeye.jp',
 		'templates' => array(
 			'user_update' => array(
 				'subject' => "ユーザ情報更新",
@@ -624,8 +626,6 @@ return array(
 		),
 	),
 	'eras' => array(
-		"1900" => "1900/明治33",
-		"1901" => "1901/明治34",
 		"1902" => "1902/明治35",
 		"1903" => "1903/明治36",
 		"1904" => "1904/明治37",
