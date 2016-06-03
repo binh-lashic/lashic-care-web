@@ -189,7 +189,7 @@ class Model_Alert extends Orm\Model{
     	if(!empty($params['type'])) {
     		$query['type'] = $params['type'];
     	}
-    	$query[] = array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24))
+    	$query[] = array('date', ">=", date("Y-m-d H:i:s", time() - 60 * 60 * 24));
     	$alert = \Model_Alert::find('first', array(
     		'where' => $query,
     		'order_by' => array('date' => 'desc'),
