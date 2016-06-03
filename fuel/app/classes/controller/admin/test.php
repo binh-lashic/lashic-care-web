@@ -29,6 +29,12 @@ class Controller_Admin_Test extends Controller_Admin
         exit;
     }
 
+    public function action_disconnection() {
+        $sensor = \Model_Sensor::find(Input::param("sensor_id"));
+        $sensor->checkDisconnection();
+        exit;
+    }
+
     public function action_save_sensor() {
         $user_id = 87;
         $params['sensor_id'] = 5;
