@@ -194,8 +194,6 @@ class Model_Alert extends Orm\Model{
     		'where' => $query,
     		'order_by' => array('date' => 'desc'),
     	));
-    	echo "hoge";
-    	echo \DB::last_query();
 
 		if(!empty($alert['expiration_time'])) {
 			if(strtotime($alert['expiration_time']) < time()) {
