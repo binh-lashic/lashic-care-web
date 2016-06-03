@@ -37,7 +37,7 @@ class Controller_Admin_Test extends Controller_Admin
         exit;
     }
 
-    public function action_disconnection() {
+    public function action_reconnection() {
         $sensor = \Model_Sensor::find(Input::param("sensor_id"));
         $time = strtotime(date("Y-m-d H:i:00"));
         $sensor->setTime($time);
