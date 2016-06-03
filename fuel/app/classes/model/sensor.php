@@ -490,14 +490,14 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		$wake_up_time = null;
-//echo \DB::last_query("data");
+echo \DB::last_query("data");
 		if($count) {
-//echo "<table>";
+echo "<table>";
 			foreach($result as $row) {
-//echo "<tr>";
-//echo "<td>".$row['date']."</td>";
+echo "<tr>";
+echo "<td>".$row['date']."</td>";
 				if($level['threshold'] < $row['active']) {
-//echo "<td>◯</td>";
+echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
@@ -514,13 +514,13 @@ class Model_Sensor extends Orm\Model{
 						);
 						$daily_data->set($params);
 						$daily_data->save();
-//						echo "</tr>";
-//						echo "</table>";
+						echo "</tr>";
+						echo "</table>";
 						return true;
 					}
 					$nonactive_count = 0;
 				} else {
-//echo "<td>×</td>";
+echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -529,14 +529,14 @@ class Model_Sensor extends Orm\Model{
 						$wake_up_time = null;
 					}
 				}
-//echo "<td>".$active_count."</td>";
-//echo "<td>".$nonactive_count."</td>";
-//if(isset($$wake_up_time)) {
-//	echo "<td>".$$wake_up_time."</td>";
-//} else {
-//	echo "<td></td>";
-///}
-//echo "</tr>";
+echo "<td>".$active_count."</td>";
+echo "<td>".$nonactive_count."</td>";
+if(isset($$wake_up_time)) {
+	echo "<td>".$$wake_up_time."</td>";
+} else {
+	echo "<td></td>";
+}
+echo "</tr>";
 			}//foreach
 
 			//平均起床時間遅延アラート
@@ -548,7 +548,7 @@ class Model_Sensor extends Orm\Model{
 					return $this->alert($params);
 				}							
 			}
-//echo "</table>";
+echo "</table>";
 		}//if
 		return false;
 	}
