@@ -186,6 +186,8 @@ foreach($users as $user) {
                         $client = \Model_User::find($user_id);
                         $client->set(array(
                             'admin' => 0,
+                            'last_name' => "山田",
+                            'first_name' => "太郎".$sensor->id,
                         ));
                         $client->save();
                         echo "User:",$user_id," saved\n";
