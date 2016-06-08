@@ -376,7 +376,7 @@ class Model_Sensor extends Orm\Model{
 			$count = 0;
 			if(count($result)) {
 				foreach($result as $row) {
-					$hour = date("h", strtotime($row['date']));
+					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
 						if($level['lower_limit'] < $row['illuminance']) {
@@ -420,10 +420,10 @@ class Model_Sensor extends Orm\Model{
 			$count = 0;
 			if(count($result)) {
 				foreach($result as $row) {
-					$hour = date("h", strtotime($row['date']));
+					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
-						if($level['lower_limit'] < $row['illuminance']) {
+						if($level['lower_limit'] > $row['illuminance']) {
 							$count--;
 						}					
 					} else {
