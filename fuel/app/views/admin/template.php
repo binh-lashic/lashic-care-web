@@ -11,25 +11,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Infic</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/admin/user/list">管理者</a></li>
-        <li><a href="/admin/alert/list">アラート</a></li>
-        <li><a href="/admin/sensor/list">機器</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
 	<div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><img alt="Brand" src="/images/common/logo.png" style="height:26px;"></a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <ul class="col-sm-12 nav nav-pills">
+      <li role="presentation" class="active"><a href="/admin/user/list">親アカウント一覧</a></li>
+      <li role="presentation"><a href="/admin/sensor/list">センサー機器一覧</a></li>
+    </ul>
 		<?php echo $content; ?>
 	</div>
 </body>

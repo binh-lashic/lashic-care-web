@@ -18,8 +18,8 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_list() {
-    	$id = Input::param("id");
-    	$data['sensors'] = \Model_Sensor::getAll();
+    	$data['sensors'] = \Model_Sensor::getSearch(array('query' => Input::param('query')));
+        $data['query'] = Input::param('query');
         $this->template->title = '管理ページ センサー一覧';
         $this->template->content = View::forge('admin/sensor/list', $data);
 	}
@@ -42,4 +42,19 @@ class Controller_Admin_Sensor extends Controller_Admin
      	$data['sensors'] = \Model_Sensor::getAll();
         $this->template->content = View::forge('admin/sensor/list', $data);
 	}
+
+	public function action_data() {
+    	$data['sensor_name'] = Input::param("name");
+    	$data['data'] = DB::select()
+	    ->from('data')
+	    ->where('sensor_id', $data['sensor_name'])
+	    ->order_by('id', 'desc')
+	    ->limit(100)
+	    ->execute('data') // 引数で指定できる
+	    ->as_array();
+
+        $this->template->title = '管理ページ センサー一覧';
+        $this->template->content = View::forge('admin/sensor/data', $data);
+	}
+
 }

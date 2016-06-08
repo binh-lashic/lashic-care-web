@@ -245,6 +245,34 @@ class Model_User extends Orm\Model{
 		return $users;
 	}
 
+	public static function getSearch($params) {
+		$query = \Model_User::query();
+		if(isset($params['admin'])) {
+			$query->where('admin', '=', $params['admin']);
+		}
+		if(isset($params['query'])) {
+			$query->and_where_open()
+				  ->or_where_open()
+				  ->where('last_name', 'LIKE', '%'.$params['query'].'%')
+				  ->or_where_close()
+				  ->or_where_open()
+				  ->where('first_name', 'LIKE', '%'.$params['query'].'%')
+				  ->or_where_close()
+				  ->or_where_open()
+				  ->where('last_kana', 'LIKE', '%'.$params['query'].'%')
+				  ->or_where_close()
+				  ->or_where_open()
+				  ->where('first_kana', 'LIKE', '%'.$params['query'].'%')
+				  ->or_where_close()
+				  ->and_where_close();
+		}
+		$rows = $query->order_by('id', 'desc')->from_cache(false)->get();
+		foreach($rows as $row) {
+			$users[] = \Model_User::format($row);
+		}
+		return $users;
+	}
+
 	public static function getUsers(){
 		$sql = "SELECT * FROM users;";
 		$res = DB::query($sql)->execute();

@@ -13,6 +13,7 @@ return array(
 		'identifier'   => '`',
         'profiling' => true,
 	),
+
 	'data' => array(
 		'connection'  => array(
 			'dsn'        => 'mysql:host=localhost;dbname=infic',

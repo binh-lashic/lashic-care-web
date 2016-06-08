@@ -106,7 +106,7 @@ class Model_Sensor extends Orm\Model{
 
 	public static function getAll() {
 		$_sensors = \Model_Sensor::find('all',array(
-			'order_by' => array('name' => 'asc')
+			'order_by' => array('name' => 'desc')
 		));
 		foreach($_sensors as $_sensor) {
 			$sensors[] = \Model_Sensor::format($_sensor);
@@ -114,6 +114,26 @@ class Model_Sensor extends Orm\Model{
 		return $sensors;
 	}
 
+	public static function getSearch($params) {
+		$_sensors = \Model_Sensor::find('all',array(
+			'where' => array(
+				array('name', 'LIKE', '%'.$params['query'].'%'),
+			),
+			'order_by' => array('name' => 'desc')
+		));
+		foreach($_sensors as $_sensor) {
+			$sensors[] = \Model_Sensor::format($_sensor);
+		}
+		return $sensors;
+	}
+
+	public static function getAdmins($params) {
+		$user_sensor = \Model_User_Sensor::find('all', array(
+			'where' => array(
+				'sensor_id' => $params['sensor_id'],
+			),
+		));
+	}
 
 	public static function saveSensor($params) {
 		if(!empty($params['shipping_year']) && !empty($params['shipping_month']) && !empty($params['shipping_day'])) {

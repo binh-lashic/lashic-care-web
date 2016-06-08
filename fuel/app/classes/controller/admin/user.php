@@ -15,8 +15,6 @@ class Controller_Admin_User extends Controller_Admin
     	$id = Input::param("admin_user_id");
     	if($id) {
     		$data['user'] = Model_User::getUser($id);
-    		$data['sensors'] = \Model_User::getSensors($data['user']['id']);
-            $data['clients'] = Model_User::getClients($id);
     	}
         $this->template->title = '管理ページ トップ';
         $this->template->content = View::forge('admin/user/index', $data);
@@ -24,8 +22,22 @@ class Controller_Admin_User extends Controller_Admin
 
     public function action_list() {
         $data = array();
-        $data['admins'] = Model_User::getAdmins();
-        $this->template->title = '管理ページ トップ';
+        if(Input::param('query')) {
+            $admins = Model_User::getSearch(array(
+                'query' => Input::param('query'),
+                'admin' => 1,
+            ));            
+        } else {
+            $admins = Model_User::getAdmins();
+        }
+
+        foreach($admins as $admin) {
+            $sensors = \Model_User::getSensors($admin['id']);
+            $admin['sensors'] = $sensors;
+            $data['admins'][] = $admin;
+        }
+        $data['query'] = Input::param('query');
+        $this->template->title = '管理ページ 親アカウント一覧';
         $this->template->content = View::forge('admin/user/list', $data);
     }
 
