@@ -9,9 +9,9 @@ return array(
   'default' => array(
     'type' => 'pdo', // PDO を利用
     'connection' => array(
-      'dsn' => 'sqlsrv:server = tcp:infic-test.database.windows.net,1433; Database = infic_test',
-      'username' => 'infic-test',
-      'password' => '2scHOVO6',
+      'dsn'        => $_SERVER['DEFAULT_DSN'],
+      'username'   => $_SERVER['DEFAULT_USERNAME'],
+      'password'   => $_SERVER['DEFAULT_PASSWORD'],
       'persistent' => false,
     ),
     'identifier' => '',
@@ -21,9 +21,9 @@ return array(
   'data' => array(
     'type' => 'pdo', // PDO を利用
     'connection' => array(
-      'dsn' => 'sqlsrv:server = tcp:j1ot5wy793.database.windows.net,1433; Database = infic_db',
-      'username' => 'qyNFJoQegELogin_infic-api',
-      'password' => 'Zm87el320546zZ$$',
+      'dsn'        => $_SERVER['DATA_DSN'],
+      'username'   => $_SERVER['DATA_USERNAME'],
+      'password'   => $_SERVER['DATA_PASSWORD'],
       'persistent' => false,
     ),
     'identifier' => '',
