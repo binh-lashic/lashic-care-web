@@ -300,6 +300,7 @@ $(function () {
   });
   
   // マウスカーソルがメニュー上/メニュー外
+  over_flg = false;
   $('.slide_btn,.graph24_cal_otherMonth').hover(function(){
     over_flg = true;
   }, function(){

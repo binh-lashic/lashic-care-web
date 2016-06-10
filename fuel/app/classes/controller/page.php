@@ -105,7 +105,10 @@ class Controller_Page extends Controller_Template
 	}
 
     public function action_careeye() {
-        echo "CareEye";
+        $this->template->title = 'ケアアイとは';
+        $this->template->header = View::forge('header');
+        $this->template->content = View::forge('more_info');
+        $this->template->footer = View::forge('footer');
     }
 
     public function action_infic() {
