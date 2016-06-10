@@ -57,4 +57,9 @@ class Controller_Admin_Sensor extends Controller_Admin
         $this->template->content = View::forge('admin/sensor/data', $data);
 	}
 
+	public function action_shipping() {
+    	$data['sensor'] = \Model_Sensor::find(Input::param("id"));
+        $this->template->title = '管理ページ 出荷日登録';
+        $this->template->content = View::forge('admin/sensor/shipping', $data);
+	}
 }

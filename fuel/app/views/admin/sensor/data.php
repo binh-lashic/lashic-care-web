@@ -1,6 +1,14 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h2>データ確認(センサー機器ID：<?php echo $sensor_name; ?>)</h2>
+		<h2>センサー機器ID：<?php echo $sensor_name; ?></h2>
+    <ul class="nav nav-tabs">
+      <li role="presentation"><a href="/admin/user/?admin_user_id=">出荷日の設定</a></li>
+      <li role="presentation" class="active"><a href="/admin/sensor/data?name=<?php echo $sensor_name; ?>">データの確認</a></li>
+    </ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">

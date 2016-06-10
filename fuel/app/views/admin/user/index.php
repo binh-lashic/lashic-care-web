@@ -1,6 +1,15 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h2>親アカウント詳細確認</h2>
+		<h2>親アカウント:<?php echo $user['name']; ?></h2>
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="/admin/user/?admin_user_id=<?php echo $user['id']; ?>">詳細</a></li>
+      <li role="presentation"><a href="/admin/user/sensor">センサー機器割当</a></li>
+    </ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr>
