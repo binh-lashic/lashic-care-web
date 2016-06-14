@@ -73,7 +73,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\composer.json" (
   call php composer.phar install --no-dev
   IF !ERRORLEVEL! NEQ 0 goto error
 )
-
+echo "%GITHUB_TOKEN%"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
