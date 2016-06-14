@@ -20,7 +20,7 @@
 	<div class="col-sm-6">
 		<form action="/admin/sensor/list" method="get">
 			<div class="input-group">
-		  		<input type="text" class="form-control" placeholder="名前、ふりがな、センサー機器IDで検索" name="query" value="<?php echo $query; ?>">
+		  		<input type="text" class="form-control" placeholder="名前、ふりがな、センサー機器IDで検索" name="query" value="<?php echo isset($query) ? $query : ""; ?>">
 		  		<span class="input-group-btn">
 		    		<button class="btn btn-default" type="submit">検索</button>
 		  		</span>
@@ -60,10 +60,24 @@ foreach($sensors as $sensor){
 						<?php echo $sensor['name']; ?>
 					</td>
 					<td>
-						<?php echo $sensor['name']; ?>
+<?php
+foreach($sensor['admins'] as $admin) {
+?>
+<a href="/admin/user/?admin_user_id=<?php echo $admin['id']; ?>">
+	<?php echo $admin['last_name'].$admin['first_name']; ?>
+</a><br />
+<?php
+}
+?>
 					</td>
 					<td>
-						<?php echo $sensor['name']; ?>
+<?php
+foreach($sensor['clients'] as $client) {
+?>
+	<?php echo $client['last_name'].$client['first_name']; ?><br />
+<?php
+}
+?>
 					</td>
 					<td class="text-center">
 						<?php echo $status; ?>

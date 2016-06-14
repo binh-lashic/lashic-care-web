@@ -18,7 +18,26 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_list() {
-    	$data['sensors'] = \Model_Sensor::getSearch(array('query' => Input::param('query')));
+    	$sensors = \Model_Sensor::getSearch(array('query' => Input::param('query')));
+    	foreach($sensors as $sensor) {
+    		$sensor = $sensor->to_array();
+    		$user_sensors = Model_Sensor::getAdmins(array("sensor_id" => $sensor['id']));
+    		$sensor['admins'] = array();
+    		$sensor['clients'] = array();
+    		if(count($user_sensors) > 0)  {
+	    		foreach($user_sensors as $user_sensor) {
+	    			$user = \Model_User::find($user_sensor['user_id']);
+	    			if(isset($user)) {
+		    			if($user['admin'] == 1) {
+		    				$sensor['admins'][] = $user;
+		    			} else {
+		    				$sensor['clients'][] = $user;
+		    			}	    				
+	    			}
+	    		}
+	    	}
+	        $data['sensors'][] = $sensor;
+    	}
         $data['query'] = Input::param('query');
         $this->template->title = '管理ページ センサー一覧';
         $this->template->content = View::forge('admin/sensor/list', $data);
@@ -36,7 +55,11 @@ class Controller_Admin_Sensor extends Controller_Admin
 		$sensor_names_data = Input::param("sensor_names");
 		$sensor_names = explode(PHP_EOL, $sensor_names_data);
 		foreach($sensor_names as $sensor_name) {
-			$sensor = \Model_Sensor::saveSensor(array('name' => $sensor_name));
+			try {
+				$sensor = \Model_Sensor::saveSensor(array('name' => $sensor_name));
+			} catch (Exception $e) {
+
+			}
 		}
         $this->template->title = '管理ページ センサー一覧';
      	$data['sensors'] = \Model_Sensor::getAll();

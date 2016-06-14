@@ -128,11 +128,12 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	public static function getAdmins($params) {
-		$user_sensor = \Model_User_Sensor::find('all', array(
+		$user_sensors = \Model_User_Sensor::find('all', array(
 			'where' => array(
 				'sensor_id' => $params['sensor_id'],
 			),
 		));
+		return $user_sensors;
 	}
 
 	public static function saveSensor($params) {

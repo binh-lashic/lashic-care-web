@@ -46,7 +46,7 @@ if(isset($admins)) {
 ?>
 					</td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/sensor/shipping?id=<?php echo $sensor['id']; ?>">センサー機器の割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $sensor['id']; ?>">センサー機器の割当</a>						
 					</td>
 				</tr>
 <?php
