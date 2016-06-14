@@ -69,11 +69,10 @@ IF EXIST "%DEPLOYMENT_TARGET%\composer.json" (
     IF !ERRORLEVEL! NEQ 0 goto error
   )
 
-  call php composer.phar config -g github-oauth.github.com 4e374e288517517423ce817199df9df684e829b3
+  call php composer.phar config -g github-oauth.github.com %GITHUB_TOKEN%
   call php composer.phar install --no-dev
   IF !ERRORLEVEL! NEQ 0 goto error
 )
-echo "%GITHUB_TOKEN%"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
