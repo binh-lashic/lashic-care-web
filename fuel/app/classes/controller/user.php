@@ -458,17 +458,21 @@ class Controller_User extends Controller_Base
 
 	public function action_login()
 	{
-		$username = Input::param("username");
-		$password = Input::param("password");
-		if (!Auth::login($username, $password)) {
-        	$this->template->title = 'ログインページ';
-        	$this->template->content = View::forge('user/login');			
-		} else {
-			list(, $user_id) = Auth::get_user_id();
-			$user = \Model_User::getUser($user_id);
-			Session::set('user', $user);
-			Response::redirect('/user');		
+		$username = Input::post("username");
+		$password = Input::post("password");
+		$data = array();
+		if(Input::post()) {
+			if (Auth::login($username, $password)) {
+				list(, $user_id) = Auth::get_user_id();
+				$user = \Model_User::getUser($user_id);
+				Session::set('user', $user);
+				Response::redirect('/user');		
+			} else {
+	        	$data['error'] = true;
+			}			
 		}
+    	$this->template->title = 'ログインページ';
+    	$this->template->content = View::forge('user/login', $data);			
 	}
 
 	public function action_logout()

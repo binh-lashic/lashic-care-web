@@ -14,6 +14,13 @@
 		<div id="loginTitle"><p>高齢者の"自立"をささえ<span class="sp_noWrap">"あんしん"を共有する</span></p></div>
 		<div id="loginContainer">
 			<div id="loginContainerInner">
+<?php
+if(isset($error)) {
+?>
+				<p class="error small mgb10">メールアドレスまたはパスワードが正しくありません</p>
+<?php
+}
+?>
 				<dl>
 					<dt>ログインID</dt>
 					<dd><input type="text" class="input_text" name="username"></dd>
