@@ -7,7 +7,7 @@
 	<div class="col-sm-6">
 		<form action="/admin/user/list" method="get">
 			<div class="input-group">
-		  		<input type="text" class="form-control" placeholder="名前、ふりがな、センサー機器IDで検索" name="query" value="<?php echo $query; ?>">
+		  		<input type="text" class="form-control" placeholder="名前、ふりがなで検索" name="query" value="<?php echo $query; ?>">
 		  		<span class="input-group-btn">
 		    		<button class="btn btn-default" type="submit">検索</button>
 		  		</span>
@@ -32,7 +32,7 @@ if(isset($admins)) {
 				<tr>
 					<td><?php echo $admin['id']; ?></td>
 					<td>
-						<a href="/admin/user/?admin_user_id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?>
+						<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?>
 						(<?php echo $admin['kana']; ?>)
 						</a></td>
 					<td>
@@ -40,13 +40,13 @@ if(isset($admins)) {
 	foreach($admin['sensors'] as $sensor) {
 		if(empty($sensor['name'])) continue;
 ?>
-					<a href="/admin/sesnor/"><?php echo $sensor['name']; ?></a>&nbsp; 
+					<a href="/admin/sensor/shipping?id=<?php echo $sensor['id']; ?>"><?php echo $sensor['name']; ?></a>&nbsp; 
 <?php
 	}
 ?>
 					</td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $sensor['id']; ?>">センサー機器の割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
 					</td>
 				</tr>
 <?php

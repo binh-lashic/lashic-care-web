@@ -67,10 +67,10 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_data() {
-    	$data['sensor_name'] = Input::param("name");
+    	$data['sensor'] = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
     	$data['data'] = DB::select()
 	    ->from('data')
-	    ->where('sensor_id', $data['sensor_name'])
+	    ->where('sensor_id', $data['sensor']['name'])
 	    ->order_by('id', 'desc')
 	    ->limit(100)
 	    ->execute('data') // 引数で指定できる

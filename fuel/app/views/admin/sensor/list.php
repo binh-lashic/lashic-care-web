@@ -20,7 +20,7 @@
 	<div class="col-sm-6">
 		<form action="/admin/sensor/list" method="get">
 			<div class="input-group">
-		  		<input type="text" class="form-control" placeholder="名前、ふりがな、センサー機器IDで検索" name="query" value="<?php echo isset($query) ? $query : ""; ?>">
+		  		<input type="text" class="form-control" placeholder="センサー機器IDで検索" name="query" value="<?php echo isset($query) ? $query : ""; ?>">
 		  		<span class="input-group-btn">
 		    		<button class="btn btn-default" type="submit">検索</button>
 		  		</span>
@@ -39,7 +39,8 @@
 					<th class="col-sm-2">見守られユーザ</th>
 					<th class="col-sm-1">ステータス</th>
 					<th class="col-sm-2">出荷日</th>
-					<th class="col-sm-3">操作</th>
+					<th class="col-sm-2">操作</th>
+					<th class="col-sm-1">削除</th>
 				</tr>
 <?php
 foreach($sensors as $sensor){
@@ -61,21 +62,33 @@ foreach($sensors as $sensor){
 					</td>
 					<td>
 <?php
-foreach($sensor['admins'] as $admin) {
+if(isset($sensor['admins'])) {
+	foreach($sensor['admins'] as $admin) {
 ?>
-<a href="/admin/user/?admin_user_id=<?php echo $admin['id']; ?>">
+<a href="/admin/user/?id=<?php echo $admin['id']; ?>">
 	<?php echo $admin['last_name'].$admin['first_name']; ?>
 </a><br />
 <?php
+	}
 }
 ?>
 					</td>
 					<td>
 <?php
-foreach($sensor['clients'] as $client) {
+if(isset($sensor['clients'])) {
+	foreach($sensor['clients'] as $client) {
+		if(!empty($client['last_name']) && !empty($client['first_name'])) {
 ?>
 	<?php echo $client['last_name'].$client['first_name']; ?><br />
 <?php
+		} else {
+?>
+	未設定
+<?php		
+		}
+?>
+<?php
+	}
 }
 ?>
 					</td>
@@ -88,6 +101,10 @@ foreach($sensor['clients'] as $client) {
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/sensor/shipping?id=<?php echo $sensor['id']; ?>">出荷日登録</a>
 						<a class="btn btn-primary btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>">データ確認</a>
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>" onClick="return confirm('データを削除してもよろしいですか？')">センサー削除</a>
+
 					</td>
 				</tr>
 <?php	

@@ -411,6 +411,44 @@ class Model_User extends Orm\Model{
 		return null;
 	}
 
+	//見守られユーザの自動作成
+	public static function createClient($params) {
+		$sensor_id = $params['id'];
+		$sensor_name = $params['name'];
+
+        $params = array(
+            'username' => $sensor_id."-".$sensor_name,
+            'password' => sha1($sensor_id."-".$sensor_name.mt_rand()),
+            'email' => $sensor_id."-".$sensor_name."@example.com",
+        );
+        try {
+            $user_id = Auth::create_user(
+                    $params['username'],
+                    $params['password'],
+                    $params['email']);
+
+            $client = \Model_User::find($user_id);
+            $client->set(array(
+                'admin' => 0,
+                'memo' => $sensor_name,
+            ));
+            if($client->save()) {
+	            $user_sensor = \Model_User_Sensor::forge();
+	            $user_sensor->set(array(
+	                'user_id' => $client->id,
+	                'sensor_id' => $sensor_id,
+	                'admin' => 0,
+	            ));
+	            $user_sensor->save();           	
+            }
+
+            return $client;
+        } catch (Exception $e) {
+        	print_r($e);
+        	exit;
+        }
+	}
+
 	public static function sendEmail($params) {
 		if(empty($params['from'])) {
 			$params['from'] = Config::get("email.from");

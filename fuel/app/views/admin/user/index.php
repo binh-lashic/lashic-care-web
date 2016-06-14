@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h2>親アカウント:<?php echo $user['name']; ?></h2>
+		<h2>親アカウント:<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?></h2>
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="/admin/user/?admin_user_id=<?php echo $user['id']; ?>">詳細</a></li>
-      <li role="presentation"><a href="/admin/user/sensor">センサー機器割当</a></li>
+      <li role="presentation" class="active"><a href="/admin/user/?id=<?php echo $user['id']; ?>">詳細</a></li>
+      <li role="presentation"><a href="/admin/user/sensor?id=<?php echo $user['id']; ?>">センサー機器割当</a></li>
     </ul>
 	</div>
 </div>
@@ -21,9 +21,7 @@
 				<tr>
 					<td class="info text-right">名前</td>
 					<td>
-						<a href="/admin/user/?admin_user_id=<?php echo $user['id']; ?>"><?php echo $user['name']; ?>
-						(<?php echo $user['kana']; ?>)
-						</a>
+						<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>(<?php echo $user['last_kana']; ?><?php echo $user['first_kana']; ?>)
 					</td>
 				</tr>
 				<tr>

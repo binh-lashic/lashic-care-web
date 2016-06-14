@@ -12,7 +12,7 @@ class Controller_Admin_User extends Controller_Admin
     public function action_index() {
         $data = array();
     	$data['admins'] = Model_User::getAdmins();
-    	$id = Input::param("admin_user_id");
+    	$id = Input::param("id");
     	if($id) {
     		$data['user'] = Model_User::getUser($id);
     	}
@@ -89,40 +89,42 @@ class Controller_Admin_User extends Controller_Admin
 
     public function action_add_sensor() {
         $user_id = Input::param("user_id");
-        $name = Input::param("name");
-        if($user_id && $name) {
-            $sensor = Model_Sensor::find("first" , array(
-                'where' => array(
-                        array('name', $name),
-                    )
-                ));
-           	if(!$sensor) {
-	            $sensor = Model_Sensor::forge();
-	            $sensor->set(array('name' => $name));
-	            if(!$sensor->save()) {
-	            }
-           	}
+        $sensor_names_data = Input::param("sensor_names");
+        $sensor_names = explode(PHP_EOL, $sensor_names_data);
 
-            if($sensor->id > 0) {
-                $user_sensor = Model_User_Sensor::forge();
-                $user_sensor->set(array(
-                    'user_id' => $user_id,
-                    'sensor_id' => $sensor->id,
-                    'admin' => 1,
-                ));
-                try {
-                    if(!$user_sensor->save()) {
-                    }
-                } catch(Exception $e) {
+        if($user_id && $sensor_names) {
+            foreach($sensor_names as $name) {
+                $name = trim($name);
+                //センサーを新規登録
+                $sensor = Model_Sensor::find("first" , array(
+                    'where' => array(
+                            array('name', $name),
+                        )
+                    ));
+                if(!$sensor) {
+                    $sensor = Model_Sensor::forge();
+                    $sensor->set(array('name' => $name));
+                    $sensor->save();
+                }
 
-                }                
-            } else {
-                echo "センサー機器の登録に失敗しました";
-                exit;
+                if($sensor->id > 0) {
+                    //見守られユーザを登録
+                    $client = \Model_User::createClient($sensor);
+                    \Model_User_Client::saveUserClient(array(
+                        'user_id' => $user_id,
+                        'client_user_id' => $client->id,
+                    ));
+
+                    //管理者として登録
+                    \Model_User_Sensor::saveUserSensor(array(
+                        'user_id' => $user_id,
+                        'sensor_id' => $sensor->id,
+                        'admin' => 1,
+                    ));
+                }
             }
-
     		$user = Model_User::getUser($user_id);
-	        Response::redirect('/admin/user/?admin_user_id='.$user['id']);
+	        Response::redirect('/admin/user/?id='.$user['id']);
 
     	}
     }
