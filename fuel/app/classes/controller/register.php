@@ -59,7 +59,10 @@ class Controller_Register extends Controller_Base
 				\Model_User::sendConfirmEmail($user);
 			}			
 		} catch(Exception $e) {
-			
+			$params = Input::post();
+			unset($params['password']);
+			Log::error($e->getMessage(), 'register_complete');
+			Log::error(print_r($params, true), 'register_complete');
 		}
 
 		$this->template->title = 'Care Eye 新規登録  >  アカウント情報　入力';
