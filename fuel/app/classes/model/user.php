@@ -394,7 +394,12 @@ class Model_User extends Orm\Model{
 		    ->setFrom($params['from'])
 		    ->setSubject($params['subject'])
 		    ->setHtml($params['text']);
-		return $sendgrid->send($email);
+		try {
+			return $sendgrid->send($email);
+		} catch (Exception $e) {
+			Log::error($e->getMessage(), 'sendEmail');
+			return;
+		}
 	}
 
 	public static function saveSensor($params) {
