@@ -78,8 +78,8 @@ class Controller_Contact extends Controller_Base
         try {
             $sendgrid->send($email);
             $email
-                ->addTo(Config::get("email.noreply"))
-                ->setFrom(Input::post('email'))
+                ->addTo(Input::post('email'))
+                ->setFrom(Config::get("email.noreply"))
                 ->setSubject($params['subject'])
                 ->setHtml($params['text']);
             $sendgrid->send($email);
