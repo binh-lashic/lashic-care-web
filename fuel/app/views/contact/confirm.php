@@ -7,6 +7,11 @@
 				<h2 class="form_title">ご入力内容</h2>
 				<form action="/contact/complete" method="post">
 					<input type="hidden" name="name" value="<?php if(!empty($data['name'])) { echo $data['name']; } ?>" />
+					<input type="hidden" name="kana" value="<?php if(!empty($data['kana'])) { echo $data['kana']; } ?>" />
+					<input type="hidden" name="company" value="<?php if(!empty($data['company'])) { echo $data['company']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>" />
+					<input type="hidden" name="phone" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>" />
+					<input type="hidden" name="detail" value="<?php if(!empty($data['detail'])) { echo $data['detail']; } ?>" />
 				<div class="form_set_container">
 						<div class="form_base_data_edit">
 							<table>
