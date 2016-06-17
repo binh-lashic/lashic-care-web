@@ -123,6 +123,9 @@ class Controller_Admin_User extends Controller_Admin
                 if($sensor->id > 0) {
                     if(empty($client)) {
                         $client = \Model_Sensor::getClient(array('sensor_id' => $sensor->id));
+                    } else {
+                        //見守られユーザを新規作成
+                        $client = \Model_User::createClient($sensor);
                     }
                     //見守られユーザを登録
                     \Model_User_Client::saveUserClient(array(
