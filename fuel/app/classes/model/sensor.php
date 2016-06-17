@@ -121,6 +121,7 @@ class Model_Sensor extends Orm\Model{
 			),
 			'order_by' => array('name' => 'desc')
 		));
+		$sensors = array();
 		foreach($_sensors as $_sensor) {
 			$sensors[] = \Model_Sensor::format($_sensor);
 		}
@@ -134,6 +135,21 @@ class Model_Sensor extends Orm\Model{
 			),
 		));
 		return $user_sensors;
+	}
+
+	public static function getClient($params) {
+		$user_sensor = \Model_User_Sensor::find('first', array(
+			'where' => array(
+				'sensor_id' => $params['sensor_id'],
+				'admin' => 0,
+			),
+		));
+		$user = \Model_User::find($user_sensor['user_id']);
+		if($user['admin'] == 0) {
+			return $user;
+		}
+
+		return null;
 	}
 
 	public static function saveSensor($params) {
@@ -150,6 +166,18 @@ class Model_Sensor extends Orm\Model{
     		unset($params['id']);
     		$sensor->set($params);
     		if($sensor->save()) {
+    			return \Model_Sensor::format($sensor);
+    		}
+    	}
+    	return null;
+    }
+
+    public static function deleteSensor($params) {
+		if(isset($params['id'])) {
+	    	$sensor = \Model_Sensor::find($params['id']);
+		}
+    	if($sensor) {
+    		if($sensor->delete()) {
     			return \Model_Sensor::format($sensor);
     		}
     	}

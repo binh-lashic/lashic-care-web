@@ -43,14 +43,15 @@
 					<th class="col-sm-1">削除</th>
 				</tr>
 <?php
-foreach($sensors as $sensor){
-	if(!empty($sensor['shipping_date']) && $sensor['enable'] == 1) {
-		$status = "稼働中";
-	} else 	if(!empty($sensor['shipping_date']) && $sensor['enable'] != 1) {
-		$status = "出荷済";
-	} else {
-		$status = "未出荷";
-	}
+if(isset($sensors)) {
+	foreach($sensors as $sensor){
+		if(!empty($sensor['shipping_date']) && $sensor['enable'] == 1) {
+			$status = "稼働中";
+		} else 	if(!empty($sensor['shipping_date']) && $sensor['enable'] != 1) {
+			$status = "出荷済";
+		} else {
+			$status = "未出荷";
+		}
 
 ?>
 				<tr class="<?php if($sensor['enable'] == 0) { echo "active"; } ?>">
@@ -103,12 +104,12 @@ if(isset($sensor['clients'])) {
 						<a class="btn btn-primary btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>">データ確認</a>
 					</td>
 					<td>
-						<a class="btn btn-danger btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>" onClick="return confirm('データを削除してもよろしいですか？')">センサー削除</a>
-
+						<a class="btn btn-danger btn-sm" href="/admin/sensor/delete?id=<?php echo $sensor['id']; ?>" onClick="return confirm('データを削除してもよろしいですか？')">センサー削除</a>
 					</td>
 				</tr>
 <?php	
-} 
+	} 
+}
 ?>
 			</table>
 		</div>

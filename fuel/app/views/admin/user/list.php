@@ -22,8 +22,9 @@
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-3">名前</th>
-					<th class="col-sm-6">センサー機器</th>
-					<th class="col-sm-2">センサー機器の割当</th>
+					<th class="col-sm-4">センサー機器</th>
+					<th class="col-sm-2"></th>
+					<th class="col-sm-2"></th>
 				</tr>
 <?php
 if(isset($admins)) {
@@ -47,6 +48,9 @@ if(isset($admins)) {
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="/admin/user/login?id=<?php echo $admin['id']; ?>">このユーザとしてログイン</a>
 					</td>
 				</tr>
 <?php

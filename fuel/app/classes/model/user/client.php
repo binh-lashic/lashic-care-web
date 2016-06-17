@@ -79,4 +79,23 @@ class Model_User_Client extends Orm\Model{
 		}
     	return null;
     }
+
+	public static function deleteUserClient($params) {
+		if(isset($params['id'])) {
+	    	$user_client = \Model_User_Client::find($params['id']);
+		} else {
+			if(isset($params['user_id'])) {
+				$user_client = \Model_User_Client::find("first", array(
+					"where" => array(
+						"user_id" => $params['user_id'],
+						"client_user_id" => $params['client_user_id'],
+					)
+				));				
+			}
+		}
+		if($user_client->delete(false)) {
+			return $user_client;
+		}
+    	return null;
+    }
 }

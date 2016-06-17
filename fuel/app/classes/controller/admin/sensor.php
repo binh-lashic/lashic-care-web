@@ -46,9 +46,11 @@ class Controller_Admin_Sensor extends Controller_Admin
 	public function action_save() {
 		$sensor = \Model_Sensor::saveSensor(Input::param());
         Response::redirect('/admin/sensor/list');
-        $this->template->title = '管理ページ センサー設定';
-        $data['sensor'] = $sensor;
-        $this->template->content = View::forge('admin/sensor/index', $data);
+	}
+
+	public function action_delete() {
+		$sensor = \Model_Sensor::deleteSensor(Input::param());
+        Response::redirect('/admin/sensor/list');
 	}
 
 	public function action_register() {
@@ -63,7 +65,7 @@ class Controller_Admin_Sensor extends Controller_Admin
 		}
         $this->template->title = '管理ページ センサー一覧';
      	$data['sensors'] = \Model_Sensor::getAll();
-        $this->template->content = View::forge('admin/sensor/list', $data);
+        Response::redirect('/admin/sensor/list');
 	}
 
 	public function action_data() {

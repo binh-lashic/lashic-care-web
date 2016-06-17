@@ -76,7 +76,7 @@ if(isset($sensor['clients'])) {
 ?>
 					</td>
 					<td><?php echo $sensor['shipping_date']; ?></td>
-					<td><a href="" class="btn btn-danger">センサー機器の割当解除</a></td>
+					<td><a href="/admin/user/sensor/delete?user_id=<?php echo $user['id']; ?>&sensor_id=<?php echo $sensor['id']; ?>" class="btn btn-danger">センサー機器の割当解除</a></td>
 				</tr>
 <?php
 		}

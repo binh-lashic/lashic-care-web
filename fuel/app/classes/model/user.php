@@ -267,6 +267,7 @@ class Model_User extends Orm\Model{
 				  ->and_where_close();
 		}
 		$rows = $query->order_by('id', 'desc')->from_cache(false)->get();
+		$users = array();
 		foreach($rows as $row) {
 			$users[] = \Model_User::format($row);
 		}

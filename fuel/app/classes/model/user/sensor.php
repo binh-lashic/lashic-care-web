@@ -114,6 +114,25 @@ class Model_User_Sensor extends Orm\Model{
     	return \Model_User_Sensor::format($user_sensor);
     }
 
+    public static function deleteUserSensor($params) {
+		if(isset($params['id'])) {
+	    	$user_sensor = \Model_User_Sensor::find($params['id']);
+		} else {
+			$user_sensor = \Model_User_Sensor::find("first", array(
+				"where" => array(
+					"user_id" => $params['user_id'],
+					"sensor_id" => $params['sensor_id'],
+				)
+			));
+		}
+    	if($user_sensor) {
+    		if($user_sensor->delete(false)) {
+    			return $user_sensor;
+    		}
+    	}
+    	return null;
+    }
+
     public static function format($params) {
 		$ret = array();
 		$keys = array(

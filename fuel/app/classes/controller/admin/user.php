@@ -20,6 +20,14 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->content = View::forge('admin/user/index', $data);
 	}
 
+    public function action_login() {
+        if (Auth::force_login(Input::param('id')))
+        {
+            Session::delete('client');
+            Response::redirect('/user');
+        }
+    }
+
     public function action_list() {
         $data = array();
         if(Input::param('query')) {
@@ -28,7 +36,9 @@ class Controller_Admin_User extends Controller_Admin
                 'admin' => 1,
             ));            
         } else {
-            $admins = Model_User::getAdmins();
+            $admins = Model_User::getSearch(array(
+                'admin' => 1,
+            ));   
         }
 
         foreach($admins as $admin) {
@@ -104,12 +114,17 @@ class Controller_Admin_User extends Controller_Admin
                 if(!$sensor) {
                     $sensor = Model_Sensor::forge();
                     $sensor->set(array('name' => $name));
-                    $sensor->save();
+                    if($sensor->save()) {
+                        //見守られユーザを新規作成
+                        $client = \Model_User::createClient($sensor);
+                    }
                 }
 
                 if($sensor->id > 0) {
+                    if(empty($client)) {
+                        $client = \Model_Sensor::getClient(array('sensor_id' => $sensor->id));
+                    }
                     //見守られユーザを登録
-                    $client = \Model_User::createClient($sensor);
                     \Model_User_Client::saveUserClient(array(
                         'user_id' => $user_id,
                         'client_user_id' => $client->id,
@@ -124,7 +139,7 @@ class Controller_Admin_User extends Controller_Admin
                 }
             }
     		$user = Model_User::getUser($user_id);
-	        Response::redirect('/admin/user/?id='.$user['id']);
+	        Response::redirect('/admin/user/sensor?id='.$user['id']);
 
     	}
     }
