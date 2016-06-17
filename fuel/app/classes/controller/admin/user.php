@@ -114,19 +114,18 @@ class Controller_Admin_User extends Controller_Admin
                 if(!$sensor) {
                     $sensor = Model_Sensor::forge();
                     $sensor->set(array('name' => $name));
-                    if($sensor->save()) {
-                        //見守られユーザを新規作成
-                        $client = \Model_User::createClient($sensor);
-                    }
+                    $sensor->save();
                 }
 
                 if($sensor->id > 0) {
                     if(empty($client)) {
                         $client = \Model_Sensor::getClient(array('sensor_id' => $sensor->id));
-                    } else {
+                    }
+                    if(empty($client)) {
                         //見守られユーザを新規作成
                         $client = \Model_User::createClient($sensor);
                     }
+
                     //見守られユーザを登録
                     \Model_User_Client::saveUserClient(array(
                         'user_id' => $user_id,
