@@ -14,7 +14,6 @@
 <meta property="og:image" content="/images/common/ogp.jpg" >
 <meta property="og:site_name" content="CareEye（ケアアイ）　管理ページ" >
 <meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
-<meta name="viewport" content="width=360,initial-scale=0.1">
 <meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
@@ -66,7 +65,11 @@
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
 <!-- 円グラフ --> 
 <script src="/js/jquery.circliful.min.js"></script> 
+<script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script>
+$(document).ready(function() {
+    $(".fancybox").fancybox();
+  }); 
 $(document).ready(function(){
     $('.myStat').circliful();
 });

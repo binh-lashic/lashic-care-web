@@ -6,6 +6,7 @@ class Controller_Contact extends Controller_Base
 	public function before() {
 		$this->nologin_methods = array(
 	        'index',
+            'complete'
 	    );
 	    parent::before();
 	}
@@ -60,7 +61,33 @@ class Controller_Contact extends Controller_Base
 	public function action_complete()
 	{
         $this->template->title = 'お問い合わせ';
+        $this->data = Input::post();
         $this->data['breadcrumbs'] = array($this->template->title);
+        $this->data['date'] = date("Y年m月d日");
+
+        $params['subject'] = "お問い合わせを受け付けました";
+        $params['text'] = \View::forge('email/contact', $this->data);
+        
+        $sendgrid = new SendGrid(Config::get("sendgrid"));
+        $email = new SendGrid\Email();
+        $email
+            ->addTo(Config::get("email.info"))
+            ->setFrom(Input::post('email'))
+            ->setSubject($params['subject'])
+            ->setHtml($params['text']);
+        try {
+            $sendgrid->send($email);
+            $email
+                ->addTo(Input::post('email'))
+                ->setFrom(Config::get("email.noreply"))
+                ->setSubject($params['subject'])
+                ->setHtml($params['text']);
+            $sendgrid->send($email);
+
+        } catch (Exception $e) {
+            Log::error($e->getMessage(), 'sendEmail');
+        }
+
        	$this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('contact/complete', $this->data);
 	}
