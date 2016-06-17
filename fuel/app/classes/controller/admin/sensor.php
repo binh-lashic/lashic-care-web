@@ -73,7 +73,7 @@ class Controller_Admin_Sensor extends Controller_Admin
     	$data['data'] = DB::select()
 	    ->from('data')
 	    ->where('sensor_id', $data['sensor']['name'])
-	    ->order_by('id', 'desc')
+	    ->order_by('date', 'desc')
 	    ->limit(100)
 	    ->execute('data') // 引数で指定できる
 	    ->as_array();
