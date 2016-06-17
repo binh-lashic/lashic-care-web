@@ -19,6 +19,7 @@ if (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) {
 	\Autoloader::add_classes(array(
 	    'Database_Query_Builder' => APPPATH.'classes/database/query/builder.php',
 	    'Database_Query_Builder_Select' => APPPATH.'classes/database/query/builder/select.php',
+	    'Database_Query_Builder_Delete' => APPPATH.'classes/database/query/builder/delete.php',
 	    'Database_Connection' => APPPATH.'classes/database/connection.php',
 	));
 }
