@@ -466,6 +466,7 @@ class Controller_User extends Controller_Base
 				list(, $user_id) = Auth::get_user_id();
 				$user = \Model_User::getUser($user_id);
 				Session::set('user', $user);
+				Session::delete('client');
 				Response::redirect('/user');		
 			} else {
 	        	$data['error'] = true;
@@ -478,6 +479,7 @@ class Controller_User extends Controller_Base
 	public function action_logout()
 	{
 		Auth::logout();
+		Session::delete('client');
 		Response::redirect('/user/login');
 	}
 
