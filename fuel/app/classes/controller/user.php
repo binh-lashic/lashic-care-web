@@ -463,18 +463,13 @@ class Controller_User extends Controller_Base
 		$password = Input::post("password");
 		$data = array();
 		if(Input::post()) {
-			Session::delete('client');
-			Session::set('client', null);
+
 			if (Auth::login($username, $password)) {
-				Session::destroy();
-				Session::create();
 				list(, $user_id) = Auth::get_user_id();
 				$user = \Model_User::getUser($user_id);
 				Session::set('user', $user);
-				
-				echo Session::get('client');
-				exit;
-				//Session::delete('client');
+				Session::delete('client');
+				Session::set('client', null);
 				Response::redirect('/user');		
 			} else {
 	        	$data['error'] = true;
@@ -488,6 +483,7 @@ class Controller_User extends Controller_Base
 	{
 		Auth::logout();
 		Session::delete('client');
+		Session::set('client', null);
 		Response::redirect('/user/login');
 	}
 
