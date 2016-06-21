@@ -30,7 +30,6 @@ class Controller_User extends Controller_Base
 	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    } else {
-	    		    echo $client_id;
 	    	$client = \Model_User::getUser($client_id);
 	    }
 
