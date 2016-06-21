@@ -464,6 +464,7 @@ class Controller_User extends Controller_Base
 		$data = array();
 		if(Input::post()) {
 			Session::delete('client');
+			Session::set('client', null);
 			if (Auth::login($username, $password)) {
 				Session::destroy();
 				Session::create();
