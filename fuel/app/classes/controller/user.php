@@ -465,6 +465,7 @@ class Controller_User extends Controller_Base
 		if(Input::post()) {
 			Session::delete('client');
 			if (Auth::login($username, $password)) {
+				Session::create();
 				list(, $user_id) = Auth::get_user_id();
 				$user = \Model_User::getUser($user_id);
 				Session::set('user', $user);
