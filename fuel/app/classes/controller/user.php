@@ -31,7 +31,6 @@ class Controller_User extends Controller_Base
 	    	$client = $this->clients[0];
 	    } else {
 	    		    echo $client_id;
-	    exit;
 	    	$client = \Model_User::getUser($client_id);
 	    }
 
