@@ -467,6 +467,9 @@ class Controller_User extends Controller_Base
 				$user = \Model_User::getUser($user_id);
 				Session::set('user', $user);
 				Session::delete('client');
+				echo Session::get('client');
+				exit;
+				//Session::delete('client');
 				Response::redirect('/user');		
 			} else {
 	        	$data['error'] = true;
