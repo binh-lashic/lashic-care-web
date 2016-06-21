@@ -27,6 +27,8 @@ class Controller_User extends Controller_Base
 	    );
 
 	    $client_id = Session::get("client_id");
+	    echo $client_id;
+	    exit;
 	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    } else {
