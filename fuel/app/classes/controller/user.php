@@ -27,11 +27,11 @@ class Controller_User extends Controller_Base
 	    );
 
 	    $client_id = Session::get("client_id");
-	    echo $client_id;
-	    exit;
 	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    } else {
+	    		    echo $client_id;
+	    exit;
 	    	$client = \Model_User::getUser($client_id);
 	    }
 
@@ -464,11 +464,12 @@ class Controller_User extends Controller_Base
 		$password = Input::post("password");
 		$data = array();
 		if(Input::post()) {
+			Session::delete('client');
 			if (Auth::login($username, $password)) {
 				list(, $user_id) = Auth::get_user_id();
 				$user = \Model_User::getUser($user_id);
 				Session::set('user', $user);
-				Session::delete('client');
+				
 				echo Session::get('client');
 				exit;
 				//Session::delete('client');
