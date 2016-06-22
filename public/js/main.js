@@ -1,10 +1,6 @@
 $(function(){
-	if(window.location.href.match(/careeye\.jp/i)) {
-		var apiUrl = "http://careeye.jp/api/";
-	} else if(window.location.href.match(/garoo\.jp/i)) {
-		var apiUrl = "http://infic.garoo.jp/api/";
-	}
-    
+	var apiUrl = "/api/";
+
 
     // ユーザ定義関数
     function api(action, params, callback){
