@@ -87,6 +87,7 @@ class Controller_Api_User extends Controller_Api
 	}
 
 	public function get_login_error() {
+	    header("HTTP/1.1 401 Unauthorized");
 		$this->result = array(
 			'message' => 'ログインをしていません',
 		);
