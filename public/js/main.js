@@ -1,11 +1,8 @@
 $(function(){
-	var apiUrl = "/api/";
-
-
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
-			apiUrl + action,
+			"/api/" + action,
 			params, 
 			callback,
 			"json"
