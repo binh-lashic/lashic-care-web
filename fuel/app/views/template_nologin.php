@@ -31,7 +31,7 @@
 <!-- /カレンダー表示・非表示 -->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <!-- srcoll design -->
 <script type="text/javascript" src="/js/jquery.jscrollpane.min.js"></script>
