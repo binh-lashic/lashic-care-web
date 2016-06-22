@@ -431,7 +431,7 @@ for($i = 0; $i < 29; $i++) {
 		</div>
 	</div>
 		<!--このページのjs -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script type="text/javascript"> 
