@@ -20,7 +20,6 @@ class Controller_Api extends Controller_Rest
 	    	}
 	    } else if (!Auth::check()) {
 	    	$this->_error();
-	    	Response::redirect('/api/user/login_error');
 	    }
 	}
 
@@ -36,12 +35,16 @@ class Controller_Api extends Controller_Rest
 			$this->result['success'] = true;
 		}
 
-		if (Auth::check()) {
+	   	$method = Request::active()->action;
+	    if (in_array($method, $this->nologin_methods)) {  
 			$this->result['sesson_error'] = false;
-		} else {
-			$this->result['sesson_error'] = true;
-		}
-
+	    } else {
+			if (Auth::check()) {
+				$this->result['sesson_error'] = false;
+			} else {
+				$this->result['sesson_error'] = true;
+			}
+	    }
 
 		$res = parent::response($this->result, $http_status);
 		$res->set_header('Access-Control-Allow-Origin', '*');
