@@ -908,33 +908,35 @@ if(isset($sleep_time)) {
     		$alert->set($params);
 
     		foreach($this->users as $user) {
-    			$user_sensor = \Model_User_Sensor::find('first', array(
-    				'where' => array(
-    					'user_id' => $user['id'],
-    					'sensor_id' => $this->id,
-    				),
-    			))->to_array();
-    			if(isset($user_sensor)) {
-    				if($user_sensor[$params['type']."_alert"] == 1) {
-    					/*
-    					$devices = \Model_Device::find('all', array(
-    						'where' => array(
-    							'user_id' => $user['id'],
-    						),
-    					));
-    					foreach($devices as $device) {
-    						\Model_Alert::pushAlert(array(
-    							'push_id' => $device['push_id'],
-    							'text' => $params['description'],
-    						));
-    					}*/
+    			if($user['master'] != 1) {
+	    			$user_sensor = \Model_User_Sensor::find('first', array(
+	    				'where' => array(
+	    					'user_id' => $user['id'],
+	    					'sensor_id' => $this->id,
+	    				),
+	    			))->to_array();
+	    			if(isset($user_sensor)) {
+	    				if($user_sensor[$params['type']."_alert"] == 1) {
+	    					/*
+	    					$devices = \Model_Device::find('all', array(
+	    						'where' => array(
+	    							'user_id' => $user['id'],
+	    						),
+	    					));
+	    					foreach($devices as $device) {
+	    						\Model_Alert::pushAlert(array(
+	    							'push_id' => $device['push_id'],
+	    							'text' => $params['description'],
+	    						));
+	    					}*/
 
-		  	    		$this->send_alert(array(
-			    			'email' => $user['email'],
-			    			'title' => $params['title'],
-			    			'description' => $params['description'],
-			    		));  	    					
-    				}
+			  	    		$this->send_alert(array(
+				    			'email' => $user['email'],
+				    			'title' => $params['title'],
+				    			'description' => $params['description'],
+				    		));  	    					
+	    				}
+	    			}    				
     			}
     		}
 	    	return $alert->save();

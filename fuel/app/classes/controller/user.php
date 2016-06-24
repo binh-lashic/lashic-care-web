@@ -14,7 +14,11 @@ class Controller_User extends Controller_Base
 	    if(empty($this->user)) {
 			list(, $user_id) = Auth::get_user_id();
 			$this->user = \Model_User::getUser($user_id);
-			$clients = \Model_User::getClients($user_id);
+			if($this->user['master'] == 1) {
+				$clients = \Model_User::getClients();
+			} else {
+				$clients = \Model_User::getClients($user_id);
+			}
 			foreach($clients as $client) {
 				$client['sensors'] = \Model_User::getSensors($client['id']);
 				$this->clients[] = $client;

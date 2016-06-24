@@ -46,6 +46,7 @@ class Model_User extends Orm\Model{
 		'new_email',
 		'email_confirm_token',
 		'email_confirm_expired',
+		'master' => array('default' => 0),
 	);
 
     public static function validate($factory)
@@ -166,6 +167,7 @@ class Model_User extends Orm\Model{
 			'new_email',
 			'email_confirm_token',
 			'email_confirm_expired',
+			'master',
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
@@ -232,11 +234,15 @@ class Model_User extends Orm\Model{
 				'related' => array('admin')
 			));
 			foreach($rows as $row) {
-				$users[] = \Model_User::format($row->admin);
+				if($row->admin['master'] != 1) {
+					$users[] = \Model_User::format($row->admin);
+				}
 			}
 		} else {
 			$rows = \Model_User::find("all", array(
-				'where' => array('admin' => 1)
+				'where' => array(
+					'admin' => 1,
+				)
 			));
 			foreach($rows as $row) {
 				$users[] = \Model_User::format($row);
