@@ -55,7 +55,7 @@ if(!empty($errors['new_password_confirm'])) {
 					</div>
 					<div class="right_container"></div>
 				</div>
-				<p class="center"><a href="#">パスワードを忘れた方はこちら</a></p>
+				<p class="center"><a href="/password/">パスワードを忘れた方はこちら</a></p>
 			</form>
 		</section>
 		<!-- /content end パスワード変更　エラー --> 
