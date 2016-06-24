@@ -528,6 +528,9 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
+		if($this->wake_up_level == 0) {
+			return null;
+		}
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
@@ -560,16 +563,16 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		$wake_up_time = null;
-echo \DB::last_query("data");
+//echo \DB::last_query("data");
 		if($count) {
-echo "<table>";
+//echo "<table>";
 			foreach($result as $row) {
-echo "<tr>";
-echo "<td>".$row['date']."</td>";
-echo "<td>".$level['threshold']."</td>";
-echo "<td>".$row['active']."</td>";
+//echo "<tr>";
+//echo "<td>".$row['date']."</td>";
+//echo "<td>".$level['threshold']."</td>";
+//echo "<td>".$row['active']."</td>";
 				if($level['threshold'] < $row['active']) {
-echo "<td>◯</td>";
+//echo "<td>◯</td>";
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
@@ -592,7 +595,7 @@ echo "<td>◯</td>";
 					}
 					$nonactive_count = 0;
 				} else {
-echo "<td>×</td>";
+//echo "<td>×</td>";
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -601,14 +604,14 @@ echo "<td>×</td>";
 						$wake_up_time = null;
 					}
 				}
-echo "<td>".$active_count."</td>";
-echo "<td>".$nonactive_count."</td>";
+//echo "<td>".$active_count."</td>";
+//echo "<td>".$nonactive_count."</td>";
 if(isset($wake_up_time)) {
-	echo "<td>".$wake_up_time."</td>";
+	//echo "<td>".$wake_up_time."</td>";
 } else {
-	echo "<td></td>";
+	//echo "<td></td>";
 }
-echo "</tr>";
+//echo "</tr>";
 			}//foreach
 
 			//平均起床時間遅延アラート
@@ -620,13 +623,16 @@ echo "</tr>";
 					return $this->alert($params);
 				}							
 			}
-echo "</table>";
+//echo "</table>";
 		}//if
 		return false;
 	}
 
 	//就寝時間のチェック
 	public function checkSleep() {
+		if($this->sleep_level == 0) {
+			return null;
+		}
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
@@ -668,17 +674,17 @@ echo "</table>";
 		$active_count = 0;
 		$nonactive_count = 0;
 		$sleep_time = null;
-echo \DB::last_query("data");
-echo "<table>";
+//echo \DB::last_query("data");
+//echo "<table>";
 
 		if($count) {
 			foreach($result as $row) {
-echo "<tr>";
-echo "<td>".$row['date']."</td>";
-echo "<td>".$level['threshold']."</td>";
-echo "<td>".$row['active']."</td>";
+//echo "<tr>";
+//echo "<td>".$row['date']."</td>";
+//echo "<td>".$level['threshold']."</td>";
+//echo "<td>".$row['active']."</td>";
 				if($level['threshold'] > $row['active']) {
-echo "<td>◯</td>";
+//echo "<td>◯</td>";
 
 					if(empty($current_sleep_time)) {
 						$nonactive_count = 0;
@@ -687,7 +693,7 @@ echo "<td>◯</td>";
 					$nonactive_count++;
 					$active_count = 0;
 				} else {
-echo "<td>×</td>";
+//echo "<td>×</td>";
 
 					$active_count++;
 					$nonactive_count++;
@@ -700,16 +706,16 @@ echo "<td>×</td>";
 				if($nonactive_count >= $level['duration'] && isset($current_sleep_time)) {
 					$sleep_time = $current_sleep_time;
 				}
-echo "<td>".$active_count."</td>";
-echo "<td>".$nonactive_count."</td>";
+//echo "<td>".$active_count."</td>";
+//echo "<td>".$nonactive_count."</td>";
 if(isset($sleep_time)) {
-	echo "<td>".$sleep_time."</td>";
+	//echo "<td>".$sleep_time."</td>";
 } else {
-	echo "<td></td>";
+	//echo "<td></td>";
 }
-echo "</tr>";
+//echo "</tr>";
 			}
-echo "</table>";
+//echo "</table>";
 		}
 		if(isset($sleep_time)) {
 			if(!$daily_data) {

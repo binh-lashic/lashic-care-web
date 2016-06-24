@@ -599,24 +599,28 @@ class Controller_Api_Data extends Controller_Api
 		foreach($sensors as $sensor) {
 			$sensor->users;
 			$sensor->setTime($time);
-			$this->result['data'][] = array(
-				'sensor_id' => $sensor->id,
-				'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
-				'fire' => $sensor->checkFire(),									//火事アラート
-				'temperature' => $sensor->checkTemperature(),					//室温異常通知
-				'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
-				'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
-				'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
-				'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
-				'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-				'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
-				'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
-				'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
-				'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
-//通信復帰通知
-                       );
-               }
-               return $this->result(); 
-       }
+			try {
+				$this->result['data'][] = array(
+					'sensor_id' => $sensor->id,
+					'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
+					'fire' => $sensor->checkFire(),									//火事アラート
+					'temperature' => $sensor->checkTemperature(),					//室温異常通知
+					'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
+					'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
+					'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
+					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
+					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
+					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
+					'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
+					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
+					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
+																					//通信復帰通知
+            	);
+			} catch (Exception $e) {
+				Log::info($e->getMessage(), 'alert error');
+			}
+        }
+        return $this->result(); 
+    }
 
 }
