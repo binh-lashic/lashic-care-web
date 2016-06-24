@@ -528,7 +528,7 @@ class Model_Sensor extends Orm\Model{
 
 	//起床時間のチェック
 	public function checkWakeUp() {
-		if($this->wake_up_level == 0) {
+		if($this->wake_up_level < 1) {
 			return null;
 		}
     	$levels = Config::get("sensor_levels.wake_up");
@@ -630,7 +630,7 @@ if(isset($wake_up_time)) {
 
 	//就寝時間のチェック
 	public function checkSleep() {
-		if($this->sleep_level == 0) {
+		if($this->sleep_level < 1) {
 			return null;
 		}
     	$levels = Config::get("sensor_levels.sleep");
