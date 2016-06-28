@@ -117,15 +117,15 @@ class Controller_Api_Data extends Controller_Api
 		return $this->result();	
 	}
 
-	public function get_graph() {
-		return $this->_graph();
+	public function get_graph_org() {
+		return $this->_graph_org();
 	}
 
-	public function post_graph() {
-		return $this->_graph();
+	public function post_graph_org() {
+		return $this->_graph_org();
 	}
 
-	public function _graph() {
+	public function _graph_org() {
 		$type = Input::param("type");
 		$date = Input::param("date");
 		$span = Input::param("span");
@@ -225,15 +225,15 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 
-	public function get_graph2() {
-		return $this->_graph2();
+	public function get_graph() {
+		return $this->_graph();
 	}
 
-	public function post_graph2() {
-		return $this->_graph2();
+	public function post_graph() {
+		return $this->_graph();
 	}
 
-	public function _graph2() {
+	public function _graph() {
 		$type = Input::param("type");
 		$date = Input::param("date");
 		$span = Input::param("span");
@@ -290,7 +290,7 @@ class Controller_Api_Data extends Controller_Api
 				'start_time' => date("Y-m-d H:i:s", $start_time),
 				'end_time' => date("Y-m-d H:i:s", $end_time),
 			));
-			$results = $query->execute('data');
+			$results = $query->cached(60)->execute('data');
 			$rows = array();
 			foreach($results as $result) {
 				$result = Model_Data::format($result);
