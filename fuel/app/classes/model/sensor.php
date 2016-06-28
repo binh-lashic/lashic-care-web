@@ -115,12 +115,22 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	public static function getSearch($params) {
-		$_sensors = \Model_Sensor::find('all',array(
+		$query = array(
 			'where' => array(
 				array('name', 'LIKE', '%'.$params['query'].'%'),
 			),
 			'order_by' => array('name' => 'desc')
-		));
+		);
+		if(!empty($params['limit'])) {
+			$query['limit'] = $params['limit'];
+			if(!empty($params['page']) && $params['page'] > 1) {
+				$query['offset'] = $params['limit'] * ($params['page'] - 1);
+			}
+		}
+		if(isset($params['limit'])) {
+			
+		}
+		$_sensors = \Model_Sensor::find('all', $query);
 		$sensors = array();
 		foreach($_sensors as $_sensor) {
 			$sensors[] = \Model_Sensor::format($_sensor);
