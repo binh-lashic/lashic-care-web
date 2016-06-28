@@ -45,10 +45,6 @@ class Controller_User extends Controller_Base
 	    } else {
 	    	$this->data['date'] = date("Y-m-d");
 	    }
-	    $is_today = false;
-	    if($this->data['date'] == date("Y-m-d")) {
-	    	$is_today = true;
-	    }
 
 	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
 	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
@@ -65,26 +61,6 @@ class Controller_User extends Controller_Base
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
-				
-				$this->data['data_daily'] = \Model_Data_Daily::getData($this->data['sensor']['id'], $this->data['date']);
-
-				$this->data['data_latest'] = \Model_Data_Daily::getData($this->data['sensor']['id'], date("Y-m-d", strtotime("-1day")));
-
-				if($is_today) {
-					if(isset($this->data['sensor']['name'])) {
-						$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);					
-					}
-				} else {
-					if(!empty($this->data['data_daily']['temperature_average'])) {
-						$this->data['data'] = array(
-							'temperature' => $this->data['data_daily']['temperature_average'],
-							'humidity' => $this->data['data_daily']['humidity_average'],
-							'active' => $this->data['data_daily']['active_average'],
-							'illuminance' => $this->data['data_daily']['illuminance_average'],
-							'discomfort' => $this->data['data_daily']['discomfort_average'],
-						);						
-					}
-				}
 
 				//$this->data['data_daily'] = \Model_Data_Daily::getLatestData($this->data['sensor']['id']);
 				$params = array(
@@ -104,6 +80,28 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
+		if(isset($this->data['sensor'])) {
+			$this->data['data_daily'] = \Model_Data_Daily::getData($this->data['sensor']['id'], $this->data['date']);
+
+			$this->data['data_latest'] = \Model_Data_Daily::getData($this->data['sensor']['id'], date("Y-m-d", strtotime("-1day")));
+
+			if($this->data['date'] == date("Y-m-d")) {
+				if(isset($this->data['sensor']['name'])) {
+					$this->data['data'] = \Model_Data::getLatestData($this->data['sensor']['name']);					
+				}
+			} else {
+				if(!empty($this->data['data_daily']['temperature_average'])) {
+					$this->data['data'] = array(
+						'temperature' => $this->data['data_daily']['temperature_average'],
+						'humidity' => $this->data['data_daily']['humidity_average'],
+						'active' => $this->data['data_daily']['active_average'],
+						'illuminance' => $this->data['data_daily']['illuminance_average'],
+						'discomfort' => $this->data['data_daily']['discomfort_average'],
+					);						
+				}
+			}			
+		}
+
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/index', $this->data);

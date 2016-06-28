@@ -18,7 +18,12 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_list() {
-    	$sensors = \Model_Sensor::getSearch(array('query' => Input::param('query')));
+		$data['page'] = Input::param("page") ? Input::param("page") : 1;
+    	$sensors = \Model_Sensor::getSearch(array(
+    		'query' => Input::param('query'),
+    		'limit' => 10,
+    		'page' => $data['page'],
+    	));
     	foreach($sensors as $sensor) {
     		$sensor = $sensor->to_array();
     		$user_sensors = Model_Sensor::getAdmins(array("sensor_id" => $sensor['id']));

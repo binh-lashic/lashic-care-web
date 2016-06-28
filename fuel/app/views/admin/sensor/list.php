@@ -3,6 +3,7 @@
 		<h2>センサー機器一覧</h2>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-sm-6">
 		<h2>センサー機器新規一括登録</h2>
@@ -16,6 +17,7 @@
 		</form>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-sm-6">
 		<form action="/admin/sensor/list" method="get">
@@ -28,6 +30,7 @@
 		</form>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-sm-12">
 		<div class="panel panel-default">
@@ -113,6 +116,15 @@ if(isset($sensor['clients'])) {
 ?>
 			</table>
 		</div>
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/admin/sensor/list?page=<?php echo $page - 1; ?>&query=<?php echo $query; ?>"><span aria-hidden="true">&larr;</span> 前へ</a></li>
+    <li class="next"><a href="/admin/sensor/list?page=<?php echo $page + 1; ?>&query=<?php echo $query; ?>">次へ <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
 
 	</div>
+
+
 </div>
+
