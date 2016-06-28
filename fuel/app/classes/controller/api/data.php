@@ -624,3 +624,4 @@ class Controller_Api_Data extends Controller_Api
         }
         return $this->result(); 
     }
+}
