@@ -175,7 +175,7 @@ class Controller_Api_Data extends Controller_Api
 			$end_time = strtotime($date." 24:00:00");
 			$end = 60 * 24 / $span;
 
-			//$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_name AND date BETWEEN :start_time AND :end_time';
+			$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_name AND date BETWEEN :start_time AND :end_time';
 			//$sql = "SELECT SUBSTRING(CONVERT(NVARCHAR, date, 114),0,16) AS date, avg(active), avg(temperature) FROM data WHERE sensor_id = :sensor_name AND date BETWEEN :start_time AND :end_time GROUP BY SUBSTRING(CONVERT(NVARCHAR, date, 114),0,16)";
 			$query = DB::query($sql);
 			$query->parameters(array(
@@ -624,5 +624,3 @@ class Controller_Api_Data extends Controller_Api
         }
         return $this->result(); 
     }
-
-}
