@@ -104,11 +104,21 @@ $(function(){
 
 	function drawData() {
 		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
-			$("#data_temperature").attr("data-text", result.data.temperature + "°C");
-			$("#data_humidity").attr("data-text", result.data.humidity + "%");
-			$("#data_illuminance").attr("data-text", result.data.illuminance + "lux");
-			$("#data_active").attr("data-text", result.data.active);
-			$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
+			if(typeof result.data.temperature != "undefined") {
+				$("#data_temperature").attr("data-text", result.data.temperature + "°C");
+			}
+			if(typeof result.data.humidity != "undefined") {
+				$("#data_humidity").attr("data-text", result.data.humidity + "%");
+			}
+			if(typeof result.data.illuminance != "undefined") {
+				$("#data_illuminance").attr("data-text", result.data.illuminance + "lux");
+			}
+			if(typeof result.data.active != "undefined") {
+				$("#data_active").attr("data-text", result.data.active);
+			}
+			if(typeof result.data.discomfort != "undefined") {
+				$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
+			}
 			$('.myStat').empty();
 			$('.myStat').circliful();
 		});
