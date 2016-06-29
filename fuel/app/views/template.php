@@ -70,9 +70,6 @@
 $(document).ready(function() {
     $(".fancybox").fancybox();
   }); 
-$(document).ready(function(){
-    $('.myStat').circliful();
-});
 </script> 
 <!-- /円グラフ --> 
 <script src="/js/drawer.min.js" charset="utf-8"></script> 

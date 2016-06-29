@@ -4,6 +4,48 @@ if(isset($client)) {
 	<script type="text/javascript">
 	var sensor_id = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var date = "<?php echo $date; ?>";
+<?php
+if(!empty($temperature)) {
+?>
+	var temperature = 1;
+<?php
+}
+?>
+<?php
+if(!empty($humidity)) {
+?>
+	var humidity = 1;
+<?php
+}
+?>
+<?php
+if(!empty($active)) {
+?>
+	var active = 1;
+<?php
+}
+?>
+<?php
+if(!empty($illuminance)) {
+?>
+	var illuminance = 1;
+<?php
+}
+?>
+<?php
+if(!empty($wake_up_time)) {
+?>
+	var wake_up_time = 1;
+<?php
+}
+?>
+<?php
+if(!empty($sleep_time)) {
+?>
+	var sleep_time = 1;
+<?php
+}
+?>
 	</script>
 		<!-- content start -->
 		<section id="contentBox">
@@ -27,7 +69,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">     </p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['temperature']) ? round($data['temperature'], 1) : ""; ?>°C" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" id="data_temperature" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p>室温</p>
@@ -38,7 +80,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">   </p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['humidity']) ? round($data['humidity'], 1) : ""; ?>%" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" id="data_humidity" data-dimension="153" data-text="" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p>湿度</p>
@@ -49,7 +91,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank"> </p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['active']) ? round($data['active'], 1) : ""; ?>" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_active" data-dimension="153" data-text="" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p>運動量</p>
@@ -60,7 +102,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">     </p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['illuminance']) ? $data['illuminance'] : ""; ?>lux" data-percent="<?php echo isset($data['illuminance']) ? $data['illuminance'] / 10 : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_illuminance" data-dimension="153" data-text="" data-percent="<?php echo isset($data['illuminance']) ? $data['illuminance'] / 10 : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
 							<p>照度</p>
@@ -71,7 +113,7 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
 						<div class="graph_chart">
-							<div class="myStat" data-dimension="153" data-text="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>%" data-percent="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_discomfort" data-dimension="153" data-text="" data-percent="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
 							<p>不快指数</p>

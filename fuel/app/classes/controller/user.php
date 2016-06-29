@@ -76,6 +76,25 @@ class Controller_User extends Controller_Base
 	    	$this->data['date'] = date("Y-m-d");
 	    }
 
+	    if(Input::param("temperature")) {
+	    	$this->data['temperature'] = true;
+	    } 
+	    if(Input::param("humidity")) {
+	    	$this->data['humidity'] = true;
+	    } 
+	    if(Input::param("illuminance")) {
+	    	$this->data['illuminance'] = true;
+	    } 	  
+	    if(Input::param("active")) {
+	    	$this->data['active'] = true;
+	    }   
+	    if(Input::param("wake_up_time")) {
+	    	$this->data['wake_up_time'] = true;
+	    }   
+	    if(Input::param("sleep_time")) {
+	    	$this->data['sleep_time'] = true;
+	    }   
+
 	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
 	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
 
