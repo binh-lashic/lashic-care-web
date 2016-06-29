@@ -9,28 +9,35 @@ $(function(){
 	    );
     }
 
-/*
-	api("user/login_check", null, function(result){
-		console.log(result.data);
-	});
-*/
-/*
-    $("#login").submit(function() {
-		var params = {
-			'username': $("#username").val(),
-			'password': $("#password").val()
-		};
-		api("user/login", params, function(result){
-			if(result.data) {
-				console.log(result.data);
-				location.href = "/user/";
-			}
-		});
-		return false;
-	});
-*/
+    if(typeof temperature != "undefined") {
+		$("#graph_temperature").prop('checked', true);
+	}
+    if(typeof humidity != "undefined") {
+		$("#graph_humidity").prop('checked', true);
+	}
+    if(typeof illuminance != "undefined") {
+		$("#graph_illuminance").prop('checked', true);
+	}
+    if(typeof active != "undefined") {
+		$("#graph_active").prop('checked', true);
+	}
+    if(typeof wake_up_time != "undefined") {
+		$("#graph_wake_up_time").prop('checked', true);
+	}
+    if(typeof sleep_time != "undefined") {
+		$("#graph_sleep_time").prop('checked', true);
+	}
+
+	setInterval(
+		function() {
+			drawGraph();
+			drawData();
+		},
+	60000);
+
 	if(typeof sensor_id != "undefined" && typeof date != "undefined" ) {
 		drawGraph();
+		drawData();
 	}
 
 	$(".graph_checkbox").change(function() {
@@ -95,6 +102,28 @@ $(function(){
 		drawCalender();
 	}
 
+	function drawData() {
+		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+			if(typeof result.data.temperature != "undefined") {
+				$("#data_temperature").attr("data-text", result.data.temperature + "°C");
+			}
+			if(typeof result.data.humidity != "undefined") {
+				$("#data_humidity").attr("data-text", result.data.humidity + "%");
+			}
+			if(typeof result.data.illuminance != "undefined") {
+				$("#data_illuminance").attr("data-text", result.data.illuminance + "lux");
+			}
+			if(typeof result.data.active != "undefined") {
+				$("#data_active").attr("data-text", result.data.active);
+			}
+			if(typeof result.data.discomfort != "undefined") {
+				$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
+			}
+			$('.myStat').empty();
+			$('.myStat').circliful();
+		});
+	}
+
 	function drawCalender() {
 		$('.calendar_body').html("");
 		$(".calendar_year_month").text((selected_date.getMonth() + 1) + "月 " + selected_date.getFullYear());
@@ -152,8 +181,31 @@ $(function(){
 		}
 
 		$(".graph24_cal-active span").on("click", function() {
-			location.href = "/user/?date=" + $(this).attr("data-date");
+			changeDate($(this).attr("data-date"));
 		});
+	}
+
+	function changeDate(date) {
+		var url =  "/user/?date=" + date;
+		if($("#graph_temperature").prop('checked')) {
+			url += "&temperature=1";
+		}
+		if($("#graph_humidity").prop('checked')) {
+			url += "&humidity=1";
+		}
+		if($("#graph_illuminance").prop('checked')) {
+			url += "&illuminance=1";
+		}		
+		if($("#graph_active").prop('checked')) {
+			url += "&active=1";
+		}
+		if($("#graph_wake_up_time").prop('checked')) {
+			url += "&wake_up_time=1";
+		}
+		if($("#graph_sleep_time").prop('checked')) {
+			url += "&sleep_time=1";
+		}
+		location.href = url;
 	}
 
 	$(".graph_setting").click(function() {

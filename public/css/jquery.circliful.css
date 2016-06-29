@@ -18,3 +18,7 @@
 	position: relative;
 	bottom: 4px;
 }
+
+.graph_tile {
+	height:169px;
+}

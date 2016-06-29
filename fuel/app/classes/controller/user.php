@@ -40,15 +40,6 @@ class Controller_User extends Controller_Base
     	$this->data['client'] = $client;
 	    $this->data['admins'] = \Model_User::getAdmins($client['id']);
 
-	    if(Input::param("date")) {
-	    	$this->data['date'] = Input::param("date");
-	    } else {
-	    	$this->data['date'] = date("Y-m-d");
-	    }
-
-	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
-	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
-
 	    if(Input::param("page")) {
 	    	$this->data['page'] = Input::param("page");
 	    } else {
@@ -61,8 +52,6 @@ class Controller_User extends Controller_Base
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
 				$this->data['sensor'] = $sensors[0];
-
-				//$this->data['data_daily'] = \Model_Data_Daily::getLatestData($this->data['sensor']['id']);
 				$params = array(
 					'sensor_id' => $this->data['sensor']['id'],
 					'limit' => Config::get("report_list_count"),
@@ -80,6 +69,35 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
+
+	    if(Input::param("date")) {
+	    	$this->data['date'] = Input::param("date");
+	    } else {
+	    	$this->data['date'] = date("Y-m-d");
+	    }
+
+	    if(Input::param("temperature")) {
+	    	$this->data['temperature'] = true;
+	    } 
+	    if(Input::param("humidity")) {
+	    	$this->data['humidity'] = true;
+	    } 
+	    if(Input::param("illuminance")) {
+	    	$this->data['illuminance'] = true;
+	    } 	  
+	    if(Input::param("active")) {
+	    	$this->data['active'] = true;
+	    }   
+	    if(Input::param("wake_up_time")) {
+	    	$this->data['wake_up_time'] = true;
+	    }   
+	    if(Input::param("sleep_time")) {
+	    	$this->data['sleep_time'] = true;
+	    }   
+
+	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
+	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
+
 		if(isset($this->data['sensor'])) {
 			$this->data['data_daily'] = \Model_Data_Daily::getData($this->data['sensor']['id'], $this->data['date']);
 
