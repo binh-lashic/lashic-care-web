@@ -198,6 +198,10 @@ $(function(){
 		location.href = url;
 	}
 
+	$(".change_date").on("click", function() {
+		changeDate($(this).attr("data-date"));
+	});
+
 	$(".graph_setting").click(function() {
 		console.log("graph_setting");
 		//センサーの設定
