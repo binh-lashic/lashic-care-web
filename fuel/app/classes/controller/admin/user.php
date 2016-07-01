@@ -30,16 +30,16 @@ class Controller_Admin_User extends Controller_Admin
 
     public function action_list() {
         $data = array();
+        $data['page'] = Input::param("page") ? Input::param("page") : 1;
+        $query = array(
+            'admin' => 1,
+            'limit' => 10,
+            'page' => $data['page'],
+        );
         if(Input::param('query')) {
-            $admins = Model_User::getSearch(array(
-                'query' => Input::param('query'),
-                'admin' => 1,
-            ));            
-        } else {
-            $admins = Model_User::getSearch(array(
-                'admin' => 1,
-            ));   
+             $query['query'] = Input::param('query');
         }
+        $admins = Model_User::getSearch($query);
 
         foreach($admins as $admin) {
             $sensors = \Model_User::getSensors($admin['id']);
