@@ -272,6 +272,12 @@ class Model_User extends Orm\Model{
 				  ->or_where_close()
 				  ->and_where_close();
 		}
+		if(isset($params['limit'])) {
+			$query->limit($params['limit']);
+			if(isset($params['page'])) {
+				$query->offset($params['limit'] * ($params['page'] - 1));
+			}
+		}
 		$rows = $query->order_by('id', 'desc')->from_cache(false)->get();
 		$users = array();
 		foreach($rows as $row) {

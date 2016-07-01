@@ -61,8 +61,8 @@ if(isset($admins)) {
 		</div>
 		<nav>
 		  <ul class="pager">
-		    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 前へ</a></li>
-		    <li class="next"><a href="#">次へ <span aria-hidden="true">&rarr;</span></a></li>
+		    <li class="previous"><a href="/admin/user/list?page=<?php echo $page - 1; ?>&query=<?php echo $query; ?>"><span aria-hidden="true">&larr;</span> 前へ</a></li>
+		    <li class="next"><a href="/admin/user/list?page=<?php echo $page + 1; ?>&query=<?php echo $query; ?>">次へ <span aria-hidden="true">&rarr;</span></a></li>
 		  </ul>
 		</nav>
 	</div>

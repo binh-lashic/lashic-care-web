@@ -127,4 +127,3 @@ if(isset($sensor['clients'])) {
 
 
 </div>
-
