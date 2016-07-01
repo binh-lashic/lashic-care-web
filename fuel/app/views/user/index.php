@@ -149,8 +149,8 @@ if(!empty($sleep_time)) {
 				<div class="graph24_hdr">
 					<p class="graph24_day">今日 <?php echo date("m/d", strtotime($date)); ?>（<?php echo Util::format_week(date("w", strtotime($date))); ?>）</p>
 					<ul>
-						<li class="graph24_back"><a href="/user/?date=<?php echo $prev_date; ?>"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
-						<li class="graph24_next"><a href="/user/?date=<?php echo $next_date; ?>"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_back"><a class="change_date" href="javascript:void(0)" data-date="<?php echo $prev_date; ?>"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_next"><a class="change_date" href="javascript:void(0)" data-date="<?php echo $next_date; ?>"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
 					</ul>
 					<div class="graph24_calendar">
 						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="/images/graph/graph_btn_calender_off.png" width="90" height="41" alt=""/></a>
