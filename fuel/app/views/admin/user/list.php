@@ -22,7 +22,8 @@
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-3">名前</th>
-					<th class="col-sm-4">センサー機器</th>
+					<th class="col-sm-3">センサー機器</th>
+					<th class="col-sm-1">流入元</th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
 				</tr>
@@ -46,6 +47,7 @@ if(isset($admins)) {
 	}
 ?>
 					</td>
+					<td><?php echo $admin['affiliate']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
 					</td>
