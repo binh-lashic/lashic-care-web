@@ -9,6 +9,7 @@ class Model_Sensor extends Orm\Model{
 	protected static $_properties = array(
 		'id',
 		'name',
+		'serial',
 		'wake_up_start_time' => array('default' => 5),
 		'wake_up_end_time' => array('default' => 9),
 		'sleep_start_time' => array('default' => 19),
@@ -168,8 +169,11 @@ class Model_Sensor extends Orm\Model{
 		}
 		if(isset($params['id'])) {
 	    	$sensor = \Model_Sensor::find($params['id']);
-		} else {
-			$sensor = \Model_Sensor::forge();
+		} else if(isset($params['name'])) {
+			$sensor = \Model_Sensor::getSensorFromSensorName($params['name']);
+			if(empty($sensor)) {
+				$sensor = \Model_Sensor::forge();
+			}
 		}
     	if($sensor) {
     		unset($params['q']);

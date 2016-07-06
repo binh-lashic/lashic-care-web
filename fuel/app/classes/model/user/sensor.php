@@ -109,7 +109,9 @@ class Model_User_Sensor extends Orm\Model{
 			$user_sensor = $user_sensor->to_array();
 		} else {
 			$sensor = \Model_Sensor::find($params['sensor_id']);
-			$user_sensor['sensor'] = $sensor->to_array();
+			if(!empty($sensor)) {
+				$user_sensor['sensor'] = $sensor->to_array();
+			}
 		}
     	return \Model_User_Sensor::format($user_sensor);
     }
