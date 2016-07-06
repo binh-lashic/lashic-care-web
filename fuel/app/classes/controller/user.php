@@ -462,6 +462,9 @@ class Controller_User extends Controller_Base
 
 	public function action_login()
 	{
+		if(!empty($this->param('affiliate'))) {
+	        Cookie::set('affiliate', $this->param('affiliate'), 60 * 60 * 24 * 90);
+		}
 		$username = Input::post("username");
 		$password = Input::post("password");
 		$data = array();
