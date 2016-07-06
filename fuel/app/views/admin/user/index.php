@@ -72,6 +72,12 @@
 						<?php echo $user['gender']; ?>
 					</td>
 				</tr>
+				<tr>
+					<td class="info text-right">アフィリエイト</td>
+					<td>
+						<?php echo $user['affiliate']; ?>
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>
