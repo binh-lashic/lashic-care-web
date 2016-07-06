@@ -64,7 +64,7 @@
 <script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
 <!-- 円グラフ --> 
-<script src="/js/jquery.circliful.min.js"></script> 
+<script src="/js/jquery.circliful.js"></script> 
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script>
 $(document).ready(function() {

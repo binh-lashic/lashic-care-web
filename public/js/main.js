@@ -36,8 +36,8 @@ $(function(){
 	60000);
 
 	if(typeof sensor_id != "undefined" && typeof date != "undefined" ) {
-		drawGraph();
 		drawData();
+		drawGraph();
 	}
 
 	$(".graph_checkbox").change(function() {
@@ -103,23 +103,81 @@ $(function(){
 	}
 
 	function drawData() {
+		var today = new Date(date);
+		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
+		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ] ;
+		$("#today_week").html(weekDayList[today.getDay()]);
+
+		var prev_date = new Date();
+		prev_date.setDate(today.getDate() - 1);
+		
+		$("#prev_date").attr("data-date", prev_date.getFullYear() + "-" + (prev_date.getMonth() + 1) + "-" + prev_date.getDate());
+
+		var next_date = new Date();
+		next_date.setDate(today.getDate() + 1);
+
+		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
+
 		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+			$('.myStat').empty();
 			if(typeof result.data.temperature != "undefined") {
 				$("#data_temperature").attr("data-text", result.data.temperature + "°C");
+				$("#data_temperature").attr("data-percent", result.data.temperature);
+			} else {
+				$("#data_temperature").attr("data-text", "");
+				$("#data_temperature").attr("data-percent","");
 			}
 			if(typeof result.data.humidity != "undefined") {
 				$("#data_humidity").attr("data-text", result.data.humidity + "%");
+				$("#data_humidity").attr("data-percent", result.data.humidity);
+			} else {
+				$("#data_humidity").attr("data-text", "");
+				$("#data_humidity").attr("data-percent","");
 			}
 			if(typeof result.data.illuminance != "undefined") {
 				$("#data_illuminance").attr("data-text", result.data.illuminance + "lux");
+				$("#data_illuminance").attr("data-percent", result.data.illuminance / 10);
+			} else {
+				$("#data_illuminance").attr("data-text", "");
+				$("#data_illuminance").attr("data-percent","");
 			}
 			if(typeof result.data.active != "undefined") {
 				$("#data_active").attr("data-text", result.data.active);
+				$("#data_active").attr("data-percent", result.data.active);
+			} else {
+				$("#data_active").attr("data-text", "");
+				$("#data_active").attr("data-percent","");
 			}
 			if(typeof result.data.discomfort != "undefined") {
 				$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
+				$("#data_discomfort").attr("data-percent", result.data.discomfort);
+			} else {
+				$("#data_discomfort").attr("data-text", "");
+				$("#data_discomfort").attr("data-percent","");
 			}
-			$('.myStat').empty();
+
+			if(result.data.wake_up_time != null) {
+				$("#data_wake_up_time").html(result.data.wake_up_time.substring(0, 5));
+				wake_up_time_data = result.data.wake_up_time.substring(0, 4) + "0";
+			} else {
+				$("#data_wake_up_time").empty();
+			}
+			if(result.data.sleep_time != null) {
+				$("#data_sleep_time").html(result.data.sleep_time.substring(0, 5));
+				sleep_time_data = result.data.sleep_time.substring(0, 4) + "0";
+			} else {
+				$("#data_sleep_time").empty();
+			}
+			if(result.data.wake_up_time_average != null) {
+				$("#data_wake_up_time_average").html(result.data.wake_up_time_average.substring(0, 5));
+			} else {
+				$("#data_wake_up_time_average").empty();
+			}
+			if(result.data.sleep_time_average != null) {
+				$("#data_sleep_time_average").html(result.data.sleep_time_average.substring(0, 5));
+			} else {
+				$("#data_sleep_time_average").empty();
+			}
 			$('.myStat').circliful();
 		});
 	}
@@ -140,6 +198,7 @@ $(function(){
 			$td.append($span);
 			$tr.append($td);
 		}
+		
 		for(var i = 1; i <= last_date.getDate(); i++) {
 			var week = (i + first_date.getDay() - 1) % 7;
 			$td = $('<td>');
@@ -185,27 +244,31 @@ $(function(){
 		});
 	}
 
-	function changeDate(date) {
-		var url =  "/user/?date=" + date;
+	function changeDate(_date) {
+		date = _date;
 		if($("#graph_temperature").prop('checked')) {
-			url += "&temperature=1";
+			temperature = 1;
 		}
 		if($("#graph_humidity").prop('checked')) {
-			url += "&humidity=1";
+			humidity = 1;
 		}
 		if($("#graph_illuminance").prop('checked')) {
-			url += "&illuminance=1";
+			illuminance = 1;
 		}		
 		if($("#graph_active").prop('checked')) {
-			url += "&active=1";
+			active = 1;
 		}
 		if($("#graph_wake_up_time").prop('checked')) {
-			url += "&wake_up_time=1";
+			wake_up_time = 1;
 		}
 		if($("#graph_sleep_time").prop('checked')) {
-			url += "&sleep_time=1";
+			sleep_time = 1;
 		}
-		location.href = url;
+		wake_up_time_data = "";
+		sleep_time_data = "";
+		drawGraph();
+		drawData();
+//		location.href = url;
 	}
 
 	$(".change_date").on("click", function() {
@@ -266,43 +329,32 @@ $(function(){
 		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
 			console.log("drawGraph");
 			var values = [];
-			var graphs = [];
-			if($("#graph_wake_up_time").prop('checked') || $("#graph_sleep_time").prop('checked')) {
-				api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
-					/*
-					if($("#graph_wake_up_time").prop('checked')) {
-						graphs.push({
-						        "valueAxis": "wake_up_time",
-						        "bullet": "round",
-						        "bulletBorderAlpha": 1,
-						        "bulletSize": 8,
-						        "bulletColor": "#FFFFFF",
-						        "title": "湿度",
-						        "valueField": "humidity",
-								"fillAlphas": 0
-							});							
-					}*/
-				});
-			}		
+			var graphs = [];			
+			var display_graphs = [];
+
 			if($("#graph_temperature").prop('checked')) {
-				values.push({
+				display_graphs.push({
+					value:{
 				        "id":"temperature",
-				        "color": "#FF9900",
+				        "axisColor": "#FF9900",
+				        "axisThickness": 2,
 				        "gridAlpha": 0,
-				        "axisAlpha": 0,
+				        "axisAlpha": 1,
 				        "position": "left"
-				    });
-				graphs.push({
+				    },
+				    graph:{
 				        "valueAxis": "temperature",
 				        "lineColor": "#FF9900",
 				        "lineThickness": 2,
 				        "title": "室温",
 				        "connect": false,
 				        "valueField": "temperature",
-					});			
+					}
+				});
 			}
 			if($("#graph_humidity").prop('checked')) {
-				values.push({
+				display_graphs.push({
+					value:{
 				        "id":"humidity",
 				        "axisColor": "#88D3F5",
 				        "axisThickness": 2,
@@ -310,18 +362,20 @@ $(function(){
 				        "axisAlpha": 1,
 				        "position": "left",
        					"offset": values.length * 50,
-				    });
-				graphs.push({
+				    },
+				    graph:{
 				        "valueAxis": "humidity",
 				        "lineColor": "#88D3F5",
 				        "lineThickness": 2,
 				        "title": "湿度",
 				        "connect": false,
 				        "valueField": "humidity",
-					});			
+					}
+				});	
 			}
 			if($("#graph_illuminance").prop('checked')) {
-				values.push({
+				display_graphs.push({
+					value:{
 				        "id":"illuminance",
 				        "axisColor": "#DED31C",
 				        "axisThickness": 2,
@@ -329,18 +383,20 @@ $(function(){
 				        "axisAlpha": 1,
 				        "position": "left",
        					"offset": values.length * 50,
-				    });
-				graphs.push({
+				    },
+				    graph:{
 				        "valueAxis": "illuminance",
 				        "lineColor": "#DED31C",
 				        "lineThickness": 2,
 				        "title": "照度",
 				        "connect": false,
 				        "valueField": "illuminance",
-					});			
+					}
+				});			
 			}
 			if($("#graph_active").prop('checked')) {
-				values.push({
+				display_graphs.push({
+					value:{
 				        "id":"active",
 				        "axisColor": "#EB71B6",
 				        "axisThickness": 2,
@@ -348,8 +404,8 @@ $(function(){
 				        "axisAlpha": 1,
 				        "position": "left",
        					"offset": values.length * 50,
-				    });    
-				graphs.push({
+				    },
+				    graph:{
 						"valueAxis": "active",
 						"lineColor": "#EB71B6",
 				        "columnWidth": 1,
@@ -358,8 +414,75 @@ $(function(){
 				        "type": "column",
 				        "connect": false,
 				        "valueField": "active",
-				    });			
+					}
+				});		
 			}
+
+			$.each(result.data, function(i, item){
+				if(typeof wake_up_time_data != "undefined") {
+					if(wake_up_time_data == item.time.substring(11, 16)) {
+						result.data[i].wake_up_time = 5;
+					}
+					if(sleep_time_data == item.time.substring(11, 16)) {
+						result.data[i].sleep_time = 5;
+					}	
+				}
+			});
+			if($("#graph_wake_up_time").prop('checked')) {
+				values.push({
+				    "id":"wake_up_time",
+			        "axisThickness": 0,
+			        "gridAlpha": 0,
+			        "axisAlpha": 0,
+			        "color":"#FFFFFF",
+				    "position": "left",
+				});
+				graphs.push({
+					"valueAxis": "wake_up_time",
+					"lineColor": "#FF0000",
+					"useLineColorForBulletBorder": true,
+			        "bullet": "round",
+			        "bulletBorderAlpha": 1,
+			        "bulletSize": 8,
+			        "bulletColor": "#FFFFFF",
+			        "title": "起床時間",
+			        "valueField": "wake_up_time",
+					"fillAlphas": 0
+				});												
+			}
+			if($("#graph_sleep_time").prop('checked')) {
+				values.push({
+				    "id":"sleep_time",
+			        "axisThickness": 0,
+			        "gridAlpha": 0,
+			        "axisAlpha": 0,
+			        "color":"#FFFFFF",
+				    "position": "left",
+				});
+				graphs.push({
+					"valueAxis": "sleep_time",
+					"lineColor": "#3300FF",
+					"useLineColorForBulletBorder": true,
+			        "bullet": "round",
+			        "bulletBorderAlpha": 1,
+			        "bulletSize": 8,
+			        "bulletColor": "#FFFFFF",
+			        "title": "睡眠時間",
+			        "valueField": "sleep_time",
+					"fillAlphas": 0
+				});	
+			}
+			$.each(display_graphs, function(i, item){
+				if(i % 2 == 0) {
+					item.value.position = "left";
+				} else {
+					item.value.position = "right";
+				}
+				item.value.offset = parseInt(i / 2) * 50;
+				values.push(item.value);
+			    graphs.push(item.graph);
+			});
+
 			var chart = AmCharts.makeChart("graph", {
 			    "type": "serial",
 			    "theme": "light",
