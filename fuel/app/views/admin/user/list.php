@@ -23,7 +23,7 @@
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-3">名前</th>
 					<th class="col-sm-3">センサー機器</th>
-					<th class="col-sm-1">アフィリエイト</th>
+					<th class="col-sm-1">流入元</th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
 				</tr>

@@ -73,7 +73,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="info text-right">アフィリエイト</td>
+					<td class="info text-right">流入元</td>
 					<td>
 						<?php echo $user['affiliate']; ?>
 					</td>
