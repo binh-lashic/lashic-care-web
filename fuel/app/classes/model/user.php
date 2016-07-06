@@ -47,6 +47,7 @@ class Model_User extends Orm\Model{
 		'email_confirm_token',
 		'email_confirm_expired',
 		'master' => array('default' => 0),
+		'affiliate',
 	);
 
     public static function validate($factory)
@@ -168,6 +169,7 @@ class Model_User extends Orm\Model{
 			'email_confirm_token',
 			'email_confirm_expired',
 			'master',
+			'affiliate'
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
@@ -367,7 +369,13 @@ class Model_User extends Orm\Model{
 			$params['email_confirm'] = 0;
 			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
 			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
+			//新規のときだけアフィリエイトを登録
+			if(!empty(Cookie::get("affiliate"))) {
+				$params['affiliate'] = Cookie::get("affiliate"); 
+				Cookie::delete("affiliate");
+			}
 		}
+
 		$user = \Model_User::find($id);
 		unset($params['id']);
 		unset($params['username']);
