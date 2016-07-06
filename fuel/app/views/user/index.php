@@ -4,6 +4,16 @@ if(isset($client)) {
 	<script type="text/javascript">
 	var sensor_id = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var date = "<?php echo $date; ?>";
+	var wake_up_time_data = "";
+	var sleep_time_data = "";
+
+<?php
+if(empty($temperature) && empty($humidity) && empty($active) && empty($illuminance) && empty($wake_up_time) && empty($sleep_time)) {
+?>
+	var temperature = 1;
+<?php
+}
+?>
 <?php
 if(!empty($temperature)) {
 ?>
@@ -57,19 +67,19 @@ if(!empty($sleep_time)) {
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
-						<p class="graph_text">起床 <span class="graph_number"><?php echo !empty($data_daily['wake_up_time']) ? date("H:i", strtotime($data_daily['wake_up_time'])) : ""; ?></span></p>
-						<p class="graph_text_gray">（平均起床時間 <?php echo !empty($data_latest['wake_up_time_average']) ? date("H:i", strtotime($data_latest['wake_up_time_average'])) : ""; ?>）</p>
+						<p class="graph_text">起床 <span class="graph_number" id="data_wake_up_time"></span></p>
+						<p class="graph_text_gray">（平均起床時間 <span id="data_wake_up_time_average"></span>）</p>
 						<hr>
 						<p class="graph_rank">     </p>
-						<p class="graph_text">就寝 <span class="graph_number"><?php echo !empty($data_daily['sleep_time']) ? date("H:i", strtotime($data_daily['sleep_time'])) : ""; ?></span></p>
-						<p class="graph_text_gray">（平均就寝時間 <?php echo !empty($data_latest['sleep_time_average']) ? date("H:i", strtotime($data_latest['sleep_time_average'])) : ""; ?>）</p>
+						<p class="graph_text">就寝 <span class="graph_number" id="data_sleep_time"></span></p>
+						<p class="graph_text_gray">（平均就寝時間 <span id="data_sleep_time_average"></span>）</p>
 					</div>
 				</li>
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">     </p>
 						<div class="graph_chart">
-							<div class="myStat" id="data_temperature" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="<?php echo isset($data['temperature']) ? $data['temperature'] : ""; ?>" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" id="data_temperature" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p>室温</p>
@@ -80,7 +90,7 @@ if(!empty($sleep_time)) {
 					<div class="graph_set">
 						<p class="graph_rank">   </p>
 						<div class="graph_chart">
-							<div class="myStat" id="data_humidity" data-dimension="153" data-text="" data-percent="<?php echo isset($data['humidity']) ? $data['humidity'] : ""; ?>" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
+							<div class="myStat" id="data_humidity" data-dimension="153" data-text="" data-percent="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p>湿度</p>
@@ -91,7 +101,7 @@ if(!empty($sleep_time)) {
 					<div class="graph_set">
 						<p class="graph_rank"> </p>
 						<div class="graph_chart">
-							<div class="myStat" id="data_active" data-dimension="153" data-text="" data-percent="<?php echo isset($data['active']) ? $data['active'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_active" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p>運動量</p>
@@ -102,7 +112,7 @@ if(!empty($sleep_time)) {
 					<div class="graph_set">
 						<p class="graph_rank">     </p>
 						<div class="graph_chart">
-							<div class="myStat" id="data_illuminance" data-dimension="153" data-text="" data-percent="<?php echo isset($data['illuminance']) ? $data['illuminance'] / 10 : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_illuminance" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
 							<p>照度</p>
@@ -113,7 +123,7 @@ if(!empty($sleep_time)) {
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
 						<div class="graph_chart">
-							<div class="myStat" id="data_discomfort" data-dimension="153" data-text="" data-percent="<?php echo isset($data['discomfort']) ? $data['discomfort'] : ""; ?>" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
+							<div class="myStat" id="data_discomfort" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
 							<p>不快指数</p>
@@ -128,7 +138,7 @@ if(!empty($sleep_time)) {
 			<table class="graph24_select lazy">
 				<tr>
 					<th>グラフ表示項目選択</th>
-					<td class="clearfix"><input type="checkbox" id="graph_temperature" class="graph_checkbox" checked="checked">
+					<td class="clearfix"><input type="checkbox" id="graph_temperature" class="graph_checkbox">
 						<label for="graph_temperature" class="checkbox">室温 <img src="/images/graph/graph_select_01.png" width="25" height="9" alt=""/></label>
 						<input type="checkbox" id="graph_humidity" class="graph_checkbox">
 						<label for="graph_humidity" class="checkbox">湿度 <img src="/images/graph/graph_select_02.png" width="25" height="9" alt=""/></label>
@@ -137,9 +147,9 @@ if(!empty($sleep_time)) {
 						<input type="checkbox" id="graph_illuminance" class="graph_checkbox">
 						<label for="graph_illuminance" class="checkbox">照度 <img src="/images/graph/graph_select_04.png" width="25" height="9" alt=""/></label>
 						<br>
-						<input type="checkbox" id="graph_wake_up_time">
+						<input type="checkbox" id="graph_wake_up_time" class="graph_checkbox">
 						<label for="graph_wake_up_time" class="checkbox">起床時間 <img src="/images/graph/graph_select_06.png" width="15" height="15" alt=""/></label>
-						<input type="checkbox" id="graph_sleep_time">
+						<input type="checkbox" id="graph_sleep_time" class="graph_checkbox">
 						<label for="graph_sleep_time" class="checkbox">就寝時間 <img src="/images/graph/graph_select_07.png" width="15" height="15" alt=""/></label></td>
 				</tr>
 			</table>
@@ -147,10 +157,10 @@ if(!empty($sleep_time)) {
 
 			<div class="graph24_chart_line">
 				<div class="graph24_hdr">
-					<p class="graph24_day">今日 <?php echo date("m/d", strtotime($date)); ?>（<?php echo Util::format_week(date("w", strtotime($date))); ?>）</p>
+					<p class="graph24_day">今日 <span id="today"></span>（<span id="today_week"></span>）</p>
 					<ul>
-						<li class="graph24_back"><a class="change_date" href="javascript:void(0)" data-date="<?php echo $prev_date; ?>"><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
-						<li class="graph24_next"><a class="change_date" href="javascript:void(0)" data-date="<?php echo $next_date; ?>"><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_back"><a id="prev_date" class="change_date" href="javascript:void(0)" data-date=""><img src="/images/graph/graph_arrow_blue_back.png" width="12" height="19" alt=""/></a></li>
+						<li class="graph24_next"><a id="next_date" class="change_date" href="javascript:void(0)" data-date=""><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
 					</ul>
 					<div class="graph24_calendar">
 						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="/images/graph/graph_btn_calender_off.png" width="90" height="41" alt=""/></a>
