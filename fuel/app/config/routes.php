@@ -8,4 +8,5 @@ return array(
 	'contents/info' => 'page/news',
 	'contents/kiyaku' => 'page/terms',
 	'contents/privacy' => 'page/privacy',
+	's/:affiliate' => 'user/login'
 );
