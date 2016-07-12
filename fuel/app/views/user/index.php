@@ -11,6 +11,11 @@ if(isset($client)) {
 if(empty($temperature) && empty($humidity) && empty($active) && empty($illuminance) && empty($wake_up_time) && empty($sleep_time)) {
 ?>
 	var temperature = 1;
+	var humidity = 1;
+	var active = 1;
+	var illuminance = 1;
+	var wake_up_time = 1;
+	var sleep_time = 1;
 <?php
 }
 ?>
