@@ -332,6 +332,29 @@ $(function(){
 			var graphs = [];			
 			var display_graphs = [];
 
+			if($("#graph_active").prop('checked')) {
+				display_graphs.push({
+					value:{
+				        "id":"active",
+				        "axisColor": "#CCCCCC",
+				        "axisThickness": 2,
+				        "gridAlpha": 0,
+				        "axisAlpha": 1,
+				        "position": "left",
+       					"offset": values.length * 50,
+				    },
+				    graph:{
+						"valueAxis": "active",
+						"lineColor": "#CCCCCC",
+				        "columnWidth": 1,
+				        "fillAlphas": 1,
+				        "title": "運動量",
+				        "type": "column",
+				        "connect": false,
+				        "valueField": "active",
+					}
+				});		
+			}
 			if($("#graph_temperature").prop('checked')) {
 				display_graphs.push({
 					value:{
@@ -393,29 +416,6 @@ $(function(){
 				        "valueField": "illuminance",
 					}
 				});			
-			}
-			if($("#graph_active").prop('checked')) {
-				display_graphs.push({
-					value:{
-				        "id":"active",
-				        "axisColor": "#EB71B6",
-				        "axisThickness": 2,
-				        "gridAlpha": 0,
-				        "axisAlpha": 1,
-				        "position": "left",
-       					"offset": values.length * 50,
-				    },
-				    graph:{
-						"valueAxis": "active",
-						"lineColor": "#EB71B6",
-				        "columnWidth": 1,
-				        "fillAlphas": 1,
-				        "title": "運動量",
-				        "type": "column",
-				        "connect": false,
-				        "valueField": "active",
-					}
-				});		
 			}
 
 			$.each(result.data, function(i, item){
