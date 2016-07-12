@@ -9,22 +9,39 @@ $(function(){
 	    );
     }
 
-    if(typeof temperature != "undefined") {
+	var temperature = Cookies.get('temperature');
+	var humidity = Cookies.get('humidity');
+	var illuminance = Cookies.get('illuminance');
+	var active = Cookies.get('active');
+	var wake_up_time = Cookies.get('wake_up_time');
+	var sleep_time = Cookies.get('sleep_time');
+
+	//クッキーの設定がない場合はデフォルト
+	if(typeof temperature == "undefined") {
+		temperature = 'true';
+		humidity = 'true';
+		illuminance = 'true';
+		active = 'true';
+		wake_up_time = 'true';
+		sleep_time = 'true';
+	}
+
+    if(typeof temperature != "undefined" && temperature != 'false') {
 		$("#graph_temperature").prop('checked', true);
 	}
-    if(typeof humidity != "undefined") {
+    if(typeof humidity != "undefined" && humidity != 'false') {
 		$("#graph_humidity").prop('checked', true);
 	}
-    if(typeof illuminance != "undefined") {
+    if(typeof illuminance != "undefined" && illuminance != 'false') {
 		$("#graph_illuminance").prop('checked', true);
 	}
-    if(typeof active != "undefined") {
+    if(typeof active != "undefined" && active != 'false') {
 		$("#graph_active").prop('checked', true);
 	}
-    if(typeof wake_up_time != "undefined") {
+    if(typeof wake_up_time != "undefined" && wake_up_time != 'false') {
 		$("#graph_wake_up_time").prop('checked', true);
 	}
-    if(typeof sleep_time != "undefined") {
+    if(typeof sleep_time != "undefined" && sleep_time != 'false') {
 		$("#graph_sleep_time").prop('checked', true);
 	}
 
@@ -331,6 +348,12 @@ $(function(){
 			var values = [];
 			var graphs = [];			
 			var display_graphs = [];
+			Cookies.set('active', $("#graph_active").prop('checked'), { expires: 90 });
+			Cookies.set('temperature', $("#graph_temperature").prop('checked'), { expires: 90 });
+			Cookies.set('humidity', $("#graph_humidity").prop('checked'), { expires: 90 });
+			Cookies.set('illuminance', $("#graph_illuminance").prop('checked'), { expires: 90 });
+			Cookies.set('wake_up_time', $("#graph_wake_up_time").prop('checked'), { expires: 90 });
+			Cookies.set('sleep_time', $("#graph_sleep_time").prop('checked'), { expires: 90 });
 
 			if($("#graph_active").prop('checked')) {
 				display_graphs.push({
