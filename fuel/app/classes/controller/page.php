@@ -66,7 +66,7 @@ class Controller_Page extends Controller_Template
     }
     public function action_terms()
     {        
-        Response::redirect('http://www.infic-c.net/careeye/kiyaku.htm');
+        Response::redirect('http://www.infic-c.net/careeye/kiyaku.html');
         return;
         $this->template->title = '利用規約';
         $this->data['breadcrumbs'] = array($this->template->title);
@@ -76,7 +76,7 @@ class Controller_Page extends Controller_Template
     }
     public function action_privacy()
     {        
-        Response::redirect('http://www.infic-c.net/careeye/privacy.htm');
+        Response::redirect('http://www.infic-c.net/careeye/privacy.html');
         return;
         $this->template->title = 'プライバシーポリシー';
         $this->data['breadcrumbs'] = array($this->template->title);
