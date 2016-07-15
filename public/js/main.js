@@ -359,7 +359,7 @@ $(function(){
 				display_graphs.push({
 					value:{
 				        "id":"active",
-				        "axisColor": "#CCCCCC",
+				        "axisColor": "#FFCCFF",
 				        "axisThickness": 2,
 				        "gridAlpha": 0,
 				        "axisAlpha": 1,
@@ -368,7 +368,7 @@ $(function(){
 				    },
 				    graph:{
 						"valueAxis": "active",
-						"lineColor": "#CCCCCC",
+						"lineColor": "#FFCCFF",
 				        "columnWidth": 1,
 				        "fillAlphas": 1,
 				        "title": "運動量",
