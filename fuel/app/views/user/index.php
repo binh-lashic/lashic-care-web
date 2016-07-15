@@ -6,56 +6,6 @@ if(isset($client)) {
 	var date = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
 	var sleep_time_data = "";
-
-<?php
-if(empty($temperature) && empty($humidity) && empty($active) && empty($illuminance) && empty($wake_up_time) && empty($sleep_time)) {
-?>
-	var temperature = 1;
-<?php
-}
-?>
-<?php
-if(!empty($temperature)) {
-?>
-	var temperature = 1;
-<?php
-}
-?>
-<?php
-if(!empty($humidity)) {
-?>
-	var humidity = 1;
-<?php
-}
-?>
-<?php
-if(!empty($active)) {
-?>
-	var active = 1;
-<?php
-}
-?>
-<?php
-if(!empty($illuminance)) {
-?>
-	var illuminance = 1;
-<?php
-}
-?>
-<?php
-if(!empty($wake_up_time)) {
-?>
-	var wake_up_time = 1;
-<?php
-}
-?>
-<?php
-if(!empty($sleep_time)) {
-?>
-	var sleep_time = 1;
-<?php
-}
-?>
 	</script>
 		<!-- content start -->
 		<section id="contentBox">

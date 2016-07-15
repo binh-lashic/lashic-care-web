@@ -37,7 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
 <script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
-
+<script src="/js/js.cookie.js"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 </head>
 <body id="home" class="drawer drawer--right">
