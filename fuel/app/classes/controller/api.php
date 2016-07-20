@@ -9,7 +9,6 @@ class Controller_Api extends Controller_Rest
 	public function before()
 	{
 	    parent::before();
-
 	   	$method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {    
 	    } else if (Input::param("device_id")){
@@ -21,16 +20,11 @@ class Controller_Api extends Controller_Rest
 	    	}
 	    } else if (!Auth::check()) {
 	    	$this->_error();
-//	    	Response::redirect('/api/user/login_error');
-//	    	return;
 	    }
 	}
 
 	public function _error($msg = 'ログインをしていません') {
-		$this->result = array(
-			'message' => $msg,
-		);
- 		return $this->result();
+	    Response::redirect('/api/user/login_error');
 	}
 
 	public function result($http_status = null) {
@@ -40,6 +34,17 @@ class Controller_Api extends Controller_Rest
 		} else {
 			$this->result['success'] = true;
 		}
+
+	   	$method = Request::active()->action;
+	    if (in_array($method, $this->nologin_methods)) {  
+			$this->result['sesson_error'] = false;
+	    } else {
+			if (Auth::check()) {
+				$this->result['sesson_error'] = false;
+			} else {
+				$this->result['sesson_error'] = true;
+			}
+	    }
 
 		$res = parent::response($this->result, $http_status);
 		$res->set_header('Access-Control-Allow-Origin', '*');

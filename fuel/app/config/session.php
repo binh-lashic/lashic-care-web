@@ -53,7 +53,7 @@ return array(
 	'expire_on_close'	=> false,
 
 	// session expiration time, <= 0 means 2 years! (optional, default = 2 hours)
-	'expiration_time'	=> 86400,
+	'expiration_time'	=> 60,
 
 	// session ID rotation time  (optional, default = 300) Set to false to disable rotation
 	'rotation_time'		=> 300,
@@ -86,6 +86,8 @@ return array(
 	// special configuration settings for cookie based sessions
 	'cookie'			=> array(
 		'cookie_name'		=> 'fuelcid',				// name of the session cookie for cookie based sessions
+		'gc_probability'	=>	100,						// probability % (between 0 and 100) for garbage collection
+
 						),
 
 	// specific configuration settings for file based sessions

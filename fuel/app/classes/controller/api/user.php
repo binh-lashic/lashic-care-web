@@ -90,7 +90,7 @@ class Controller_Api_User extends Controller_Api
 		$this->result = array(
 			'message' => 'ログインをしていません',
 		);
- 		return $this->result();
+ 		return $this->result(401);
 	}
 
 	//ログインチェック
