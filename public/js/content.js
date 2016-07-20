@@ -28,7 +28,16 @@ $(function() {
 		});
 
 
+/* ------------------------------------------------------
 
+リサイズするとリロード
+
+------------------------------------------------------ */
+
+if(!navigator.userAgent.match(/(iPhone|Android|iPad)/)){
+window.onresize = rebuild;
+function rebuild(){ location.reload();}
+}
 		
 		
 /* ------------------------------------------------------
@@ -97,11 +106,29 @@ $(function(){
 	});
 	}
 });
-
-
-
-
-
+$(function(){
+	//*********************************
+	//初期設定
+	
+	var minus2 = 80　//Header+要素AのHeight値（要素B、要素Cと追加していきたい分だけ高さを足してください。）
+	var mainID2 = 'cartMenu'　//高さを動的にするdivのID名
+	hsize2 = $('.cartMenu').height();
+	
+	//*********************************
+	if ($(window).height() < hsize2) {
+	function heightSetting2(){
+		windowH2 = $(window).height();
+		mainH2 = windowH2 - minus2;
+		$('#'+mainID2).height(mainH2+'px');
+	}
+	
+	heightSetting2();
+ 
+	$(window).resize(function() {
+		heightSetting2();
+	});
+	}
+});
 
 
 /* メニュースクロール設定 jquery.mCustomScrollbar.concat.min.js */
@@ -110,6 +137,10 @@ $(function(){
 			$(window).load(function(){
 				
 				$("#mainMenu").mCustomScrollbar({
+					theme:"minimal-dark"
+				});
+				
+				$("#cartMenu").mCustomScrollbar({
 					theme:"minimal-dark"
 				});
 				
@@ -263,6 +294,9 @@ $(function(){
   });
   $(function() {
     $(".tile").tile(3);
+  });
+  $(function() {
+    $(".shopping_tile .shoppingCart_address").tile();
   });
 
 

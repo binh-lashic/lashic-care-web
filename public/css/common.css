@@ -54,9 +54,32 @@ body {
 	text-indent: 100%;
 	white-space: nowrap;
 }
+
+
+/* wide */
+.w300{ width:300px !important;}
+
+
+
+
+
+
 /* margin */
+.mAuto{ margin:0 auto;}
 .mgt0 {
 	margin-top: 0 !important;
+}
+.mgt1 {
+	margin-top: 1px !important;
+}
+.mgt2 {
+	margin-top: 2px !important;
+}
+.mgt3 {
+	margin-top: 3px !important;
+}
+.mgt4 {
+	margin-top: 4px !important;
 }
 .mgt5 {
 	margin-top: 5px !important;
@@ -69,6 +92,33 @@ body {
 }
 .mgt20 {
 	margin-top: 20px !important;
+}
+.mgt21 {
+	margin-top: 21px !important;
+}
+.mgt22 {
+	margin-top: 22px !important;
+}
+.mgt23 {
+	margin-top: 23px !important;
+}
+.mgt24 {
+	margin-top: 24px !important;
+}
+.mgt25 {
+	margin-top: 25px !important;
+}
+.mgt26 {
+	margin-top: 26px !important;
+}
+.mgt27 {
+	margin-top: 27px !important;
+}
+.mgt28 {
+	margin-top: 28px !important;
+}
+.mgt29 {
+	margin-top: 29px !important;
 }
 .mgt30 {
 	margin-top: 30px !important;
@@ -108,6 +158,18 @@ body {
 }
 
 
+
+
+
+.mgb-3 {
+	margin-bottom: -3px !important;
+}
+.mgb-2 {
+	margin-bottom: -2px !important;
+}
+.mgb-1 {
+	margin-bottom: -1px !important;
+}
 .mgb0 {
 	margin-bottom: 0 !important;
 }
@@ -179,7 +241,34 @@ body {
 
 
 
+.mgl0 {
+	margin-left: 0 !important;
+}
+.mgl5 {
+	margin-left: 5px !important;
+}
+.mgl10 {
+	margin-left: 10px !important;
+}
+.mgl15 {
+	margin-left: 15px !important;
+}
+.mgl20 {
+	margin-left: 20px !important;
+}
+.mgl30 {
+	margin-left: 30px !important;
+}
+
+
+
+
+
 /* padding */
+.pd10{ padding:10px !important;}
+.pd15{ padding:15px !important;}
+.pd20{ padding:20px !important;}
+.pd30{ padding:30px !important;}
 .pdt0 {
 	padding-top: 0 !important;
 }
@@ -287,14 +376,14 @@ strong {
 	font-weight: bold;
 }
 .large {
-	font-size: 120%;
+	font-size: 140%;
 }
 .small {
 	font-size: 12px;
 	line-height: 1.4em;
 }
 .text_gray {
-	color: #626262;
+	color: #999;
 }
 .text_red {
 	color: #df1838;
@@ -383,25 +472,50 @@ a.alpha:hover img, a.alpha:active img {
 
 
 
+a.link_black:link{ color:#4b4948;}
+a.link_noUnderLine{ text-decoration:none;}
+
 
 
 
 
 /* bg */
-.bgGray{ background-color:#f9f9f9;}
+.bgGray{ background-color:#f9f9f9; position:relative;}
 .bgGray > table{ width:90%; margin:30px auto;}
+
 .bgBeige{ background-color:#fffcf2 !important;}
 
 
 
 
 /* border */
-.borderGray{ border:1px solid #DDD;}
-.borderGrayRadius{ border:1px solid #DDD; border-radius:4px;}
+.borderGray{ border:1px solid #DDD; border-radius:4px; }
+.borderGrayRadius{ border:1px solid #DDD; border-radius:4px; position:relative; box-shadow: 0 2px 2px #EEE;}
+.no-boxShadow{ box-shadow:none;}
+
+
+.borderblack{ border:1px solid #4b4948;}
+.borderBlue2Radius{ border:2px solid #003c58; border-radius:4px;}
+.borderBlue3Radius{ border:3px solid #003c58; border-radius:4px;}
 
 
 
-
+/* icon */
+.icon_white_arrow{ position:relative;}
+.icon_white_arrow::after{
+	content:"";
+	display: block;
+	width:10px;
+	height:10px;
+	border-top:3px solid #FFF;
+	border-right:3px solid #FFF;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	right:30px;
+	top:50%;
+	margin-top:-7px;
+}
 
 
 
@@ -477,7 +591,7 @@ a.btn_redRadius20 , .btn_redRadius20 [type=submit] {
 	outline:none;
 	text-decoration:none;
 }
-a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
+button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
 	background-image: -moz-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
 	background-image: -webkit-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
 	background-image: -ms-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
@@ -492,6 +606,7 @@ a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
 	outline:none;
 	text-decoration:none;
 }
+button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
@@ -532,7 +647,11 @@ ul.ul-text{ margin-left: 30px;}
 ul.ul-text2{ 
     margin-left: 44px;
     text-indent: -37px;}
-p + ol.ol-text , p+ ul.ul-text{ margin-top:30px;}
+ul.ul-disc{
+	list-style:disc;
+	margin-left:16px;
+}
+p+ ol.ol-text , p + ul.ul-text{ margin-top:30px;}
 
 
 
@@ -552,6 +671,8 @@ p + ol.ol-text , p+ ul.ul-text{ margin-top:30px;}
 #contentBox{ width:770px; float:right;}
 #contentBoxLarge{ width:100%; min-height:400px;}
 .contentHalf{ width:47%;}
+.contentLeft{ width:68%; float:left;}
+.contentRight{ width:28%; float:right;}
 .content_h1{ background-color:#7ecef4; font-size:22px; font-weight:normal; color:#003c58; padding:10px 10px 10px 41px; margin-bottom:30px;}
 .content_h2{ font-size:20px; color:#003c58; font-weight:normal; padding-bottom:10px; border-bottom:1px solid #DDD; margin-bottom:20px;}
 .content_h3{ font-size:16px; color:#003c58; font-weight:normal; margin-bottom:20px; border-left:3px solid #003c58; padding-left:8px; line-height:1em;}
@@ -638,6 +759,9 @@ input[type=radio],  input[type=checkbox] {
 input[type=radio] + label,  input[type=checkbox] + label {
 	padding: 0 0 0 24px;
 }
+input[type=radio] + label.largeInput,  input[type=checkbox] + label.largeInput {
+	padding: 5px 0 0 33px;
+}
 input[type=checkbox] + label::before {
 	content: "";
 	position: absolute;
@@ -649,7 +773,7 @@ input[type=checkbox] + label::before {
 	display: block;
 	width: 18px;
 	height: 18px;
-	margin-top: -11px;
+	margin-top: -10px;
 	background-color: white;
 }
 input[type=radio] + label::before {
@@ -663,6 +787,20 @@ input[type=radio] + label::before {
 	display: block;
 	width: 18px;
 	height: 18px;
+	margin-top: -10px;
+	background-color: white;
+}
+input[type=radio] + label.largeInput::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;
+	width: 26px;
+	height: 26px;
 	margin-top: -10px;
 	background-color: white;
 }
@@ -687,6 +825,14 @@ input[type=radio]:checked + label::after {
 	width: 8px;
 	height: 8px;
 	margin-top: -5px;
+	background: #074195;
+	border-radius: 8px;
+}
+input[type=radio]:checked + label.largeInput::after {
+	left: 8px;
+	width: 10px;
+	height: 10px;
+	margin-top: -3px;
 	background: #074195;
 	border-radius: 8px;
 }

@@ -5,6 +5,7 @@ class Controller_Register extends Controller_Base
 
 	public function before() {
 		$this->nologin_methods = array(
+	        'email',
 	        'index',
 	        'complete'
 	    );
@@ -50,6 +51,41 @@ class Controller_Register extends Controller_Base
         }
 
         $this->template->content = View::forge('register/form', $this->data);
+	}
+
+	public function action_email()
+	{		
+		$this->template->title = 'Care Eye 新規登録  >  メールアドレス入力';
+		$this->data['breadcrumbs'] = array($this->template->title);
+        $this->template->header = View::forge('header', $this->data);
+
+        if(Input::post()) {
+     		$params = Input::post();
+     		//メールアドレスチェック
+     		if(empty($params['email'])){
+     			$this->data['errors']['email'] = "エラー：メールアドレスを入力してください";
+     		} else {
+	     		$user = \Model_User::getUserFromEmail($params['email']);
+	     		if(isset($user)){
+	     			$this->data['errors']['email'] = "エラー：既に登録されているメールアドレスです";
+	     		}     			
+     		}
+     		if(empty($params['term'])){
+     			$this->data['errors']['term'] = true;
+     		}
+
+			$this->data['data'] = $params;
+			if(empty($this->data['errors'])) {
+				$user = \Model_User::saveEmail($params);
+				if($user) {
+					\Model_User::sendRegisterConfirmEmail($user);
+				}
+	        	$this->template->content = View::forge('register/email_complete', $this->data);
+	        	return;
+			}
+        }
+
+        $this->template->content = View::forge('register/email', $this->data);
 	}
 
 	public function action_complete() {

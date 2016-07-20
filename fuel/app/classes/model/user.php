@@ -347,6 +347,37 @@ class Model_User extends Orm\Model{
         }
 	}
 
+	public static function saveEmail($params) {
+		$params['username'] = sha1($params['email'].mt_rand());
+		$params['password'] = sha1($params['email'].mt_rand());
+		$params['admin'] = 1;
+		$id = Auth::create_user(
+                $params['username'],
+                $params['password'],
+                $params['email']);
+		$params['email_confirm'] = 0;
+		$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+		$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
+		//新規のときだけアフィリエイトを登録
+		if(!empty(Cookie::get("affiliate"))) {
+			$params['affiliate'] = Cookie::get("affiliate"); 
+			Cookie::delete("affiliate");
+		}
+
+		$user = \Model_User::find($id);
+		unset($params['id']);
+		unset($params['username']);
+		unset($params['password']);
+		unset($params['email']);
+		if($user) {
+			$user->set($params);
+			if($user->save()) {
+				return \Model_User::format($user);
+			}			
+		}
+		return null;
+	}
+
 	public static function saveUser($params) {
 		\Model_User::uploadProfileImage();
 		return \Model_User::saveAdminUser($params);
@@ -616,21 +647,42 @@ class Model_User extends Orm\Model{
         return;
 	}
 
+	public static function sendRegisterConfirmEmail($user) {
+		$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
+			'token' => $user['email_confirm_token'],
+		));
+        $data = array(
+                    'url'      => $url,
+                    'date'     => date('Y年m月d日'),
+                    'email'    => $user['email'],
+                );
+		$params = array(
+			'to' => $user['email'],
+			'subject' => "新規登録確認",
+			'text' => \View::forge('email/register/email_confirm', $data)
+		);
+		return \Model_User::sendEmail($params);
+	}
+
 	public static function sendConfirmEmail($user) {
 		$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
 			'token' => $user['email_confirm_token'],
 		));
-                $gender = Config::get("gender");
-                $data = array(
-                            'url'      => $url,
-                            'name'     => $user['last_name'].'　'.$user['first_name'],
-                            'date'     => date('Y年m月d日'),
-                            'gender'   => $gender[$user['gender']],
-                            'birthday' => date('Y年m月d日', strtotime($user['birthday'])),
-                            'address'  => $user['prefecture'].$user['address'],
-                            'phone'    => $user['phone'],
-                            'email'    => $user['email'],
-                        );
+        $gender = Config::get("gender");
+        $data = array(
+                    'url'      => $url,
+                    'name'     => $user['last_name'].'　'.$user['first_name'],
+                    'date'     => date('Y年m月d日'),
+                    'address'  => $user['prefecture'].$user['address'],
+                    'phone'    => $user['phone'],
+                    'email'    => $user['email'],
+                );
+        if(!empty($user['gender'])) { 
+        	$data['gender'] = $gender[$user['gender']];
+        }
+        if(!empty($user['birthday'])) {
+        	$data['birthday'] = date('Y年m月d日', strtotime($user['birthday']));
+        }
 		$params = array(
 			'to' => $user['email'],
 			'subject' => "新規登録確認",

@@ -39,7 +39,7 @@ header { display:block; background-color:#FFF;}
 .logo {
 	width: 111px;
 	height: 26px;
-	margin: 18px 10px 15px;
+	margin: 24px 10px 15px;
 	display: block;
 }
 .logo img {
@@ -51,11 +51,11 @@ header { display:block; background-color:#FFF;}
 	font-size:12px;
 }
 .nav_user {
-	background: url(../images/common/hdr_icon_user.png) no-repeat 13px 11px;
-	background-size: 14px 14px;
+	background: url(../images/common/hdr_icon_user.png) no-repeat 13px 10px;
+	background-size: 21px 21px;
 }
 .nav_userList a{ margin:0 10px;}
-.nav_user-admin {
+.nav_user-admin a{
 	background: url(../images/common/hdr_icon_user-admin.png) no-repeat 11px 11px;
 	background-size: 22px 15px;
     padding-left: 40px;
@@ -63,12 +63,18 @@ header { display:block; background-color:#FFF;}
 .nav_userListRegist{margin:10px;}
 .nav_userListRegist a{ padding:10px 0;}
 .nav_mainMenu{
-	background: url(../images/common/hdr_icon_main-menu.png) no-repeat 11px 11px;
+	background: url(../images/common/hdr_icon_main-menu.png) no-repeat 11px 14px;
 	background-size: 15px 13px;
 }
 .nav_mypage a{
 	background: url(../images/common/hdr_icon_mypage.png) no-repeat 11px 11px;
 	background-size: 21px 15px;
+    padding-left: 40px;
+	padding-right:20px;
+}
+.nav_shopping_history a{
+	background: url(../images/common/hdr_icon_shopping_history.png) no-repeat 9px 8px;
+	background-size: 21px 21px;
     padding-left: 40px;
 	padding-right:20px;
 }
@@ -83,7 +89,7 @@ header { display:block; background-color:#FFF;}
     padding-left: 40px;
 }
 .nav_logout a{
-	background: url(../images/common/hdr_icon_logout.png) no-repeat 11px 11px;
+	background: url(../images/common/hdr_icon_logout.png) no-repeat 11px 10px;
 	background-size: 19px 19px;
     padding-left: 40px;
 }
@@ -92,6 +98,44 @@ header { display:block; background-color:#FFF;}
 	
 }
 .user_alert{ min-width:20px; position:absolute; top:10px; right:14px; padding:3px 6px; background-color:#ef5656; border-radius:10px; color:#FFF; font-size:10px; text-align:center;line-height:1em; }
+
+.nav_cart .drawer-menu-item{
+	background: url(../images/common/hdr_icon_cart.png) no-repeat 0 10px; 
+	background-size: 21px 21px;
+	border-radius:3px; 
+	color:#FFF;	
+    padding-left: 27px;
+	display:block;
+	min-height:31px;
+}
+.nav_cart:before{ background-color:#f1f1f1; }
+.nav_cart_text{
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;}
+.nav_number{ padding:3px 6px; background-color:#ef5656; color:#FFF; border-radius:10px; font-size:10px; text-align:center;}
+.drawer-navbar .nav_cart_link{ color:#888; font-size:12px; text-align:right; padding:0 0 10px;}
+.drawer-navbar .nav_cart_btn{
+	background-image: -moz-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+	border-radius: 20px;
+	border: none;
+	color: #FFF;
+	padding: 5px  10px;
+	font-size: 14px;
+	display: block;
+	text-align: center;
+	cursor:pointer;
+	outline:none;
+	text-decoration:none;
+	margin:20px 10px;
+}
+.drawer-navbar .drawer-dropdown-menu.nav_cartInner ul li{ padding-bottom:10px;}
+.nav_userList .nav_cart_title{ color: #4b4948; line-height:1.6em; margin:10px; text-decoration:none; display:block}
+
 
 
 /* blue area */
@@ -588,7 +632,7 @@ a.report_btn:hover{ opacity:0.7}
 	color:#003c58;
 }
 p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
-.form_set_container{ width:978px; border:1px solid #cbe7f4; display:table; padding:0 20px; }
+.form_set_container{ width:978px; border:1px solid #cbe7f4; display:table; padding:0 20px; box-shadow:0 2px 2px #EEE}
 .form_set_container + .form_set_container{ border-top:none; margin-top:-1px}
 .form_left_container{ width:760px; display:table-cell; vertical-align:middle; border-right:1px solid #cbe7f4; padding-right:20px;}
 .form_right_container{ width:178px; display:table-cell; vertical-align:middle; padding:20px 0 10px 20px; }
@@ -597,9 +641,11 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .form_set_container table{ width:100%; margin-top:15px; border-collapse:collapse; margin-bottom:20px;}
 .form_set_container table tr{ border-bottom: 1px dotted #c2c2c2;}
 .form_set_container table tr:nth-child(even) { background-color:#f6f6f6; }
-.form_set_container table th{ width:138px; padding:10px; text-align:left; vertical-align:top;}
-.form_set_container table th.largeTh{ width:250px; padding:10px; text-align:left; vertical-align:top}
-.form_set_container table td{ padding:10px; position:relative;}
+.form_set_container table tr:last-child{ border-bottom: none;}
+.form_set_container table tr:nth-child(even):last-child{ border-bottom: 1px dotted #c2c2c2;}
+.form_set_container table th{ padding:15px 10px; text-align:left; vertical-align:top;}
+.form_set_container table th.largeTh{ width:250px; padding:10px; text-align:left; vertical-align:middle}
+.form_set_container table td{ padding:15px 10px; position:relative;}
 
 .userDate_photo{ width:178px; float:left; clear:left; margin:10px 0 20px;}
 .userDate_photo + .form_base_data{ width:560px; margin-left:200px;}
@@ -641,7 +687,21 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .table_border{ border:1px solid #DDD;}
 
 
-
+.form_right_container .btn_darkBlue , .set_container .center_container , .tableBlue .btn_darkBlue{position:relative;}
+.form_right_container .btn_darkBlue::after , .set_container .center_container::after, .tableBlue .btn_darkBlue::after{
+	content:"";
+	display: block;
+	width:10px;
+	height:10px;
+	border-top:3px solid #FFF;
+	border-right:3px solid #FFF;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	right:30px;
+	top:50%;
+	margin-top:-7px;
+}
 
 
 
@@ -683,7 +743,7 @@ p + .form_title , div + .form_title , p + .form_set_container{ margin-top:30px;}
 .usrMn_list{ margin:20px 0 30px;}
 .usrMn_list li{ border-bottom: 1px dotted #DDD; list-style:none; padding:10px;}
 .usrMn_list li:last-child{ border-bottom: none; list-style:none; padding:10px 10px 0;}
-.lowerTotalPrice{ font-size:20px; padding:20px 10px;}
+.lowerTotalPrice{ font-size:16px; padding:10px 10px;}
 
 
 
@@ -819,17 +879,17 @@ a.nowHere:link , a.nowHere:visited , a.nowHere:hover , a.nowHere:active{ color:#
 }
 a.moreINfoLink:link{ text-decoration:none;}
 .moreInfoTitle{ text-align:center; color:#4b4948; text-decoration:none;}
-.loginBg footer{ margin-top:0;}
 @media  (min-width: 774px) {
 #loginTop{ width:840px; margin:0 auto; position:relative;}
 #loginTitle{ width:413px; height:140px; background:url(../images/login/login_text.png) no-repeat; background-size:413px 140px; text-indent:-9999px; position:absolute; left:0;}
 #loginContainer{ width:350px; position:absolute; right:0; border-radius:6px; background-color:#FFF; box-shadow:0 0 5px #DDD;}
-#loginContainerInner{ padding:25px 25px 10px;}
+#loginContainerInner{ padding:25px 25px 25px;}
 #loginContainer dl{ margin-bottom:20px;}
 #loginContainer dl dt{ width:120px; float:left; clear:left; margin-bottom:10px;}
 #loginContainer dl dd{ margin-left:80px; margin-bottom:10px;}
 #loginContainer dl dt:last-child, #loginContainer dl dd:last-child{ margin-bottom:0;}
 .loginMoreInfo{ padding-top:540px; padding-bottom:80px;}
+.loginBg footer{ margin-top:0; }
  }
 
 @media  (min-width: 641px)  and (max-width: 773px) {
@@ -862,6 +922,16 @@ a.moreINfoLink:link{ text-decoration:none;}
 }
 @media  (min-width: 774px) and  (max-height: 560px) {
 #loginTop{ width:800px; height:460px; margin:0 auto; position:relative;}
+#loginTitle{ margin:0;}
+}
+@media  (min-width: 774px) and  (min-height: 561px) {
+#loginTitle{ margin-top:-5%;}
+}
+@media  (min-width: 774px) and  (min-height: 770px) {
+#loginTitle{ margin-top:-10%;}
+}
+@media  (min-width: 774px) and  (min-height: 970px) {
+#loginTitle{ margin-top:-15%;}
 }
 
 
@@ -894,6 +964,13 @@ a.moreINfoLink:link{ text-decoration:none;}
 初期登録
 
 ---------------------------------------------------------- */
+
+.regist_kiyaku{ height:250px; overflow-y:scroll; padding:20px; font-size:12px; line-height:1.4em}
+.regist_mailTOUROKU{ width:80%; background-color:#FFF; border:1px solid #DDD; margin:30px auto}
+.regist_mailTOUROKU th{ padding:20px 40px; width:35%;}
+.regist_mailTOUROKU td{ padding:20px 40px}
+.regist_kiyaku_doui{ padding:20px 40px; text-align:center}
+
 .regist_h2{ font-size:27px; line-height:1.4em; color:#003c58; font-weight:normal; margin-bottom:10px;}
 .regist_h3{ font-size:27px; line-height:1.4em; color:#00b7f1; font-weight:normal; margin-bottom:10px;}
 .regist_h4{ font-size:22px; line-height:1.4em; color:#003c58; font-weight:normal; margin-bottom:10px;}
@@ -930,3 +1007,161 @@ a.moreINfoLink:link{ text-decoration:none;}
 /* 会員ID・パスワード忘れ */
 .password_start{ width:25%;}
 .password_start .btn_text{ padding:15px 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------
+
+ショッピングカート
+
+---------------------------------------------------------- */
+.shoppingCart_container{ width:100%; margin-top:30px; }
+.shoppingCart_containerUl{ width:1044px; margin-right:-12px; }
+.shoppingCart_containerUl:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+.shoppingCart_containerLi{ width:332px; float:left; margin-right:12px; margin-bottom:12px; position:relative;}
+
+.shoppingCart_box{ border-radius:3px; border:1px solid #DDD; padding:20px; box-shadow: 0 2px 2px #EEE;}
+.shoppingCart_box2_form{ width:100%; border:none; padding:0; margin:0 auto;}
+.shoppingCart_h3{ font-size:16px; font-weight:700; padding-bottom: 10px; border-bottom: 1px solid #DDD; color: #003c58; margin-bottom:10px;} 
+.shoppingCart_price{ color:#EF5657; text-align:right; font-size:16px; }
+.shoppingCart_detail{ border-top:1px solid #DDD; margin-top:10px; font-size:12px; line-height:1.6em; padding-top:10px; height:80px;}
+input[type=checkbox] + label.shoppingCart_input , input[type=radio] + label.shoppingCart_input {
+	line-height: 1.6em;}
+input[type=checkbox] + label.shoppingCart_input:before  , input[type=radio] + label.shoppingCart_input:before { top:13px;}
+input[type=checkbox]:checked + label.shoppingCart_input:after , input[type=radio]:checked + label.shoppingCart_input:after {
+    top: 13px;
+}
+
+/* メッセージ */
+.nav_cart_alert {
+	background-color:#7ecef4;
+	border-radius:3px;
+	padding:10px 20px;
+    display: none; /* 初期状態は非表示 */
+    /* 画面上部に表示 */
+    position: absolute;
+	top:80px;
+	right:38px;
+	color:#FFF;
+    margin-left: -175px; /* (width + padding-left + padding-right + border-left + border-right) の半分 */
+}
+
+.order_alert {
+	width:300px;
+	background-color:#7ecef4;
+	border-radius:3px;
+	padding:40px;
+    display: none; /* 初期状態は非表示 */
+    /* 画面上部に表示 */
+    position: absolute;
+	top:40%;
+	left:50%;
+	right:50%;
+	color:#FFF;
+	text-align:center;
+    margin-left: -175px; /* (width + padding-left + padding-right + border-left + border-right) の半分 */
+	z-index:1000;
+	position:fixed
+}
+
+
+
+
+/* ----------------------------------------------------------
+
+ショッピングフロウ
+
+---------------------------------------------------------- */
+.order_deleteSet{
+	position:absolute;
+	top:5px;
+	right:5px;
+}
+.order_btn_delete{
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #003c58;
+  border:0;
+  outline:none;
+  cursor:pointer;
+}
+.order_btn_delete:hover{
+  background: #888;
+}
+.order_btn_delete_icon:before, .order_btn_delete_icon:after{
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  margin: 0 0 0 -7px;
+  background: #FFF;
+  transition: .3s;
+}
+.order_btn_delete .close:before{
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.order_btn_delete .close:after{
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+
+
+
+.order_btn_delete .order_wrap_text{
+  position: absolute;
+  opacity: 0;
+  top: -50px;
+  left: -25px;
+  width: 60px;
+  padding: 10px;
+  border-radius: 2px;
+  background: #003c58;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  transition: .3s;
+
+}
+.order_btn_delete .order_wrap_text:after{
+  position: absolute;
+  top: 100%;
+  left: 34px;
+  height: 0;
+  width: 0;
+  border: 6px solid transparent;
+  border-top: 6px solid #003c58;
+  content: "";
+}
+.order_btn_delete:hover .order_wrap_text{
+  opacity: 1;
+  top: -40px;
+}
+.orderSet{ margin-bottom:40px;}
+.form_set_container .sumTalble{ width:280px; float:right}
+.form_set_container table.sumTalble tr{ border-bottom:none;}
+.form_set_container table.sumTalble tr:nth-child(even){ background-color:transparent}
+.form_set_container table.sumTalble th, .form_set_container table.sumTalble td{ padding:0;}
