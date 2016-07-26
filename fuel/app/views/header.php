@@ -30,7 +30,7 @@ if(isset($user)) {
 if(!empty($clients)) {
 	foreach($clients as $_client) {
 ?>
-								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item <?php if($client['id'] == $_client['id']) { echo "nowStay"; } ?>"><?php echo $_client['last_name'].$_client['first_name']; ?>さん</a></li>
+								<li class="nav_userList"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="drawer-dropdown-menu-item <?php if(isset($client) && $client['id'] == $_client['id']) { echo "nowStay"; } ?>"><?php echo $_client['last_name'].$_client['first_name']; ?>さん</a></li>
 <?php
 	}
 }
@@ -54,8 +54,41 @@ if(!empty($clients)) {
 <?php	
 }
 ?>
+				<li id="nav_cart" class="drawer-dropdown nav_cart">
+					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nav_cart_text">カート</span><span class="nav_number">1</span></a>
+					<div class="drawer-dropdown-menu cartMenu">
+					<div id="cartMenu">
+						<ul>
+							<li id="nav_order01" class="nav_userList">
+								<p class="nav_cart_title">CareEye（ケアアイ）<br>
+12ヶ月パック</p>
+								<p class="nav_cart_btnArea right"><a href="javascript:();" class="nav_cart_link" id="nav_cart_delete01">× 削除</a></p>
+							</li>
+							<li class="nav_userList center"><p class="nav_cart_title">何も入っていません</p></li>
+							<li>
+								<p class="nav_cart_btnArea"><a href="/shopping/cart" class="nav_cart_btn">購入手続きへ</a></p></li>
+						</ul>
+						<script type="text/javascript"> 
+							/* 1つ目 */
+							$('#nav_cart_delete01').click(function(){
+							$('#nav_order01').remove();
+							$('#nav_cart').addClass("opened");
+							$('.opened').delay().queue(function(){
+								 $('#nav_cart').removeClass("opened");
+								 $('#nav_cart').addClass("open").dequeue();
+							 });
+							 $('.nav_cart_alert').fadeIn(1000).delay().fadeOut(500);
+							});
+						</script>
+					</div>
+					</div>
+				</li>
 			</ul>
+						<div class="nav_cart_alert">
+							<p>削除されました</p>
+						</div>
 		</nav>
+
 	</div>
 </header>
 <?php
@@ -66,10 +99,7 @@ if(isset($client['id'])) {
 	<div class="content clearfix">
 		<!-- ユーザー名 -->
 		<div class="user_select">
-
 			<div class="hdr_select_text"><p><?php echo $client['last_name'].$client['first_name']; ?><span class="com_userSmall">さん</span></p></div>
-
-
 		</div>
 		<!-- /ユーザー名 --> 
 		<div id="content_nav">
@@ -92,7 +122,7 @@ if(isset($client['id'])) {
 
 		<!-- お知らせ -->
 		<div class="com_news">
-		<?php
+<?php
 if(!empty($this->data['header_alerts'])) {
 ?>
 			<dl class="clearfix">
@@ -113,7 +143,17 @@ if(!empty($breadcrumbs)) {
 ?>
 	<div id="pankuzu">
 		<div class="content">
+<?php
+if(isset($user)) {
+?>
 		<a href="/user/">ホーム</a>
+<?php
+} else {
+?>
+		<a href="/">ホーム</a>
+<?php
+}
+?>
 <?php
 	foreach($breadcrumbs as $breadcrumb) {
 ?>

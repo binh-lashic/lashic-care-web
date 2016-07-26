@@ -66,7 +66,17 @@ class Model_User extends Orm\Model{
 				$val->add_field('address', '', 'required');	
 				$val->add_field('password', '', 'required');
 				$val->add_field('password_confirm', '', 'required');	
-				break;			
+				break;
+			case "register_client":
+				$val->add_field('first_name', '', 'required');
+				$val->add_field('first_kana', '', 'required');
+				$val->add_field('last_name', '', 'required');
+				$val->add_field('last_kana', '', 'required');
+				$val->add_field('gender', '', 'required');
+				$val->add_field('phone', '', 'required');
+				$val->add_field('prefecture', '', 'required');	
+				$val->add_field('address', '', 'required');	
+				break;		
 			case "basic":
 				$val->add_field('name', '', 'required');
 				$val->add_field('kana', '', 'required');
@@ -465,6 +475,33 @@ class Model_User extends Orm\Model{
 
 	//見守られユーザの自動作成
 	public static function createClient($params) {
+		list(, $user_id) = Auth::get_user_id();
+		if($user_id)
+		{
+	        try {
+	            $client_user_id = Auth::create_user(
+	                    sha1(mt_rand()),	//username
+	                    sha1(mt_rand()),	//password
+	                    sha1(mt_rand())."@example.com"
+	                );	//email
+
+	            $client = \Model_User::find($client_user_id);
+
+	            $client->set($params);
+	            if($client->save()) {
+	            	\Model_User::saveClients($user_id, array($client_user_id => "true"));	
+	            }
+	            return $client;
+	        } catch (Exception $e) {
+	        	print_r($e);
+	        	exit;
+	        }
+		}
+
+	}
+
+	//見守られユーザの自動作成
+	public static function createClientWithSensor($params) {
 		$sensor_id = $params['id'];
 		$sensor_name = $params['name'];
 

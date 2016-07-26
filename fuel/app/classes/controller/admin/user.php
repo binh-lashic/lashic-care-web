@@ -123,7 +123,7 @@ class Controller_Admin_User extends Controller_Admin
                     }
                     if(empty($client)) {
                         //見守られユーザを新規作成
-                        $client = \Model_User::createClient($sensor);
+                        $client = \Model_User::createClientWithSensor($sensor);
                     }
 
                     //見守られユーザを登録
