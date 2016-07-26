@@ -127,6 +127,23 @@ class Controller_Shopping extends Controller_Base
         if(Input::post()) {
             $params = Input::post();
             $this->data['card'] = $params;
+            if(!$params['number'])
+            {
+                $this->data['errors']['number'] = true;
+            }
+            if(!$params['expire_month'] || !$params['expire_year'])
+            {
+                $this->data['errors']['expire'] = true;
+            }
+            if(!$params['nominee'])
+            {
+                $this->data['errors']['nominee'] = true;
+            }
+            if(!$params['security_code'])
+            {
+                $this->data['errors']['security_code'] = true;
+            }
+
             Session::set('card', $params);
             if(empty($this->data['errors'])) {
                 $this->template->content = View::forge('shopping/confirm', $this->data);
