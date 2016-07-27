@@ -42,7 +42,7 @@ for($i = 1; $i <= 10; $i++) {
 									</tr>
 									<tr>
 										<th>室内温度異常アラート<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/temperature">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -66,7 +66,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 										<th>火事アラート<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/fire">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -90,7 +90,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>熱中症アラート<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/heatstroke">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -113,7 +113,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>室内湿度異常アラート<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/humidity">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -137,7 +137,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>カビ・ダニアラート<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/mold_mites">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -161,7 +161,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>室内照度異常（日中）<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/illuminance_daytime">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -185,7 +185,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>室内照度異常（深夜）<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/illuminance_night">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -220,7 +220,7 @@ if($sensor['admin'] == 1) {
 */
 ?>
 									<th>平均起床時間遅延<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/wake_up">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -244,7 +244,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>平均睡眠時間遅延<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/sleep">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -268,7 +268,7 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>異常行動<br>
-<p class="small text_red txt_normal">※テキスト</p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/abnormal_behavior">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
@@ -291,7 +291,8 @@ if($sensor['admin'] == 1) {
 										</td>
 									</tr>
 									<tr>
-										<th>一定時間人感センサー未感知<br><p class="small text_red txt_normal">※テキスト</p></th>
+										<th>一定時間人感センサー未感知<br>
+										<p class="small text_red txt_normal"><a href="/alert/info/active_non_detection">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
