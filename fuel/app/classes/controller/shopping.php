@@ -124,6 +124,8 @@ class Controller_Shopping extends Controller_Base
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
 
+        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        $this->data['cards'] = $card->cardList;
         if(Input::post()) {
             $params = Input::post();
             $this->data['card'] = $params;
@@ -134,10 +136,12 @@ class Controller_Shopping extends Controller_Base
             if(!$params['expire_month'] || !$params['expire_year'])
             {
                 $this->data['errors']['expire'] = true;
+            } else {
+                $params['expire'] = $params['expire_month'].substr($params['expire_year'], 2, 2);
             }
-            if(!$params['nominee'])
+            if(!$params['holder_name'])
             {
-                $this->data['errors']['nominee'] = true;
+                $this->data['errors']['holder_name'] = true;
             }
             if(!$params['security_code'])
             {
@@ -146,6 +150,17 @@ class Controller_Shopping extends Controller_Base
 
             Session::set('card', $params);
             if(empty($this->data['errors'])) {
+                //GMOペイメントの会員登録
+                $member = \Model_GMO::findMember($this->user['id']);
+                if($member) {
+                    $params['member_id'] = $member->memberId;
+                }
+
+                //カード情報の登録
+                \Model_GMO::saveCard($params);
+
+                $params['amount'] = 10000;
+                $output = Model_Gmo::exec($params);
                 $this->template->content = View::forge('shopping/confirm', $this->data);
                 return;
             }

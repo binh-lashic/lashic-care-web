@@ -28,25 +28,25 @@ if(!empty($errors)) {
 			<div class="form_set_container">
 					<table>
 						<tbody>
-							<tr>
-								<th colspan="2" class="large">ご登録のクレジットカード
-								</th>
-							</tr>
+							<th colspan="2" class="large"> <input type="radio" id="card01" name="card" checked>
+								<label for="card01" class="checkbox largeInput">ご登録のクレジットカード</label>
+							</th>
 <?php
-if(!empty($credit_card))
+if(!empty($cards))
 {
+	foreach($cards as $_card) {
 ?>
 							<tr>
 								<th>カード番号</th>
-								<td>**************41</td>
+								<td><?php echo $_card['CardNo']; ?></td>
 							</tr>
 							<tr>
 								<th>有効期限</th>
-								<td>07月 2020年</td>
+								<td><?php echo substr($_card['Expire'], 2, 2); ?>月 20<?php echo substr($_card['Expire'], 0, 2); ?>年</td>
 							</tr>
 							<tr>
 								<th>名義人</th>
-								<td>KEIKO SAITO</td>
+								<td><?php echo $_card['HolderName']; ?></td>
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> セキュリティコード</th>
@@ -61,6 +61,7 @@ if(!empty($errors['security_code'])) {
 								</td>
 							</tr>
 <?php
+	}
 } else {
 ?>
 							<tr>
@@ -138,9 +139,9 @@ if(!empty($errors['expire'])) {
 							</tr>
 							<tr>
 								<th>名義人</th>
-								<td><input type="text" name="nominee" class="input_text input_medium" value="<?php if($card['nominee']) echo $card['nominee']; ?>">&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数大文字、カードの表記通りにご入力ください。</span>
+								<td><input type="text" name="holder_name" class="input_text input_medium" value="<?php if($card['holder_name']) echo $card['holder_name']; ?>">&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数大文字、カードの表記通りにご入力ください。</span>
 <?php
-if(!empty($errors['nominee'])) {
+if(!empty($errors['holder_name'])) {
 ?>
 									<p class="error">エラー：名義人を入力してください。</p>
 <?php
