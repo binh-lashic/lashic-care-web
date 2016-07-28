@@ -104,6 +104,7 @@ class Controller_Admin_User extends Controller_Admin
 
         if($user_id && $sensor_names) {
             foreach($sensor_names as $name) {
+                $client = null;
                 $name = trim($name);
                 //センサーを新規登録
                 $sensor = Model_Sensor::find("first" , array(

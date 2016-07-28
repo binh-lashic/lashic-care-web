@@ -298,7 +298,7 @@ class Controller_Api_Data extends Controller_Api
 			}
 
 			$end = 60 * 24; //10分毎に行う
-			for($i = 0; $i <= $end; $i = $i + 10) {
+			for($i = 0; $i <= $end; $i = $i + $span) {
 				$time = $start_time + $i * 60;
 				$temperature_total = 0;
 				$humidity_total = 0;
@@ -314,7 +314,7 @@ class Controller_Api_Data extends Controller_Api
 				);
 				$span_time = date("Y-m-d H:i:s", $time);
 				$data_count = 0;
-				for($j = 0; $j < 10; $j++) {
+				for($j = 0; $j < $span; $j++) {
 					$current_time = date("Y-m-d H:i:s", $start_time + ($i + $j)* 60);
 					if(isset($rows[$current_time])) {
 						$temperature_total += $rows[$current_time]['temperature'];
