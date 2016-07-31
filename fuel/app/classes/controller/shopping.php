@@ -208,8 +208,10 @@ class Controller_Shopping extends Controller_Base
                         $member = \Model_GMO::saveMember($this->user['id']);
                     }
                     $params['member_id'] = $member->memberId;
+                    print_r($member);
                     //カード情報の登録
                     $result = \Model_GMO::saveCard($params);
+                    echo "hoge";
                     print_r($result);
                     Response::redirect('/shopping/payment');
                 }
