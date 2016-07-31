@@ -356,7 +356,7 @@ class Session_File extends \Session_Driver
 						// do we have a path?
 						if ( empty($item) OR ! is_dir($item))
 						{
-							throw new \FuelException('You have specify a valid path to store the session data files.');
+							throw new \FuelException('You have specify a valid path to store the session data files.' . $item);
 						}
 						// and can we write to it?
 						if ( ! is_writable($item))
