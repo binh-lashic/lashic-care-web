@@ -187,6 +187,7 @@ class Controller_Shopping extends Controller_Base
                     return;
                 }
             } else {
+                echo "hoge1";
                 if(!$params['number'])
                 {
                     $this->data['errors']['number'] = true;
@@ -212,7 +213,7 @@ class Controller_Shopping extends Controller_Base
                     print_r($member);
                     //カード情報の登録
                     $result = \Model_GMO::saveCard($params);
-                    echo "hoge";
+                    echo "hoge2";
                     print_r($result);
                     Response::redirect('/shopping/payment');
                 }
