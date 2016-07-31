@@ -177,6 +177,7 @@ class Controller_Shopping extends Controller_Base
             $params = Input::post();
             Session::set('card', $params);
             $this->data['card'] = $params;
+            echo "hoge";
             if($params['process'] == "registered") {
                 if(!$params['security_code_registered'])
                 {
@@ -186,6 +187,7 @@ class Controller_Shopping extends Controller_Base
                     Response::redirect('/shopping/confirm');
                     return;
                 }
+                echo "hoge0";
             } else {
                 echo "hoge1";
                 if(!$params['number'])
