@@ -201,6 +201,7 @@ class Controller_Shopping extends Controller_Base
                 {
                     $this->data['errors']['holder_name'] = true;
                 }
+                print_r($this->data['errors']);
                 if(empty($this->data['errors'])) {
                     //GMOペイメントの会員登録
                     $member = \Model_GMO::findMember($this->user['id']);
@@ -219,6 +220,7 @@ class Controller_Shopping extends Controller_Base
         }
 
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        print_r($card);
         $this->data['cards'] = $card->cardList;
 
         $this->template->content = View::forge('shopping/payment', $this->data);           
