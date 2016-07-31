@@ -55,38 +55,17 @@ if(!empty($clients)) {
 }
 ?>
 				<li id="nav_cart" class="drawer-dropdown nav_cart">
-					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nav_cart_text">カート</span><span class="nav_number">1</span></a>
+					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nav_cart_text">カート</span><span class="nav_number" style="display:none;">1</span></a>
 					<div class="drawer-dropdown-menu cartMenu">
 					<div id="cartMenu">
-						<ul>
-							<li id="nav_order01" class="nav_userList">
-								<p class="nav_cart_title">CareEye（ケアアイ）<br>
-12ヶ月パック</p>
-								<p class="nav_cart_btnArea right"><a href="javascript:();" class="nav_cart_link" id="nav_cart_delete01">× 削除</a></p>
-							</li>
-							<li class="nav_userList center"><p class="nav_cart_title">何も入っていません</p></li>
-							<li>
-								<p class="nav_cart_btnArea"><a href="/shopping/cart" class="nav_cart_btn">購入手続きへ</a></p></li>
-						</ul>
-						<script type="text/javascript"> 
-							/* 1つ目 */
-							$('#nav_cart_delete01').click(function(){
-							$('#nav_order01').remove();
-							$('#nav_cart').addClass("opened");
-							$('.opened').delay().queue(function(){
-								 $('#nav_cart').removeClass("opened");
-								 $('#nav_cart').addClass("open").dequeue();
-							 });
-							 $('.nav_cart_alert').fadeIn(1000).delay().fadeOut(500);
-							});
-						</script>
+						<ul id="cart"></ul>
 					</div>
 					</div>
 				</li>
 			</ul>
-						<div class="nav_cart_alert">
-							<p>削除されました</p>
-						</div>
+			<div class="nav_cart_alert">
+				<p>削除されました</p>
+			</div>
 		</nav>
 
 	</div>

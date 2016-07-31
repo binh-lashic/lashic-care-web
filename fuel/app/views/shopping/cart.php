@@ -18,14 +18,14 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">カート</h1>
 				<p class="plan_message" style="display:none">プランがカートに入っています。お申し込み手続きを完了させてください。</p>
-				<form action="/shopping/cart_complete" method="post" id="cart_form">
+				<form action="/shopping/user" method="post" id="cart_form">
 				<div class="contentLarge_h2">
 					<h2>ご注文</h2>
 				</div>
 			<!-- ご注文1 -->
 				<div id="order_no" class="orderSet">
 				<div class="bgGray borderGrayRadius">
-					<div class="order_deleteSet"><button id="order_btn_delete" class="order_btn_delete" onClick="removeElement()"><span class="order_btn_delete_icon close"></span><span class="order_wrap_text">削除する</span></button></div>
+					<div class="order_deleteSet"><button id="order_btn_delete" class="order_btn_delete"><span class="order_btn_delete_icon close"></span><span class="order_wrap_text">削除する</span></button></div>
 						<table class="tableGray mgb-1">
 						<tbody id="plans">
 							<tr>

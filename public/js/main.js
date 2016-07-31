@@ -528,4 +528,72 @@ $(function(){
 		});			
 
 	}
+
+	//カート系の処理
+    getCartPlans();
+
+    function getCartPlans() {
+		api("shopping/get_plans", {}, function(result){
+			displayCartPlans(result);
+		});
+    }
+
+    function displayCartPlans(result) {
+		$("#cart").empty();
+    	if(result.data.plans != null) {
+			$.each(result.data.plans, function(index, plan) {
+				$("#cart").append("<li id=\"nav_order" + plan.id + "\" class=\"nav_userList cart_plan\"><p class=\"nav_cart_title\">" + 
+											plan.options[0].title + 
+											"</p><p class=\"nav_cart_btnArea right\"><a href=\"javascript:void(0);\" data-plan=\"" + plan.id + "\" class=\"delete_plan nav_cart_link\" id=\"nav_cart_delete01\">× 削除</a></p></li>");
+			});
+			$("#cart").append("<li><p class=\"nav_cart_btnArea\"><a href=\"/shopping/cart\" class=\"nav_cart_btn\">購入手続きへ</a></p></li>");
+			$('.delete_plan').on('click', function(){
+				event.preventDefault();
+				var plan = $(this).attr('data-plan');
+				api("shopping/delete_plan", { plan_id : plan }, function(result){
+					displayCartPlans(result);
+				});
+				//$('#nav_order' + plan).remove();
+				$('#nav_cart').addClass("opened");
+				$('.opened').delay().queue(function(){
+					$('#nav_cart').removeClass("opened");
+					$('#nav_cart').addClass("open").dequeue();
+				});
+				$('.nav_cart_alert').fadeIn(1000).delay().fadeOut(500);
+				return false;
+			});
+			$(".nav_number").css('display', 'run-in');
+    	} else {
+    		$(".nav_number").css('display', 'none');
+    		$("#cart").prepend("<li class=\"nav_userList center cart_plan\"><p class=\"nav_cart_title\">何も入っていません</p></li>");
+    	}
+		console.log(result);
+    }
+    //ショッピングページ用
+    $(".shoppingFancybox").click(function(event) {
+		if(typeof $(this).attr('data-plan') != "undefined") {
+			var plan_ids = [];
+			var plan = $(this).attr('data-plan');
+			if(plan == '1') {
+				plan_ids.push(1);
+			} else if(plan == '2') {
+				plan_ids.push(2);
+			} else if(plan == '3') {
+				plan_ids.push(3);
+			}
+			plan_ids.push(4);	//初期費用
+			if($("#pack" + plan).prop('checked')) {
+				plan_ids.push(5);	//wifi貸出
+			}
+	        Cookies.set("plan_id", JSON.stringify(plan_ids), { expires: 90 });
+		}
+    });
+
+
+ 	$(".shoppingFancybox").fancybox();
+	$(".startShopping").click(function(event) {
+		api("shopping/set_plans", { plan_ids : JSON.parse(Cookies.get("plan_id")) }, function(result){
+			displayCartPlans(result);
+		});
+    });
 });

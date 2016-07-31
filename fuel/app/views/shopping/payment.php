@@ -28,12 +28,14 @@ if(!empty($errors)) {
 			<div class="form_set_container">
 					<table>
 						<tbody>
-							<th colspan="2" class="large"> <input type="radio" id="card01" name="card" checked>
-								<label for="card01" class="checkbox largeInput">ご登録のクレジットカード</label>
-							</th>
 <?php
 if(!empty($cards))
 {
+?>
+							<th colspan="2" class="large"> <input type="radio" id="card01" name="process" value="registered" checked>
+								<label for="card01" class="checkbox largeInput">ご登録のクレジットカード</label>
+							</th>
+<?php
 	foreach($cards as $_card) {
 ?>
 							<tr>
@@ -50,9 +52,9 @@ if(!empty($cards))
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> セキュリティコード</th>
-								<td><input type="text" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="#" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
+								<td><input type="text" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="#" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
 <?php
-if(!empty($errors['security_code'])) {
+if(!empty($errors['security_code_registered'])) {
 ?>
 								<p class="error">エラー：セキュリティコードを入力してください。</p>
 <?php
@@ -81,7 +83,8 @@ if(!empty($errors['security_code'])) {
 					<table>
 						<tbody>
 							<tr>
-								<th colspan="2" class="large">別のクレジットカード <span class="small">：こちらのクレジットカードが登録されます</span>
+								<th colspan="2" class="large"><input type="radio" id="card02" name="process" value="new">
+								<label for="card02" class="checkbox largeInput">別のクレジットカード</label> <span class="small">：こちらのクレジットカードが登録されます</span>
 								</th>
 							</tr>
 							<tr>

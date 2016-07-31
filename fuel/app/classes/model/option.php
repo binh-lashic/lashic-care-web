@@ -6,8 +6,21 @@ class Model_Option extends Orm\Model{
 		'price',
 		'continuation' => array('default' => 1),
 		'free_period',
+        'updated_at',
+        'created_at',
 	);
 
+    protected static $_observers = array(
+        'Orm\Observer_CreatedAt' => array(
+            'events' => array('before_insert'),
+            'mysql_timestamp' => true,
+        ),
+        'Orm\Observer_UpdatedAt' => array(
+            'events' => array('before_save'),
+            'mysql_timestamp' => true,
+        ),
+    );
+    
 	public static function getOption($id){
 		try {
 			$plan = \Model_Option::find($id);

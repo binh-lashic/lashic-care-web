@@ -22,19 +22,20 @@
 				<div class="floatL contentHalf borderGrayRadius">
 					<div class="pd20">
 						<p class="mgb20 text_gray">送付先： <?php echo $destination['last_name']; ?><?php echo $destination['first_name']; ?>　<?php echo $destination['prefecture']; ?><?php echo $destination['address']; ?></p>
+<?php
+foreach($plans as $plan) {
+?>
 						<div id="item01">
-							<p><strong>CareEye（ケアアイ） 月々パック　</strong><span class="text_red">&nbsp;&nbsp;1200円（税込）</span></p>
-							<p><strong>初期費用</strong><span class="text_red">&nbsp;&nbsp;14,800円（税込）</span></p>
-							<div class="mgt5 mgb10"><a class="fancybox  mgt20" href="#settingChange">商品変更</a>&nbsp;&nbsp;&nbsp;<a href="#deleteItem1" class="fancybox ">× 削除</a></div>
+							<p><strong><?php echo $plan['title']; ?>　</strong><span class="text_red">&nbsp;&nbsp;<?php echo $plan['price']; ?>円（税込）</span></p>
+<!--							<div class="mgt5 mgb10"><a class="fancybox  mgt20" href="#settingChange">商品変更</a>&nbsp;&nbsp;&nbsp;<a href="#deleteItem1" class="fancybox ">× 削除</a></div>-->
 						</div>
-						<div id="item02">
-							<p><strong>WiFi貸出料金月額</strong><span class="text_red">&nbsp;&nbsp;980円（税込）</span></p>
-							<div class="mgt5 mgb10"><a href="#settingChange2" class="fancybox mgt20">商品変更</a>&nbsp;&nbsp;&nbsp;<a href="#deleteItem2" class="fancybox">× 削除</a></div>
-						</div>
+<?php
+}
+?>
 						<hr>
-						<p class="right">小計2180円（税込）</p>
-						<p class="right">送料　＊＊円</p>
-						<p class="right">合計<strong class="text_red">2180円</strong></p>
+						<p class="right">小計<?php echo $total_price; ?>円（税込）</p>
+						<p class="right">送料　<?php echo $destination['shipping']; ?>円</p>
+						<p class="right">合計<strong class="text_red"><?php echo $total_price + $destination['shipping']; ?>円</strong></p>
 					</div>
 				</div>
 				<!-- /商品確認 --> 
@@ -43,7 +44,8 @@
 					<h3 class="content_h3">お届け日について</h3>
 					<p>お届けは、ご注文後3営業日内となります。</p>
 					<form action="/shopping/payment" method="get">
-					<button class="btn_darkBlue w300 floatR pd15 mgt30">次の画面へ</button>
+						<button class="btn_darkBlue w300 floatR pd15 mgt30">次の画面へ</button>
+					</form>
 				</div>
 				<!-- 配送指定 --> 
 			</div>

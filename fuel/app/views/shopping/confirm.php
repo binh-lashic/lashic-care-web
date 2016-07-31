@@ -21,21 +21,21 @@
 				<div class="form_base_data_edit">
 					<div class="clearfix">
 						<h3 class="content_h3 mgt20 floatL">お支払い方法</h3>
-						<!-- お支払い指定へリンク --><a class="floatR btn_lightGray mgt20 small" href="shopping_flow02_04.html#card_tourokuzumi">カード情報を編集する</a>
+						<!-- お支払い指定へリンク --><a class="floatR btn_lightGray mgt20 small" href="/shopping/payment">カード情報を編集する</a>
 					</div>
 					<table>
 						<tbody>
 							<tr>
 								<th width="200">カード番号</th>
-								<td>**************41</td>
+								<td><?php echo $card['CardNo']; ?></td>
 							</tr>
 							<tr>
 								<th>有効期限</th>
-								<td>07月 2020年</td>
+								<td><?php echo substr($card['Expire'], 2, 2); ?>月 20<?php echo substr($card['Expire'], 0, 2); ?>年</td>
 							</tr>
 							<tr>
 								<th>名義人</th>
-								<td>KEIKO SAITO</td>
+								<td><?php echo $card['HolderName']; ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -48,21 +48,21 @@
 				<div class="form_base_data_edit">
 					<div class="clearfix">
 						<h3 class="content_h3 mgt20 floatL">送付先</h3>
-						<!-- お支払い指定へリンク --><a class="floatR btn_lightGray mgt20 small" href="shopping_flow02_03.html#hensyu">送付先を編集する</a>
+						<!-- お支払い指定へリンク --><a class="floatR btn_lightGray mgt20 small" href="/shopping/destination">送付先を編集する</a>
 					</div>
 					<table>
 						<tbody>
 							<tr>
 								<th width="200">お名前</th>
-								<td>インフィック</td>
+								<td><?php echo $destination['last_name']; ?><?php echo $destination['first_name']; ?></td>
 							</tr>
 							<tr>
 								<th>ご住所</th>
-								<td>東京都千代田区丸の内3-3-1 新東京ビル7F</td>
+								<td><?php echo $destination['prefecture']; ?><?php echo $destination['address']; ?></td>
 							</tr>
 							<tr>
 								<th>電話番号</th>
-								<td>0300000000</td>
+								<td><?php echo $destination['phone']; ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -76,18 +76,19 @@
 					<h3 class="content_h3 mgt20">ご注文内容</h3>
 					<table>
 						<tbody>
+<?php
+$total_price = 0;
+foreach($plans as $plan) {
+	$total_price += $plan['price'];
+?>
 							<tr>
-								<th>CareEye（ケアアイ） 月々パック</th>
-								<td class="right">1200円（税込）</td>
+								<th><?php echo $plan['title']; ?></th>
+								<td class="right"><?php echo $plan['price']; ?>円（税込）</td>
 							</tr>
-							<tr>
-								<th>初期費用</th>
-								<td class="right">14,800円（税込）</td>
-							</tr>
-							<tr>
-								<th>WiFi貸出料月額</th>
-								<td class="right">980円（税込）</td>
-							</tr>
+<?php
+}
+?>
+
 						</tbody>
 					</table>
 					
@@ -98,15 +99,15 @@
 							<table class="sumTalble mgr20">
 								<tr>
 									<td>小計</td>
-									<td class="right">2180円（税込）</td>
+									<td class="right"><?php echo $total_price; ?>円（税込）</td>
 								</tr>
 								<tr>
 									<td>送料</td>
-									<td class="right">＊＊円</td>
+									<td class="right"><?php echo $destination['shipping']; ?>円</td>
 								</tr>
 								<tr>
 									<td class="large">合計</td>
-									<td class="large right"><strong class="text_red large">2180円</strong></td>
+									<td class="large right"><strong class="text_red large"><?php echo $total_price + $destination['shipping']; ?>円</strong></td>
 								</tr>
 							</table>
 						</div>
@@ -123,7 +124,9 @@
 			<div class="set_container">
 				<div class="left_container"><a href="#" class="link_back">戻る</a></div>
 				<div class="center_container">
-					<input type="submit" onClick="location.href='shopping_flow02_06.html'"  value="注文を確定する" >
+				<form action="/shopping/complete" method="post">
+					<input type="submit"  value="注文を確定する" >
+				</form>
 				</div>
 				<div class="right_container left"></div>
 			</div>

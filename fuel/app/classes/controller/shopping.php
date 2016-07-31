@@ -37,8 +37,9 @@ class Controller_Shopping extends Controller_Base
 	public function action_cart()
 	{
         if (!Auth::check()) {
-            Response::redirect('/register');
+            Response::redirect('/register/email');
         } else {
+            $this->data['plans'] = Session::get("plans");
             $this->template->title = 'カート';
             $this->data['breadcrumbs'] = array($this->template->title);
             $this->template->header = View::forge('header', $this->data);
@@ -100,9 +101,41 @@ class Controller_Shopping extends Controller_Base
 
     public function action_destination()
     {
+        if(Input::param("client_user_id")) {
+            $client = \Model_User::find(Input::param("client_user_id"));
+            Session::set('client', $client);
+        }
+
+        $this->data['prefectures'] = Config::get("prefectures");
+
         $this->data['users'] = array();
         $this->data['users'][] = $this->user;
-        $this->data['users'][] = \Model_User::find(Input::param("client_user_id"));
+
+        $clients = \Model_User::getClients($this->user['id']);
+        $this->data['users'] = array_merge($this->data['users'], $clients);
+
+        if(Input::post()) {
+            $params = Input::post();
+            $val = \Model_Address::validate();
+
+            if(!$val->run()) {
+                foreach($val->error() as $key=>$value){
+                    $this->data['errors'][$key] = true;
+                }
+            }
+
+            if(empty($this->data['errors'])) {
+               $address = \Model_Address::forge();
+               $params['user_id'] = $this->user['id'];
+               $address->set($params);
+               $address->save();
+            } else {
+                $this->data['data'] = $params;
+            }
+        }
+        $this->data['addresses'] = \Model_Address::getAddresses(array("user_id" => $this->user['id']));
+
+
         $this->template->title = '送付先指定';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
@@ -111,7 +144,23 @@ class Controller_Shopping extends Controller_Base
 
     public function action_destination_confirm()
     {
-        $this->data['destination'] = \Model_User::find(Input::param("user_id"));
+        if(Input::param("user_id")) {
+            $this->data['destination'] = \Model_User::find(Input::param("user_id"));
+        }
+        if(Input::param("address_id")) {
+            $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+        }
+        if(preg_match("/北海道|沖縄/ui", $this->data['destination']['prefecture'])) {
+            $this->data['destination']['shipping'] = 500;
+        } else {
+            $this->data['destination']['shipping'] = 0;
+        }
+        Session::set("destination", $this->data['destination']);
+        $this->data['plans'] = Session::get("plans");
+        $this->data['total_price'] = 0;
+        foreach($this->data['plans'] as $plan) {
+            $this->data['total_price'] += $plan['price'];
+        } 
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
@@ -124,55 +173,126 @@ class Controller_Shopping extends Controller_Base
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
 
-        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
-        $this->data['cards'] = $card->cardList;
         if(Input::post()) {
             $params = Input::post();
-            $this->data['card'] = $params;
-            if(!$params['number'])
-            {
-                $this->data['errors']['number'] = true;
-            }
-            if(!$params['expire_month'] || !$params['expire_year'])
-            {
-                $this->data['errors']['expire'] = true;
-            } else {
-                $params['expire'] = $params['expire_month'].substr($params['expire_year'], 2, 2);
-            }
-            if(!$params['holder_name'])
-            {
-                $this->data['errors']['holder_name'] = true;
-            }
-            if(!$params['security_code'])
-            {
-                $this->data['errors']['security_code'] = true;
-            }
-
             Session::set('card', $params);
-            if(empty($this->data['errors'])) {
-                //GMOペイメントの会員登録
-                $member = \Model_GMO::findMember($this->user['id']);
-                if($member) {
-                    $params['member_id'] = $member->memberId;
+            $this->data['card'] = $params;
+            if($params['process'] == "registered") {
+                if(!$params['security_code_registered'])
+                {
+                    $this->data['errors']['security_code_registered'] = true;
                 }
-
-                //カード情報の登録
-                \Model_GMO::saveCard($params);
-
-                $params['amount'] = 10000;
-                $output = Model_Gmo::exec($params);
-                $this->template->content = View::forge('shopping/confirm', $this->data);
-                return;
+                if(empty($this->data['errors'])) {
+                    Response::redirect('/shopping/confirm');
+                    return;
+                }
+            } else {
+                if(!$params['number'])
+                {
+                    $this->data['errors']['number'] = true;
+                }
+                if(!$params['expire_month'] || !$params['expire_year'])
+                {
+                    $this->data['errors']['expire'] = true;
+                } else {
+                    $params['expire'] = substr($params['expire_year'], 2, 2).$params['expire_month'];
+                }
+                if(!$params['holder_name'])
+                {
+                    $this->data['errors']['holder_name'] = true;
+                }
+                if(empty($this->data['errors'])) {
+                    //GMOペイメントの会員登録
+                    $member = \Model_GMO::findMember($this->user['id']);
+                    if(!$member->memberId) {
+                        $member = \Model_GMO::saveMember($this->user['id']);
+                    }
+                    $params['member_id'] = $member->memberId;
+                    //カード情報の登録
+                    \Model_GMO::saveCard($params);
+                    Response::redirect('/shopping/payment');
+                }
             }
         }
+
+        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        $this->data['cards'] = $card->cardList;
+
         $this->template->content = View::forge('shopping/payment', $this->data);           
     }
 
     public function action_confirm()
     {
+        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        $this->data['card'] = $card->cardList[0];
+        $this->data['destination'] = Session::get("destination");
+        $this->data['plans'] = Session::get("plans");
         $this->template->title = 'ご注文確認';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
         $this->template->content = View::forge('shopping/confirm', $this->data);           
+    }
+
+    public function action_complete()
+    {
+        $plans = Session::get("plans");
+        $client = Session::get("client");
+        $destination = Session::get("destination");
+        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        if(empty($client['id'])) {
+            $this->data['errors']['client'] = true;
+        }
+        if(empty($plans)) {
+            $this->data['errors']['plan'] = true;
+        }
+        if(empty($destination['zip_code'])) {
+            $this->data['errors']['destination'] = true;
+        }
+        if(empty($this->data['errors'])) {
+            foreach($plans as $plan) {
+                if($plan['type'] == 'monthly') {
+                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));
+                } else if($plan['type'] == '6monthly') {
+                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 8, 0, date('Y')));
+                } else if($plan['type'] == 'yearly') {
+                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 14, 0, date('Y')));
+                }
+                $params = array(
+                    'plan_id' => $plan['id'],
+                    'user_id' => $this->user['id'],
+                    'client_user_id' => $client['id'],
+                    'start_date' => date("Y-m-d"),
+                    'renew_date'=> $renew_date,
+                    'price' => $plan['price'],
+                    'shipping' => $destination['shipping'],
+                    'zip_code' => $destination['zip_code'],
+                    'prefecture' => $destination['prefecture'],
+                    'address' => $destination['address'],
+                );
+                $contract = \Model_Contract::forge();
+                $contract->set($params);
+                if($contract->save()) {
+                    if($plan['options'][0]['continuation'] != "1") {
+                        $result = \Model_GMO::entry(array(
+                            'order_id' => $contract->id,
+                            'member_id' => $contract->user_id,
+                            'amount' => $contract->price,
+                            'tax' => $contract->shipping,
+                        ));
+                    }
+                }
+            }
+            Session::delete("plans");
+            Session::delete("client");
+            Session::delete("destination");
+        } else {
+            echo '不正な処理です';
+            exit;
+        }
+        
+        $this->template->title = 'ご注文完了';
+        $this->data['breadcrumbs'] = array("カート", $this->template->title);
+        $this->template->header = View::forge('header', $this->data); 
+        $this->template->content = View::forge('shopping/complete', $this->data);           
     }
 }

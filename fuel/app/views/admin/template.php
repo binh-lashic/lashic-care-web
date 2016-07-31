@@ -2,7 +2,7 @@
 <html lang="ja_JP">
 <head>
 	<meta charset="utf-8">
-	<title>Infic - <?php echo isset($title) ? $title : ""; ?></title>
+	<title>ケアアイ管理画面 - <?php echo isset($title) ? $title : ""; ?></title>
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -22,6 +22,7 @@
     </nav>
 
     <ul class="col-sm-12 nav nav-pills">
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Cotract") { echo "class=\"active\""; }?>><a href="/admin/contract/list">契約一覧</a></li>
       <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_User") { echo "class=\"active\""; }?>><a href="/admin/user/list">親アカウント一覧</a></li>
       <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Sensor") { echo "class=\"active\""; }?>><a href="/admin/sensor/list">センサー機器一覧</a></li>
     </ul>

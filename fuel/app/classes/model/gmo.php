@@ -19,8 +19,7 @@ class Model_GMO extends Orm\Model{
 			exit();
 		}else{
 			if( $output->isErrorOccurred() ){
-				require_once( PGCARD_SAMPLE_BASE . '/display/Error.php');
-				exit();
+				return $output;
 			} else if($output->memberId) {
 				return $output;
 			}
@@ -59,7 +58,7 @@ class Model_GMO extends Orm\Model{
 				require_once( PGCARD_SAMPLE_BASE . '/display/Error.php');
 				exit();
 			} else if($output->memberId) {
-				return true;
+				return $output;
 			}
 			return $output;
 		}
@@ -72,8 +71,10 @@ class Model_GMO extends Orm\Model{
 		$input = new SearchCardInput();/* @var $input SearchCardInput */
 		$input->setSiteId( PGCARD_SITE_ID );
 		$input->setSitePass( PGCARD_SITE_PASS );
-		
 		$input->setMemberId( $params['member_id'] );
+		$input->setSeqMode(1);
+		$input->setCardSeq(0);
+
 		/*
 		$cardSeq = $params['CardSeq'];
 		if( 0 < strlen( $cardSeq ) ){
@@ -89,8 +90,7 @@ class Model_GMO extends Orm\Model{
 			exit();
 		}else{
 			if( $output->isErrorOccurred() ){//出力パラメータにエラーコードが含まれていないか、チェックしています。
-				require_once( PGCARD_SAMPLE_BASE . '/display/Error.php');
-				exit();
+				return $output;
 			}
 			return $output;
 		}
@@ -108,6 +108,8 @@ class Model_GMO extends Orm\Model{
 		//$input->setCardPass( $params['CardPass'] );
 		$input->setExpire( $params['expire'] );
 		$input->setHolderName( $params['holder_name']);
+		$input->setSeqMode(1);
+		$input->setCardSeq(0);
 /*
 		$cardSeq = $_POST['CardSeq'];
 		if( 0 < strlen( $cardSeq ) ){
@@ -130,7 +132,7 @@ class Model_GMO extends Orm\Model{
 		$input->setCardName( $_POST['CardName']);
 		$input->setDefaultFlag( $_POST['DefaultFlag']);
 */
-
+		//\Model_GMO::deleteCard($params);
 		$exe = new SaveCard();/* @var $exec SearchCard */
 		$output = $exe->exec( $input );/* @var $output SaveCardOutput */
 		if( $exe->isExceptionOccured() ){//取引の処理そのものがうまくいかない（通信エラー等）場合、例外が発生します。
@@ -163,20 +165,49 @@ class Model_GMO extends Orm\Model{
 		}
 	}
 
-	public static function exec($params) {
+	public static function deleteCard($params) {
+		\Autoloader::add_class('DeleteCardInput', APPPATH.'com/gmo_pg/client/input/DeleteCardInput.php');
+		\Autoloader::add_class('DeleteCard', APPPATH.'com/gmo_pg/client/tran/DeleteCard.php');
+
+		$input = new DeleteCardInput();
+		$input->setSiteId( PGCARD_SITE_ID );
+		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setMemberId( $params['member_id'] );
+		$input->setSeqMode(1);
+
+		$exe = new DeleteCard();/* @var $exec DeleteCard */
+
+		$result = \Model_GMO::findCard($params);	
+		print_r($result);
+		foreach($result->cardSeq as $val) {
+			$input->setCardSeq( $val );
+			$output = $exe->exec( $input );/* @var $output DeleteCardOutput */
+						echo $val;
+			if( $exe->isExceptionOccured() ){//取引の処理そのものがうまくいかない（通信エラー等）場合、例外が発生します。
+				print_R($output);
+				exit;
+				return $output;
+			}else{
+				if( $output->isErrorOccurred() ){//出力パラメータにエラーコードが含まれていないか、チェックしています。
+				print_R($output);
+				exit;
+					return $output;
+				}
+			}
+		}
+		echo "hoge";
+		exit;
+		//$input->setSeqMode( $_POST['SeqMode']);
+	}
+
+	public static function entry($params) {
 		\Autoloader::add_class('EntryTranInput', APPPATH.'com/gmo_pg/client/input/EntryTranInput.php');
 		\Autoloader::add_class('ExecTranInput', APPPATH.'com/gmo_pg/client/input/ExecTranInput.php');
 		\Autoloader::add_class('EntryExecTranInput', APPPATH.'com/gmo_pg/client/input/EntryExecTranInput.php');
 		\Autoloader::add_class('EntryExecTran', APPPATH.'com/gmo_pg/client/tran/EntryExecTran.php');
-		//入力パラメータクラスをインスタンス化します
 		
-		if(empty($params['order_id'])) {
-			$order_id = substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, 1);
-		} else {
-			$order_id = $params['order_id'];
-		}
-		echo $order_id;
-
+		$order_id = $params['member_id']."-".$params['order_id'];
+		
 		//取引登録時に必要なパラメータ
 		$entryInput = new EntryTranInput();
 		$entryInput->setShopId( PGCARD_SHOP_ID );
@@ -190,10 +221,21 @@ class Model_GMO extends Orm\Model{
 		$execInput = new ExecTranInput();							//決済実行のパラメータ
 		$execInput->setOrderId( $order_id );						//カード番号入力型・会員ID決済型に共通する値です。
 		$execInput->setMethod( 1 );									//支払方法に応じて、支払回数のセット要否が異なります。
-		$execInput->setCardNo( $params['number'] );
-		$execInput->setExpire( $params['expire'] );
-		$execInput->setSecurityCode( $params['security_code'] );	//セキュリティコードは任意です。
-		
+
+		/*
+		if(!empty($params['number'])) {
+			$execInput->setCardNo( $params['number'] );
+			$execInput->setExpire( $params['expire'] );
+			$execInput->setSecurityCode( $params['security_code'] );	//セキュリティコードは任意です。					
+		}
+		*/
+		//会員IDは必須です。
+		$execInput->setSiteId( PGCARD_SITE_ID );
+		$execInput->setSitePass( PGCARD_SITE_PASS );
+
+		$execInput->setMemberId( $params['member_id'] );
+		$execInput->setCardSeq( 0 );	//連番は0固定とする
+
 		//取引登録＋決済実行の入力パラメータクラスをインスタンス化します
 		$input = new EntryExecTranInput();
 		$input->setEntryTranInput( $entryInput );

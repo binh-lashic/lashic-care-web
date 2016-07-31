@@ -1,7 +1,6 @@
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
 		<div class="drawer-navbar-header"> <a class="logo" href="index.html"><img src="/images/common/logo.png" alt=""/></a></div>
-		s
 		<nav class="drawer-nav drawer-nav-userMenu" role="navigation">
 		<button type="button" class="drawer-toggle drawer-hamburger">
           <span class="sr-only">toggle navigation</span>
@@ -16,34 +15,14 @@
 					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="nav_cart_text">カート</span><span class="nav_number">1</span></a>
 					<div class="drawer-dropdown-menu cartMenu">
 					<div id="cartMenu">
-						<ul>
-							<li id="nav_order01" class="nav_userList">
-								<p class="nav_cart_title">CareEye（ケアアイ）<br>12ヶ月パック</p>
-								<p class="nav_cart_btnArea right"><a href="javascript:();" class="nav_cart_link" id="nav_cart_delete01">× 削除</a></p>
-							</li>
-							<li class="nav_userList center"><p class="nav_cart_title">何も入っていません<br><span class="small text_red">＊何も入っていない場合</span></p></li>
-							<li>
-								<p class="nav_cart_btnArea"><a href="shopping_flow01_01.html" class="nav_cart_btn">購入手続きへ</a></p></li>
-						</ul>
-						<script type="text/javascript"> 
-							/* 1つ目 */
-							$('#nav_cart_delete01').click(function(){
-								$('#nav_order01').remove();
-								$('#nav_cart').addClass("opened");
-								$('.opened').delay().queue(function(){
-									$('#nav_cart').removeClass("opened");
-									$('#nav_cart').addClass("open").dequeue();
-								});
-								$('.nav_cart_alert').fadeIn(1000).delay().fadeOut(500);
-							});
-						</script>
+						<ul id="cart"></ul>
 					</div>
 					</div>
 				</li>
 			</ul>
-						<div class="nav_cart_alert">
-							<p>削除されました</p>
-						</div>
+			<div class="nav_cart_alert">
+				<p>削除されました</p>
+			</div>
 		</nav>
 	</div>
 </header>
@@ -176,42 +155,14 @@
 	<div class="settingInner">
 		<p class="mgb20">選択した商品を購入しますか？</p>
 		<a href="#settingComp" class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue">カートに入れる</a>
-		<a href="javascript:$.shoppingFancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a>
+		<a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a>
 	</div>
 </div>
 <div id="settingComp" class="settingContainer" style="display: none; width:400px; height:300px; ">
 	<div class="settingInner">
 		<p class="mgb20">商品をカートに入れました。</p>
 		<a href="/shopping/cart" class="hoppingFancybox btn_darkBlue graphSettingTrue">購入手続きへ</a>
-		<a href="javascript:$.shoppingFancybox.close();" class="btn_lightGray radius20 graphSettingFalse">ページへ戻る</a>
+		<a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">ページへ戻る</a>
 	</div>
 </div>
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
-<script>
-$(document).ready(function() {
-	$(".shoppingFancybox").click(function(event) {
-		if(typeof $(this).attr('data-plan') != "undefined") {
-			var plan_ids = [];
-			var plan = $(this).attr('data-plan');
-			if(plan == '1') {
-				plan_ids.push(1);
-			} else if(plan == '2') {
-				plan_ids.push(2);
-			} else if(plan == '3') {
-				plan_ids.push(3);
-			}
-			plan_ids.push(4);	//初期費用
-			console.log($("#pack" + plan).prop('checked'));
-			if($("#pack" + plan).prop('checked')) {
-				plan_ids.push(5);	//wifi貸出
-			}
-	        Cookies.set("plan_id", JSON.stringify(plan_ids), { expires: 90 });
-
-		}
-    });
- 	$(".shoppingFancybox").fancybox();
-	$(".startShopping").click(function(event) {
-        Cookies.set("cart_plan_id", Cookies.get("plan_id"));
-    });
-}); 
-</script> 
