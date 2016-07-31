@@ -202,8 +202,6 @@ class Controller_Shopping extends Controller_Base
                 {
                     $this->data['errors']['holder_name'] = true;
                 }
-                print_r($this->data['errors']);
-                exit;
                 if(empty($this->data['errors'])) {
                     //GMOペイメントの会員登録
                     $member = \Model_GMO::findMember($this->user['id']);
