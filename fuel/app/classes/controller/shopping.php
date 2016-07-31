@@ -175,14 +175,10 @@ class Controller_Shopping extends Controller_Base
         echo "hoge";
         print_r(Input::post());
         if(Input::post()) {
-            echo "hoge1";
-            exit;
             $params = Input::post();
             Session::set('card', $params);
             $this->data['card'] = $params;
             if($params['process'] == "registered") {
-                echo "hoge0";
-                exit;
                 if(!$params['security_code_registered'])
                 {
                     $this->data['errors']['security_code_registered'] = true;
@@ -192,8 +188,6 @@ class Controller_Shopping extends Controller_Base
                     return;
                 }
             } else {
-                echo "hoge1";
-                exit;
                 if(!$params['number'])
                 {
                     $this->data['errors']['number'] = true;
@@ -209,6 +203,7 @@ class Controller_Shopping extends Controller_Base
                     $this->data['errors']['holder_name'] = true;
                 }
                 print_r($this->data['errors']);
+                exit;
                 if(empty($this->data['errors'])) {
                     //GMOペイメントの会員登録
                     $member = \Model_GMO::findMember($this->user['id']);
@@ -221,6 +216,7 @@ class Controller_Shopping extends Controller_Base
                     $result = \Model_GMO::saveCard($params);
                     echo "hoge2";
                     print_r($result);
+                    exit;
                     Response::redirect('/shopping/payment');
                 }
             }
