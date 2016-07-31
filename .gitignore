@@ -32,3 +32,4 @@ composer.phar
 /fuel/app/cache/*/*
 /fuel/app/config/crypt.php
 /public/images/user/
+/fuel/app/session/*
