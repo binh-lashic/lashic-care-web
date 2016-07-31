@@ -209,7 +209,8 @@ class Controller_Shopping extends Controller_Base
                     }
                     $params['member_id'] = $member->memberId;
                     //カード情報の登録
-                    \Model_GMO::saveCard($params);
+                    $result = \Model_GMO::saveCard($params);
+                    print_r($result);
                     Response::redirect('/shopping/payment');
                 }
             }
