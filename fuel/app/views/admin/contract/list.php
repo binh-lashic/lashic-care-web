@@ -3,6 +3,7 @@
 		<h2>契約一覧</h2>
 	</div>
 </div>
+<!--
 <div class="row">
 	<div class="col-sm-6">
 		<form action="/admin/contract/list" method="get">
@@ -15,6 +16,7 @@
 		</form>
 	</div>
 </div>
+-->
 <div class="row">
 	<div class="col-sm-12">
 		<div class="panel panel-default">

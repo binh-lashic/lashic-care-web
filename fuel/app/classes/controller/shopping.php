@@ -211,13 +211,11 @@ class Controller_Shopping extends Controller_Base
                         $member = \Model_GMO::saveMember($this->user['id']);
                     }
                     $params['member_id'] = $member->memberId;
+                    //既に登録しているカードがある場合はシーケンス番号を与える
                     if(!empty($card->cardList)) {
                         $params['sequence'] = 0;
                     }
                     $result = \Model_GMO::saveCard($params);
-                    echo "hoge2";
-                    print_r($result);
-                    exit;
                     Response::redirect('/shopping/payment');
                 }
             }
