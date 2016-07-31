@@ -172,12 +172,12 @@ class Controller_Shopping extends Controller_Base
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header', $this->data); 
-
+        echo "hoge";
+        print_r(Input::post());
         if(Input::post()) {
             $params = Input::post();
             Session::set('card', $params);
             $this->data['card'] = $params;
-            echo "hoge";
             if($params['process'] == "registered") {
                 if(!$params['security_code_registered'])
                 {
