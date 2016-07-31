@@ -107,9 +107,11 @@ class Model_GMO extends Orm\Model{
 		$input->setCardNo( $params['number'] );
 		//$input->setCardPass( $params['CardPass'] );
 		$input->setExpire( $params['expire'] );
-		$input->setHolderName( $params['holder_name']);
-		$input->setSeqMode(1);
-		$input->setCardSeq(0);
+		$input->setHolderName( $params['holder_name'] );
+		if(!empty($params['sequence'] )) {
+			$input->setSeqMode(1);
+			$input->setCardSeq( $params['card_sequence'] );
+		}
 /*
 		$cardSeq = $_POST['CardSeq'];
 		if( 0 < strlen( $cardSeq ) ){

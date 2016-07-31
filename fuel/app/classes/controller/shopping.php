@@ -171,9 +171,11 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data); 
-        echo "hoge";
-        print_r(Input::post());
+        $this->template->header = View::forge('header', $this->data);
+
+        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+        $this->data['cards'] = $card->cardList;
+
         if(Input::post()) {
             $params = Input::post();
             Session::set('card', $params);
@@ -209,9 +211,9 @@ class Controller_Shopping extends Controller_Base
                         $member = \Model_GMO::saveMember($this->user['id']);
                     }
                     $params['member_id'] = $member->memberId;
-                    print_r($member);
-                    //カード情報の登録
-                    print_r($params);
+                    if(!empty($card->cardList)) {
+                        $params['sequence'] = 0;
+                    }
                     $result = \Model_GMO::saveCard($params);
                     echo "hoge2";
                     print_r($result);
@@ -220,10 +222,6 @@ class Controller_Shopping extends Controller_Base
                 }
             }
         }
-
-        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
-        print_r($card);
-        $this->data['cards'] = $card->cardList;
 
         $this->template->content = View::forge('shopping/payment', $this->data);           
     }
