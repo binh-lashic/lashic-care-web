@@ -211,6 +211,7 @@ class Controller_Shopping extends Controller_Base
                     $params['member_id'] = $member->memberId;
                     print_r($member);
                     //カード情報の登録
+                    print_r($params);
                     $result = \Model_GMO::saveCard($params);
                     echo "hoge2";
                     print_r($result);
