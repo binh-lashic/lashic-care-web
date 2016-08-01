@@ -69,7 +69,8 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
-		if(count($this->data['clients']) == 0) {
+		if(count($this->data['clients']) == 0 && count(Session::get("plans")) > 0) {
+			Response::redirect('/shopping/cart');
 		}
 	    if(Input::param("date")) {
 	    	$this->data['date'] = Input::param("date");

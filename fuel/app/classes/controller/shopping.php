@@ -37,7 +37,7 @@ class Controller_Shopping extends Controller_Base
 	public function action_cart()
 	{
         if (!Auth::check()) {
-            Response::redirect('/register/email');
+            Response::redirect('/register/');
         } else {
             $this->data['plans'] = Session::get("plans");
             $this->template->title = 'カート';
