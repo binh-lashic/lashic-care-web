@@ -1,5 +1,4 @@
 <?php 
-require_once(APPPATH.'config.php');
 set_include_path(get_include_path().PATH_SEPARATOR.APPPATH);
 
 class Model_GMO extends Orm\Model{
@@ -9,8 +8,8 @@ class Model_GMO extends Orm\Model{
 		\Autoloader::add_class('SearchMember', APPPATH.'com/gmo_pg/client/tran/SearchMember.php');
 
 		$input = new SearchMemberInput();
-		$input->setSiteId( PGCARD_SITE_ID );
-		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$input->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 		$input->setMemberId( $id );
 		$exe = new SearchMember();
 		$output = $exe->exec( $input );
@@ -32,8 +31,8 @@ class Model_GMO extends Orm\Model{
 		\Autoloader::add_class('SaveMember', APPPATH.'com/gmo_pg/client/tran/SaveMember.php');
 
 		$input = new SaveMemberInput();
-		$input->setSiteId( PGCARD_SITE_ID );
-		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$input->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 		
 		$input->setMemberId( $id );
 		
@@ -69,8 +68,8 @@ class Model_GMO extends Orm\Model{
 		\Autoloader::add_class('SearchCard', APPPATH.'com/gmo_pg/client/tran/SearchCard.php');
 
 		$input = new SearchCardInput();/* @var $input SearchCardInput */
-		$input->setSiteId( PGCARD_SITE_ID );
-		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$input->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 		$input->setMemberId( $params['member_id'] );
 		$input->setSeqMode(1);
 		$input->setCardSeq(0);
@@ -100,8 +99,8 @@ class Model_GMO extends Orm\Model{
 		\Autoloader::add_class('SaveCard', APPPATH.'com/gmo_pg/client/tran/SaveCard.php');
 
 		$input = new SaveCardInput();/* @var $input SaveCardInput */
-		$input->setSiteId( PGCARD_SITE_ID );
-		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$input->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 
 		$input->setMemberId( $params['member_id'] );
 		$input->setCardNo( $params['number'] );
@@ -172,8 +171,8 @@ class Model_GMO extends Orm\Model{
 		\Autoloader::add_class('DeleteCard', APPPATH.'com/gmo_pg/client/tran/DeleteCard.php');
 
 		$input = new DeleteCardInput();
-		$input->setSiteId( PGCARD_SITE_ID );
-		$input->setSitePass( PGCARD_SITE_PASS );
+		$input->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$input->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 		$input->setMemberId( $params['member_id'] );
 		$input->setSeqMode(1);
 
@@ -212,8 +211,8 @@ class Model_GMO extends Orm\Model{
 		
 		//取引登録時に必要なパラメータ
 		$entryInput = new EntryTranInput();
-		$entryInput->setShopId( PGCARD_SHOP_ID );
-		$entryInput->setShopPass( PGCARD_SHOP_PASS );
+		$entryInput->setShopId( $_SERVER['PGCARD_SHOP_ID'] );
+		$entryInput->setShopPass( $_SERVER['PGCARD_SHOP_PASS'] );
 		$entryInput->setJobCd("CAPTURE");
 		$entryInput->setItemCode( "0000990" );
 		$entryInput->setAmount( $params['amount']);
@@ -232,8 +231,8 @@ class Model_GMO extends Orm\Model{
 		}
 		*/
 		//会員IDは必須です。
-		$execInput->setSiteId( PGCARD_SITE_ID );
-		$execInput->setSitePass( PGCARD_SITE_PASS );
+		$execInput->setSiteId( $_SERVER['PGCARD_SITE_ID'] );
+		$execInput->setSitePass( $_SERVER['PGCARD_SITE_PASS'] );
 
 		$execInput->setMemberId( $params['member_id'] );
 		$execInput->setCardSeq( 0 );	//連番は0固定とする

@@ -23,10 +23,13 @@
 			<table class="table table-bordered">
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
-					<th class="col-sm-2">名前</th>
-					<th class="col-sm-2">契約名</th>
-					<th class="col-sm-2">金額</th>
-					<th class="col-sm-2">契約開始日</th>
+					<th class="col-sm-1">契約アカウント</th>
+					<th class="col-sm-3">契約プラン名</th>
+					<th class="col-sm-1">金額</th>
+					<th class="col-sm-1">送料</th>
+					<th class="col-sm-1">契約開始日</th>
+					<th class="col-sm-1">契約更新日</th>
+					<th class="col-sm-2">操作</th>
 				</tr>
 <?php
 if(isset($contracts)) {
@@ -35,8 +38,13 @@ if(isset($contracts)) {
 					<td><?php echo $contract['id']; ?></td>
 					<td><a href="/admin/contract/?id=<?php echo $contract['id']; ?>"><?php echo $contract['last_name']; ?><?php echo $contract['first_name']; ?></a></td>
 					<td><?php echo $contract['title']; ?></td>
-					<td><?php echo $contract['price']; ?>円</td>
+					<td class="text-right"><?php echo $contract['price']; ?>円</td>
+					<td class="text-right"><?php echo $contract['shipping']; ?>円</td>
 					<td><?php echo $contract['start_date']; ?></td>
+					<td><?php echo $contract['renew_date']; ?></td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
+					</td>
 				</tr>
 <?php
 	}
