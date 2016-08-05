@@ -110,6 +110,7 @@ class Controller_Api_Data extends Controller_Api
 					$this->result['data']['active'] = round($data['active'], 1);
 					$this->result['data']['illuminance'] =  (int)$data['illuminance'];
 					$this->result['data']['discomfort'] = $data['discomfort'];
+					$this->result['data']['wbgt'] = $data['wbgt'];
 					$this->result['data']['date'] = $data['date'];
 				}
 			}
@@ -210,6 +211,7 @@ class Controller_Api_Data extends Controller_Api
 					'illuminance' => !empty($rows[$current_time]) ? $rows[$current_time]['illuminance'] : null,
 					'active' => !empty($rows[$current_time]) ? $rows[$current_time]['active'] : null,
 					'discomfort' => !empty($rows[$current_time]) ? $rows[$current_time]['discomfort'] : null,
+					'wbgt' => !empty($rows[$current_time]) ? $rows[$current_time]['wbgt'] : null,
 				);
 			}
 			$this->result = array(
@@ -305,12 +307,14 @@ class Controller_Api_Data extends Controller_Api
 				$illuminance_total = 0;
 				$active_total = 0;
 				$discomfort_total = 0;
+				$wbgt_total = 0;
 				$averages = array(
 					'temperature' => null,
 					'humidity' => null,
 					'illuminance' => null,
 					'active' => null,
 					'discomfort' => null,
+					'wbgt' => null,
 				);
 				$span_time = date("Y-m-d H:i:s", $time);
 				$data_count = 0;
@@ -322,6 +326,7 @@ class Controller_Api_Data extends Controller_Api
 						$illuminance_total += $rows[$current_time]['illuminance'];
 						$active_total += $rows[$current_time]['active'];
 						$discomfort_total += $rows[$current_time]['discomfort'];
+						$wbgt_total += $rows[$current_time]['wbgt'];
 						$data_count++;
 					}					
 				}
@@ -332,6 +337,7 @@ class Controller_Api_Data extends Controller_Api
 					$averages['illuminance'] = $illuminance_total / $data_count;
 					$averages['active'] = $active_total / $data_count;
 					$averages['discomfort'] = $discomfort_total / $data_count;
+					$averages['wbgt'] = $wbgt_total / $data_count;
 				}
 				$value = $averages[$type];
 
@@ -344,6 +350,7 @@ class Controller_Api_Data extends Controller_Api
 					'illuminance' => $averages['illuminance'],
 					'active' => $averages['active'],
 					'discomfort' => $averages['discomfort'],
+					'wbgt' => $averages['wbgt'],
 				);
 			}
 			$this->result = array(
