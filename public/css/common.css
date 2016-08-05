@@ -378,6 +378,9 @@ strong {
 .large {
 	font-size: 140%;
 }
+.max_large {
+	font-size: 200%;
+}
 .small {
 	font-size: 12px;
 	line-height: 1.4em;

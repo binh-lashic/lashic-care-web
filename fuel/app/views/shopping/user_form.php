@@ -125,7 +125,7 @@ if(!empty($errors['birthday'])) {
 							<tr>
 								<th>郵便番号</th>
 								<td><input type="text" name="zip_code" class="input_text input_short p-postal-code" maxlength="7" placeholder="例）1234567" value="<?php if(isset($data['zip_code'])) { echo $data['zip_code']; } ?>"> 
-									　&nbsp;&nbsp;<a href="http://www.post.japanpost.jp/zipcode/" target="_blank">郵便番号検索</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+									　&nbsp;&nbsp;<a href="http://www.post.japanpost.jp/zipcode/" target="_blank">郵便番号検索</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角数字、ハイフンなしでご入力ください。</span></td>
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> 都道府県</th>
@@ -169,7 +169,7 @@ if(!empty($errors['address'])) {
 							<tr>
 								<th><span class="icon_Required">必須</span> 電話番号1</th>
 								<td><input type="text" name="phone" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['phone'])) { echo $data['phone']; } ?>">
-									<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+									<span class="small text_red">※</span><span class="small">半角数字、ハイフンなしでご入力ください。</span>
 <?php
 if(!empty($errors['phone'])) {
 ?>
@@ -182,7 +182,7 @@ if(!empty($errors['phone'])) {
 							<tr>
 								<th>電話番号2</th>
 								<td><input type="text" name="cellular" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['cellular'])) { echo $data['cellular']; } ?>">
-									<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+									<span class="small text_red">※</span><span class="small">半角数字、ハイフンなしでご入力ください。</span></td>
 							</tr>
 							<tr>
 								<th>血液型</th>

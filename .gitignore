@@ -20,6 +20,7 @@ composer.phar
 
 # any of the fuel packages installed by default
 /docs/
+/logs/
 #/fuel/core/
 #/fuel/packages/auth/
 #/fuel/packages/email/

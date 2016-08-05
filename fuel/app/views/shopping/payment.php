@@ -83,7 +83,8 @@ if(!empty($errors['security_code_registered'])) {
 					<table>
 						<tbody>
 							<tr>
-								<th colspan="2" class="large"><input type="radio" id="card02" name="process" value="new">
+								<th colspan="2" class="large">
+								<input type="radio" id="card02" name="process" value="new" <?php if($card['process'] == "new") { echo "checked=\"checked\""; } ?>>
 								<label for="card02" class="checkbox largeInput">別のクレジットカード</label> <span class="small">：こちらのクレジットカードが登録されます</span>
 								</th>
 							</tr>

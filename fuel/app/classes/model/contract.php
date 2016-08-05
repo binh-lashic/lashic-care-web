@@ -39,4 +39,21 @@ class Model_Contract extends Orm\Model{
         return $results;
     }
 
+    public function getUsers()
+    {
+        $sql = "SELECT c.*,u.last_name,u.first_name,p.title ".
+               "  FROM contracts c ".
+               "  LEFT JOIN users u ON c.user_id = u.id".
+               "  LEFT JOIN plans p ON c.plan_id = p.id".
+               "  ORDER BY c.id DESC;";
+        $query = DB::query($sql);
+        $rows = $query->execute();
+        $results = array();
+        foreach($rows as $row)
+        {
+            $results[] = $row['user_id'];
+        }
+        return array_unique($results);
+    }
+
 }

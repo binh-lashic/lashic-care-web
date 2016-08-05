@@ -107,9 +107,9 @@ class Model_GMO extends Orm\Model{
 		//$input->setCardPass( $params['CardPass'] );
 		$input->setExpire( $params['expire'] );
 		$input->setHolderName( $params['holder_name'] );
-		if(!empty($params['sequence'] )) {
+		if(isset($params['sequence'] )) {
 			$input->setSeqMode(1);
-			$input->setCardSeq( $params['card_sequence'] );
+			$input->setCardSeq( $params['sequence'] );
 		}
 /*
 		$cardSeq = $_POST['CardSeq'];
@@ -147,6 +147,7 @@ class Model_GMO extends Orm\Model{
 				echo $message;
 				echo "\n";
 			}
+			exit;
 			return $output;
 		}else{
 			if( $output->isErrorOccurred() ){//出力パラメータにエラーコードが含まれていないか、チェックしています。
@@ -161,6 +162,7 @@ class Model_GMO extends Orm\Model{
 						.'</p>';
 						
 				}
+				exit;
 				return $output;
 			}
 		}
