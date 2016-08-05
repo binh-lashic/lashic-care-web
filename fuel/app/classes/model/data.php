@@ -37,6 +37,10 @@ class Model_Data extends Orm\Model{
             $data['discomfort'] = 0.81 * $data['temperature'] + 0.01 * $data['humidity'] * (0.99 * $data['temperature'] - 14.3) + 46.3;
             $data['discomfort'] = round($data['discomfort'], 1);
             $data['discomfort'] = (string)$data['discomfort'];
+            //熱中症指数＝ (0.3×温度+2.75)×(湿度-20)÷80 + 0.75×温度-0.75
+            $data['wbgt'] = (0.3 * $data['temperature'] + 2.75) * ($data['humidity'] - 20) / 80 + 0.75 * $data['temperature'] - 0.75;
+            $data['wbgt'] = round($data['wbgt'], 1);
+            $data['wbgt'] = (string)$data['wbgt'];
         }
         return $data;
     }

@@ -165,6 +165,7 @@ $(function(){
 				$("#data_active").attr("data-text", "");
 				$("#data_active").attr("data-percent","");
 			}
+			/*
 			if(typeof result.data.discomfort != "undefined") {
 				$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
 				$("#data_discomfort").attr("data-percent", result.data.discomfort);
@@ -172,7 +173,14 @@ $(function(){
 				$("#data_discomfort").attr("data-text", "");
 				$("#data_discomfort").attr("data-percent","");
 			}
-
+			*/
+			if(typeof result.data.wbgt != "undefined") {
+				$("#data_wbgt").attr("data-text", result.data.wbgt + "度");
+				$("#data_wbgt").attr("data-percent", result.data.wbgt);
+			} else {
+				$("#data_wbgt").attr("data-text", "");
+				$("#data_wbgt").attr("data-percent","");
+			}
 			if(result.data.wake_up_time != null) {
 				$("#data_wake_up_time").html(result.data.wake_up_time.substring(0, 5));
 				wake_up_time_data = result.data.wake_up_time.substring(0, 4) + "0";
