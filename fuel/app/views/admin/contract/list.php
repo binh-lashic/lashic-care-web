@@ -43,7 +43,7 @@ if(isset($contracts)) {
 					<td><?php echo $contract['start_date']; ?></td>
 					<td><?php echo $contract['renew_date']; ?></td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">センサー機器の割当</a>						
 					</td>
 				</tr>
 <?php

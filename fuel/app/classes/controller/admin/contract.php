@@ -68,5 +68,59 @@ class Controller_Admin_Contract extends Controller_Admin
 		}
 		return $response;
 	}
+
+    public function action_add_sensor() {
+        $contract = \Model_Contract::find(Input::param("contract_id"));
+
+
+        $sensor_names_data = Input::param("sensor_names");
+        $sensor_names = explode(PHP_EOL, $sensor_names_data);
+
+        if($contract['id'] && $sensor_names) {
+            foreach($sensor_names as $name) {
+                $name = trim($name);
+                //センサーを新規登録
+                $sensor = Model_Sensor::find("first" , array(
+                    'where' => array(
+                            array('name', $name),
+                        )
+                    ));
+                if(!$sensor) {
+                    $sensor = Model_Sensor::forge();
+                    $sensor->set(array('name' => $name));
+                    $sensor->save();
+                }
+
+                if($sensor->id > 0) {
+                	\Model_Contract_Sensor::saveContractSensor(array(
+                        'contract_id' => $contract['id'],
+                        'sensor_id' => $sensor->id,
+                    ));
+
+                    //見守られユーザを登録
+                    \Model_User_Client::saveUserClient(array(
+                        'user_id' => $contract['user_id'],
+                        'client_user_id' => $contract['client_user_id'],
+                    ));
+
+                    //管理者として登録
+                    \Model_User_Sensor::saveUserSensor(array(
+                        'user_id' => $contract['client_user_id'],
+                        'sensor_id' => $sensor->id,
+                        'admin' => 0,
+                    ));
+
+                    //管理者として登録
+                    \Model_User_Sensor::saveUserSensor(array(
+                        'user_id' => $contract['user_id'],
+                        'sensor_id' => $sensor->id,
+                        'admin' => 1,
+                    ));
+                }
+
+            }
+	        Response::redirect('/admin/contract/sensor?id='.$contract['id']);
+    	}
+    }
 }
 ?>

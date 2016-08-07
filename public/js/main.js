@@ -165,7 +165,7 @@ $(function(){
 				$("#data_active").attr("data-text", "");
 				$("#data_active").attr("data-percent","");
 			}
-			/*
+/*
 			if(typeof result.data.discomfort != "undefined") {
 				$("#data_discomfort").attr("data-text", result.data.discomfort + "%");
 				$("#data_discomfort").attr("data-percent", result.data.discomfort);
@@ -173,9 +173,9 @@ $(function(){
 				$("#data_discomfort").attr("data-text", "");
 				$("#data_discomfort").attr("data-percent","");
 			}
-			*/
+*/
 			if(typeof result.data.wbgt != "undefined") {
-				$("#data_wbgt").attr("data-text", result.data.wbgt + "度");
+				$("#data_wbgt").attr("data-text", result.data.wbgt + "%");
 				$("#data_wbgt").attr("data-percent", result.data.wbgt);
 			} else {
 				$("#data_wbgt").attr("data-text", "");
@@ -597,11 +597,24 @@ $(function(){
 		}
     });
 
-
  	$(".shoppingFancybox").fancybox();
 	$(".startShopping").click(function(event) {
 		api("shopping/set_plans", { plan_ids : JSON.parse(Cookies.get("plan_id")) }, function(result){
 			displayCartPlans(result);
 		});
     });
+
+    //送付先ページ用
+    $('.destination_delete').click(function(){
+    	console.log("destination_delete");
+    	if(confirm("この送付先を削除してもよろしいでしょうか？")) {
+			var id = $(this).attr('data-address');
+			api("address/delete", { id : id }, function(result){
+				$('#order_address' + id).empty();
+				$('.order_alert').fadeIn(1000).delay().fadeOut(1000);
+			});
+    	}
+		return false;
+	});
+
 });

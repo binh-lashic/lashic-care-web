@@ -56,4 +56,33 @@ class Model_Contract extends Orm\Model{
         return array_unique($results);
     }
 
+    public static function getSensors($contract_id) {
+        $sensors = array();
+        if($contract_id) {
+            $rows = \Model_Contract_Sensor::find("all", array(
+                'where' => array(
+                    'contract_id' => $contract_id,
+                ),
+                'related' => array(
+                    'sensor' => array(
+                        'order_by' => array('name' => 'asc'),
+                    )
+                ),
+            ));
+            foreach($rows as $row) {
+                $contract_sensor = $row->to_array();
+                $contract_sensor['id'] = $contract_sensor['sensor_id'];
+                unset($contract_sensor['contract_id']);
+                unset($contract_sensor['sensor_id']);
+                if(isset($contract_sensor['sensor'])) {
+                    $sensor = $contract_sensor['sensor'];
+                    unset($contract_sensor['sensor']);
+                    $sensors[] = array_merge($sensor, $contract_sensor);
+                } else {
+                    $sensors[] = $contract_sensor;
+                }               
+            }
+        }
+        return $sensors;
+    }
 }

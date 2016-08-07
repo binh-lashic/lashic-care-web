@@ -22,9 +22,7 @@
 foreach($users as $key => $_user)
 {
 ?>
-					<li id="order_address<?php echo $key; ?>" class="shoppingCart_containerLi shopping_tile">
-<?php
-						?>
+					<li class="shoppingCart_containerLi shopping_tile">
 						<div class="borderGrayRadius pd20">
 							<div class="shoppingCart_address">
 								<h3 class="shoppingCart_h3"><?php echo $_user['last_name']; ?><?php echo $_user['first_name']; ?></h3>
@@ -42,19 +40,9 @@ foreach($addresses as $key => $_address)
 {
 ?>
 					<li id="order_address<?php echo $key; ?>" class="shoppingCart_containerLi shopping_tile">
-<?php
-/*
 						<div class="order_deleteSet">
-							<button id="order_btn_delete01" class="order_btn_delete" onClick="removeElement()"><span class="order_btn_delete_icon close"></span><span class="order_wrap_text">削除する</span></button>
+							<button id="order_btn_delete01" class="order_btn_delete destination_delete" data-address="<?php echo $key; ?>" style="z-index:9999;"><span class="order_btn_delete_icon close"></span><span class="order_wrap_text">削除する</span></button>
 						</div>
-						<script type="text/javascript"> 
-							$('#order_btn_delete<?php echo $key; ?>').click(function(){
-							$('#order_address<?php echo $key; ?>').remove();
-							 $('.order_alert').fadeIn(1000).delay().fadeOut(1000);
-							});
-						</script>
-*/
-						?>
 						<div class="borderGrayRadius pd20">
 							<div class="shoppingCart_address">
 								<h3 class="shoppingCart_h3"><?php echo $_address['last_name']; ?><?php echo $_address['first_name']; ?></h3>

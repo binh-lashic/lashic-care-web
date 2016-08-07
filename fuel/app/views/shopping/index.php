@@ -102,7 +102,7 @@
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>月々パック</h3>
-							<p class="shoppingCart_price">1200円（税込）<span class="small">/月</span></p>
+							<p class="right"><span class="max_large text_red">1200円（税込）</span><span class="large text_red">/月</span></p>
 							<p class="right">初期費用 14,800円（税込）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
@@ -118,7 +118,7 @@
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>6ヶ月パック</h3>
-							<p class="shoppingCart_price">6600円（税込）<span class="small">1100円/月</span></p>
+							<p class="right"><span class="max_large text_red">6600円（税込）</span><span class="large text_red">/月</span></p>
 							<p class="right">初期費用 14,800円（税込）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
@@ -133,7 +133,7 @@
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>12ヶ月パック</h3>
-							<p class="shoppingCart_price">11760円（税込） <span class="small">980円/月</span></p>
+							<p class="right"><span class="max_large text_red">11760円（税込） </span><span class="large text_red">/月</span></p>
 							<p class="right">初期費用 14,800円（税込）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
