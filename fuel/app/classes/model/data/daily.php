@@ -58,8 +58,11 @@ class Model_Data_Daily extends Orm\Model{
         if($data) {
             $data['discomfort_average'] = 0.81 * $data->temperature_average + 0.01 * $data->humidity_average * (0.99 * $data->temperature_average - 14.3) + 46.3;
             $data['discomfort_average'] = round($data['discomfort_average'], 1);
+            $data['wbgt_average'] =  (0.3 * $data->temperature_average + 2.75) * ($data->humidity_average - 20) / 80 + 0.75 * $data->temperature_average - 0.75;
+            $data['wbgt_average'] = round($data['wbgt_average'], 1);
         } else {
             $data['discomfort_average'] = "";
+            $data['wbgt_average'] = "";
         }
         return $data;
     }

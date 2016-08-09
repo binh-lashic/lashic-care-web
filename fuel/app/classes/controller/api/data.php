@@ -99,6 +99,9 @@ class Controller_Api_Data extends Controller_Api
 				if(!empty($data_daily['discomfort_average'])) {
 					$this->result['data']['discomfort']  = $data_daily['discomfort_average'];
 				}
+				if(!empty($data_daily['wbgt_average'])) {
+					$this->result['data']['wbgt']  = $data_daily['wbgt_average'];
+				}
 			}
 
 			//今日だったら最新データにする
@@ -426,101 +429,4 @@ class Controller_Api_Data extends Controller_Api
 				$params['sleep_time_average'] = $hour.":".$minutes.":00";
 			}
 
-    		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
-	    	$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $sensor->name,
-				'start_date' => $start_date,
-				'end_date' => $end_date,
-			));
-			$result = $query->execute('data');
-			$rows = $result->as_array();
-			$count = count($rows);
-			if($count > 0) {
-				$temperature_total = 0;
-				$humidity_total = 0;
-				$active_total = 0;
-				$illuminance_total = 0;
-				foreach($rows as $row) {
-					$temperature_total += $row['temperature'];
-					$humidity_total += $row['humidity'];
-					$active_total += $row['active'];
-					$illuminance_total += $row['illuminance'];
-				}
-				$params['temperature_average'] = $temperature_total / $count;
-				$params['humidity_average'] = $humidity_total / $count;
-				$params['active_average'] = $active_total / $count;
-				$params['illuminance_average'] = $illuminance_total / $count;
-
-				$data_daily = \Model_Data_Daily::find('first', array('where' => array(
-					'sensor_id' => $sensor->id,
-					'date' => $date,
-				)));
-				if(empty($data_daily)) {
-					$data_daily =  \Model_Data_Daily::forge();
-				}
-				$data_daily->set($params);
-				$data_daily->save();	
-			}
-		} 
-		return $this->result();	
-	}
-
-	public function get_alert() {
-		$time = strtotime(date("Y-m-d H:i:00"));
-		//開通確認
-		$sensors = \Model_Sensor::find("all", array(
-			'where' => array(
-				'enable' => 0,
-				array('shipping_date', "<", date("Y-m-d H:i:s"))
-			)
-		));
-		foreach($sensors as $sensor) {
-			$result = DB::select("*")
-					    ->from('data')
-					    ->where('sensor_id', $sensor->name)
-					    ->where('date', date("Y-m-d H:i:00", $time - 60))
-					    ->execute('data');
-			if(isset($result)) {
-				$sensor->set(array('enable' => 1));
-				$sensor->save();
-			}
-		}
-
-
-		if(Input::param("sensor_id")) {
-			$sensors = array(\Model_Sensor::find(Input::param("sensor_id")));
-		} else {
-			$sensors = \Model_Sensor::find("all", array(
-				'where' => array(
-					'enable' => 1,
-				)
-			));
-		}
-		foreach($sensors as $sensor) {
-			$sensor->users;
-			$sensor->setTime($time);
-			try {
-				$this->result['data'][] = array(
-					'sensor_id' => $sensor->id,
-					'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
-					'fire' => $sensor->checkFire(),									//火事アラート
-					'temperature' => $sensor->checkTemperature(),					//室温異常通知
-					'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
-					'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
-					'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
-					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
-					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
-					'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
-					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
-					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
-																					//通信復帰通知
-            	);
-			} catch (Exception $e) {
-				Log::info($e->getMessage(), 'alert error');
-			}
-        }
-        return $this->result(); 
-    }
-}
+    		$sql = 'SELECT * FROM data WHERE sensor_i
