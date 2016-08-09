@@ -13,6 +13,7 @@ class Model_Contract extends Orm\Model{
         'price',
         'shipping',
         'status',
+        'affiliate',
         'updated_at',
         'created_at',
 	);
@@ -28,11 +29,12 @@ class Model_Contract extends Orm\Model{
         ),
     );
 
-    public function getSearch() {
+    public function getSearch($params) {
         $sql = "SELECT c.*,u.last_name,u.first_name,p.title ".
                "  FROM contracts c ".
                "  LEFT JOIN users u ON c.user_id = u.id".
                "  LEFT JOIN plans p ON c.plan_id = p.id".
+               " WHERE type = 'initial' OR type = 'wifi'".
                "  ORDER BY c.id DESC;";
         $query = DB::query($sql);
         $results = $query->execute();

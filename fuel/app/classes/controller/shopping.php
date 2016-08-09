@@ -252,38 +252,64 @@ class Controller_Shopping extends Controller_Base
             $this->data['errors']['destination'] = true;
         }
         if(empty($this->data['errors'])) {
+            //支払い処理を行う
+            $payment = \Model_Payment::forge();
+            $price = 0;
             foreach($plans as $plan) {
-                if($plan['type'] == 'monthly') {
-                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));
-                } else if($plan['type'] == '6monthly') {
-                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 8, 0, date('Y')));
-                } else if($plan['type'] == 'yearly') {
-                    $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 14, 0, date('Y')));
-                }
-                $params = array(
-                    'plan_id' => $plan['id'],
-                    'user_id' => $this->user['id'],
-                    'client_user_id' => $client['id'],
-                    'start_date' => date("Y-m-d"),
-                    'renew_date'=> $renew_date,
-                    'price' => $plan['price'],
-                    'shipping' => $destination['shipping'],
-                    'zip_code' => $destination['zip_code'],
-                    'prefecture' => $destination['prefecture'],
-                    'address' => $destination['address'],
-                );
-                $contract = \Model_Contract::forge();
-                $contract->set($params);
-                if($contract->save()) {
-                    if($plan['options'][0]['continuation'] != "1") {
-                        $result = \Model_GMO::entry(array(
-                            'order_id' => $contract->id,
-                            'member_id' => $contract->user_id,
-                            'amount' => $contract->price,
-                            'tax' => $contract->shipping,
-                        ));
+                $price += $plan['price'];
+            }
+            $payment->set(array(
+                'user_id' => $this->user['id'],
+                'date' => date("Y-m-d"),
+                'price' => $price,
+                'shipping' => $destination['shipping'],
+                'title' => 'ケアアイ初期費用',
+                'type' => 'initial',
+            ));
+            if($payment->save()) {
+                foreach($plans as $plan) {
+                    if($plan['continuation'] == 1) {
+                        $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));
+                    } else if($plan['continuation'] == 6) {
+                        $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 8, 0, date('Y')));
+                    } else if($plan['continuation'] == 12) {
+                        $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 14, 0, date('Y')));
                     }
-                }
+                    $params = array(
+                        'plan_id' => $plan['id'],
+                        'user_id' => $this->user['id'],
+                        'client_user_id' => $client['id'],
+                        'start_date' => date("Y-m-d"),
+                        'renew_date'=> $renew_date,
+                        'price' => $plan['price'],
+                        'shipping' => $destination['shipping'],
+                        'zip_code' => $destination['zip_code'],
+                        'prefecture' => $destination['prefecture'],
+                        'address' => $destination['address'],
+                    );
+                    if(!empty(Cookie::get("affiliate"))) {
+                        $params['affiliate'] = Cookie::get("affiliate"); 
+                        Cookie::delete("affiliate");
+                    }
+                    $contract = \Model_Contract::forge();
+                    $contract->set($params);
+                    if($contract->save()) {
+                        if($plan['options'][0]['continuation'] != "1") {
+                            $result = \Model_GMO::entry(array(
+                                'order_id' => $contract->id,
+                                'member_id' => $contract->user_id,
+                                'amount' => $contract->price,
+                                'tax' => $contract->shipping,
+                            ));
+                        }
+                        $contract_payment = \Model_Contract_Payment::forge();
+                        $contract_payment->set(array(
+                            'contract_id' => $contract->id,
+                            'payment_id' => $payment->id, 
+                        ));
+                        $contract_payment->save();
+                    }
+                }          
             }
             Session::delete("plans");
             Session::delete("client");
