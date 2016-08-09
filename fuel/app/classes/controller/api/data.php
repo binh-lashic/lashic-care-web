@@ -140,6 +140,7 @@ class Controller_Api_Data extends Controller_Api
 			'illuminance' => true,					//照度
 			'active' => true,						//運動
 			'discomfort' => true,					//不快指数
+			'wbgt' => true,							//熱中症指数
 		);
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
