@@ -217,7 +217,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = count($result);
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
@@ -265,7 +266,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = count($result);
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
@@ -313,7 +315,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = count($result);
 			if($count) {
 				foreach($result as $row) {
@@ -349,7 +352,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = count($result);
 			if($count) {
 				foreach($result as $row) {
@@ -435,7 +439,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = 0;
 			if(count($result)) {
 				foreach($result as $row) {
@@ -479,7 +484,8 @@ class Model_Sensor extends Orm\Model{
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
 			));
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 			$count = 0;
 			if(count($result)) {
 				foreach($result as $row) {
@@ -827,7 +833,8 @@ if(isset($sleep_time)) {
 					'sensor_id' => $this->name,
 					'date' => date("Y-m-d H:i:s", $this->time - 60)
 				));  
-				$result = $query->cached(60)->execute('data');
+				//$result = $query->cached(60)->execute('data');
+				$result = $query->execute('data');
 
 				$count = count($result);
 
@@ -866,7 +873,8 @@ if(isset($sleep_time)) {
 				'sensor_id' => $this->name,
 				'date' => date("Y-m-d H:i:s", $this->time - 60)
 			));  
-			$result = $query->cached(60)->execute('data');
+			//$result = $query->cached(60)->execute('data');
+			$result = $query->execute('data');
 
 			$count = count($result);
 

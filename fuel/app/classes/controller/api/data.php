@@ -297,7 +297,8 @@ class Controller_Api_Data extends Controller_Api
 				'start_time' => date("Y-m-d H:i:s", $start_time),
 				'end_time' => date("Y-m-d H:i:s", $end_time),
 			));
-			$results = $query->cached(60)->execute('data');
+			//$results = $query->cached(60)->execute('data');
+			$results = $query->execute('data');
 			$rows = array();
 			foreach($results as $result) {
 				$result = Model_Data::format($result);
