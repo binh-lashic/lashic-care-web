@@ -25,6 +25,7 @@
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-1">契約アカウント</th>
 					<th class="col-sm-3">契約プラン名</th>
+					<th class="col-sm-1">ステータス</th>
 					<th class="col-sm-1">金額</th>
 					<th class="col-sm-1">送料</th>
 					<th class="col-sm-1">契約開始日</th>
@@ -38,12 +39,20 @@ if(isset($contracts)) {
 					<td><?php echo $contract['id']; ?></td>
 					<td><a href="/admin/contract/?id=<?php echo $contract['id']; ?>"><?php echo $contract['last_name']; ?><?php echo $contract['first_name']; ?></a></td>
 					<td><?php echo $contract['title']; ?></td>
+					<td>未出荷</td>
 					<td class="text-right"><?php echo $contract['price']; ?>円</td>
 					<td class="text-right"><?php echo $contract['shipping']; ?>円</td>
 					<td><?php echo $contract['start_date']; ?></td>
 					<td><?php echo $contract['renew_date']; ?></td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">センサー機器の割当</a>						
+<?php
+if($contract['type'] != 'initial') {
+?>
+						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">機器の割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">出荷日登録</a>
+<?php
+}
+?>
 					</td>
 				</tr>
 <?php

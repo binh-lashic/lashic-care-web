@@ -77,7 +77,6 @@ class Controller_Admin_Contract extends Controller_Admin
     public function action_add_sensor() {
         $contract = \Model_Contract::find(Input::param("contract_id"));
 
-
         $sensor_names_data = Input::param("sensor_names");
         $sensor_names = explode(PHP_EOL, $sensor_names_data);
 

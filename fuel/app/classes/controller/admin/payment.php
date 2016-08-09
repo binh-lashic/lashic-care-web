@@ -2,9 +2,21 @@
 class Controller_Admin_Payment extends Controller_Admin
 {
 
+	public function action_index()
+	{
+		$data['payment'] = \Model_Payment::getPayment(Input::param("id"));
+        $this->template->title = '契約一覧';
+        $this->template->content = View::forge('admin/payment/index', $data);
+	}
+
 	public function action_list()
 	{
 		$data['payments'] = \Model_Payment::getSearch();
+		if(Input::param("type")) {
+			$data['type'] = Input::param("type");
+		} else {
+			$data['type'] = "initial";
+		}
         $this->template->title = '契約一覧';
         $this->template->content = View::forge('admin/payment/list', $data);
 	}
@@ -71,7 +83,6 @@ class Controller_Admin_Payment extends Controller_Admin
 
     public function action_add_sensor() {
         $payment = \Model_Payment::find(Input::param("payment_id"));
-
 
         $sensor_names_data = Input::param("sensor_names");
         $sensor_names = explode(PHP_EOL, $sensor_names_data);

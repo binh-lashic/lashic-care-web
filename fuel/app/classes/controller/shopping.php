@@ -268,12 +268,20 @@ class Controller_Shopping extends Controller_Base
             ));
             if($payment->save()) {
                 foreach($plans as $plan) {
-                    if($plan['continuation'] == 1) {
+                    if($plan['span'] == 1) {
                         $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));
-                    } else if($plan['continuation'] == 6) {
+                    } else if($plan['span'] == 6) {
                         $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 8, 0, date('Y')));
-                    } else if($plan['continuation'] == 12) {
+                    } else if($plan['span'] == 12) {
                         $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 14, 0, date('Y')));
+                    }
+
+                    //継続課金ではないデータに送料を付ける
+                    if($plan['span'] == 0){
+                        $shipping = $destination['shipping'];
+                        $renew_date = null;
+                    } else {
+                        $shipping = 0;
                     }
                     $params = array(
                         'plan_id' => $plan['id'],
@@ -282,10 +290,10 @@ class Controller_Shopping extends Controller_Base
                         'start_date' => date("Y-m-d"),
                         'renew_date'=> $renew_date,
                         'price' => $plan['price'],
-                        'shipping' => $destination['shipping'],
-                        'zip_code' => $destination['zip_code'],
-                        'prefecture' => $destination['prefecture'],
-                        'address' => $destination['address'],
+                        'shipping' => $shipping,
+                        'zip_code' => $destination->zip_code,
+                        'prefecture' => $destination->prefecture,
+                        'address' => $destination->address,
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 

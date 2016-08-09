@@ -1,8 +1,8 @@
 <?php 
 class Model_Contract extends Orm\Model{
 
-	protected static $_properties = array(
-		'id',
+    protected static $_properties = array(
+        'id',
         'user_id',
         'plan_id',
         'client_user_id',
@@ -16,7 +16,7 @@ class Model_Contract extends Orm\Model{
         'affiliate',
         'updated_at',
         'created_at',
-	);
+    );
 
     protected static $_observers = array(
         'Orm\Observer_CreatedAt' => array(
@@ -30,11 +30,10 @@ class Model_Contract extends Orm\Model{
     );
 
     public function getSearch($params) {
-        $sql = "SELECT c.*,u.last_name,u.first_name,p.title ".
+        $sql = "SELECT c.*,u.last_name,u.first_name,p.title,p.type ".
                "  FROM contracts c ".
                "  LEFT JOIN users u ON c.user_id = u.id".
                "  LEFT JOIN plans p ON c.plan_id = p.id".
-               " WHERE type = 'initial' OR type = 'wifi'".
                "  ORDER BY c.id DESC;";
         $query = DB::query($sql);
         $results = $query->execute();

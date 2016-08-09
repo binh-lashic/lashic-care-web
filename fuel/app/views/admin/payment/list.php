@@ -4,9 +4,8 @@
 	</div>
 </div>
 <ul class="col-sm-12 nav nav-pills">
-  <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Cotract") { echo "class=\"active\""; }?>><a href="/admin/contract/list">初期契約時</a></li>
-  <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_User") { echo "class=\"active\""; }?>><a href="/admin/user/list">親アカウント一覧</a></li>
-  <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Sensor") { echo "class=\"active\""; }?>><a href="/admin/sensor/list">センサー機器一覧</a></li>
+  <li role="presentation"<?php if($type=='initial') { echo "class=\"active\""; }?>><a href="/admin/payment/list?type=initial">初期契約時</a></li>
+  <li role="presentation"<?php if($type=='continuation') { echo "class=\"active\""; }?>><a href="/admin/payment/list?type=continuation">継続課金</a></li>
 </ul>
 <div class="row">
 	<div class="col-sm-12">
@@ -30,7 +29,7 @@ if(isset($payments)) {
 					<td class="text-right"><?php echo $payment['price']; ?>円</td>
 					<td class="text-right"><?php echo $payment['shipping']; ?>円</td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/payment/sensor?id=<?php echo $payment['id']; ?>">センサー機器の割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/payment?id=<?php echo $payment['id']; ?>">契約を確認</a>						
 					</td>
 				</tr>
 <?php

@@ -33,4 +33,17 @@ class Model_Payment extends Orm\Model{
         return $results;
     }
 
+    public function getPayment($id) {
+        $sql = "SELECT * FROM payments ".
+               "  LEFT JOIN users ON users.id = payments.user_id ".
+               " INNER JOIN contract_payments cp ON payments.id = cp.payment_id ".
+               " INNER JOIN contracts ON cp.contract_id = contracts.id ".
+               "  LEFT JOIN plans ON contracts.plan_id = plans.id ".
+               " WHERE payments.id= :id";
+        $query = DB::query($sql);
+        $query->parameters(array('id' => &$id));
+        $results = $query->execute();
+        print_r($results);
+        return $results;
+    }
 }

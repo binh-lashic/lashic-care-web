@@ -584,15 +584,21 @@ $(function(){
 			var plan = $(this).attr('data-plan');
 			if(plan == '1') {
 				plan_ids.push(1);
+				if($("#pack" + plan).prop('checked')) {
+					plan_ids.push(5);	//wifi貸出
+				}
 			} else if(plan == '2') {
 				plan_ids.push(2);
+				if($("#pack" + plan).prop('checked')) {
+					plan_ids.push(6);	//wifi貸出
+				}
 			} else if(plan == '3') {
 				plan_ids.push(3);
+				if($("#pack" + plan).prop('checked')) {
+					plan_ids.push(7);	//wifi貸出
+				}
 			}
 			plan_ids.push(4);	//初期費用
-			if($("#pack" + plan).prop('checked')) {
-				plan_ids.push(5);	//wifi貸出
-			}
 	        Cookies.set("plan_id", JSON.stringify(plan_ids), { expires: 90 });
 		}
     });
