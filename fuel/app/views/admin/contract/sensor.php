@@ -1,8 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h2>契約:</h2>
+		<h2>センサー機器割当:</h2>
     <ul class="nav nav-tabs">
-      <li role="presentation"><a href="/admin/contract/?id=<?php echo $contract['id']; ?>">詳細</a></li>
       <li role="presentation" class="active"><a href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">センサー機器割当</a></li>
     </ul>
 	</div>
