@@ -12,11 +12,13 @@
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="col-sm-1">システムID</th>
+					<th class="col-sm-1">ID</th>
 					<th class="col-sm-1">契約アカウント</th>
 					<th class="col-sm-3">契約プラン名</th>
 					<th class="col-sm-1">金額</th>
 					<th class="col-sm-1">送料</th>
+					<th class="col-sm-1">出荷済</th>
+					<th class="col-sm-1">機器数</th>
 					<th class="col-sm-2">操作</th>
 				</tr>
 <?php
@@ -28,6 +30,8 @@ if(isset($payments)) {
 					<td><?php echo $payment['title']; ?></td>
 					<td class="text-right"><?php echo $payment['price']; ?>円</td>
 					<td class="text-right"><?php echo $payment['shipping']; ?>円</td>
+					<td><?php echo $payment['shipping_count']; ?></td>
+					<td><?php echo $payment['sensor_count']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/payment?id=<?php echo $payment['id']; ?>">契約を確認</a>						
 					</td>

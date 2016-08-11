@@ -28,6 +28,7 @@ class Model_Sensor extends Orm\Model{
 		'active_night_level' => array('default' => 2),
 		'enable' => array('default' => 0),
 		'shipping_date',
+		'type' => array('default' => 'sensor'),
 	);
 
 	protected static $_many_many = array(

@@ -5,16 +5,34 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-6">
-		<h2>センサー機器新規一括登録</h2>
-		<form action="/admin/sensor/register" method="post">
+	<div class="col-sm-12">
+		<h3>センサー機器新規一括登録</h3>
 		<div class="panel panel-default">
-			<div class="panel-body">
-				<textarea name="sensor_names" class="form-control" rows="3"></textarea>			
-				<input class="btn btn-default"  type="submit" value="一括登録" />
-			</div>
+			<p>
+			<form action="/admin/sensor/register" method="post" class="form-horizontal">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">機器ID</label>
+					<div class="col-sm-10">
+						<textarea name="sensor_names" class="form-control" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">機器タイプ</label>
+					<div class="col-sm-10">
+						<select name="type">
+							<option value="sensor">センサー</option>
+							<option value="wifi">WiFi</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input class="btn btn-default"  type="submit" value="一括登録" />
+					</div>
+				</div>
+			</form>
+			</p>
 		</div>
-		</form>
 	</div>
 </div>
 

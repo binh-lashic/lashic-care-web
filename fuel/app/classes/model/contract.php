@@ -6,7 +6,6 @@ class Model_Contract extends Orm\Model{
         'user_id',
         'plan_id',
         'client_user_id',
-        'sensor_id',
         'start_date',
         'end_date',
         'renew_date',
@@ -30,11 +29,16 @@ class Model_Contract extends Orm\Model{
     );
 
     public function getSearch($params) {
-        $sql = "SELECT c.*,u.last_name,u.first_name,p.title,p.type ".
-               "  FROM contracts c ".
-               "  LEFT JOIN users u ON c.user_id = u.id".
-               "  LEFT JOIN plans p ON c.plan_id = p.id".
-               "  ORDER BY c.id DESC;";
+        $sql = "SELECT c.*,u.last_name,u.first_name,p.title,p.type,count(shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
+               " FROM contracts c ".
+               " LEFT JOIN users u ON c.user_id = u.id ".
+               " LEFT JOIN plans p ON c.plan_id = p.id ".
+               " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
+               " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
+               " WHERE p.type != 'initial'".
+               "GROUP BY c.id ".
+               "ORDER BY c.id DESC;";
+
         $query = DB::query($sql);
         $results = $query->execute();
         return $results;

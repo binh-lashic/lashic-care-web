@@ -4,8 +4,10 @@ class Controller_Admin_Payment extends Controller_Admin
 
 	public function action_index()
 	{
-		$data['payment'] = \Model_Payment::getPayment(Input::param("id"));
-        $this->template->title = '契約一覧';
+		$data['payments'] = \Model_Payment::getPayments(Input::param("id"));
+		$data['sensors'] = \Model_Payment::getSensors(Input::param("id"));
+		$data['id'] = Input::param("id");
+        $this->template->title = '支払い一覧';
         $this->template->content = View::forge('admin/payment/index', $data);
 	}
 
@@ -17,7 +19,7 @@ class Controller_Admin_Payment extends Controller_Admin
 		} else {
 			$data['type'] = "initial";
 		}
-        $this->template->title = '契約一覧';
+        $this->template->title = '支払い一覧';
         $this->template->content = View::forge('admin/payment/list', $data);
 	}
 
@@ -55,7 +57,7 @@ class Controller_Admin_Payment extends Controller_Admin
 			$i++;
 
 			$params = array(
-				$_SERVER['PGCARD_SHOP_ID'], 							//1	ショップID	13	必須	加盟店様を識別する ID【半角英数字】 本サービス契約時に、弊社より発行する値
+				$_SERVER['PGCARD_SHOP_ID'], 							//1	ショップID	13	必須	加盟店様を識別する ID【半角英数字】 本サービス支払い時に、弊社より発行する値
 				$payment['user_id'],									//2	会員ID	60	必須	サイトが管理している会員の ID
 				0,														//3	カード登録連番	4		継続課金を行うカードの登録連番 (洗替・継続課金フラグが ON)カードを使用 します。
 				0, 														//4	取引コード	1	必須	行う処理を識別するコード 以下のいずれかを設定して下さい。 【0】:売上 【1】:取消
@@ -132,6 +134,16 @@ class Controller_Admin_Payment extends Controller_Admin
             }
 	        Response::redirect('/admin/payment/sensor?id='.$payment['id']);
     	}
+    }
+
+    public function action_save_sensor() {
+        $sensor_ids = Input::param("sensor_ids");
+       	$params = Input::param();
+        foreach($sensor_ids as $id) {
+        	$params['id'] = $id;
+        	\Model_Sensor::saveSensor($params);            
+    	}
+	    Response::redirect('/admin/payment?id='.Input::param("payment_id"));
     }
 }
 ?>
