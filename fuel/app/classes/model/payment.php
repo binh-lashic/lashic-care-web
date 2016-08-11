@@ -28,7 +28,7 @@ class Model_Payment extends Orm\Model{
                " FROM payments pay INNER JOIN contract_payments cp ON pay.id = cp.payment_id ".
                "INNER JOIN contracts c ON cp.contract_id = c.id ".
                " LEFT JOIN users u ON c.user_id = u.id ".
-               " LEFT JOIN plans plan ON c.plan_id = plan.id ".
+               " LEFT JOIN plans p ON c.plan_id = p.id ".
                " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
                " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name".
