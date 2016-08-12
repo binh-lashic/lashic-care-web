@@ -52,7 +52,7 @@ class Model_Payment extends Orm\Model{
     }
 
     public function getSensors($id) {
-        $sql = "SELECT *,s.id AS sensor_id FROM payments p ".
+        $sql = "SELECT *,c.id AS contract_id,s.id AS sensor_id FROM payments p ".
                "  LEFT JOIN users ON users.id = p.user_id ".
                " INNER JOIN contract_payments cp ON p.id = cp.payment_id ".
                " INNER JOIN contracts c ON cp.contract_id = c.id ".

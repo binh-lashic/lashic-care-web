@@ -59,7 +59,6 @@ if(isset($contracts)) {
 if($contract['type'] != 'initial') {
 ?>
 						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">機器の割当</a>						
-						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $contract['id']; ?>">出荷日登録</a>
 <?php
 }
 ?>

@@ -267,6 +267,12 @@ class Controller_Shopping extends Controller_Base
                 'type' => 'initial',
             ));
             if($payment->save()) {
+                $result = \Model_GMO::entry(array(
+                    'order_id' => $payment->id,
+                    'member_id' => $payment->user_id,
+                    'amount' => $price,
+                    'tax' => $destination['shipping'],
+                ));
                 foreach($plans as $plan) {
                     if($plan['span'] == 1) {
                         $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));
@@ -302,14 +308,6 @@ class Controller_Shopping extends Controller_Base
                     $contract = \Model_Contract::forge();
                     $contract->set($params);
                     if($contract->save()) {
-                        if($plan['options'][0]['continuation'] != "1") {
-                            $result = \Model_GMO::entry(array(
-                                'order_id' => $contract->id,
-                                'member_id' => $contract->user_id,
-                                'amount' => $contract->price,
-                                'tax' => $contract->shipping,
-                            ));
-                        }
                         $contract_payment = \Model_Contract_Payment::forge();
                         $contract_payment->set(array(
                             'contract_id' => $contract->id,
