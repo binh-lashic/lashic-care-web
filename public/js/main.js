@@ -552,13 +552,13 @@ $(function(){
 			$.each(result.data.plans, function(index, plan) {
 				$("#cart").append("<li id=\"nav_order" + plan.id + "\" class=\"nav_userList cart_plan\"><p class=\"nav_cart_title\">" + 
 											plan.options[0].title + 
-											"</p><p class=\"nav_cart_btnArea right\"><a href=\"javascript:void(0);\" data-plan=\"" + plan.id + "\" class=\"delete_plan nav_cart_link\" id=\"nav_cart_delete01\">× 削除</a></p></li>");
+											"</p></li>");
+				//
 			});
-			$("#cart").append("<li><p class=\"nav_cart_btnArea\"><a href=\"/shopping/cart\" class=\"nav_cart_btn\">購入手続きへ</a></p></li>");
+			$("#cart").append("<li><p class=\"nav_cart_btnArea right\"><a href=\"javascript:void(0);\" class=\"delete_plan nav_cart_link\" id=\"nav_cart_delete01\">× カートを空にする</a></p><p class=\"nav_cart_btnArea\"><a href=\"/shopping/cart\" class=\"nav_cart_btn\">購入手続きへ</a></p></li>");
 			$('.delete_plan').on('click', function(){
 				event.preventDefault();
-				var plan = $(this).attr('data-plan');
-				api("shopping/delete_plan", { plan_id : plan }, function(result){
+				api("shopping/delete_plans", {}, function(result){
 					displayCartPlans(result);
 				});
 				//$('#nav_order' + plan).remove();

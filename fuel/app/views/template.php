@@ -18,12 +18,14 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
+
 <link href="/css/reset.css" type="text/css" rel="stylesheet">
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
+<link href="/css/animate.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet" type="text/css">
 <link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

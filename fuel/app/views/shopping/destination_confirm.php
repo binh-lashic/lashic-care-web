@@ -21,21 +21,22 @@
 				<!-- 商品確認 -->
 				<div class="floatL contentHalf borderGrayRadius">
 					<div class="pd20">
-						<p class="mgb20 text_gray">送付先： <?php echo $destination['last_name']; ?><?php echo $destination['first_name']; ?>　<?php echo $destination['prefecture']; ?><?php echo $destination['address']; ?></p>
+						<p class="mgb20 text_gray">送付先： <?php echo $destination['last_name']; ?><?php echo $destination['first_name']; ?>　
+						<?php echo $destination['prefecture']; ?><?php echo $destination['address']; ?></p>
 <?php
 foreach($plans as $plan) {
 ?>
 						<div id="item01">
-							<p><strong><?php echo $plan['title']; ?>　</strong><span class="text_red">&nbsp;&nbsp;<?php echo $plan['price']; ?>円（税込）</span></p>
+							<p><strong><?php echo $plan['title']; ?>　</strong><span class="text_red">&nbsp;&nbsp;<?php echo number_format($plan['price']); ?>円（税込）</span></p>
 <!--							<div class="mgt5 mgb10"><a class="fancybox  mgt20" href="#settingChange">商品変更</a>&nbsp;&nbsp;&nbsp;<a href="#deleteItem1" class="fancybox ">× 削除</a></div>-->
 						</div>
 <?php
 }
 ?>
 						<hr>
-						<p class="right">小計<?php echo $total_price; ?>円（税込）</p>
-						<p class="right">送料　<?php echo $destination['shipping']; ?>円</p>
-						<p class="right">合計<strong class="text_red"><?php echo $total_price + $destination['shipping']; ?>円</strong></p>
+						<p class="right">小計<?php echo number_format($total_price); ?>円（税込）</p>
+						<p class="right">送料　<?php echo number_format($destination['shipping']); ?>円</p>
+						<p class="right">合計<strong class="text_red"><?php echo number_format($total_price + $destination['shipping']); ?>円</strong></p>
 					</div>
 				</div>
 				<!-- /商品確認 --> 

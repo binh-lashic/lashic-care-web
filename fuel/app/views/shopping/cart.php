@@ -12,8 +12,6 @@
 			</div>
 			<!-- /flow矢印 -->
 	
-		
-		
 		<!-- content start　ご注文内容確認-->
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">カート</h1>
@@ -38,6 +36,9 @@
 					<table class="borderGray mgt0 plan_total" style="display:none">
 						<tbody>
 							<tr>
+								<td class="bgBeige lowerTotalPrice right">消費税 <strong id="tax">0</strong> 円</td>
+							</tr>
+							<tr>
 								<td class="bgBeige lowerTotalPrice right">合計 <strong class="large" id="total_price">0</strong> 円</td>
 							</tr>
 						</tbody>
@@ -47,6 +48,11 @@
 						<div class="center_container">
 							<input type="submit" value="次の画面に進む" >
 						</div>
+						<div class="right_container"></div>
+					</div>
+					<div class="set_container mgb30">
+						<div class="left_container"></div>
+						<div class="center_container"><a href="/shopping/" class="link_back">プランを再選択する</a></div>
 						<div class="right_container"></div>
 					</div>
 					</form>

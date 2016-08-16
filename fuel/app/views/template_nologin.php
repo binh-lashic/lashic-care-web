@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CareEye ケアアイ - ユーザーの様子</title>
+<title>高齢者の”自立”をささえ、”あんしん”を共有する、CareEye ケアアイ</title>
 <meta name="keywords" content="ケアアイ,ケア,アイ,見守り">
 <meta name="description" content="ケアアイの管理画面です。">
 <meta name="robots" content="all">
@@ -14,23 +14,18 @@
 <meta property="og:image" content="/images/common/ogp.jpg" >
 <meta property="og:site_name" content="CareEye（ケアアイ）　管理ページ" >
 <meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
+
 <link href="/css/reset.css" type="text/css" rel="stylesheet">
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/drawer.css" type="text/css" rel="stylesheet">
 <link href="/css/style.css" type="text/css" rel="stylesheet">
 <link href="/css/print.css" type="text/css" rel="stylesheet" media="print" />
-<!-- 円グラフ -->
-<link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
-<!-- /円グラフ -->
-<!-- カレンダー表示・非表示 -->
-<link href="/css/darktooltip.css" type="text/css" rel="stylesheet">
-<!-- /カレンダー表示・非表示 -->
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
-
+<link href="/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
+<link href="/css/animate.min.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <!-- srcoll design -->
