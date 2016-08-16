@@ -74,7 +74,7 @@ return array(
 			),
 			'heatstroke' => array(
 				array(
-		'wbgt_upper_limit' => 28,
+		'wbgt_upper_limit' => 31,
 		'duration' => 60,
 				),
 				array(
@@ -82,7 +82,7 @@ return array(
 		'duration' => 60,
 				),
 				array(
-		'wbgt_upper_limit' => 28,
+		'wbgt_upper_limit' => 25,
 		'duration' => 60,
 				),
 			),

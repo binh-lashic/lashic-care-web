@@ -176,7 +176,7 @@ $(function(){
 			*/
 			if(typeof result.data.wbgt != "undefined") {
 				$("#data_wbgt").attr("data-text", result.data.wbgt + "度");
-				$("#data_wbgt").attr("data-percent", result.data.wbgt);
+				$("#data_wbgt").attr("data-percent", result.data.wbgt * 2);
 			} else {
 				$("#data_wbgt").attr("data-text", "");
 				$("#data_wbgt").attr("data-percent","");

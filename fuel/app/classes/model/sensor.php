@@ -320,8 +320,8 @@ class Model_Sensor extends Orm\Model{
 			$count = count($result);
 			if($count) {
 				foreach($result as $row) {
-					//温度×0.7＋湿度×0.3
-					$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
+					$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
+					//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
 					if($level['wbgt_upper_limit'] < $wbgt) {
 						$count--;
 					}
