@@ -14,7 +14,7 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">お支払い指定</h1>
 			<p>クレジットカード情報を入力し、「次の画面へ進む」をクリックしてください。</p>
-			<p><strong>ご利用いただけるカード：</strong>アメリカン・エキスプレス、ダイナース、JCB、VISA、UC、 Master、DC、NICOS<br>
+			<p><strong>ご利用いただけるカード：</strong>VISA、Master、JCB、アメリカン・エキスプレス、ダイナース<br>
 				<img src="/images/common/card_m_all.png" width="136"></p>
 <?php
 if(!empty($errors)) {
