@@ -1,4 +1,4 @@
-∂$(function(){
+$(function(){
     // ユーザ定義関数
     function api(action, params, callback){
 	    $.post(
