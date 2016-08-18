@@ -3,13 +3,14 @@ class Model_Payment extends Orm\Model{
 
 	protected static $_properties = array(
 		'id',
-        'user_id',
-        'title',
-        'date',
-        'price',
-        'shipping',
-        'updated_at',
-        'created_at',
+    'user_id',
+    'title',
+    'date',
+    'price',
+    'tax',
+    'shipping',
+    'updated_at',
+    'created_at',
 	);
 
     protected static $_observers = array(

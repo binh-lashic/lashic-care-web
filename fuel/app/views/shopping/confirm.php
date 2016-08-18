@@ -77,13 +77,11 @@
 					<table>
 						<tbody>
 <?php
-$total_price = 0;
 foreach($plans as $plan) {
-	$total_price += $plan['price'];
 ?>
 							<tr>
 								<th><?php echo $plan['title']; ?></th>
-								<td class="right"><?php echo number_format($plan['price']) ?>円（税込）</td>
+								<td class="right"><?php echo number_format($plan['price']) ?>円（税抜）</td>
 							</tr>
 <?php
 }
@@ -99,15 +97,19 @@ foreach($plans as $plan) {
 							<table class="sumTalble mgr20">
 								<tr>
 									<td>小計</td>
-									<td class="right"><?php echo number_format($total_price); ?>円（税込）</td>
+									<td class="right"><?php echo number_format($subtotal_price); ?>円（税抜）</td>
 								</tr>
 								<tr>
 									<td>送料</td>
 									<td class="right"><?php echo number_format($destination['shipping']); ?>円</td>
 								</tr>
 								<tr>
+									<td>消費税</td>
+									<td class="right"><?php echo number_format($tax); ?>円</td>
+								</tr>
+								<tr>
 									<td class="large">合計</td>
-									<td class="large right"><strong class="text_red large"><?php echo number_format($total_price + $destination['shipping']); ?>円</strong></td>
+									<td class="large right"><strong class="text_red large"><?php echo number_format($total_price); ?>円</strong></td>
 								</tr>
 							</table>
 						</div>

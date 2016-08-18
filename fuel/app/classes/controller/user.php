@@ -101,7 +101,7 @@ class Controller_User extends Controller_Base
 	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
 
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/index', $this->data);
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
@@ -109,7 +109,7 @@ class Controller_User extends Controller_Base
 	public function action_list()
 	{
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/list', $this->data);
 	}
 
@@ -117,7 +117,7 @@ class Controller_User extends Controller_Base
 	{
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/account', $this->data);
     }
 
@@ -128,7 +128,7 @@ class Controller_User extends Controller_Base
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
         
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
         if(Input::post()) {
         	$val = \Model_User::validate("save");
@@ -168,7 +168,7 @@ class Controller_User extends Controller_Base
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
         }
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/account_basic_complete', $this->data);
     }
 
@@ -177,7 +177,7 @@ class Controller_User extends Controller_Base
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
         
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
         if(Input::post()) {
         	$val = \Model_User::validate("save");
@@ -217,7 +217,7 @@ class Controller_User extends Controller_Base
         	\Model_User::saveUser($params);
         }
         $this->data['data'] = Input::post();
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/account_mail_complete', $this->data);
     }
 
@@ -226,7 +226,7 @@ class Controller_User extends Controller_Base
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
         
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         if(Input::post()) {
          	if(!Input::post('password')) {
         		$this->data['errors']['password'] = true;
@@ -260,21 +260,21 @@ class Controller_User extends Controller_Base
         	\Model_User::changePassword($params);
         }
         $this->data['data'] = Input::post();
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/account_password_complete', $this->data);
     }
 
 	public function action_info()
 	{
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info', $this->data);
     }
 
 	public function action_info_basic_form()
 	{
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
 		if(Input::post()) {
 		    $params = Input::post();
@@ -308,14 +308,14 @@ class Controller_User extends Controller_Base
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
         }
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info_basic_complete', $this->data);
     }
 
 	public function action_info_contact_form()
 	{
 		$this->template->title = 'マイページ';
-		$this->template->header = View::forge('header', $this->data);
+		$this->template->header = View::forge('header_client', $this->data);
 
 		$this->data['prefectures'] = Config::get("prefectures");
 		if(Input::post()) {
@@ -333,14 +333,14 @@ class Controller_User extends Controller_Base
         if(Input::post()) {
         	\Model_User::saveUser(Input::post());
         }
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info_contact_complete', $this->data);
     }
     
 	public function action_info_option_form()
 	{
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
 		if(Input::post()) {
 		    $params = Input::post();
@@ -355,7 +355,7 @@ class Controller_User extends Controller_Base
 	public function action_info_option_complete()
 	{
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
 		if(Input::post()) {
 		    $params = Input::post();
@@ -426,7 +426,7 @@ class Controller_User extends Controller_Base
 			}
 		}
         $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/report', $this->data);
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
@@ -498,7 +498,7 @@ class Controller_User extends Controller_Base
         );
         
         $this->data['sensor'] = \Model_User_Sensor::getUserSensor($params);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/setting', $this->data);
 	}
 
@@ -529,5 +529,19 @@ class Controller_User extends Controller_Base
 			\Auth::force_login($user['id']);
 			Response::redirect('/user');
 		}
+	}
+
+	public function action_payment()
+	{
+        $data = array();
+        $this->template->title = '購入・支払い履歴ページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
+        $this->data['payments'] = \Model_Payment::find("all", array(
+        	"where" => array(
+        		'user_id' => $this->user['id'],
+        	)
+        ));
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/payment', $this->data);
 	}
 }

@@ -23,7 +23,8 @@ class Model_Plan extends Orm\Model{
     );
 
 	public static function getPlan($id){
-		$sql = "SELECT p.id plan_id, p.title plan_title,p.type plan_type, p.span plan_span, o.id option_id, o.title option_title, o.price option_price, o.continuation option_continuation  ".
+		$sql = "SELECT p.id plan_id, p.title plan_title,p.type plan_type, p.span plan_span, o.id option_id, o.title option_title, o.price option_price, o.continuation option_continuation,".
+               "o.unit_price option_unit_price  ".
                "  FROM (plans p INNER JOIN plan_options po ON p.id = po.plan_id) INNER JOIN options o ON po.option_id = o.id".
                " WHERE p.id = :plan_id;";
         $query = DB::query($sql);
@@ -39,6 +40,8 @@ class Model_Plan extends Orm\Model{
         		'id' => $result['option_id'],
         		'title' => $result['option_title'],
         		'price' => $result['option_price'],
+                'unit_price' => $result['option_unit_price'],
+                'tilte' => $result['unit_price'],
         		'continuation' => $result['option_continuation'],
         	);
         	$price += $result['option_price'];

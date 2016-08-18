@@ -29,6 +29,7 @@
 							<tr>
 								<th class="center">プラン名</th>
 								<th class="center">単価</th>
+								<th class="center">数量</th>
 								<th class="center">小計</th>
 							</tr>
 						</tbody>

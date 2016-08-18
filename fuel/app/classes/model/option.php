@@ -6,6 +6,7 @@ class Model_Option extends Orm\Model{
 		'price',
 		'continuation' => array('default' => 1),
 		'free_period',
+		'unit_price',
         'updated_at',
         'created_at',
 	);

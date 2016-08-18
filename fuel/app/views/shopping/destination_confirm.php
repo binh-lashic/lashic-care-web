@@ -27,16 +27,17 @@
 foreach($plans as $plan) {
 ?>
 						<div id="item01">
-							<p><strong><?php echo $plan['title']; ?>　</strong><span class="text_red">&nbsp;&nbsp;<?php echo number_format($plan['price']); ?>円（税込）</span></p>
+							<p><strong><?php echo $plan['title']; ?>　</strong><span class="text_red">&nbsp;&nbsp;<?php echo number_format($plan['price']); ?>円（税抜）</span></p>
 <!--							<div class="mgt5 mgb10"><a class="fancybox  mgt20" href="#settingChange">商品変更</a>&nbsp;&nbsp;&nbsp;<a href="#deleteItem1" class="fancybox ">× 削除</a></div>-->
 						</div>
 <?php
 }
 ?>
 						<hr>
-						<p class="right">小計<?php echo number_format($total_price); ?>円（税込）</p>
-						<p class="right">送料　<?php echo number_format($destination['shipping']); ?>円</p>
-						<p class="right">合計<strong class="text_red"><?php echo number_format($total_price + $destination['shipping']); ?>円</strong></p>
+						<p class="right">送料　<?php echo number_format($destination['shipping']); ?>円（税抜）</p>
+						<p class="right">小計　<?php echo number_format($subtotal_price); ?>円（税抜）</p>
+						<p class="right">消費税　<?php echo number_format($tax); ?>円</p>
+						<p class="right">合計　<strong class="text_red"><?php echo number_format($total_price); ?>円</strong></p>
 					</div>
 				</div>
 				<!-- /商品確認 --> 
@@ -65,18 +66,18 @@ foreach($plans as $plan) {
 		<p class="mgb20 large text_blue">変更する商品を選択してください</p>
 		<div class="left">
 			<input type="radio" id="1month" name="pack" checked>
-			<label for="1month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 月々パック</strong> <span class="text_red">1200円（税込）</span><br>
-				※初期費用 14,800円（税込）</label>
+			<label for="1month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 月々パック</strong> <span class="text_red">1200円（税抜）</span><br>
+				※初期費用 14,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="6month" name="pack" >
-			<label for="6month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 6ヶ月パック</strong> <span class="text_red">6600円（税込）</span><br>
+			<label for="6month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 6ヶ月パック</strong> <span class="text_red">6600円（税抜）</span><br>
 				1100円/月<br>
-				※初期費用 14,800円（税込）</label>
+				※初期費用 14,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="1year" name="pack" >
-			<label for="1year" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 12ヶ月パック</strong> <span class="text_red">11760円（税込）</span><br>
+			<label for="1year" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 12ヶ月パック</strong> <span class="text_red">11760円（税抜）</span><br>
 				980円/月<br>
-				※初期費用 14,800円（税込）</label>
+				※初期費用 14,800円（税抜）</label>
 		</div>
 		<br>
 		<a href="javascript:$.fancybox.close();" class="fancybox btn_darkBlue graphSettingTrue">変更する</a> <a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a> </div>
@@ -89,7 +90,7 @@ foreach($plans as $plan) {
 		<p class="mgb20 large text_blue">変更する商品を選択してください</p>
 		<div class="left">
 			<input type="checkbox" id="yes" name="wifi" checked>
-			<label for="yes" class="checkbox shoppingCart_input"><strong>WiFi貸出料金月額</strong> <span class="text_red">980円（税込）</span></label>
+			<label for="yes" class="checkbox shoppingCart_input"><strong>WiFi貸出料金月額</strong> <span class="text_red">980円（税抜）</span></label>
 		</div>
 		<br>
 		<a href="javascript:$.fancybox.close();" class="fancybox btn_darkBlue graphSettingTrue">変更する</a> <a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a> </div>

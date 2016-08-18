@@ -26,10 +26,19 @@ $(function(){
 			if(result.data.plans != null) {
 				$(".plan_message").css('display', 'block');
 				$.each(result.data.plans, function(index, plan) {
-					$("#plans").append("<tr><td>" + plan['title'] + "</td><td class=\"right\">" + plan['price'].toLocaleString() + "円（税抜）</td><td class=\"center\">" + plan['price'].toLocaleString() + "円（税抜）</td></tr>");
+					console.log(plan);
+					if(plan['span'] > 0) {
+						quantity = plan['span'];
+					} else {
+						quantity = 1;
+					}
+					$("#plans").append("<tr><td>" + plan['title'] + "</td>" + 
+						               "<td class=\"right\">" + plan['options'][0]['unit_price'].toLocaleString() + "円（税抜）</td>" + 
+						               "<td class=\"center\">" + quantity + "</td>" + 
+						               "<td class=\"center\">" + plan['price'].toLocaleString() + "円（税抜）</td></tr>");
 					subtotal_price += parseInt(plan['price']);
 				});
-				tax = subtotal_price * 0.08;
+				tax = Math.floor(subtotal_price * 0.08);
 				total_price = subtotal_price + tax;
 			}
 			$("#tax").html(tax.toLocaleString());

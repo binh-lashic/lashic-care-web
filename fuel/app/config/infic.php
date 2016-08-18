@@ -1,5 +1,6 @@
 <?php
 return array(
+	'tax_rate' => 0.08,
 	'blood_types' => array(
 		'A',
 		'B',

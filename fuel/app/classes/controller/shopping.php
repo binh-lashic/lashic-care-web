@@ -42,7 +42,7 @@ class Controller_Shopping extends Controller_Base
             $this->data['plans'] = Session::get("plans");
             $this->template->title = 'カート';
             $this->data['breadcrumbs'] = array($this->template->title);
-            $this->template->header = View::forge('header', $this->data);
+            $this->template->header = View::forge('header_client', $this->data);
             $this->template->content = View::forge('shopping/cart', $this->data);
         }
     }
@@ -51,7 +51,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('shopping/user', $this->data);
     }
    
@@ -59,7 +59,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
@@ -138,7 +138,7 @@ class Controller_Shopping extends Controller_Base
 
         $this->template->title = '送付先指定';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data); 
+        $this->template->header = View::forge('header_client', $this->data); 
         $this->template->content = View::forge('shopping/destination', $this->data);           
     }
 
@@ -150,7 +150,7 @@ class Controller_Shopping extends Controller_Base
         if(Input::param("address_id")) {
             $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
         }
-        if(preg_match("/北海道|沖縄/ui", $this->data['destination']['prefecture'])) {
+        if(preg_match("/沖縄/ui", $this->data['destination']['prefecture'])) {
             $this->data['destination']['shipping'] = 500;
         } else {
             $this->data['destination']['shipping'] = 0;
@@ -158,12 +158,17 @@ class Controller_Shopping extends Controller_Base
         Session::set("destination", $this->data['destination']);
         $this->data['plans'] = Session::get("plans");
         $this->data['total_price'] = 0;
+        $this->data['subtotal_price'] = 0;
         foreach($this->data['plans'] as $plan) {
-            $this->data['total_price'] += $plan['price'];
+            $this->data['subtotal_price'] += $plan['price'];
         } 
+
+        $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
+        $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
+
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data); 
+        $this->template->header = View::forge('header_client', $this->data); 
         $this->template->content = View::forge('shopping/destination_confirm', $this->data);           
     }
 
@@ -171,7 +176,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_client', $this->data);
 
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
         $this->data['cards'] = $card->cardList;
@@ -230,9 +235,18 @@ class Controller_Shopping extends Controller_Base
         $this->data['card'] = $card->cardList[0];
         $this->data['destination'] = Session::get("destination");
         $this->data['plans'] = Session::get("plans");
+
+        $this->data['total_price'] = 0;
+        $this->data['subtotal_price'] = 0;
+        foreach($this->data['plans'] as $plan) {
+            $this->data['subtotal_price'] += $plan['price'];
+        } 
+        $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
+        $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
+
         $this->template->title = 'ご注文確認';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data); 
+        $this->template->header = View::forge('header_client', $this->data); 
         $this->template->content = View::forge('shopping/confirm', $this->data);           
     }
 
@@ -254,14 +268,16 @@ class Controller_Shopping extends Controller_Base
         if(empty($this->data['errors'])) {
             //支払い処理を行う
             $payment = \Model_Payment::forge();
-            $price = 0;
+            $subtotal_price = 0;
             foreach($plans as $plan) {
-                $price += $plan['price'];
+                $subtotal_price += $plan['price'];
             }
+            $tax = floor(($subtotal_price + $destination['shipping']) * Config::get("tax_rate"));
             $payment->set(array(
                 'user_id' => $this->user['id'],
                 'date' => date("Y-m-d"),
-                'price' => $price,
+                'price' => $subtotal_price,
+                'tax' => $tax,
                 'shipping' => $destination['shipping'],
                 'title' => 'ケアアイ初期費用',
                 'type' => 'initial',
@@ -270,8 +286,8 @@ class Controller_Shopping extends Controller_Base
                 $result = \Model_GMO::entry(array(
                     'order_id' => $payment->id,
                     'member_id' => $payment->user_id,
-                    'amount' => $price,
-                    'tax' => $destination['shipping'],
+                    'amount' => $subtotal_price + $destination['shipping'],
+                    'tax' => $tax,
                 ));
                 foreach($plans as $plan) {
                     if($plan['span'] == 1) {
@@ -297,9 +313,9 @@ class Controller_Shopping extends Controller_Base
                         'renew_date'=> $renew_date,
                         'price' => $plan['price'],
                         'shipping' => $shipping,
-                        'zip_code' => $destination->zip_code,
-                        'prefecture' => $destination->prefecture,
-                        'address' => $destination->address,
+                        'zip_code' => $destination['zip_code'],
+                        'prefecture' => $destination['prefecture'],
+                        'address' => $destination['address'],
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
