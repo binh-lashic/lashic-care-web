@@ -54,8 +54,18 @@ class Model_GMO extends Orm\Model{
 			return $output;		
 		}else{
 			if( $output->isErrorOccurred() ){
-				require_once( PGCARD_SAMPLE_BASE . '/display/Error.php');
-				exit();
+				//サンプルでは、エラーが発生していた場合、エラー画面を表示して終了します。
+				echo "isErrorOccurred";
+				$errorList = $output->getErrList() ;
+				
+				foreach( $errorList as  $errorInfo ){
+					echo '<p>'
+						. $errorInfo->getErrCode()
+						. ':' . $errorInfo->getErrInfo()
+						.'</p>';
+						
+				}
+				exit;
 			} else if($output->memberId) {
 				return $output;
 			}
