@@ -55,7 +55,7 @@ if(isset($sensors)) {
 	foreach($sensors as $sensor) {
 ?>
 				<tr>
-					<td><input type="checkbox" name="sensor_ids[]" value="<?php echo $sensor['sensor_id']; ?>"/></td>
+					<td><input type="checkbox" name="sensor_ids[]" value="<?php echo $sensor['sensor_id']; ?>" checked="checked"/></td>
 					<td><?php echo $sensor['title']; ?></td>
 					<td><?php echo $sensor['name']; ?></td>
 					<td><?php echo $sensor['shipping_date']; ?></td>
@@ -71,16 +71,26 @@ if(isset($sensors)) {
 
 		</div>
 		<div class="panel panel-default">
-		<div class="panel-body">出荷日を設定します</div>
-		<div class="panel-body">
+		<div class="panel-body">出荷日を設定し、発送メールを送信します</div>
+		<div class="panel-body form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">運送会社</label>
+					<div class="col-sm-10 radio">
+						<label>
+							<input type="radio" name="vendor" value="ヤマト運輸" checked="checked">ヤマト運輸
+						</label>
+						<label>
+							<input type="radio" name="vendor" value="ゆうパック">ゆうパック
+						</label>
+					</div>
+				</div>
 				<div class="form-group">
 					<label for="slip_number" class="col-sm-2 control-label">お問い合わせ伝票番号</label>
 					<div class="col-sm-10">
 						<input type="text" name="slip_number" value="" class="form-control">
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="form-group form-inline">
+				<div class="form-group form-inline">
 						<label for="date" class="col-sm-2 control-label">出荷日</label>
 						<div class="col-sm-10">
 							<select name="shipping_year" class="form-control">
@@ -115,12 +125,12 @@ for($i = 1; $i <= 31; $i++) {
 ?>
 							</select>
 							日
-						</div>
+						
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<input class="btn btn-default btn-sm" type="submit" value="出荷日を登録">
+						<input class="btn btn-default btn-sm" type="submit" value="発送メールを送信">
 					</div>
 				</div>
 							

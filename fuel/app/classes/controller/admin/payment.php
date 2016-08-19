@@ -150,6 +150,7 @@ class Controller_Admin_Payment extends Controller_Admin
             'user'  => $user,
             'date'  => date('Y年m月d日'),
             'slip_number' => $params['slip_number'],
+            'vendor' => $params['vendor'],
         );
         $params = array(
             'to' => $user['email'],
