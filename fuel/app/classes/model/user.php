@@ -203,8 +203,14 @@ class Model_User extends Orm\Model{
 			$now = date("Ymd");
 			$birthday = date("Ymd", strtotime($ret['birthday']));
 			$ret['age'] = (int)(floor((int)$now - (int)$birthday) / 10000);
+			$ret['birthday_display'] = date('Y年m月d日', strtotime($ret['birthday']));
 		} else {
 			$ret['age'] = null;
+		}
+
+		if(isset($ret['gender'])) {
+			$gender = Config::get("gender");
+			$ret['gender_display'] = $gender[$ret['gender']];
 		}
 		
 		return $ret;

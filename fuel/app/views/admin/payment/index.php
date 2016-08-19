@@ -73,13 +73,22 @@ if(isset($sensors)) {
 		<div class="panel panel-default">
 		<div class="panel-body">出荷日を設定します</div>
 		<div class="panel-body">
-
-							<select name="shipping_year">
+				<div class="form-group">
+					<label for="slip_number" class="col-sm-2 control-label">お問い合わせ伝票番号</label>
+					<div class="col-sm-10">
+						<input type="text" name="slip_number" value="" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-group form-inline">
+						<label for="date" class="col-sm-2 control-label">出荷日</label>
+						<div class="col-sm-10">
+							<select name="shipping_year" class="form-control">
 								<option value="2016">2016</option>
 								<option value="2017">2017</option>
 							</select>
 							年
-							<select name="shipping_month">
+							<select name="shipping_month" class="form-control">
 <?php
 if(!empty($sensor['shipping_date'])) {
 	$time = strtotime($sensor['shipping_date']);
@@ -95,7 +104,7 @@ for($i = 1; $i <= 12; $i++) {
 ?>
 							</select>
 							月
-							<select name="shipping_day">
+							<select name="shipping_day" class="form-control">
 <?php
 $day = date('j', $time);
 for($i = 1; $i <= 31; $i++) {
@@ -105,8 +114,16 @@ for($i = 1; $i <= 31; $i++) {
 }
 ?>
 							</select>
-							日<br />
-							<input class="btn btn-default btn-sm" type="submit" value="出荷日を登録">
+							日
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input class="btn btn-default btn-sm" type="submit" value="出荷日を登録">
+					</div>
+				</div>
+							
 			</div>
 		</div>
 	</div>

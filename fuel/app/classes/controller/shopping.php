@@ -150,11 +150,15 @@ class Controller_Shopping extends Controller_Base
         if(Input::param("address_id")) {
             $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
         }
-        if(preg_match("/沖縄/ui", $this->data['destination']['prefecture'])) {
-            $this->data['destination']['shipping'] = 500;
-        } else {
-            $this->data['destination']['shipping'] = 0;
+        $shippings = Config::get("shipping");
+        $this->data['destination']['shipping'] = 0;
+        foreach($shippings as $shipping) {
+            if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
+                $this->data['destination']['shipping'] = $shipping['price'];
+                break;
+            }      
         }
+
         Session::set("destination", $this->data['destination']);
         $this->data['plans'] = Session::get("plans");
         $this->data['total_price'] = 0;
@@ -331,7 +335,18 @@ class Controller_Shopping extends Controller_Base
                         ));
                         $contract_payment->save();
                     }
-                }          
+                }
+                //メールの送信
+                $data = array(
+                            'user'  => $this->user,
+                            'date'  => date('Y年m月d日'),
+                        );
+                $params = array(
+                    'to' => $this->user['email'],
+                    'subject' => "CareEyeアカウント登録、サービス購入のご連絡",
+                    'text' => \View::forge('email/contract', $data)
+                );
+                \Model_User::sendEmail($params);
             }
             Session::delete("plans");
             Session::delete("client");

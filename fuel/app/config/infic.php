@@ -1,6 +1,12 @@
 <?php
 return array(
 	'tax_rate' => 0.08,
+	'shipping' => array(
+		array(
+			'key' => '沖縄',
+			'price' => 800,
+		)
+	),
 	'blood_types' => array(
 		'A',
 		'B',

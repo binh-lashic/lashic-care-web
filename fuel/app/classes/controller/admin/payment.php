@@ -143,6 +143,20 @@ class Controller_Admin_Payment extends Controller_Admin
         	$params['id'] = $id;
         	\Model_Sensor::saveSensor($params);            
     	}
+    	$payment = \Model_Payment::find($params['payment_id']);
+    	$user = \Model_User::getUser($payment['user_id']);
+        //メールの送信
+        $data = array(
+            'user'  => $user,
+            'date'  => date('Y年m月d日'),
+            'slip_number' => $params['slip_number'],
+        );
+        $params = array(
+            'to' => $user['email'],
+            'subject' => "CareEye 機器発送のご連絡",
+            'text' => \View::forge('email/shipping', $data)
+        );
+        \Model_User::sendEmail($params);
 	    Response::redirect('/admin/payment?id='.Input::param("payment_id"));
     }
 }
