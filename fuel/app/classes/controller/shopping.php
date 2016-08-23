@@ -260,6 +260,7 @@ class Controller_Shopping extends Controller_Base
         $client = Session::get("client");
         $destination = Session::get("destination");
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+
         if(empty($client['id'])) {
             $this->data['errors']['client'] = true;
         }
@@ -290,7 +291,7 @@ class Controller_Shopping extends Controller_Base
                 $result = \Model_GMO::entry(array(
                     'order_id' => $payment->id,
                     'member_id' => $payment->user_id,
-                    'amount' => $subtotal_price + $destination['shipping'],
+                    'amount' => $subtotal_price + $destination['shipping'] ,
                     'tax' => $tax,
                 ));
                 foreach($plans as $plan) {
@@ -323,7 +324,6 @@ class Controller_Shopping extends Controller_Base
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
-                        Cookie::delete("affiliate");
                     }
                     $contract = \Model_Contract::forge();
                     $contract->set($params);
@@ -339,7 +339,14 @@ class Controller_Shopping extends Controller_Base
                 //メールの送信
                 $data = array(
                             'user'  => $this->user,
+                            'destination' => $destination,
+                            'plans' => $plans,
+                            'card' => $card->cardList[0],
+                            'subtotal_price' => $subtotal_price,
+                            'tax' => $tax,
+                            'total_price' => $subtotal_price + $destination['shipping'] + $tax,
                             'date'  => date('Y年m月d日'),
+                            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                         );
                 $params = array(
                     'to' => $this->user['email'],
@@ -347,10 +354,19 @@ class Controller_Shopping extends Controller_Base
                     'text' => \View::forge('email/contract', $data)
                 );
                 \Model_User::sendEmail($params);
+
+                //管理者用メール
+                $params = array(
+                    'to' => $_SERVER['EMAIL_MASTER'],
+                    'subject' => "CareEyeアカウント登録、サービス購入のご連絡",
+                    'text' => \View::forge('email/admin/contract', $data)
+                );
+                \Model_User::sendEmail($params);
             }
             Session::delete("plans");
             Session::delete("client");
             Session::delete("destination");
+            Cookie::delete("affiliate");
         } else {
             echo '不正な処理です';
             exit;

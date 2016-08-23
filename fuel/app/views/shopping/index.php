@@ -145,7 +145,7 @@
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="1" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
-							<label for="pack1" class="checkbox shoppingCart_input">wifi貸出　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
@@ -160,7 +160,7 @@
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="2" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
-							<label for="pack2" class="checkbox shoppingCart_input">wifi貸出　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
@@ -175,7 +175,7 @@
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="3" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
-							<label for="pack3" class="checkbox shoppingCart_input">wifi貸出　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
 						</div></li>
 				</ul>
 			</div>

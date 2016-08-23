@@ -93,6 +93,18 @@ class Controller_Register extends Controller_Base
 			$user = \Model_User::saveUser(Input::post());
 			if($user) {
 				\Model_User::sendConfirmEmail($user);
+				//管理用メールの送信
+                $data = array(
+                            'user'  => $user,
+                            'date'  => date('Y年m月d日'),
+                            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                        );
+                $params = array(
+                    'to' => $_SERVER['EMAIL_MASTER'],
+                    'subject' => "CareEye新規アカウント登録・購入情報",
+                    'text' => \View::forge('email/admin/register', $data)
+                );
+                \Model_User::sendEmail($params);
 			}			
 		} catch(Exception $e) {
 			$params = Input::post();
