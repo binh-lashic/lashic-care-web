@@ -1,12 +1,12 @@
 <?php echo $name; ?>様<br />
                                                         <?php echo $date; ?><br />
 **********************************************************************<br />
- CareEye サービスご利用、<?php echo $user['last_name'] ?><?php echo $user['last_name'] ?>様からのご招待<br />
+ CareEye サービスご利用、<?php echo $user['last_name'] ?><?php echo $user['first_name'] ?>様からのご招待<br />
 **********************************************************************<br />
-この度、<?php echo $user['last_name']; ?><?php echo $user['last_name']; ?>様から「CareEyeサービス」ご利用のご招待がありましたのでご案内いたします。<br />
+この度、<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>様から「CareEyeサービス」ご利用のご招待がありましたのでご案内いたします。<br />
 「CareEyeサービス」の概要についてはこちらhttps://careeye.jp/からご覧ください。<br />
 <br />
-下記のリンク先から<?php echo $name; ?>さまの情報をご入力頂きますと、<?php echo $user['last_name']; ?><?php echo $user['last_name']; ?>様と見守り情報を共有頂けますので是非ご利用ください。<br />
+下記のリンク先から<?php echo $name; ?>さまの情報をご入力頂きますと、<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>様と見守り情報を共有頂けますので是非ご利用ください。<br />
 <?php echo $url; ?><br />
 <br />
 <br />
