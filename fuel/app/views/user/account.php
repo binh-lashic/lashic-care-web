@@ -16,11 +16,11 @@
 								</tr>
 								<tr>
 									<th>性別</th>
-									<td colspan="3"><?php echo $user['gender'] == "m" ? "男性" : "女性"; ?></td>
+									<td colspan="3"><?php if($user['gender'] == "m") { echo "男性"; } else if($user['gender'] == "w") { echo "女性"; } ?></td>
 								</tr>
 								<tr>
 									<th>生年月日</th>
-									<td colspan="3"><?php echo date("Y年m月d日", strtotime($user['birthday'])); ?></td>
+									<td colspan="3"><?php if(isset($user['birthday'])) { echo date("Y年m月d日", strtotime($user['birthday'])); } ?></td>
 								</tr>
 								<tr>
 								<th>住所</th>

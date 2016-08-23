@@ -390,7 +390,8 @@ class Controller_User extends Controller_Base
 		        try { 
 			        $admin_user = \Model_User::saveShareUser($admin_params);
 		        } catch(Exception $e) {
-
+		        	print_R($e);
+		        	exit;
 		        }
 		    }
 

@@ -450,8 +450,10 @@ class Model_User extends Orm\Model{
 		}
 
 		$params['username'] = sha1($params['email'].mt_rand());
-		$params['password'] =
+		$params['password'] = sha1($params['email'].mt_rand());
 		$user = \Model_User::getUserFromEmail($params['email']);
+		list(, $user_id) = Auth::get_user_id();
+		$admin = \Model_User::getUser($user_id);
 		if(isset($user)) {
 			$user = \Model_User::find($user['id']);
 		} else {
@@ -459,6 +461,7 @@ class Model_User extends Orm\Model{
 	                $params['username'],
 	                $params['password'],
 	                $params['email']);
+
 			$params['email_confirm'] = 0;
 			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
 			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
@@ -469,7 +472,24 @@ class Model_User extends Orm\Model{
 			$user = \Model_User::find($id);
 			$user->set($params);
 			if($user->save()) {
-				\Model_User::sendConfirmEmail($user);
+				$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
+					'token' => $user['email_confirm_token'],
+				));
+		        $data = array(
+		        			'user'	   => $admin,
+		                    'url'      => $url,
+		                    'name'     => $user['last_name'].'　'.$user['first_name'],
+		                    'date'     => date('Y年m月d日'),
+		                    'address'  => $user['prefecture'].$user['address'],
+		                    'phone'    => $user['phone'],
+		                    'email'    => $user['email'],
+		                );
+				$params = array(
+					'to' => $user['email'],
+					'subject' => "CareEye サービスご利用、".$admin['last_name'].$admin['first_name']."様からのご招待",
+					'text' => \View::forge('email/user/invite', $data)
+				);
+				\Model_User::sendEmail($params);
 			}
 		}
 
