@@ -484,12 +484,11 @@ class Model_User extends Orm\Model{
 		                    'phone'    => $user['phone'],
 		                    'email'    => $user['email'],
 		                );
-				$params = array(
+				\Model_User::sendEmail(array(
 					'to' => $user['email'],
 					'subject' => "CareEye サービスご利用、".$admin['last_name'].$admin['first_name']."様からのご招待",
 					'text' => \View::forge('email/user/invite', $data)
-				);
-				\Model_User::sendEmail($params);
+				));
 			}
 		}
 
