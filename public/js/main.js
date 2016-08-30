@@ -120,7 +120,7 @@ $(function(){
 	}
 
 	function drawData() {
-		var today = new Date(date);
+		var today = new Date(date.replace(/-/g, "/"));
 		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
 		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ] ;
 		$("#today_week").html(weekDayList[today.getDay()]);
@@ -270,7 +270,9 @@ $(function(){
 	}
 
 	function changeDate(_date) {
+		console.log(date);
 		date = _date;
+
 		if($("#graph_temperature").prop('checked')) {
 			temperature = 1;
 		}
@@ -577,6 +579,7 @@ $(function(){
     	}
 		console.log(result);
     }
+
     //ショッピングページ用
     $(".shoppingFancybox").click(function(event) {
 		if(typeof $(this).attr('data-plan') != "undefined") {
