@@ -1,33 +1,6 @@
 <?php
-class Controller_Admin_Contract extends Controller_Admin
+class Controller_Admin_Billing extends Controller_Admin
 {
-
-	public function action_list()
-	{
-		$data['contracts'] = \Model_Contract::getSearch();
-        $this->template->title = '契約一覧';
-        $this->template->content = View::forge('admin/contract/list', $data);
-	}
-
-	public function action_laundering()
-	{
-		$this->template = null;
-		$response = new Response();
-		$response->set_header('Content-Type', 'application/csv');
-    	$response->set_header("Content-Disposition", "attachment; filename=laundering.csv");
-
-		$users = \Model_Contract::getUsers();
-		foreach($users as $user)
-		{
-			$params = array(
-				$user,
-				0,
-				"",
-			);
-			echo "\"".Implode("\",\"", $params)."\"\n";
-		}
-		return $response;
-	}
 
 	public function action_payment()
 	{
@@ -36,9 +9,9 @@ class Controller_Admin_Contract extends Controller_Admin
         } else {
             $date = date("Y-m-01");
         }
-        $time = strtotime($date);
-        $data['next_date'] = date("Y-m-01", $time + 60 * 60 * 24 * 32);
-        $data['prev_date'] = date("Y-m-01", $time - 60 * 60 * 24);
+        $data['date'] = $date;
+        $data['next_date'] = date("Y-m-01", strtotime($date." +1 month"));
+        $data['prev_date'] = date("Y-m-01", strtotime($date." -1 month"));
         
         $sql = "SELECT cp.payment_id,c.id,c.price,c.renew_date,c.user_id,p.title ".
                "  FROM contracts c ".
@@ -57,8 +30,8 @@ class Controller_Admin_Contract extends Controller_Admin
         	$contracts[$result['payment_id']]['prices'][] = $result['price'];
         }
         $data['contracts'] = $contracts;
-        $this->template->title = '継続支払い一覧';
-        $this->template->content = View::forge('admin/contract/payment', $data);
+        $this->template->title = '継続課金';
+        $this->template->content = View::forge('admin/billing/payment', $data);
 /*
 		$i = 0;
 		$this->template = null;
@@ -97,58 +70,5 @@ class Controller_Admin_Contract extends Controller_Admin
 		return $response;
 		*/
 	}
-
-    public function action_add_sensor() {
-        $contract = \Model_Contract::find(Input::param("contract_id"));
-
-        $sensor_names_data = Input::param("sensor_names");
-        $sensor_names = explode(PHP_EOL, $sensor_names_data);
-
-        if($contract['id'] && $sensor_names) {
-            foreach($sensor_names as $name) {
-                $name = trim($name);
-                //センサーを新規登録
-                $sensor = Model_Sensor::find("first" , array(
-                    'where' => array(
-                            array('name', $name),
-                        )
-                    ));
-                if(!$sensor) {
-                    $sensor = Model_Sensor::forge();
-                    $sensor->set(array('name' => $name));
-                    $sensor->save();
-                }
-
-                if($sensor->id > 0) {
-                	\Model_Contract_Sensor::saveContractSensor(array(
-                        'contract_id' => $contract['id'],
-                        'sensor_id' => $sensor->id,
-                    ));
-
-                    //見守られユーザを登録
-                    \Model_User_Client::saveUserClient(array(
-                        'user_id' => $contract['user_id'],
-                        'client_user_id' => $contract['client_user_id'],
-                    ));
-
-                    //管理者として登録
-                    \Model_User_Sensor::saveUserSensor(array(
-                        'user_id' => $contract['client_user_id'],
-                        'sensor_id' => $sensor->id,
-                        'admin' => 0,
-                    ));
-
-                    //管理者として登録
-                    \Model_User_Sensor::saveUserSensor(array(
-                        'user_id' => $contract['user_id'],
-                        'sensor_id' => $sensor->id,
-                        'admin' => 1,
-                    ));
-                }
-
-            }
-	        Response::redirect('/admin/contract/sensor?id='.$contract['id']);
-    	}
-    }
 }
 ?>

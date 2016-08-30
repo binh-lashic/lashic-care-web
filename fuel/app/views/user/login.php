@@ -22,7 +22,7 @@ if(isset($error)) {
 }
 ?>
 				<dl>
-					<dt>ログインID</dt>
+					<dt>メールアドレス</dt>
 					<dd><input type="text" class="input_text" name="username"></dd>
 					<dt>パスワード</dt>
 					<dd><input type="password" class="input_text" name="password"></dd>

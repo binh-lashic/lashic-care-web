@@ -5,7 +5,7 @@
 </div>
 <ul class="col-sm-12 nav nav-pills">
   <li role="presentation"<?php if($type=='initial') { echo "class=\"active\""; }?>><a href="/admin/payment/list?type=initial">初期契約時</a></li>
-  <li role="presentation"<?php if($type=='continuation') { echo "class=\"active\""; }?>><a href="/admin/payment/list?type=continuation">継続課金</a></li>
+  <li <?php if($type=='continuation') { echo "class=\"active\""; }?>><a href="/admin/contract/payment">継続課金</a></li>
 </ul>
 <div class="row">
 	<div class="col-sm-12">
@@ -28,8 +28,8 @@ if(isset($payments)) {
 					<td><?php echo $payment['id']; ?></td>
 					<td><a href="/admin/payment/?id=<?php echo $payment['id']; ?>"><?php echo $payment['last_name']; ?><?php echo $payment['first_name']; ?></a></td>
 					<td><?php echo $payment['title']; ?></td>
-					<td class="text-right"><?php echo $payment['price']; ?>円</td>
-					<td class="text-right"><?php echo $payment['shipping']; ?>円</td>
+					<td class="text-right"><?php echo number_format($payment['price']); ?>円</td>
+					<td class="text-right"><?php echo number_format($payment['shipping']); ?>円</td>
 					<td><?php echo $payment['shipping_count']; ?></td>
 					<td><?php echo $payment['sensor_count']; ?></td>
 					<td>

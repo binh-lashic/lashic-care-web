@@ -1,6 +1,6 @@
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
-		<div class="drawer-navbar-header"> <a class="logo" href="index.html"><img src="/images/common/logo.png" alt=""/></a></div>
+		<div class="drawer-navbar-header"> <a class="logo" href="/"><img src="/images/common/logo.png" alt=""/></a></div>
 		<nav class="drawer-nav drawer-nav-userMenu" role="navigation">
 		<button type="button" class="drawer-toggle drawer-hamburger">
           <span class="sr-only">toggle navigation</span>
@@ -118,10 +118,10 @@
 		<!-- text -->
 		
 		<h4 class="regist_h4 wow fadeInUp">”いま”を知ることが自立支援の第一歩です</h4>
-		<p class=" wow fadeInUp">老化や人視聴の初期段階はほんの僅かな変化から始まり、ご家族はもちろん、ほんんインでさえそこに気づくのは困難です。<br>
+		<p class=" wow fadeInUp">老化や認知症の初期段階はほんの僅かな変化から始まり、ご家族はもちろん、本人でさえそこに気づくのは困難です。<br>
 			「CareEye」でその”いま”をキャッチして、ご本人もご家族も納得感がありバランスの取れた”自立”と”支援”の環境構築をサポートします。</p>
 		<h4 class="regist_h4 mgt30 wow fadeInUp">”これから”を予測することで事前準備が容易になります</h4>
-		<p class=" wow fadeInUp">認知症の発症などにより、ある日突然対応を迫られると、選択肢は狭まり、費用は増加します。<br>
+		<p class=" wow fadeInUp">認知症の発症などにより、ある日突然対応を迫られると、選択肢は狭まり、費用がかさんでしまいます。<br>
 			「CareEye」からの通知やレポートにより、事前準備をある程度想定しておくことで、ゆとりを持って個々の状態や環境にふさわしい選択が可能とります。</p>
 		<!-- /text --> 
 		
@@ -135,47 +135,49 @@
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>月々パック</h3>
-							<p class="right"><span class="max_large text_red">1,200円（税抜）</span><span class="large text_red">/月</span></p>
+							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
-									<li>月々1,200円（税抜）が自動的に引き落とされます。</li>
-									<li>1ヶ月からお試しでご利用も可能です。</li>
+									<li>ひと月分1,200円(税抜)が毎月引き落とされます。</li>
+									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="1" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
-							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>6ヶ月パック</h3>
-							<p class="right"><span class="max_large text_red">6,600円（税抜）</span><span class="large text_red">/月</span></p>
+							<p class="right"><span class="max_large text_red">1,100円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
-									<li>6ヶ月分6,600円（税抜）の一括払い。6ヶ月ごとに自動更新されます。</li>
+									<li>6か月分6,600円(税抜)の一括支払い。</li>
+									<li>6か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="2" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
-							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>12ヶ月パック</h3>
-							<p class="right"><span class="max_large text_red">11,760円（税抜） </span><span class="large text_red">/月</span></p>
+							<p class="right"><span class="max_large text_red">980円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
-									<li>12ヶ月分11,760円（税抜）の一括払い。12ヶ月ごとに自動更新されます。</li>
+									<li>12か月分11,760円(税抜)の一括支払い。</li>
+									<li>12か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="3" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
-							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　月1,500円（税抜）も一緒に申し込む</label>
+							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 						</div></li>
 				</ul>
 			</div>

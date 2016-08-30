@@ -27,7 +27,6 @@ $(function() {
 			});
 		});
 
-
 /* ------------------------------------------------------
 
 リサイズするとリロード
@@ -80,7 +79,18 @@ else if(window.attachEvent) {
 メニューバー drawer.js設定
 
 ------------------------------------------------------ */
-
+$(function(){
+	$('.drawer-menu > .drawer-dropdown')
+		.mouseover(function(){
+		$(this).addClass("open");
+		$(this).siblings().removeClass("open");
+		$(".drawer-menu-item").attr({
+				'aria-expanded' : 'true'
+			});
+	});
+});
+	
+	
 	
 /* 高さ設定 */
 $(function(){
@@ -376,3 +386,8 @@ function hide_body(d){
 	document.getElementById('toggle_off'+d).style.display = 'none';
 	document.getElementById('body'+d).style.display = 'none';
 }
+
+
+
+
+

@@ -22,10 +22,11 @@
     </nav>
 
     <ul class="col-sm-12 nav nav-pills">
-      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Contract") { echo "class=\"active\""; }?>><a href="/admin/contract/list">契約一覧</a></li>
-      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Payment") { echo "class=\"active\""; }?>><a href="/admin/payment/list">支払い一覧</a></li>
-      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_User") { echo "class=\"active\""; }?>><a href="/admin/user/list">親アカウント一覧</a></li>
-      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Sensor") { echo "class=\"active\""; }?>><a href="/admin/sensor/list">センサー機器一覧</a></li>
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Contract") { echo "class=\"active\""; }?>><a href="/admin/contract/list">契約</a></li>
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Payment") { echo "class=\"active\""; }?>><a href="/admin/payment/list">支払い</a></li>
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Billing") { echo "class=\"active\""; }?>><a href="/admin/billing/payment">継続課金</a></li>
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_User") { echo "class=\"active\""; }?>><a href="/admin/user/list">親アカウント</a></li>
+      <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Sensor") { echo "class=\"active\""; }?>><a href="/admin/sensor/list">センサー機器</a></li>
     </ul>
 		<?php echo $content; ?>
 	</div>
