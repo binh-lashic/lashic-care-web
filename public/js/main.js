@@ -270,7 +270,6 @@ $(function(){
 	}
 
 	function changeDate(_date) {
-		console.log(date);
 		date = _date;
 
 		if($("#graph_temperature").prop('checked')) {

@@ -55,7 +55,7 @@ return array(
 	 * Note that this is less secure, as session hijacking countermeasures have to
 	 * be disabled for this to work!
 	 */
-	'multiple_logins' => false,
+	'multiple_logins' => true,
 
 	/**
 	 * Remember-me functionality
@@ -120,7 +120,7 @@ return array(
 	/**
 	 * Salt for the login hash
 	 */
-	'login_hash_salt' => 'put_some_salt_in_here',
+	'login_hash_salt' => '8PmCbG3Bpunv',
 
 	/**
 	 * $_POST key for login username
