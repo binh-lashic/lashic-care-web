@@ -601,6 +601,16 @@ $(function(){
 				}
 			}
 			plan_ids.push(4);	//初期費用
+			var date = new Date();
+			if(date.getDate() >= 16) {
+				if(plan == '1') {
+					plan_ids.push(8);
+				} else if(plan == '2') {
+					plan_ids.push(9);
+				} else if(plan == '3') {
+					plan_ids.push(10);
+				}
+			}
 	        Cookies.set("plan_id", JSON.stringify(plan_ids), { expires: 90 });
 		}
     });

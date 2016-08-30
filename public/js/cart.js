@@ -33,9 +33,9 @@ $(function(){
 						quantity = 1;
 					}
 					$("#plans").append("<tr><td>" + plan['title'] + "</td>" + 
-						               "<td class=\"right\">" + plan['options'][0]['unit_price'].toLocaleString() + "円（税抜）</td>" + 
+						               "<td class=\"right\">" + parseInt(plan['options'][0]['unit_price']).toLocaleString() + "円（税抜）</td>" + 
 						               "<td class=\"center\">" + quantity + "</td>" + 
-						               "<td class=\"center\">" + plan['price'].toLocaleString() + "円（税抜）</td></tr>");
+						               "<td class=\"right\">" + plan['price'].toLocaleString() + "円（税抜）</td></tr>");
 					subtotal_price += parseInt(plan['price']);
 				});
 				tax = Math.floor(subtotal_price * 0.08);

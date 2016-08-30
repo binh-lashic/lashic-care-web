@@ -60,7 +60,7 @@ class Model_Payment extends Orm\Model{
                "  LEFT JOIN plans ON c.plan_id = plans.id ".
                "  LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                "  LEFT JOIN sensors s ON cs.sensor_id = s.id ".
-               " WHERE plans.type != 'initial' ".
+               " WHERE plans.type != 'initial' AND plans.type != 'discount'".
                "   AND p.id= :id";
         $query = DB::query($sql);
         $query->parameters(array('id' => &$id));
