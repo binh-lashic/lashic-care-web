@@ -1490,9 +1490,11 @@ a.moreINfoLink:link {
 	margin-bottom: 10px;
 }
 #loginContainer dl dd {
-	margin-left: 80px;
+	width:190px;
+	margin-left: 120px;
 	margin-bottom: 10px;
 }
+#loginContainer dl dd input{ width:160px;}
 #loginContainer dl dt:last-child, #loginContainer dl dd:last-child {
 	margin-bottom: 0;
 }
