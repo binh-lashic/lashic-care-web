@@ -16,6 +16,9 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">ご注文確認</h1>
 			<p>ご注文情報をご確認のうえ、「ご注文を確定する」をクリックしてください。</p>
+<?php
+if(isset($card)) {
+?>
 			<!-- お支払い方法 -->
 			<div class="form_set_container">
 				<div class="form_base_data_edit">
@@ -43,6 +46,9 @@
 			</div>
 			<!-- /お支払い方法 --> 
 			<br><br>
+<?php
+}
+?>
 			<!-- 送付先 -->
 			<div class="form_set_container">
 				<div class="form_base_data_edit">

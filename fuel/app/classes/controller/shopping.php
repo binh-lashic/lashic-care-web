@@ -31,6 +31,12 @@ class Controller_Shopping extends Controller_Base
 	{
         $this->template->title = 'CareEye（ケアアイ）';
         $this->data['breadcrumbs'] = array($this->template->title);
+
+        if(Cookie::get("affiliate") == "magokoro") {
+            Session::set('monitor', Cookie::get("affiliate"));
+            $this->data['monitor'] = true;
+        }
+
         $this->template->content = View::forge('shopping/index', $this->data);
 	}
 
@@ -178,6 +184,9 @@ class Controller_Shopping extends Controller_Base
 
     public function action_payment()
     {
+        if(Session::get('monitor')) {
+            Response::redirect('/shopping/confirm');
+        }
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
         $this->template->header = View::forge('header_client', $this->data);
@@ -235,8 +244,13 @@ class Controller_Shopping extends Controller_Base
 
     public function action_confirm()
     {
-        $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
-        $this->data['card'] = $card->cardList[0];
+        if(Session::get('monitor')) {
+
+        } else {
+            $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+            $this->data['card'] = $card->cardList[0];
+        }
+
         $this->data['destination'] = Session::get("destination");
         $this->data['plans'] = Session::get("plans");
 
