@@ -600,7 +600,8 @@ $(function(){
 					plan_ids.push(7);	//wifi貸出
 				}
 			}
-			if(plan == '11') {
+			if(plan == '11') {	//モニター会員用
+				
 				plan_ids.push(11);
 				/*
 				if($("#pack" + plan).prop('checked')) {
@@ -610,7 +611,7 @@ $(function(){
 			} else {
 				plan_ids.push(4);	//初期費用
 			}
-			
+
 			var date = new Date();
 			if(date.getDate() >= 16) {
 				if(plan == '1') {
