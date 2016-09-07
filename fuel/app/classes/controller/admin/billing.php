@@ -17,10 +17,13 @@ class Controller_Admin_Billing extends Controller_Admin
                "  FROM contracts c ".
                " INNER JOIN plans p ON c.plan_id = p.id ".
                "  LEFT JOIN contract_payments cp ON c.id = cp.contract_id ".
-               " WHERE renew_date > :renew_date;";
+               " WHERE c.affiliate IS NULL ".
+               "    OR (c.affiliate IS NOT NULL AND affiliate != 'magokoro')".
+               "   AND c.renew_date > :renew_date;";
         $query = DB::query($sql);
         $query->parameters(array('renew_date' => $date));
         $results = $query->execute();
+
         $contracts = array();
         foreach($results as $result) {
         	if(empty($contracts[$result['payment_id']])) {

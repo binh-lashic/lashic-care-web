@@ -147,9 +147,9 @@ if(!empty($monitor))
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="11" href="#settingChange">カートに入れる</a></div>
-							<input type="checkbox" id="pack11">
-							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="12" href="#settingChange">カートに入れる</a></div>
+							<input type="checkbox" id="pack12">
+							<label for="pack12" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 <?php

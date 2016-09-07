@@ -600,13 +600,12 @@ $(function(){
 					plan_ids.push(7);	//wifi貸出
 				}
 			}
-			if(plan == '11') {
-				plan_ids.push(11);
-				/*
+			if(plan == '12') {
+				plan_ids.push(12);
 				if($("#pack" + plan).prop('checked')) {
-					plan_ids.push(7);	//wifi貸出
+					plan_ids.push(13);	//wifi貸出
 				}
-				*/
+				plan_ids.push(11);	//初期費用
 			} else {
 				plan_ids.push(4);	//初期費用
 			}
