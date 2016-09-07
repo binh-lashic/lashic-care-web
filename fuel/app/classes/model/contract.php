@@ -39,8 +39,8 @@ class Model_Contract extends Orm\Model{
                " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
                " WHERE p.type != 'initial' AND p.type != 'discount'".
-               "GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,u.last_name,u.first_name,p.title,p.type,c.affiliate".
-               "ORDER BY c.id DESC;";
+               " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,u.last_name,u.first_name,p.title,p.type,c.affiliate ".
+               " ORDER BY c.id DESC;";
 
         $query = DB::query($sql);
         $results = $query->execute();
