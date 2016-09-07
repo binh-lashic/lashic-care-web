@@ -32,7 +32,7 @@ class Model_Payment extends Orm\Model{
                " LEFT JOIN plans p ON c.plan_id = p.id ".
                " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
-               " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,p.title".
+               " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,p.title,c.affiliate".
                " ORDER BY pay.id DESC;";
         $query = DB::query($sql);
         $results = $query->execute();
