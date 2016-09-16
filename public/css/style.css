@@ -2031,9 +2031,46 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 /* skippr */
 .skippr {
 	width: 100%;
+	height:80%;
 	min-height: 500px;
 	position: relative;
 	overflow: hidden;
+}
+@media (min-width: 1000px) {
+.skippr {
+	width: 100%;
+	height:80%;
+	min-height: 600px;
+	position: relative;
+	overflow: hidden;
+}
+}
+@media (min-width: 1200px) {
+.skippr {
+	width: 100%;
+	height:80%;
+	min-height: 600px;
+	position: relative;
+	overflow: hidden;
+}
+}
+@media (min-width: 1400px) {
+.skippr {
+	width: 100%;
+	height:80%;
+	min-height: 700px;
+	position: relative;
+	overflow: hidden;
+}
+}
+@media (min-width: 1600px) {
+.skippr {
+	width: 100%;
+	height:80%;
+	min-height: 800px;
+	position: relative;
+	overflow: hidden;
+}
 }
 
 
@@ -2288,7 +2325,18 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 	font-family: "游明朝体", "Yu Mincho", YuMincho, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
 	font-weight:400; position:relative;
 	background:url(../images/chart.jpg) no-repeat; background-size:cover}
-.topCopy_image{ position:relative; width:70%; height:580px; margin:0 auto;}
+@media (max-width: 740px) {
+.topCopy_image{ position:relative; width:70%; height:280px; margin:0 auto;}
+}
+@media (min-width: 741px)  and (max-width: 1150px) {
+.topCopy_image{ position:relative; width:70%; height:380px; margin:0 auto;}
+}
+@media (min-width: 1151px)  and (max-width: 1300px){
+.topCopy_image{ position:relative; width:70%; height:500px; margin:0 auto;}
+}
+@media (min-width: 1301px) {
+.topCopy_image{ position:relative; width:70%; height:560px; margin:0 auto;}
+}
 .topCopy_image img{ width:100%;}
-.topCopy_pc , .topCopy_apli{ position:absolute; top:0; left:0;}
+.topCopy_pc , .topCopy_apli{ max-width:1000px; position:absolute; top:0; left:0; right:0; margin:0 auto;}
 .topCopy_text{ margin-top:60px;}
