@@ -138,18 +138,20 @@ if(!empty($monitor))
 ?>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
-							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>モニターパック</h3>
-							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span></p>
+							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>無料モニターパック</h3>
+							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span>
+							</p>
 							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right"><span class="large text_red">初期費用、6ヶ月分無料</span></p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>ひと月分1,200円(税抜)が毎月引き落とされます。</li>
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="12" href="#settingChange">カートに入れる</a></div>
-							<input type="checkbox" id="pack12">
-							<label for="pack12" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="magokoro" href="#settingChange">カートに入れる</a></div>
+							<input type="checkbox" id="packmagokoro">
+							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 <?php
