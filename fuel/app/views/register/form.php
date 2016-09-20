@@ -207,7 +207,7 @@ if(isset($errors['phone'])) {
 										<th><span class="icon_Required">必須</span> パスワード</th>
 										<td><input type="password" name="password" class="input_text input_short" minlength="8" maxlength="16" placeholder="パスワード入力">
 										<br>
-<span class="small "><span class="text_red">※</span>半角英数 8桁<br>
+<span class="small "><span class="text_red">※</span>半角英数 8桁以上<br>
 										<span class="text_red">※</span>必ず英字と数字の両方を使って入力してください。大文字小文字は区別されます。<br>
 									<span class="text_red">※</span>ユーザーID、郵便番号、電話番号、誕生日など推測できる文字は避けてください。</span>
 <?php

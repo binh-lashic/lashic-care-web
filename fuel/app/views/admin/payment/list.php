@@ -19,6 +19,7 @@
 					<th class="col-sm-1">送料</th>
 					<th class="col-sm-1">出荷済</th>
 					<th class="col-sm-1">機器数</th>
+					<th class="col-sm-1">経由</th>
 					<th class="col-sm-2">操作</th>
 				</tr>
 <?php
@@ -27,11 +28,12 @@ if(isset($payments)) {
 ?>				<tr>
 					<td><?php echo $payment['id']; ?></td>
 					<td><a href="/admin/payment/?id=<?php echo $payment['id']; ?>"><?php echo $payment['last_name']; ?><?php echo $payment['first_name']; ?></a></td>
-					<td><?php echo $payment['title']; ?></td>
+					<td><?php echo $payment['plan_title']; ?></td>
 					<td class="text-right"><?php echo number_format($payment['price']); ?>円</td>
 					<td class="text-right"><?php echo number_format($payment['shipping']); ?>円</td>
 					<td><?php echo $payment['shipping_count']; ?></td>
 					<td><?php echo $payment['sensor_count']; ?></td>
+					<td><?php echo $payment['affiliate']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/payment?id=<?php echo $payment['id']; ?>">契約を確認</a>						
 					</td>

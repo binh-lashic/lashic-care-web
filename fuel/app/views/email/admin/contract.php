@@ -37,7 +37,7 @@ foreach($plans as $plan) {
 <?php
 }
 ?><br />
-小　計 ：<?php echo $subtotal_price; ?>（税抜）<br />
-送　料 ：<?php echo $destination['shipping']; ?>円<br />
+小　計 ：<?php echo $subtotal_price; ?>円（税抜）<br />
+送　料 ：<?php echo $destination['shipping'] ? $destination['shipping'] : 0; ?>円<br />
 消費税 ：<?php echo $tax; ?>円<br />
 合　計 ：<?php echo $total_price; ?>円<br />

@@ -156,14 +156,19 @@ class Controller_Shopping extends Controller_Base
         if(Input::param("address_id")) {
             $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
         }
-        $shippings = Config::get("shipping");
-        $this->data['destination']['shipping'] = 0;
-        foreach($shippings as $shipping) {
-            if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
-                $this->data['destination']['shipping'] = $shipping['price'];
-                break;
-            }      
+
+        if(Session::get('monitor')) {
+        } else {
+            $shippings = Config::get("shipping");
+            $this->data['destination']['shipping'] = 0;
+            foreach($shippings as $shipping) {
+                if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
+                    $this->data['destination']['shipping'] = $shipping['price'];
+                    break;
+                }      
+            }            
         }
+
 
         Session::set("destination", $this->data['destination']);
         $this->data['plans'] = Session::get("plans");
@@ -302,12 +307,15 @@ class Controller_Shopping extends Controller_Base
                 'type' => 'initial',
             ));
             if($payment->save()) {
-                $result = \Model_GMO::entry(array(
-                    'order_id' => $payment->id,
-                    'member_id' => $payment->user_id,
-                    'amount' => $subtotal_price + $destination['shipping'] ,
-                    'tax' => $tax,
-                ));
+                if(Session::get('monitor')) {
+                } else {
+                    $result = \Model_GMO::entry(array(
+                        'order_id' => $payment->id,
+                        'member_id' => $payment->user_id,
+                        'amount' => $subtotal_price + $destination['shipping'] ,
+                        'tax' => $tax,
+                    ));
+                }
                 foreach($plans as $plan) {
                     if($plan['span'] == 1) {
                         $renew_date = date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y')));

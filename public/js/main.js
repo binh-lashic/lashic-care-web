@@ -600,28 +600,30 @@ $(function(){
 					plan_ids.push(7);	//wifi貸出
 				}
 			}
-			if(plan == '11') {	//モニター会員用
-				
-				plan_ids.push(11);
-				/*
+			plan_ids.push(4);	//初期費用
+			if(plan == 'magokoro') {
+				plan_ids.push(1);
 				if($("#pack" + plan).prop('checked')) {
-					plan_ids.push(7);	//wifi貸出
+					plan_ids.push(5);	//wifi貸出
+					plan_ids.push(12);
+				} else {
+					plan_ids.push(11);
 				}
-				*/
+
 			} else {
-				plan_ids.push(4);	//初期費用
+				var date = new Date();
+				if(date.getDate() >= 16) {
+					if(plan == '1') {
+						plan_ids.push(8);
+					} else if(plan == '2') {
+						plan_ids.push(9);
+					} else if(plan == '3') {
+						plan_ids.push(10);
+					}
+				}	
 			}
 
-			var date = new Date();
-			if(date.getDate() >= 16) {
-				if(plan == '1') {
-					plan_ids.push(8);
-				} else if(plan == '2') {
-					plan_ids.push(9);
-				} else if(plan == '3') {
-					plan_ids.push(10);
-				}
-			}
+
 	        Cookies.set("plan_id", JSON.stringify(plan_ids), { expires: 90 });
 		}
     });
@@ -633,17 +635,4 @@ $(function(){
 		});
     });
 
-    //送付先ページ用
-    $('.destination_delete').click(function(){
-    	console.log("destination_delete");
-    	if(confirm("この送付先を削除してもよろしいでしょうか？")) {
-			var id = $(this).attr('data-address');
-			api("address/delete", { id : id }, function(result){
-				$('#order_address' + id).empty();
-				$('.order_alert').fadeIn(1000).delay().fadeOut(1000);
-			});
-    	}
-		return false;
-	});
-
-});
+    //送付先ページ

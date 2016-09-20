@@ -38,7 +38,8 @@
 					<th class="col-sm-1">契約更新日</th>
 					<th class="col-sm-1">出荷済</th>
 					<th class="col-sm-1">機器数</th>
-					<th class="col-sm-2">操作</th>
+					<th class="col-sm-1">経由</th>
+					<th class="col-sm-1">操作</th>
 				</tr>
 <?php
 if(isset($contracts)) {
@@ -54,6 +55,7 @@ if(isset($contracts)) {
 					<td><?php echo $contract['renew_date']; ?></td>
 					<td><?php echo $contract['shipping_count']; ?></td>
 					<td><?php echo $contract['sensor_count']; ?></td>
+					<td><?php echo $contract['affiliate']; ?></td>
 					<td>
 <?php
 if($contract['type'] != 'initial') {

@@ -25,14 +25,14 @@ class Model_Payment extends Orm\Model{
     );
 
     public function getSearch() {
-        $sql = "SELECT pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,count(shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
+        $sql = "SELECT pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,p.title AS plan_title,c.affiliate, count(shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM payments pay INNER JOIN contract_payments cp ON pay.id = cp.payment_id ".
                "INNER JOIN contracts c ON cp.contract_id = c.id ".
                " LEFT JOIN users u ON c.user_id = u.id ".
                " LEFT JOIN plans p ON c.plan_id = p.id ".
                " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
-               " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name".
+               " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,p.title,c.affiliate".
                " ORDER BY pay.id DESC;";
         $query = DB::query($sql);
         $results = $query->execute();
