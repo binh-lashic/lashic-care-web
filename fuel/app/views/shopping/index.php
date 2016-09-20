@@ -152,6 +152,7 @@ if(!empty($monitor))
 							<div class="mgt10 mgb10"><a class="shoppingFancybox btn_darkBlue" data-plan="magokoro" href="#settingChange">カートに入れる</a></div>
 							<input type="checkbox" id="packmagokoro">
 							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<div class="mgt10 mgb10"><a href="/s/normal">通常の購入に戻る</a></div>
 						</div>
 					</li>
 <?php
