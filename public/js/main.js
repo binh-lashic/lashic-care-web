@@ -635,4 +635,16 @@ $(function(){
 		});
     });
 
-    //送付先ページ
+        //送付先ページ用
+    $('.destination_delete').click(function(){
+    	console.log("destination_delete");
+    	if(confirm("この送付先を削除してもよろしいでしょうか？")) {
+			var id = $(this).attr('data-address');
+			api("address/delete", { id : id }, function(result){
+				$('#order_address' + id).empty();
+				$('.order_alert').fadeIn(1000).delay().fadeOut(1000);
+			});
+    	}
+		return false;
+	});
+});
