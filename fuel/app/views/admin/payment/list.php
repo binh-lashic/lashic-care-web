@@ -3,10 +3,7 @@
 		<h2>支払い一覧</h2>
 	</div>
 </div>
-<ul class="col-sm-12 nav nav-pills">
-  <li role="presentation"<?php if($type=='initial') { echo "class=\"active\""; }?>><a href="/admin/payment/list?type=initial">初期契約時</a></li>
-  <li <?php if($type=='continuation') { echo "class=\"active\""; }?>><a href="/admin/contract/payment">継続課金</a></li>
-</ul>
+
 <div class="row">
 	<div class="col-sm-12">
 		<div class="panel panel-default">

@@ -42,12 +42,7 @@ class Controller_Admin_Contract_Sensor extends Controller_Admin
         $contract_id = Input::param("contract_id");
         $sensor_id = Input::param("sensor_id");
 
-        \Model_Contract_Sensor::deleteUserSensor(array('contract_id' => $contract_id, 'sensor_id' => $sensor_id));
-
-        $client = \Model_Sensor::getClient(array('sensor_id' => $sensor_id));
-        if(isset($client)) {
-            \Model_Contract_Client::deleteUserClient(array('contract_id' => $contract_id, 'client_contract_id' => $client->id));
-        }
+        \Model_Contract_Sensor::deleteContractSensor(array('contract_id' => $contract_id, 'sensor_id' => $sensor_id));
         Response::redirect('/admin/contract/sensor?id='.$contract_id); 
     }
 }

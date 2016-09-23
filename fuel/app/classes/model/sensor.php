@@ -164,6 +164,21 @@ class Model_Sensor extends Orm\Model{
 		return null;
 	}
 
+	public static function isAllowed($sensor_id, $user_id)
+	{
+		$user_sensor = \Model_User_Sensor::find('first', array(
+			'where' => array(
+				'sensor_id' => $sensor_id,
+				'user_id' => $user_id,
+			),
+		));
+		if(!empty($user_sensor)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static function saveSensor($params) {
 		if(!empty($params['shipping_year']) && !empty($params['shipping_month']) && !empty($params['shipping_day'])) {
 			$params['shipping_date'] = $params['shipping_year']."-".$params['shipping_month']."-".$params['shipping_day'];
