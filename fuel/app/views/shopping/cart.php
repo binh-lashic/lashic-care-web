@@ -65,7 +65,7 @@
 			<div class="order_alert"><p>削除されました</p></div>
 				
 				<div class="set_container">
-					<div class="left_container"><a href="/shopping/" class="link_back">戻る</a></div>
+					<div class="left_container"><a href="/" class="link_back">戻る</a></div>
 					<div class="center_container"></div>
 					<div class="right_container"></div>
 				</div>

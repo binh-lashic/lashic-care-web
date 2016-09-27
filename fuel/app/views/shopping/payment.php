@@ -17,7 +17,11 @@
 			<p><strong>ご利用いただけるカード：</strong>VISA、Master、JCB、アメリカン・エキスプレス、ダイナース<br>
 				<img src="/images/common/card_m_all.png" width="136"></p>
 <?php
-if(!empty($errors)) {
+if(!empty($errors['card'])) {
+?>
+				<p class="title_errer"><strong>クレジットカードに不備がありました</strong></p>
+<?php
+} else if(!empty($errors)) {
 ?>
 				<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
 <?php
