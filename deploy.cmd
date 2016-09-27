@@ -74,7 +74,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\composer.json" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-IF "%FUEL_ENV%" EQ "production" (
+IF "%FUEL_ENV%" = "production" (
   call cp fuel/app/conf/connector.properties fuel/app/conf/connector.properties.develop
   call cp fuel/app/conf/connector.honban fuel/app/conf/connector.properties
 )
