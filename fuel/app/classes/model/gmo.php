@@ -41,35 +41,14 @@ class Model_GMO extends Orm\Model{
 		$exe = new SaveMember();
 		$output = $exe->exec( $input );
 		if( $exe->isExceptionOccured() ){
-			echo "isExceptionOccured";
-			echo "\n";
-			$exception = $exe->getException(); 
-			echo $exception->getMessage();
-			echo "\n";
-			$mesasges = $exception->getMessages();
-			foreach($messages as $message) {
-				echo $message;
-				echo "\n";
-			}
-			return $output;		
+			return null;	
 		}else{
 			if( $output->isErrorOccurred() ){
-				//サンプルでは、エラーが発生していた場合、エラー画面を表示して終了します。
-				echo "isErrorOccurred";
-				$errorList = $output->getErrList() ;
-				
-				foreach( $errorList as  $errorInfo ){
-					echo '<p>'
-						. $errorInfo->getErrCode()
-						. ':' . $errorInfo->getErrInfo()
-						.'</p>';
-						
-				}
-				exit;
+				return null;
 			} else if($output->memberId) {
 				return $output;
 			}
-			return $output;
+			return null;
 		}
 	}
 
