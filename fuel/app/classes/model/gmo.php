@@ -41,35 +41,14 @@ class Model_GMO extends Orm\Model{
 		$exe = new SaveMember();
 		$output = $exe->exec( $input );
 		if( $exe->isExceptionOccured() ){
-			echo "isExceptionOccured";
-			echo "\n";
-			$exception = $exe->getException(); 
-			echo $exception->getMessage();
-			echo "\n";
-			$mesasges = $exception->getMessages();
-			foreach($messages as $message) {
-				echo $message;
-				echo "\n";
-			}
-			return $output;		
+			return null;	
 		}else{
 			if( $output->isErrorOccurred() ){
-				//サンプルでは、エラーが発生していた場合、エラー画面を表示して終了します。
-				echo "isErrorOccurred";
-				$errorList = $output->getErrList() ;
-				
-				foreach( $errorList as  $errorInfo ){
-					echo '<p>'
-						. $errorInfo->getErrCode()
-						. ':' . $errorInfo->getErrInfo()
-						.'</p>';
-						
-				}
-				exit;
+				return null;
 			} else if($output->memberId) {
 				return $output;
 			}
-			return $output;
+			return null;
 		}
 	}
 
@@ -114,67 +93,22 @@ class Model_GMO extends Orm\Model{
 
 		$input->setMemberId( $params['member_id'] );
 		$input->setCardNo( $params['number'] );
-		//$input->setCardPass( $params['CardPass'] );
 		$input->setExpire( $params['expire'] );
 		$input->setHolderName( $params['holder_name'] );
 		if(isset($params['sequence'] )) {
 			$input->setSeqMode(1);
 			$input->setCardSeq( $params['sequence'] );
 		}
-/*
-		$cardSeq = $_POST['CardSeq'];
-		if( 0 < strlen( $cardSeq ) ){
-			//登録カード連番
-			$input->setCardSeq( $cardSeq );
-			$input->setSeqMode( $_POST['SeqMode'] );
-		}
-*/
-/*
-		$token = $_POST['Token'];
-		if( 0 < strlen( $token ) )
-		{
-			$input->setToken( $_POST['Token']);
-		}else{
-			$input->setCardNo( $_POST['CardNo'] );
-			$input->setCardPass( $_POST['CardPass'] );
-			$input->setExpire( $_POST['Expire'] );
-			$input->setHolderName( $_POST['HolderName']);
-		}
-		$input->setCardName( $_POST['CardName']);
-		$input->setDefaultFlag( $_POST['DefaultFlag']);
-*/
-		//\Model_GMO::deleteCard($params);
+
 		$exe = new SaveCard();/* @var $exec SearchCard */
 		$output = $exe->exec( $input );/* @var $output SaveCardOutput */
 		if( $exe->isExceptionOccured() ){//取引の処理そのものがうまくいかない（通信エラー等）場合、例外が発生します。
-			echo "isExceptionOccured";
-			echo "\n";
-			$exception = $exe->getException(); 
-			echo $exception->getMessage();
-			echo "\n";
-			$mesasges = $exception->getMessages();
-			foreach($messages as $message) {
-				echo $message;
-				echo "\n";
-			}
-			exit;
-			return $output;
+			return null;
 		}else{
 			if( $output->isErrorOccurred() ){//出力パラメータにエラーコードが含まれていないか、チェックしています。
-				//サンプルでは、エラーが発生していた場合、エラー画面を表示して終了します。
-				echo "isErrorOccurred";
-				$errorList = $output->getErrList() ;
-				
-				foreach( $errorList as  $errorInfo ){
-					echo '<p>'
-						. $errorInfo->getErrCode()
-						. ':' . $errorInfo->getErrInfo()
-						.'</p>';
-						
-				}
-				exit;
-				return $output;
+				return null;
 			}
+			return $output;
 		}
 	}
 

@@ -73,6 +73,13 @@ IF EXIST "%DEPLOYMENT_TARGET%\composer.json" (
   call php composer.phar install --no-dev
   IF !ERRORLEVEL! NEQ 0 goto error
 )
+
+IF "%FUEL_ENV%" NEQ "production" (
+  echo "%FUEL_ENV%"
+) else (
+  call cp fuel/app/conf/connector.properties fuel/app/conf/connector.properties.develop
+  call cp fuel/app/conf/connector.properties.honban fuel/app/conf/connector.properties
+)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub

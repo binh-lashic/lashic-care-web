@@ -1,6 +1,6 @@
 <?php
 return array(
-	'_root_'  => 'user/login',  // The default route
+	'_root_'  => 'shopping',  // The default route
 	'_404_'   => 'page/404',    // The main 404 route
 	'admin' => 'admin/user/list',
 	'contents/careeye' => 'page/careeye',
@@ -8,5 +8,5 @@ return array(
 	'contents/info' => 'page/news',
 	'contents/kiyaku' => 'page/terms',
 	'contents/privacy' => 'page/privacy',
-	's/:affiliate' => 'user/login',
+	's/:affiliate' => 'shopping',
 );

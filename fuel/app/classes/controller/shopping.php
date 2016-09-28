@@ -29,6 +29,14 @@ class Controller_Shopping extends Controller_Base
 
 	public function action_index()
 	{
+         if(!empty($this->param('affiliate'))) {
+            if($this->param('affiliate') == "normal") {
+                Session::delete('monitor');
+                Cookie::delete('affiliate');
+            } else {
+                Cookie::set('affiliate', $this->param('affiliate'), 60 * 60 * 24 * 90);
+            }
+        }
         $this->template->title = 'CareEye（ケアアイ）';
         $this->data['breadcrumbs'] = array($this->template->title);
 
@@ -233,13 +241,23 @@ class Controller_Shopping extends Controller_Base
                     if(!$member->memberId) {
                         $member = \Model_GMO::saveMember($this->user['id']);
                     }
-                    $params['member_id'] = $member->memberId;
+                    if(!empty($member)) {
+                        $params['member_id'] = $member->memberId;
+                    } else {
+                        $this->data['errors']['gmo'] = true;            
+                    } 
                     //既に登録しているカードがある場合はシーケンス番号を与える
                     if(!empty($card->cardList)) {
                         $params['sequence'] = 0;
                     }
                     $result = \Model_GMO::saveCard($params);
-                    Response::redirect('/shopping/payment');
+                    
+                    if(empty($result)) {
+                        $this->data['errors']['card'] = true;
+                    } else {
+                        Response::redirect('/shopping/payment');                  
+                    }
+
                 }
             }
         }
