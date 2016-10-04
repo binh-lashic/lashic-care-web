@@ -60,7 +60,7 @@ if(isset($sensors)) {
 					<td><?php echo $sensor['name']; ?></td>
 					<td><?php echo $sensor['shipping_date']; ?></td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $sensor['contract_id']; ?>">機器割当</a>						
+						<a class="btn btn-primary btn-sm" href="/admin/contract/sensor?id=<?php echo $sensor['contract_id']; ?>">機器割当</a>
 					</td>
 				</tr>
 <?php

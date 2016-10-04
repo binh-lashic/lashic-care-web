@@ -22,7 +22,8 @@
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-3">名前</th>
-					<th class="col-sm-3">センサー機器</th>
+					<th class="col-sm-1">登録</th>
+					<th class="col-sm-2">センサー機器</th>
 					<th class="col-sm-1">流入元</th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
@@ -37,6 +38,7 @@ if(isset($admins)) {
 						<a href="/admin/user/?id=<?php echo $admin['id']; ?>"><?php echo $admin['name']; ?>
 						(<?php echo $admin['kana']; ?>)
 						</a></td>
+					<td><?php echo $admin['email_confirm'] == 0 ? "仮登録" : "本登録"; ?></td>
 					<td>
 <?php
 	foreach($admin['sensors'] as $sensor) {

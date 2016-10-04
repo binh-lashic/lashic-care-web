@@ -4,7 +4,14 @@ class Controller_Admin_Contract extends Controller_Admin
 
 	public function action_list()
 	{
-		$data['contracts'] = \Model_Contract::getSearch();
+        $params = array();
+        if(Input::param("status")) {
+            $data['status'] = Input::param("status");
+            $params['status'] = Input::param("status");
+        }
+		$data['contracts'] = \Model_Contract::getSearch($params);
+        $data['statuses'] = Contract_Status::get();
+        
         $this->template->title = '契約一覧';
         $this->template->content = View::forge('admin/contract/list', $data);
 	}
@@ -149,6 +156,71 @@ class Controller_Admin_Contract extends Controller_Admin
             }
 	        Response::redirect('/admin/contract/sensor?id='.$contract['id']);
     	}
+    }
+
+    public function action_delete_sensor() {
+        $contract = \Model_Contract::find(Input::param("contract_id"));
+
+        $sensor_names_data = Input::param("sensor_names");
+        $sensor_names = explode(PHP_EOL, $sensor_names_data);
+
+        if($contract['id'] && $sensor_names) {
+            foreach($sensor_names as $name) {
+                $name = trim($name);
+                //センサーを新規登録
+                $sensor = Model_Sensor::find("first" , array(
+                    'where' => array(
+                            array('name', $name),
+                        )
+                    ));
+                if(!$sensor) {
+                    $sensor = Model_Sensor::forge();
+                    $sensor->set(array('name' => $name));
+                    $sensor->save();
+                }
+
+                if($sensor->id > 0) {
+                    \Model_Contract_Sensor::saveContractSensor(array(
+                        'contract_id' => $contract['id'],
+                        'sensor_id' => $sensor->id,
+                    ));
+
+                    //見守られユーザを登録
+                    \Model_User_Client::saveUserClient(array(
+                        'user_id' => $contract['user_id'],
+                        'client_user_id' => $contract['client_user_id'],
+                    ));
+
+                    //管理者として登録
+                    \Model_User_Sensor::saveUserSensor(array(
+                        'user_id' => $contract['client_user_id'],
+                        'sensor_id' => $sensor->id,
+                        'admin' => 0,
+                    ));
+
+                    //管理者として登録
+                    \Model_User_Sensor::saveUserSensor(array(
+                        'user_id' => $contract['user_id'],
+                        'sensor_id' => $sensor->id,
+                        'admin' => 1,
+                    ));
+                }
+
+            }
+            Response::redirect('/admin/contract/sensor?id='.$contract['id']);
+        }
+    }
+
+    public function action_cancel()
+    {
+        $contract = \Model_Contract::find(Input::param("id"));
+        $contract->set(array(
+            'status' => Contract_Status::CANCEL,
+            'renew_date' => null,
+            'end_date' => date('Y-m-d', mktime(0, 0, 0, date('m') + 2, 0, date('Y'))),
+        ));
+        $contract->save();
+        Response::redirect('/admin/contract/list');
     }
 }
 ?>
