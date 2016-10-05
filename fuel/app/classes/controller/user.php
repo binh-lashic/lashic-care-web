@@ -30,7 +30,13 @@ class Controller_User extends Controller_Base
 	    	'clients' => $this->clients,
 	    );
 
-	    $client_id = Session::get("client_id");
+        if(Input::param("set_client_id")) {
+        	$client_id = Input::param("set_client_id");
+			Session::set("client_id", $client_id);
+        } else {
+        	$client_id = Session::get("client_id");	
+        }
+
 	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    } else {

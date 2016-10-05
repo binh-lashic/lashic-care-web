@@ -15,7 +15,7 @@ if(!empty($clients)) {
 ?>
 					<tr>
 						<th colspan="2" class="center large"><?php echo $_client['last_name'].$_client['first_name']; ?>（<?php echo $_client['last_kana'].$_client['first_kana']; ?>）さん
-							<div class="usrMn_btn_edit"><a href="/user/set_client?id=<?php echo $_client['id']; ?>" class="btn_text">ユーザー情報を編集する</a></div>
+							<div class="usrMn_btn_edit"><a href="/user/info?set_client_id=<?php echo $_client['id']; ?>" class="btn_text">ユーザー情報を編集する</a></div>
 						</th>
 					</tr>
 					<tr>
