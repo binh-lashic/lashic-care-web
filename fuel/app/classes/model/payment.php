@@ -25,6 +25,7 @@ class Model_Payment extends Orm\Model{
     );
 
     public function getSearch() {
+      /*
         $sql = "SELECT pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name, c.affiliate, count(shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM payments pay ".
                " LEFT JOIN contract_payments cp ON pay.id = cp.payment_id ".
@@ -34,25 +35,26 @@ class Model_Payment extends Orm\Model{
                " LEFT JOIN contract_sensors cs ON c.id = cs.contract_id ".
                " LEFT JOIN sensors s ON cs.sensor_id = s.id ".
                " GROUP BY pay.id,pay.title,pay.price,pay.shipping,u.last_name,u.first_name,c.affiliate".
-               " ORDER BY pay.id DESC;";/*
+               " ORDER BY pay.id DESC;";
+               */
         $sql = "SELECT pay.id,pay.price,u.last_name,u.first_name,c.affiliate, (
-SELECT title + ',' FROM plans p 
-LEFT JOIN contracts c ON c.plan_id = p.id
-LEFT JOIN contract_payments cp ON c.id = cp.contract_id
-WHERE cp.payment_id = pay.id
-FOR XML PATH ('')
-) AS title,
-count(shipping_date) AS shipping_count,
-count(s.id) AS sensor_count 
-FROM payments pay
-LEFT JOIN contract_payments cp ON cp.payment_id = pay.id
-LEFT JOIN contract_sensors cs ON cs.contract_id = cp.contract_id 
-LEFT JOIN sensors s ON cs.sensor_id = s.id 
-LEFT JOIN contracts c ON c.id = cp.contract_id
-LEFT JOIN users u ON c.user_id = u.id
-GROUP BY pay.id,pay.price,c.affiliate,u.last_name,u.first_name
-;";
-*/
+        SELECT title + ',' FROM plans p 
+        LEFT JOIN contracts c ON c.plan_id = p.id
+        LEFT JOIN contract_payments cp ON c.id = cp.contract_id
+        WHERE cp.payment_id = pay.id
+        FOR XML PATH ('')
+        ) AS title,
+        count(shipping_date) AS shipping_count,
+        count(s.id) AS sensor_count 
+        FROM payments pay
+        LEFT JOIN contract_payments cp ON cp.payment_id = pay.id
+        LEFT JOIN contract_sensors cs ON cs.contract_id = cp.contract_id 
+        LEFT JOIN sensors s ON cs.sensor_id = s.id 
+        LEFT JOIN contracts c ON c.id = cp.contract_id
+        LEFT JOIN users u ON c.user_id = u.id
+        WHERE pay.price > 0
+        GROUP BY pay.id,pay.price,c.affiliate,u.last_name,u.first_name
+        ;";
         $query = DB::query($sql);
         $results = $query->execute();
         return $results;

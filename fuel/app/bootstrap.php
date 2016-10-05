@@ -15,14 +15,13 @@ require COREPATH.'bootstrap.php';
  */
 
 \Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : \Fuel::PRODUCTION);
-if (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) {
+//if (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) {
 	\Autoloader::add_classes(array(
 	    'Database_Query_Builder' => APPPATH.'classes/database/query/builder.php',
 	    'Database_Query_Builder_Select' => APPPATH.'classes/database/query/builder/select.php',
 	    'Database_Query_Builder_Delete' => APPPATH.'classes/database/query/builder/delete.php',
 	    'Database_Connection' => APPPATH.'classes/database/connection.php',
 	));
-}
-
+//}
 // Initialize the framework with the config file.
 \Fuel::init('config.php');

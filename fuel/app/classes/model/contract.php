@@ -65,6 +65,7 @@ class Model_Contract extends Orm\Model{
     }
 
     public function getSearch($params) {
+    /*
         $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.end_date,c.status,u.last_name,u.first_name,p.title,c.affiliate,p.type,count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM contracts c ".
                " LEFT JOIN users u ON c.user_id = u.id ".
@@ -75,8 +76,14 @@ class Model_Contract extends Orm\Model{
         if(!empty($params['status'])) {
             $sql .= " AND status = '".$params['status']."'";
         }
-        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,u.last_name,u.first_name,p.title,p.type,c.affiliate ".
+        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,u.last_name,u.first_name,p.title,p.type,c.affiliate,u.last_name,u.first_name ".
                " ORDER BY c.id DESC;";
+    */
+        $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.affiliate,u.last_name,u.first_name ".
+               " FROM contracts c ".
+               " LEFT JOIN users u ON c.user_id = u.id ";
+        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,c.affiliate,u.last_name,u.first_name";
+        $sql .=        " ORDER BY c.id DESC;";
 
         $query = DB::query($sql);
         $_results = $query->execute();

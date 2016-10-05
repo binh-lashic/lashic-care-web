@@ -25,7 +25,7 @@ if(isset($payments)) {
 ?>				<tr>
 					<td><?php echo $payment['id']; ?></td>
 					<td><a href="/admin/payment/?id=<?php echo $payment['id']; ?>"><?php echo $payment['last_name']; ?><?php echo $payment['first_name']; ?></a></td>
-					<td><?php echo $payment['plan_title']; ?></td>
+					<td><?php echo substr($payment['title'], 0, -1); ?></td>
 					<td class="text-right"><?php echo number_format($payment['price']); ?>円</td>
 					<td class="text-right"><?php echo number_format($payment['shipping']); ?>円</td>
 					<td><?php echo $payment['shipping_count']; ?></td>
