@@ -127,11 +127,13 @@ class Controller_User extends Controller_Base
         	$contracts[$contract['client_user_id']][] = $contract;
         }
         foreach($this->data['clients'] as $key => $client) {
-        	$this->data['clients'][$key] = $client->to_array();
-        	if(empty($contracts[$client['id']])) {
-        		$this->data['clients'][$key]['contracts'] = array();
-        	} else {
-        		$this->data['clients'][$key]['contracts'] = $contracts[$client['id']];
+        	if(isset($client)) {
+	        	$this->data['clients'][$key] = $client->to_array();
+	        	if(empty($contracts[$client['id']])) {
+	        		$this->data['clients'][$key]['contracts'] = array();
+	        	} else {
+	        		$this->data['clients'][$key]['contracts'] = $contracts[$client['id']];
+	        	}        		
         	}
         }
         
