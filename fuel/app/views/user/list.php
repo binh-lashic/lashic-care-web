@@ -11,18 +11,25 @@ if(!empty($clients)) {
 				<tbody>
 <?php
 
-	foreach($clients as $_client) {
+	foreach($clients as $client) {
 ?>
 					<tr>
-						<th colspan="2" class="center large"><?php echo $_client['last_name'].$_client['first_name']; ?>（<?php echo $_client['last_kana'].$_client['first_kana']; ?>）さん
-							<div class="usrMn_btn_edit"><a href="/user/info?set_client_id=<?php echo $_client['id']; ?>" class="btn_text">ユーザー情報を編集する</a></div>
+						<th colspan="2" class="center large"><?php echo $client['last_name'].$client['first_name']; ?>（<?php echo $client['last_kana'].$client['first_kana']; ?>）さん
+							<div class="usrMn_btn_edit"><a href="/user/info?set_client_id=<?php echo $client['id']; ?>" class="btn_text">ユーザー情報を編集する</a></div>
 						</th>
 					</tr>
-					<tr>
-						<td><p><strong>見守り契約</strong> 12ヶ月パック　無料期間</p></td>
-						<td width="198"><a href="detail.html" class="btn_darkBlue">契約詳細確認</a></td>
-					</tr>
 <?php
+		if(!empty($client['contracts'])) {
+			foreach($client['contracts'] as $contract) {
+?>
+					<tr>
+						<td><p><?php echo $contract['title']; ?></p></td>
+						<td width="198"><a href="/user/contract?id=<?php echo $contract['id']; ?>" class="btn_darkBlue">契約詳細確認</a></td>
+					</tr>
+
+<?php
+			}
+		}
 	} //foreach
 ?>
 				</tbody>

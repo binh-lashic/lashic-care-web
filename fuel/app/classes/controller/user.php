@@ -71,6 +71,9 @@ class Controller_User extends Controller_Base
 				$this->data['header_alert_count'] = \Model_Alert::getAlertCount($params);
 			}
 		}
+
+		$this->data['genders'] = Config::get("gender");
+		$this->data['tax_rate'] = Config::get("tax_rate");
 	}
 
 	public function action_index()
@@ -115,6 +118,23 @@ class Controller_User extends Controller_Base
 	public function action_list()
 	{
         $this->template->title = 'マイページ';
+        $results = \Model_Contract::getClients(array("user_id" => $this->user->id));
+        $contracts = array();
+        foreach($results as $contract) {
+        	if(empty($contracts[$contract['client_user_id']])) {
+        		$contracts[$contract['client_user_id']] = array();
+        	}
+        	$contracts[$contract['client_user_id']][] = $contract;
+        }
+        foreach($this->data['clients'] as $key => $client) {
+        	$this->data['clients'][$key] = $client->to_array();
+        	if(empty($contracts[$client['id']])) {
+        		$this->data['clients'][$key]['contracts'] = array();
+        	} else {
+        		$this->data['clients'][$key]['contracts'] = $contracts[$client['id']];
+        	}
+        }
+        
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/list', $this->data);
 	}
@@ -547,5 +567,23 @@ class Controller_User extends Controller_Base
         ));
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/payment', $this->data);
+	}
+
+	public function action_contract()
+	{
+        $data = array();
+        $this->template->title = '契約詳細確認ページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
+
+	    $this->data['contract'] = \Model_Contract::find(Input::param("id"), array('related' => array(
+	    	'plan' => array(
+	    		'related' => array('options')
+	    	)
+	    )));
+        $this->data['contract'] = $this->data['contract']->to_array();
+        $this->data['contract_user'] = \Model_User::find($this->data['contract']['client_user_id']);
+
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/contract', $this->data);
 	}
 }
