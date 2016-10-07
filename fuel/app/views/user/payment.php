@@ -9,12 +9,24 @@
 				<!-- お知らせ -->
 					<table class="tableGray">
 						<tbody>
+<?php
+if(!empty($payments)) {
+?>
 							<tr>
 								<th class="center">パック名</th>
 								<th class="center">ご請求額</th>
 								<th class="center">入金状況</th>
 							</tr>
 <?php
+} else {
+?>
+							<tr>
+								<td>
+									<p class="center">履歴はありません</p>
+								</td>
+							<tr>
+<?php
+}
 foreach($payments as $payment) {
 ?>
 							<tr>
