@@ -41,14 +41,6 @@ class Model_Contract extends Orm\Model{
         )
     );
 
-    public function get($params) {
-        \Model_Contract::find("first", $params['id']);
-
-        $query = DB::query($sql);
-        $results = $query->execute();
-        return $results;
-    }
-
     public function getSearch($params) {
         $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,u.last_name,u.first_name,p.title,c.affiliate,p.type,count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM contracts c ".
