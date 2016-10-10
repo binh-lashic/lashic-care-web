@@ -23,5 +23,6 @@ require COREPATH.'bootstrap.php';
 	    'Database_Connection' => APPPATH.'classes/database/connection.php',
 	));
 //}
+
 // Initialize the framework with the config file.
 \Fuel::init('config.php');

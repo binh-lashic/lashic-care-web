@@ -15,6 +15,7 @@ class Controller_User extends Controller_Base
 			list(, $user_id) = Auth::get_user_id();
 			$this->user = \Model_User::getUser($user_id);
 			if($this->user['master'] == 1) {
+            	Session::set('master', 1);
 				$clients = \Model_User::getClients();
 			} else {
 				$clients = \Model_User::getClients($user_id);
@@ -30,7 +31,13 @@ class Controller_User extends Controller_Base
 	    	'clients' => $this->clients,
 	    );
 
-	    $client_id = Session::get("client_id");
+        if(Input::param("set_client_id")) {
+        	$client_id = Input::param("set_client_id");
+			Session::set("client_id", $client_id);
+        } else {
+        	$client_id = Session::get("client_id");	
+        }
+
 	    if(empty($client_id ) && isset($this->clients[0])) {
 	    	$client = $this->clients[0];
 	    } else {
@@ -65,6 +72,9 @@ class Controller_User extends Controller_Base
 				$this->data['header_alert_count'] = \Model_Alert::getAlertCount($params);
 			}
 		}
+
+		$this->data['genders'] = Config::get("gender");
+		$this->data['tax_rate'] = Config::get("tax_rate");
 	}
 
 	public function action_index()
@@ -109,6 +119,25 @@ class Controller_User extends Controller_Base
 	public function action_list()
 	{
         $this->template->title = 'マイページ';
+        $results = \Model_Contract::getClients(array("user_id" => $this->user->id));
+        $contracts = array();
+        foreach($results as $contract) {
+        	if(empty($contracts[$contract['client_user_id']])) {
+        		$contracts[$contract['client_user_id']] = array();
+        	}
+        	$contracts[$contract['client_user_id']][] = $contract;
+        }
+        foreach($this->data['clients'] as $key => $client) {
+        	if(is_object($client)) {
+	        	$this->data['clients'][$key] = $client->to_array();
+	        	if(empty($contracts[$client['id']])) {
+	        		$this->data['clients'][$key]['contracts'] = array();
+	        	} else {
+	        		$this->data['clients'][$key]['contracts'] = $contracts[$client['id']];
+	        	}        		
+        	}
+        }
+        
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/list', $this->data);
 	}
@@ -541,5 +570,23 @@ class Controller_User extends Controller_Base
         ));
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/payment', $this->data);
+	}
+
+	public function action_contract()
+	{
+        $data = array();
+        $this->template->title = '契約詳細確認ページ';
+        $this->data['breadcrumbs'] = array($this->template->title);
+
+	    $this->data['contract'] = \Model_Contract::find(Input::param("id"), array('related' => array(
+	    	'plan' => array(
+	    		'related' => array('options')
+	    	)
+	    )));
+        $this->data['contract'] = $this->data['contract']->to_array();
+        $this->data['contract_user'] = \Model_User::find($this->data['contract']['client_user_id']);
+
+        $this->template->header = View::forge('header', $this->data);
+        $this->template->content = View::forge('user/contract', $this->data);
 	}
 }
