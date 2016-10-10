@@ -529,6 +529,9 @@ class Controller_Api_Data extends Controller_Api
 			if($wake_up_time_count > 0) {
 				$minutes = $wake_up_time_total / $wake_up_time_count;
 				$hour = (int)($minutes / 60);
+				if($hour >= 24) {
+					$hour = $hour - 24;
+				}
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
 				$params['wake_up_time_average'] = $hour.":".$minutes.":00";				
 			}
@@ -536,6 +539,9 @@ class Controller_Api_Data extends Controller_Api
 			if($sleep_time_count > 0) {
 				$minutes = $sleep_time_total / $sleep_time_count;
 				$hour = (int)($minutes / 60);
+				if($hour >= 24) {
+					$hour = $hour - 24;
+				}
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
 				$params['sleep_time_average'] = $hour.":".$minutes.":00";
 			}
