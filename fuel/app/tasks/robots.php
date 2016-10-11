@@ -143,7 +143,7 @@ class Robots
 				\Log::info($sensor->id."<>".$sensor->name, 'save analyze');
 			}
 		} 
-		return $this->result();	
+		return;
 	}
 
 }
