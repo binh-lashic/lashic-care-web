@@ -29,6 +29,7 @@ class Robots
 
 
 	public function alert() {
+		echo "start:",date("Y-m-d H:i:s"),"\n";
 		$time = strtotime(date("Y-m-d H:i:00"));
 		//開通確認
 		$sensors = \Model_Sensor::find("all", array(
@@ -72,15 +73,16 @@ class Robots
 					'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
 					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
 					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
-																					//通信復帰通知
             	);
+				echo $sensor->id."<>".$sensor->name."\n";
 			} catch (Exception $e) {
 				\Log::info($e->getMessage(), 'alert error');
 			}
         }
+		echo "end:",date("Y-m-d H:i:s"),"\n";
         return ; 
     }
-    
+
 	public static function analyze($date = null)
 	{
 		if($date) {
