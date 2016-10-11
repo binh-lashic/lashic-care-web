@@ -105,7 +105,7 @@ class Robots
 			}
 
     		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date';
-	    	$query = DB::query($sql);
+	    	$query = \DB::query($sql);
 			$query->parameters(array(
 				'sensor_id' => $sensor->name,
 				'start_date' => $start_date,
