@@ -580,7 +580,9 @@ class Controller_Api_Data extends Controller_Api
 					$data_daily =  \Model_Data_Daily::forge();
 				}
 				$data_daily->set($params);
-				$data_daily->save();	
+				$data_daily->save();
+
+				Log::info($sensor->id."<>".$sensor->name, 'save analyze');
 			}
 		} 
 		return $this->result();	
