@@ -610,8 +610,6 @@ class Model_Sensor extends Orm\Model{
 						);
 						$daily_data->set($params);
 						$daily_data->save();
-						echo "</tr>";
-						echo "</table>";
 						return true;
 					}
 					$nonactive_count = 0;
