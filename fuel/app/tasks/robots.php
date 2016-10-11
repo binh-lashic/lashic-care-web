@@ -140,7 +140,7 @@ class Robots
 				$data_daily->set($params);
 				$data_daily->save();
 
-				Log::info($sensor->id."<>".$sensor->name, 'save analyze');
+				\Log::info($sensor->id."<>".$sensor->name, 'save analyze');
 			}
 		} 
 		return $this->result();	
