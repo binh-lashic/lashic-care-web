@@ -141,7 +141,7 @@ class Robots
 				$data_daily->save();
 
 				\Log::info($sensor->id."<>".$sensor->name, 'save analyze');
-				echo $sensor->id."<>".$sensor->name."¥n";
+				echo $sensor->id."<>".$sensor->name."\n";
 			}
 		} 
 		return;
