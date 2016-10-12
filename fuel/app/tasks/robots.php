@@ -39,14 +39,16 @@ class Robots
 			)
 		));
 		foreach($sensors as $sensor) {
-			$result = DB::select("*")
-					    ->from('data')
-					    ->where('sensor_id', $sensor->name)
-					    ->where('date', date("Y-m-d H:i:00", $time - 60))
-					    ->execute('data');
-			if(isset($result)) {
-				$sensor->set(array('enable' => 1));
-				$sensor->save();
+			if($sensor->enable == 0) {
+				$result = DB::select("*")
+						    ->from('data')
+						    ->where('sensor_id', $sensor->name)
+						    ->where('date', date("Y-m-d H:i:00", $time - 60))
+						    ->execute('data');
+				if(isset($result)) {
+					$sensor->set(array('enable' => 1));
+					$sensor->save();
+				}
 			}
 		}
 
@@ -71,7 +73,6 @@ class Robots
 					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
 					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
-					'sleep' => $sensor->checkSleep(),								//就寝時間 //平均睡眠時間遅延
 					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
 					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
             	);
@@ -102,6 +103,9 @@ class Robots
 		));
 
 		foreach($sensors as $sensor) {
+			//睡眠時間を取得
+			$sensor->checkSleep();
+
 			$params = array(
 				'sensor_id' => $sensor->id,
 				'date' => $date,
@@ -121,7 +125,6 @@ class Robots
 				if(!empty($row['wake_up_time'])) {
 					$wake_up_time_count++;
 					$wake_up_time_total += (strtotime($row['wake_up_time']) - (strtotime($row['date']))) / 60;
-					//$wake_up_time_total += date("h", strtotime($row['wake_up_time'])) * 60 + date("i", strtotime($row['wake_up_time']));
 				}
 				if(!empty($row['sleep_time'])) {
 					$sleep_time_count++;

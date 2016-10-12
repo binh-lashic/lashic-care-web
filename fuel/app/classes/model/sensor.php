@@ -2,6 +2,7 @@
 class Model_Sensor extends Orm\Model{
 	private $time;
 	private $data;
+	private $count;
 
 	public function setTime($_time) {
 		$this->time = $_time;
@@ -15,6 +16,7 @@ class Model_Sensor extends Orm\Model{
 			'date' => date("Y-m-d H:i:s", $this->time - 60 * 60)		//60分で固定
 		));
 		$this->data= $query->execute('data');
+		$this->count = count($this->data);
 	}
 
 	protected static $_properties = array(
@@ -194,11 +196,10 @@ class Model_Sensor extends Orm\Model{
     		$levels = Config::get("sensor_levels.temperature");
     		$level = $levels[$this->temperature_level - 1];
 
-			$count = count($this->data);
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
 
-			if($count) {
+			if($this->count) {
 				foreach($this->data as $row) {
 					if($level['upper_limit'] < $row['temperature']) {
 						$temperature_upper_limit_count++;
@@ -207,7 +208,7 @@ class Model_Sensor extends Orm\Model{
 					}
 				}
 
-				if($temperature_upper_limit_count == $count) {
+				if($temperature_upper_limit_count == $this->count) {
 					$params = array(
 						'type' => 'temperature',
 						'logs' => array(
@@ -215,7 +216,7 @@ class Model_Sensor extends Orm\Model{
 						),
 					);
 					return $this->alert($params);			
-				} else if($temperature_lower_limit_count == $count) {
+				} else if($temperature_lower_limit_count == $this->count) {
 					$params = array(
 						'type' => 'temperature',
 						'logs' => array(
@@ -235,11 +236,10 @@ class Model_Sensor extends Orm\Model{
     		$levels = Config::get("sensor_levels.humidity");
 	    	$level = $levels[$this->humidity_level - 1];
 
-			$count = count($this->data);
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
 
-			if($count) {
+			if($this->count) {
 				foreach($this->data as $row) {
 					if($level['upper_limit'] < $row['humidity']) {
 						$humidity_upper_limit_count++;
@@ -248,7 +248,7 @@ class Model_Sensor extends Orm\Model{
 					}
 				}
 
-				if($humidity_upper_limit_count == $count) {
+				if($humidity_upper_limit_count == $this->count) {
 					$params = array(
 						'type' => 'humidity',
 						'logs' => array(
@@ -256,7 +256,7 @@ class Model_Sensor extends Orm\Model{
 						),
 					);
 					return $this->alert($params);			
-				} else if($humidity_upper_limit_count == $count) {
+				} else if($humidity_upper_limit_count == $this->count) {
 					$params = array(
 						'type' => 'humidity',
 						'logs' => array(
@@ -726,9 +726,7 @@ class Model_Sensor extends Orm\Model{
 	    		$levels = Config::get("sensor_levels.abnormal_behavior_level");
 			 	$level = $levels[$this->abnormal_behavior_level- 1];
 
-				$count = count($this->data);
-
-				if($count) {
+				if($this->count) {
 					$active_count = 0;
 					foreach($this->data as $row) {
 						if($level['active_threshold'] < $row['active'] && $level['illuminance_threshold'] < $row['illuminance'] ) {
@@ -756,9 +754,7 @@ class Model_Sensor extends Orm\Model{
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level - 1];
 
-			$count = count($this->data);
-
-			if($count) {
+			if($this->count) {
 				$nonactive_count = 0;
 				foreach($this->data as $row) {
 					if($level['threshold'] > $row['active']) {
