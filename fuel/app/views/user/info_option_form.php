@@ -60,6 +60,7 @@
 				<!-- /緊急連絡先の設定 --> 
 
 				<!-- 連絡共有先の設定 -->
+				<a name="share"></a>
 				<h2 class="form_title">連絡共有先の設定</h2>
 				<div class="form_set_container">
 					<div class="clearfix">

@@ -61,7 +61,7 @@ if(!empty($client['emergency_name_2'])) {
 ?>
 				<!-- 連絡共有 -->
 				<div class="aside_share">
-					<h3><img src="/images/common/user_icon_share.png" width="32" alt=""/> 連絡共有</h3>
+					<h3><img src="/images/common/user_icon_share.png" width="32" alt=""/> <div class="aside_btn_edit"><a href="/user/info_option_form#share" class="btn_text">編集</a></div></h3>
 					<div class="aside_shareInner">
 						<ul class="scroll_area">
 <?php
