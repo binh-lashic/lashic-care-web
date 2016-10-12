@@ -58,15 +58,16 @@ class Robots
 		foreach($sensors as $sensor) {
 			$sensor->users;
 			$sensor->setTime($time);
+			$sensor->loadData();
 			try {
 				$this->result['data'][] = array(
 					'sensor_id' => $sensor->id,
-					'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
 					'fire' => $sensor->checkFire(),									//火事アラート
 					'temperature' => $sensor->checkTemperature(),					//室温異常通知
 					'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
 					'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
 					'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
+					'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
 					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
 					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
