@@ -191,7 +191,8 @@ class Robots
 				} else {
 					echo $sensor->id."<>".$sensor->name."<>error\n";
 				}
-
+				echo print_r($params, true);
+				echo "¥n";
 			}
 		} 
 		return;
