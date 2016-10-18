@@ -186,10 +186,12 @@ class Robots
 					$data_daily =  \Model_Data_Daily::forge();
 				}
 				$data_daily->set($params);
-				$data_daily->save();
+				if($data_daily->save()) {
+					echo $sensor->id."<>".$sensor->name."<>success\n";
+				} else {
+					echo $sensor->id."<>".$sensor->name."<>error\n";
+				}
 
-				\Log::info($sensor->id."<>".$sensor->name, 'save analyze');
-				echo $sensor->id."<>".$sensor->name."\n";
 			}
 		} 
 		return;
