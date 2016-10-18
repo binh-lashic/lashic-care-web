@@ -78,7 +78,7 @@ class Robots
 					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
             	);
 				echo $sensor->id."<>".$sensor->name."\n";
-			} catch (Exception $e) {
+			} catch (PhpErrorException $e) {
 				\Log::info($e->getMessage(), 'alert error');
 			}
         }
