@@ -23,6 +23,7 @@ namespace Fuel\Tasks;
  * @version		1.0
  * @author		Phil Sturgeon
  */
+date_default_timezone_set('Asia/Tokyo');
 
 class Robots
 {
