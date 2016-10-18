@@ -192,7 +192,8 @@ class Robots
 					echo $sensor->id."<>".$sensor->name."<>error\n";
 				}
 				echo print_r($params, true);
-				echo "¥n";
+				echo \DB::last_query();
+				echo "\n";
 			}
 		} 
 		return;
