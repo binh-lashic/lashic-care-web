@@ -79,6 +79,7 @@ class Robots
             	);
 				echo $sensor->id."<>".$sensor->name."\n";
 			} catch (PhpErrorException $e) {
+				echo $e->getMessage()."\n";
 				\Log::info($e->getMessage(), 'alert error');
 			}
         }
