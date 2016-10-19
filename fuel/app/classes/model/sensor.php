@@ -436,7 +436,7 @@ class Model_Sensor extends Orm\Model{
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
 			$count = 0;
-			if(count($this->data)) {
+			if(count($this->data) && isset($level['lower_limit'])) {
 				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
