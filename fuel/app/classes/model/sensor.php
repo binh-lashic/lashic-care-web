@@ -770,7 +770,7 @@ class Model_Sensor extends Orm\Model{
 	//一定時間人感センサー未感知
 	public function checkActiveNonDetection() {
 		if($this->active_non_detection_level > 0) {
-			cho "Check Active Non Detection\n";
+			echo "Check Active Non Detection\n";
 
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level - 1];
