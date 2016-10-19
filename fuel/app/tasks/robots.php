@@ -73,8 +73,6 @@ class Robots
 					'disconnection' => $sensor->checkDisconnection(),				//通信断アラート
 					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
-					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
-					'sleep' => $sensor->checkSleep(),
 					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
 					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
             	);
@@ -88,7 +86,22 @@ class Robots
         return ; 
     }
 
-	public static function analyze($date = null)
+	public function analyze_minutes() {
+
+		$sensors = \Model_Sensor::find("all", array(
+			'where' => array(
+				'enable' => 1,
+			)
+		));
+
+		foreach($sensors as $sensor) {
+			$sensor->setTime($time);
+			$sensor->checkWakeUp();
+			$sensor->checkSleep();
+		}
+	}
+
+	public static function analyze_daily($date = null)
 	{
 		if($date) {
 			$time = strtotime($date);
