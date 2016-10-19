@@ -225,7 +225,7 @@ class Model_Sensor extends Orm\Model{
 						$params = array(
 							'type' => 'temperature',
 							'logs' => array(
-								'temperature_lower_limit' => $level['lower_limit']
+//								'temperature_lower_limit' => $level['lower_limit']
 							),
 						);
 						return $this->alert($params);	
@@ -273,7 +273,7 @@ class Model_Sensor extends Orm\Model{
 						$params = array(
 							'type' => 'humidity',
 							'logs' => array(
-								'humidity_lower_limit' => $level['lower_limit'],
+//								'humidity_lower_limit' => $level['lower_limit'],
 							),
 						);
 						return $this->alert($params);	
@@ -439,7 +439,7 @@ class Model_Sensor extends Orm\Model{
 							'illuminance_daytime_start_time' => $level['start_time'],
 							'illuminance_daytime_end_time' => $level['end_time'],
 							'hour' => $hour,
-							'illuminance_daytime_lower_limit' => $level['lower_limit,']
+//							'illuminance_daytime_lower_limit' => $level['lower_limit,']
 						),
 					);
 					return $this->alert($params);			
@@ -484,7 +484,7 @@ class Model_Sensor extends Orm\Model{
 							'illuminance_night_start_time' => $level['start_time'],
 							'illuminance_night_end_time' => $level['end_time'],
 							'hour' => $hour,
-							'illuminance_night_lower_limit' => $level['lower_limit'],
+//							'illuminance_night_lower_limit' => $level['lower_limit'],
 						),
 					);
 					return $this->alert($params);			
