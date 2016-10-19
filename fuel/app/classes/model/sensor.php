@@ -203,32 +203,37 @@ class Model_Sensor extends Orm\Model{
 			$temperature_lower_limit_count = 0;
 
 			if($this->count && isset($level)) {
-				foreach($this->data as $row) {
+				try {
+					foreach($this->data as $row) {
+							if($level['upper_limit'] < $row['temperature']) {
+								$temperature_upper_limit_count++;
+							} else if($level['lower_limit'] > $row['temperature']) {
+								$temperature_lower_limit_count++;
+							}
 
-					if($level['upper_limit'] < $row['temperature']) {
-						$temperature_upper_limit_count++;
-					} else if($level['lower_limit'] > $row['temperature']) {
-						$temperature_lower_limit_count++;
 					}
-				}
 
-				if($temperature_upper_limit_count == $this->count) {
-					$params = array(
-						'type' => 'temperature',
-						'logs' => array(
-							'temperature_upper_limit' => $level['upper_limit']
-						),
-					);
-					return $this->alert($params);			
-				} else if($temperature_lower_limit_count == $this->count) {
-					$params = array(
-						'type' => 'temperature',
-						'logs' => array(
-							'temperature_lower_limit' => $level['lower_limit']
-						),
-					);
-					return $this->alert($params);	
-				}			
+					if($temperature_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'temperature',
+							'logs' => array(
+								'temperature_upper_limit' => $level['upper_limit']
+							),
+						);
+						return $this->alert($params);			
+					} else if($temperature_lower_limit_count == $this->count) {
+						$params = array(
+							'type' => 'temperature',
+							'logs' => array(
+								'temperature_lower_limit' => $level['lower_limit']
+							),
+						);
+						return $this->alert($params);	
+					}
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+				}
+	
 			}
     	}
 		return false;
@@ -246,31 +251,36 @@ class Model_Sensor extends Orm\Model{
 			$humidity_lower_limit_count = 0;
 
 			if($this->count && isset($level)) {
-				foreach($this->data as $row) {
-					if($level['upper_limit'] < $row['humidity']) {
-						$humidity_upper_limit_count++;
-					} else if($level['lower_limit'] > $row['humidity']) {
-						$humidity_lower_limit_count++;
-					}
-				}
+				try {
+					foreach($this->data as $row) {
 
-				if($humidity_upper_limit_count == $this->count) {
-					$params = array(
-						'type' => 'humidity',
-						'logs' => array(
-							'humidity_upper_limit' => $level['upper_limit']
-						),
-					);
-					return $this->alert($params);			
-				} else if($humidity_upper_limit_count == $this->count) {
-					$params = array(
-						'type' => 'humidity',
-						'logs' => array(
-							'humidity_lower_limit' => $level['lower_limit'],
-						),
-					);
-					return $this->alert($params);	
-				}			
+						if($level['upper_limit'] < $row['humidity']) {
+							$humidity_upper_limit_count++;
+						} else if($level['lower_limit'] > $row['humidity']) {
+							$humidity_lower_limit_count++;
+						}
+					}
+
+					if($humidity_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'humidity',
+							'logs' => array(
+								'humidity_upper_limit' => $level['upper_limit']
+							),
+						);
+						return $this->alert($params);			
+					} else if($humidity_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'humidity',
+							'logs' => array(
+								'humidity_lower_limit' => $level['lower_limit'],
+							),
+						);
+						return $this->alert($params);	
+					}
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+				}	
 			}    		
     	}
 		return false;
@@ -287,21 +297,25 @@ class Model_Sensor extends Orm\Model{
 
 			$count = count($this->data);
 			if($count && isset($level)) {
-				foreach($this->data as $row) {
-					$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
-					//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
-					if($level['wbgt_upper_limit'] < $wbgt) {
-						$count--;
+				try {
+					foreach($this->data as $row) {
+						$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
+						//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
+						if($level['wbgt_upper_limit'] < $wbgt) {
+							$count--;
+						}
 					}
-				}
-				if($count == 0) {
-					$params = array(
-						'type' => 'heatstroke',
-						'logs' => array(
-							'heatstroke_wbgt_upper_limit' => $level['wbgt_upper_limit'],
-						),
-					);
-					return $this->alert($params);			
+					if($count == 0) {
+						$params = array(
+							'type' => 'heatstroke',
+							'logs' => array(
+								'heatstroke_wbgt_upper_limit' => $level['wbgt_upper_limit'],
+							),
+						);
+						return $this->alert($params);			
+					}	
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
 				}	
 			}
 		}
@@ -318,20 +332,24 @@ class Model_Sensor extends Orm\Model{
 
 			$count = count($this->data);
 			if($count && isset($level)) {
-				foreach($this->data as $row) {
-					if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
-						$count--;
+				try {
+					foreach($this->data as $row) {
+						if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
+							$count--;
+						}
 					}
-				}
-				if($count == 0) {
-					$params = array(
-						'type' => 'mold_mites',
-						'logs' => array(
-							'mold_mites_humidity_upper_limit' => $level['humidity_upper_limit'],
-							'mold_mites_temperature_upper_limit' => $level['temperature_upper_limit'],
-						),
-					);
-					return $this->alert($params);			
+					if($count == 0) {
+						$params = array(
+							'type' => 'mold_mites',
+							'logs' => array(
+								'mold_mites_humidity_upper_limit' => $level['humidity_upper_limit'],
+								'mold_mites_temperature_upper_limit' => $level['temperature_upper_limit'],
+							),
+						);
+						return $this->alert($params);			
+					}	
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
 				}	
 			}			
 		}
@@ -401,9 +419,14 @@ class Model_Sensor extends Orm\Model{
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
-						if($level['lower_limit'] < $row['illuminance']) {
-							$count--;
-						}					
+						try {
+							if($level['lower_limit'] < $row['illuminance']) {
+								$count--;
+							}		
+						} catch(Exception $e) {
+							echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+						}
+			
 					} else {
 						$count++;
 					}
@@ -441,10 +464,14 @@ class Model_Sensor extends Orm\Model{
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
-
-						if($level['lower_limit'] > $row['illuminance']) {
-							$count--;
-						}					
+						try {
+							if($level['lower_limit'] > $row['illuminance']) {
+								$count--;
+							}	
+						} catch(Exception $e) {
+							echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+						}
+				
 					} else {
 						$count++;
 					}
