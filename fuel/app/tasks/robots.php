@@ -87,6 +87,8 @@ class Robots
     }
 
 	public function analyze_minutes() {
+		echo "start:",date("Y-m-d H:i:s"),"\n";
+		$time = strtotime(date("Y-m-d H:i:00"));
 
 		$sensors = \Model_Sensor::find("all", array(
 			'where' => array(
