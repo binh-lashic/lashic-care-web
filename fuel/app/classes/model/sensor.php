@@ -200,8 +200,10 @@ class Model_Sensor extends Orm\Model{
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
 
+											print_r($level);
 			if($this->count) {
 				foreach($this->data as $row) {
+
 					if($level['upper_limit'] < $row['temperature']) {
 						$temperature_upper_limit_count++;
 					} else if($level['lower_limit'] > $row['temperature']) {
@@ -240,6 +242,7 @@ class Model_Sensor extends Orm\Model{
 
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
+						print_r($level);
 
 			if($this->count) {
 				foreach($this->data as $row) {
@@ -386,6 +389,7 @@ class Model_Sensor extends Orm\Model{
 	   		$levels = Config::get("sensor_levels.illuminance_daytime");
 	    	$level = $levels[$this->illuminance_daytime_level - 1];
 
+						print_r($level);
 			$count = 0;
 			if(count($this->data)) {
 				foreach($this->data as $row) {
@@ -424,12 +428,14 @@ class Model_Sensor extends Orm\Model{
     		$levels = Config::get("sensor_levels.illuminance_night");
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
+												print_r($level);
 			$count = 0;
 			if(count($this->data)) {
 				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
+
 						if($level['lower_limit'] > $row['illuminance']) {
 							$count--;
 						}					
