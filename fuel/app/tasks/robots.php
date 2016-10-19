@@ -74,6 +74,7 @@ class Robots
 					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）
 					'illuminance_night' => $sensor->checkIlluminanceNight(),		//室内照度異常（深夜）
 					'wake_up' => $sensor->checkWakeUp(),							//起床時間 //平均起床時間遅延
+					'sleep' => $sensor->checkSleep(),
 					'abnormal_behavior' => $sensor->checkAbnormalBehavior(),		//異常行動（夜間、照明をつけずに動いている）
 					'active_non_detection' => $sensor->checkActiveNonDetection(),	//一定時間人感センサー未感知
             	);
@@ -105,9 +106,6 @@ class Robots
 		));
 
 		foreach($sensors as $sensor) {
-			//睡眠時間を取得
-			$sensor->checkSleep();
-
 			$params = array(
 				'sensor_id' => $sensor->id,
 				'date' => $date,
