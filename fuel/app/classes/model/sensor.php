@@ -1,9 +1,22 @@
 <?php 
 class Model_Sensor extends Orm\Model{
 	private $time;
+	private $data;
+	private $count;
 
 	public function setTime($_time) {
 		$this->time = $_time;
+	}
+
+	public function loadData() {
+		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
+		$query = DB::query($sql);
+		$query->parameters(array(
+			'sensor_id' => $this->name,
+			'date' => date("Y-m-d H:i:s", $this->time - 60 * 60)		//60分で固定
+		));
+		$this->data= $query->execute('data');
+		$this->count = count($this->data);
 	}
 
 	protected static $_properties = array(
@@ -43,32 +56,6 @@ class Model_Sensor extends Orm\Model{
 	        'cascade_delete' => false,
 	    )
 	);
-
-	public static function createTable(){
-		try {
-		    DB::query("DROP TABLE sensors")->execute();
-		} catch(Exception $e) {
-
-		}
-		$sql = "CREATE TABLE sensors (
-  id INT NOT NULL IDENTITY (1, 1),
-  name NVARCHAR(50),
-  temperature_level INT DEFAULT 2,
-  fire_level INT DEFAULT 2,
-  heatstroke_level INT DEFAULT 2,
-  humidity_level INT DEFAULT 2,
-  mold_mites_level INT DEFAULT 2,
-  illuminance_daytime_level INT DEFAULT 2,
-  illuminance_night_level INT DEFAULT 2,
-  wake_up_level INT DEFAULT 2,
-  sleep_level INT DEFAULT 2,
-  abnormal_behavior_level INT DEFAULT 2,
-  active_non_detection_level INT DEFAULT 2,
-  active_night_level INT DEFAULT 2,
-  enable INT DEFAULT 1
-) ON [PRIMARY];";
-		return DB::query($sql)->execute();
-	}
 
 	public static function getSensor($id){
 		try {
@@ -220,51 +207,48 @@ class Model_Sensor extends Orm\Model{
 
     //室温異常通知
     public function checkTemperature() {
-    	if($this->temperature_level == 0) {
-    		return null;
-    	}
-    	$levels = Config::get("sensor_levels.temperature");
-    	$level = $levels[$this->temperature_level - 1];
-
     	if($this->temperature_level > 0) {
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
-			$count = count($result);
+   		  	echo "Check Temperature\n";
+   		  	echo "Temperature Level ".$this->temperature_level."\n";
+
+	   		$levels = Config::get("sensor_levels.temperature");
+    		$level = $levels[$this->temperature_level - 1];
+
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
 
-			if($count) {
-				foreach($result as $row) {
-					if($level['upper_limit'] < $row['temperature']) {
-						$temperature_upper_limit_count++;
-					} else if($level['lower_limit'] > $row['temperature']) {
-						$temperature_lower_limit_count++;
-					}
-				}
+			if($this->count && isset($level)) {
+				try {
+					foreach($this->data as $row) {
+							if($level['upper_limit'] < $row['temperature']) {
+								$temperature_upper_limit_count++;
+							} else if($level['lower_limit'] > $row['temperature']) {
+								$temperature_lower_limit_count++;
+							}
 
-				if($temperature_upper_limit_count == $count) {
-					$params = array(
-						'type' => 'temperature',
-						'logs' => array(
-							'temperature_upper_limit' => $level['upper_limit']
-						),
-					);
-					return $this->alert($params);			
-				} else if($temperature_lower_limit_count == $count) {
-					$params = array(
-						'type' => 'temperature',
-						'logs' => array(
-							'temperature_lower_limit' => $level['lower_limit']
-						),
-					);
-					return $this->alert($params);	
-				}			
+					}
+
+					if($temperature_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'temperature',
+							'logs' => array(
+								'temperature_upper_limit' => $level['upper_limit']
+							),
+						);
+						return $this->alert($params);			
+					} else if($temperature_lower_limit_count == $this->count) {
+						$params = array(
+							'type' => 'temperature',
+							'logs' => array(
+//								'temperature_lower_limit' => $level['lower_limit']
+							),
+						);
+						return $this->alert($params);	
+					}
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+				}
+	
 			}
     	}
 		return false;
@@ -273,47 +257,45 @@ class Model_Sensor extends Orm\Model{
     //湿度異常通知
     public function checkHumidity() {
     	if($this->humidity_level > 0) {
-    		$levels = Config::get("sensor_levels.humidity");
+	     	echo "Check Humidity\n";
+	     	echo "Level ".$this->humidity_level."\n";
+	   		$levels = Config::get("sensor_levels.humidity");
 	    	$level = $levels[$this->humidity_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
-			$count = count($result);
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
 
-			if($count) {
-				foreach($result as $row) {
-					if($level['upper_limit'] < $row['humidity']) {
-						$humidity_upper_limit_count++;
-					} else if($level['lower_limit'] > $row['humidity']) {
-						$humidity_lower_limit_count++;
-					}
-				}
+			if($this->count && isset($level)) {
+				try {
+					foreach($this->data as $row) {
 
-				if($humidity_upper_limit_count == $count) {
-					$params = array(
-						'type' => 'humidity',
-						'logs' => array(
-							'humidity_upper_limit' => $level['upper_limit']
-						),
-					);
-					return $this->alert($params);			
-				} else if($humidity_upper_limit_count == $count) {
-					$params = array(
-						'type' => 'humidity',
-						'logs' => array(
-							'humidity_lower_limit' => $level['lower_limit'],
-						),
-					);
-					return $this->alert($params);	
-				}			
+						if($level['upper_limit'] < $row['humidity']) {
+							$humidity_upper_limit_count++;
+						} else if($level['lower_limit'] > $row['humidity']) {
+							$humidity_lower_limit_count++;
+						}
+					}
+
+					if($humidity_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'humidity',
+							'logs' => array(
+								'humidity_upper_limit' => $level['upper_limit']
+							),
+						);
+						return $this->alert($params);			
+					} else if($humidity_upper_limit_count == $this->count) {
+						$params = array(
+							'type' => 'humidity',
+							'logs' => array(
+//								'humidity_lower_limit' => $level['lower_limit'],
+							),
+						);
+						return $this->alert($params);	
+					}
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+				}	
 			}    		
     	}
 		return false;
@@ -322,34 +304,33 @@ class Model_Sensor extends Orm\Model{
 	//熱中症チェック
 	public function checkHeatstroke() {
 		if($this->heatstroke_level > 0) {
+	     	echo "Check Heatstroke\n";
+	     	echo "Level ".$this->heatstroke_level."\n";
+
     		$levels = Config::get("sensor_levels.heatstroke");
 	    	$level = $levels[$this->heatstroke_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
-			$count = count($result);
-			if($count) {
-				foreach($result as $row) {
-					$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
-					//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
-					if($level['wbgt_upper_limit'] < $wbgt) {
-						$count--;
+			$count = count($this->data);
+			if($count && isset($level)) {
+				try {
+					foreach($this->data as $row) {
+						$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
+						//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
+						if($level['wbgt_upper_limit'] < $wbgt) {
+							$count--;
+						}
 					}
-				}
-				if($count == 0) {
-					$params = array(
-						'type' => 'heatstroke',
-						'logs' => array(
-							'heatstroke_wbgt_upper_limit' => $level['wbgt_upper_limit'],
-						),
-					);
-					return $this->alert($params);			
+					if($count == 0) {
+						$params = array(
+							'type' => 'heatstroke',
+							'logs' => array(
+								'heatstroke_wbgt_upper_limit' => $level['wbgt_upper_limit'],
+							),
+						);
+						return $this->alert($params);			
+					}	
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
 				}	
 			}
 		}
@@ -359,33 +340,31 @@ class Model_Sensor extends Orm\Model{
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
 		if($this->mold_mites_level > 0) {
+	     	echo "Check Mold Mites\n";
+
     		$levels = Config::get("sensor_levels.mold_mites");
 	    	$level = $levels[$this->mold_mites_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
-			$count = count($result);
-			if($count) {
-				foreach($result as $row) {
-					if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
-						$count--;
+			$count = count($this->data);
+			if($count && isset($level)) {
+				try {
+					foreach($this->data as $row) {
+						if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
+							$count--;
+						}
 					}
-				}
-				if($count == 0) {
-					$params = array(
-						'type' => 'mold_mites',
-						'logs' => array(
-							'mold_mites_humidity_upper_limit' => $level['humidity_upper_limit'],
-							'mold_mites_temperature_upper_limit' => $level['temperature_upper_limit'],
-						),
-					);
-					return $this->alert($params);			
+					if($count == 0) {
+						$params = array(
+							'type' => 'mold_mites',
+							'logs' => array(
+								'mold_mites_humidity_upper_limit' => $level['humidity_upper_limit'],
+								'mold_mites_temperature_upper_limit' => $level['temperature_upper_limit'],
+							),
+						);
+						return $this->alert($params);			
+					}	
+				} catch(Exception $e) {
+					echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
 				}	
 			}			
 		}
@@ -395,16 +374,11 @@ class Model_Sensor extends Orm\Model{
 
     //通信断のチェック
     public function checkDisconnection() {
+    	echo "Check Disconnection\n";
+
     	$this->disconnection_duration = Config::get("sensor_default_setting.disconnection_duration");
-    	
-     	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date >= :date';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->time - $this->disconnection_duration * 60)
-		));
-		$result = $query->execute('data');
-		if($result[0]['count'] == 0) {
+
+		if(count($this->data) == 0) {
 			$params = array(
 				'type' => 'disconnection',
 				'logs' => array(
@@ -418,6 +392,8 @@ class Model_Sensor extends Orm\Model{
 
     //再通信のチェック
     public function checkReconnection() {
+    	echo "Check Reconnection\n";
+
      	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date = :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
@@ -446,26 +422,26 @@ class Model_Sensor extends Orm\Model{
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
 		if($this->illuminance_daytime_level > 0) {
-    		$levels = Config::get("sensor_levels.illuminance_daytime");
+     		echo "Check Illuminance Daytime\n";
+     		echo "Illuminance Daytime Level ".$this->illuminance_daytime_level."\n";
+
+	   		$levels = Config::get("sensor_levels.illuminance_daytime");
 	    	$level = $levels[$this->illuminance_daytime_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
 			$count = 0;
-			if(count($result)) {
-				foreach($result as $row) {
+			if(count($this->data) && isset($level)) {
+				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
-						if($level['lower_limit'] < $row['illuminance']) {
-							$count--;
-						}					
+						try {
+							if($level['lower_limit'] < $row['illuminance']) {
+								$count--;
+							}		
+						} catch(Exception $e) {
+							echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+						}
+			
 					} else {
 						$count++;
 					}
@@ -478,7 +454,7 @@ class Model_Sensor extends Orm\Model{
 							'illuminance_daytime_start_time' => $level['start_time'],
 							'illuminance_daytime_end_time' => $level['end_time'],
 							'hour' => $hour,
-							'illuminance_daytime_lower_limit' => $level['lower_limit,']
+//							'illuminance_daytime_lower_limit' => $level['lower_limit,']
 						),
 					);
 					return $this->alert($params);			
@@ -491,26 +467,26 @@ class Model_Sensor extends Orm\Model{
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
 		if($this->illuminance_night_level > 0) {
+     		echo "Check Illuminance Night\n";
+     		echo "Illuminance Night Level ".$this->illuminance_night_level."\n";
+
     		$levels = Config::get("sensor_levels.illuminance_night");
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - $level['duration'] * 60)
-			));
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
 			$count = 0;
-			if(count($result)) {
-				foreach($result as $row) {
+			if(count($this->data) && isset($level)) {
+				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
 						$count++;
-						if($level['lower_limit'] > $row['illuminance']) {
-							$count--;
-						}					
+						try {
+							if($level['lower_limit'] > $row['illuminance']) {
+								$count--;
+							}	
+						} catch(Exception $e) {
+							echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+						}
+				
 					} else {
 						$count++;
 					}
@@ -523,7 +499,7 @@ class Model_Sensor extends Orm\Model{
 							'illuminance_night_start_time' => $level['start_time'],
 							'illuminance_night_end_time' => $level['end_time'],
 							'hour' => $hour,
-							'illuminance_night_lower_limit' => $level['lower_limit'],
+//							'illuminance_night_lower_limit' => $level['lower_limit'],
 						),
 					);
 					return $this->alert($params);			
@@ -538,6 +514,8 @@ class Model_Sensor extends Orm\Model{
     //火事のチェック
     public function checkFire() {
     	if($this->fire_level > 0) {
+    		echo "Check Fire\n";
+
     		$levels = Config::get("sensor_levels.fire");
 		   	$level = $levels[$this->fire_level - 1];
 
@@ -567,6 +545,8 @@ class Model_Sensor extends Orm\Model{
 		if($this->wake_up_level < 1) {
 			return null;
 		}
+		echo "Check Wakeup\n";
+
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
@@ -599,16 +579,13 @@ class Model_Sensor extends Orm\Model{
 		$active_count = 0;
 		$nonactive_count = 0;
 		$wake_up_time = null;
-//echo \DB::last_query("data");
+
 		if($count) {
-//echo "<table>";
+
 			foreach($result as $row) {
-//echo "<tr>";
-//echo "<td>".$row['date']."</td>";
-//echo "<td>".$level['threshold']."</td>";
-//echo "<td>".$row['active']."</td>";
+
 				if($level['threshold'] < $row['active']) {
-//echo "<td>◯</td>";
+
 					if(empty($wake_up_time)) {
 						$active_count = 0;
 						$wake_up_time = $row['date'];
@@ -629,7 +606,7 @@ class Model_Sensor extends Orm\Model{
 					}
 					$nonactive_count = 0;
 				} else {
-//echo "<td>×</td>";
+
 					$nonactive_count++;
 					$active_count++;
 					if($nonactive_count == $level['ignore_duration']) {
@@ -638,14 +615,7 @@ class Model_Sensor extends Orm\Model{
 						$wake_up_time = null;
 					}
 				}
-//echo "<td>".$active_count."</td>";
-//echo "<td>".$nonactive_count."</td>";
-if(isset($wake_up_time)) {
-	//echo "<td>".$wake_up_time."</td>";
-} else {
-	//echo "<td></td>";
-}
-//echo "</tr>";
+	
 			}//foreach
 
 			//平均起床時間遅延アラート
@@ -657,7 +627,6 @@ if(isset($wake_up_time)) {
 					return $this->alert($params);
 				}							
 			}
-//echo "</table>";
 		}//if
 		return false;
 	}
@@ -667,6 +636,7 @@ if(isset($wake_up_time)) {
 		if($this->sleep_level < 1) {
 			return null;
 		}
+		echo "Check Sleep\n";
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
@@ -708,17 +678,11 @@ if(isset($wake_up_time)) {
 		$active_count = 0;
 		$nonactive_count = 0;
 		$sleep_time = null;
-//echo \DB::last_query("data");
-//echo "<table>";
 
 		if($count) {
 			foreach($result as $row) {
-//echo "<tr>";
-//echo "<td>".$row['date']."</td>";
-//echo "<td>".$level['threshold']."</td>";
-//echo "<td>".$row['active']."</td>";
+
 				if($level['threshold'] > $row['active']) {
-//echo "<td>◯</td>";
 
 					if(empty($current_sleep_time)) {
 						$nonactive_count = 0;
@@ -727,7 +691,6 @@ if(isset($wake_up_time)) {
 					$nonactive_count++;
 					$active_count = 0;
 				} else {
-//echo "<td>×</td>";
 
 					$active_count++;
 					$nonactive_count++;
@@ -740,16 +703,8 @@ if(isset($wake_up_time)) {
 				if($nonactive_count >= $level['duration'] && isset($current_sleep_time)) {
 					$sleep_time = $current_sleep_time;
 				}
-//echo "<td>".$active_count."</td>";
-//echo "<td>".$nonactive_count."</td>";
-if(isset($sleep_time)) {
-	//echo "<td>".$sleep_time."</td>";
-} else {
-	//echo "<td></td>";
-}
-//echo "</tr>";
+
 			}
-//echo "</table>";
 		}
 		if(isset($sleep_time)) {
 			if(!$daily_data) {
@@ -770,6 +725,8 @@ if(isset($sleep_time)) {
 
 	public function checkActiveNight() {
 		if($this->active_non_detection_level > 0) {
+			echo "Check Active Night\n";
+
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level- 1];
 			if(Input::param("date")) {
@@ -828,6 +785,8 @@ if(isset($sleep_time)) {
 	//	継続時間：30分
 	public function checkAbnormalBehavior() {
 		if($this->abnormal_behavior_level > 0) {
+			echo "Check Abnormal Behavior\n";
+
 			if(Input::param("date")) {
 		    	$date = Input::param("date");
 			} else {
@@ -840,21 +799,9 @@ if(isset($sleep_time)) {
 	    		$levels = Config::get("sensor_levels.abnormal_behavior_level");
 			 	$level = $levels[$this->abnormal_behavior_level- 1];
 
-			 	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-		    	$query = DB::query($sql);
-
-	    		$query->parameters(array(
-					'sensor_id' => $this->name,
-					'date' => date("Y-m-d H:i:s", $this->time - 60)
-				));  
-				//$result = $query->cached(60)->execute('data');
-				$result = $query->execute('data');
-
-				$count = count($result);
-
-				if($count) {
+				if($this->count) {
 					$active_count = 0;
-					foreach($result as $row) {
+					foreach($this->data as $row) {
 						if($level['active_threshold'] < $row['active'] && $level['illuminance_threshold'] < $row['illuminance'] ) {
 							$active_count++;
 							if($active_count >= $level['duration'] ) {
@@ -877,24 +824,14 @@ if(isset($sleep_time)) {
 	//一定時間人感センサー未感知
 	public function checkActiveNonDetection() {
 		if($this->active_non_detection_level > 0) {
+			echo "Check Active Non Detection\n";
+
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level - 1];
 
-		 	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-	    	$query = DB::query($sql);
-
-    		$query->parameters(array(
-				'sensor_id' => $this->name,
-				'date' => date("Y-m-d H:i:s", $this->time - 60)
-			));  
-			//$result = $query->cached(60)->execute('data');
-			$result = $query->execute('data');
-
-			$count = count($result);
-
-			if($count) {
+			if($this->count) {
 				$nonactive_count = 0;
-				foreach($result as $row) {
+				foreach($this->data as $row) {
 					if($level['threshold'] > $row['active']) {
 						$nonactive_count++;
 						if($nonactive_count >= $level['duration'] ) {

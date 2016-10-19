@@ -60,11 +60,19 @@
 				<!-- /緊急連絡先の設定 --> 
 
 				<!-- 連絡共有先の設定 -->
+				<a name="share"></a>
 				<h2 class="form_title">連絡共有先の設定</h2>
 				<div class="form_set_container">
 					<div class="clearfix">
 						<div class="floatL mgt20"><p>設定した連絡共有者に、お知らせメールが届きます。最大3名まで登録可能です。</p></div>
 					</div>
+					<?php
+if(isset($errors['users_count'])) {
+?>
+				<p class="error">エラー：<?php echo $errors['users_count']; ?></p>
+<?php
+}
+?>
 						<table class="table_border">
 								<tbody>
 									<tr>

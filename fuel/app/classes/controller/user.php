@@ -419,8 +419,9 @@ class Controller_User extends Controller_Base
 		        try { 
 			        $admin_user = \Model_User::saveShareUser($admin_params);
 		        } catch(Exception $e) {
-		        	print_R($e);
-		        	exit;
+		        	$this->data['errors']['users_count'] = $e->getMessage();
+		        	$this->template->content = View::forge('user/info_option_form', $this->data);
+		        	return;
 		        }
 		    }
 

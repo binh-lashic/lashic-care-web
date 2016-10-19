@@ -21,7 +21,10 @@ class Controller_Api_Data extends Controller_Api
 
 	public function isSensorAllowed($sensor) {
 		list(, $user_id) = Auth::get_user_id();
-		if(!\Model_Sensor::isAllowed($sensor->id, $user_id)) {
+		$master = Sessiong::get("master");
+		if(!empty($master)) {
+			return true;
+		} else if(!\Model_Sensor::isAllowed($sensor->id, $user_id)) {
 			$this->errors[] = array(
 				'message' => 'センサーへのアクセスの許可がありません'
 			);
@@ -434,6 +437,9 @@ class Controller_Api_Data extends Controller_Api
 				$minutes = $wake_up_time_total / $wake_up_time_count;
 				$hour = (int)($minutes / 60);
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
+				if($hour >= 24) {
+					$hour = $hour - 24;
+				}
 				$params['wake_up_time_average'] = $hour.":".$minutes.":00";				
 			}
 
@@ -441,6 +447,9 @@ class Controller_Api_Data extends Controller_Api
 				$minutes = $sleep_time_total / $sleep_time_count;
 				$hour = (int)($minutes / 60);
 				$minutes = str_pad((int)($minutes - $hour * 60), 2, 0, STR_PAD_LEFT);
+				if($hour >= 24) {
+					$hour = $hour - 24;
+				}
 				$params['sleep_time_average'] = $hour.":".$minutes.":00";
 			}
 
@@ -478,7 +487,9 @@ class Controller_Api_Data extends Controller_Api
 					$data_daily =  \Model_Data_Daily::forge();
 				}
 				$data_daily->set($params);
-				$data_daily->save();	
+				$data_daily->save();
+
+				Log::info($sensor->id."<>".$sensor->name, 'save analyze');
 			}
 		} 
 		return $this->result();	
