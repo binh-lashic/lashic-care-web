@@ -193,7 +193,8 @@ class Model_Sensor extends Orm\Model{
     //室温異常通知
     public function checkTemperature() {
     	if($this->temperature_level > 0) {
-    		$levels = Config::get("sensor_levels.temperature");
+   		  	echo "Check Temperature\n";
+	   		$levels = Config::get("sensor_levels.temperature");
     		$level = $levels[$this->temperature_level - 1];
 
 			$temperature_upper_limit_count = 0;
@@ -233,7 +234,8 @@ class Model_Sensor extends Orm\Model{
     //湿度異常通知
     public function checkHumidity() {
     	if($this->humidity_level > 0) {
-    		$levels = Config::get("sensor_levels.humidity");
+	     	echo "Check Humidity\n";
+	   		$levels = Config::get("sensor_levels.humidity");
 	    	$level = $levels[$this->humidity_level - 1];
 
 			$humidity_upper_limit_count = 0;
@@ -273,6 +275,7 @@ class Model_Sensor extends Orm\Model{
 	//熱中症チェック
 	public function checkHeatstroke() {
 		if($this->heatstroke_level > 0) {
+	     	echo "Check Heatstroke\n";
     		$levels = Config::get("sensor_levels.heatstroke");
 	    	$level = $levels[$this->heatstroke_level - 1];
 
@@ -302,6 +305,7 @@ class Model_Sensor extends Orm\Model{
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
 		if($this->mold_mites_level > 0) {
+	     	echo "Check Mold Mites\n";
     		$levels = Config::get("sensor_levels.mold_mites");
 	    	$level = $levels[$this->mold_mites_level - 1];
 
@@ -330,6 +334,8 @@ class Model_Sensor extends Orm\Model{
 
     //通信断のチェック
     public function checkDisconnection() {
+    	echo "Check Disconnection\n";
+
     	$this->disconnection_duration = Config::get("sensor_default_setting.disconnection_duration");
 
 		if(count($this->data) == 0) {
@@ -346,6 +352,8 @@ class Model_Sensor extends Orm\Model{
 
     //再通信のチェック
     public function checkReconnection() {
+    	echo "Check Reconnection\n";
+
      	$sql = 'SELECT COUNT(*) AS count FROM data WHERE sensor_id = :sensor_id AND date = :date';
 		$query = DB::query($sql);
 		$query->parameters(array(
@@ -374,7 +382,8 @@ class Model_Sensor extends Orm\Model{
     //室内照度異常（日中）
     public function checkIlluminanceDaytime() {
 		if($this->illuminance_daytime_level > 0) {
-    		$levels = Config::get("sensor_levels.illuminance_daytime");
+     		echo "Check Illuminance Daytime\n";
+	   		$levels = Config::get("sensor_levels.illuminance_daytime");
 	    	$level = $levels[$this->illuminance_daytime_level - 1];
 
 			$count = 0;
@@ -411,6 +420,7 @@ class Model_Sensor extends Orm\Model{
     //室内照度異常（深夜）
     public function checkIlluminanceNight() {
 		if($this->illuminance_night_level > 0) {
+     		echo "Check Illuminance Night\n";
     		$levels = Config::get("sensor_levels.illuminance_night");
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
@@ -450,6 +460,8 @@ class Model_Sensor extends Orm\Model{
     //火事のチェック
     public function checkFire() {
     	if($this->fire_level > 0) {
+    		echo "Check Fire\n";
+
     		$levels = Config::get("sensor_levels.fire");
 		   	$level = $levels[$this->fire_level - 1];
 
@@ -479,6 +491,8 @@ class Model_Sensor extends Orm\Model{
 		if($this->wake_up_level < 1) {
 			return null;
 		}
+		echo "Check Wakeup\n";
+
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
 
@@ -568,6 +582,7 @@ class Model_Sensor extends Orm\Model{
 		if($this->sleep_level < 1) {
 			return null;
 		}
+		echo "Check Sleep\n";
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
@@ -656,6 +671,8 @@ class Model_Sensor extends Orm\Model{
 
 	public function checkActiveNight() {
 		if($this->active_non_detection_level > 0) {
+			echo "Check Active Night\n";
+
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level- 1];
 			if(Input::param("date")) {
@@ -714,6 +731,8 @@ class Model_Sensor extends Orm\Model{
 	//	継続時間：30分
 	public function checkAbnormalBehavior() {
 		if($this->abnormal_behavior_level > 0) {
+			echo "Check Abnormal Behavior\n";
+
 			if(Input::param("date")) {
 		    	$date = Input::param("date");
 			} else {
@@ -751,6 +770,8 @@ class Model_Sensor extends Orm\Model{
 	//一定時間人感センサー未感知
 	public function checkActiveNonDetection() {
 		if($this->active_non_detection_level > 0) {
+			cho "Check Active Non Detection\n";
+
 	    	$levels = Config::get("sensor_levels.active_non_detection_level");
 		 	$level = $levels[$this->active_non_detection_level - 1];
 
