@@ -202,7 +202,7 @@ class Model_Sensor extends Orm\Model{
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
 
-			if($this->count) {
+			if($this->count && isset($level)) {
 				foreach($this->data as $row) {
 
 					if($level['upper_limit'] < $row['temperature']) {
@@ -245,7 +245,7 @@ class Model_Sensor extends Orm\Model{
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
 
-			if($this->count) {
+			if($this->count && isset($level)) {
 				foreach($this->data as $row) {
 					if($level['upper_limit'] < $row['humidity']) {
 						$humidity_upper_limit_count++;
@@ -286,7 +286,7 @@ class Model_Sensor extends Orm\Model{
 	    	$level = $levels[$this->heatstroke_level - 1];
 
 			$count = count($this->data);
-			if($count) {
+			if($count && isset($level)) {
 				foreach($this->data as $row) {
 					$wbgt = (0.3 * $row['temperature'] + 2.75) * ($row['humidity'] - 20) / 80 + 0.75 * $row['temperature'] - 0.75;
 					//$wbgt = $row['temperature'] * 0.7 + $row['humidity'] * 0.3;
@@ -317,7 +317,7 @@ class Model_Sensor extends Orm\Model{
 	    	$level = $levels[$this->mold_mites_level - 1];
 
 			$count = count($this->data);
-			if($count) {
+			if($count && isset($level)) {
 				foreach($this->data as $row) {
 					if($level['humidity_upper_limit'] < $row['humidity'] && $level['temperature_upper_limit'] < $row['temperature']) {
 						$count--;
@@ -396,7 +396,7 @@ class Model_Sensor extends Orm\Model{
 	    	$level = $levels[$this->illuminance_daytime_level - 1];
 
 			$count = 0;
-			if(count($this->data)) {
+			if(count($this->data) && isset($level)) {
 				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
@@ -436,7 +436,7 @@ class Model_Sensor extends Orm\Model{
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
 			$count = 0;
-			if(count($this->data) && isset($level['lower_limit'])) {
+			if(count($this->data) && isset($level)) {
 				foreach($this->data as $row) {
 					$hour = (int)date("H", strtotime($row['date']));
 					if($level['start_time'] < $hour && $level['end_time'] > $hour) {
