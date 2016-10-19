@@ -194,13 +194,14 @@ class Model_Sensor extends Orm\Model{
     public function checkTemperature() {
     	if($this->temperature_level > 0) {
    		  	echo "Check Temperature\n";
+   		  	echo "Temperature Level ".$this->temperature_level."\n";
+
 	   		$levels = Config::get("sensor_levels.temperature");
     		$level = $levels[$this->temperature_level - 1];
 
 			$temperature_upper_limit_count = 0;
 			$temperature_lower_limit_count = 0;
 
-											print_r($level);
 			if($this->count) {
 				foreach($this->data as $row) {
 
@@ -237,12 +238,12 @@ class Model_Sensor extends Orm\Model{
     public function checkHumidity() {
     	if($this->humidity_level > 0) {
 	     	echo "Check Humidity\n";
+	     	echo "Level ".$this->humidity_level."\n";
 	   		$levels = Config::get("sensor_levels.humidity");
 	    	$level = $levels[$this->humidity_level - 1];
 
 			$humidity_upper_limit_count = 0;
 			$humidity_lower_limit_count = 0;
-						print_r($level);
 
 			if($this->count) {
 				foreach($this->data as $row) {
@@ -279,6 +280,8 @@ class Model_Sensor extends Orm\Model{
 	public function checkHeatstroke() {
 		if($this->heatstroke_level > 0) {
 	     	echo "Check Heatstroke\n";
+	     	echo "Level ".$this->heatstroke_level."\n";
+
     		$levels = Config::get("sensor_levels.heatstroke");
 	    	$level = $levels[$this->heatstroke_level - 1];
 
@@ -309,6 +312,7 @@ class Model_Sensor extends Orm\Model{
 	public function checkMoldMites() {
 		if($this->mold_mites_level > 0) {
 	     	echo "Check Mold Mites\n";
+
     		$levels = Config::get("sensor_levels.mold_mites");
 	    	$level = $levels[$this->mold_mites_level - 1];
 
@@ -386,10 +390,11 @@ class Model_Sensor extends Orm\Model{
     public function checkIlluminanceDaytime() {
 		if($this->illuminance_daytime_level > 0) {
      		echo "Check Illuminance Daytime\n";
+     		echo "Illuminance Daytime Level ".$this->illuminance_daytime_level."\n";
+
 	   		$levels = Config::get("sensor_levels.illuminance_daytime");
 	    	$level = $levels[$this->illuminance_daytime_level - 1];
 
-						print_r($level);
 			$count = 0;
 			if(count($this->data)) {
 				foreach($this->data as $row) {
@@ -425,10 +430,11 @@ class Model_Sensor extends Orm\Model{
     public function checkIlluminanceNight() {
 		if($this->illuminance_night_level > 0) {
      		echo "Check Illuminance Night\n";
+     		echo "Illuminance Night Level ".$this->illuminance_night_level."\n";
+
     		$levels = Config::get("sensor_levels.illuminance_night");
 	    	$level = $levels[$this->illuminance_night_level - 1];
 
-												print_r($level);
 			$count = 0;
 			if(count($this->data)) {
 				foreach($this->data as $row) {
