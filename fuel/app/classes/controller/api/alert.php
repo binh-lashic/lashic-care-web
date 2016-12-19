@@ -124,4 +124,26 @@ class Controller_Api_Alert extends Controller_Api
         $push->send();
         $push->disconnect();
 	}
+
+        public function post_latest() {
+                return $this->_latest();
+        }
+
+        public function get_latest() {
+                return $this->_latest();
+        }
+
+        public function _latest() {
+		$sensor_id = Input::param("sensor_id");
+        	//アラートの最新データ1件を取得する
+        	$alerts = \Model_Alert::getAlerts(array(
+			'sensor_id' => $sensor_id,
+			'confirm_status' => 0,
+			'limit' => 1,
+		));
+		if(!empty($alerts[0])) {
+			$this->result['data'] = $alerts[0];
+		}
+		return $this->result();
+	}
 }
