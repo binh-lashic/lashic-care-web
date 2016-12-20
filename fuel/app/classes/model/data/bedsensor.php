@@ -32,30 +32,37 @@ class Model_Data_Bedsensor extends Orm\Model{
     public static function format($data) {
         if($data) {
             $status = '-';
-            if ($data->rolling == -32) { // 寝返り
-                $status = '左寝返り';
-            } else if ($data->rolling == -16) {
-                $status = '左移動';
-            } else if ($data->rolling == 16) {
-                $status = '右移動';
-            } else if ($data->rolling == 32) {
-                $status = '右寝返り';
-            } else if ($data->sleep == 16) { // 睡眠
-                $status = 'おめざめ中';
-            } else if ($data->sleep == 32) {
-                $status = 'お休み中';
-            } else if ($data->posture == 16) { // 姿勢
-                $status = '寝姿勢';
-            } else if ($data->posture == 48) {
-                $status = '起上り';
-            } else if ($data->posture == 64) {
-                $status = '離床注意';
-            } else if ($data->humans == 16) {
-                $status = '不在';
+            // 在・不在
+            if ($data->humans == 0) {
+                $status = '不明';
+            if ($data->humans == 16) {
+                $status = '離床';
             } else if ($data->humans == 17) {
                 $status = '検出中';
             } else if ($data->humans == 32) {
-                $status = '在';
+                // 姿勢
+                if ($data->posture == 0) {
+                    $status = '横になっています';
+                } else if ($data->posture == 48) {
+                    $status = '起上り';
+                } else if ($data->posture == 64) {
+                    $status = '離床注意';
+                } else if ($data->posture == 32) {
+                    $status = '座っています';
+                } else if ($data->posture == 16) {
+                    // 寝返り
+                    if ($data->rolling == 0) {
+                        $status = '横になっています';
+                    } else if ($data->rolling == -32) {
+                        $status = '左寝返り';
+                    } else if ($data->rolling == -16) {
+                        $status = '左移動';
+                    } else if ($data->rolling == 16) {
+                        $status = '右移動';
+                    } else if ($data->rolling == 32) {
+                        $status = '右寝返り';
+                    }
+                }
             }
             $data->status = $status;
         }
