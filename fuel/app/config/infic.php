@@ -24,6 +24,8 @@ return array(
 		'fire_temperature_upper_limit' => 45,
 		'heatstroke_wbgt_upper_limit' => 28,
 		'heatstroke_duration' => 60,
+		'cold_upper_limit' => 60,
+		'cold_duration' => 60,
 		'humidity_upper_limit' => 70,
 		'humidity_lower_limit' => 40,
 		'humidity_duration' => 60,
@@ -93,6 +95,20 @@ return array(
 		'duration' => 60,
 				),
 			),
+		'cold' => array(
+			array(
+				'cold_upper_limit' => 80,
+				'duration' => 60,
+			),
+			array(
+				'cold_upper_limit' => 60,
+				'duration' => 60,
+			),
+			array(
+				'cold_upper_limit' => 40,
+				'duration' => 60,
+			),
+		),
 			'mold_mites' => array(
 				array(
 		'humidity_upper_limit' => 70,
@@ -264,6 +280,10 @@ return array(
 					'title' => '熱中症アラート',
 					'description' => 'CareEyeセンサーが設置された環境で熱中症指数（WBGT値）が設定値を超えた場合に熱中症の危険があると判断して通知します。',
 				),
+                                'cold'    => array(
+                                        'title' => '風邪アラート',
+                                        'description' => 'CareEyeセンサーが設置された環境で風邪ひき指数が設定値を超えた場合に風邪をひく危険があると判断して通知します。',
+                                ),
 				'mold_mites'	=>	array(
 					'title' => 'カビ・ダニアラート',
 					'description' => 'CareEyeセンサーが設置された環境でカビやダニが発生しやすい環境として、指数が設定値をこえた場合に異常と判断して通知します。',

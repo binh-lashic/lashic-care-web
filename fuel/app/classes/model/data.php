@@ -41,6 +41,9 @@ class Model_Data extends Orm\Model{
             $data['wbgt'] = (0.3 * $data['temperature'] + 2.75) * ($data['humidity'] - 20) / 80 + 0.75 * $data['temperature'] - 0.75;
             $data['wbgt'] = round($data['wbgt'], 1);
             $data['wbgt'] = (string)$data['wbgt'];
+            //風邪ひき指数 = (-3/4）×「湿度」−「温度」＋100
+            $data['cold'] = \Util::calc_cold($data['humidity'], $data['temperature']);
+            $data['cold'] = (string)round($data['cold'], 1);
         }
         return $data;
     }

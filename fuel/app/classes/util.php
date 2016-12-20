@@ -13,4 +13,11 @@ class Util {
     	);
         return $week_array[$week];
     }
+
+    public static function calc_cold($temperature, $humidity)
+    {
+        // 「風邪ひき指数」＝(-3/4）×「湿度」−「温度」＋100
+        $cold = (3 / 4) * $humidity - $humidity + 100;
+        return $cold;
+    }
 }

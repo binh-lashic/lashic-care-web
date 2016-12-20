@@ -536,6 +536,7 @@ class Controller_Api_Data extends Controller_Api
 					'fire' => $sensor->checkFire(),									//火事アラート
 					'temperature' => $sensor->checkTemperature(),					//室温異常通知
 					'heatstroke' => $sensor->checkHeatstroke(),						//熱中症アラート
+					'cold' => $sensor->checkCold(),						//風邪アラート
 					'humidity' => $sensor->checkHumidity(),							//室内湿度異常アラート
 					'mold_mites' => $sensor->checkMoldMites(),						//カビ・ダニ警報アラート
 					'illuminance_daytime' => $sensor->checkIlluminanceDaytime(),	//室内照度異常（日中）

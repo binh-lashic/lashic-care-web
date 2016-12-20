@@ -337,6 +337,41 @@ class Model_Sensor extends Orm\Model{
 		return false;
 	}
 
+        //風邪ひき指数チェック
+        public function checkCold() {
+                if($this->cold_level > 0) {
+                echo "Check Cold\n";
+                echo "Level ".$this->cold_level."\n";
+
+                $levels = Config::get("sensor_levels.cold");
+                $level = $levels[$this->cold_level - 1];
+
+                        $count = count($this->data);
+                        if($count && isset($level)) {
+                                try {
+                                        foreach($this->data as $row) {
+                                                $cold = \Util::calc_cold($row['humidity'], $row['temperature']);
+                                                if($level['cold_upper_limit'] < $cold) {
+                                                        $count--;
+                                                }
+                                        }
+                                        if($count == 0) {
+                                                $params = array(
+                                                        'type' => 'cold',
+                                                        'logs' => array(
+                                                                'cold_upper_limit' => $level['cold_upper_limit'],
+                                                        ),
+                                                );
+                                                return $this->alert($params);
+                                        }
+                                } catch(Exception $e) {
+                                        echo $e->getFile()." - ".$e->getLine()." - ".$e->getMessage()."\n";
+                                }
+                        }
+                }
+                return false;
+        }
+
 	//カビ・ダニ警報アラート
 	public function checkMoldMites() {
 		if($this->mold_mites_level > 0) {
