@@ -31,7 +31,33 @@ class Model_Data_Bedsensor extends Orm\Model{
 
     public static function format($data) {
         if($data) {
-        } else {
+            $status = '-';
+            if ($data->rolling == -32) { // 寝返り
+                $status = '左寝返り';
+            } else if ($data->rolling == -16) {
+                $status = '左移動';
+            } else if ($data->rolling == 16) {
+                $status = '右移動';
+            } else if ($data->rolling == 32) {
+                $status = '右寝返り';
+            } else if ($data->sleep == 16) { // 睡眠
+                $status = 'おめざめ中';
+            } else if ($data->sleep == 32) {
+                $status = 'お休み中';
+            } else if ($data->posture == 16) { // 姿勢
+                $status = '寝姿勢';
+            } else if ($data->posture == 48) {
+                $status = '起上り';
+            } else if ($data->posture == 64) {
+                $status = '離床注意';
+            } else if ($data->humans == 16) {
+                $status = '不在';
+            } else if ($data->humans == 17) {
+                $status = '検出中';
+            } else if ($data->humans == 32) {
+                $status = '在';
+            }
+            $data->status = $status;
         }
         return $data;
     }
