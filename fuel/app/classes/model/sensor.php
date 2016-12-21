@@ -30,6 +30,7 @@ class Model_Sensor extends Orm\Model{
 		'temperature_level' => array('default' => 2),
 		'fire_level' => array('default' => 2),
 		'heatstroke_level' => array('default' => 2),
+		'cold_level' => array('default' => 2),
 		'mold_mites_level' => array('default' => 2),
 		'humidity_level' => array('default' => 2),
 		'illuminance_daytime_level' => array('default' => 2),
