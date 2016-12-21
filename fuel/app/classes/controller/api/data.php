@@ -108,6 +108,9 @@ class Controller_Api_Data extends Controller_Api
 					}
 					if(!empty($data_daily['wbgt_average'])) {
 						$this->result['data']['wbgt']  = $data_daily['wbgt_average'];
+                                        }
+					if(!empty($data_daily['cold_average'])) {
+						$this->result['data']['cold']  = $data_daily['cold_average'];
 					}
 				}
 
@@ -121,6 +124,7 @@ class Controller_Api_Data extends Controller_Api
 						$this->result['data']['illuminance'] =  (int)$data['illuminance'];
 						$this->result['data']['discomfort'] = $data['discomfort'];
 						$this->result['data']['wbgt'] = $data['wbgt'];
+						$this->result['data']['cold'] = $data['cold'];
 						$this->result['data']['date'] = $data['date'];
 					}
 				}			
@@ -152,6 +156,7 @@ class Controller_Api_Data extends Controller_Api
 			'active' => true,						//運動
 			'discomfort' => true,					//不快指数
 			'wbgt' => true,							//熱中症指数
+			'cold' => true,							//風邪ひき指数
 		);
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
@@ -217,6 +222,7 @@ class Controller_Api_Data extends Controller_Api
 					$active_total = 0;
 					$discomfort_total = 0;
 					$wbgt_total = 0;
+					$cold_total = 0;
 					$averages = array(
 						'temperature' => null,
 						'humidity' => null,
@@ -224,6 +230,7 @@ class Controller_Api_Data extends Controller_Api
 						'active' => null,
 						'discomfort' => null,
 						'wbgt' => null,
+						'cold' => null,
 					);
 					$span_time = date("Y-m-d H:i:s", $time);
 					$data_count = 0;
@@ -236,6 +243,7 @@ class Controller_Api_Data extends Controller_Api
 							$active_total += $rows[$current_time]['active'];
 							$discomfort_total += $rows[$current_time]['discomfort'];
 							$wbgt_total += $rows[$current_time]['wbgt'];
+							$cold_total += $rows[$current_time]['cold'];
 							$data_count++;
 						}					
 					}
@@ -247,6 +255,7 @@ class Controller_Api_Data extends Controller_Api
 						$averages['active'] = $active_total / $data_count;
 						$averages['discomfort'] = $discomfort_total / $data_count;
 						$averages['wbgt'] = $wbgt_total / $data_count;
+						$averages['cold'] = $cold_total / $data_count;
 					}
 					$value = $averages[$type];
 
@@ -260,6 +269,7 @@ class Controller_Api_Data extends Controller_Api
 						'active' => $averages['active'],
 						'discomfort' => $averages['discomfort'],
 						'wbgt' => $averages['wbgt'],
+						'cold' => $averages['cold'],
 					);
 				}
 				$this->result = array(

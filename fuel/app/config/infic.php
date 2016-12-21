@@ -97,15 +97,15 @@ return array(
 			),
 		'cold' => array(
 			array(
-				'cold_upper_limit' => 80,
+				'cold_upper_limit' => 75,
 				'duration' => 60,
 			),
 			array(
-				'cold_upper_limit' => 60,
+				'cold_upper_limit' => 75,
 				'duration' => 60,
 			),
 			array(
-				'cold_upper_limit' => 40,
+				'cold_upper_limit' => 75,
 				'duration' => 60,
 			),
 		),

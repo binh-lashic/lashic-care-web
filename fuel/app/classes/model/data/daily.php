@@ -60,9 +60,12 @@ class Model_Data_Daily extends Orm\Model{
             $data['discomfort_average'] = round($data['discomfort_average'], 1);
             $data['wbgt_average'] =  (0.3 * $data->temperature_average + 2.75) * ($data->humidity_average - 20) / 80 + 0.75 * $data->temperature_average - 0.75;
             $data['wbgt_average'] = round($data['wbgt_average'], 1);
+            $data['cold_average'] = \Util::calc_cold($data->humidity_average, $data->temperature_average);
+            $data['cold_average'] = round($data['cold_average'], 1);
         } else {
             $data['discomfort_average'] = "";
             $data['wbgt_average'] = "";
+            $data['cold_average'] = "";
         }
         return $data;
     }
