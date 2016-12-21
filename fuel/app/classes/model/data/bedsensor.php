@@ -35,7 +35,7 @@ class Model_Data_Bedsensor extends Orm\Model{
             // 在・不在
             if ($data->humans == 0) {
                 $status = '不明';
-            if ($data->humans == 16) {
+            } else if ($data->humans == 16) {
                 $status = '離床';
             } else if ($data->humans == 17) {
                 $status = '検出中';
