@@ -21,7 +21,7 @@ class Controller_Api_Data extends Controller_Api
 
 	public function isSensorAllowed($sensor) {
 		list(, $user_id) = Auth::get_user_id();
-		$master = Sessiong::get("master");
+		$master = Session::get("master");
 		if(!empty($master)) {
 			return true;
 		} else if(!\Model_Sensor::isAllowed($sensor->id, $user_id)) {
