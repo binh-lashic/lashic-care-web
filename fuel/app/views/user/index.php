@@ -76,7 +76,7 @@ if(isset($client)) {
 							<div class="myStat" id="data_wbgt" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
-							<p>熱中症指数</p>
+							<p>風邪ひき指数</p>
 						</div>
 					</div>
 				</li>
