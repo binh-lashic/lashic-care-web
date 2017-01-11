@@ -22,6 +22,7 @@
 						<select name="type">
 							<option value="sensor">センサー</option>
 							<option value="wifi">WiFi</option>
+							<option value="bedsensor">ベッドセンサー</option>
 						</select>
 					</div>
 				</div>

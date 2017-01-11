@@ -61,9 +61,10 @@ class Controller_Admin_Sensor extends Controller_Admin
 	public function action_register() {
 		$sensor_names_data = Input::param("sensor_names");
 		$sensor_names = explode(PHP_EOL, $sensor_names_data);
+		$type = Input::param("type");
 		foreach($sensor_names as $sensor_name) {
 			try {
-				$sensor = \Model_Sensor::saveSensor(array('name' => $sensor_name));
+				$sensor = \Model_Sensor::saveSensor(array('name' => $sensor_name, 'type' => $type));
 			} catch (Exception $e) {
 
 			}
