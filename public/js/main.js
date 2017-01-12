@@ -129,7 +129,7 @@ $(function(){
 		var prev_date = new Date();
 		prev_date.setDate(today.getDate() - 1);
 		console.log(today.getDate());
-		console.log(ptoday.getDate() - 1);
+		console.log(today.getDate() - 1);
 		console.log(prev_date);
 		
 		$("#prev_date").attr("data-date", prev_date.getFullYear() + "-" + (prev_date.getMonth() + 1) + "-" + prev_date.getDate());
