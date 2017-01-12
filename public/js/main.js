@@ -127,7 +127,7 @@ $(function(){
 		$("#today_week").html(weekDayList[today.getDay()]);
 
 		var prev_date = new Date();
-		prev_date.setDate(today.getDate() - 1);
+		prev_date.setTime(today.getTime() - 60*1000*60*24);
 		console.log(today.getDate());
 		console.log(today.getDate() - 1);
 		console.log(prev_date);
@@ -135,7 +135,7 @@ $(function(){
 		$("#prev_date").attr("data-date", prev_date.getFullYear() + "-" + (prev_date.getMonth() + 1) + "-" + prev_date.getDate());
 
 		var next_date = new Date();
-		next_date.setDate(today.getDate() + 1);
+		next_date.setTime(today.getTime() + 60*1000*60*24);
 		console.log(next_date);
 
 		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
