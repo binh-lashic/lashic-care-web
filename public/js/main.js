@@ -121,22 +121,17 @@ $(function(){
 
 	function drawData() {
 		var today = new Date(date.replace(/-/g, "/"));
-		console.log(today);
 		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
 		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ] ;
 		$("#today_week").html(weekDayList[today.getDay()]);
 
 		var prev_date = new Date();
 		prev_date.setTime(today.getTime() - 60*1000*60*24);
-		console.log(today.getDate());
-		console.log(today.getDate() - 1);
-		console.log(prev_date);
 		
 		$("#prev_date").attr("data-date", prev_date.getFullYear() + "-" + (prev_date.getMonth() + 1) + "-" + prev_date.getDate());
 
 		var next_date = new Date();
 		next_date.setTime(today.getTime() + 60*1000*60*24);
-		console.log(next_date);
 
 		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
 
