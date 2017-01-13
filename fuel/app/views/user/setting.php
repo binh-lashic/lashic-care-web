@@ -89,7 +89,7 @@ if($sensor['admin'] == 1) {
 										</td>
 									</tr>
 									<tr>
-									<th>熱中症アラート<br>
+									<th>風邪アラート<br>
 <p class="small text_red txt_normal"><a href="/alert/info/heatstroke">※</a></p></th>
 										<td colspan="2">
 <?php
