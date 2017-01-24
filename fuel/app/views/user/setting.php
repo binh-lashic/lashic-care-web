@@ -90,13 +90,13 @@ if($sensor['admin'] == 1) {
 									</tr>
 									<tr>
 									<th>風邪アラート<br>
-<p class="small text_red txt_normal"><a href="/alert/info/heatstroke">※</a></p></th>
+<p class="small text_red txt_normal"><a href="/alert/info/cold">※</a></p></th>
 										<td colspan="2">
 <?php
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['heatstroke_level']; ?>" list="scale" class="rangeNo03" id="heatstroke_level" name="heatstroke_level" />
+											<input type="range" min="0" max="2" value="<?php echo $sensor['cold_level']; ?>" list="scale" class="rangeNo03" id="cold_level" name="cold_level" />
 											<table class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
@@ -108,7 +108,7 @@ if($sensor['admin'] == 1) {
 }
 ?>										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['heatstroke_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="heatstroke_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['cold_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="cold_alert">メール通知 ON</a></div>
 										</td>
 									</tr>
 									<tr>

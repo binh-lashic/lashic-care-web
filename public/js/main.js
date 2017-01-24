@@ -181,6 +181,15 @@ $(function(){
 				$("#data_wbgt").attr("data-text", "");
 				$("#data_wbgt").attr("data-percent","");
 			}
+
+                        if(typeof result.data.cold != "undefined") {
+                                $("#data_cold").attr("data-text", result.data.cold + "%");
+                                $("#data_cold").attr("data-percent", result.data.cold);
+                        } else {
+                                $("#data_cold").attr("data-text", "");
+                                $("#data_cold").attr("data-percent","");
+                        }
+
 			if(result.data.wake_up_time != null) {
 				$("#data_wake_up_time").html(result.data.wake_up_time.substring(0, 5));
 				wake_up_time_data = result.data.wake_up_time.substring(0, 4) + "0";
@@ -309,6 +318,7 @@ $(function(){
 			temperature_level:$('#temperature_level').val(),
 			fire_level:$('#fire_level').val(),
 			heatstroke_level:$('#heatstroke_level').val(),
+			cold_level:$('#cold_level').val(),
 			mold_mites_level:$('#mold_mites_level').val(),
 			humidity_level:$('#humidity_level').val(),
 			illuminance_daytime_level:$('#illuminance_daytime_level').val(),
@@ -334,6 +344,7 @@ $(function(){
 			temperature_alert:$('#temperature_alert').hasClass("mail_on") ? 1 : 0,
 			fire_alert:$('#fire_alert').hasClass("mail_on") ? 1 : 0,
 			heatstroke_alert:$('#heatstroke_alert').hasClass("mail_on") ? 1 : 0,
+			cold_alert:$('#cold_alert').hasClass("mail_on") ? 1 : 0,
 			mold_mites_alert:$('#mold_mites_alert').hasClass("mail_on") ? 1 : 0,
 			humidity_alert:$('#humidity_alert').hasClass("mail_on") ? 1 : 0,
 			illuminance_daytime_alert:$('#illuminance_daytime_alert').hasClass("mail_on") ? 1 : 0,
