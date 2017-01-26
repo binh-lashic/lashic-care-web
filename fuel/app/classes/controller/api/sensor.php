@@ -125,4 +125,34 @@ class Controller_Api_Sensor extends Controller_Api
     	echo $error;
     	exit;
 	}
+
+    public function get_sensor_token() {
+        $this->_sensor_token();
+    }
+
+    public function post_sensor_token() {
+        $this->_sensor_token();
+    }
+
+    private function _sensor_token() {
+        list(, $user_id) = Auth::get_user_id();
+        $client_user_id = Input::param('user_id');               
+        $user_client = \Model_User_Client::getUserClient($user_id, $client_user_id);
+        if (empty($user_client)) {
+            $this->errors[] = array('message' => 'センサーへのアクセスの許可がありません');
+        } else {
+            $sensors = \Model_Sensor::getSensorsFromClientUserId($client_user_id);
+            foreach($sensors as $sensor) {
+                if ($sensor->type == 'sensor') {
+                    $sensor->functions_token = \Util::functions_token($sensor->name);
+                } else if ($sensor->type == 'bedsensor') {
+                    $sensor->functions_token = \Util::functions_token($sensor->name);
+                    $sensor->websocket_token = \Util::websocket_token($sensor->name);
+                }
+            }
+            $this->result = array('sensors' => $sensors);
+        } 
+        return $this->result();
+    }
 }
+

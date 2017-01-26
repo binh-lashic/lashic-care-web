@@ -98,4 +98,13 @@ class Model_User_Client extends Orm\Model{
 		}
     	return null;
     }
+
+    public static function getUserClient($user_id, $client_user_id) {
+        return \Model_User_Client::find("first", array(
+               'where' => array(
+                   'user_id'        => $user_id,
+                   'client_user_id' => $client_user_id,
+               )
+        ));
+    }
 }

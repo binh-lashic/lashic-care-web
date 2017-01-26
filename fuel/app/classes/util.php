@@ -20,4 +20,28 @@ class Util {
         $cold = -0.75 * $humidity - $temperature + 100;
         return $cold;
     }
+
+    public static function functions_token($target)
+    {
+        $salt = $_SERVER['FUNCTIONS_SALT'];
+        $iterations = intval($_SERVER['FUNCTIONS_ITERATIONS']);
+        return self::create_token($target, $salt, $iterations);
+    }
+
+    public static function websocket_token($target)
+    {
+        $salt = $_SERVER['WEBSOCKET_SALT'];
+        $iterations = intval($_SERVER['WEBSOCKET_ITERATIONS']);
+        return self::create_token($target, $salt, $iterations);
+    }
+
+    private static function create_token($target, $salt, $iterations)
+    {
+        $secret = $target.date('Ymd');
+        Log::debug('secret:'.$secret);
+        Log::debug('salt:'.$salt);
+        Log::debug('iterations:'.$iterations);
+        $hash = hash_pbkdf2('sha512', $secret, $salt, $iterations, 64, true);
+        return base64_encode($hash);
+    }
 }
