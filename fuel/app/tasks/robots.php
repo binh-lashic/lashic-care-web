@@ -41,7 +41,7 @@ class Robots
 		));
 		foreach($sensors as $sensor) {
 			if($sensor->enable == 0) {
-				$result = DB::select("*")
+				$result = \DB::select("*")
 						    ->from('data')
 						    ->where('sensor_id', $sensor->name)
 						    ->where('date', date("Y-m-d H:i:00", $time - 60))
