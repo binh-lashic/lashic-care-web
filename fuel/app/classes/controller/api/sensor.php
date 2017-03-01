@@ -143,7 +143,7 @@ class Controller_Api_Sensor extends Controller_Api
         } else {
             $sensors = \Model_Sensor::getSensorsFromClientUserId($client_user_id);
             foreach($sensors as $sensor) {
-                if ($sensor->type == 'sensor') {
+                if (empty($sensor->type) || $sensor->type == 'sensor') {
                     $sensor->functions_token = \Util::functions_token($sensor->name);
                 } else if ($sensor->type == 'bedsensor') {
                     $sensor->functions_token = \Util::functions_token($sensor->name);
