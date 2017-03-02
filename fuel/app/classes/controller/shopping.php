@@ -37,7 +37,7 @@ class Controller_Shopping extends Controller_Base
                 Cookie::set('affiliate', $this->param('affiliate'), 60 * 60 * 24 * 90);
             }
         }
-        $this->template->title = 'CareEye（ケアアイ）';
+        $this->template->title = 'LASHIC（ラシク）';
         $this->data['breadcrumbs'] = array($this->template->title);
 
         if(Cookie::get("affiliate") == "magokoro") {
@@ -321,7 +321,7 @@ class Controller_Shopping extends Controller_Base
                 'price' => $subtotal_price,
                 'tax' => $tax,
                 'shipping' => $destination['shipping'],
-                'title' => 'ケアアイ初期費用',
+                'title' => 'ラシク初期費用',
                 'type' => 'initial',
             ));
             if($payment->save()) {
@@ -390,7 +390,7 @@ class Controller_Shopping extends Controller_Base
                         );
                 $params = array(
                     'to' => $this->user['email'],
-                    'subject' => "CareEyeアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
                     'text' => \View::forge('email/contract', $data)
                 );
                 \Model_User::sendEmail($params);
@@ -398,7 +398,7 @@ class Controller_Shopping extends Controller_Base
                 //管理者用メール
                 $params = array(
                     'to' => $_SERVER['EMAIL_MASTER'],
-                    'subject' => "CareEyeアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
                     'text' => \View::forge('email/admin/contract', $data)
                 );
                 \Model_User::sendEmail($params);

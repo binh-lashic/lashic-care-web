@@ -80,14 +80,14 @@ if(!empty($clients)) {
 			
 			
 			
-			<!-- Care Eyeから退会希望のお客様 -->
+			<!-- LASHICから退会希望のお客様 -->
 			<h2 class="form_title">登録したユーザーを解約したいお客様へ</h2>
 			<div class="form_set_container center">
 				<p class="mgt20 mgb10">お電話で解約のお申し込みをしてください。</p>
 				<p class="mgb20"><span class="phone_number">054-266-6201</span><br>
 午前9時〜午後18時まで、土日祝日休み</p>
 			</div>
-			<!-- /Care Eyeから退会希望のお客様 -->
+			<!-- /LASHICから退会希望のお客様 -->
 		</section>
 		<!-- /content end　ユーザー管理 --> 
 		

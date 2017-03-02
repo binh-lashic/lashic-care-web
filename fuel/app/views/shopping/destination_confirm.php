@@ -66,16 +66,16 @@ foreach($plans as $plan) {
 		<p class="mgb20 large text_blue">変更する商品を選択してください</p>
 		<div class="left">
 			<input type="radio" id="1month" name="pack" checked>
-			<label for="1month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 月々パック</strong> <span class="text_red">1200円（税抜）</span><br>
+			<label for="1month" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 月々パック</strong> <span class="text_red">1200円（税抜）</span><br>
 				※初期費用 14,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="6month" name="pack" >
-			<label for="6month" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 6ヶ月パック</strong> <span class="text_red">6600円（税抜）</span><br>
+			<label for="6month" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 6ヶ月パック</strong> <span class="text_red">6600円（税抜）</span><br>
 				1100円/月<br>
 				※初期費用 14,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="1year" name="pack" >
-			<label for="1year" class="checkbox shoppingCart_input"><strong>CareEye（ケアアイ） 12ヶ月パック</strong> <span class="text_red">11760円（税抜）</span><br>
+			<label for="1year" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 12ヶ月パック</strong> <span class="text_red">11760円（税抜）</span><br>
 				980円/月<br>
 				※初期費用 14,800円（税抜）</label>
 		</div>

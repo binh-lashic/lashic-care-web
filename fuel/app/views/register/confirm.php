@@ -1,6 +1,6 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">Care Eye 新規登録のお客様</h1>
+			<h1 class="contentLarge_h1">LASHIC 新規登録のお客様</h1>
 			<!-- flow矢印 -->
 			<div class="flowSet flow_no03">
 				<ol>

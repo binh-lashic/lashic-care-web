@@ -66,7 +66,7 @@ class Controller_Page extends Controller_Template
     }
     public function action_terms()
     {        
-        Response::redirect('http://www.infic-c.net/careeye/kiyaku.html');
+        Response::redirect('http://www.infic-c.net/LASHIC/kiyaku.html');
         return;
         $this->template->title = '利用規約';
         $this->data['breadcrumbs'] = array($this->template->title);
@@ -76,7 +76,7 @@ class Controller_Page extends Controller_Template
     }
     public function action_privacy()
     {        
-        Response::redirect('http://www.infic-c.net/careeye/privacy.html');
+        Response::redirect('http://www.infic-c.net/LASHIC/privacy.html');
         return;
         $this->template->title = 'プライバシーポリシー';
         $this->data['breadcrumbs'] = array($this->template->title);
@@ -86,7 +86,7 @@ class Controller_Page extends Controller_Template
     }
     public function action_help()
     {        
-        Response::redirect('http://www.infic-c.net/careeye/qa.html');
+        Response::redirect('http://www.infic-c.net/LASHIC/qa.html');
         return;
         $this->template->title = 'Q &amp; A';
         $this->data['breadcrumbs'] = array($this->template->title);
@@ -95,7 +95,7 @@ class Controller_Page extends Controller_Template
         $this->template->footer = View::forge('footer');
     }
     public function action_about() {
-        $this->template->title = 'ケアアイとは';
+        $this->template->title = 'ラシクとは';
         $this->template->header = View::forge('header');
         $this->template->content = View::forge('more_info');
         $this->template->footer = View::forge('footer');

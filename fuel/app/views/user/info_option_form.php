@@ -85,7 +85,7 @@ if(isset($errors['users_count'])) {
 									</tr>
 									<tr>
 										<th>メールアドレス</th>
-										<td><input type="text" class="input_text input_short" name="email"> <span class="small text_red">※半角英数でご入力ください。例）example@careeye.jp</span></td>
+										<td><input type="text" class="input_text input_short" name="email"> <span class="small text_red">※半角英数でご入力ください。例）example@lashic.jp</span></td>
 									</tr>
 								</tbody>
 							</table>

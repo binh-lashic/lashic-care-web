@@ -15,7 +15,7 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">送付先指定</h1>
-			<p>CareEye機器の送付先をご指定ください。</p>
+			<p>LASHIC機器の送付先をご指定ください。</p>
 			<div class="shoppingCart_container clearfix">
 				<ul class="shoppingCart_containerUl">
 <?php

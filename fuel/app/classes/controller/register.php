@@ -19,7 +19,7 @@ class Controller_Register extends Controller_Base
 		$this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
 		
-		$this->template->title = 'Care Eye 新規登録  >  アカウント情報　入力';
+		$this->template->title = 'LASHIC 新規登録  >  アカウント情報　入力';
         $this->template->header = View::forge('header', $this->data);
 
         if(Input::post()) {
@@ -55,7 +55,7 @@ class Controller_Register extends Controller_Base
 
 	public function action_email()
 	{		
-		$this->template->title = 'Care Eye 新規登録  >  メールアドレス入力';
+		$this->template->title = 'LASHIC 新規登録  >  メールアドレス入力';
 		$this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
 
@@ -101,7 +101,7 @@ class Controller_Register extends Controller_Base
                         );
                 $params = array(
                     'to' => $_SERVER['EMAIL_MASTER'],
-                    'subject' => "CareEye新規アカウント登録・購入情報",
+                    'subject' => "LASHIC新規アカウント登録・購入情報",
                     'text' => \View::forge('email/admin/register', $data)
                 );
                 \Model_User::sendEmail($params);
@@ -113,7 +113,7 @@ class Controller_Register extends Controller_Base
 			Log::error(print_r($params, true), 'register_complete');
 		}
 
-		$this->template->title = 'Care Eye 新規登録  >  アカウント情報　入力';
+		$this->template->title = 'LASHIC 新規登録  >  アカウント情報　入力';
         $this->template->header = View::forge('header', $this->data);
 		$this->template->content = View::forge('register/complete', $this->data);
 	}

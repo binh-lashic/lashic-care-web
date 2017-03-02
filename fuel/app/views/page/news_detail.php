@@ -4,9 +4,9 @@
 				
 				<!-- リリース 詳細 -->
 				<article class="post">
-					<h2 class="news_h2">CareEye公開準備中</h2>
+					<h2 class="news_h2">LASHIC公開準備中</h2>
 					<p class="news_detail_time">2016/06/01</p>
-					<div class="post-body">現在、CareEyeアプリ公開を準備中です。AppStore掲載時には別途告知致します。</div>
+					<div class="post-body">現在、LASHICアプリ公開を準備中です。AppStore掲載時には別途告知致します。</div>
 				</article>
 				<!-- /リリース 詳細 --> 
 				

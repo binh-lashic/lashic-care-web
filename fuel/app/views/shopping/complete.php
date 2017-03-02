@@ -16,7 +16,7 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1 center">ご注文が完了しました</h1>
 			<p class="center">ご購入された内容をメールでお送りしました。<br>
-お支払いが確認でき次第、CareEye機器を配送いたします。<br>
+お支払いが確認でき次第、LASHIC機器を配送いたします。<br>
 機器に電源を入れインターネット環境につながると、<br>
 ユーザーの状況を確認できるようになります。
 </p>

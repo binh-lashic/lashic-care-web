@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CareEye ケアアイ - プライバシーポリシー（個人情報保護方針）</title>
-<meta name="keywords" content="CareEye,ケアアイ,ケア,アイ,見守り">
-<meta name="description" content="CareEye（ケアアイ）のプライバシーポリシー（個人情報保護方針）ページです。">
+<title>LASHIC ラシク - プライバシーポリシー（個人情報保護方針）</title>
+<meta name="keywords" content="LASHIC,ラシク,見守り">
+<meta name="description" content="LASHIC（ラシク）のプライバシーポリシー（個人情報保護方針）ページです。">
 <meta name="robots" content="all">
 <meta property="og:type" content="website" >
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
-<meta property="og:image" content="http://careeye.jp/images/common/ogp.jpg" >
-<meta property="og:site_name" content="CareEye（ケアアイ） - プライバシーポリシー（個人情報保護方針）" >
-<meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
+<meta property="og:image" content="/images/common/ogp.jpg" >
+<meta property="og:site_name" content="LASHIC（ラシク） - プライバシーポリシー（個人情報保護方針）" >
+<meta property="og:description" content="LASHIC（ラシク）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
 <meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
-<link rel="shortcut icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="apple-touch-icon" href="http://careeye.jp/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
 <link href="reset.css" type="text/css" rel="stylesheet">
 <link href="common.css" type="text/css" rel="stylesheet">
 <link href="drawer.css" type="text/css" rel="stylesheet">
@@ -28,7 +28,7 @@
 <body id="home" class="drawer drawer--right">
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
-		<div class="drawer-navbar-header"><a class="logo" href="http://careeye.jp/user"><img src="../images/common/logo.png" alt=""/></a></div>
+		<div class="drawer-navbar-header"><a class="logo" href="/user"><img src="../images/common/logo.png" alt=""/></a></div>
 	</div>
 </header>
 
@@ -37,7 +37,7 @@
 	<!-- pankuzu -->
 	<div id="pankuzu">
 		<div class="content">
-			<a href="http://careeye.jp/user/">ホーム</a>
+			<a href="/user/">ホーム</a>
 		&nbsp;&gt;&nbsp; プライバシーポリシー</div>
 	</div>
 	<!-- /pankuzu -->
@@ -52,10 +52,10 @@
 			<p>　本方針において、以下の用語は以下に定める意味を有するものとします。</p>
 			<ul class="ul-text2">
 				<li>（1）本方針において、「個人情報」（注※1）、「個人データ」（注※2）、「保有個人データ」（注※3）は、「個人情報の保護に関する法律」（以下「個人情報保護法」といいます）第2条各号に定める意味を有します。</li>
-				<li>（2）「利用者」とは、所定の方法によりCareEyeユーザー登録及びCareEyeアカウント登録をした個人をいいます。</li>
+				<li>（2）「利用者」とは、所定の方法によりLASHICユーザー登録及びLASHICアカウント登録をした個人をいいます。</li>
 				<li>（3）「当グループ」とは、インフィック株式会社、株式会社まごころ介護サービス及びインフィック株式会社又は株式会社まごころ介護サービスと業務上の提携関係にある会社であって、本方針において指定される会社をいいます。なお、「当グループ」として指定される会社は随時更新されます。（現在の「当グループ」 に所属する会社はこちら（注※4）です。）</li>
-				<li>（4）「サービス」とは、当グループが運営する「CareEye」において提供する利用者向けの各種サービスをいいます。</li>
-				<li>（5）「サービス提供者」とは、CareEyeサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
+				<li>（4）「サービス」とは、当グループが運営する「LASHIC」において提供する利用者向けの各種サービスをいいます。</li>
+				<li>（5）「サービス提供者」とは、LASHICサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
 			</ul>
 			
 			
@@ -208,14 +208,14 @@
 </main>
 <footer>
 	<ul>
-		<li><a href="http://careeye.jp/page/news">運営者からのお知らせ</a></li>
-		<li><a href="http://careeye.jp/page/terms">利用規約</a></li>
+		<li><a href="/page/news">運営者からのお知らせ</a></li>
+		<li><a href="/page/terms">利用規約</a></li>
 		<li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-		<li><a href="http://careeye.jp/page/privacy">プライバシーポリシー</a></li>
-		<li><a href="http://careeye.jp/page/help">Q&amp;A</a></li>
-		<li><a href="http://careeye.jp/contact">お問い合わせ</a></li>
+		<li><a href="/page/privacy">プライバシーポリシー</a></li>
+		<li><a href="/page/help">Q&amp;A</a></li>
+		<li><a href="/contact">お問い合わせ</a></li>
 	</ul>
-	<p><span class="ftr_copyrights">&copy;</span> CareEye. All Rights Reserved.</p>
+	<p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="../images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <script src="content.js" type="text/javascript"></script>

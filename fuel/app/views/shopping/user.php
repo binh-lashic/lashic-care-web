@@ -15,7 +15,7 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー設定</h1>
-			<p>CareEye機器を使用する見守り対象ユーザーの情報をご登録ください。<br>
+			<p>LASHIC機器を使用する見守り対象ユーザーの情報をご登録ください。<br>
 				すでにご登録済みのユーザーにお届けする場合は、一覧から選択してください。 </p>
 			
 			<!-- 基本情報 -->

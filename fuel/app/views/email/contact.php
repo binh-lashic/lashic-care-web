@@ -1,9 +1,9 @@
 <?php echo $name; ?>　様<br />
                                                         <?php echo $date; ?><br />
 **********************************************************************<br />
- CareEyeお問い合わせのご連絡<br />
+ LASHICお問い合わせのご連絡<br />
 **********************************************************************<br />
-このたびはCareEyeサービスにお問い合わせいただき、誠にありがとうござました。<br />
+このたびはLASHICサービスにお問い合わせいただき、誠にありがとうござました。<br />
 <br />
 下記のお問い合わせの内容を承りました。<br />
 内容について確認をし、ご連絡させて頂きますので、今しばらくお待ち下さい。<br /><br />
@@ -19,9 +19,9 @@
 ■サポート＆サービス情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 ↓Ｑ＆Ａ<br />
-http://www.infic-c.net/careeye/help.htm<br />
+http://www.infic-c.net/LASHIC/qa.html<br />
 ↓お問い合わせ<br />
-http://careeye.jp/contact<br />
+http://lashic.jp/contact<br />
 ↓運営会社<br />
 http://www.infic.net<br />
 http://www.infic-c.net<br />
@@ -36,7 +36,7 @@ http://www.infic-c.net<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 当社の個人情報保護方針につきましては、下記のWebサイトにてご確認いただけ<br />
 ます。<br />
-http://www.infic-c.net/careeye/privacy.htm<br />
+http://www.infic-c.net/LASHIC/privacy.htm<br />
 <br />
 **********************************************************************<br />
 本メールは自動的に作成し、配信しております。<br />

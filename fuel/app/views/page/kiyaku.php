@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CareEye ケアアイ - 利用規約</title>
-<meta name="keywords" content="CareEye,ケアアイ,ケア,アイ,見守り">
-<meta name="description" content="CareEye（ケアアイ）の利用規約ページです。">
+<title>LASHIC ラシク - 利用規約</title>
+<meta name="keywords" content="LASHIC,ラシク,見守り">
+<meta name="description" content="LASHIC（ラシク）の利用規約ページです。">
 <meta name="robots" content="all">
 <meta property="og:type" content="website" >
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
-<meta property="og:image" content="http://careeye.jp/images/common/ogp.jpg" >
-<meta property="og:site_name" content="CareEye（ケアアイ） - 利用規約" >
-<meta content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" property="og:description" href="http://careeye.jp/page/privacy" >
+<meta property="og:image" content="http://lashic.jp/images/common/ogp.jpg" >
+<meta property="og:site_name" content="LASHIC（ラシク） - 利用規約" >
+<meta content="LASHIC（ラシク）は高齢者の”自立”をささえ、”あんしん”を共有します。" property="og:description" href="/page/privacy" >
 <meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
-<link rel="shortcut icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="apple-touch-icon" href="http://careeye.jp/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
 <link href="reset.css" type="text/css" rel="stylesheet">
 <link href="common.css" type="text/css" rel="stylesheet">
 <link href="drawer.css" type="text/css" rel="stylesheet">
@@ -28,7 +28,7 @@
 <body id="home" class="drawer drawer--right">
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
-		<div class="drawer-navbar-header"><a class="logo" href="http://careeye.jp/user"><img src="../images/common/logo.png" alt=""/></a></div>
+		<div class="drawer-navbar-header"><a class="logo" href="/user"><img src="../images/common/logo.png" alt=""/></a></div>
 	</div>
 </header>
 
@@ -37,17 +37,17 @@
 	<!-- pankuzu -->
 	<div id="pankuzu">
 		<div class="content">
-			<a href="http://careeye.jp/user/">ホーム</a>
+			<a href="/user/">ホーム</a>
 		&nbsp;&gt;&nbsp; 利用規約</div>
 	</div>
 	<!-- /pankuzu -->
 	<div class="clearfix content"> 
 		<!-- content start　利用規約 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">CareEye利用規約</h1>
+			<h1 class="contentLarge_h1">LASHIC利用規約</h1>
 			<ul>
 				<li><a href="#section01">第1条　&nbsp;&nbsp;定義</a></li>
-				<li><a href="#section02">第2条　&nbsp;&nbsp;CareEye利用者</a></li>
+				<li><a href="#section02">第2条　&nbsp;&nbsp;LASHIC利用者</a></li>
 				<li><a href="#section03">第3条　&nbsp;&nbsp;本規約</a></li>
 				<li><a href="#section04">第4条　&nbsp;&nbsp;利用者登録手続き</a></li>
 				<li><a href="#section05">第5条　&nbsp;&nbsp;ユーザーＩＤ及びパスワードの管理</a></li>
@@ -66,24 +66,24 @@
 				<li><a href="#section18">第18条　本規約の改定</a></li>
 				<li><a href="#section19">第19条　準拠法、合意管轄</a></li>
 			</ul>
-			<h2 class="content_h2 mgt40 mgb30">CareEye利用規約</h2>
+			<h2 class="content_h2 mgt40 mgb30">LASHIC利用規約</h2>
 			
 			
 			
 			<h3 id="section01" class="content_h3">第1条（定義）</h3>
 			<p>　本規約において、以下の用語は以下に定める意味を有するものとします。</p>
 			<ul class="ul-text2">
-				<li>（1）「利用者」とは、本規約に同意の上、所定の方法によりCareEyeユーザー登録及びCareEyeアカウント登録をした個人をいいます。</li>
+				<li>（1）「利用者」とは、本規約に同意の上、所定の方法によりLASHICユーザー登録及びLASHICアカウント登録をした個人をいいます。</li>
 				<li>（2）「当グループ」とは、インフィック株式会社、株式会社まごころ介護サービス及びインフィック株式会社又は株式会社まごころ介護サービスと業務上の提携関係にある会社であって、本方針において指定される会社をいいます。なお、「当グループ」として指定される会社は随時更新されます。（現在の「当グループ」 に所属する会社はこちら（注※5）です。）</li>
-				<li>（3）「サービス」とは、当グループが運営する「CareEye」において提供する利用者向けの各種サービスをいいます。</li>
+				<li>（3）「サービス」とは、当グループが運営する「LASHIC」において提供する利用者向けの各種サービスをいいます。</li>
 				<li>（4）「取引」とは、利用者がサービスを利用して行う、お買い物、プレゼント応募等の各種行為をいいます。</li>
-				<li>（5）「サービス提供者」とは、CareEyeサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
-				<li>（6）「本規約等」とは、本規約、CareEyeサイトご利用上のご注意、その他当グループが定める規約、ガイドライン等の総称をいいます。</li>
+				<li>（5）「サービス提供者」とは、LASHICサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
+				<li>（6）「本規約等」とは、本規約、LASHICサイトご利用上のご注意、その他当グループが定める規約、ガイドライン等の総称をいいます。</li>
 				<li>（7）「利用者情報」とは、利用者が当グループに開示した利用者の属性に関する情報および利用者の取引に関する履歴等の情報（第11条により収集された情報を含みます）をいいます。</li>
 			</ul>
 			
 			
-			<h3 id="section02" class="content_h3">第2条（CareEye利用者）</h3>
+			<h3 id="section02" class="content_h3">第2条（LASHIC利用者）</h3>
 			<ol class="ol-text">
 				<li>利用者は、当グループが定める条件に従って、サービスを利用することができます。ただし、別途当グループが定める事項の登録を必要とする場合があります。</li>
 				<li>利用者は、利用者としての地位およびサービスの利用により当グループに対して取得した一切の権利を譲渡、転貸、担保差入その他形態を問わず処分することはできません。</li>
@@ -119,7 +119,7 @@
 			
 			
 			
-			<h3 id="section08" class="content_h3">第8条（CareEyeにおける取引）</h3>
+			<h3 id="section08" class="content_h3">第8条（LASHICにおける取引）</h3>
 			<p>　利用者が当グループのサーバを通して行うサービス提供者との取引は、利用者とサービス提供者間の直接取引となります。当グループは、当該取引についてサービス提供者となる場合を除き、取引の当事者とはならず、取引に関する責任は負いません。したがって、取引に際し万一トラブルが生じた際には、利用者とサービス提供者との間で解決していただくことになります。</p>
 			
 			
@@ -137,7 +137,7 @@
 			<h3 id="section10" class="content_h3">第10条（禁止事項）</h3>
 			<p>　本サービスの利用に際して、利用者に対し次の各号の行為を行うことを禁止します。</p>
 			<ul class="ul-text2">
-				<li>（1）法令または本規約、CareEyeサイトご利用上のご注意、その他の本規約等に違反すること</li>
+				<li>（1）法令または本規約、LASHICサイトご利用上のご注意、その他の本規約等に違反すること</li>
 				<li>（2）当グループ、サービス提供者およびその他の第三者の権利、利益、名誉等を損ねること</li>
 				<li>（3）公序良俗に反する行為を行うこと</li>
 				<li>（4）他の利用者その他の第三者に迷惑となる行為や不快感を抱かせる行為を行うこと</li>
@@ -157,7 +157,7 @@
 			
 			
 			<h3 id="section12" class="content_h3">第12条（利用者情報の取扱い）</h3>
-			<p>　当グループは、当グループの個人情報保護方針（<a href="http://careeye.jp/page/privacy">http://careeye.jp/page/privacy</a>）に従い、個人情報を取り扱います。</p>
+			<p>　当グループは、当グループの個人情報保護方針（<a href="/page/privacy">http://lashic.jp/page/privacy</a>）に従い、個人情報を取り扱います。</p>
 			<h3 id="section13" class="content_h3">第13条（著作権の取扱い）</h3>
 			<p>　本サービスに表示される文章、画像、デザインまたは商標、ロゴマーク等（以下、「掲載情報」といいます）に関する 著作権その他の諸権利は、当社または当該権利の正当な権利者に帰属します。</p>
 			<p>ユーザは、掲載情報を無断使用、無断転載することはできません。</p>
@@ -225,14 +225,14 @@
 </main>
 <footer>
 	<ul>
-		<li><a href="http://careeye.jp/page/news">運営者からのお知らせ</a></li>
-		<li><a href="http://careeye.jp/page/terms">利用規約</a></li>
+		<li><a href="/page/news">運営者からのお知らせ</a></li>
+		<li><a href="/page/terms">利用規約</a></li>
 		<li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-		<li><a href="http://careeye.jp/page/privacy">プライバシーポリシー</a></li>
-		<li><a href="http://careeye.jp/page/help">Q&amp;A</a></li>
-		<li><a href="http://careeye.jp/contact">お問い合わせ</a></li>
+		<li><a href="/page/privacy">プライバシーポリシー</a></li>
+		<li><a href="/page/help">Q&amp;A</a></li>
+		<li><a href="/contact">お問い合わせ</a></li>
 	</ul>
-	<p><span class="ftr_copyrights">&copy;</span> CareEye. All Rights Reserved.</p>
+	<p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="../images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <script src="content.js" type="text/javascript"></script>

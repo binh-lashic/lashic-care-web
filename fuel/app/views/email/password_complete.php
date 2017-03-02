@@ -1,20 +1,20 @@
 <?php echo $name; ?>　様<br />
                                                         <?php echo date("Y年m月d日"); ?><br />
 **********************************************************************<br />
- CareEyeパスワード設定完了のご連絡<br />
+ LASHICパスワード設定完了のご連絡<br />
 **********************************************************************<br />
 パスワードの設定が完了しました。<br />
 下記のログインページよりログインをしてください。<br />
 <br />
-https://careeye.jp/<br />
+https://lashic.jp/<br />
 <br />
 
 ■サポート＆サービス情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 ↓Ｑ＆Ａ<br />
-http://www.infic-c.net/careeye/help.htm<br />
+http://www.infic-c.net/LASHIC/aq.html<br />
 ↓お問い合わせ<br />
-http://careeye.jp/contact<br />
+http://lashic.jp/contact<br />
 ↓運営会社<br />
 http://www.infic.net<br />
 http://www.infic-c.net<br />
@@ -29,7 +29,7 @@ http://www.infic-c.net<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 当社の個人情報保護方針につきましては、下記のWebサイトにてご確認いただけ<br />
 ます。<br />
-http://www.infic-c.net/careeye/privacy.htm<br />
+http://www.infic-c.net/LASHIC/privacy.htm<br />
 <br />
 **********************************************************************<br />
 本メールは自動的に作成し、配信しております。<br />

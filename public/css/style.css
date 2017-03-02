@@ -1456,15 +1456,15 @@ a.moreINfoLink:link {
 #loginTop {
 	width: 840px;
 	
-    min-height: 460px;
+    min-height: 520px;
 	margin: 0 auto;
 	position: relative;
 }
 #loginTitle {
 	width: 413px;
-	height: 140px;
+	height: 190px;
 	background: url(../images/login/login_text.png) no-repeat;
-	background-size: 413px 140px;
+	background-size: 413px 190px;
 	text-indent: -9999px;
 	position: absolute;
 	left: 0;
@@ -1554,7 +1554,7 @@ a.moreINfoLink:link {
 }
 #moreInfoBg {
 	background-color: rgba(255,255,255,0.8);
-	padding: 35px 0 0;
+	padding: 35px 0;
 }
 .moreInfoInner2 {
 	width: 100%;

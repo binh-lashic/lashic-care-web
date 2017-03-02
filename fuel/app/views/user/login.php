@@ -33,7 +33,7 @@ if(isset($error)) {
 				<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt20">ログインする</a></p>
 				<p><a href="/register" class="btn_redRadius20 mgt10">新規登録する</a></p>
 				<a href="#moreInfoBg" class="moreINfoLink">
-					<div class="moreInfoTitle mgt10">CareEyeを知る</div>
+					<div class="moreInfoTitle mgt10">LASHICを知る</div>
 					<div  class="center mgt5"><img src="/images/login/moreinfo_arrow.png" width="17" height="17" alt=""/></div>
 				</a>
 			</div>

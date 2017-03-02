@@ -45,13 +45,13 @@ foreach($payments as $payment) {
 			
 			
 			
-			<!-- CareEyeから退会希望のお客様 -->
+			<!-- LASHICから退会希望のお客様 -->
 			<h2 class="form_title">ご契約の解約やお問い合わせはこちらへご連絡ください。</h2>
 			<div class="form_set_container center">
 				<p class="mgt20 mgb10">お電話で解約のお申し込みをしてください。</p>
 				<p class="mgb20"><span class="phone_number">054-266-6201</span><br>
 午前9時〜午後18時まで、土日祝日休み</p>
 			</div>
-			<!-- /CareEyeから退会希望のお客様 -->
+			<!-- /LASHICから退会希望のお客様 -->
 		</section>
 		<!-- /content end　ユーザー管理 --> 

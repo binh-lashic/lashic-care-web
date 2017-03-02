@@ -74,7 +74,7 @@
 			<div class="contentHalf floatL">
 				<h2 class="regist_h2 wow fadeInUp">高齢者宅の<br>
 					”いま”の状態を共有します</h2>
-				<p>宅内に設置した「CareEye」センサーで、ご家族は設置先である高齢者宅内の”いま”の状態を共有できます。<br>
+				<p>宅内に設置した「LASHIC」センサーで、ご家族は設置先である高齢者宅内の”いま”の状態を共有できます。<br>
 					温度・湿度・照度など高齢者宅の生活環境や運動量による日常生活の様子がスマートフォンなどでリアルタイムに確認が可能。異常時には、メールやアプリによるプッシュ通知でお知らせします。</p>
 			</div>
 			<div class="contentHalf floatR">
@@ -90,7 +90,7 @@
 		<div class="regist_waku clearfix wow fadeInUp">
 			<div class="floatL"><img src="/images/regist/regist_img_02_01.jpg" width="129" height="169" alt="PC画面"/></div>
 			<div class="floatR regist_waku_right">
-				<h3 class="regist_h3 mgb20">CareEye モニター画面</h3>
+				<h3 class="regist_h3 mgb20">LASHIC モニター画面</h3>
 				<ul>
 					<li class="clearfix">
 						<div class="floatL"><img src="/images/regist/regist_img_02_02.jpg" width="48" height="40" class="mgr10" alt=""/></div>
@@ -119,10 +119,10 @@
 		
 		<h4 class="regist_h4 wow fadeInUp">”いま”を知ることが自立支援の第一歩です</h4>
 		<p class=" wow fadeInUp">老化や認知症の初期段階はほんの僅かな変化から始まり、ご家族はもちろん、本人でさえそのことに気づくのは困難です。<br>
-			「CareEye」はその”いま”をキャッチして、ご本人もご家族も納得感がありバランスの取れた”自立”と”支援”の環境構築をサポートします。</p>
+			「LASHIC」はその”いま”をキャッチして、ご本人もご家族も納得感がありバランスの取れた”自立”と”支援”の環境構築をサポートします。</p>
 		<h4 class="regist_h4 mgt30 wow fadeInUp">”これから”を予測することで事前準備が容易になります</h4>
 		<p class=" wow fadeInUp">認知症の発症などにより、ある日突然対応を迫られると、選択肢は狭まり、費用がかさんでしまいます。<br>
-			「CareEye」からの通知やレポートにより、事前に備えることによって、ゆとりを持って個々の状態や環境にふさわしい選択が可能とります。</p>
+			「LASHIC」からの通知やレポートにより、事前に備えることによって、ゆとりを持って個々の状態や環境にふさわしい選択が可能とります。</p>
 		<!-- /text --> 
 		
 	</div>
@@ -138,7 +138,7 @@ if(!empty($monitor))
 ?>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
-							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>無料モニターパック</h3>
+							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>無料モニターパック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span>
 							</p>
 							<p class="right">初期費用 14,800円（税抜）</p>
@@ -160,7 +160,7 @@ if(!empty($monitor))
 ?>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
-							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>月々パック</h3>
+							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>月々パック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">
@@ -176,7 +176,7 @@ if(!empty($monitor))
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
-							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>6ヶ月パック</h3>
+							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>6ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">1,100円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">
@@ -192,7 +192,7 @@ if(!empty($monitor))
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
-							<h3 class="shoppingCart_h3">CareEye（ケアアイ）<br>12ヶ月パック</h3>
+							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>12ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">980円/月</span><span class="large text_red">（税抜）</span></p>
 							<p class="right">初期費用 14,800円（税抜）</p>
 							<div class="shoppingCart_detail">

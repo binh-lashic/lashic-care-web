@@ -1,6 +1,6 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">Care Eye 新規登録のお客様</h1>
+			<h1 class="contentLarge_h1">LASHIC 新規登録のお客様</h1>
 			<!-- flow矢印 -->
 			<div class="flowSet flow_no03">
 				<ol>
@@ -45,7 +45,7 @@
 						<div class="clearfix">
 							<div class="floatL"><img src="../images/regist/regist_img_02_01.jpg" width="129" height="169" alt="PC画面"/></div>
 							<div class="floatR regist_waku_right">
-								<h3 class="regist_h3 mgb20">Care Eye モニター画面</h3>
+								<h3 class="regist_h3 mgb20">LASHIC モニター画面</h3>
 								<ul>
 									<li class="clearfix">
 										<div class="floatL"><img src="../images/regist/regist_img_02_02.jpg" width="48" height="40" class="mgr10" alt=""/></div>
@@ -82,11 +82,11 @@
 						
 					<h4 class="regist_h4">”いま”を知ることが自立支援の第一歩です</h4>
 					<p>老化や人視聴の初期段階はほんの僅かな変化から始まり、ご家族はもちろん、ほんんインでさえそこに気づくのは困難です。<br>
-「CareEye」でその”いま”をキャッチして、ご本人もご家族も納得感がありバランスの取れた”自立”と”支援”の環境構築をサポートします。</p>
+「LASHIC」でその”いま”をキャッチして、ご本人もご家族も納得感がありバランスの取れた”自立”と”支援”の環境構築をサポートします。</p>
 						
 					<h4 class="regist_h4 mgt30">”これから”を予測することで事前準備が容易になります</h4>
 					<p>認知症の発症などにより、ある日突然対応を迫られると、選択肢は狭まり、費用は増加します。<br>
-「CareEye」からの通知やレポートにより、事前準備をある程度想定しておくことで、<br>
+「LASHIC」からの通知やレポートにより、事前準備をある程度想定しておくことで、<br>
 ゆとりを持って個々の状態や環境にふさわしい選択が可能とります。</p>
 					<!-- /text -->
 						</td>

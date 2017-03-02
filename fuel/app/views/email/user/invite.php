@@ -1,25 +1,25 @@
 <?php echo $name; ?>様<br />
                                                         <?php echo $date; ?><br />
 **********************************************************************<br />
- CareEye サービスご利用、<?php echo $user['last_name'] ?><?php echo $user['first_name'] ?>様からのご招待<br />
+ LASHIC サービスご利用、<?php echo $user['last_name'] ?><?php echo $user['first_name'] ?>様からのご招待<br />
 **********************************************************************<br />
-この度、<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>様から「CareEyeサービス」ご利用のご招待がありましたのでご案内いたします。<br />
-「CareEyeサービス」の概要についてはこちらhttps://careeye.jp/からご覧ください。<br />
+この度、<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>様から「LASHICサービス」ご利用のご招待がありましたのでご案内いたします。<br />
+「LASHICサービス」の概要についてはこちらhttps://lashic.jp/からご覧ください。<br />
 <br />
 下記のリンク先から<?php echo $name; ?>さまの情報をご入力頂きますと、<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?>様と見守り情報を共有頂けますので是非ご利用ください。<br />
 <?php echo $url; ?><br />
 <br />
 <br />
-上記の登録後、パソコン、スマートフォン、タブレット端末などのインターネット閲覧ソフト（ブラウザ）で「careeye.jp」にアクセスし、ご登録頂いたID（メールアドレス）とパスワードを入力してログインしてください。<br />
+上記の登録後、パソコン、スマートフォン、タブレット端末などのインターネット閲覧ソフト（ブラウザ）で「lashic.jp」にアクセスし、ご登録頂いたID（メールアドレス）とパスワードを入力してログインしてください。<br />
 <br />
 万一、本メールに覚えがない、誤って着信した場合には、お手数ですが、発信人まで連絡の上、メールを破棄いただきますようお願いいたします。<br />
 <br />
 ■サポート＆サービス情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 ↓Ｑ＆Ａ<br />
-http://www.infic-c.net/careeye/help.htm<br />
+http://www.infic-c.net/LASHIC/qa.html<br />
 ↓お問い合わせ<br />
-http://www.careeye.jp/contact<br />
+http://www.lashic.jp/contact<br />
 ↓運営会社<br />
 http://www.infic.net<br />
 http://www.infic-c.net<br />
@@ -34,7 +34,7 @@ http://www.infic-c.net<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 当社の個人情報保護方針につきましては、下記のWebサイトにてご確認いただけ<br />
 ます。<br />
-http://www.infic-c.net/careeye/privacy.htm<br />
+http://www.infic-c.net/LASHIC/privacy.htm<br />
 <br />
 **********************************************************************<br />
 本メールは自動的に作成し、配信しております。<br />

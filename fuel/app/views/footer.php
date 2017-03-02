@@ -9,7 +9,7 @@
     <li><a href="/page/help">Q&amp;A</a></li>
     <li><a href="/contact">お問い合わせ</a></li>
   </ul>
-  <p><span class="ftr_copyrights">&copy;</span> Care Eye. All Rights Reserved.</p>
+  <p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 

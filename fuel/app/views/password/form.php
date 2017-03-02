@@ -37,7 +37,7 @@ if(isset($errors)) {
 メールのリンクから「新パスワードの設定画面」に移動し、新しいパスワードを設定くださいませ。</p>
 <p class="mgt30 small"><span class="text_red">※</span>新パスワード設定画面の有効時間はメール送信後24時間となります。24時間以内に新パスワードの設定を完了させてください。<br>
 <span class="text_red">※</span>メールが届かない場合はご入力に間違いがあるか、ドメイン拒否の設定をされている可能性があります。<br>
-　ケアアイ（@careeye.jp）からのメールが受信できるよう設定をし、再度パスワードの再設定をしてください。 <br>
+　ラシク（@lashic.jp）からのメールが受信できるよう設定をし、再度パスワードの再設定をしてください。 <br>
 <span class="text_red">※</span>個人情報は、信頼性の高いセキュリティ技術の SSL を使用し暗号化しています。</p>
 			
 			
@@ -51,7 +51,7 @@ if(isset($errors)) {
 								<tbody>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 会員ID（メールアドレス）</th>
-										<td><input type="text" name="email" class="input_text input_medium" placeholder="例）careeye@careeye.jp" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>"> <span class="small text_red">※</span><span class="small">半角英数でご入力ください</span></td>
+										<td><input type="text" name="email" class="input_text input_medium" placeholder="例）example@lashic.jp" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>"> <span class="small text_red">※</span><span class="small">半角英数でご入力ください</span></td>
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> お名前</th>

@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CareEye ケアアイ - Q &amp; A</title>
-<meta name="keywords" content="ケアアイ,ケア,アイ,見守り">
-<meta name="description" content="ケアアイのQ & Aページです。">
+<title>LASHIC ラシク - Q &amp; A</title>
+<meta name="keywords" content="ラシク,見守り">
+<meta name="description" content="ラシクのQ & Aページです。">
 <meta name="robots" content="all">
 <meta property="og:type" content="website" >
-<meta property="og:url" content="http://careeye.jp/" >
+<meta property="og:url" content="http://lashic.jp/" >
 <meta property="og:locale" content="ja_JP" >
 <meta property="og:image" content="/images/common/ogp.jpg" >
-<meta property="og:site_name" content="CareEye（ケアアイ）　Q & Aページです。" >
-<meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
+<meta property="og:site_name" content="LASHIC（ラシク）　Q & Aページです。" >
+<meta property="og:description" content="LASHIC（ラシク）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
 <meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
-<link rel="shortcut icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="icon" href="http://careeye.jp/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="apple-touch-icon" href="http://careeye.jp/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
 <link href="reset.css" type="text/css" rel="stylesheet">
 <link href="common.css" type="text/css" rel="stylesheet">
 <link href="drawer.css" type="text/css" rel="stylesheet">
@@ -28,7 +28,7 @@
 <body id="home" class="drawer drawer--right">
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
-		<div class="drawer-navbar-header"><a class="logo" href="http://careeye.jp/user"><img src="../images/common/logo.png" alt=""/></a></div>
+		<div class="drawer-navbar-header"><a class="logo" href="/user"><img src="../images/common/logo.png" alt=""/></a></div>
 	</div>
 </header>
 
@@ -37,7 +37,7 @@
 	<!-- pankuzu -->
 	<div id="pankuzu">
 		<div class="content">
-			<a href="http://careeye.jp/user/">ホーム</a>
+			<a href="/user/">ホーム</a>
 		&nbsp;&gt;&nbsp; Q &amp; A</div>
 	</div>
 	<!-- /pankuzu -->
@@ -63,7 +63,7 @@
 ※多くのケースでの利用が想定されます。適応の有無に関する相談もお受けしております。</span></dd>
 					<dt id="q01_02"><span><strong>Q2.</strong> インターネット環境がないと利用できませんか。</span></dt>
 					<dd style="display:none"><span>インターネット環境がない場合にはポケットルーター（1500円/月）を貸し出すことで利用が可能となります。</span></dd>
-					<dt id="q01_03"><span><strong>Q3.</strong> CareEyeの大きさはどのくらいですか。</span></dt>
+					<dt id="q01_03"><span><strong>Q3.</strong> LASHICの大きさはどのくらいですか。</span></dt>
 					<dd style="display:none"><span>コンセントカバーくらいの大きさです。9.5㎝×10.8㎝（厚さ3.5㎝）</span></dd>
 					<dt id="q01_04"><span><strong>Q4. </strong> 取付は難しいですか。</span></dt>
 					<dd style="display:none"><span>難しくありません。基本的には設置位置を決めて取り付け、インターネット回線に接続、コンセントを差すだけです。</span></dd>
@@ -155,14 +155,14 @@ Android端末対応は2016年内を目処にご提供する予定です。</span
 </main>
 <footer>
 	<ul>
-		<li><a href="http://careeye.jp/page/news">運営者からのお知らせ</a></li>
-		<li><a href="http://careeye.jp/page/terms">利用規約</a></li>
+		<li><a href="/page/news">運営者からのお知らせ</a></li>
+		<li><a href="/page/terms">利用規約</a></li>
 		<li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-		<li><a href="http://careeye.jp/page/privacy">プライバシーポリシー</a></li>
-		<li><a href="http://careeye.jp/page/help">Q&amp;A</a></li>
-		<li><a href="http://careeye.jp/contact">お問い合わせ</a></li>
+		<li><a href="/page/privacy">プライバシーポリシー</a></li>
+		<li><a href="/page/help">Q&amp;A</a></li>
+		<li><a href="/contact">お問い合わせ</a></li>
 	</ul>
-	<p><span class="ftr_copyrights">&copy;</span> CareEye. All Rights Reserved.</p>
+	<p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="../images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 <script src="js/content.js" type="text/javascript"></script>

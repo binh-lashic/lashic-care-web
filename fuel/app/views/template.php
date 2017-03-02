@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CareEye ケアアイ - <?php if(!empty($title)) { echo $title; } ?></title>
-<meta name="keywords" content="ケアアイ,ケア,アイ,見守り">
-<meta name="description" content="ケアアイの管理画面です。">
+<title>LASHIC ラシク - <?php if(!empty($title)) { echo $title; } ?></title>
+<meta name="keywords" content="ラシク,見守り">
+<meta name="description" content="ラシクの管理画面です。">
 <meta name="robots" content="all">
 <meta property="og:type" content="website" >
 <meta property="og:url" content="" >
 <meta property="og:locale" content="ja_JP" >
 <meta property="og:image" content="/images/common/ogp.jpg" >
-<meta property="og:site_name" content="CareEye（ケアアイ）　管理ページ" >
-<meta property="og:description" content="CareEye（ケアアイ）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
+<meta property="og:site_name" content="LASHIC（ラシク）　管理ページ" >
+<meta property="og:description" content="LASHIC（ラシク）は高齢者の”自立”をささえ、”あんしん”を共有します。" >
 <meta name="viewport" content="target-densitydpi=device-dpi, width=1000px, minimum-scale=0.1, maximum-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
 <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
@@ -57,7 +57,7 @@
     <li><a href="/page/help">Q&amp;A</a></li>
     <li><a href="/contact">お問い合わせ</a></li>
   </ul>
-  <p><span class="ftr_copyrights">&copy;</span> CareEye. All Rights Reserved.</p>
+  <p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
 <p id="page-top"><a href="#home"><img src="/images/common/btn_pagetop.png" width="59" height="59" alt=""/></a></p>
 

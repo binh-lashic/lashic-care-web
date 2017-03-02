@@ -2,16 +2,16 @@
 	<form action="/register/email" method="post">
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">CareEye 新規登録のお客様</h1>
+			<h1 class="contentLarge_h1">LASHIC 新規登録のお客様</h1>
 			<p class="pdb3t0"><strong class="large">利用規約をお読みください。会員規約にご同意のうえ、会員登録を希望される方は会員ID（メールアドレス）をご入力ください。</strong><br>
-メールアドレスがCareEye会員IDとなります。<br>
+メールアドレスがLASHIC会員IDとなります。<br>
 確認の為、ご入力されたメールアドレス宛てにメールを送信いたします。<br>
-モバイルでお申し込みの場合、CareEyeからのメール(@careeye.jp)が受信できるように設定のうえ、お手続きください。</p>
+モバイルでお申し込みの場合、LASHICからのメール(@lashic.jp)が受信できるように設定のうえ、お手続きください。</p>
 			
 				<div class="borderGrayRadius bgBeige mgt20">
 					<table class="regist_mailTOUROKU">
 						<th>メールアドレス</th>
-						<td><input name="email" type="text" class="input_text input_large" placeholder="例）careeye@careeye.jp"> <span class="text_red">※</span><span class="small">半角英数</span>
+						<td><input name="email" type="text" class="input_text input_large" placeholder="例）example@lashic.jp"> <span class="text_red">※</span><span class="small">半角英数</span>
 <?php
 if(!empty($errors['email'])) {
 ?>
@@ -26,24 +26,24 @@ if(!empty($errors['email'])) {
 				<table class="tableGray mgt60">
 					<tr>
 						<td><div class="regist_kiyaku"><!-- content start　利用規約 -->
-			<h2>CareEye利用規約</h2><br>
+			<h2>LASHIC利用規約</h2><br>
 			
 			
 			
 			<h3 id="section01">第1条（定義）</h3>
 			<p>　本規約において、以下の用語は以下に定める意味を有するものとします。</p>
 			<ul class="ul-text2">
-				<li>（1）「利用者」とは、本規約に同意の上、所定の方法によりCareEyeユーザー登録及びCareEyeアカウント登録をした個人をいいます。</li>
+				<li>（1）「利用者」とは、本規約に同意の上、所定の方法によりLASHICユーザー登録及びLASHICアカウント登録をした個人をいいます。</li>
 				<li>（2）「当グループ」とは、インフィック株式会社、株式会社まごころ介護サービス及びインフィック株式会社又は株式会社まごころ介護サービスと業務上の提携関係にある会社であって、本方針において指定される会社をいいます。なお、「当グループ」として指定される会社は随時更新されます。（現在の「当グループ」 に所属する会社はこちら（注※5）です。）</li>
-				<li>（3）「サービス」とは、当グループが運営する「CareEye」において提供する利用者向けの各種サービスをいいます。</li>
+				<li>（3）「サービス」とは、当グループが運営する「LASHIC」において提供する利用者向けの各種サービスをいいます。</li>
 				<li>（4）「取引」とは、利用者がサービスを利用して行う、お買い物、プレゼント応募等の各種行為をいいます。</li>
-				<li>（5）「サービス提供者」とは、CareEyeサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
-				<li>（6）「本規約等」とは、本規約、CareEyeサイトご利用上のご注意、その他当グループが定める規約、ガイドライン等の総称をいいます。</li>
+				<li>（5）「サービス提供者」とは、LASHICサービス内で、取引の対象となる商品または役務を提供する者をいいます。</li>
+				<li>（6）「本規約等」とは、本規約、LASHICサイトご利用上のご注意、その他当グループが定める規約、ガイドライン等の総称をいいます。</li>
 				<li>（7）「利用者情報」とは、利用者が当グループに開示した利用者の属性に関する情報および利用者の取引に関する履歴等の情報（第11条により収集された情報を含みます）をいいます。</li>
 			</ul>
 			
 			
-			<h3 id="section02">第2条（CareEye利用者）</h3>
+			<h3 id="section02">第2条（LASHIC利用者）</h3>
 			<ol class="ol-text">
 				<li>利用者は、当グループが定める条件に従って、サービスを利用することができます。ただし、別途当グループが定める事項の登録を必要とする場合があります。</li>
 				<li>利用者は、利用者としての地位およびサービスの利用により当グループに対して取得した一切の権利を譲渡、転貸、担保差入その他形態を問わず処分することはできません。</li>
@@ -79,7 +79,7 @@ if(!empty($errors['email'])) {
 			
 			
 			
-			<h3 id="section08">第8条（CareEyeにおける取引）</h3>
+			<h3 id="section08">第8条（LASHICにおける取引）</h3>
 			<p>　利用者が当グループのサーバを通して行うサービス提供者との取引は、利用者とサービス提供者間の直接取引となります。当グループは、当該取引についてサービス提供者となる場合を除き、取引の当事者とはならず、取引に関する責任は負いません。したがって、取引に際し万一トラブルが生じた際には、利用者とサービス提供者との間で解決していただくことになります。</p>
 			
 			
@@ -97,7 +97,7 @@ if(!empty($errors['email'])) {
 			<h3 id="section10">第10条（禁止事項）</h3>
 			<p>　本サービスの利用に際して、利用者に対し次の各号の行為を行うことを禁止します。</p>
 			<ul class="ul-text2">
-				<li>（1）法令または本規約、CareEyeサイトご利用上のご注意、その他の本規約等に違反すること</li>
+				<li>（1）法令または本規約、LASHICサイトご利用上のご注意、その他の本規約等に違反すること</li>
 				<li>（2）当グループ、サービス提供者およびその他の第三者の権利、利益、名誉等を損ねること</li>
 				<li>（3）公序良俗に反する行為を行うこと</li>
 				<li>（4）他の利用者その他の第三者に迷惑となる行為や不快感を抱かせる行為を行うこと</li>
@@ -117,7 +117,7 @@ if(!empty($errors['email'])) {
 			
 			
 			<h3 id="section12">第12条（利用者情報の取扱い）</h3>
-			<p>　当グループは、当グループの個人情報保護方針（<a href="http://careeye.jp/page/privacy">http://careeye.jp/page/privacy</a>）に従い、個人情報を取り扱います。</p>
+			<p>　当グループは、当グループの個人情報保護方針（<a href="/page/privacy">http://lashic.jp/page/privacy</a>）に従い、個人情報を取り扱います。</p>
 			<h3 id="section13">第13条（著作権の取扱い）</h3>
 			<p>　本サービスに表示される文章、画像、デザインまたは商標、ロゴマーク等（以下、「掲載情報」といいます）に関する 著作権その他の諸権利は、当社または当該権利の正当な権利者に帰属します。</p>
 			<p>ユーザは、掲載情報を無断使用、無断転載することはできません。</p>

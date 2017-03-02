@@ -486,7 +486,7 @@ class Model_User extends Orm\Model{
 		                );
 				\Model_User::sendEmail(array(
 					'to' => $user['email'],
-					'subject' => "CareEye サービスご利用、".$admin['last_name'].$admin['first_name']."様からのご招待",
+					'subject' => "LASHIC サービスご利用、".$admin['last_name'].$admin['first_name']."様からのご招待",
 					'text' => \View::forge('email/user/invite', $data)
 				));
 			}

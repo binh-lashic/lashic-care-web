@@ -154,7 +154,7 @@ class Controller_Admin_Payment extends Controller_Admin
         );
         $params = array(
             'to' => $user['email'],
-            'subject' => "CareEye 機器発送のご連絡",
+            'subject' => "LASHIC 機器発送のご連絡",
             'text' => \View::forge('email/shipping', $data)
         );
         \Model_User::sendEmail($params);
