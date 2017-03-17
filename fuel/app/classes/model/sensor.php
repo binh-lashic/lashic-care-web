@@ -72,10 +72,7 @@ class Model_Sensor extends Orm\Model{
 					->select('sleep_end_time')
 					->from('sensors')
 					->where('enable', '=', 1)
-                    ->where_open()
 					->where('type', 'IN', ['sensor', 'bedsensor'])
-                    ->or_where('type', '=', null)
-                    ->where_close()
 					->execute()->as_array();
 	}
 
