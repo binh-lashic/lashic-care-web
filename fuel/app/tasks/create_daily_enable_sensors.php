@@ -92,9 +92,6 @@ class Create_Daily_Enable_Sensors
 				return self::TYPE_SLAVE_SENSOR;
 			case 'bedsensor':
 				return self::TYPE_BED_SENSOR_1;
-			# 既存データでは sensors.type が NULL のものも多いのでその場合は子機として扱う
-			case null:
-				return self::TYPE_SLAVE_SENSOR;
 		}
 	}
 
