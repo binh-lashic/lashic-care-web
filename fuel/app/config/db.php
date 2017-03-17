@@ -30,4 +30,17 @@ return array(
     'table_prefix' => '',
     'charset' => NULL,
   ),
+  // 施設版のバッチ用データベースに接続するための設定
+  'batch' => array(
+    'type' => 'pdo',
+    'connection' => array(
+      'dsn'        => $_SERVER['BATCH_DSN'],
+      'username'   => $_SERVER['BATCH_USERNAME'],
+      'password'   => $_SERVER['BATCH_PASSWORD'],
+      'persistent' => false,
+    ),
+    'identifier' => '',
+    'table_prefix' => '',
+    'charset' => NULL,
+  ),
 );
