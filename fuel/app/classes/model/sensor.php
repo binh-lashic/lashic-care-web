@@ -58,6 +58,24 @@ class Model_Sensor extends Orm\Model{
 	    )
 	);
 
+	/**
+	 * 有効なセンサー名と起床・就寝判断開始・終了時間の一覧を取得する
+	 *
+	 * @param string $sensor_type sensor_types.type の値
+	 */
+	public static function get_enable_sensor_name_and_times() {
+		return DB::select(['sensors.name', 'name'])
+					->select(['type', 'sensor_type'])
+					->select('wake_up_start_time')
+					->select('wake_up_end_time')
+					->select('sleep_start_time')
+					->select('sleep_end_time')
+					->from('sensors')
+					->where('enable', '=', 1)
+					->where('type', 'IN', ['sensor', 'bedsensor'])
+					->execute()->as_array();
+	}
+
 	public static function getSensor($id){
 		try {
 			$sensor = \Model_Sensor::find($id);
