@@ -21,4 +21,20 @@ class Controller_Api_User_Client extends Controller_Api
 		);
  		return $this->result();
 	}
+
+	public function post_get() {
+        }
+
+	public function get_get() {
+		return $this->_get();
+        }
+
+	private function _get() {
+		$user_id = Input::param('id');
+		$clients = \Model_User_Client::getUserClients($user_id);
+		$this->result = array(
+			'data' => $clients
+		);
+		return $this->result();
+        }
 }

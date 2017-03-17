@@ -107,4 +107,34 @@ class Model_User_Client extends Orm\Model{
                )
         ));
     }
+
+    public static function getUserClients($user_id) {
+        $sql = '
+            SELECT
+                c.id AS id,
+                c.user_id AS user_id,
+                c.client_user_id AS client_user_id,
+                s2.admin AS admin,
+                u.last_name AS last_name,
+                u.first_name AS first_name,
+                s1.sensor_id AS sensor_id
+            FROM
+                dbo.user_clients c
+            INNER JOIN
+                dbo.users u ON c.client_user_id = u.id
+            INNER JOIN 
+                dbo.user_sensors s1 ON c.client_user_id = s1.user_id
+            INNER JOIN
+                dbo.user_sensors s2 ON c.user_id = s2.user_id
+            INNER JOIN
+                dbo.sensors s ON s2.sensor_id = s.id
+            WHERE
+                s1.sensor_id = s2.sensor_id
+                AND s.type = :type
+                AND c.user_id = :user_id
+        ';
+        $query = DB::query($sql);
+        $query->parameters(array('type' => 'sensor', 'user_id' => $user_id));
+        return $query->execute();
+    }
 }
