@@ -300,12 +300,15 @@ class Controller_Shopping extends Controller_Base
 
         if(empty($client['id'])) {
             $this->data['errors']['client'] = true;
+			\Log::warning('client not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
         if(empty($plans)) {
             $this->data['errors']['plan'] = true;
+			\Log::warning('plans not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
         if(empty($destination['zip_code'])) {
             $this->data['errors']['destination'] = true;
+			\Log::warning('destination not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
         if(empty($this->data['errors'])) {
             //支払い処理を行う
@@ -409,6 +412,7 @@ class Controller_Shopping extends Controller_Base
             Cookie::delete("affiliate");
         } else {
             echo '不正な処理です';
+			\Log::warning('不正な処理です. session_id:[' . Session::key() . ']', __METHOD__);
             exit;
         }
         

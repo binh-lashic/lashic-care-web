@@ -43,4 +43,13 @@ return array(
     'table_prefix' => '',
     'charset' => NULL,
   ),
+  // セッションストアとして使う Redis の設定
+  'redis' => array(
+    'default' => array(
+      'hostname' => $_SERVER['REDIS_HOST'],
+      'port'     => $_SERVER['REDIS_PORT'],
+      'password' => $_SERVER['REDIS_PASSWORD'],
+      'timeout'  => null,
+    ),
+  ),
 );
