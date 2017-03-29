@@ -27,3 +27,13 @@ require COREPATH.'bootstrap.php';
 
 // Initialize the framework with the config file.
 \Fuel::init('config.php');
+
+/** loading .env files */
+$paths = [APPPATH. 'config', APPPATH. 'config'. DS. \Fuel::$env];
+foreach ($paths as $path) {
+	if (file_exists($path. DS. '.env')) {
+		$dotenv = new \Dotenv\Dotenv($path);
+		$dotenv->load();
+	}
+}
+
