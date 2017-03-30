@@ -45,4 +45,30 @@ SQL;
         $query->parameters($properties);
         return $query->execute('batch');
 	}
+
+	/**
+	 * last_sleep_time_processed フラグを立てる
+	 * @param string $sensor_name
+	 * @param string $date Y-m-d 形式の JST 日付文字列
+	 */
+	public static function processed_last_sleep_time($sensor_name, $date) {
+		return DB::update(static::$_table_name)
+					->value('last_sleep_time_processed', true)
+					->where('sensor_name', '=', $sensor_name)
+					->where('date', '=', $date)
+					->execute('batch');
+	}
+
+	/**
+	 * wake_up_time_processed フラグを立てる
+	 * @param string $sensor_name
+	 * @param string $date Y-m-d 形式の JST 日付文字列
+	 */
+	public static function processed_wake_up_time($sensor_name, $date) {
+		return DB::update(static::$_table_name)
+					->value('wake_up_time_processed', true)
+					->where('sensor_name', '=', $sensor_name)
+					->where('date', '=', $date)
+					->execute('batch');
+	}
 }

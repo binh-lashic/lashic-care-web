@@ -47,7 +47,7 @@ class Create_Daily_Enable_Sensors
 			\Model_Daily_Enable_Sensor::insert([
 				'sensor_name'        => $sensor['name'],
 				'date'               => $today,
-				'sensor_type'        => $this->convert_sensor_type($sensor['sensor_type']),
+				'sensor_type'        => \Model_Sensor::to_facility_sensor_type($sensor['sensor_type']),
 				'wake_up_started_at' => $wake_up_started_at,
 				'wake_up_ended_at'   => $wake_up_ended_at,
 				'sleep_started_at'   => $sleep_started_at,
@@ -75,24 +75,6 @@ class Create_Daily_Enable_Sensors
 			$end_date = $base_time->setTime($end_time, 00, 00);
 		}
 		return [$start_date->format('Y-m-d H:i:s'), $end_date->format('Y-m-d H:i:s')];
-	}
-
-	# 施設版で定義したセンサータイプの値
-	/** センサータイプ:子機 */
-	const TYPE_SLAVE_SENSOR  = '1';
-	/** センサータイプ:ベッドセンサー */
-	const TYPE_BED_SENSOR_1  = '2';
-
-	/**
-	 * 通常版 -> 施設版へのタイプ値変換
-	 */
-	private function convert_sensor_type($sensor_type) {
-		switch ($sensor_type) {
-			case 'sensor':
-				return self::TYPE_SLAVE_SENSOR;
-			case 'bedsensor':
-				return self::TYPE_BED_SENSOR_1;
-		}
 	}
 
 	/**

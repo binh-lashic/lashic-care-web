@@ -1,5 +1,21 @@
 <?php 
 class Model_Alert extends Orm\Model{
+
+	// alert_type の定数
+	const TYPE_TEMPERATURE          = 'temperature';
+	const TYPE_FIRE                 = 'fire';
+	const TYPE_HEATSTROKE           = 'heatstroke';
+	const TYPE_COLD                 = 'cold';
+	const TYPE_HUMIDITY             = 'humidity';
+	const TYPE_MOLD_MITES           = 'mold_mites';
+	const TYPE_ILLUMINANCE_DAYTIME  = 'illuminance_daytime';
+	const TYPE_ILLUMINANCE_NIGHT    = 'illuminance_night';
+	const TYPE_WAKE_UP              = 'wake_up';
+	const TYPE_SLEEP                = 'sleep';
+	const TYPE_ABNORMAL_BEHAVIOR    = 'abnormal_behavior';
+	const TYPE_ACTIVE_NON_DETECTION = 'active_non_detection';
+	const TYPE_DISCONNECTION        = 'disconnection';
+
 	protected static $_properties = array(
 		'id',
 		'sensor_id',
