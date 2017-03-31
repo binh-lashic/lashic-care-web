@@ -26,7 +26,9 @@
         "fuelphp/upload": "2.0.2",
         "monolog/monolog": "1.5.*",
         "michelf/php-markdown": "1.4.0",
-        "sendgrid/sendgrid": "~4.0"
+        "sendgrid/sendgrid": "~4.0",
+        "microsoft/windowsazure": "^0.4",
+        "vlucas/phpdotenv": "^2.4"
     },
     "suggest": {
         "dwoo/dwoo" : "Allow Dwoo templating with the Parser package",

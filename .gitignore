@@ -34,3 +34,13 @@ composer.phar
 /fuel/app/config/crypt.php
 /public/images/user/
 /fuel/app/session/*
+
+# localvimrc
+.lvimrc
+
+# phpunit.xml
+fuel/app/phpunit.xml
+
+# dotenv
+.env
+

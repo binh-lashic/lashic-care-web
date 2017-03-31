@@ -1,5 +1,21 @@
 <?php 
 class Model_Sensor extends Orm\Model{
+	// 機器タイプ
+    /** 機器タイプ: WiFi */
+	const TYPE_WIFI       = 'wifi';
+	/** 機器タイプ: 通常センサー */
+	const TYPE_SENSOR     = 'sensor';
+	/** 機器タイプ: ベッドセンサー */
+	const TYPE_BED_SENSOR = 'bedsensor';
+
+	// 施設版センサータイプ
+	/** センサータイプ:子機 */
+	const FACILITY_TYPE_SLAVE_SENSOR  = '1';
+	/** センサータイプ:ベッドセンサー */
+	const FACILITY_TYPE_BED_SENSOR_1  = '2';
+	/** センサータイプ:ベッドセンサー */
+	const FACILITY_TYPE_BED_SENSOR_2  = '3';
+
 	private $time;
 	private $data;
 	private $count;
@@ -59,9 +75,19 @@ class Model_Sensor extends Orm\Model{
 	);
 
 	/**
+	 * 通常版 -> 施設版へのタイプ値変換
+	 */
+	public static function to_facility_sensor_type($sensor_type) {
+		switch ($sensor_type) {
+			case 'sensor':
+				return self::FACILITY_TYPE_SLAVE_SENSOR;
+			case 'bedsensor':
+				return self::FACILITY_TYPE_BED_SENSOR_1;
+		}
+	}
+
+	/**
 	 * 有効なセンサー名と起床・就寝判断開始・終了時間の一覧を取得する
-	 *
-	 * @param string $sensor_type sensor_types.type の値
 	 */
 	public static function get_enable_sensor_name_and_times() {
 		return DB::select(['sensors.name', 'name'])
@@ -72,8 +98,69 @@ class Model_Sensor extends Orm\Model{
 					->select('sleep_end_time')
 					->from('sensors')
 					->where('enable', '=', 1)
-					->where('type', 'IN', ['sensor', 'bedsensor'])
+					->where('type', 'IN', [self::TYPE_SENSOR, self::TYPE_BED_SENSOR])
 					->execute()->as_array();
+	}
+
+	/**
+	 * 指定されたセンサー名の指定されたアラートタイプのアラート設定情報を取得する
+	 * @param string $alert_type
+	 * @param array $sensor_names
+	 */
+	public static function get_alert_levels($alert_type, $sensor_names) {
+		$sql = <<<SQL
+SELECT
+  s.id as sensor_id,
+  s.name as sensor_name,
+  '{$alert_type}' as alert_type,
+  s.{$alert_type}_level as alert_level,
+  us.{$alert_type}_alert as alert,
+  u.id as user_id,
+  u.email as email
+FROM
+  sensors s JOIN user_sensors us ON s.id = us.sensor_id
+  JOIN users u ON us.user_id = u.id
+WHERE
+  ISNULL(u.master, 0) != 1
+AND
+  s.name IN :sensor_names
+ORDER BY
+  s.name
+SQL;
+
+		$query = DB::query($sql);
+		$query->parameters([
+			'sensor_names' => $sensor_names,
+		]);
+		$result = $query->execute()->as_array();
+
+		# sensor_name をキーとした配列に変換して返す
+		# 一つのセンサーに複数ユーザが紐付いている(=見守っている)事が有り得るのでユーザ情報は配列で持つ
+		$alert_levels = [];
+		foreach($result as $elem) {
+			if (array_key_exists($elem['sensor_name'], $alert_levels)) {
+				$alert_levels[$elem['sensor_name']]['users'][]= [
+					'user_id' => $elem['user_id'],
+					'alert'   => $elem['alert'],
+					'email'   => $elem['email'],
+				];
+			} else {
+				$alert_levels[$elem['sensor_name']] = [
+					'sensor_id'   => $elem['sensor_id'],
+					'sensor_name' => $elem['sensor_name'],
+					'alert_type'  => $elem['alert_type'],
+					'alert_level' => $elem['alert_level'],
+					'users'       => [
+						[
+							'user_id' => $elem['user_id'],
+							'alert'   => $elem['alert'],
+							'email'   => $elem['email'],
+						]
+					]
+				];
+			}
+		}
+		return $alert_levels;
 	}
 
 	public static function getSensor($id){
@@ -925,17 +1012,17 @@ class Model_Sensor extends Orm\Model{
     	$alert = \Model_Alert::getLatestAlert($params);
 		if(isset($alert)) {
 			//スヌーズ処理が5回以上なら再度通知
-	    	Log::info($data, 'no alert');
+	    	Log::info($data, 'no alert', __METHOD__);
 			return false;
 		}
 		 else {
-	    	Log::info($data, 'alert');
+	    	Log::info($data, 'alert', __METHOD__);
 
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
 
     		foreach($this->users as $user) {
-    			if($user['master'] != 1) {
+    			if($user['master'] != 1) { // システム管理者以外に通知
 	    			$user_sensor = \Model_User_Sensor::find('first', array(
 	    				'where' => array(
 	    					'user_id' => $user['id'],
@@ -971,6 +1058,7 @@ class Model_Sensor extends Orm\Model{
     }
 
     public function send_alert($params) {
+		\Log::debug("send email:[{$params['email']}]", __METHOD__);
 		$sendgrid = new SendGrid(Config::get("sendgrid"));
 		$email = new SendGrid\Email();
 		$email
@@ -982,6 +1070,11 @@ class Model_Sensor extends Orm\Model{
 		    $sendgrid->send($email);
 		    return true;
 		} catch(\SendGrid\Exception $e) {
+			$code    = $e->getCode();
+			$message = $e->getMessage();
+			$file    = $e->getFile();
+			$line    = $e->getLine();
+			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
 		    return false;
 		}
     }
