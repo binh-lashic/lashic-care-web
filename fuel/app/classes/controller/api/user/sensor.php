@@ -32,6 +32,7 @@ class Controller_Api_User_Sensor extends Controller_Api
 
 	public function _save() {
 		$params = Input::param();
+		\Log::debug('params:' . print_r($params, true), __METHOD__);
 		$sensor = \Model_User_Sensor::saveUserSensor($params);
 		$this->result = array(
 			'data' => $sensor

@@ -75,6 +75,7 @@ class Model_User_Sensor extends Orm\Model{
 				)
 			));
 			if(empty($user_sensor)) {
+				\Log::debug("user_sensors not found. user_id:[{$user_id}] sensor_id:[{$params['sensor_id']}]", __METHOD__);
 				$user_sensor = \Model_User_Sensor::forge();
 			}
 		}
@@ -83,6 +84,7 @@ class Model_User_Sensor extends Orm\Model{
     		unset($params['id']);
     		$user_sensor->set($params);
     		if($user_sensor->save(false)) {
+				\Log::debug("user_sensors saved. user_id:[{$user_sensor->user_id}] sensor_id:[{$user_sensor->sensor_id}]", __METHOD__);
     			return $user_sensor;
     		}
     	}

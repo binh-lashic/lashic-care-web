@@ -2,24 +2,24 @@
 
 namespace Fuel\Tasks;
 
-use Internal\SlaveSensor\SleepTimeChecker  as SleepTimeChecker;
-use Internal\SlaveSensor\WakeUpTimeChecker as WakeUpTimeChecker;
+use Internal\BedSensor\SleepTimeChecker  as SleepTimeChecker;
+use Internal\BedSensor\WakeUpTimeChecker as WakeUpTimeChecker;
 
 # TODO: 他のバッチを真似たがこれで正しいのか？
 date_default_timezone_set('Asia/Tokyo');
 
 /**
- * 就寝・起床時間判定 + 遅延アラートチェックバッチ(Storage Table 版)
+ * ベッドセンサー用の就寝・起床時間判定 + 遅延アラートチェックバッチ(Storage Table 版)
  */
-class Check_Sleep_And_Wake_Up
+class Check_Sleep_And_Wake_Up_Bed_Sensor
 {
 	/**
-	 * 有効なセンサーのデータから起床・就寝時間を判定し、またそれらが遅延していた場合アラートの登録を行う
+	 * 有効なベッドセンサーのデータから起床・就寝時間を判定し、またそれらが遅延していた場合アラートの登録を行う
 	 */
 	public function run()
 	{
 		$target_datetime = new \DateTimeImmutable(null, new \DateTimeZone('Asia/Tokyo'));
-		\Log::info("task [check_sleep_and_wake_up:run] start. target_date:[{$target_datetime->format('Y-m-d H:i:s')}] environment:[" . \Fuel::$env . "]", __METHOD__);
+		\Log::info("task [check_sleep_and_wake_up_bed_sensor:run] start. target_date:[{$target_datetime->format('Y-m-d H:i:s')}]", __METHOD__);
 
 		try {
 			# 就寝時間チェック
@@ -33,13 +33,13 @@ class Check_Sleep_And_Wake_Up
 			$line    = $e->getLine();
 			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
 		} finally {
-			\Log::info("task [check_sleep_and_wake_up:run] end. target_date:[{$target_datetime->format('Y-m-d H:i:s')}] environment:[" . \Fuel::$env . "]", __METHOD__);
+			\Log::info("task [check_sleep_and_wake_up_bed_sensor:run] end. target_date:[{$target_datetime->format('Y-m-d H:i:s')}]", __METHOD__);
 		}
 	}
 
 }
 
-namespace Internal\SlaveSensor;
+namespace Internal\BedSensor;
 
 /**
  * アクティブ時間の計測・遅延チェックを行うための親クラス
@@ -70,10 +70,10 @@ class SleepTimeChecker extends ActiveTimeChecker {
 	 */
 	public function check() {
 
-		# 有効なセンサーデータを取得
-		$sensor_data = \Model_Batch_Data_Daily::find_activity_by_measurement_time($this->get_date_column_value(), 'sleep_started_at', 'sleep_ended_at', 'last_sleep_time_processed');
+		# 有効なセンサー一覧を、就寝判断開始・終了時刻が同じものでグループ化して取得
+		$sensor_data = \Model_Batch_Bed_Data_Daily::find_sleep_by_measurement_time($this->get_date_column_value(), 'sleep_started_at', 'sleep_ended_at', 'last_sleep_time_processed');
 		\Log::debug(\DB::last_query('batch'), __METHOD__);
-		\Log::info("target sensor data_daily count:[" . count($sensor_data) . "]", __METHOD__);
+		\Log::info("target bedsensor bed_data_daily count:[" . count($sensor_data) . "]", __METHOD__);
 
 		# 閾値は設定ファイルから取得
 		$alert_thresholds = \Config::get("sensor_levels." . \Model_Alert::TYPE_SLEEP);
@@ -82,7 +82,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		$sensor_data_chunks = array_chunk($sensor_data, self::SENSOR_CHUNK_SIZE, true);
 		foreach ($sensor_data_chunks as $sensor_data_chunk) {
 			$sensor_names = array_keys($sensor_data_chunk);
-			\Log::debug("target sensor data chunk count:[" . count($sensor_names) . "]", __METHOD__);
+			\Log::debug("target bedsensor data chunk count:[" . count($sensor_names) . "]", __METHOD__);
 
 			# センサー毎のアラートレベル、アラート可否をまとめて取得
 			$alert_settings = \Model_Sensor::get_alert_levels('sleep', $sensor_names);
@@ -100,7 +100,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		foreach($sensor_data_chunk as $sensor_name => $sleep_time_data) {
 			# 該当期間に該当センサーのデータが無い場合終了
 			if (!count($sleep_time_data)) {
-				\Log::warning("data_daily is not found. sensor_name:[{$sensor_names}]", __METHOD__);
+				\Log::warning("bed_data_daily is not found. sensor_name:[{$sensor_names}]", __METHOD__);
 				return;
 			}
 			$this->calculate_last_sleep_time_by_sensor($sensor_name, $sleep_time_data, $alert_settings, $alert_thresholds);
@@ -112,16 +112,16 @@ class SleepTimeChecker extends ActiveTimeChecker {
 	 */
 	private function calculate_last_sleep_time_by_sensor($sensor_name, $sleep_time_data, $alert_settings, $alert_thresholds) {
 		# Storage Table から当日分のデータ取得
-		$sensordaily = \Model_Sensordaily::find($sensor_name, $this->get_row_key());
+		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
 
 		if (is_null($sensordaily)) {
-			Log::info("sensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
+			Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
 			return;
 		}
 
 		# 既に設定済みのセンサーはスキップ
-		if (\Model_Sensordaily::is_already_set($sensordaily, 'last_sleep_time')) {
-			\Log::debug("sensordaily.last_sleep_time is already set. sensor_name:[{$sensor_name}]", __METHOD__);
+		if (\Model_Bedsensordaily::is_already_set($sensordaily, 'last_sleep_time')) {
+			\Log::debug("bedsensordaily.last_sleep_time is already set. sensor_name:[{$sensor_name}]", __METHOD__);
 			return;
 		}
 
@@ -147,7 +147,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		if ($counter->is_defined_time()) {
 			\Log::debug("sensor_name:[{$sensor_name}] last_sleep_time:[{$counter->get_defined_time()->format('Y-m-d H:i:s')}]", __METHOD__);
 			# Storage Table を更新
-			\Model_Sensordaily::update_entity($sensordaily, [
+			\Model_Bedsensordaily::update_entity($sensordaily, [
 				'last_sleep_time' => $counter->get_defined_time()
 			]);
 			# 処理済みフラグを立てる
@@ -170,7 +170,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		# 30 日平均が無い場合アラートチェックは行わない
 		$avg_30d_sleep_time = $sensordaily->getProperty('avg_30d_sleep_time');
 		if (!$avg_30d_sleep_time || empty($avg_30d_sleep_time->getValue())) {
-			\Log::info("avg_30d_sleep_time is not found. sensor_name:[{$sensordaily->getPartitionKey()}]", __METHOD__);
+			\Log::debug("avg_30d_sleep_time is not found. sensor_name:[{$sensordaily->getPartitionKey()}]", __METHOD__);
 			return;
 		}
 
@@ -216,10 +216,10 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 	 */
 	public function check() {
 
-		# 有効なセンサーデータを取得
-		$sensor_data = \Model_Batch_Data_Daily::find_activity_by_measurement_time($this->get_date_column_value(), 'wake_up_started_at', 'wake_up_ended_at', 'wake_up_time_processed');
+		# 有効なセンサー一覧を、就寝判断開始・終了時刻が同じものでグループ化して取得
+		$sensor_data = \Model_Batch_Bed_Data_Daily::find_sleep_by_measurement_time($this->get_date_column_value(), 'wake_up_started_at', 'wake_up_ended_at', 'wake_up_time_processed');
 		\Log::debug(\DB::last_query('batch'), __METHOD__);
-		\Log::info("target sensor data_daily count:[" . count($sensor_data) . "]", __METHOD__);
+		\Log::info("target bedsensor bed_data_daily count:[" . count($sensor_data) . "]", __METHOD__);
 
 		# 閾値は設定ファイルから取得
 		$alert_thresholds = \Config::get("sensor_levels." . \Model_Alert::TYPE_WAKE_UP);
@@ -228,7 +228,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		$sensor_name_chunks = array_chunk($sensor_data, self::SENSOR_CHUNK_SIZE, true);
 		foreach ($sensor_name_chunks as $sensor_data_chunk) {
 			$sensor_names = array_keys($sensor_data_chunk);
-			\Log::debug("target sensor data chunk count:[" . count($sensor_names) . "]", __METHOD__);
+			\Log::debug("target bedsensor data chunk count:[" . count($sensor_names) . "]", __METHOD__);
 
 			# センサー毎のアラートレベル、アラート可否をまとめて取得
 			$alert_settings = \Model_Sensor::get_alert_levels('wake_up', $sensor_names);
@@ -246,7 +246,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		foreach($sensor_data_chunk as $sensor_name => $wake_up_time_data) {
 			# 該当期間に該当センサーのデータが無い場合終了
 			if (!count($wake_up_time_data)) {
-				\Log::warning("data_daily is not found. sensor_name:[{$sensor_name}]", __METHOD__);
+				\Log::warning("bed_data_daily is not found. sensor_name:[{$sensor_name}]", __METHOD__);
 				return;
 			}
 			$this->calculate_wake_up_time_by_sensor($sensor_name, $wake_up_time_data, $alert_settings, $alert_thresholds);
@@ -258,16 +258,16 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 	 */
 	private function calculate_wake_up_time_by_sensor($sensor_name, $wake_up_time_data, $alert_settings, $alert_thresholds) {
 		# Storage Table から当日分のデータ取得
-		$sensordaily = \Model_Sensordaily::find($sensor_name, $this->get_row_key());
+		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
 
 		if (is_null($sensordaily)) {
-			Log::info("sensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
+			Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
 			return;
 		}
 
 		# 既に設定済みのセンサーはスキップ
-		if (\Model_Sensordaily::is_already_set($sensordaily, 'wake_up_time')) {
-			\Log::info("sensordaily.wake_up_time is already set. sensor_name:[{$sensor_name}]", __METHOD__);
+		if (\Model_Bedsensordaily::is_already_set($sensordaily, 'wake_up_time')) {
+			\Log::info("bedsensordaily.wake_up_time is already set. sensor_name:[{$sensor_name}]", __METHOD__);
 			return;
 		}
 
@@ -293,7 +293,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		if ($counter->is_defined_time()) {
 			\Log::debug("sensor_name:[{$sensor_name}] wake_up_time:[{$counter->get_defined_time()->format('Y-m-d H:i:s')}]", __METHOD__);
 			# Storage Table を更新
-			\Model_Sensordaily::update_entity($sensordaily, [
+			\Model_Bedsensordaily::update_entity($sensordaily, [
 				'wake_up_time' => $counter->get_defined_time()
 			]);
 			# 処理済みフラグを立てる
@@ -316,7 +316,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		# 30 日平均が無い場合アラートチェックは行わない
 		$avg_30d_wake_up_time = $sensordaily->getProperty('avg_30d_wake_up_time');
 		if (!$avg_30d_wake_up_time || empty($avg_30d_wake_up_time->getValue())) {
-			\Log::info("avg_30d_wake_up_time is not found. sensor_name:[{$sensordaily->getPartitionKey()}]", __METHOD__);
+			\Log::debug("avg_30d_wake_up_time is not found. sensor_name:[{$sensordaily->getPartitionKey()}]", __METHOD__);
 			return;
 		}
 
@@ -336,6 +336,13 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 			}
 			\Log::info("[ALERT] sensor_id:[{$sensor_id}] sensor_name:[{$sensor_name}] wake up time delay. wake_up_time:[{$wake_up_time->format(DATE_ATOM)}] alert_threshold_time:[{$alert_threshold_time->format(DATE_ATOM)}] avg_30d_wake_up_time:[{$avg_30d_wake_up_time->getValue()}] delay_minutes:[{$delay_minutes}]", __METHOD__);
 
+			$alert_value = [
+				'wake_up_time'         => $wake_up_time->format(DATE_ATOM),
+				'alert_threshold'      => $alert_threshold_time->format(DATE_ATOM),
+				'avg_30d_wake_up_time' => $avg_30d_wake_up_time->getValue(),
+				'delay_minutes'        => $delay_minutes,
+			];
+
 			# アラート処理は現在のロジックをそのまま使う
 			# これにより新・旧両方のバッチが動いていても同種のアラートは二重には登録されない
 			$sensor->setTime($this->target_datetime->getTimestamp());
@@ -352,6 +359,13 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
  * アクティブ時間判定用カウンタの親クラス
  */
 abstract class ActiveTimeCounter {
+
+	# sleep の値を表す定数
+	# 定義: "sleep": <睡眠:Int(不明 0x00・覚醒 0x10・睡眠 0x20)>
+	const SLEEP_UNKOWN   = 0x00;
+	const SLEEP_WAKE_UP  = 0x10;
+	const SLEEP_SLEEPING = 0x20;
+
 	public function __construct($sensor_name, $alert_setting, $alert_threshold) {
 		$this->sensor_name       = $sensor_name;
 		$this->active_minutes    = 0;
@@ -384,21 +398,21 @@ class SleepTimeCounter extends ActiveTimeCounter {
 		parent::__construct($sensor_name, $alert_setting, $alert_threshold);
 	}
 	/**
-	 * activity が就寝判定の閾値を下回った分数をカウントする
+	 * sleep の値が「睡眠」になっているレコードをカウントする
 	 */
 	public function count($data) {
-		if ($data['activity'] < $this->alert_threshold['threshold']) {
+		if ($data['sleep'] == self::SLEEP_SLEEPING) {
 			$this->nonactive_minutes++;
 			$this->active_minutes = 0;
-			# 一番最初に下回った時刻を就寝時間候補として保存しておく
+			# 一番最初に「睡眠」に変わった時刻を就寝時間候補として保存しておく
 			if (is_null($this->temporary_time)) {
 				$this->temporary_time = $data['measurement_time'];
 			}
 		} else {
-			# 判定途中で閾値を上回った場合、就寝不感帯期間の間は判断を継続
+			# 判定途中の「覚醒」「不明」は、就寝不感帯期間の間は判断を継続
 			$this->active_minutes++;
 			$this->nonactive_minutes++;
-			# 就寝不感帯期間を超えて上回っていた場合、一旦ここで就寝判断をリセット
+			# 就寝不感帯期間を超えて「睡眠」以外が連続した場合、一旦ここで就寝判断をリセット
 			if ($this->active_minutes > $this->alert_threshold['ignore_duration']) {
 				$this->nonactive_minutes = 0;
 				$this->active_minutes = 0;
@@ -432,18 +446,19 @@ class WakeUpTimeCounter extends ActiveTimeCounter {
 	 * activity が就寝判定の閾値を下回った分数をカウントする
 	 */
 	public function count($data) {
-		if ($data['activity'] > $this->alert_threshold['threshold']) {
+		# 起床の場合は「睡眠」以外(「覚醒」「不明」)に変わったら判断期間に入る
+		if ($data['sleep'] != self::SLEEP_SLEEPING) {
 			$this->active_minutes++;
 			$this->nonactive_minutes = 0;
-			# 一番最初に上回った時刻を起床時間候補として保存しておく
+			# 一番最初に「睡眠」以外に変わった時刻を起床時間候補として保存しておく
 			if (is_null($this->temporary_time)) {
 				$this->temporary_time = $data['measurement_time'];
 			}
 		} else {
-			# 判定途中で閾値を下回った場合、起床不感帯期間の間は判断を継続
+			# 判定途中の「睡眠」は、就寝不感帯期間の間は判断を継続
 			$this->nonactive_minutes++;
 			$this->active_minutes++;
-			# 起床不感帯期間を超えて上回っていた場合、一旦ここで起床判断をリセット
+			# 起床不感帯期間を超えて「睡眠」が連続した場合、一旦ここで起床判断をリセット
 			if ($this->nonactive_minutes > $this->alert_threshold['ignore_duration']) {
 				$this->active_minutes = 0;
 				$this->nonactive_minutes = 0;
@@ -464,5 +479,4 @@ class WakeUpTimeCounter extends ActiveTimeCounter {
 	}
 }
 
-
-/* End of file tasks/check_sleep_and_wake_up.php */
+/* End of file tasks/check_sleep_and_wake_up_bed_sensor.php */

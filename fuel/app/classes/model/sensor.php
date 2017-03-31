@@ -13,6 +13,8 @@ class Model_Sensor extends Orm\Model{
 	const FACILITY_TYPE_SLAVE_SENSOR  = '1';
 	/** センサータイプ:ベッドセンサー */
 	const FACILITY_TYPE_BED_SENSOR_1  = '2';
+	/** センサータイプ:ベッドセンサー */
+	const FACILITY_TYPE_BED_SENSOR_2  = '3';
 
 	private $time;
 	private $data;
@@ -1070,8 +1072,9 @@ SQL;
 		} catch(\SendGrid\Exception $e) {
 			$code    = $e->getCode();
 			$message = $e->getMessage();
+			$file    = $e->getFile();
 			$line    = $e->getLine();
-			\Log::error("Error code:[{$code}] Error message:[{$message}] - line:[$line]", __METHOD__);
+			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
 		    return false;
 		}
     }

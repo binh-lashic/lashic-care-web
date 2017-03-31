@@ -524,6 +524,9 @@ class Controller_User extends Controller_Base
         	'user_id' => $this->data['user']['id'],
         	'sensor_id' => $this->data['sensor']['id']
         );
+
+		\Log::debug('params:' . print_r($params, true), __METHOD__);
+		\Log::debug('$this->data:' . print_r($this->data, true), __METHOD__);
         
         $this->data['sensor'] = \Model_User_Sensor::getUserSensor($params);
         $this->template->header = View::forge('header_client', $this->data);
