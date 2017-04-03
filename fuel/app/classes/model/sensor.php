@@ -103,6 +103,19 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	/**
+	 * 指定されたタイプの有効なセンサー名一覧を配列で返す
+	 * @param string $sensor_type sensors.type の値
+	 */
+	public static function get_enable_sensor_names_by_type($sensor_type) {
+		$sensor_names =  DB::select(['sensors.name', 'sensor_name'])
+							->from('sensors')
+							->where('enable', '=', 1)
+							->where('type', '=', $sensor_type)
+							->execute()->as_array();
+		return \Arr::pluck($sensor_names, 'sensor_name');
+	}
+
+	/**
 	 * 指定されたセンサー名の指定されたアラートタイプのアラート設定情報を取得する
 	 * @param string $alert_type
 	 * @param array $sensor_names

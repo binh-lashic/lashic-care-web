@@ -10,7 +10,7 @@ use MicrosoftAzure\Storage\Table\Models\Filters\Filter;
 /**
  * Class Model_Base_Storage_Table
  */
-class Model_Base_Storage_Table extends Model
+abstract class Model_Base_Storage_Table extends Model
 {
 	const PARTITION_KEY_FIELD = 'PartitionKey';
 	const ROW_KEY_FIELD       = 'RowKey';
@@ -48,7 +48,7 @@ class Model_Base_Storage_Table extends Model
 	 */
 	public static function find_all($filter, $entities = [], $next_partition_key = null, $next_row_key = null) {
 		$result   = static::execute_query($filter, null, $next_partition_key, $next_row_key);
-		$entities = array_merge($entities, $result->getEntities());
+		$entities = array_merge($entities, self::to_array($result));
 
 		$next_partition_key = $result->getNextPartitionKey();
 		$next_row_key       = $result->getNextRowKey();
@@ -60,14 +60,33 @@ class Model_Base_Storage_Table extends Model
 	}
 
 	/**
+	 * 指定された datetime プロパティの指定期間のデータを取得する
+	 * 期間の範囲指定方法は以下
+	 *      $from <= $datetime_property_name && $datetime_property_name < $to
+	 * @param string $partition_key パーティションキー
+	 * @param string $datetime_property_name 検索対象プロパティ名
+	 * @param \DateTimeImmutable $from 期間開始日時
+	 * @param \DateTimeImmutable $to 期間終了日時
+	 */
+	public static function find_by_datetime_range($partition_key, $datetime_property_name, $from, $to) {
+		$to   = static::format_datetime_filter($to);
+		$from = static::format_datetime_filter($from);
+
+		$filter = static::PARTITION_KEY_FIELD . " eq '{$partition_key}' and {$datetime_property_name} ge {$from} and {$datetime_property_name} lt {$to}";
+		Log::debug("table: [". static::$_table_name . "] filter: [{$filter}]", __METHOD__);
+
+		return static::find_all($filter);
+	}
+
+	/**
 	 * 指定日より過去に指定された日数分だけレコードを取得する
 	 *
-	 * @param string $sensro_name センサー名
+	 * @param string $partition_key パーティションキー
 	 * @param string $datetime_property_name 検索対象プロパティ名
 	 * @param \DateTimeImmutable $datetime 指定日
 	 * @param int $days 指定日より遡る日数
 	 */
-	public static function find_last_days($sensor_name, $datetime_property_name, $datetime, $days = 30) {
+	public static function find_last_days($partition_key, $datetime_property_name, $datetime, $days = 30) {
 		# Storage Table は UTC だが検索用フィールドは見た目上 JST になるようにしたデータを設定しているのでタイムゾーンは Asia/Tokyo のままで OK
 		$to_date   = $datetime->setTime(0, 0, 0);
 		$from_date = $to_date->modify("- {$days} days");
@@ -75,12 +94,13 @@ class Model_Base_Storage_Table extends Model
 		$to   = static::format_datetime_filter($to_date);
 		$from = static::format_datetime_filter($from_date);
 
-		# $from <= summary_date && summary_date < $to
-		$filter = static::PARTITION_KEY_FIELD . " eq '{$sensor_name}' and {$datetime_property_name} ge {$from} and {$datetime_property_name} lt {$to}";
+		# $from <= $datetime_property_name && $datetime_property_name < $to
+		$filter = static::PARTITION_KEY_FIELD . " eq '{$partition_key}' and {$datetime_property_name} ge {$from} and {$datetime_property_name} lt {$to}";
 
 		Log::debug("filter: [{$filter}]", __METHOD__);
 
-		return static::execute_query($filter);
+		$query_results = static::execute_query($filter);
+		return static::to_array($query_results);
 	}
 
 	/**
@@ -110,18 +130,7 @@ class Model_Base_Storage_Table extends Model
 			$options->setTop($top);
 		}
 		$options->setFilter(Filter::applyQueryString($filter));
-		$query_results = static::get_rest_proxy()->queryEntities(static::$_table_name, $options);
-		$entities = $query_results->getEntities();
-
-		$results = [];
-		foreach ($entities as $entity) {
-			$result = [];
-			foreach ($entity->getProperties() as $name => $value) {
-				$result[$name] = $value->getValue();
-			}
-			$results[] = $result;
-		}
-		return $results;
+		return static::get_rest_proxy()->queryEntities(static::$_table_name, $options);
 	}
 
 	/**
@@ -227,6 +236,24 @@ class Model_Base_Storage_Table extends Model
 			$datetime_str = $datetime->format('Y-m-d\TH:i:s');
 		}
 		return "datetime'{$datetime_str}'";
+	}
+
+
+	/**
+	 * Storage Table へのクエリ実行結果を連想配列に変換して返す
+	 */
+	protected static function to_array($query_results) {
+		$entities = $query_results->getEntities();
+
+		$results = [];
+		foreach ($entities as $entity) {
+			$result = [];
+			foreach ($entity->getProperties() as $name => $value) {
+				$result[$name] = $value->getValue();
+			}
+			$results[] = $result;
+		}
+		return $results;
 	}
 
 	/**
