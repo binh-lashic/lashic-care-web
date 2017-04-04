@@ -82,7 +82,7 @@ class Create_Bed_Sensor_Monthly
 			$properties = [];
 
 			if ($sleeping_time_count > 0) {
-				$properties['avg_sleeping_time'] = (double) $sleeping_time / $sleeping_time_count;
+				$properties['avg_sleeping_time'] = (int) round($sleeping_time / $sleeping_time_count);
 			}
 
 			# レコード作成日を追加

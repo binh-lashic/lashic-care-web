@@ -282,10 +282,10 @@ abstract class Model_Base_Storage_Table extends Model
 	 * EdmType に変換する
 	 */
 	protected static function get_edm_type($val) {
-		if (is_long($val)) {
-			return EdmType::INT64;
-		} else if (is_int($val)) {
+		if (is_int($val)) {
 			return EdmType::INT32;
+		} else if (is_long($val)) {
+			return EdmType::INT64;
 		} else if (is_float($val)) {
 			return EdmType::DOUBLE;
 		} else if (is_bool($val)) {
