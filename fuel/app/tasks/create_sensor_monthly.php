@@ -81,7 +81,7 @@ class Create_Sensor_Monthly
 
 					$last_sleep_time = $daily_data['last_sleep_time']->setTimezone($this->_timezone);
 					$wake_up_time    = $daily_data['wake_up_time']->setTimezone($this->_timezone);
-					$sleeping_minutes = ($wake_up_time->getTimestamp() - $last_sleep_time->getTimestamp()) / 60;
+					$sleeping_minutes = ($wake_up_time->getTimestamp() - $last_sleep_time->getTimestamp());
 					$sleeping_time += $sleeping_minutes;
 					$sleeping_time_count++;
 				}
@@ -94,7 +94,7 @@ class Create_Sensor_Monthly
 			}
 
 			if ($sleeping_time_count > 0) {
-				$properties['avg_sleeping_time'] = (int) round($sleeping_time / $sleeping_time_count);
+				$properties['avg_sleeping_time'] = (int) round($sleeping_time / $sleeping_time_count / 60);
 			}
 
 			# レコード作成日を追加
