@@ -2,10 +2,11 @@
 if(isset($client)) {
 ?>
 	<script type="text/javascript">
-	var sensor_id = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
-	var date = "<?php echo $date; ?>";
+	var sensor_id         = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
+	var bedsensor_id      = "<?php echo !empty($bedsensor['id']) ? $bedsensor['id'] : ""; ?>";
+	var date              = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
-	var sleep_time_data = "";
+	var sleep_time_data   = "";
 	</script>
 		<!-- content start -->
 		<section id="contentBox">

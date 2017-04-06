@@ -135,7 +135,7 @@ $(function(){
 
 		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
 
-		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result){
 			$('.myStat').empty();
 			if(typeof result.data.temperature != "undefined") {
 				$("#data_temperature").attr("data-text", result.data.temperature + "°C");
@@ -182,13 +182,13 @@ $(function(){
 				$("#data_wbgt").attr("data-percent","");
 			}
 
-                        if(typeof result.data.cold != "undefined") {
-                                $("#data_cold").attr("data-text", result.data.cold + "%");
-                                $("#data_cold").attr("data-percent", result.data.cold);
-                        } else {
-                                $("#data_cold").attr("data-text", "");
-                                $("#data_cold").attr("data-percent","");
-                        }
+			if(typeof result.data.cold != "undefined") {
+				$("#data_cold").attr("data-text", result.data.cold + "%");
+				$("#data_cold").attr("data-percent", result.data.cold);
+			} else {
+				$("#data_cold").attr("data-text", "");
+				$("#data_cold").attr("data-percent","");
+			}
 
 			if(result.data.wake_up_time != null) {
 				$("#data_wake_up_time").html(result.data.wake_up_time.substring(0, 5));

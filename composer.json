@@ -11,7 +11,11 @@
         { "type": "vcs", "url": "https://github.com/fuel/email" },
         { "type": "vcs", "url": "https://github.com/fuel/oil" },
         { "type": "vcs", "url": "https://github.com/fuel/orm" },
-        { "type": "vcs", "url": "https://github.com/fuel/parser" }
+        { "type": "vcs", "url": "https://github.com/fuel/parser" },
+        {
+            "type": "vcs",
+            "url": "fascent@fascent.git.backlog.jp:/INFIC/careeye-api-client.git"
+        }
     ],
     "require": {
         "php": ">=5.3.3",
@@ -28,7 +32,8 @@
         "michelf/php-markdown": "1.4.0",
         "sendgrid/sendgrid": "~4.0",
         "microsoft/windowsazure": "^0.4",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "fascent/careeye-api-client": "@dev"
     },
     "suggest": {
         "dwoo/dwoo" : "Allow Dwoo templating with the Parser package",
@@ -52,5 +57,8 @@
             "php oil r install"
         ]
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    }
 }
