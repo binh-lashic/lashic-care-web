@@ -25,6 +25,7 @@ class Controller_Api_Data extends Controller_Api
 		if(!empty($master)) {
 			return true;
 		} else if(!\Model_Sensor::isAllowed($sensor->id, $user_id)) {
+			\Log::warning("user_id:[{$user_id}] sensor_id:[{$sensor->id}] is not allowed.", __METHOD__);
 			$this->errors[] = array(
 				'message' => 'センサーへのアクセスの許可がありません'
 			);
@@ -35,6 +36,8 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function _dashboard() {
+		\Log::debug("Input::param - \n" . print_r(Input::param(), true), __METHOD__);
+
 		$sensor_name = Input::param("sensor_name");
 		$sensor_id = Input::param("sensor_id");
 		if(empty($sensor_name) && empty($sensor_id)) {
@@ -46,92 +49,46 @@ class Controller_Api_Data extends Controller_Api
 		} else if(!empty($sensor_id)) {
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
+
+		$bedsensor = $this->get_bedsensor();
 		
-		if(!empty($sensor)) {	
-			if($this->isSensorAllowed($sensor)) {
-				//日付を取得
-				if(Input::param("date")) {
-					$date = date("Y-m-d", strtotime(Input::param("date")));
-				} else {
-					$date = date("Y-m-d");
-				}
+		if(!empty($sensor) && $this->isSensorAllowed($sensor)) {
 
-				$this->result = array(
-					'sensor_id' => $sensor->id,
-					'sensor_name' => $sensor->name,
-					'data' => array("_dummy" => true),
-				);
-
-				//アラートの最新データ1件を取得する
-				$alerts = \Model_Alert::getAlerts(array(
-					'sensor_id' => $sensor->id,
-					'confirm_status' => 0,
-					'limit' => 1,
-				));
-				if(!empty($alerts[0])) {
-					$this->result['data']['alert'] = $alerts[0];
-				}
-
-				$data_daily = \Model_Data_DAily::getData($sensor->id, $date);
-
-				if(!empty($data_daily)) {
-					if(!empty($data_daily['wake_up_time'])) {
-						$this->result['data']['wake_up_time'] = date("H:i:s", strtotime($data_daily['wake_up_time']));
-					}
-
-					if(!empty($data_daily['wake_up_time_average'])) {
-						$this->result['data']['wake_up_time_average'] = $data_daily['wake_up_time_average'];
-					}
-
-					if(!empty($data_daily['sleep_time'])) {
-						$this->result['data']['sleep_time'] = date("H:i:s", strtotime($data_daily['sleep_time']));
-					}
-
-					if(!empty($data_daily['sleep_time_average'])) {
-						$this->result['data']['sleep_time_average'] = $data_daily['sleep_time_average'];
-					}
-					
-					if(!empty($data_daily['temperature_average'])) {
-						$this->result['data']['temperature']  = round($data_daily['temperature_average'], 1);
-					}
-					if(!empty($data_daily['humidity_average'])) {
-						$this->result['data']['humidity']  = round($data_daily['humidity_average'], 1);
-					}
-					if(!empty($data_daily['active_average'])) {
-						$this->result['data']['active']  = round($data_daily['active_average'], 1);
-					}
-					if(!empty($data_daily['illuminance_average'])) {
-						$this->result['data']['illuminance']  = (int)$data_daily['illuminance_average'];
-					}
-					if(!empty($data_daily['discomfort_average'])) {
-						$this->result['data']['discomfort']  = $data_daily['discomfort_average'];
-					}
-					if(!empty($data_daily['wbgt_average'])) {
-						$this->result['data']['wbgt']  = $data_daily['wbgt_average'];
-                                        }
-					if(!empty($data_daily['cold_average'])) {
-						$this->result['data']['cold']  = $data_daily['cold_average'];
-					}
-				}
-
-				//今日だったら最新データにする
-				if($date === date("Y-m-d")) {
-					$data = \Model_Data::getLatestData($sensor->name);
-					if(!empty($data) && isset($sensor)) {
-						$this->result['data']['temperature'] = round($data['temperature'], 1);
-						$this->result['data']['humidity'] = round($data['humidity'], 1);
-						$this->result['data']['active'] = round($data['active'], 1);
-						$this->result['data']['illuminance'] =  (int)$data['illuminance'];
-						$this->result['data']['discomfort'] = $data['discomfort'];
-						$this->result['data']['wbgt'] = $data['wbgt'];
-						$this->result['data']['cold'] = $data['cold'];
-						$this->result['data']['date'] = $data['date'];
-					}
-				}			
+			//日付を取得
+			if(Input::param("date")) {
+				$date = (new DateTime(Input::param("date"), new DateTimeZone('Asia/Tokyo')))->setTime(0, 0, 0);
+			} else {
+				$date = (new DateTime(null, new DateTimeZone('Asia/Tokyo')))->setTime(0, 0, 0);
 			}
 
+			$this->result = array(
+				'sensor_id'   => $sensor->id,
+				'sensor_name' => $sensor->name,
+				'data'        => array("_dummy" => true),
+			);
 
+			if (!empty($bedsensor) && $this->isSensorAllowed($bedsensor)) {
+				$bedsensor_name = $bedsensor->name;
+				$this->result['bedsensor_id']   = $bedsensor->id;
+				$this->result['bedsensor_name'] = $bedsensor_name;
+			} else {
+				$bedsensor_name = null;
+			}
 
+			//アラートの最新データ1件を取得する
+			$alerts = \Model_Alert::getAlerts(array(
+				'sensor_id'      => $sensor->id,
+				'confirm_status' => 0,
+				'limit'          => 1,
+			));
+			if(!empty($alerts[0])) {
+				$this->result['data']['alert'] = $alerts[0];
+			}
+			// API からセンサーデータを取得
+			$data = \Model_Api_Sensors_Daily::find_by_sensor_name_and_date($sensor->name, $bedsensor_name, $date);
+			$this->result['data'] = array_merge($this->result['data'], $data);
+
+			\Log::debug("result: " . print_r($this->result, true), __METHOD__);
 		}
 		return $this->result();	
 	}
@@ -563,4 +520,18 @@ class Controller_Api_Data extends Controller_Api
         }
         return $this->result(); 
     }
+
+	/**
+	 * パラメータに bedsensor_name または bedsensor_id が存在する場合、ベッドセンサーを取得する
+	 */
+	private function get_bedsensor() {
+		$bedsensor_name = Input::param("bedsensor_name");
+		$bedsensor_id   = Input::param("bedsensor_id");
+		if(!empty($bedsensor_name)) {
+			return \Model_Sensor::getSensorFromSensorName($bedsensor_name);
+		} else if(!empty($bedsensor_id)) {
+			return \Model_Sensor::getSensor($bedsensor_id);
+		}
+		return null;
+	}
 }

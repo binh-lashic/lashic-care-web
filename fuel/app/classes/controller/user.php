@@ -55,22 +55,44 @@ class Controller_User extends Controller_Base
 	    $this->data['next_page'] = $this->data['page'] + 1;
 	    $this->data['prev_page'] = $this->data['page'] - 1;
 
-	    if(isset($this->data['client']['id'])) {
+		# ログインユーザに紐付く見守られユーザが存在する場合
+		if(isset($this->data['client']['id'])) {
+			\Log::debug("login user_id:[{$this->user['id']}] client_id:[{$this->data['client']['id']}]", __METHOD__);
 			$sensors = \Model_User::getSensors($this->data['client']['id']);
 			if(!empty($sensors)) {
-				$this->data['sensor'] = $sensors[0];
+				\Log::debug("client_id:[{$this->data['client']['id']}] sensors:" . print_r($sensors, true), __METHOD__);
+				foreach($sensors as $sensor) {
+					switch($sensor['type']) {
+						case \Model_Sensor::TYPE_SENSOR:
+							if (!isset($this->data['sensor'])) { // 一つ目の要素を採用
+								$this->data['sensor'] = $sensor;
+							}
+							break;
+						case \Model_Sensor::TYPE_BED_SENSOR:
+							if (!isset($this->data['bedsensor'])) { // 一つ目の要素を採用
+								$this->data['bedsensor'] = $sensor;
+							}
+							break;
+						default:
+							\Log::warning("unknown sensor type:[{$sensor['type']}] login user_id:[{$this->user['id']}] client_id:[{$this->data['client']['id']}]", __METHOD__);
+					}
+				}
 				$params = array(
-					'sensor_id' => $this->data['sensor']['id'],
-					'limit' => Config::get("report_list_count"),
+					'sensor_id'      => $this->data['sensor']['id'],
+					'limit'          => Config::get("report_list_count"),
 					'confirm_status' => 0,
 				);
 				$this->data['header_alerts'] = \Model_Alert::getAlerts($params);
 				$params = array(
-					'sensor_id' => $this->data['sensor']['id'],
+					'sensor_id'      => $this->data['sensor']['id'],
 					'confirm_status' => 0,
 				);
 				$this->data['header_alert_count'] = \Model_Alert::getAlertCount($params);
+			} else {
+				\Log::warning("client_id:[{$this->data['client']['id']}] sensors are not assigned.", __METHOD__);
 			}
+		} else {
+			\Log::warning("login user_id:[{$this->user['id']}] client_id is not set.", __METHOD__);
 		}
 
 		$this->data['genders'] = Config::get("gender");
@@ -526,9 +548,10 @@ class Controller_User extends Controller_Base
         );
 
 		\Log::debug('params:' . print_r($params, true), __METHOD__);
-		\Log::debug('$this->data:' . print_r($this->data, true), __METHOD__);
-        
         $this->data['sensor'] = \Model_User_Sensor::getUserSensor($params);
+		\Log::debug(DB::last_query(), __METHOD__);
+		\Log::debug('$this->data:' . print_r($this->data, true), __METHOD__);
+
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/setting', $this->data);
 	}
