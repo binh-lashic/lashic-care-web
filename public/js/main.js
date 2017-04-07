@@ -362,18 +362,20 @@ $(function(){
 			console.log(params);
 		});
 	});
+
 	function drawGraph() {
-		api("data/graph?sensor_id=" + sensor_id + "&type=temperature&span=10&date=" + date, null, function(result){
+		api("data/graph?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
 			console.log("drawGraph");
-			var values = [];
-			var graphs = [];			
-			var display_graphs = [];
 			Cookies.set('active', $("#graph_active").prop('checked'), { expires: 90 });
 			Cookies.set('temperature', $("#graph_temperature").prop('checked'), { expires: 90 });
 			Cookies.set('humidity', $("#graph_humidity").prop('checked'), { expires: 90 });
 			Cookies.set('illuminance', $("#graph_illuminance").prop('checked'), { expires: 90 });
 			Cookies.set('wake_up_time', $("#graph_wake_up_time").prop('checked'), { expires: 90 });
 			Cookies.set('sleep_time', $("#graph_sleep_time").prop('checked'), { expires: 90 });
+
+			var values = [];
+			var graphs = [];
+			var display_graphs = [];
 
 			if($("#graph_active").prop('checked')) {
 				display_graphs.push({
@@ -384,7 +386,7 @@ $(function(){
 				        "gridAlpha": 0,
 				        "axisAlpha": 1,
 				        "position": "left",
-       					"offset": values.length * 50,
+					    "offset": values.length * 50,
 				    },
 				    graph:{
 						"valueAxis": "active",
@@ -396,7 +398,7 @@ $(function(){
 				        "connect": false,
 				        "valueField": "active",
 					}
-				});		
+				});
 			}
 			if($("#graph_temperature").prop('checked')) {
 				display_graphs.push({
@@ -427,7 +429,7 @@ $(function(){
 				        "gridAlpha": 0,
 				        "axisAlpha": 1,
 				        "position": "left",
-       					"offset": values.length * 50,
+						"offset": values.length * 50,
 				    },
 				    graph:{
 				        "valueAxis": "humidity",
@@ -437,7 +439,7 @@ $(function(){
 				        "connect": false,
 				        "valueField": "humidity",
 					}
-				});	
+				});
 			}
 			if($("#graph_illuminance").prop('checked')) {
 				display_graphs.push({
@@ -448,7 +450,7 @@ $(function(){
 				        "gridAlpha": 0,
 				        "axisAlpha": 1,
 				        "position": "left",
-       					"offset": values.length * 50,
+						"offset": values.length * 50,
 				    },
 				    graph:{
 				        "valueAxis": "illuminance",
@@ -458,7 +460,7 @@ $(function(){
 				        "connect": false,
 				        "valueField": "illuminance",
 					}
-				});			
+				});
 			}
 
 			$.each(result.data, function(i, item){
@@ -468,7 +470,7 @@ $(function(){
 					}
 					if(sleep_time_data == item.time.substring(11, 16)) {
 						result.data[i].sleep_time = 5;
-					}	
+					}
 				}
 			});
 			if($("#graph_wake_up_time").prop('checked')) {
@@ -491,7 +493,7 @@ $(function(){
 			        "title": "起床時間",
 			        "valueField": "wake_up_time",
 					"fillAlphas": 0
-				});												
+				});
 			}
 			if($("#graph_sleep_time").prop('checked')) {
 				values.push({
@@ -545,7 +547,7 @@ $(function(){
 			        "minorGridEnabled": true
 			    },
 			});
-		});			
+		});
 
 	}
 

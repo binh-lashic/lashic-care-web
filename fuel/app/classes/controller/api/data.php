@@ -102,144 +102,36 @@ class Controller_Api_Data extends Controller_Api
 	}
 
 	public function _graph() {
-		$type = Input::param("type");
-		$date = Input::param("date");
-		$span = Input::param("span");
-
-		$types = array(
-			'temperature' => true,					//温度
-			'humidity' => true,						//湿度
-			'illuminance' => true,					//照度
-			'active' => true,						//運動
-			'discomfort' => true,					//不快指数
-			'wbgt' => true,							//熱中症指数
-			'cold' => true,							//風邪ひき指数
-		);
 		$sensor_name = Input::param("sensor_name");
-		$sensor_id = Input::param("sensor_id");
+		$sensor_id   = Input::param("sensor_id");
 		if(empty($sensor_name) && empty($sensor_id)) {
-			$this->errors[] = array(
+			$this->errors[] = [
 				'message' => 'センサーIDを指定してください'
-			);
+			];
 		} else if(!empty($sensor_name)) {
 			$sensor = \Model_Sensor::getSensorFromSensorName($sensor_name);
 		} else if(!empty($sensor_id)) {
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
 
-		if(!$type) {
-			$this->errors[] = array(
-				'message' => 'グラフのタイプを指定してください'
-			);
-		} else if(empty($types[$type])) {
-			$this->errors[] = array(
-				'message' => 'グラフのタイプが間違っています'
-			);
-		} else if(!empty($sensor)) {
-			if($this->isSensorAllowed($sensor)) {
-
-				if(empty($date)) {
-					$date = date("Y-m-d");
-				} else {
-					$date = date("Y-m-d", strtotime($date));
-				}
-				if(empty($span)) {
-					$span = 10;
-				} else if($span < 0) {
-					$span = 1;
-				} else if($span > 240) {
-					$span = 240;
-				}
-				$data = array();
-				$start_time = strtotime($date." 00:00:00");
-				$end_time = strtotime($date." 24:00:00");
-
-
-				$sql = 'SELECT * FROM data WHERE sensor_id=:sensor_name AND date BETWEEN :start_time AND :end_time';
-				$query = DB::query($sql);
-				$query->parameters(array(
-					'sensor_name' => $sensor->name,
-					'start_time' => date("Y-m-d H:i:s", $start_time),
-					'end_time' => date("Y-m-d H:i:s", $end_time),
-				));
-				//$results = $query->cached(60)->execute('data');
-				$results = $query->execute('data');
-				$rows = array();
-				foreach($results as $result) {
-					$result = Model_Data::format($result);
-					$rows[$result['date']] = $result;
-				}
-
-				$end = 60 * 24; //10分毎に行う
-				for($i = 0; $i <= $end; $i = $i + $span) {
-					$time = $start_time + $i * 60;
-					$temperature_total = 0;
-					$humidity_total = 0;
-					$illuminance_total = 0;
-					$active_total = 0;
-					$discomfort_total = 0;
-					$wbgt_total = 0;
-					$cold_total = 0;
-					$averages = array(
-						'temperature' => null,
-						'humidity' => null,
-						'illuminance' => null,
-						'active' => null,
-						'discomfort' => null,
-						'wbgt' => null,
-						'cold' => null,
-					);
-					$span_time = date("Y-m-d H:i:s", $time);
-					$data_count = 0;
-					for($j = 0; $j < $span; $j++) {
-						$current_time = date("Y-m-d H:i:s", $start_time + ($i + $j)* 60);
-						if(isset($rows[$current_time])) {
-							$temperature_total += $rows[$current_time]['temperature'];
-							$humidity_total += $rows[$current_time]['humidity'];
-							$illuminance_total += $rows[$current_time]['illuminance'];
-							$active_total += $rows[$current_time]['active'];
-							$discomfort_total += $rows[$current_time]['discomfort'];
-							$wbgt_total += $rows[$current_time]['wbgt'];
-							$cold_total += $rows[$current_time]['cold'];
-							$data_count++;
-						}					
-					}
-
-					if($data_count > 0) {
-						$averages['temperature'] = $temperature_total / $data_count;
-						$averages['humidity'] = $humidity_total / $data_count;
-						$averages['illuminance'] = $illuminance_total / $data_count;
-						$averages['active'] = $active_total / $data_count;
-						$averages['discomfort'] = $discomfort_total / $data_count;
-						$averages['wbgt'] = $wbgt_total / $data_count;
-						$averages['cold'] = $cold_total / $data_count;
-					}
-					$value = $averages[$type];
-
-					$data[] = array(
-						'time' => $span_time,
-						'label' => date("H:i", $time),
-						'value' => $value,
-						'temperature' => $averages['temperature'],
-						'humidity' => $averages['humidity'],
-						'illuminance' => $averages['illuminance'],
-						'active' => $averages['active'],
-						'discomfort' => $averages['discomfort'],
-						'wbgt' => $averages['wbgt'],
-						'cold' => $averages['cold'],
-					);
-				}
-				$this->result = array(
-					'sensor_id' => $sensor->id,
-					'sensor_name' => $sensor->name,
-					'type' => $type,
-					'date' => $date,
-					'span' => $span,
-					'data' => $data,
-				);
+		if(!empty($sensor) && $this->isSensorAllowed($sensor)) {
+			$date = Input::param("date");
+			if($date) {
+				$date = (new DateTime($date, new DateTimeZone('Asia/Tokyo')))->setTime(0, 0, 0);
+			} else {
+				$date = (new DateTime(null, new DateTimeZone('Asia/Tokyo')))->setTime(0, 0, 0);
 			}
+
+			// API からセンサーデータを取得
+			$data = \Model_Api_Sensors_Graph::find_by_sensor_name_and_date($sensor->name, $date);
+			$this->result = [
+				'sensor_id'   => $sensor->id,
+				'sensor_name' => $sensor->name,
+				'date'        => $date->format('Y-m-d'),
+				'data'        => $data ?: [],
+			];
 		}
-		return $this->result();	
+		return $this->result();
 	}
 
 	public function get_graph_daily() {

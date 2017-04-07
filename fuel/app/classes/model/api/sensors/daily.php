@@ -6,8 +6,7 @@ use Fascent\Careeye\Api\Client\BedSensor as BedSensor;
 /**
  * Class Model_Api_Sensors_Daily
  */
-class Model_Api_Sensors_Daily
-{
+class Model_Api_Sensors_Daily extends Model_Api_Base {
 	/**
 	 * @param string $sensor_name
 	 * @param string $bedsensor_name
@@ -85,23 +84,6 @@ class Model_Api_Sensors_Daily
 			'latest' => self::get_contents($latest),
 			'daily'  => self::get_contents($daily),
 		];
-	}
-
-	/**
-	 * API の呼び出し結果からデータを取り出す
-	 */
-	private static function get_contents($api_result) {
-		if (empty($api_result)) {
-			return null;
-		}
-		if (\Arr::get($api_result, 'statusCode') == 200 &&
-			\Arr::get($api_result, 'contents.result')) {
-			return \Arr::get($api_result, 'contents.sensor');
-		}
-
-		\Log::warning("sensor api error. " . print_r($api_result, true) , __METHOD__);
-
-		return null;
 	}
 
 	/**
