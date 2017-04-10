@@ -47,8 +47,8 @@ $(function(){
 
 	setInterval(
 		function() {
-			drawGraph();
 			drawData();
+			drawGraph();
 		},
 	60000);
 
@@ -301,8 +301,8 @@ $(function(){
 		}
 		wake_up_time_data = "";
 		sleep_time_data = "";
-		drawGraph();
 		drawData();
+		drawGraph();
 //		location.href = url;
 	}
 
@@ -465,6 +465,9 @@ $(function(){
 
 			$.each(result.data, function(i, item){
 				if(typeof wake_up_time_data != "undefined") {
+					if (typeof item.time === 'undefined') {
+					  return; // continue
+					}
 					if(wake_up_time_data == item.time.substring(11, 16)) {
 						result.data[i].wake_up_time = 5;
 					}
@@ -544,7 +547,9 @@ $(function(){
 			    "categoryAxis": {
 			        "parseDates": false,
 			        "axisColor": "#DADADA",
-			        "minorGridEnabled": true
+			        "minorGridEnabled": true,
+					"autoGridCount": false,
+					"gridCount": 12
 			    },
 			});
 		});
