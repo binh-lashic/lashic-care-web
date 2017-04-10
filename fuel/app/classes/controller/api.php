@@ -37,12 +37,12 @@ class Controller_Api extends Controller_Rest
 
 	   	$method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {  
-			$this->result['sesson_error'] = false;
+			$this->result['session_error'] = false;
 	    } else {
 			if (Auth::check()) {
-				$this->result['sesson_error'] = false;
+				$this->result['session_error'] = false;
 			} else {
-				$this->result['sesson_error'] = true;
+				$this->result['session_error'] = true;
 			}
 	    }
 
