@@ -9,17 +9,20 @@ $(function(){
 	    );
     }
 
-	var temperature = Cookies.get('temperature');
-	var humidity = Cookies.get('humidity');
-	var illuminance = Cookies.get('illuminance');
-	var active = Cookies.get('active');
-	var wake_up_time = Cookies.get('wake_up_time');
-	var sleep_time = Cookies.get('sleep_time');
 	/**
 	 * 現在の画面が「ユーザの様子」画面かどうかを返す
 	 */
 	function is_user_state_page() {
 		return location.pathname.match(/^\/user(\/|\/index)?$/) ? true : false;
+	}
+
+	if (typeof Cookies !== 'undefined') {
+		var temperature  = Cookies.get('temperature');
+		var humidity     = Cookies.get('humidity');
+		var illuminance  = Cookies.get('illuminance');
+		var active       = Cookies.get('active');
+		var wake_up_time = Cookies.get('wake_up_time');
+		var sleep_time   = Cookies.get('sleep_time');
 	}
 
 	//クッキーの設定がない場合はデフォルト
