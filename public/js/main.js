@@ -665,7 +665,10 @@ $(function(){
 		}
     });
 
- 	$(".shoppingFancybox").fancybox();
+	if (typeof $.fn.fancybox !== 'undefined') {
+		$(".shoppingFancybox").fancybox();
+	}
+
 	$(".startShopping").click(function(event) {
 		api("shopping/set_plans", { plan_ids : JSON.parse(Cookies.get("plan_id")) }, function(result){
 			displayCartPlans(result);
