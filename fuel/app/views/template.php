@@ -63,7 +63,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script> 
-<script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script> 
 <script src="/js/jquery.darktooltip.min.js" charset="utf-8"></script> 
 <!-- 円グラフ --> 
 <script src="/js/jquery.circliful.js"></script> 
