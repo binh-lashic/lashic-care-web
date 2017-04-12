@@ -79,9 +79,9 @@ class Model_Sensor extends Orm\Model{
 	 */
 	public static function to_facility_sensor_type($sensor_type) {
 		switch ($sensor_type) {
-			case 'sensor':
+			case self::TYPE_SENSOR:
 				return self::FACILITY_TYPE_SLAVE_SENSOR;
-			case 'bedsensor':
+			case self::TYPE_BED_SENSOR:
 				return self::FACILITY_TYPE_BED_SENSOR_1;
 		}
 	}
@@ -174,6 +174,61 @@ SQL;
 			}
 		}
 		return $alert_levels;
+	}
+
+	/**
+	 * 最新のアラートが接続断アラートになっているセンサー情報を取得する
+	 *
+	 * 接続断アラートは直近60分以内のデータ受信が無い場合に記録される
+	 * なので、そのセンサーの最新のアラートは必ず接続断になるはず
+	 *
+	 * @return array sensor_name をキーにした連想配列
+	 */
+	public static function get_disconnected_sensors() {
+		$sql = <<<SQL
+SELECT
+  t1.sensor_id,
+  s.name AS sensor_name,
+  s.type AS sensor_type,
+  t1.date AS alerted_at,
+  t1.type AS alert_type,
+  t1.confirm_status
+FROM
+  (
+    SELECT
+      a1.sensor_id,
+      a1.date,
+      a1.type,
+      a1.confirm_status
+    FROM
+      alerts a1 JOIN alerts a2 ON (a1.sensor_id = a2.sensor_id)
+    GROUP BY a1.sensor_id, a1.date, a1.type, a1.confirm_status
+    HAVING a1.date = MAX(a2.date)
+       AND a1.type = :alert_type
+  ) t1 JOIN sensors s ON t1.sensor_id = s.id
+ORDER BY sensor_name
+SQL;
+
+		$query = DB::query($sql);
+		$query->parameters([
+			'alert_type'     => \Model_Alert::TYPE_DISCONNECTION,
+		]);
+		$disconnected_sensors = $query->execute()->as_array();
+
+		$result = [];
+		foreach ($disconnected_sensors as $sensor) {
+			switch ($sensor['sensor_type']) {
+				case self::TYPE_SENSOR:
+					$result[self::TYPE_SENSOR][$sensor['sensor_name']] = $sensor;
+					break;
+				case self::TYPE_BED_SENSOR:
+					$result[self::TYPE_BED_SENSOR][$sensor['sensor_name']] = $sensor;
+					break;
+				default:
+					throw new \UnexpectedValueException("sensor_type:[{$sensor['sensor_type']}] is unexpected.");
+			}
+		}
+		return $result;
 	}
 
 	public static function getSensor($id){
@@ -1006,7 +1061,10 @@ SQL;
     public function alert($params) {
     	$params['date'] = date("Y-m-d H:i:s", $this->time);
     	$params['sensor_id'] = $this->id;
-    	$params['category'] = "emergency";
+		// カテゴリ未指定の場合は「emergency」を入れる
+		if (!array_key_exists('category', $params)) {
+			$params['category'] = \Model_Alert::CATEGORY_EMERGENCY;
+		}
     	$params['confirm_status'] = 0;
 		$params['logs']['sensor_name'] = $this->name;
 		$params['logs']['sql'] = \DB::last_query("data");

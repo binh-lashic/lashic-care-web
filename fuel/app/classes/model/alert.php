@@ -15,6 +15,25 @@ class Model_Alert extends Orm\Model{
 	const TYPE_ABNORMAL_BEHAVIOR    = 'abnormal_behavior';
 	const TYPE_ACTIVE_NON_DETECTION = 'active_non_detection';
 	const TYPE_DISCONNECTION        = 'disconnection';
+	const TYPE_RECONNECTION         = 'reconnection';
+
+	// confirm_status の定数
+	/** 確認ステータス: 未確認 */
+	const CONFIRM_STATUS_UNCONFIRMED = 0;
+	/** 確認ステータス: 確認済み */
+	const CONFIRM_STATUS_CONFIRMED   = 1;
+
+	// category の定義(see: CareEye DB仕様書.pdf)
+	/** カテゴリ: 予定 */
+	const CATEGORY_SCHEDULE             = 'schedule';
+	/** カテゴリ: 起床 */
+	const CATEGORY_WAKE_UP              = 'wake_up';
+	/** カテゴリ: 就寝 */
+	const CATEGORY_SLEEP                = 'sleep';
+	/** カテゴリ: 未行動 */
+	const CATEGORY_ACTIVE_NON_DETECTION = 'active_non_detection';
+	/** カテゴリ: 緊急 */
+	const CATEGORY_EMERGENCY            = 'emergency';
 
 	protected static $_properties = array(
 		'id',

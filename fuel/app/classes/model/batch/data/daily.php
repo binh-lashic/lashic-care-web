@@ -60,4 +60,27 @@ class Model_Batch_Data_Daily extends Orm\Model {
 		}
 		return $results;
 	}
+
+	/**
+	 * 指定されたセンサー名のうち、指定された時間以降にデータが飛んできているセンサーのセンサー名・親センサー名をまとめた配列を返す
+	 * @param array $sensor_names
+	 * @param string $datetime Y-m-d H:i:s 形式の日付文字列
+	 */
+	public static function get_enabled_sensor_names_by_measurement_time_after(array $sensor_names, $datetime) {
+		$enabled_sensors = DB::select('sensor_name')
+							->select('parent_sensor_name')
+							->from(static::$_table_name)
+							->where('measurement_time', '>=', $datetime)
+							->where('sensor_name', 'IN', $sensor_names)
+							->group_by('sensor_name', 'parent_sensor_name')
+							->execute('batch')->as_array('sensor_name');
+		$result = [];
+		foreach ($enabled_sensors as $sensor) {
+			$result[] = $sensor['sensor_name'];
+			if (!is_null($sensor['parent_sensor_name'])) {
+				$result[] = $sensor['parent_sensor_name'];
+			}
+		}
+		return \Arr::unique($result);
+	}
 }

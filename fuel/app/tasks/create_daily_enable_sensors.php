@@ -21,10 +21,12 @@ class Create_Daily_Enable_Sensors
 			$this->create_daily_enable_sensors($target_datetime);
 			\Log::debug(\DB::last_query('batch'), __METHOD__);
 		} catch(\Exception $e) {
+			 // 未処理例外はログを記録して再 throw する
 			$code    = $e->getCode();
 			$message = $e->getMessage();
 			$line    = $e->getLine();
 			\Log::error("Error code:[{$code}] Error message:[{$message}] - line:[$line]", __METHOD__);
+			throw $e;
 		} finally {
 			\Log::info("task [create_daily_enable_sensors:run] end. target_date:[{$target_datetime->format('Y-m-d H:i:s')}]", __METHOD__);
 		}
@@ -38,7 +40,7 @@ class Create_Daily_Enable_Sensors
 		# 有効なセンサー一覧を取得
 		$enabled_sensor_names = \Model_Sensor::get_enable_sensor_name_and_times();
 		\Log::debug(\DB::last_query(), __METHOD__);
-		\Log::debug('enabled sensors:' . $this->to_string(\Arr::pluck($enabled_sensor_names, 'name')), __METHOD__);
+		\Log::debug('enabled sensors:[' . \Util_Array::to_string(\Arr::pluck($enabled_sensor_names, 'name')) . ']', __METHOD__);
 
 		# daily_enable_sensor にレコード作成
 		foreach($enabled_sensor_names as $sensor) {
@@ -75,17 +77,6 @@ class Create_Daily_Enable_Sensors
 			$end_date = $base_time->setTime($end_time, 00, 00);
 		}
 		return [$start_date->format('Y-m-d H:i:s'), $end_date->format('Y-m-d H:i:s')];
-	}
-
-	/**
-	 * 配列を文字列化する
-	 * @param array $array
-	 */
-	private function to_string(array $array) {
-		if (is_null($array)) {
-			return "";
-		}
-		return implode(',', $array);
 	}
 }
 /* End of file tasks/create_daily_enable_sensors.php */

@@ -321,11 +321,11 @@ return array(
 				),
 				'disconnection' => array(
 					'title' => '接続断アラート',
-					'description' => '',
+					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータが一時間以上受信できない場合に異常と判断して通知します。',
 				),
 				'reconnection' => array(
-					'title' => '接続再開アラート',
-					'description' => '',
+					'title' => 'センサー接続再開通知',
+					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータ受信の再開を確認できた場合に通知します。',
 				),
 		),
 	),

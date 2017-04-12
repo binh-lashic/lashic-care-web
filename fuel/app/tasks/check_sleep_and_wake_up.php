@@ -27,11 +27,13 @@ class Check_Sleep_And_Wake_Up
 			# 起床時間チェック
 			(new WakeUpTimeChecker($target_datetime))->check();
 		} catch(\Exception $e) {
+			 // 未処理例外はログを記録して再 throw する
 			$code    = $e->getCode();
 			$message = $e->getMessage();
 			$file    = $e->getFile();
 			$line    = $e->getLine();
 			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
+			throw $e;
 		} finally {
 			\Log::info("task [check_sleep_and_wake_up:run] end. target_date:[{$target_datetime->format('Y-m-d H:i:s')}] environment:[" . \Fuel::$env . "]", __METHOD__);
 		}
