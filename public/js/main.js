@@ -9,12 +9,21 @@ $(function(){
 	    );
     }
 
-	var temperature = Cookies.get('temperature');
-	var humidity = Cookies.get('humidity');
-	var illuminance = Cookies.get('illuminance');
-	var active = Cookies.get('active');
-	var wake_up_time = Cookies.get('wake_up_time');
-	var sleep_time = Cookies.get('sleep_time');
+	/**
+	 * 現在の画面が「ユーザの様子」画面かどうかを返す
+	 */
+	function is_user_state_page() {
+		return location.pathname.match(/^\/user(\/|\/index)?$/) ? true : false;
+	}
+
+	if (typeof Cookies !== 'undefined') {
+		var temperature  = Cookies.get('temperature');
+		var humidity     = Cookies.get('humidity');
+		var illuminance  = Cookies.get('illuminance');
+		var active       = Cookies.get('active');
+		var wake_up_time = Cookies.get('wake_up_time');
+		var sleep_time   = Cookies.get('sleep_time');
+	}
 
 	//クッキーの設定がない場合はデフォルト
 	if(typeof temperature == "undefined") {
@@ -45,12 +54,16 @@ $(function(){
 		$("#graph_sleep_time").prop('checked', true);
 	}
 
-	setInterval(
-		function() {
-			drawData();
-			drawGraph();
-		},
-	60000);
+	// 「ユーザの様子」画面でのみタイマー有効
+	if (is_user_state_page()) {
+		console.log('set interval');
+		setInterval(
+			function() {
+				drawData();
+				drawGraph();
+			},
+		60000);
+	}
 
 	if(typeof sensor_id != "undefined" && typeof date != "undefined" ) {
 		drawData();
@@ -120,6 +133,9 @@ $(function(){
 	}
 
 	function drawData() {
+		if (!is_user_state_page()) {
+			return;
+		}
 		var today = new Date(date.replace(/-/g, "/"));
 		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
 		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ] ;
@@ -364,6 +380,9 @@ $(function(){
 	});
 
 	function drawGraph() {
+		if (!is_user_state_page()) {
+			return;
+		}
 		api("data/graph?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
 			console.log("drawGraph");
 			Cookies.set('active', $("#graph_active").prop('checked'), { expires: 90 });
@@ -646,7 +665,10 @@ $(function(){
 		}
     });
 
- 	$(".shoppingFancybox").fancybox();
+	if (typeof $.fn.fancybox !== 'undefined') {
+		$(".shoppingFancybox").fancybox();
+	}
+
 	$(".startShopping").click(function(event) {
 		api("shopping/set_plans", { plan_ids : JSON.parse(Cookies.get("plan_id")) }, function(result){
 			displayCartPlans(result);
