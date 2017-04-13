@@ -45,7 +45,9 @@ class Model_Batch_Bed_Data_Daily extends Orm\Model {
 		$result = [];
 		foreach ($enabled_sensors as $sensor) {
 			$result[] = $sensor['sensor_name'];
-			$result[] = $sensor['parent_sensor_name'];
+			if (!is_null($sensor['parent_sensor_name'])) {
+				$result[] = $sensor['parent_sensor_name'];
+			}
 		}
 		return \Arr::unique($result);
 	}

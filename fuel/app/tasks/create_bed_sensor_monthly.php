@@ -36,16 +36,18 @@ class Create_Bed_Sensor_Monthly
 			// 有効な通常センサーの一覧を取得
 			$target_sensor_names = \Model_Sensor::get_enable_sensor_names_by_type(\Model_Sensor::TYPE_BED_SENSOR);
 			\Log::debug(\DB::last_query(), __METHOD__);
-			\Log::debug("enabled sensors:[{$this->to_string($target_sensor_names)}]", __METHOD__);
+			\Log::debug('enabled sensors:[' . \Util_Array::to_string($target_sensor_names) . ']', __METHOD__);
 
 			// レポート作成
 			$this->create_report($target_datetime, $target_sensor_names);
 		} catch(\Exception $e) {
+			 // 未処理例外はログを記録して再 throw する
 			$code    = $e->getCode();
 			$message = $e->getMessage();
 			$file    = $e->getFile();
 			$line    = $e->getLine();
 			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
+			throw $e;
 		} finally {
 			\Log::info("task [create_bed_sensor_monthly:run] end. target_date:[{$target_datetime->format('Y-m')}]", __METHOD__);
 		}
@@ -95,17 +97,6 @@ class Create_Bed_Sensor_Monthly
 
 			\Model_Bedsensormonthly::upsert($sensor_name, $current_month, $properties);
 		}
-	}
-
-	/**
-	 * 配列を文字列化する
-	 * @param array $array
-	 */
-	private function to_string(array $array) {
-		if (is_null($array)) {
-			return "";
-		}
-		return implode(',', $array);
 	}
 }
 /* End of file tasks/create_sensor_monthly.php */
