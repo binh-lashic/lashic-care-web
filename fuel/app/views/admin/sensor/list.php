@@ -20,6 +20,7 @@
 					<label for="inputEmail3" class="col-sm-2 control-label">機器タイプ</label>
 					<div class="col-sm-10">
 						<select name="type">
+							<option value="parent">親機</option>
 							<option value="sensor">センサー</option>
 							<option value="wifi">WiFi</option>
 							<option value="bedsensor">ベッドセンサー</option>
