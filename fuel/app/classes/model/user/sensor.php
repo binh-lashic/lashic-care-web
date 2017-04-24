@@ -20,8 +20,6 @@ class Model_User_Sensor extends Orm\Model{
 		'active_night_alert' => array('default' => 1),
 		'disconnection_alert' => array('default' => 1),
 		'reconnection_alert' => array('default' => 1),
-		'snooze_times' => array('default' => 5),
-		'snooze_interval' => array('default' => 60),
 	);
 
 	protected static $_belongs_to = array('sensor'=> array(
@@ -160,8 +158,6 @@ class Model_User_Sensor extends Orm\Model{
 			'active_night_alert',
 			'disconnection_alert',
 			'reconnection_alert',
-			'snooze_times',
-			'snooze_interval',
 		);
 
 		foreach($keys as $key) {
