@@ -1,5 +1,5 @@
 -- for staging db
--- USE [infic_staging]
+-- USE [infic-staging_db]
 -- GO
 
 -- for production db
