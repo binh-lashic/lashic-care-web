@@ -370,8 +370,6 @@ $(function(){
 			abnormal_behavior_alert:$('#abnormal_behavior_alert').hasClass("mail_on") ? 1 : 0,
 			active_non_detection_alert:$('#active_non_detection_alert').hasClass("mail_on") ? 1 : 0,
 			active_night_alert:$('#active_night_alert').hasClass("mail_on") ? 1 : 0,
-			snooze_times:$('#snooze_times').val(),
-			snooze_interval:$('#snooze_interval').val(),
 		};
 		api("/user/sensor/save", params, function(result){
 			console.log("user sensor success");

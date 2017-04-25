@@ -10,37 +10,6 @@
 							<table>
 								<tbody>
 									<tr>
-										<th>再通知設定</th>
-										<td colspan="2">
-											<label for="snooze" class="floatL pdt5">スヌーズ期間　</label>
-											<div class="common_select floatL">
-												<select name="snooze_interval" id="snooze_interval">
-<?php
-for($i = 0; $i <= 6; $i++) {
-	$time = $i * 10;
-?>
-													<option value="<?php echo $time; ?>"  <?php if($sensor['snooze_interval'] == $time) { echo "selected=\"selected\""; } ?>><?php echo $time; ?>分</option>
-<?php
-}
-?>												</select>
-												</div>
-											<label for="snoozeTimes" class="floatL pdt5">　繰り返し回数　</label>
-											<div class="common_select floatL">
-												<select name="snooze_times" id="snooze_times">
-<?php
-for($i = 1; $i <= 10; $i++) {
-?>
-													<option value="<?php echo $i; ?>" <?php if($sensor['snooze_times'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?>回</option>
-<?php
-}
-?>
-												</select>
-												</div>
-										</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
 										<th>室内温度異常アラート<br>
 <p class="small text_red txt_normal"><a href="/alert/info/temperature">※</a></p></th>
 										<td colspan="2">
