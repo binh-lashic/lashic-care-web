@@ -24,6 +24,7 @@
 					<th class="col-sm-3">名前</th>
 					<th class="col-sm-1">登録</th>
 					<th class="col-sm-2">センサー機器</th>
+					<th class="col-sm-2">見守られユーザ</th>
 					<th class="col-sm-1">流入元</th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
@@ -48,6 +49,13 @@ if(isset($admins)) {
 <?php
 	}
 ?>
+					</td>
+					<td>
+<?php foreach($admin['clients'] as $clients) : ?>
+    <?php if(!empty($clients['name'])) : ?>
+					<?php echo $clients['name']; ?><?php if(end($admin['clients']) !== $clients) : ?><br /><?php endif; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
 					</td>
 					<td><?php echo $admin['affiliate']; ?></td>
 					<td>
