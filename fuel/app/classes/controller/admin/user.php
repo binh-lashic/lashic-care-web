@@ -29,26 +29,8 @@ class Controller_Admin_User extends Controller_Admin
     }
 
     public function action_list() {
-        $data = array();
-        $data['page'] = Input::param("page") ? Input::param("page") : 1;
-        $query = array(
-            'admin' => 1,
-            'limit' => 10,
-            'page' => $data['page'],
-        );
-        if(Input::param('query')) {
-             $query['query'] = Input::param('query');
-        }
-        $admins = Model_User::getSearch($query);
-
-        foreach($admins as $admin) {
-            $sensors = \Model_User::getSensors($admin['id']);
-            $admin['sensors'] = $sensors;
-            $data['admins'][] = $admin;
-        }
-        $data['query'] = Input::param('query');
         $this->template->title = '管理ページ 親アカウント一覧';
-        $this->template->content = View::forge('admin/user/list', $data);
+	$this->template->content = Presenter::forge('admin/user/list');
     }
 
     public function action_alert() {
