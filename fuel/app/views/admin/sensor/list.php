@@ -58,7 +58,6 @@
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-1">センサー機器ID</th>
-					<th class="col-sm-1">シリアル</th>
 					<th class="col-sm-2">親アカウント</th>
 					<th class="col-sm-2">見守られユーザ</th>
 					<th class="col-sm-1">ステータス</th>
@@ -84,9 +83,6 @@ if(isset($sensors)) {
 					</td>
 					<td class="text-center">
 						<?php echo $sensor['name']; ?>
-					</td>
-					<td class="text-center">
-						<?php echo $sensor['serial']; ?>
 					</td>
 					<td>
 <?php
