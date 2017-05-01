@@ -18,34 +18,20 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_list() {
-		$data['page'] = Input::param("page") ? Input::param("page") : 1;
-    	$sensors = \Model_Sensor::getSearch(array(
-    		'query' => Input::param('query'),
-    		'limit' => 10,
-    		'page' => $data['page'],
-    	));
-    	foreach($sensors as $sensor) {
-    		$sensor = $sensor->to_array();
-    		$user_sensors = Model_Sensor::getAdmins(array("sensor_id" => $sensor['id']));
-    		$sensor['admins'] = array();
-    		$sensor['clients'] = array();
-    		if(count($user_sensors) > 0)  {
-	    		foreach($user_sensors as $user_sensor) {
-	    			$user = \Model_User::find($user_sensor['user_id']);
-	    			if(isset($user)) {
-		    			if($user['admin'] == 1) {
-		    				$sensor['admins'][] = $user;
-		    			} else {
-		    				$sensor['clients'][] = $user;
-		    			}	    				
-	    			}
-	    		}
-	    	}
-	        $data['sensors'][] = $sensor;
-    	}
-        $data['query'] = Input::param('query');
-        $this->template->title = '管理ページ センサー一覧';
-        $this->template->content = View::forge('admin/sensor/list', $data);
+            $page = Input::param("page") ?: 1;
+            $query = Input::param('query');
+                
+            $result = \Model_Sensor::getSearch(array(
+                    'query' => $query,
+                    'limit' => 10,
+                    'page' => $page,
+            ));
+                
+            $this->template->title = '管理ページ センサー一覧';
+            $this->template->content = Presenter::forge('admin/sensor/list')
+                                        ->set('result', $result)
+                                        ->set('query', $query)
+                                        ->set('page', $page);
 	}
 
 	public function action_save() {

@@ -19,12 +19,7 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">機器タイプ</label>
 					<div class="col-sm-10">
-						<select name="type">
-							<option value="parent">親機</option>
-							<option value="sensor">センサー</option>
-							<option value="wifi">WiFi</option>
-							<option value="bedsensor">ベッドセンサー</option>
-						</select>
+						<?php echo Form::select('type', 1, $typeName); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -58,6 +53,7 @@
 				<tr class="info">
 					<th class="col-sm-1">システムID</th>
 					<th class="col-sm-1">センサー機器ID</th>
+					<th class="col-sm-1">機器タイプ</th>
 					<th class="col-sm-2">親アカウント</th>
 					<th class="col-sm-2">見守られユーザ</th>
 					<th class="col-sm-1">ステータス</th>
@@ -83,6 +79,9 @@ if(isset($sensors)) {
 					</td>
 					<td class="text-center">
 						<?php echo $sensor['name']; ?>
+					</td>
+					<td class="text-center">
+						<?php echo $sensor['type']; ?>
 					</td>
 					<td>
 <?php
