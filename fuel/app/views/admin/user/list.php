@@ -53,7 +53,7 @@ if(isset($admins)) {
 					<td>
 <?php foreach($admin['clients'] as $clients) : ?>
     <?php if(!empty($clients['name'])) : ?>
-					<?php echo $clients['name']; ?><?php if(end($admin['clients']) !== $clients) : ?><br /><?php endif; ?>
+					<a href="/admin/user/client/detail?id=<?php echo $clients['id']; ?>&parent_id=<?php echo $admin['id']; ?>"><?php echo $clients['name']; ?></a><?php if(end($admin['clients']) !== $clients) : ?><br /><?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>
 					</td>

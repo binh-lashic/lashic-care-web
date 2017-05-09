@@ -28,4 +28,50 @@ class Controller_Admin_User_Client extends Controller_Admin
 			print_r($e->getMessage());
 		}
 	}
+        
+    public function action_detail() {
+    	$id = Input::param("id");
+        $parent_id = Input::param("parent_id");
+ 
+        $this->template->title = '管理ページ 見守られユーザ';
+        $this->template->content = Presenter::forge('admin/user/client/detail')
+                                    ->set('id', $id)
+                                    ->set('parent_id', $parent_id);
+    }
+
+    public function action_sensor() {
+    	$id = Input::param('id');
+        $parent_id = Input::param('parent_id');
+        $sensor = Input::param('sensor');
+ 
+        $this->template->title = '管理ページ 見守られユーザ センサー機器割当';
+        $this->template->content = Presenter::forge('admin/user/client/sensor')
+                                    ->set('id', $id)
+                                    ->set('parent_id', $parent_id)
+                                    ->set('sensor', $sensor);
+    }
+    
+    public function action_add_sensor()
+    {
+        $user_id = Input::param('user_id');
+        $parent_id = Input::param('parent_id');  
+        $sensor = Input::param('sensor');
+        
+        // センサー割当済みチェック
+        if(\Model_User_Sensor::count_by_client_user($sensor)) {
+            Session::set_flash('error', "センサー割当済みです。センサー割当を解除してください");
+        } else {
+            if ($user_id && $sensor) {
+                $result = \Model_User_Sensor::saveUserSensor([
+                    'user_id' => $user_id,
+                    'sensor_id' => $sensor,
+                    'admin' => 0
+                ]);
+
+            }
+        }
+        Response::redirect(
+                sprintf('/admin/user/client/sensor?id=%s&parent_id=%s&sensor=%s',$user_id, $parent_id, $sensor)
+                );
+    }
 }

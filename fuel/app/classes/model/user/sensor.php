@@ -172,4 +172,16 @@ class Model_User_Sensor extends Orm\Model{
 		}
 		return $ret;
 	}
+        
+        public function count_by_client_user($sensor_id)
+        {
+            $rows = DB::select([DB::expr('COUNT(*)'), 'cnt'])
+                        ->from(['user_sensors', 'us'])
+                        ->where(DB::expr('EXISTS (SELECT * FROM user_clients AS uc WHERE us.user_id = uc.client_user_id)'))
+                        ->and_where('sensor_id', '=', $sensor_id)
+                        ->and_where('admin', '=', 0)
+                        ->execute();
+
+            return ($rows->get('cnt') > 0);
+        }
 }
