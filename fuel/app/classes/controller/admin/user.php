@@ -86,7 +86,6 @@ class Controller_Admin_User extends Controller_Admin
 
         if($user_id && $sensor_names) {
             foreach($sensor_names as $name) {
-                $client = null;
                 $name = trim($name);
                 //センサーを新規登録
                 $sensor = Model_Sensor::find("first" , array(
@@ -101,20 +100,6 @@ class Controller_Admin_User extends Controller_Admin
                 }
 
                 if($sensor->id > 0) {
-                    if(empty($client)) {
-                        $client = \Model_Sensor::getClient(array('sensor_id' => $sensor->id));
-                    }
-                    if(empty($client)) {
-                        //見守られユーザを新規作成
-                        $client = \Model_User::createClientWithSensor($sensor);
-                    }
-
-                    //見守られユーザを登録
-                    \Model_User_Client::saveUserClient(array(
-                        'user_id' => $user_id,
-                        'client_user_id' => $client->id,
-                    ));
-
                     //管理者として登録
                     \Model_User_Sensor::saveUserSensor(array(
                         'user_id' => $user_id,
@@ -123,8 +108,8 @@ class Controller_Admin_User extends Controller_Admin
                     ));
                 }
             }
-    		$user = Model_User::getUser($user_id);
-	        Response::redirect('/admin/user/sensor?id='.$user['id']);
+            $user = Model_User::getUser($user_id);
+            Response::redirect('/admin/user/sensor?id='.$user['id']);
 
     	}
     }
