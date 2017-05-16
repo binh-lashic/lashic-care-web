@@ -11,20 +11,28 @@ class Presenter_Admin_User_Client_Sensor extends Presenter
 	public function view()
 	{
             $user = [];
-            $sensor = [];
+            $sensor_list = [];
             
             if($this->id) {
                 $user = Model_User::getUser($this->id);
+                if($sensors = Model_User::getSensors($user['id'])) {
+                    foreach ($sensors as $key => $value) {
+                        $value['type'] = $this->getTypeName($value['type']);
+                        $sensors[$key] = $value;
+                    }
+                }
             }
+
             // プルダウン生成
             if($this->parent_id) {
                 if($result = Model_User::getSensors($this->parent_id)) {
                     $sensor_list = $this->getList($result);
                 }
             }
-
+      
             $this->set('user', $user);
             $this->set('sensor_list', $sensor_list);
+            $this->set('sensors', $sensors);
         }
         
 	private function getList($sensors)
@@ -35,7 +43,7 @@ class Presenter_Admin_User_Client_Sensor extends Presenter
             }
             return $list;
 	}
-        
+       
 	private function getTypeName($key)
 	{
             return (isset($this->typeName[$key])) ? $this->typeName[$key] : '';

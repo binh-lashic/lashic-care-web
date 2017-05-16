@@ -37,3 +37,34 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">機器一覧</div>
+			<table class="table table-bordered">
+				<tr class="info">
+					<td class="col-sm-2">システムID</td>
+					<td class="col-sm-2">センサーID</td>
+					<td class="col-sm-2">機器タイプ</td>
+					<td class="col-sm-3">出荷日</td>
+					<td class="col-sm-3"></td>
+				</tr>
+            <?php if(isset($sensors)) : ?>
+                    <?php foreach($sensors as $sensor) : ?>
+				<tr>
+					<td>
+						<?php echo $sensor['id']; ?>
+					</td>
+					<td><?php echo $sensor['name']; ?></td>
+					<td><?php echo $sensor['type']; ?></td> 
+					<td><?php echo $sensor['shipping_date']; ?></td>
+					<td><a href="/admin/user/client/delete_sensor?id=<?php echo $id; ?>&sensor=<?php echo $sensor['id']; ?>&parent_id=<?php echo $parent_id; ?>" class="btn btn-danger">センサー機器の割当解除</a></td>
+				</tr>
+                    <?php endforeach; ?>
+            <?php endif; ?>
+
+			</table>
+		</div>
+	</div>
+</div>
