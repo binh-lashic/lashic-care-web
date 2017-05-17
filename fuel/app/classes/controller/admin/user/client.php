@@ -74,4 +74,21 @@ class Controller_Admin_User_Client extends Controller_Admin
                 sprintf('/admin/user/client/sensor?id=%s&parent_id=%s&sensor=%s',$user_id, $parent_id, $sensor)
                 );
     }
+    
+    public function action_delete_sensor() {
+        $id = Input::param('id');
+        $sensor_id = Input::param('sensor');
+        $parent_id = Input::param('parent_id');
+
+        if($id && $sensor_id) {
+            Model_User_Sensor::deleteUserSensor([
+                'user_id' => $id, 
+                'sensor_id' => $sensor_id
+                    ]);
+        }
+        
+        Response::redirect(
+                sprintf('/admin/user/client/sensor?id=%s&parent_id=%s&sensor=%s',$id, $parent_id, $sensor_id)
+                );
+    }
 }
