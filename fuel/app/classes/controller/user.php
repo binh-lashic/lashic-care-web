@@ -241,6 +241,9 @@ class Controller_User extends Controller_Base
         	if(Input::post('new_email') != Input::post('new_email_confirm')) {
         		$this->data['errors']['new_email_confirm'] = true;
         	}
+        	if(Model_User::getOtherUserByEmail(Input::post('new_email'))) {
+        		$this->data['errors']['email_duplicate'] = true;
+        	}
                 
         	$this->data['data'] = Input::post();
         	if(count($this->data['errors']) === 0) {

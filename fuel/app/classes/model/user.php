@@ -337,6 +337,21 @@ class Model_User extends Orm\Model{
 		}	
 	}
 
+	public static function getOtherUserByEmail($email){
+		list($tmp, $user_id) = Auth::get_user_id();
+		$user = \Model_User::find("first", [
+			'where' => [
+				['id', "!=", $user_id],
+				'email' => $email,
+			]
+		]);
+		if($user) {
+			return \Model_User::format($user);
+		} else {
+			return null;
+		}	
+	}
+        
 	public static function uploadProfileImage() {
 		$config = array(
             'path' => DOCROOT.DS.'images/user',
