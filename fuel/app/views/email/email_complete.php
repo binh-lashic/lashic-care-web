@@ -12,7 +12,7 @@ https://lashic.jp/<br />
 ■サポート＆サービス情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 ↓Ｑ＆Ａ<br />
-http://www.infic-c.net/LASHIC/aq.html<br />
+http://www.infic-c.net/LASHIC/qa.html<br />
 ↓お問い合わせ<br />
 http://lashic.jp/contact<br />
 ↓運営会社<br />
