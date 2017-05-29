@@ -12,25 +12,21 @@
 								<tbody>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス</th>
-										<td><input type="text" class="input_text input_medium" name="new_email"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
-<?php
-if(!empty($errors['new_email'])) {
-?>
+										<td><?php echo Form::input('new_email', $data['new_email'], ['class' => 'input_text input_medium', 'id' => null]); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+<?php if(!empty($errors['new_email'])) : ?>
 											<p class="error">変更するメールアドレスを入力してください。</p>
-<?php
-}
-?>										</td>
+<?php endif; ?>
+<?php if(!empty($errors['email_duplicate'])) : ?>
+											<p class="error">変更するメールアドレスは既に登録されています。</p>
+<?php endif; ?>                                                                                       
+                                                                                </td>
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス　確認</th>
-										<td><input type="text" class="input_text input_medium" name="new_email_confirm"> <span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
-<?php
-if(!empty($errors['new_email_confirm'])) {
-?>
+										<td><?php echo Form::input('new_email_confirm', $data['new_email_confirm'], ['class' => 'input_text input_medium', 'id' => null]); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+<?php if(!empty($errors['new_email_confirm'])) : ?>
 											<p class="error">変更するメールアドレスが一致しません。</p>
-<?php
-}
-?>										</td>
+<?php endif; ?>										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 当社からのメール案内</th>

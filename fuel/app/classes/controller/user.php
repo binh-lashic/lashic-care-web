@@ -224,9 +224,9 @@ class Controller_User extends Controller_Base
     }
 
     public function action_account_mail_form()
-	{
+    {
         $this->template->title = 'マイページ';
-        $this->data['breadcrumbs'] = array($this->template->title);
+        $this->data['breadcrumbs'] = [$this->template->title];
         
         $this->template->header = View::forge('header_client', $this->data);
 
@@ -241,37 +241,41 @@ class Controller_User extends Controller_Base
         	if(Input::post('new_email') != Input::post('new_email_confirm')) {
         		$this->data['errors']['new_email_confirm'] = true;
         	}
-        	if(empty($this->data['errors'])) {
-        		$this->data['data'] = Input::post();
+        	if(Model_User::getOtherUserByEmail(Input::post('new_email'))) {
+        		$this->data['errors']['email_duplicate'] = true;
+        	}
+                
+        	$this->data['data'] = Input::post();
+        	if(count($this->data['errors']) === 0) {
 	    		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
         		return;
         	}
-        	
-			
-			$this->data['data'] = Input::post();
-    		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
-    		return;
         }
+        
         $this->template->content = View::forge('user/account_mail_form', $this->data);
     }
 
-	public function action_account_mail_complete()
-	{
+    public function action_account_mail_complete()
+    {
         $this->template->title = 'マイページ';
-        $this->data['breadcrumbs'] = array($this->template->title);
-
-        if(Input::post()) {
-        	$params = Input::post();
-        	$date = date("Y-m-d H:i:s", strtotime("+1day"));
-        	$params['email_confirm_token'] = sha1($params['new_email'].$date);
-        	$params['email_confirm_expired'] = $date;
-        	\Model_User::saveUser($params);
-        }
+        $this->data['breadcrumbs'] = [$this->template->title];
         $this->data['data'] = Input::post();
+        
         $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('user/account_mail_complete', $this->data);
+        $this->template->content = Presenter::forge('account_mail_complete', 'view', null, 'user/account_mail_complete')
+                ->set('data', $this->data['data']);
     }
 
+    public function action_email_complete()
+    {
+        $this->template->title = 'マイページ';
+        $this->data['breadcrumbs'] = [$this->template->title];
+        
+        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->content = Presenter::forge('account_mail_success', 'view', null, 'user/email_complete' )
+                ->set('token', Input::Param('token'));
+    }
+    
     public function action_account_password_form()
 	{
         $this->template->title = 'マイページ';
