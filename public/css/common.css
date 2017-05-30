@@ -613,6 +613,39 @@ button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
+a.btn_disabledRadius20 , .btn_disabledRadius20 [type=submit] {
+	background-image: -moz-linear-gradient( 90deg, rgb(192,192,192) 0%, rgb(192,192,192) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(192,192,192) 0%, rgb(192,192,192) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(192,192,192) 0%, rgb(192,192,192) 100%);
+	border-radius: 20px;
+	border: none;
+	color: #FFF;
+	padding: 10px;
+	font-size: 14px;
+	display: block;
+	text-align: center;
+	cursor:pointer;
+	outline:none;
+	text-decoration:none;
+}
+button.btn_disabled , a.btn_disabled , a.report_btn ,.center_container [type=submit] {
+	background-image: -moz-linear-gradient( 90deg, rgb(192,192,192)  0%, rgb(192,192,192) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(192,192,192)  0%, rgb(192,192,192) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(192,192,192)  0%, rgb(192,192,192) 100%);
+	border-radius: 20px;
+	border: none;
+	color: #FFF;
+	padding: 10px;
+	font-size: 14px;
+	display: block;
+	text-align: center;
+	cursor:pointer;
+	outline:none;
+	text-decoration:none;
+}
+button.btn_disabled{ width:100%;}
+.center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+.center_container .btn_disabled{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 .center_container [type=submit]:hover {
 	opacity: 0.7;
