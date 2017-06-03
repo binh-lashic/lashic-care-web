@@ -12,6 +12,7 @@ class Presenter_Admin_User_Client_Sensor extends Presenter
 	{
             $user = [];
             $sensor_list = [];
+            $isDisplay = false;
             
             if($this->id) {
                 $user = Model_User::getUser($this->id);
@@ -25,11 +26,13 @@ class Presenter_Admin_User_Client_Sensor extends Presenter
 
             // プルダウン生成
             if($this->parent_id) {
-                if($result = Model_User::getSensors($this->parent_id)) {
+                if($result = Model_User::getUnselectedSensorList($this->parent_id)) {
+                    $isDisplay = true;
                     $sensor_list = $this->getList($result);
                 }
             }
       
+            $this->set('isDisplay', $isDisplay);
             $this->set('user', $user);
             $this->set('sensor_list', $sensor_list);
             $this->set('sensors', $sensors);

@@ -29,26 +29,21 @@ class Controller_Admin_User_Client extends Controller_Admin
 		}
 	}
         
-    public function action_detail() {
-    	$id = Input::param("id");
-        $parent_id = Input::param("parent_id");
- 
+    public function action_detail()
+    {
         $this->template->title = '管理ページ 見守られユーザ';
         $this->template->content = Presenter::forge('admin/user/client/detail')
-                                    ->set('id', $id)
-                                    ->set('parent_id', $parent_id);
+                                    ->set('id', Input::param("id"))
+                                    ->set('parent_id', Input::param("parent_id"));
     }
 
-    public function action_sensor() {
-    	$id = Input::param('id');
-        $parent_id = Input::param('parent_id');
-        $sensor = Input::param('sensor');
- 
+    public function action_sensor()
+    {
         $this->template->title = '管理ページ 見守られユーザ センサー機器割当';
         $this->template->content = Presenter::forge('admin/user/client/sensor')
-                                    ->set('id', $id)
-                                    ->set('parent_id', $parent_id)
-                                    ->set('sensor', $sensor);
+                                    ->set('id', Input::param('id'))
+                                    ->set('parent_id', Input::param('parent_id'))
+                                    ->set('sensor', Input::param('sensor'));
     }
     
     public function action_add_sensor()
@@ -56,20 +51,27 @@ class Controller_Admin_User_Client extends Controller_Admin
         $user_id = Input::param('user_id');
         $parent_id = Input::param('parent_id');  
         $sensor = Input::param('sensor');
-        
-        // センサー割当済みチェック
-        if(\Model_User_Sensor::count_by_client_user($sensor)) {
-            Session::set_flash('error', "センサー割当済みです。センサー割当を解除してください");
-        } else {
+     
+        $validation = Validation::forge('add_sensor');
+        $validation->add_callable('sensorrules');
+        $validation->add('sensor')
+                ->add_rule('selected_sensortype', $user_id)
+                ->add_rule('selected');
+        $validation->set_message('selected_sensortype', '別のセンサーが割当られているため、登録できません');
+        $validation->set_message('selected', 'センサー割当済みです。センサー割当を解除してください');
+
+        if($validation->run()) {
             if ($user_id && $sensor) {
                 $result = \Model_User_Sensor::saveUserSensor([
                     'user_id' => $user_id,
                     'sensor_id' => $sensor,
                     'admin' => 0
                 ]);
-
             }
+        } else {
+            Session::set_flash('error', $validation->error_message('sensor'));
         }
+
         Response::redirect(
                 sprintf('/admin/user/client/sensor?id=%s&parent_id=%s&sensor=%s',$user_id, $parent_id, $sensor)
                 );
