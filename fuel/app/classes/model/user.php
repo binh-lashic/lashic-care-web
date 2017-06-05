@@ -768,5 +768,36 @@ class Model_User extends Orm\Model{
 		);
 		return \Model_User::sendEmail($params);
 	}
+
+        /*
+         * 見守られユーザーに紐づいているセンサーを除外したリスト
+         * 
+         *  @param int $user_id
+         *  @return array $sensors
+         */
+        public function getUnselectedSensorList($user_id)
+        {
+            $rows = DB::select('*')
+                        ->from(['user_sensors', 'us'])
+                        ->join(['sensors', 's'], 'LEFT')
+                        ->on('us.sensor_id', '=', 's.id')
+                        ->where(DB::expr('us.sensor_id NOT IN ( SELECT t1.sensor_id FROM user_sensors AS t1 WHERE EXISTS ( SELECT * FROM user_clients AS t2 WHERE t1.user_id = t2.client_user_id ) AND t1.sensor_id = us.sensor_id AND t1.admin = 0 )'))
+                        ->and_where('us.user_id', '=', $user_id)
+                        ->execute()->as_array();
+
+            foreach($rows as $row) {
+                $row['id'] = $row['sensor_id'];
+                unset($row['user_id']);
+                unset($row['sensor_id']);
+                if(isset($row['sensor'])) {
+                    $sensor = $row['sensor'];
+                    unset($row['sensor']);
+                    $sensors[] = array_merge($sensor, $row);
+                } else {
+                    $sensors[] = $row;
+                }			
+            }
+            return $sensors;
+        }
 }
 		

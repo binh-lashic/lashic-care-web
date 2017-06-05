@@ -184,4 +184,30 @@ class Model_User_Sensor extends Orm\Model{
 
             return ($rows->get('cnt') > 0);
         }
+        
+         /*
+          * 同一の機器タイプが割当済みかチェック
+          * 
+          *  @param array $params
+          *  @return boolean
+          */
+        public function checkSelectedSensorType($params)
+        {
+                $query = DB::query(
+                    "SELECT COUNT(*) AS cnt "
+                        . "FROM user_sensors AS us "
+                        . "LEFT JOIN sensors AS s ON us.sensor_id = s.id "
+                        . "WHERE s.type = ( "
+                        . "SELECT type FROM sensors AS tmp WHERE tmp.id = :sensor_id "
+                        . ") "
+                        . "AND us.user_id = :user_id"
+                    );
+                
+                $rows = $query->parameters([
+                    'sensor_id' => $params['sensor_id'], 
+                    'user_id' => $params['user_id']]
+                        )->execute();
+     
+            return ($rows->get('cnt') > 0);
+        }
 }
