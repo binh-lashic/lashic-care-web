@@ -143,4 +143,82 @@ class Controller_Admin_User extends Controller_Admin
         \Model_User::saveClients($user_id, $client_user_ids);
         Response::redirect('/admin/user/client_list?user_id='.$user_id);
     }
+    
+    /*
+     * 見守られユーザー登録フォーム
+     * 
+     *  @param none
+     *  @return none
+     */
+    public function action_client_form()
+    {
+        $id = Input::param("id");
+        $this->template->title = '管理ページ 見守られユーザ 新規登録';
+        $this->template->content = Presenter::forge('admin/user/client/form')
+                ->set('id', $id)
+                ->set('data', []);
+    }
+
+    /*
+     * 見守られユーザー登録完了
+     * 
+     * @param none
+     * @return none
+     */
+    public function action_client_complete()
+    {
+        $id = Input::param("id");
+        $this->template->title = '管理ページ 見守られユーザ 新規登録完了';
+        
+        $data = [];
+        $validation = Validation::forge('client_complete');
+        
+        if(Input::post()) {
+            $validation->add_callable('userclientrules');
+            $validation->add('zip_code')
+                    ->add_rule('check_zipcode');
+            $validation->add('phone', '電話番号1')
+                    ->add_rule('check_phone');
+            $validation->add('cellular', '電話番号2')
+                    ->add_rule('check_phone');
+            $validation->add('email')
+                    ->add_rule('check_email')
+                    ->add_rule('duplicate_email');
+            $validation->set_message('check_zipcode', '郵便番号の形式が正しくありません。');
+            $validation->set_message('check_phone', ' :labelの形式が正しくありません。');
+            $validation->set_message('check_email', 'メールアドレスの形式が正しくありません。');
+            $validation->set_message('duplicate_email', 'メールアドレスは既に登録されています。');
+            
+            foreach([
+                'last_name','first_name','last_kana',
+                'first_kana','gender','year',
+                'month','day','blood_type','zip_code',
+                'prefecture','address','phone',
+                'cellular','email'
+            ] as $key) {
+                $data[$key] = Input::param($key);
+            }
+                 
+            if($validation->run()) {
+                $data['birthday'] = sprintf('%d-%02d-%02d', $data['year'], $data['month'], $data['day']);
+                $prefectureList = Config::get('prefectures');
+                $data['prefecture'] = $prefectureList[$data['prefecture']];
+                $data['admin'] = 0;
+     
+                try {
+                    $user = Model_User::saveClientUser($id, $data);
+                    return Response::redirect(sprintf('/admin/user/client/detail?id=%s&parent_id=%s', $user['id'], $id));
+                    
+                } catch (Exception $e) {
+                    \Log::error('見守られユーザー登録に失敗しました。  ['.$e->getMessage().']');
+                    throw new Exception($e);
+                }
+            }  
+        }
+        
+        $this->template->content = Presenter::forge('admin/user/client/form')
+                ->set('id', $id)
+                ->set('data', $data)
+                ->set('error', $validation->error_message());    
+    }
 }

@@ -28,6 +28,7 @@
 					<th class="col-sm-1">流入元</th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
+					<th class="col-sm-2"></th>
 				</tr>
 <?php
 if(isset($admins)) {
@@ -60,6 +61,9 @@ if(isset($admins)) {
 					<td><?php echo $admin['affiliate']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="/admin/user/client_form?id=<?php echo $admin['id']; ?>">見守られユーザの登録</a>						
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/login?id=<?php echo $admin['id']; ?>">このユーザとしてログイン</a>
