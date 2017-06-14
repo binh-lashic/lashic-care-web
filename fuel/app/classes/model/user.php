@@ -510,12 +510,22 @@ class Model_User extends Orm\Model{
                 $user = \Model_User::find($id);
                 $user->set($params);
                 $user->save();
-                    
-                \Model_User::saveClients($user_id, [$user['id'] => "true"]);
+                
+             } catch (Exception $e) {
+                throw new Exception('create users failed. ['.$e->getMessage().']');
+            }
+
+            try {
+                \Model_User_Client::createUserClient([
+                    'user_id' => $user_id,
+                    'client_user_id' => $user['id'],
+                    'admin' => 1
+                ]);
+                
                 return \Model_User::format($user);
                     
             } catch (Exception $e) {
-                throw new Exception('save users failed. ['.$e->getMessage().']');
+                throw new Exception('create user_clients failed. ['.$e->getMessage().']');
             }
         }
         

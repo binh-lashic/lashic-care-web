@@ -4,6 +4,7 @@ class Model_User_Client extends Orm\Model{
 		'id',
 		'user_id',
 		'client_user_id',
+                'admin',
 	);
 
 	protected static $_belongs_to = array(
@@ -136,5 +137,21 @@ class Model_User_Client extends Orm\Model{
         $query = DB::query($sql);
         $query->parameters(array('type' => 'sensor', 'user_id' => $user_id));
         return $query->execute();
+    }
+    
+    /*
+     * 新規追加
+     *  
+     * @param array $params
+     * @throw
+     */
+    public static function createUserClient($params)
+    {
+        try {
+            $client = \Model_User_Client::forge($params);
+            $client->save();    
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }
