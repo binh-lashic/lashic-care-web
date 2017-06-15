@@ -525,4 +525,11 @@ return array(
 		'wifi' => 'WiFi',
 		'bedsensor' => 'ベッドセンサー',
 	],
+    
+	'blood_type' => [
+                'A' => 'A型' ,
+                'B' => 'B型',
+                'O' => 'O型',
+                'AB' => 'AB型',
+         ],
 );

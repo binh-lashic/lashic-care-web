@@ -457,6 +457,78 @@ class Model_User extends Orm\Model{
 		}
 	}
 
+        /*
+         * 見守られユーザー登録
+         * 
+         * @param int $user_id
+         * @param array $params
+         */
+        public static function saveClientUser($user_id, $params)
+        {
+            if(isset($params['id'])) {
+                $id = $params['id'];
+            } else {
+                if(!isset($params['email']) || empty($params['email'])) {
+                    $params['email'] = sha1(mt_rand())."@example.com";
+                }
+                
+                if(!isset($params['username']) || empty($params['username'])) {
+                    $params['username'] = sha1($params['email'].mt_rand());
+                }
+                
+                if(!isset($params['password']) || empty($params['password'])) {
+                    $params['password'] = sha1(mt_rand());
+                }
+
+                try {
+                    $id = Auth::create_user(
+                            $params['username'],
+                            $params['password'],
+                            $params['email']
+                    );
+                        
+                } catch (Exception $e) {
+                    throw new Exception('create_user failed. ['.$e->getMessage().']');
+                }
+                    
+                if(!isset($params['admin'])) {
+                    $params['admin'] = 1;
+                }
+
+                $params['email_confirm'] = 0;
+                $params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+                $params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
+                    
+            }
+
+            foreach (['id', 'username', 'password', 'email'] as $key) {
+                unset($params[$key]);
+            }
+                    
+            try {
+                     
+                $user = \Model_User::find($id);
+                $user->set($params);
+                $user->save();
+                
+             } catch (Exception $e) {
+                throw new Exception('create users failed. ['.$e->getMessage().']');
+            }
+
+            try {
+                \Model_User_Client::createUserClient([
+                    'user_id' => $user_id,
+                    'client_user_id' => $user['id'],
+                    'admin' => 1
+                ]);
+                
+                return \Model_User::format($user);
+                    
+            } catch (Exception $e) {
+                throw new Exception('create user_clients failed. ['.$e->getMessage().']');
+            }
+        }
+        
 	public static function saveShareUser($params) {
 		//連絡共有先人数を取得
 		$admins = \Model_User::getAdmins($params['client_user_id']);
