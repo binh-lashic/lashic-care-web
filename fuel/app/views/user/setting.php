@@ -10,37 +10,6 @@
 							<table>
 								<tbody>
 									<tr>
-										<th>再通知設定</th>
-										<td colspan="2">
-											<label for="snooze" class="floatL pdt5">スヌーズ期間　</label>
-											<div class="common_select floatL">
-												<select name="snooze_interval" id="snooze_interval">
-<?php
-for($i = 0; $i <= 6; $i++) {
-	$time = $i * 10;
-?>
-													<option value="<?php echo $time; ?>"  <?php if($sensor['snooze_interval'] == $time) { echo "selected=\"selected\""; } ?>><?php echo $time; ?>分</option>
-<?php
-}
-?>												</select>
-												</div>
-											<label for="snoozeTimes" class="floatL pdt5">　繰り返し回数　</label>
-											<div class="common_select floatL">
-												<select name="snooze_times" id="snooze_times">
-<?php
-for($i = 1; $i <= 10; $i++) {
-?>
-													<option value="<?php echo $i; ?>" <?php if($sensor['snooze_times'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?>回</option>
-<?php
-}
-?>
-												</select>
-												</div>
-										</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
 										<th>室内温度異常アラート<br>
 <p class="small text_red txt_normal"><a href="/alert/info/temperature">※</a></p></th>
 										<td colspan="2">
@@ -61,7 +30,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['temperature_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="temperature_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['temperature_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="temperature_alert"><?php if($sensor['temperature_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -85,7 +54,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['fire_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="fire_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['fire_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="fire_alert"><?php if($sensor['fire_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -108,7 +77,7 @@ if($sensor['admin'] == 1) {
 }
 ?>										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['cold_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="cold_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['cold_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="cold_alert"><?php if($sensor['cold_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -132,7 +101,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['humidity_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="humidity_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['humidity_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="humidity_alert"><?php if($sensor['humidity_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -156,7 +125,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['mold_mites_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="mold_mites_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['mold_mites_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="mold_mites_alert"><?php if($sensor['mold_mites_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -180,7 +149,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['illuminance_daytime_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_daytime_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['illuminance_daytime_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_daytime_alert"><?php if($sensor['illuminance_daytime_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -204,7 +173,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['illuminance_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_night_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['illuminance_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="illuminance_night_alert"><?php if($sensor['illuminance_night_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 <?php
@@ -239,7 +208,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['wake_up_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="wake_up_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['wake_up_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="wake_up_alert"><?php if($sensor['wake_up_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -263,7 +232,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['sleep_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="sleep_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['sleep_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="sleep_alert"><?php if($sensor['sleep_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -287,7 +256,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['abnormal_behavior_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="abnormal_behavior_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['abnormal_behavior_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="abnormal_behavior_alert"><?php if($sensor['abnormal_behavior_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 									<tr>
@@ -311,7 +280,7 @@ if($sensor['admin'] == 1) {
 ?>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_non_detection_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_non_detection_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_non_detection_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_non_detection_alert"><?php if($sensor['active_non_detection_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 <?php
@@ -330,7 +299,7 @@ if($sensor['admin'] == 1) {
 										</table>
 										</td>
 										<td>
-												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_night_alert">メール通知 ON</a></div>
+												<div class="mailSetting"><a href="javascript:void(0);" class="<?php if($sensor['active_night_alert'] == "1") { echo "mail_on"; } else { echo "mail_off"; } ?>" id="active_night_alert"><?php if($sensor['active_night_alert'] == "1") : ?>メール通知 ON<?php else : ?>メール通知 OFF<?php endif; ?></a></div>
 										</td>
 									</tr>
 */

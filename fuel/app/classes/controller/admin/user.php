@@ -29,26 +29,8 @@ class Controller_Admin_User extends Controller_Admin
     }
 
     public function action_list() {
-        $data = array();
-        $data['page'] = Input::param("page") ? Input::param("page") : 1;
-        $query = array(
-            'admin' => 1,
-            'limit' => 10,
-            'page' => $data['page'],
-        );
-        if(Input::param('query')) {
-             $query['query'] = Input::param('query');
-        }
-        $admins = Model_User::getSearch($query);
-
-        foreach($admins as $admin) {
-            $sensors = \Model_User::getSensors($admin['id']);
-            $admin['sensors'] = $sensors;
-            $data['admins'][] = $admin;
-        }
-        $data['query'] = Input::param('query');
         $this->template->title = '管理ページ 親アカウント一覧';
-        $this->template->content = View::forge('admin/user/list', $data);
+	$this->template->content = Presenter::forge('admin/user/list');
     }
 
     public function action_alert() {
@@ -104,7 +86,6 @@ class Controller_Admin_User extends Controller_Admin
 
         if($user_id && $sensor_names) {
             foreach($sensor_names as $name) {
-                $client = null;
                 $name = trim($name);
                 //センサーを新規登録
                 $sensor = Model_Sensor::find("first" , array(
@@ -119,20 +100,6 @@ class Controller_Admin_User extends Controller_Admin
                 }
 
                 if($sensor->id > 0) {
-                    if(empty($client)) {
-                        $client = \Model_Sensor::getClient(array('sensor_id' => $sensor->id));
-                    }
-                    if(empty($client)) {
-                        //見守られユーザを新規作成
-                        $client = \Model_User::createClientWithSensor($sensor);
-                    }
-
-                    //見守られユーザを登録
-                    \Model_User_Client::saveUserClient(array(
-                        'user_id' => $user_id,
-                        'client_user_id' => $client->id,
-                    ));
-
                     //管理者として登録
                     \Model_User_Sensor::saveUserSensor(array(
                         'user_id' => $user_id,
@@ -141,8 +108,8 @@ class Controller_Admin_User extends Controller_Admin
                     ));
                 }
             }
-    		$user = Model_User::getUser($user_id);
-	        Response::redirect('/admin/user/sensor?id='.$user['id']);
+            $user = Model_User::getUser($user_id);
+            Response::redirect('/admin/user/sensor?id='.$user['id']);
 
     	}
     }
@@ -175,5 +142,83 @@ class Controller_Admin_User extends Controller_Admin
         $client_user_ids = Input::param("client_user_ids");
         \Model_User::saveClients($user_id, $client_user_ids);
         Response::redirect('/admin/user/client_list?user_id='.$user_id);
+    }
+    
+    /*
+     * 見守られユーザー登録フォーム
+     * 
+     *  @param none
+     *  @return none
+     */
+    public function action_client_form()
+    {
+        $id = Input::param("id");
+        $this->template->title = '管理ページ 見守られユーザ 新規登録';
+        $this->template->content = Presenter::forge('admin/user/client/form')
+                ->set('id', $id)
+                ->set('data', []);
+    }
+
+    /*
+     * 見守られユーザー登録完了
+     * 
+     * @param none
+     * @return none
+     */
+    public function action_client_complete()
+    {
+        $id = Input::param("id");
+        $this->template->title = '管理ページ 見守られユーザ 新規登録完了';
+        
+        $data = [];
+        $validation = Validation::forge('client_complete');
+        
+        if(Input::post()) {
+            $validation->add_callable('userclientrules');
+            $validation->add('zip_code')
+                    ->add_rule('check_zipcode');
+            $validation->add('phone', '電話番号1')
+                    ->add_rule('check_phone');
+            $validation->add('cellular', '電話番号2')
+                    ->add_rule('check_phone');
+            $validation->add('email')
+                    ->add_rule('check_email')
+                    ->add_rule('duplicate_email');
+            $validation->set_message('check_zipcode', '郵便番号の形式が正しくありません。');
+            $validation->set_message('check_phone', ' :labelの形式が正しくありません。');
+            $validation->set_message('check_email', 'メールアドレスの形式が正しくありません。');
+            $validation->set_message('duplicate_email', 'メールアドレスは既に登録されています。');
+            
+            foreach([
+                'last_name','first_name','last_kana',
+                'first_kana','gender','year',
+                'month','day','blood_type','zip_code',
+                'prefecture','address','phone',
+                'cellular','email'
+            ] as $key) {
+                $data[$key] = Input::param($key);
+            }
+                 
+            if($validation->run()) {
+                $data['birthday'] = sprintf('%d-%02d-%02d', $data['year'], $data['month'], $data['day']);
+                $prefectureList = Config::get('prefectures');
+                $data['prefecture'] = $prefectureList[$data['prefecture']];
+                $data['admin'] = 0;
+     
+                try {
+                    $user = Model_User::saveClientUser($id, $data);
+                    return Response::redirect(sprintf('/admin/user/client/detail?id=%s&parent_id=%s', $user['id'], $id));
+                    
+                } catch (Exception $e) {
+                    \Log::error('見守られユーザー登録に失敗しました。  ['.$e->getMessage().']');
+                    throw new Exception($e);
+                }
+            }  
+        }
+        
+        $this->template->content = Presenter::forge('admin/user/client/form')
+                ->set('id', $id)
+                ->set('data', $data)
+                ->set('error', $validation->error_message());    
     }
 }

@@ -337,6 +337,21 @@ class Model_User extends Orm\Model{
 		}	
 	}
 
+	public static function getOtherUserByEmail($email){
+		list($tmp, $user_id) = Auth::get_user_id();
+		$user = \Model_User::find("first", [
+			'where' => [
+				['id', "!=", $user_id],
+				'email' => $email,
+			]
+		]);
+		if($user) {
+			return \Model_User::format($user);
+		} else {
+			return null;
+		}	
+	}
+        
 	public static function uploadProfileImage() {
 		$config = array(
             'path' => DOCROOT.DS.'images/user',
@@ -442,6 +457,78 @@ class Model_User extends Orm\Model{
 		}
 	}
 
+        /*
+         * 見守られユーザー登録
+         * 
+         * @param int $user_id
+         * @param array $params
+         */
+        public static function saveClientUser($user_id, $params)
+        {
+            if(isset($params['id'])) {
+                $id = $params['id'];
+            } else {
+                if(!isset($params['email']) || empty($params['email'])) {
+                    $params['email'] = sha1(mt_rand())."@example.com";
+                }
+                
+                if(!isset($params['username']) || empty($params['username'])) {
+                    $params['username'] = sha1($params['email'].mt_rand());
+                }
+                
+                if(!isset($params['password']) || empty($params['password'])) {
+                    $params['password'] = sha1(mt_rand());
+                }
+
+                try {
+                    $id = Auth::create_user(
+                            $params['username'],
+                            $params['password'],
+                            $params['email']
+                    );
+                        
+                } catch (Exception $e) {
+                    throw new Exception('create_user failed. ['.$e->getMessage().']');
+                }
+                    
+                if(!isset($params['admin'])) {
+                    $params['admin'] = 1;
+                }
+
+                $params['email_confirm'] = 0;
+                $params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+                $params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
+                    
+            }
+
+            foreach (['id', 'username', 'password', 'email'] as $key) {
+                unset($params[$key]);
+            }
+                    
+            try {
+                     
+                $user = \Model_User::find($id);
+                $user->set($params);
+                $user->save();
+                
+             } catch (Exception $e) {
+                throw new Exception('create users failed. ['.$e->getMessage().']');
+            }
+
+            try {
+                \Model_User_Client::createUserClient([
+                    'user_id' => $user_id,
+                    'client_user_id' => $user['id'],
+                    'admin' => 1
+                ]);
+                
+                return \Model_User::format($user);
+                    
+            } catch (Exception $e) {
+                throw new Exception('create user_clients failed. ['.$e->getMessage().']');
+            }
+        }
+        
 	public static function saveShareUser($params) {
 		//連絡共有先人数を取得
 		$admins = \Model_User::getAdmins($params['client_user_id']);
@@ -753,5 +840,36 @@ class Model_User extends Orm\Model{
 		);
 		return \Model_User::sendEmail($params);
 	}
+
+        /*
+         * 見守られユーザーに紐づいているセンサーを除外したリスト
+         * 
+         *  @param int $user_id
+         *  @return array $sensors
+         */
+        public function getUnselectedSensorList($user_id)
+        {
+            $rows = DB::select('*')
+                        ->from(['user_sensors', 'us'])
+                        ->join(['sensors', 's'], 'LEFT')
+                        ->on('us.sensor_id', '=', 's.id')
+                        ->where(DB::expr('us.sensor_id NOT IN ( SELECT t1.sensor_id FROM user_sensors AS t1 WHERE EXISTS ( SELECT * FROM user_clients AS t2 WHERE t1.user_id = t2.client_user_id ) AND t1.sensor_id = us.sensor_id AND t1.admin = 0 )'))
+                        ->and_where('us.user_id', '=', $user_id)
+                        ->execute()->as_array();
+
+            foreach($rows as $row) {
+                $row['id'] = $row['sensor_id'];
+                unset($row['user_id']);
+                unset($row['sensor_id']);
+                if(isset($row['sensor'])) {
+                    $sensor = $row['sensor'];
+                    unset($row['sensor']);
+                    $sensors[] = array_merge($sensor, $row);
+                } else {
+                    $sensors[] = $row;
+                }			
+            }
+            return $sensors;
+        }
 }
 		

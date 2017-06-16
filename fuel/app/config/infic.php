@@ -518,4 +518,18 @@ return array(
 	'months' => array_combine(range(1, 12), range(1, 12)),
 
 	'days' => array_combine(range(1, 31), range(1, 31)),
+    
+	'sensor_type' => [
+		'parent' => '親機',
+		'sensor' => 'センサー',
+		'wifi' => 'WiFi',
+		'bedsensor' => 'ベッドセンサー',
+	],
+    
+	'blood_type' => [
+                'A' => 'A型' ,
+                'B' => 'B型',
+                'O' => 'O型',
+                'AB' => 'AB型',
+         ],
 );

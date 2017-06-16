@@ -1,10 +1,9 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h2>親アカウント:<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?></h2>
+		<h2>見守られユーザ:<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?></h2>
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="/admin/user/?id=<?php echo $user['id']; ?>">詳細</a></li>
-      <li role="presentation"><a href="/admin/user/sensor?id=<?php echo $user['id']; ?>">センサー機器割当</a></li>
-      <li role="presentation"><a href="/admin/user/client_form?id=<?php echo $user['id']; ?>">見守られユーザ登録</a></li>
+      <li role="presentation" class="active"><a href="/admin/user/client/detail?id=<?php echo $user['id']; ?>&parent_id=<?php echo $parent_id; ?>">詳細</a></li>
+      <li role="presentation"><a href="/admin/user/client/sensor?id=<?php echo $user['id']; ?>&parent_id=<?php echo $parent_id; ?>">センサー機器割当</a></li>
     </ul>
 	</div>
 </div>

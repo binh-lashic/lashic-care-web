@@ -20,8 +20,6 @@ class Model_User_Sensor extends Orm\Model{
 		'active_night_alert' => array('default' => 1),
 		'disconnection_alert' => array('default' => 1),
 		'reconnection_alert' => array('default' => 1),
-		'snooze_times' => array('default' => 5),
-		'snooze_interval' => array('default' => 60),
 	);
 
 	protected static $_belongs_to = array('sensor'=> array(
@@ -160,8 +158,6 @@ class Model_User_Sensor extends Orm\Model{
 			'active_night_alert',
 			'disconnection_alert',
 			'reconnection_alert',
-			'snooze_times',
-			'snooze_interval',
 		);
 
 		foreach($keys as $key) {
@@ -176,4 +172,42 @@ class Model_User_Sensor extends Orm\Model{
 		}
 		return $ret;
 	}
+        
+        public function count_by_client_user($sensor_id)
+        {
+            $rows = DB::select([DB::expr('COUNT(*)'), 'cnt'])
+                        ->from(['user_sensors', 'us'])
+                        ->where(DB::expr('EXISTS (SELECT * FROM user_clients AS uc WHERE us.user_id = uc.client_user_id)'))
+                        ->and_where('sensor_id', '=', $sensor_id)
+                        ->and_where('admin', '=', 0)
+                        ->execute();
+
+            return ($rows->get('cnt') > 0);
+        }
+        
+         /*
+          * 同一の機器タイプが割当済みかチェック
+          * 
+          *  @param array $params
+          *  @return boolean
+          */
+        public function checkSelectedSensorType($params)
+        {
+                $query = DB::query(
+                    "SELECT COUNT(*) AS cnt "
+                        . "FROM user_sensors AS us "
+                        . "LEFT JOIN sensors AS s ON us.sensor_id = s.id "
+                        . "WHERE s.type = ( "
+                        . "SELECT type FROM sensors AS tmp WHERE tmp.id = :sensor_id "
+                        . ") "
+                        . "AND us.user_id = :user_id"
+                    );
+                
+                $rows = $query->parameters([
+                    'sensor_id' => $params['sensor_id'], 
+                    'user_id' => $params['user_id']]
+                        )->execute();
+     
+            return ($rows->get('cnt') > 0);
+        }
 }

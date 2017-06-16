@@ -24,7 +24,9 @@
 					<th class="col-sm-3">名前</th>
 					<th class="col-sm-1">登録</th>
 					<th class="col-sm-2">センサー機器</th>
+					<th class="col-sm-2">見守られユーザ</th>
 					<th class="col-sm-1">流入元</th>
+					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
 					<th class="col-sm-2"></th>
 				</tr>
@@ -49,9 +51,19 @@ if(isset($admins)) {
 	}
 ?>
 					</td>
+					<td>
+<?php foreach($admin['clients'] as $clients) : ?>
+    <?php if(!empty($clients['name'])) : ?>
+					<a href="/admin/user/client/detail?id=<?php echo $clients['id']; ?>&parent_id=<?php echo $admin['id']; ?>"><?php echo $clients['name']; ?></a><?php if(end($admin['clients']) !== $clients) : ?><br /><?php endif; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
+					</td>
 					<td><?php echo $admin['affiliate']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/sensor?id=<?php echo $admin['id']; ?>">センサー機器の割当</a>						
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="/admin/user/client_form?id=<?php echo $admin['id']; ?>">見守られユーザの登録</a>						
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/user/login?id=<?php echo $admin['id']; ?>">このユーザとしてログイン</a>
