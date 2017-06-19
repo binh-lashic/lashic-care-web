@@ -22,7 +22,7 @@ if(isset($user)) {
 <?php
 if(isset($user)) {
 ?>
-				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">ユーザー選択<span class="drawer-caret"></span> </a>
+				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo __('header.client.select_user'); ?><span class="drawer-caret"></span> </a>
 					<div class="drawer-dropdown-menu mainMenu">
 						<div id="mainMenu">
 							<ul>
@@ -42,7 +42,7 @@ if(!empty($clients)) {
 				</li>
 				<li class="drawer-dropdown nav_mainMenu">
 					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-					  メニュー <span class="drawer-caret"></span>
+					  <?php echo __('header.client.menu'); ?> <span class="drawer-caret"></span>
 					</a>
 					<ul class="drawer-dropdown-menu">
 						<li class="nav_mypage"><a href="/user/account" class="drawer-dropdown-menu-item">マイページ</a></li>
@@ -79,14 +79,14 @@ if(isset($client['id'])) {
 	<div class="content clearfix">
 		<!-- ユーザー名 -->
 		<div class="user_select">
-			<div class="hdr_select_text"><p><?php echo $client['last_name'].$client['first_name']; ?><span class="com_userSmall">さん</span></p></div>
+			<div class="hdr_select_text"><p><?php echo $client['last_name'].$client['first_name']; ?><span class="com_userSmall"><?php echo __('header.client.honorific_title'); ?></span></p></div>
 		</div>
 		<!-- /ユーザー名 --> 
 		<div id="content_nav">
 			<nav>
 				<ul>
-					<li <?php if(Request::active()->action == "index") { echo "class=\"nav_on\""; } ?>><a href="/user/" class="nav_graph"><span></span>ユーザーの様子</a></li>
-					<li <?php if(Request::active()->action == "report") { echo "class=\"nav_on\""; } ?>><a href="/user/report" class="nav_report"><span></span>確認・報告</a></li>
+					<li <?php if(Request::active()->action == "index") { echo "class=\"nav_on\""; } ?>><a href="/user/" class="nav_graph"><span></span><?php echo __('header.client.user_state'); ?></a></li>
+					<li <?php if(Request::active()->action == "report") { echo "class=\"nav_on\""; } ?>><a href="/user/report" class="nav_report"><span></span><?php echo __('header.client.confirm_report'); ?></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -107,9 +107,9 @@ if(!empty($this->data['header_alerts'])) {
 ?>
 			<dl class="clearfix">
 				<dt class="com_news_tile"><img src="/images/common/hdr_news_megaphone.png" alt="icon"/><br>
-					お知らせ</dt>
+					<?php echo __('header.client.notice'); ?></dt>
 				<dd class="com_news_tile"> <a href="/user/report" class="com_news_link"> <span class="com_news_text"><?php echo $this->data['header_alerts'][0]['description']; ?><br>
-					<span class="small">その他未対応事項（<?php echo $this->data['header_alert_count']; ?>件）</span> </span> </a> </dd>
+					<span class="small"><?php echo __('header.client.uncorresponding_items', ['count' => $this->data['header_alert_count']]); ?></span> </span> </a> </dd>
 			</dl>
 <?php
 }

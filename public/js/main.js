@@ -138,7 +138,7 @@ $(function(){
 		}
 		var today = new Date(date.replace(/-/g, "/"));
 		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
-		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ] ;
+		var weekDayList = labels.date.abbr_day_names;
 		$("#today_week").html(weekDayList[today.getDay()]);
 
 		var prev_date = new Date();
@@ -234,7 +234,7 @@ $(function(){
 
 	function drawCalender() {
 		$('.calendar_body').html("");
-		$(".calendar_year_month").text((selected_date.getMonth() + 1) + "月 " + selected_date.getFullYear());
+		$(".calendar_year_month").text(labels.date.abbr_month_names[selected_date.getMonth()] + " " + selected_date.getFullYear());
 		var today = new Date();
 		var first_date = new Date(selected_date.getFullYear(),selected_date.getMonth(), 1);
 		var last_date = new Date(selected_date.getFullYear(),selected_date.getMonth()+1, 0);
@@ -261,7 +261,7 @@ $(function(){
 			}
 			if(today.getFullYear() == selected_date.getFullYear() && today.getMonth() == selected_date.getMonth() && today.getDate() == i) {
 				$td.addClass('graph24_cal-today');
-				$span.html(i + "<br>今日");
+				$span.html(i + "<br>" + labels.date.today);
 			} else {
 				$span.text(i);
 			}
@@ -410,7 +410,7 @@ $(function(){
 						"lineColor": "#FFCCFF",
 				        "columnWidth": 1,
 				        "fillAlphas": 1,
-				        "title": "運動量",
+				        "title": labels.sensor_data.titles.amount_of_exercise,
 				        "type": "column",
 				        "connect": false,
 				        "valueField": "active",
@@ -431,7 +431,7 @@ $(function(){
 				        "valueAxis": "temperature",
 				        "lineColor": "#FF9900",
 				        "lineThickness": 2,
-				        "title": "室温",
+				        "title": labels.sensor_data.titles.temperature,
 				        "connect": false,
 				        "valueField": "temperature",
 					}
@@ -452,7 +452,7 @@ $(function(){
 				        "valueAxis": "humidity",
 				        "lineColor": "#88D3F5",
 				        "lineThickness": 2,
-				        "title": "湿度",
+				        "title": labels.sensor_data.titles.humidity,
 				        "connect": false,
 				        "valueField": "humidity",
 					}
@@ -473,7 +473,7 @@ $(function(){
 				        "valueAxis": "illuminance",
 				        "lineColor": "#DED31C",
 				        "lineThickness": 2,
-				        "title": "照度",
+				        "title": labels.sensor_data.titles.illuminance,
 				        "connect": false,
 				        "valueField": "illuminance",
 					}
@@ -510,7 +510,7 @@ $(function(){
 			        "bulletBorderAlpha": 1,
 			        "bulletSize": 8,
 			        "bulletColor": "#FFFFFF",
-			        "title": "起床時間",
+			        "title": labels.sensor_data.titles.time_of_awakening,
 			        "valueField": "wake_up_time",
 					"fillAlphas": 0
 				});
@@ -532,7 +532,7 @@ $(function(){
 			        "bulletBorderAlpha": 1,
 			        "bulletSize": 8,
 			        "bulletColor": "#FFFFFF",
-			        "title": "睡眠時間",
+			        "title": labels.sensor_data.titles.time_of_sleep,
 			        "valueField": "sleep_time",
 					"fillAlphas": 0
 				});	
