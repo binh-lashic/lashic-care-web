@@ -61,13 +61,21 @@ return [
 	],
 	'header' => [
 		'client' => [
-			'select_user'           => 'ユーザー選択',
-			'menu'                  => 'メニュー',
-			'user_state'            => 'ユーザーの様子',
-			'honorific_title'       => 'さん',
-			'confirm_report'        => '確認・報告',
-			'notice'                => 'お知らせ',
-			'uncorresponding_items' => 'その他未対応事項（:count件）',
+			'select_user'                => 'ユーザー選択',
+			'menu'                       => 'メニュー',
+			'user_state'                 => 'ユーザーの様子',
+			'honorific_title'            => 'さん',
+			'confirm_report'             => '確認・報告',
+			'notice'                     => 'お知らせ',
+			'uncorresponding_items'      => 'その他未対応事項（:count件）',
+			'user_management'            => 'ユーザー管理',
+			'my_page'                    => 'マイページ',
+			'purchase_payment_histories' => '購入・支払い履歴',
+			'alert_notification'         => 'アラート通知設定変更',
+			'q_and_a'                    => 'Q &amp; A',
+			'logout'                     => 'ログアウト',
+			'cart'                       => 'カート',
+			'cart_is_empty'              => '何も入っていません',
 		]
 	],
 	'template' => [

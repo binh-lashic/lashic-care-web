@@ -609,7 +609,7 @@ $(function(){
 			$(".nav_number").css('display', 'run-in');
     	} else {
     		$(".nav_number").css('display', 'none');
-    		$("#cart").prepend("<li class=\"nav_userList center cart_plan\"><p class=\"nav_cart_title\">何も入っていません</p></li>");
+    		$("#cart").prepend("<li class=\"nav_userList center cart_plan\"><p class=\"nav_cart_title\">" + labels.cart_is_empty + "</p></li>");
     	}
 		console.log(result);
     }

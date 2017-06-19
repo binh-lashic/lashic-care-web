@@ -61,13 +61,21 @@ return [
 	],
 	'header' => [
 		'client' => [
-			'select_user'           => 'Select User',
-			'menu'                  => 'MENU',
-			'user_state'            => 'State',
-			'honorific_title'       => '',
-			'confirm_report'        => 'Confirmation and report',
-			'notice'                => 'Notice',
-			'uncorresponding_items' => 'Uncorresponding items (:count items)',
+			'select_user'                => 'Select User',
+			'menu'                       => 'MENU',
+			'user_state'                 => 'State',
+			'honorific_title'            => '',
+			'confirm_report'             => 'Confirmation and report',
+			'notice'                     => 'Notice',
+			'uncorresponding_items'      => 'Uncorresponding items (:count items)',
+			'user_management'            => 'User Edit',
+			'my_page'                    => 'My Page',
+			'purchase_payment_histories' => 'Purchase and payment histories',
+			'alert_notification'         => 'Setting change of alert notification',
+			'q_and_a'                    => 'Q &amp; A',
+			'logout'                     => 'Logout',
+			'cart'                       => 'Shopping Cart',
+			'cart_is_empty'              => 'Your Shopping Cart is empty.',
 		]
 	],
 	'template' => [
@@ -75,7 +83,7 @@ return [
 		'terms'   => 'Terms of Use',
 		'company' => 'Operating Company',
 		'privacy' => 'Privacy policy',
-		'help'    => 'FAQ',
+		'help'    => 'Q &amp; A',
 		'contact' => 'Contact Us',
 	],
 	'sidebar' => [
