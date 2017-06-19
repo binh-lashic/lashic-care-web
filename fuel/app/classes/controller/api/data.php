@@ -39,11 +39,10 @@ class Controller_Api_Data extends Controller_Api
          * 出荷日を経過しているかどうか判定 
          * 
          * @param date $sippingDate
-         * @param date $date
          * 
          * @return bool
          */
-        public function isShippingDate($shippingDate, $date)
+        public function isShippingDate($shippingDate)
         {
             if(strtotime($shippingDate) <= strtotime(Input::param('date'))) {
                 return true;
