@@ -40,7 +40,8 @@ class Controller_Base extends Controller_Template
 		}
 		Session::set('language', $lang);
 		Config::set('language', $lang);
-		Lang::load('labels', null, null, false, true);
+		Lang::load('labels');
+		Lang::load('alerts');
 		$this->language = $lang;
 
 	    parent::before();

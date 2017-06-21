@@ -108,8 +108,14 @@ if(!empty($this->data['header_alerts'])) {
 			<dl class="clearfix">
 				<dt class="com_news_tile"><img src="/images/common/hdr_news_megaphone.png" alt="icon"/><br>
 					<?php echo __('header.client.notice'); ?></dt>
-				<dd class="com_news_tile"> <a href="/user/report" class="com_news_link"> <span class="com_news_text"><?php echo __("alerts.{$header_alerts[0]['type']}.description"); ?><br>
-					<span class="small"><?php echo __('header.client.uncorresponding_items', ['count' => $header_alert_count]); ?></span> </span> </a> </dd>
+				<dd class="com_news_tile<?php echo $current_language !== 'ja' ? ' com_news_dd_en' : '' ?>">
+					<a href="/user/report" class="com_news_link">
+						<span class="com_news_text">
+							<?php echo __("alerts.{$header_alerts[0]['type']}.description"); ?><br>
+							<span class="small"><?php echo __('header.client.uncorresponding_items', ['count' => $header_alert_count]); ?></span>
+						</span>
+					</a>
+				</dd>
 			</dl>
 <?php
 }
