@@ -49,7 +49,7 @@ class Controller_Api_Data extends Controller_Api
             } else {
                 \Log::warning("user_id:[{$user_id}] sensor_id:[{$sensor->id}] is not shipping_date.", __METHOD__);
                 $this->errors[] = [
-                            'message' => '出荷日を経過していません'
+                            'message' => '未出荷または出荷日以前です。'
 			];
                 return false;
             }

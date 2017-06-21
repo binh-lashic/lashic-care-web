@@ -1,6 +1,4 @@
-<?php
-if(isset($client)) {
-?>
+<?php if(isset($client)) : ?>
 	<script type="text/javascript">
 	var sensor_id         = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var bedsensor_id      = "<?php echo !empty($bedsensor['id']) ? $bedsensor['id'] : ""; ?>";
@@ -96,6 +94,7 @@ if(isset($client)) {
 				</li>
 */
 ?>
+                        <div id="graph_error"></div>                              
 			</ul>
 			<!-- /現在のグラフ --> 
 			
@@ -198,8 +197,7 @@ if(isset($client)) {
 				<div class="graph24_lineArea" id="graph" style="min-width: 720px; height: 328px; margin: 0 auto"></div>
 			</div>
 			<!-- /24時間グラフ --> 
+                        <div id="graph24_error"></div> 
 		</section>
 		<!-- /content end --> 
-<?php
-}
-?>
+<?php endif; ?>
