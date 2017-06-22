@@ -1,5 +1,9 @@
 <?php
 if(isset($client)) {
+	$graph_btn_calender_image = '/images/graph/graph_btn_calender_off.png';
+	if ($current_language !== 'ja') {
+		$graph_btn_calender_image = '/images/graph/graph_btn_calender_en_off.png';
+	}
 ?>
 	<script type="text/javascript">
 	var sensor_id         = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
@@ -130,7 +134,7 @@ if(isset($client)) {
 						<li class="graph24_next"><a id="next_date" class="change_date" href="javascript:void(0)" data-date=""><img src="/images/graph/graph_arrow_blue_next.png" width="12" height="19" alt=""/></a></li>
 					</ul>
 					<div class="graph24_calendar">
-						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="/images/graph/graph_btn_calender_off.png" width="90" height="41" alt=""/></a>
+						<a id="def-html" class="box" data-tooltip="#graph24_cal_select"><img src="<?php echo $graph_btn_calender_image; ?>" width="90" height="41" alt=""/></a>
 						<!-- カレンダー表示内容 -->
 						<div id="graph24_cal_select" style="display:none;">
 							<div class="graph24_cal_selectInner">
