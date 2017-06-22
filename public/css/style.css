@@ -296,6 +296,10 @@ header {
 	padding: 13px 12px 12px 12px;
 	text-decoration: none !important;
 }
+.com_news dd.com_news_dd_en {
+	background: url(../images/common/hdr_news_line.png) left top no-repeat, url(../images/common/hdr_news_next_en.png) right center no-repeat;
+	background-size: 2px 121px, 136px 60px;
+}
 /* ----------------------------------------------------------
 
 aside

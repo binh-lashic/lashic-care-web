@@ -50,12 +50,12 @@
 </main>
 <footer>
   <ul>
-    <li><a href="/page/news">運営者からのお知らせ</a></li>
-    <li><a href="/page/terms">利用規約</a></li>
-    <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
-    <li><a href="/page/privacy">プライバシーポリシー</a></li>
-    <li><a href="/page/help">Q&amp;A</a></li>
-    <li><a href="/contact">お問い合わせ</a></li>
+    <li><a href="/page/news"><?php echo __('template.news'); ?></a></li>
+    <li><a href="/page/terms"><?php echo __('template.terms'); ?></a></li>
+    <li><a href="http://www.infic.net/" target="_blank"><?php echo __('template.company'); ?></a></li>
+    <li><a href="/page/privacy"><?php echo __('template.privacy'); ?></a></li>
+    <li><a href="/page/help"><?php echo __('template.help'); ?></a></li>
+    <li><a href="/contact"><?php echo __('template.contact'); ?></a></li>
   </ul>
   <p><span class="ftr_copyrights">&copy;</span> LASHIC. All Rights Reserved.</p>
 </footer>
