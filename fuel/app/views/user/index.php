@@ -37,7 +37,7 @@ if(isset($client)) {
 						<div class="graph_chart">
 							<div class="myStat" id="data_temperature" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
 						</div>
-						<div class="graph_title"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
+						<div class="graph_title right"><img src="/images/graph/graph_icon_temperature.png" width="17" height="42" alt=""/>
 							<p><?php echo __('sensor_data.titles.temperature'); ?></p>
 						</div>
 					</div>
@@ -48,7 +48,7 @@ if(isset($client)) {
 						<div class="graph_chart">
 							<div class="myStat" id="data_humidity" data-dimension="153" data-text="" data-percent="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-fgcolor="#81cef2" data-bgcolor="#dcdcdc"></div>
 						</div>
-						<div class="graph_title"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
+						<div class="graph_title right"><img src="/images/graph/graph_icon_humidity.png" width="26" height="42" alt=""/>
 							<p><?php echo __('sensor_data.titles.humidity'); ?></p>
 						</div>
 					</div>
@@ -59,7 +59,7 @@ if(isset($client)) {
 						<div class="graph_chart">
 							<div class="myStat" id="data_active" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#eb71b6" data-bgcolor="#dcdcdc" ></div>
 						</div>
-						<div class="graph_title"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
+						<div class="graph_title right"><img src="/images/graph/graph_icon_motion.png" width="19" height="37" alt=""/>
 							<p><?php echo __('sensor_data.titles.amount_of_exercise'); ?></p>
 						</div>
 					</div>
@@ -70,7 +70,7 @@ if(isset($client)) {
 						<div class="graph_chart">
 							<div class="myStat" id="data_illuminance" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#ffef00" data-bgcolor="#dcdcdc" ></div>
 						</div>
-						<div class="graph_title"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
+						<div class="graph_title right"><img src="/images/graph/graph_icon_light.png" width="22" height="38" alt=""/>
 							<p><?php echo __('sensor_data.titles.illuminance'); ?></p>
 						</div>
 					</div>
