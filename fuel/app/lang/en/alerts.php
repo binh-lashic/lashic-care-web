@@ -39,7 +39,7 @@ return [
 		],
 		'sleep' => [
 			'title'       => 'Average sleeping time',
-			'description' => 'When the sleeping time deviates more than 3 hours before and after from the wake-up time of the past one month, the system judges it as abnormal and notifies it.',
+			'description' => 'When the sleeping time deviates more than 3 hours before and after from the sleeping time of the past one month, the system judges it as abnormal and notifies it.',
 		],
 		'abnormal_behavior' => [
 			'title'       => 'abnormal behavior',
