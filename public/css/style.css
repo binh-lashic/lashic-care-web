@@ -288,8 +288,10 @@ header {
 	opacity: 0.7
 }
 .com_news_text {
-	width: 468px;
+	width: 88%;
 	color: #FFF;
+	display: block;
+	word-wrap: break-word;
 }
 .com_news_link {
 	display: block;
