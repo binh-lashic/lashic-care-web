@@ -154,7 +154,7 @@ $(function(){
 		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result, status){
 			if(status == 'success') {
 				if(result.success === true) {
-                                    $("#graph_error").html("");
+                                    $("#graph_error").empty();
                                     $('.myStat').empty();
                                     if(typeof result.data.temperature != "undefined") {
                                             $("#data_temperature").attr("data-text", result.data.temperature + "°C");
@@ -234,6 +234,22 @@ $(function(){
                                     $('.myStat').circliful();
                             } else {
                                     $("#graph_error").html('データがありません');
+                                    $("#data_wbgt").attr("data-text", "");
+                                    $("#data_wbgt").attr("data-percent","");
+                                    $("#data_cold").attr("data-text", "");
+                                    $("#data_cold").attr("data-percent","");
+                                    $("#data_temperature").attr("data-text", "");
+                                    $("#data_temperature").attr("data-percent","");
+                                    $("#data_humidity").attr("data-text", "");
+                                    $("#data_humidity").attr("data-percent","");
+                                    $("#data_illuminance").attr("data-text", "");
+                                    $("#data_illuminance").attr("data-percent","");
+                                    $("#data_active").attr("data-text", "");
+                                    $("#data_active").attr("data-percent","");
+                                    $("#data_wake_up_time").empty();
+                                    $("#data_sleep_time").empty();
+                                    $("#data_wake_up_time_average").empty();
+                                    $("#data_sleep_time_average").empty();
                                     console.log(result.errors[0].message);
                             }
 			} else {
@@ -394,7 +410,7 @@ $(function(){
 		api("data/graph?sensor_id=" + sensor_id + "&date=" + date, null, function(result, status){
 			if (status == 'success') {
 				if(result.success === true) {
-                                  $("#graph24_error").html("");
+                                  $("#graph24_error").empty();
                                     console.log("drawGraph");
                                     Cookies.set('active', $("#graph_active").prop('checked'), { expires: 90 });
                                     Cookies.set('temperature', $("#graph_temperature").prop('checked'), { expires: 90 });
@@ -584,6 +600,7 @@ $(function(){
                                     });
                                 } else {
                                     $("#graph24_error").html('データがありません');
+                                    var chart = AmCharts.makeChart();
                                     console.log(result.errors[0].message);
                                 }
                         } else {
