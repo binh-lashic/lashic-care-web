@@ -132,10 +132,13 @@ class Controller_User extends Controller_Base
 	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
 	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
 
-        $this->template->title = 'マイページ';
-        $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('user/index', $this->data);
-        $this->template->sidebar = View::forge('sidebar', $this->data);
+		$this->data['current_language'] = $this->language;
+
+		$this->template->title   = 'マイページ';
+		$this->template->header  = View::forge('header_client', $this->data);
+		$this->template->content = View::forge('user/index', $this->data);
+		$this->template->content->set('i18n', View::forge('i18n', $this->data));
+		$this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
 	public function action_list()

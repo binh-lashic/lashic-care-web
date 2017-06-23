@@ -288,13 +288,19 @@ header {
 	opacity: 0.7
 }
 .com_news_text {
-	width: 468px;
+	width: 88%;
 	color: #FFF;
+	display: block;
+	word-wrap: break-word;
 }
 .com_news_link {
 	display: block;
 	padding: 13px 12px 12px 12px;
 	text-decoration: none !important;
+}
+.com_news dd.com_news_dd_en {
+	background: url(../images/common/hdr_news_line.png) left top no-repeat, url(../images/common/hdr_news_next_en.png) right center no-repeat;
+	background-size: 2px 121px, 136px 60px;
 }
 /* ----------------------------------------------------------
 
