@@ -34,6 +34,26 @@ class Controller_Api_Data extends Controller_Api
 			return true;
 		}
 	}
+        
+        /*
+         * 出荷日を経過しているかどうか判定 
+         * 
+         * @param date $sippingDate
+         * 
+         * @return bool
+         */
+        public function isShippingDate($shippingDate)
+        {
+            if(strtotime($shippingDate) <= strtotime(Input::param('date'))) {
+                return true;
+            } else {
+                \Log::warning("user_id:[{$user_id}] sensor_id:[{$sensor->id}] is not shipping_date.", __METHOD__);
+                $this->errors[] = [
+                            'message' => '未出荷または出荷日以前です。'
+			];
+                return false;
+            }
+        }
 
 	public function _dashboard() {
 		\Log::debug("Input::param - \n" . print_r(Input::param(), true), __METHOD__);
@@ -52,7 +72,7 @@ class Controller_Api_Data extends Controller_Api
 
 		$bedsensor = $this->get_bedsensor();
 		
-		if(!empty($sensor) && $this->isSensorAllowed($sensor)) {
+		if(!empty($sensor) && $this->isSensorAllowed($sensor) && $this->isShippingDate($sensor['shipping_date'])) {
 
 			//日付を取得
 			if(Input::param("date")) {
@@ -114,7 +134,7 @@ class Controller_Api_Data extends Controller_Api
 			$sensor = \Model_Sensor::getSensor($sensor_id);
 		}
 
-		if(!empty($sensor) && $this->isSensorAllowed($sensor)) {
+		if(!empty($sensor) && $this->isSensorAllowed($sensor) && $this->isShippingDate($sensor['shipping_date'])) {
 			$date = Input::param("date");
 			if($date) {
 				$date = (new DateTime($date, new DateTimeZone('Asia/Tokyo')))->setTime(0, 0, 0);

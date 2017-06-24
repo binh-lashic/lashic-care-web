@@ -210,4 +210,49 @@ class Model_User_Sensor extends Orm\Model{
      
             return ($rows->get('cnt') > 0);
         }
+        
+        /*
+         * 出荷済みのデータを取得
+         *  
+         * @params array $params
+         * @return array
+         * @throw
+         */
+	public static function getAllSensorByShippingDate($user_id, $shippingDate)
+        {
+            try {
+                $rows = self::find("all", [
+                            'where' => [
+                                ['user_id', '=', $user_id],
+                                ['sensor.shipping_date', '<=', $shippingDate]
+                            ],
+                            'related' => [
+                                'sensor' => ['order_by' => ['name' => 'asc']]
+                            ],
+			]);
+ 
+                if($rows) {
+                    $sensors = [];
+                    foreach($rows as $row) {
+                        $user_sensor = $row->to_array();
+                        $user_sensor['id'] = $user_sensor['sensor_id'];
+                        unset($user_sensor['user_id']);
+                        unset($user_sensor['sensor_id']);
+                        if(isset($user_sensor['sensor'])) {
+                            $sensor = $user_sensor['sensor'];
+                            unset($user_sensor['sensor']);
+                            $sensors[] = array_merge($sensor, $user_sensor);
+                        } else {
+                            $sensors[] = $user_sensor;
+                        }				
+                    }
+                    return $sensors;
+                }
+                return null;
+                
+            } catch(Exception $e) {
+                \Log::error('Sensor list Getting Failed. [' . $e->getMessage(). ']');
+                return null;
+            }
+	}
 }

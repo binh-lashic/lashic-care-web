@@ -107,6 +107,7 @@ return [
 			'choose_the_date'           => '表示日設定',
 			'choose_the_year_month'     => '年月を選択してください',
 			'item_selection'            => 'グラフ表示項目選択',
+			'no_data'                   => 'データがありません',                   
 		]
 	],
 ];

@@ -58,7 +58,7 @@ class Controller_User extends Controller_Base
 		# ログインユーザに紐付く見守られユーザが存在する場合
 		if(isset($this->data['client']['id'])) {
 			\Log::debug("login user_id:[{$this->user['id']}] client_id:[{$this->data['client']['id']}]", __METHOD__);
-			$sensors = \Model_User::getSensors($this->data['client']['id']);
+			$sensors = \Model_User_Sensor::getAllSensorByShippingDate($this->data['client']['id'], date('Y-m-d'));
 			if(!empty($sensors)) {
 				\Log::debug("client_id:[{$this->data['client']['id']}] sensors:" . print_r($sensors, true), __METHOD__);
 				foreach($sensors as $sensor) {

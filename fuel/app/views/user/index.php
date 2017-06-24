@@ -11,6 +11,8 @@ if(isset($client)) {
 	var date              = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
 	var sleep_time_data   = "";
+        var graph_error_message = "<?php echo __('user.index.no_data'); ?>";
+        var graph24_error_message = "<?php echo __('user.index.no_data'); ?>";
 	</script>
 	<?php echo $i18n ?>
 		<!-- content start -->
@@ -116,6 +118,7 @@ if(isset($client)) {
 				</li>
 */
 ?>
+                        <div id="graph_error"></div>                              
 			</ul>
 			<!-- /現在のグラフ --> 
 			
@@ -218,6 +221,7 @@ if(isset($client)) {
 				<div class="graph24_lineArea" id="graph" style="min-width: 720px; height: 328px; margin: 0 auto"></div>
 			</div>
 			<!-- /24時間グラフ --> 
+                        <div id="graph24_error"></div> 
 		</section>
 		<!-- /content end --> 
 <?php
