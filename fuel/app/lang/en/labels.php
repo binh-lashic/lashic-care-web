@@ -59,10 +59,6 @@ return [
 			'risk_of_heatstroke'        => 'Risk of heatstroke',
 			'risk_of_cold'              => 'Risk of cold',
 		],
-		'units' => [
-			'temperature'               => '&#x2103',
-			'risk_of_heatstroke'        => '&#x2103',
-		]
 	],
 	'header' => [
 		'client' => [

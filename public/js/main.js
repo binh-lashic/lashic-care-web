@@ -154,7 +154,7 @@ $(function(){
 		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result){
 			$('.myStat').empty();
 			if(typeof result.data.temperature != "undefined") {
-				$("#data_temperature").attr("data-text", result.data.temperature + labels.sensor_data.units.temperature);
+				$("#data_temperature").attr("data-text", result.data.temperature + '&#x2103');
 				$("#data_temperature").attr("data-percent", result.data.temperature);
 			} else {
 				$("#data_temperature").attr("data-text", "");
@@ -191,7 +191,7 @@ $(function(){
 			}
 */
 			if(typeof result.data.wbgt != "undefined") {
-				$("#data_wbgt").attr("data-text", result.data.wbgt + labels.sensor_data.units.risk_of_heatstroke);
+				$("#data_wbgt").attr("data-text", result.data.wbgt + '&#x2103');
 				$("#data_wbgt").attr("data-percent", result.data.wbgt * 2);
 			} else {
 				$("#data_wbgt").attr("data-text", "");

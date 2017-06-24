@@ -36,10 +36,6 @@ var labels = {
 			amount_of_exercise: '<?php echo __('sensor_data.titles.amount_of_exercise'); ?>',
 			illuminance:        '<?php echo __('sensor_data.titles.illuminance'); ?>',
 		},
-		units: {
-			temperature:        '<?php echo __('sensor_data.units.temperature'); ?>',
-			risk_of_heatstroke: '<?php echo __('sensor_data.units.risk_of_heatstroke'); ?>',
-		}
 	},
 	cart_is_empty: '<?php echo __('header.client.cart_is_empty'); ?>'
 };

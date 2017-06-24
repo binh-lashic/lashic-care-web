@@ -58,10 +58,6 @@ return [
 			'illuminance'               => '照度',
 			'risk_of_heatstroke'        => '熱中症指数',
 			'risk_of_cold'              => '風邪ひき指数',
-		],
-		'units' => [
-			'temperature'               => '°C',
-			'risk_of_heatstroke'        => '度',
 		]
 	],
 	'header' => [
