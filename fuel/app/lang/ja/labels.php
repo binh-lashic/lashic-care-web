@@ -56,6 +56,7 @@ return [
 			'humidity'                  => '湿度',
 			'amount_of_exercise'        => '運動量',
 			'illuminance'               => '照度',
+			'risk_of_heatstroke'        => '熱中症指数',
 			'risk_of_cold'              => '風邪ひき指数',
 		]
 	],
