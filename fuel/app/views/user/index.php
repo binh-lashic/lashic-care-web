@@ -11,6 +11,8 @@ if(isset($client)) {
 	var date              = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
 	var sleep_time_data   = "";
+        var graph_error_message = "<?php echo __('user.index.no_data'); ?>";
+        var graph24_error_message = "<?php echo __('user.index.no_data'); ?>";
 	</script>
 	<?php echo $i18n ?>
 		<!-- content start -->

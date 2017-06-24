@@ -233,7 +233,8 @@ $(function(){
 			}
 			$('.myStat').circliful();
                             } else {
-                                    $("#graph_error").html('データがありません');
+                                    $("#graph_error").html(graph_error_message);
+                                    $('.myStat').empty();
                                     $("#data_wbgt").attr("data-text", "");
                                     $("#data_wbgt").attr("data-percent","");
                                     $("#data_cold").attr("data-text", "");
@@ -250,6 +251,7 @@ $(function(){
                                     $("#data_sleep_time").empty();
                                     $("#data_wake_up_time_average").empty();
                                     $("#data_sleep_time_average").empty();
+                                    $('.myStat').circliful();
                                     console.log(result.errors[0].message);
                             }
 			} else {
@@ -599,8 +601,8 @@ $(function(){
 			    },
 			});
                                 } else {
-                                    $("#graph24_error").html('データがありません');
-                                    var chart = AmCharts.makeChart();
+                                    $("#graph24_error").html(graph24_error_message);
+                                    var chart = AmCharts.clear();
                                     console.log(result.errors[0].message);
                                 }
                         } else {
