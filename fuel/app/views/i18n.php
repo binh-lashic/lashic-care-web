@@ -35,7 +35,7 @@ var labels = {
 			humidity:           '<?php echo __('sensor_data.titles.humidity'); ?>',
 			amount_of_exercise: '<?php echo __('sensor_data.titles.amount_of_exercise'); ?>',
 			illuminance:        '<?php echo __('sensor_data.titles.illuminance'); ?>',
-		}
+		},
 	},
 	cart_is_empty: '<?php echo __('header.client.cart_is_empty'); ?>'
 };

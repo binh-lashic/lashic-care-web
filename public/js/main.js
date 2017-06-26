@@ -151,10 +151,13 @@ $(function(){
 
 		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
 
-		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result){
+		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result, status){
+			if(status == 'success') {
+				if(result.success === true) {
+                                    $("#graph_error").empty();
 			$('.myStat').empty();
 			if(typeof result.data.temperature != "undefined") {
-				$("#data_temperature").attr("data-text", result.data.temperature + "°C");
+				$("#data_temperature").attr("data-text", result.data.temperature + '&#x2103');
 				$("#data_temperature").attr("data-percent", result.data.temperature);
 			} else {
 				$("#data_temperature").attr("data-text", "");
@@ -191,7 +194,7 @@ $(function(){
 			}
 */
 			if(typeof result.data.wbgt != "undefined") {
-				$("#data_wbgt").attr("data-text", result.data.wbgt + "度");
+				$("#data_wbgt").attr("data-text", result.data.wbgt + '&#x2103');
 				$("#data_wbgt").attr("data-percent", result.data.wbgt * 2);
 			} else {
 				$("#data_wbgt").attr("data-text", "");
@@ -229,6 +232,31 @@ $(function(){
 				$("#data_sleep_time_average").empty();
 			}
 			$('.myStat').circliful();
+                            } else {
+                                    $("#graph_error").html(graph_error_message);
+                                    $('.myStat').empty();
+                                    $("#data_wbgt").attr("data-text", "");
+                                    $("#data_wbgt").attr("data-percent","");
+                                    $("#data_cold").attr("data-text", "");
+                                    $("#data_cold").attr("data-percent","");
+                                    $("#data_temperature").attr("data-text", "");
+                                    $("#data_temperature").attr("data-percent","");
+                                    $("#data_humidity").attr("data-text", "");
+                                    $("#data_humidity").attr("data-percent","");
+                                    $("#data_illuminance").attr("data-text", "");
+                                    $("#data_illuminance").attr("data-percent","");
+                                    $("#data_active").attr("data-text", "");
+                                    $("#data_active").attr("data-percent","");
+                                    $("#data_wake_up_time").empty();
+                                    $("#data_sleep_time").empty();
+                                    $("#data_wake_up_time_average").empty();
+                                    $("#data_sleep_time_average").empty();
+                                    $('.myStat').circliful();
+                                    console.log(result.errors[0].message);
+                            }
+			} else {
+				console.log('api connect failed.');
+			}
 		});
 	}
 
@@ -381,7 +409,10 @@ $(function(){
 		if (!is_user_state_page()) {
 			return;
 		}
-		api("data/graph?sensor_id=" + sensor_id + "&date=" + date, null, function(result){
+		api("data/graph?sensor_id=" + sensor_id + "&date=" + date, null, function(result, status){
+			if (status == 'success') {
+				if(result.success === true) {
+                                  $("#graph24_error").empty();
 			console.log("drawGraph");
 			Cookies.set('active', $("#graph_active").prop('checked'), { expires: 90 });
 			Cookies.set('temperature', $("#graph_temperature").prop('checked'), { expires: 90 });
@@ -569,6 +600,14 @@ $(function(){
 					"gridCount": 12
 			    },
 			});
+                                } else {
+                                    $("#graph24_error").html(graph24_error_message);
+                                    var chart = AmCharts.clear();
+                                    console.log(result.errors[0].message);
+                                }
+                        } else {
+                                console.log('api connect failed.');
+                        }
 		});
 
 	}

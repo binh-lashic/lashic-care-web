@@ -56,6 +56,7 @@ return [
 			'humidity'                  => '湿度',
 			'amount_of_exercise'        => '運動量',
 			'illuminance'               => '照度',
+			'risk_of_heatstroke'        => '熱中症指数',
 			'risk_of_cold'              => '風邪ひき指数',
 		]
 	],
@@ -106,6 +107,7 @@ return [
 			'choose_the_date'           => '表示日設定',
 			'choose_the_year_month'     => '年月を選択してください',
 			'item_selection'            => 'グラフ表示項目選択',
+			'no_data'                   => 'データがありません',                   
 		]
 	],
 ];

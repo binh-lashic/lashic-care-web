@@ -11,6 +11,8 @@ if(isset($client)) {
 	var date              = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
 	var sleep_time_data   = "";
+        var graph_error_message = "<?php echo __('user.index.no_data'); ?>";
+        var graph24_error_message = "<?php echo __('user.index.no_data'); ?>";
 	</script>
 	<?php echo $i18n ?>
 		<!-- content start -->
@@ -79,6 +81,19 @@ if(isset($client)) {
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
 						<div class="graph_chart">
+							<div class="myStat" id="data_wbgt" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
+						</div>
+						<div class="graph_title right"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
+							<p><?php echo __('sensor_data.titles.risk_of_heatstroke'); ?></p>
+						</div>
+					</div>
+				</li>
+<?php
+/* 風邪ひき指数
+				<li class="graph_tile">
+					<div class="graph_set">
+						<p class="graph_rank">    </p>
+						<div class="graph_chart">
 							<div class="myStat" id="data_cold" data-dimension="153" data-text="" data-percent="" data-info="" data-width="60" data-bordersize="30" data-fontsize="38" data-fgcolor="#2baa3f" data-bgcolor="#dcdcdc" ></div>
 						</div>
 						<div class="graph_title right"><img src="/images/graph/graph_icon_comfortable.png" width="31" height="31" alt=""/>
@@ -86,8 +101,10 @@ if(isset($client)) {
 						</div>
 					</div>
 				</li>
+*/
+?>
 <?php
-/*
+/* 不快指数
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
@@ -101,6 +118,7 @@ if(isset($client)) {
 				</li>
 */
 ?>
+                        <div id="graph_error"></div>                              
 			</ul>
 			<!-- /現在のグラフ --> 
 			
@@ -203,6 +221,7 @@ if(isset($client)) {
 				<div class="graph24_lineArea" id="graph" style="min-width: 720px; height: 328px; margin: 0 auto"></div>
 			</div>
 			<!-- /24時間グラフ --> 
+                        <div id="graph24_error"></div> 
 		</section>
 		<!-- /content end --> 
 <?php

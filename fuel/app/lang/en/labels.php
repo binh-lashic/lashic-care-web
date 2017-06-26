@@ -56,8 +56,9 @@ return [
 			'humidity'                  => 'Humidity',
 			'amount_of_exercise'        => 'Amount of Exercise',
 			'illuminance'               => 'Illuminance',
+			'risk_of_heatstroke'        => 'Risk of heatstroke',
 			'risk_of_cold'              => 'Risk of cold',
-		]
+		],
 	],
 	'header' => [
 		'client' => [
@@ -106,6 +107,7 @@ return [
 			'choose_the_date'           => 'Choose the date',
 			'choose_the_year_month'     => 'Choose the year and month',
 			'item_selection'            => 'Item selection',
+			'no_data'                   => 'No Data',
 		]
 	],
 ];
