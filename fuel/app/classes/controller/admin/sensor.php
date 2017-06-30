@@ -61,17 +61,21 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_data() {
-    	$data['sensor'] = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
-    	$data['data'] = DB::select()
-	    ->from('data')
-	    ->where('sensor_id', $data['sensor']['name'])
-	    ->order_by('date', 'desc')
-	    ->limit(100)
-	    ->execute('data') // 引数で指定できる
-	    ->as_array();
+		$sensor_name = null;
+		$bedsensor_name = null;
 
-        $this->template->title = '管理ページ センサー一覧';
-        $this->template->content = View::forge('admin/sensor/data', $data);
+		$type = Input::param("type");
+                if ($type == \Model_Sensor::TYPE_SENSOR) {
+			$sensor_name = Input::param("name");
+                } else if ($type == \Model_Sensor::TYPE_BED_SENSOR) {
+			$bedsensor_name = Input::param("name");
+		}
+
+		// API からセンサーデータを取得
+		$data = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name);
+
+		$this->template->title = '管理ページ センサー一覧';
+		$this->template->content = View::forge('admin/sensor/data', $data);
 	}
 
 	/**
