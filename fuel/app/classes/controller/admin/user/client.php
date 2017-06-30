@@ -56,9 +56,11 @@ class Controller_Admin_User_Client extends Controller_Admin
         $validation->add_callable('sensorrules');
         $validation->add('sensor')
                 ->add_rule('selected_sensortype', $user_id)
-                ->add_rule('selected');
+                ->add_rule('is_selected')
+                ->add_rule('is_unshipped');
         $validation->set_message('selected_sensortype', '別のセンサーが割当られているため、登録できません');
-        $validation->set_message('selected', 'センサー割当済みです。センサー割当を解除してください');
+        $validation->set_message('is_selected', 'センサー割当済みです。センサー割当を解除してください');
+        $validation->set_message('is_unshipped', '出荷日が設定されていません');
 
         if($validation->run()) {
             if ($user_id && $sensor) {
