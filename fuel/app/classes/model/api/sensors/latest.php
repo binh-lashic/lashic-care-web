@@ -33,7 +33,7 @@ class Model_Api_Sensors_Latest extends Model_Api_Base {
 
 		\Log::debug("get latests data start. sensor_name:[{$sensor_name}]", __METHOD__);
 		$latests = $latests_api->get($sensor_name);
-		\Log::debug("get latests data end. sensor_name:[{$sensor_name}] data:" . print_r($latest, true), __METHOD__);
+		\Log::debug("get latests data end. sensor_name:[{$sensor_name}] data:" . print_r($latests, true), __METHOD__);
 
 		return self::get_contents($latests);
 	}
@@ -49,7 +49,7 @@ class Model_Api_Sensors_Latest extends Model_Api_Base {
 
 		\Log::debug("get latests data start. sensor_name:[{$sensor_name}]", __METHOD__);
 		$latests = $latests_api->get($sensor_name);
-		\Log::debug("get latests data end. sensor_name:[{$sensor_name}] data:" . print_r($latest, true), __METHOD__);
+		\Log::debug("get latests data end. sensor_name:[{$sensor_name}] data:" . print_r($latests, true), __METHOD__);
 
 		return self::get_contents($latests);
 	}
