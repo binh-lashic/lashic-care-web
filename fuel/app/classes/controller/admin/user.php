@@ -79,12 +79,25 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->content = View::forge('admin/user/contract_list', $data);
     }
 
-    public function action_add_sensor() {
+    /*
+     * 親アカウントセンサー機器の新規登録 
+     * 
+     * @access public
+     */
+    public function action_add_sensor()
+    {
         $user_id = Input::param("user_id");
-        $sensor_names_data = Input::param("sensor_names");
-        $sensor_names = explode(PHP_EOL, $sensor_names_data);
+        
+        $validation = Validation::forge('add_sensor');
+        $validation->add_callable('sensorrules');
+        $validation->add('sensor_names')
+                    ->add_rule('is_empty');        
+        $validation->set_message('is_empty', '機器IDが入力されていません。');
 
-        if($user_id && $sensor_names) {
+        if($validation->run()) {
+            $sensor_names_data = Input::param("sensor_names");
+            $sensor_names = explode(PHP_EOL, $sensor_names_data);
+
             foreach($sensor_names as $name) {
                 $name = trim($name);
                 //センサーを新規登録
@@ -108,10 +121,13 @@ class Controller_Admin_User extends Controller_Admin
                     ));
                 }
             }
-            $user = Model_User::getUser($user_id);
-            Response::redirect('/admin/user/sensor?id='.$user['id']);
-
-    	}
+            
+    	} else {
+            Session::set_flash('error', $validation->error_message('sensor_names'));
+        }
+        
+        $user = Model_User::getUser($user_id);
+        Response::redirect('/admin/user/sensor?id='.$user['id']);
     }
 
     public function action_client_list() {

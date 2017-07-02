@@ -19,6 +19,9 @@
 				<div class="form-group">
 					<label for="sensor_name" class="col-sm-3 control-label">機器ID</label>
 					<div class="col-sm-9">
+                                        <?php if(Session::get_flash('error')) : ?>
+                                            <font color="red"><?php echo Session::get_flash('error'); ?></font>
+                                        <?php endif; ?> 
 						<textarea class="form-control" id="sensor_name" name="sensor_names" placeholder="割り当てるセンサー機器を入力してください。
 改行で複数入力になります。"></textarea>
 					</div>

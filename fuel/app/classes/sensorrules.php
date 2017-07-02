@@ -3,6 +3,7 @@ class SensorRules {
     /*
      * 同一の機器タイプが割当済みかチェック
      * 
+     * @access public
      * @params int $val
      * @params int $user_id
      * @return boolean
@@ -18,11 +19,41 @@ class SensorRules {
     /*
      * センサー割当済みチェック
      * 
+     * @access public
      * @params int $val
      * @return boolean
      */
-    public static function _validation_selected($val)
+    public static function _validation_is_selected($val)
     {
          return ! Model_User_Sensor::count_by_client_user($val);
+    }
+    
+    /*
+     * 未出荷かどうか判定 
+     * 
+     * @access public
+     * @params int $sensor_id
+     * @return bool
+     */
+    public static function _validation_is_unshipped($val)
+    {
+        return ! Model_Sensor::isUnShipped($val);
+    }
+    
+    /*
+     * 改行、タブ、スペースを除去して空かどうかを判定する 
+     * 
+     * @access public
+     * @params string $val
+     * @return bool
+     */
+    public static function _validation_is_empty($val)
+    {
+        $value = str_replace(["\r\n", "\r", "\n", ' ', '　'], '', $val);
+        if($value === '' || $value === null) {
+            return  false;
+        } else {
+            return true;
+        }
     }
 }
