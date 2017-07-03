@@ -126,7 +126,7 @@
             "source": {
                 "type": "git",
                 "url": "fascent@fascent.git.backlog.jp:/INFIC/careeye-api-client.git",
-                "reference": "06aeabe1a29c3acc13eb32c3497c02dd435f905b"
+                "reference": "18b24472fc1cbd028e69f5f41cdae9f9d85b22b1"
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.2"
@@ -150,7 +150,7 @@
                     "Fascent\\Careeye\\Api\\Client\\Tests\\": "tests/"
                 }
             },
-            "time": "2017-06-30 09:02:32"
+            "time": "2017-07-03 07:45:14"
         },
         {
             "name": "firebase/php-jwt",
