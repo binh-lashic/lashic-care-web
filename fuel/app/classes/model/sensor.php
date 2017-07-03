@@ -1149,4 +1149,23 @@ SQL;
 		    return false;
 		}
     }
+    
+    /*
+     * 未出荷かどうかを判定
+     *  
+     * @params int $id
+     * @return bool
+     */
+    public static function isUnShipped($id)
+    {
+        $sensor = self::find('first', [
+                        'where' => [
+                            'id' => $id
+			],
+                    ]);
+        if(is_null($sensor['shipping_date'])) {
+            return true;
+        }
+        return false;
+    }
 }

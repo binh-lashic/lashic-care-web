@@ -13,12 +13,13 @@
 			<table class="table table-bordered">
 				<tr class="info">
 					<th class="col-sm-2">日時</th>
-					<th class="col-sm-1">室温</th>
-					<th class="col-sm-1">湿度</th>
-					<th class="col-sm-1">運動量</th>
-					<th class="col-sm-1">照度</th>
-					<th class="col-sm-1">熱中症指数</th>
-					<th class="col-sm-1">風邪ひき指数</th>
+					<th class="col-sm-1">状態</th>
+					<th class="col-sm-1">人感</th>
+					<th class="col-sm-1">体動</th>
+					<th class="col-sm-1">姿勢</th>
+					<th class="col-sm-1">睡眠</th>
+					<th class="col-sm-1">寝返り</th>
+					<th class="col-sm-1">脈拍</th>
 				</tr>
 <?php
 foreach($data as $_data) {
@@ -28,22 +29,25 @@ foreach($data as $_data) {
 						<?php echo $_data['measurement_time']; ?>
 					</td>
 					<td>
-						<?php echo $_data['temperature']; ?>
+						<?php echo $_data['status']; ?>
 					</td>
 					<td>
-						<?php echo $_data['humidity']; ?>
+						<?php echo $_data['humans']; ?>
 					</td>
 					<td>
-						<?php echo $_data['activity']; ?>
+						<?php echo $_data['motion']; ?>
 					</td>
 					<td>
-						<?php echo $_data['illuminance']; ?>
+						<?php echo $_data['posture']; ?>
 					</td>
 					<td>
-						<?php echo $_data['wbgt']; ?>
+						<?php echo $_data['sleep']; ?>
 					</td>
 					<td>
-						<?php echo $_data['cold']; ?>
+						<?php echo $_data['rolling']; ?>
+					</td>
+					<td>
+						<?php echo $_data['pulse']; ?>
 					</td>
 				</tr>
 <?php	
