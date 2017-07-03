@@ -6,18 +6,15 @@
  */
 trait Trait_Time_Average_Calculatable {
 	/**
-	 * 指定日より過去に指定された日数分のレコードの平均起床時間と平均就寝時間を返す
+	 * 配列で渡されたレコードから、平均起床時間と平均就寝時間を返す
 	 */
-	public static function average_wake_up_and_sleep($sensor_name, $datetime, $days = 30) {
-		Log::debug("sensor_name: [{$sensor_name}] datetime: [{$datetime->format('Y-m-d H:i:s')}] days:[$days]", __METHOD__);
+	public static function average_wake_up_and_sleep_in_array($sensor_name, $daily_data_list, $timezone) {
+		Log::debug("sensor_name: [{$sensor_name}]", __METHOD__);
 
-		$timezone = $datetime->getTimezone();
-
-		$daily_data = static::find_last_days($sensor_name, 'summary_date', $datetime, $days);
-		$data_count = count($daily_data);
-		Log::debug("sensor_name: [{$sensor_name}] last {$days} days record:[{$data_count}]", __METHOD__);
+		$data_count = count($daily_data_list);
+		Log::debug("sensor_name: [{$sensor_name}] record:[{$data_count}]", __METHOD__);
 		if ($data_count <= 0) {
-			Log::debug("sensor_name: [{$sensor_name}] daily record not found.", __METHOD__);
+			Log::debug("sensor_name: [{$sensor_name}] sensordaily record not found.", __METHOD__);
 			return [
 				'count' => $data_count,
 			];
@@ -25,21 +22,29 @@ trait Trait_Time_Average_Calculatable {
 
 		$wake_up_times    = [];
 		$last_sleep_times = [];
-		foreach ($daily_data as $data) {
+		foreach ($daily_data_list as $data) {
 
 			# 起床時間
 			$wake_up_hour = null;
 			if (array_key_exists('wake_up_time', $data)) {
-				# Storage Table はタイムゾーンを UTC で保存するので、渡されたタイムゾーンに戻す
-				$wake_up_time = $data['wake_up_time']->setTimezone($timezone);
+				# UTC の場合は渡されたタイムゾーンに戻す
+				if ($data['wake_up_time']->getTimezone()->getName() === 'UTC') {
+					$wake_up_time = $data['wake_up_time']->setTimezone($timezone);
+				} else {
+					$wake_up_time = $data['wake_up_time'];
+				}
 				list($wake_up_hour, $wake_up_minute, $wake_up_total_minutes) = static::to_minutes($wake_up_time);
 				$wake_up_times[] = $wake_up_total_minutes;
 			}
 
 			# 就寝時間
 			if (array_key_exists('last_sleep_time', $data)) {
-				# Storage Table はタイムゾーンを UTC で保存するので、渡されたタイムゾーンに戻す
-				$last_sleep_time = $data['last_sleep_time']->setTimezone($timezone);
+				# UTC の場合は渡されたタイムゾーンに戻す
+				if ($data['last_sleep_time']->getTimezone()->getName() === 'UTC') {
+					$last_sleep_time = $data['last_sleep_time']->setTimezone($timezone);
+				} else {
+					$last_sleep_time = $data['last_sleep_time'];
+				}
 				list($last_sleep_hour, $last_sleep_minute, $last_sleep_total_minutes) = static::to_minutes($last_sleep_time, true, $wake_up_hour);
 				$last_sleep_times[] = $last_sleep_total_minutes;
 			}
@@ -48,8 +53,8 @@ trait Trait_Time_Average_Calculatable {
 		$result = [
 			'count' => $data_count,
 			'averages' => [
-				"avg_{$days}d_wake_up_time" => static::average_time($wake_up_times),
-				"avg_{$days}d_sleep_time"   => static::average_time($last_sleep_times),
+				"avg_wake_up_time" => static::average_time($wake_up_times),
+				"avg_sleep_time"   => static::average_time($last_sleep_times),
 			]
 		];
 
