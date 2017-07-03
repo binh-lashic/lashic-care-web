@@ -81,7 +81,7 @@ if(isset($sensors)) {
 						<?php echo $sensor['name']; ?>
 					</td>
 					<td class="text-center">
-						<?php echo $sensor['type']; ?>
+						<?php echo $sensor['type_name']; ?>
 					</td>
 					<td>
 <?php

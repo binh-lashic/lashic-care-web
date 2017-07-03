@@ -12,7 +12,7 @@ class Presenter_Admin_Sensor_List extends Presenter
 	{
             foreach($this->result as $sensor) {
                     $sensor = $sensor->to_array();
-                    $sensor['type'] = $this->getTypeName($sensor['type']);
+                    $sensor['type_name'] = $this->getTypeName($sensor['type']);
                     $user_sensors = Model_Sensor::getAdmins(["sensor_id" => $sensor['id']]);
                     $sensor['admins'] = [];
                     $sensor['clients'] = [];
