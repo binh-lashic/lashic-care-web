@@ -12,7 +12,7 @@ class Model_Api_Sensors_Latest extends Model_Api_Base {
 	 * @param string $bedsensor_name
 	 * @return array
 	 */
-	public static function find_by_sensor_name($sensor_name, $bedsensor_name, $limit) {
+	public static function find_by_sensor_name($sensor_name, $bedsensor_name, $limit = 100) {
 		$result = null;
 		if ($sensor_name) {
 			$result = self::get_sensor_data($sensor_name, $limit);
@@ -27,7 +27,7 @@ class Model_Api_Sensors_Latest extends Model_Api_Base {
 	 * @param string $sensor_name
 	 * @return array
 	 */
-	private static function get_sensor_data($sensor_name, $limit = 100) {
+	private static function get_sensor_data($sensor_name, $limit) {
 		$latests = null;
 		$latests_api = new Sensor\Latests();
 
@@ -43,7 +43,7 @@ class Model_Api_Sensors_Latest extends Model_Api_Base {
 	 * @param string $sensor_name
 	 * @return array
 	 */
-	private static function get_bed_sensor_data($sensor_name, $limit = 100) {
+	private static function get_bed_sensor_data($sensor_name, $limit) {
 		$latests = null;
 		$latests_api = new BedSensor\Latests();
 

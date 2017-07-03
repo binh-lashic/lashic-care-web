@@ -61,23 +61,22 @@ class Controller_Admin_Sensor extends Controller_Admin
 	}
 
 	public function action_data() {
-		$sensor_name = null;
-		$bedsensor_name = null;
-
-		$type = Input::param("type");
-                if ($type == \Model_Sensor::TYPE_SENSOR) {
-			$sensor_name = Input::param("name");
-                } else if ($type == \Model_Sensor::TYPE_BED_SENSOR) {
-			$bedsensor_name = Input::param("name");
-		}
+		$sensor = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
+		$name = $sensor['name'];
+		$type = $sensor['type'];
 		$limit = 100;
+		$view = null;
 
-		$data['sensor'] = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
-		// API からセンサーデータを取得
-		$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name, $limit);
-
+		$data['sensor'] = $sensor;
+		if ($type == \Model_Sensor::TYPE_SENSOR) {
+			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($name,,$limit);
+			$view = 'admin/sensor/data';
+		} else if ($type == \Model_Sensor::TYPE_BED_SENSOR) {
+			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name(,$name,$limit);
+			$view = 'admin/sensor/beddata';
+		}
 		$this->template->title = '管理ページ センサー一覧';
-		$this->template->content = View::forge('admin/sensor/data', $data);
+		$this->template->content = View::forge($view, $data);
 	}
 
 	/**
