@@ -20,26 +20,26 @@
 					<th class="col-sm-1">照度</th>
 				</tr>
 <?php
-foreach($data as $sensor) {
+foreach($data as $_data) {
 ?>
 				<tr>
 					<td class="text-center">
-						<?php echo $sensor->sensor_id; ?>
+						<?php echo $_data->sensor_id; ?>
 					</td>
 					<td class="text-center">
-						<?php echo $sensor->measurement_time; ?>
+						<?php echo $_data->measurement_time; ?>
 					</td>
 					<td class="text-center">
-						<?php echo $sensor->temperature; ?>
+						<?php echo $_data->temperature; ?>
 					</td>
 					<td>
-						<?php echo $sensor->humidity; ?>
+						<?php echo $_data->humidity; ?>
 					</td>
 					<td>
-						<?php echo $sensor->activity; ?>
+						<?php echo $_data->activity; ?>
 					</td>
 					<td>
-						<?php echo $sensor->illuminance; ?>
+						<?php echo $_data->illuminance; ?>
 					</td>
 				</tr>
 <?php	
