@@ -63,6 +63,7 @@ class Create_Sensor_Monthly
 		$from = $target_datetime->setTime(0, 0, 0);
 		$to   = $from->modify('+1 month');
 		foreach ($target_sensor_names as $sensor_name) {
+			$sensor_name = trim($sensor_name);
 			\Log::debug("sensor_name:[{$sensor_name}]", __METHOD__);
 			$daily_data_list = \Model_Sensordaily::find_by_datetime_range($sensor_name, 'summary_date', $from, $to);
 
@@ -71,6 +72,9 @@ class Create_Sensor_Monthly
 
 			$sleeping_time       = 0;
 			$sleeping_time_count = 0;
+
+			$night_activity       = 0;
+			$night_activity_count = 0;
 
 			foreach ($daily_data_list as $daily_data) {
 				if (array_key_exists('avg_activity', $daily_data)) {
@@ -87,6 +91,11 @@ class Create_Sensor_Monthly
 					$sleeping_time += $sleeping_minutes;
 					$sleeping_time_count++;
 				}
+
+				if (array_key_exists('night_activity', $daily_data)) {
+					$night_activity += $daily_data['night_activity'];
+					$night_activity_count++;
+				}
 			}
 
 			$properties = [];
@@ -99,6 +108,15 @@ class Create_Sensor_Monthly
 				$properties['avg_sleeping_time'] = (int) round($sleeping_time / $sleeping_time_count / 60);
 			}
 
+			if ($night_activity_count > 0) {
+				$properties['avg_night_activity'] = (double) $night_activity / $night_activity_count;
+			}
+
+			$wake_up_and_sleep = \Model_Sensordaily::average_wake_up_and_sleep_in_array($sensor_name, $daily_data_list, $this->_timezone);
+			if (array_key_exists('averages', $wake_up_and_sleep)) {
+				$properties = array_merge($properties, $wake_up_and_sleep['averages']);
+			}
+
 			# レコード作成日を追加
 			# 検索用フィールドなので見た目上 JST になるようにした日付を入れる
 			$properties['created_at'] = \Model_Sensormonthly::pseudo_jst_datetime();
@@ -106,6 +124,8 @@ class Create_Sensor_Monthly
 			# 集計日時を追加
 			# こちらも検索用フィールドなので見た目上 JST になるようにした日付を入れる
 			$properties['summary_date'] = \Model_Sensormonthly::pseudo_jst_datetime($target_datetime)->setTime(0, 0, 0);
+
+			\Log::debug("sensor_name: [{$sensor_name}] properties:\n" . print_r($properties, true), __METHOD__);
 
 			\Model_Sensormonthly::upsert($sensor_name, $current_month, $properties);
 		}

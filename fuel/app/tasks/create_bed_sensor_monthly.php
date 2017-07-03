@@ -63,6 +63,7 @@ class Create_Bed_Sensor_Monthly
 		$from = $target_datetime->setTime(0, 0, 0);
 		$to   = $from->modify('+1 month');
 		foreach ($target_sensor_names as $sensor_name) {
+			$sensor_name = trim($sensor_name);
 			\Log::debug("sensor_name:[{$sensor_name}]", __METHOD__);
 			$daily_data_list = \Model_Bedsensordaily::find_by_datetime_range($sensor_name, 'summary_date', $from, $to);
 
@@ -85,6 +86,11 @@ class Create_Bed_Sensor_Monthly
 
 			if ($sleeping_time_count > 0) {
 				$properties['avg_sleeping_time'] = (int) round($sleeping_time / $sleeping_time_count / 60);
+			}
+
+			$wake_up_and_sleep = \Model_Bedsensordaily::average_wake_up_and_sleep_in_array($sensor_name, $daily_data_list, $this->_timezone);
+			if (array_key_exists('averages', $wake_up_and_sleep)) {
+				$properties = array_merge($properties, $wake_up_and_sleep['averages']);
 			}
 
 			# レコード作成日を追加
