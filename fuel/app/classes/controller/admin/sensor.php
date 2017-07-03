@@ -69,10 +69,10 @@ class Controller_Admin_Sensor extends Controller_Admin
 
 		$data['sensor'] = $sensor;
 		if ($type == \Model_Sensor::TYPE_SENSOR) {
-			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($name,,$limit);
+			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($name, null, $limit);
 			$view = 'admin/sensor/data';
 		} else if ($type == \Model_Sensor::TYPE_BED_SENSOR) {
-			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name(,$name,$limit);
+			$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name(null, $name, $limit);
 			$view = 'admin/sensor/beddata';
 		}
 		$this->template->title = '管理ページ センサー一覧';
