@@ -12,7 +12,7 @@
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="col-sm-2">日時</th>
+					<th class="col-sm-1">日時</th>
 					<th class="col-sm-1">室温</th>
 					<th class="col-sm-1">湿度</th>
 					<th class="col-sm-1">運動量</th>
@@ -27,7 +27,7 @@ foreach($data as $_data) {
 					<td class="text-center">
 						<?php echo $_data['measurement_time']; ?>
 					</td>
-					<td class="text-center">
+					<td>
 						<?php echo $_data['temperature']; ?>
 					</td>
 					<td>

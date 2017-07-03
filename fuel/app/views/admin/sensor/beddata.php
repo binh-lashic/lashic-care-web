@@ -12,7 +12,7 @@
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="col-sm-2">日時</th>
+					<th class="col-sm-1">日時</th>
 					<th class="col-sm-1">状態</th>
 					<th class="col-sm-1">人感</th>
 					<th class="col-sm-1">体動</th>
