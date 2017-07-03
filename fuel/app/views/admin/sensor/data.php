@@ -12,7 +12,7 @@
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="col-sm-1">日時</th>
+					<th class="col-sm-2">日時</th>
 					<th class="col-sm-1">室温</th>
 					<th class="col-sm-1">湿度</th>
 					<th class="col-sm-1">運動量</th>
