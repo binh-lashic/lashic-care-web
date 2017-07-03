@@ -71,8 +71,9 @@ class Controller_Admin_Sensor extends Controller_Admin
 			$bedsensor_name = Input::param("name");
 		}
 
+		$data['sensor'] = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
 		// API からセンサーデータを取得
-		$data = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name);
+		$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name);
 
 		$this->template->title = '管理ページ センサー一覧';
 		$this->template->content = View::forge('admin/sensor/data', $data);
