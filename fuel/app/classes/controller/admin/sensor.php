@@ -70,10 +70,11 @@ class Controller_Admin_Sensor extends Controller_Admin
                 } else if ($type == \Model_Sensor::TYPE_BED_SENSOR) {
 			$bedsensor_name = Input::param("name");
 		}
+		$limit = 100;
 
 		$data['sensor'] = \Model_Sensor::getSensorFromSensorName(Input::param("name"));
 		// API からセンサーデータを取得
-		$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name);
+		$data['data'] = \Model_Api_Sensors_Latest::find_by_sensor_name($sensor_name, $bedsensor_name, $limit);
 
 		$this->template->title = '管理ページ センサー一覧';
 		$this->template->content = View::forge('admin/sensor/data', $data);

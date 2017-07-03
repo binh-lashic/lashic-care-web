@@ -24,22 +24,22 @@ foreach($data as $_data) {
 ?>
 				<tr>
 					<td class="text-center">
-						<?php echo $_data->sensor_id; ?>
+						<?php echo $_data['sensor_id']; ?>
 					</td>
 					<td class="text-center">
-						<?php echo $_data->measurement_time; ?>
+						<?php echo $_data['measurement_time']; ?>
 					</td>
 					<td class="text-center">
-						<?php echo $_data->temperature; ?>
+						<?php echo $_data['temperature']; ?>
 					</td>
 					<td>
-						<?php echo $_data->humidity; ?>
+						<?php echo $_data['humidity']; ?>
 					</td>
 					<td>
-						<?php echo $_data->activity; ?>
+						<?php echo $_data['activity']; ?>
 					</td>
 					<td>
-						<?php echo $_data->illuminance; ?>
+						<?php echo $_data['illuminance']; ?>
 					</td>
 				</tr>
 <?php	
