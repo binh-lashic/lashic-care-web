@@ -123,7 +123,7 @@ if(isset($sensor['clients'])) {
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/sensor/shipping?id=<?php echo $sensor['id']; ?>">出荷日登録</a>
-						<a class="btn btn-primary btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>; ?>">データ確認</a>
+						<a class="btn btn-primary btn-sm" href="/admin/sensor/data?name=<?php echo $sensor['name']; ?>">データ確認</a>
 					</td>
 					<td>
 						<a class="btn btn-danger btn-sm" href="/admin/sensor/delete?id=<?php echo $sensor['id']; ?>" onClick="return confirm('データを削除してもよろしいですか？')">センサー削除</a>
