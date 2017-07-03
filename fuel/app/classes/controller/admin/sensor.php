@@ -67,7 +67,7 @@ class Controller_Admin_Sensor extends Controller_Admin
 		$sensor_name = null;
 		$bedsensor_name = null;
 		$limit = 100;
-		$view = null;
+		$view = 'admin/sensor/data';
 
 		if ($type == \Model_Sensor::TYPE_SENSOR) {
 			$sensor_name = $name;
