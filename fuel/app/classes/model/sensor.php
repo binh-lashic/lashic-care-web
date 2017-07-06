@@ -1070,9 +1070,17 @@ SQL;
 		$params['logs']['sql'] = \DB::last_query("data");
 
 		$template = Config::get("template.alert");
-		if(isset($template[$params['type']])) {
+		if(isset($template[$params['type']])) {                                     
 			$params['title'] = $template[$params['type']]['title'];
-			$params['description'] = $template[$params['type']]['description'];
+                        
+			// 見守られユーザを取得
+			$client_users = Model_User::getClientUserWithUserSensors($this->id);
+			$params['description'] = sprintf(
+                            Config::get("template.alert_mail_format"), 
+                            $client_users['last_name'], 
+                            $client_users['first_name'], 
+                            $template[$params['type']]['description']
+			);
 		}
 
 		$tmp = $params;
@@ -1091,7 +1099,7 @@ SQL;
 
 			$alert = \Model_Alert::forge();
     		$alert->set($params);
-
+                            
     		foreach($this->users as $user) {
     			if($user['master'] != 1) { // システム管理者以外に通知
 	    			$user_sensor = \Model_User_Sensor::find('first', array(
