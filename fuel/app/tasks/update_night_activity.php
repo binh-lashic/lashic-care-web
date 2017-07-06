@@ -24,12 +24,11 @@ class Update_Night_Activity
 		$this->_timezone = new \DateTimeZone('Asia/Tokyo');
 
 		# 集計の最大日時
-		# 00:00:01 としているのは DatePeriod の不具合(00:00:00 だと終了日時が含まれない)対策
 		if ($this->_arg_ymd) {
-			$max_datetime = new \DateTimeImmutable("{$ymd} 00:00:01", $this->_timezone);
+			$max_datetime = new \DateTimeImmutable("{$ymd} 00:00:00", $this->_timezone);
 		} else {
 			// 引数で未指定時のデフォルトの Max は 2017-07-03
-			$max_datetime = new \DateTimeImmutable('2017-07-03 00:00:01', $this->_timezone);
+			$max_datetime = new \DateTimeImmutable('2017-07-03 00:00:00', $this->_timezone);
 		}
 
 		\Log::info("task [update_night_activity:run] start. max_datetime:[{$max_datetime->format('Y-m-d')}]", __METHOD__);
