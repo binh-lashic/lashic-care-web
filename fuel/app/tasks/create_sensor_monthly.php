@@ -9,7 +9,7 @@ class Create_Sensor_Monthly
 {
 
 	/** 引数で指定された日時 */
-	private $_arg_ymd = null;
+	private $_arg_ym = null;
 
 	/** タイムゾーン */
 	private $_timezone = null;
