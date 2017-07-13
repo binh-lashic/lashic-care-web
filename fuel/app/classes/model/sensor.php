@@ -115,6 +115,18 @@ class Model_Sensor extends Orm\Model{
 		return \Arr::pluck($sensor_names, 'sensor_name');
 	}
 
+	public static function get_sensor_name_and_shipping_date($sensor_type)
+	{
+		$results =  DB::select(['sensors.name', 'sensor_name'])
+						->select('sensors.shipping_date')
+						->from('sensors')
+						->where('shipping_date', '!=', null)
+						->where('type', '=', $sensor_type)
+						->order_by('id', 'ASC')
+						->execute()->as_array();
+		return array_column($results, 'shipping_date', 'sensor_name');
+	}
+
 	/**
 	 * 指定されたセンサー名の指定されたアラートタイプのアラート設定情報を取得する
 	 * @param string $alert_type

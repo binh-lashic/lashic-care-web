@@ -50,7 +50,8 @@ class Controller_Register extends Controller_Base
 			}
         }
 
-        $this->template->content = View::forge('register/form', $this->data);
+        //$this->template->content = View::forge('register/form', $this->data);
+        $this->template->content = View::forge('register/under_construction', $this->data);
 	}
 
 	public function action_email()

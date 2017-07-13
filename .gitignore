@@ -35,6 +35,9 @@ composer.phar
 /public/images/user/
 /fuel/app/session/*
 
+/fuel/app/tmp/*
+!/fuel/app/tmp/.gitkeep
+
 # localvimrc
 .lvimrc
 
