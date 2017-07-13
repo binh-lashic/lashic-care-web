@@ -275,4 +275,23 @@ class Model_Alert extends Orm\Model{
 
 		}
 	}
+
+	public static function getAlertCountTempAndHumid($params) {
+		$query = DB::query(
+			"SELECT COUNT(*) AS count "
+			. "FROM alerts "
+                        . "WHERE sensor_id = :sensor_id "
+                        . "AND YEAR(date) = :year "
+                        . "AND MONTH(date) = :month "
+                        . "AND type IN (:temp, :humid)"
+		);
+		$rows = $query->parameters([
+			'sensor_id' => $params['sensor_id'],
+			'year' => $params['year'],
+			'month' => $params['month'],
+			'temp' => self::TYPE_TEMPERATURE,
+			'humid' => self::TYPE_HUMIDITY
+		])->execute();
+		return $rows->get('count');
+	}
 }

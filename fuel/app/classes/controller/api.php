@@ -9,7 +9,31 @@ class Controller_Api extends Controller_Rest
 	public function before()
 	{
 	    parent::before();
-	   	$method = Request::active()->action;
+
+            // 使用言語をリクエストパラメータから設定
+            $lang = Input::param('lang');
+            if (!$lang) {
+                    // リクエストパラメータに無ければセッションから取得
+                    $lang = Session::get('language');
+            }
+            if (!$lang) {
+                    // セッションにも無ければ Accept-Language ヘッダから自動判別
+                    $languages = Agent::languages();
+                    if (in_array('ja', $languages)) {
+                            $lang = 'ja';
+                    } else {
+                            // 日本語が含まれていなかったら英語
+                            $lang = 'en';
+                    }
+            }
+            Session::set('language', $lang);
+            Config::set('language', $lang);
+            Lang::load('labels');
+            Lang::load('alerts');
+            Lang::load('monthlyreport');
+            $this->language = $lang;
+
+	    $method = Request::active()->action;
 	    if (in_array($method, $this->nologin_methods)) {    
 	    } else if (Input::param("device_id")){
 	    	$device_id = Input::param("device_id");

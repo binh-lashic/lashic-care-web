@@ -42,6 +42,7 @@ class Controller_Base extends Controller_Template
 		Config::set('language', $lang);
 		Lang::load('labels');
 		Lang::load('alerts');
+		Lang::load('monthlyreport');
 		$this->language = $lang;
 
 	    parent::before();
