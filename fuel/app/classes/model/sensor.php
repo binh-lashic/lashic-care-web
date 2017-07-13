@@ -122,6 +122,7 @@ class Model_Sensor extends Orm\Model{
 						->from('sensors')
 						->where('shipping_date', '!=', null)
 						->where('type', '=', $sensor_type)
+						->order_by('id', 'ASC')
 						->execute()->as_array();
 		return array_column($results, 'shipping_date', 'sensor_name');
 	}
