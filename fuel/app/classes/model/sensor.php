@@ -115,6 +115,18 @@ class Model_Sensor extends Orm\Model{
 		return \Arr::pluck($sensor_names, 'sensor_name');
 	}
 
+	public static function get_sensor_name_and_shipping_date($sensor_type)
+	{
+		$results =  DB::select(['sensors.name', 'sensor_name'])
+						->select('sensors.shipping_date')
+						->from('sensors')
+						->where('shipping_date', '!=', null)
+						->where('type', '=', $sensor_type)
+						->order_by('id', 'ASC')
+						->execute()->as_array();
+		return array_column($results, 'shipping_date', 'sensor_name');
+	}
+
 	/**
 	 * 指定されたセンサー名の指定されたアラートタイプのアラート設定情報を取得する
 	 * @param string $alert_type
@@ -1071,16 +1083,8 @@ SQL;
 
 		$template = Config::get("template.alert");
 		if(isset($template[$params['type']])) {                                     
-			$params['title'] = $template[$params['type']]['title'];
-                        
-			// 見守られユーザを取得
-			$client_users = Model_User::getClientUserWithUserSensors($this->id);
-			$params['description'] = sprintf(
-                            Config::get("template.alert_mail_format"), 
-                            $client_users['last_name'], 
-                            $client_users['first_name'], 
-                            $template[$params['type']]['description']
-			);
+			$params['title'] = $template[$params['type']]['title'];                        
+			$params['description'] = $template[$params['type']]['description'];
 		}
 
 		$tmp = $params;
@@ -1123,10 +1127,19 @@ SQL;
 	    						));
 	    					}*/
 
+                                                // 見守られユーザを取得
+                                                $client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
+                                                $description = sprintf(
+                                                    Config::get("template.alert_mail_format"), 
+                                                    $client_users['last_name'], 
+                                                    $client_users['first_name'], 
+                                                    $params['description']
+                                                );
+                                                
 			  	    		$this->send_alert(array(
 				    			'email' => $user['email'],
 				    			'title' => $params['title'],
-				    			'description' => $params['description'],
+				    			'description' => $description,
 				    		));  	    					
 	    				}
 	    			}    				

@@ -874,18 +874,25 @@ class Model_User extends Orm\Model{
         
         /*
          * センサーIDから紐づく見守られユーザーを取得する 
-         * １つのセンサーに対して見守られユーザが1:1で紐づくことが前提で最初の値を返却 
+         * ・センサーと見守られユーザーは1:N
+         * ・ただし同一親アカウントの見守られユーザー間で同じセンサーが紐づくことはない
          * 
          * @access public
-         * @params int $sensor_id
+         * @params int $sensor_id   センサー ID
+         * @params int $user_id     親アカウントID
          * @return array[0]
          */
-        public static function getClientUserWithUserSensors($sensor_id)
+        public static function getClientUserWithUserSensors($sensor_id, $user_id)
         {
-             $rows = DB::select('*')
-                        ->from('users')
-                        ->where(DB::expr("id = (SELECT user_id FROM user_sensors AS t1 WHERE EXISTS ( SELECT * FROM user_clients AS t2 WHERE t1.user_id = t2.client_user_id ) AND sensor_id = $sensor_id )"))
+            $rows = DB::select('*')
+                        ->from(['user_clients', 'uc'])
+                        ->join(['user_sensors', 'us'], 'LEFT')
+                        ->on('uc.client_user_id', '=', 'us.user_id')
+                        ->join(['users', 'u'], 'LEFT')
+                        ->on('uc.client_user_id', '=', 'u.id')
+                        ->and_where('uc.user_id', '=', $user_id)
+                        ->and_where('us.sensor_id', '=', $sensor_id)
                         ->execute()->as_array();
-             return  reset($rows);
+            return  reset($rows);
         }
 }
