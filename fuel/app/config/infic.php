@@ -328,6 +328,7 @@ return array(
 					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータ受信の再開を確認できた場合に通知します。',
 				),
 		),
+                'alert_mail_format' => '%s%s さんの%s',
 	),
 	'report_list_count' => 10,
 	'sendgrid' => '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',

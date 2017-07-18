@@ -871,5 +871,28 @@ class Model_User extends Orm\Model{
             }
             return $sensors;
         }
+        
+        /*
+         * センサーIDから紐づく見守られユーザーを取得する 
+         * ・センサーと見守られユーザーは1:N
+         * ・ただし同一親アカウントの見守られユーザー間で同じセンサーが紐づくことはない
+         * 
+         * @access public
+         * @params int $sensor_id   センサー ID
+         * @params int $user_id     親アカウントID
+         * @return array[0]
+         */
+        public static function getClientUserWithUserSensors($sensor_id, $user_id)
+        {
+            $rows = DB::select('*')
+                        ->from(['user_clients', 'uc'])
+                        ->join(['user_sensors', 'us'], 'LEFT')
+                        ->on('uc.client_user_id', '=', 'us.user_id')
+                        ->join(['users', 'u'], 'LEFT')
+                        ->on('uc.client_user_id', '=', 'u.id')
+                        ->and_where('uc.user_id', '=', $user_id)
+                        ->and_where('us.sensor_id', '=', $sensor_id)
+                        ->execute()->as_array();
+            return  reset($rows);
+        }
 }
-		
