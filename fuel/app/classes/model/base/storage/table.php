@@ -46,14 +46,18 @@ abstract class Model_Base_Storage_Table extends Model
 	 * 指定された検索条件に一致する Storage Table の全レコードを取得する
 	 * NextPartitionKey, NextRowKey が返ってきた場合は再帰的にリクエストを発行するので 1000 件以上のレコードを取得可能
 	 */
-	public static function find_all($filter, $entities = [], $next_partition_key = null, $next_row_key = null) {
+	public static function find_all($filter, $entities = [], $next_partition_key = null, $next_row_key = null, $is_to_array = true) {
 		$result   = static::execute_query($filter, null, $next_partition_key, $next_row_key);
-		$entities = array_merge($entities, self::to_array($result));
+		if ($is_to_array) {
+			$entities = array_merge($entities, self::to_array($result));
+		} else {
+			$entities = array_merge($entities, $result->getEntities());
+		}
 
 		$next_partition_key = $result->getNextPartitionKey();
 		$next_row_key       = $result->getNextRowKey();
 		if ($next_partition_key && $next_row_key) {
-			return static::find_all($filter, $entities, $next_partition_key, $next_row_key);
+			return static::find_all($filter, $entities, $next_partition_key, $next_row_key, $is_to_array);
 		} else {
 			return $entities;
 		}
@@ -67,15 +71,16 @@ abstract class Model_Base_Storage_Table extends Model
 	 * @param string $datetime_property_name 検索対象プロパティ名
 	 * @param \DateTimeImmutable $from 期間開始日時
 	 * @param \DateTimeImmutable $to 期間終了日時
+	 * @param bool $is_to_array 取得結果を配列に変換するかどうか。デフォルト true
 	 */
-	public static function find_by_datetime_range($partition_key, $datetime_property_name, $from, $to) {
+	public static function find_by_datetime_range($partition_key, $datetime_property_name, $from, $to, $is_to_array = true) {
 		$to   = static::format_datetime_filter($to);
 		$from = static::format_datetime_filter($from);
 
 		$filter = static::PARTITION_KEY_FIELD . " eq '{$partition_key}' and {$datetime_property_name} ge {$from} and {$datetime_property_name} lt {$to}";
 		Log::debug("table: [". static::$_table_name . "] filter: [{$filter}]", __METHOD__);
 
-		return static::find_all($filter);
+		return static::find_all($filter, [], null, null, $is_to_array);
 	}
 
 	/**
@@ -154,9 +159,19 @@ abstract class Model_Base_Storage_Table extends Model
 
 	/**
 	 * 指定されたレコードを更新する
+	 * プロパティが連想配列の場合に Property に変換して設定し更新する
 	 */
 	public static function update_entity($entity, array $properties) {
 		$entity = static::set_properties($entity, $properties);
+		$entity->addProperty('updated_at', EdmType::DATETIME, static::pseudo_jst_datetime());
+		static::get_rest_proxy()->updateEntity(static::$_table_name, $entity);
+	}
+
+	/**
+	 * 指定されたレコードを更新する
+	 * Entity そのまま更新用
+	 */
+	public static function update($entity) {
 		$entity->addProperty('updated_at', EdmType::DATETIME, static::pseudo_jst_datetime());
 		static::get_rest_proxy()->updateEntity(static::$_table_name, $entity);
 	}
