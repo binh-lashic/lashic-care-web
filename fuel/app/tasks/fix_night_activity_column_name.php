@@ -5,8 +5,10 @@ namespace Fuel\Tasks;
 # TODO: 他のバッチを真似たがこれで正しいのか？
 date_default_timezone_set('Asia/Tokyo');
 
-class Update_Night_Activity
+class Fix_Night_Activity_Column_Name
 {
+	const WRONG_COL_NAME = 'night_acitivity';
+	const RIGHT_COL_NAME = 'night_activity';
 
 	/** 引数で指定された日時 */
 	private $_arg_ymd = null;
@@ -19,14 +21,14 @@ class Update_Night_Activity
 	private $_current_summary_date = null;
 
 	/**
-	 * daily report である sensordaily テーブルの night_activity を計算する
+	 * daily report である sensordaily テーブルの night_activity の名前を間違えたのを修正する
 	 * $ymd は Y-m-d 形式の文字列(ex. 2017-01-01)
 	 */
 	public function run($ymd = null)
 	{
 		$this->_arg_ymd  = $ymd;
 		$this->_timezone = new \DateTimeZone('Asia/Tokyo');
-		$this->_current_sensor_log_path = implode(DIRECTORY_SEPARATOR, [rtrim(APPPATH, DIRECTORY_SEPARATOR), 'tmp', 'update_night_activity_current_sensor.txt']);
+		$this->_current_sensor_log_path = implode(DIRECTORY_SEPARATOR, [rtrim(APPPATH, DIRECTORY_SEPARATOR), 'tmp', 'fix_night_activity_column_name_current_sensor.txt']);
 		list($this->_current_sensor_name, $this->_current_summary_date) = $this->read_current_sensor();
 
 		# 集計の最大日時
@@ -37,7 +39,7 @@ class Update_Night_Activity
 			$max_datetime = new \DateTimeImmutable('2017-07-03 00:00:01', $this->_timezone);
 		}
 
-		\Log::info("task [update_night_activity:run] start. max_datetime:[{$max_datetime->format('Y-m-d')}] current_sensor_name:[{$this->_current_sensor_name}] current_summary_date:[{$this->_current_summary_date}]", __METHOD__);
+		\Log::info("task [fix_night_activity_column_name:run] start. max_datetime:[{$max_datetime->format('Y-m-d')}] current_sensor_name:[{$this->_current_sensor_name}] current_summary_date:[{$this->_current_summary_date}]", __METHOD__);
 
 		try {
 			// shipping_date が入っている通常センサーの一覧を取得
@@ -46,7 +48,7 @@ class Update_Night_Activity
 			\Log::debug('target sensors:' . print_r($target_sensors, true), __METHOD__);
 
 			// レポート更新
-			$this->update_report($max_datetime, $target_sensors);
+			$this->fix_report($max_datetime, $target_sensors);
 		} catch(\Exception $e) {
 			 // 未処理例外はログを記録して再 throw する
 			$code    = $e->getCode();
@@ -56,31 +58,19 @@ class Update_Night_Activity
 			\Log::error("Error code:[{$code}] Error message:[{$message}] - file:[{$file}:{$line}]", __METHOD__);
 			throw $e;
 		} finally {
-			\Log::info("task [update_night_activity:run] end. max_datetime:[{$max_datetime->format('Y-m-d')}]", __METHOD__);
+			\Log::info("task [fix_night_activity_column_name:run] end. max_datetime:[{$max_datetime->format('Y-m-d')}]", __METHOD__);
 		}
 	}
 
 	/**
-	 * デイリーレポートを更新する
+	 * デイリーレポートを修正する
 	 */
-	private function update_report($max_datetime, array $target_sensors) {
+	private function fix_report($max_datetime, array $target_sensors) {
 
 		foreach ($target_sensors as $sensor_name => $shipping_date) {
 			$sensor_name   = trim($sensor_name);
 			\Log::debug("sensor_name:[{$sensor_name}] shipping_date:[{$shipping_date}]", __METHOD__);
 
-			$shipping_date = new \DateTimeImmutable($shipping_date, $this->_timezone);
-
-			# 指定範囲の sensordaily を取得(既に sensordaily が存在する日のみが対象)
-			$sensor_dailies = $this->retryable_execute(['\Model_Sensordaily', 'find_by_datetime_range'], [$sensor_name, 'summary_date', $shipping_date, $max_datetime]);
-			$this->update_night_activities($sensor_dailies);
-		}
-	}
-
-	private function update_night_activities(array $sensor_dailies)
-	{
-		foreach ($sensor_dailies as $sensor_daily) {
-			$sensor_name = $sensor_daily['PartitionKey'];
 			if ($this->_current_sensor_name) {
 				if ($this->_current_sensor_name !== $sensor_name) {
 					\Log::debug("sensor_name:[{$sensor_name}] current_sensor_name:[{$this->_current_sensor_name}] skipped.", __METHOD__);
@@ -90,49 +80,48 @@ class Update_Night_Activity
 				}
 			}
 
-			$summary_date_str = $sensor_daily['summary_date']->format('Y-m-d H:i:s');
 			if ($this->_current_summary_date) {
-				if ($this->_current_summary_date !== $summary_date_str) {
-					\Log::debug("sensor_name:[{$sensor_name}] summary_date:{$summary_date_str} current_summary_date:[{$this->_current_summary_date}] skipped.", __METHOD__);
-					continue;
-				} else {
-					$summary_date_str = $this->_current_summary_date;
-					$this->_current_summary_date = null;
-				}
+				$summary_date = new \DateTimeImmutable($this->_current_summary_date, $this->_timezone);
+				$this->_current_summary_date = null;
+			} else {
+				$summary_date = new \DateTimeImmutable($shipping_date, $this->_timezone);
 			}
-			$summary_date = new \DateTimeImmutable($summary_date_str, $this->_timezone);
 
-			$row_key = $sensor_daily['RowKey'];
-
-			# 前日 22:00 以降
-			$from = $summary_date->modify('-1 days')->setTime(22, 00, 00);
-			# 当日 05:00 まで
-			$to   = $summary_date->setTime(05, 00, 01);
-
-			$sensor_logs     = $this->retryable_execute(['\Model_Sensorlogs', 'find_by_datetime_range'], [$sensor_name, 'measurement_time', $from, $to]);
-			$night_activity  = $this->sum_activities($sensor_logs);
-
-			\Log::debug("sensor_name:[{$sensor_name}] row_key:[{$row_key}] from:[{$from->format('Y-m-d H:i:s')}] to:[{$to->format('Y-m-d H:i:s')}] night_activity:[{$night_activity}]", __METHOD__);
-
-			$properties = [
-				'night_activity' => $night_activity,
-			];
-			$this->retryable_execute(['\Model_Sensordaily', 'merge_property'], [$sensor_name, $row_key, $properties]);
-
-			echo "sensor_name:[{$sensor_name}] row_key:[{$row_key}] night_activity:[{$night_activity}]" . PHP_EOL;
-
-			# 処理完了した sensor_name と日時をファイルに保存しておく
-			$this->write_current_sensor($sensor_name, $summary_date_str);
+			# 指定範囲の sensordaily を取得(既に sensordaily が存在する日のみが対象)
+			$sensor_dailies = $this->retryable_execute(['\Model_Sensordaily', 'find_by_datetime_range'], [$sensor_name, 'summary_date', $summary_date, $max_datetime, false]);
+			$this->fix_night_activities($sensor_dailies);
 		}
 	}
 
-	private function sum_activities(array $sensor_logs)
+	private function fix_night_activities(array $sensor_dailies)
 	{
-		$night_activity = 0;
-		foreach ($sensor_logs as $sensor_log) {
-			$night_activity += $sensor_log['activity'];
+		foreach ($sensor_dailies as $sensor_daily) {
+			$sensor_name = $sensor_daily->getPartitionKey();
+			$row_key     = $sensor_daily->getRowKey();
+
+			$props = $sensor_daily->getProperties();
+			if (!array_key_exists(static::WRONG_COL_NAME, $props)) {
+				echo "sensor_name:[{$sensor_name}] row_key:[{$row_key}] " . static::WRONG_COL_NAME . " property is not found." . PHP_EOL;
+				continue;
+			}
+
+			# 間違ったプロパティ名のプロパティを保存して配列からは削除
+			$night_activity = $props[static::WRONG_COL_NAME];
+			unset($props[static::WRONG_COL_NAME]);
+
+			# 正しい名前で追加
+			$props[static::RIGHT_COL_NAME] = $night_activity;
+
+			$sensor_daily->setProperties($props);
+
+			$this->retryable_execute(['\Model_Sensordaily', 'update'], [$sensor_daily]);
+
+			echo "sensor_name:[{$sensor_name}] row_key:[{$row_key}] night_activity:[{$night_activity->getValue()}]" . PHP_EOL;
+
+			# 処理完了した sensor_name と日時をファイルに保存しておく
+			$summary_date_str = $sensor_daily->getProperty('summary_date')->getValue()->format('Y-m-d H:i:s');
+			$this->write_current_sensor($sensor_name, $summary_date_str);
 		}
-		return $night_activity;
 	}
 
 	/**
@@ -198,4 +187,4 @@ class Update_Night_Activity
 		return [null, null];
 	}
 }
-/* End of file tasks/update_night_activity.php */
+/* End of file tasks/fix_night_activity_column_name.php */
