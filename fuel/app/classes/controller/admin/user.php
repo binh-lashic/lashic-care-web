@@ -163,6 +163,7 @@ class Controller_Admin_User extends Controller_Admin
     /*
      * 見守られユーザー登録フォーム
      * 
+     *  @access public
      *  @param none
      *  @return none
      */
@@ -178,6 +179,7 @@ class Controller_Admin_User extends Controller_Admin
     /*
      * 見守られユーザー登録完了
      * 
+     * @access publbic
      * @param none
      * @return none
      */
@@ -236,5 +238,39 @@ class Controller_Admin_User extends Controller_Admin
                 ->set('id', $id)
                 ->set('data', $data)
                 ->set('error', $validation->error_message());    
+    }
+    
+    /*
+     * 見守られユーザー削除
+     * 
+     * @access public
+     * @params none
+     * @return none
+     */
+    public function action_client_delete()
+    {
+        $validation = Validation::forge('client_delete');
+        
+        if(Input::post()) {
+            $validation->add('id')
+                    ->add_rule('required')
+                    ->add_rule('valid_string','numeric');
+            $validation->add('parent_id')
+                    ->add_rule('required')
+                    ->add_rule('valid_string','numeric');
+            
+            if($validation->run()) {           
+                $user_id = Input::param('id');
+                $parent_id = Input::param('parent_id');
+                
+                try {
+                    Model_User_Client::deleteClients($user_id, $parent_id);
+                    return Response::redirect('/admin/user/list');                    
+                } catch (Exception $e) {
+                    \Log::error('見守られユーザー削除に失敗しました。  ['.$e->getMessage().']');
+                    throw new Exception($e);
+                }
+            }
+        }
     }
 }

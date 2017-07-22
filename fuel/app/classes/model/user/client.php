@@ -141,7 +141,8 @@ class Model_User_Client extends Orm\Model{
     
     /*
      * 新規追加
-     *  
+     * 
+     * @access public
      * @param array $params
      * @throw
      */
@@ -153,5 +154,53 @@ class Model_User_Client extends Orm\Model{
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+    }
+    
+    /*
+     * 見守られユーザーの削除 
+     * users, user_clients, user_sensorsを削除
+     * 
+     * @access public
+     * @params int $user_id 見守られユーザID
+     * @params int $parent_id   親アカウントID
+     * 
+     */
+    public function deleteClients($user_id, $parent_id)
+    {
+        $db = Database_Connection::instance();
+        $db->start_transaction();
+        
+        try {
+            // user_clients削除
+            DB::delete('user_clients')
+                    ->where('user_id', '=', $parent_id)
+                    ->and_where('client_user_id', '=', $user_id)
+                    ->execute();
+        } catch (Exception $e) {
+            $db->rollback_transaction();
+            throw new Exception("delete clients_users failed. (user_id:".$user_id.") [".$e->getMessage()."]");
+        }
+        
+        try {
+            // user_sensors削除 
+            DB::delete('user_sensors')
+                    ->where('user_id', '=', $user_id)
+                    ->execute();
+        } catch (Exception $e) {
+            $db->rollback_transaction();
+            throw new Exception("delete user_sensors failed. (user_id:".$user_id.") [".$e->getMessage()."]");
+        }
+
+        try {
+            // users削除
+            DB::delete('users')
+                    ->where('id', '=', $user_id)
+                    ->execute();
+        } catch (Exception $e) {
+            $db->rollback_transaction();
+            throw new Exception("delete users failed. (user_id:".$user_id.") [".$e->getMessage()."]");
+        }
+        
+        $db->commit_transaction();
     }
 }
