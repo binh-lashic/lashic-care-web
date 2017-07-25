@@ -173,8 +173,7 @@ class Model_User_Client extends Orm\Model{
         try {
             // user_clients削除
             DB::delete('user_clients')
-                    ->where('user_id', '=', $parent_id)
-                    ->and_where('client_user_id', '=', $user_id)
+                    ->where('client_user_id', '=', $user_id)
                     ->execute();
         } catch (Exception $e) {
             $db->rollback_transaction();
