@@ -521,10 +521,10 @@ return array(
 	'days' => array_combine(range(1, 31), range(1, 31)),
     
 	'sensor_type' => [
-		'parent' => '親機',
-		'sensor' => 'センサー',
-		'wifi' => 'WiFi',
-		'bedsensor' => 'ベッドセンサー',
+		'parent' => 'Gateway',
+		'sensor' => 'LASHIC-room',
+		'bedsensor' => 'LASHIC-sleep',
+		'wifi' => 'Wi-Fi',
 	],
     
 	'blood_type' => [
