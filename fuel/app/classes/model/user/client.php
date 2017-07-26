@@ -162,10 +162,10 @@ class Model_User_Client extends Orm\Model{
      * 
      * @access public
      * @params int $user_id 見守られユーザID
-     * @params int $parent_id   親アカウントID
+     * @throw
      * 
      */
-    public function deleteClients($user_id, $parent_id)
+    public function deleteClients($user_id)
     {
         $db = Database_Connection::instance();
         $db->start_transaction();

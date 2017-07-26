@@ -264,7 +264,7 @@ class Controller_Admin_User extends Controller_Admin
                 $parent_id = Input::param('parent_id');
                 
                 try {
-                    Model_User_Client::deleteClients($user_id, $parent_id);
+                    Model_User_Client::deleteClients($user_id);
                     return Response::redirect('/admin/user/list');                    
                 } catch (Exception $e) {
                     \Log::error('見守られユーザー削除に失敗しました。  ['.$e->getMessage().']');
