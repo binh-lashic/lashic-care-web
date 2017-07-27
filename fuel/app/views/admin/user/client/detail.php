@@ -141,7 +141,6 @@ $(function(){
  
     <div class="inner" align="center">
     <?php echo Form::open(['action' => '/admin/user/client_delete', 'method' => 'post']); ?>
-    <?php echo Form::hidden('parent_id', $parent_id); ?>
     <?php echo Form::hidden('id', $user['id']); ?>
     本当に削除しますか？<br /><br /><br />
     <?php echo Form::button('ok', '　OK　', ['class' => 'btn btn-default', 'type' => 'submit']);?>　

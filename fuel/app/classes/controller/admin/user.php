@@ -255,15 +255,10 @@ class Controller_Admin_User extends Controller_Admin
             $validation->add('id')
                     ->add_rule('required')
                     ->add_rule('valid_string','numeric');
-            $validation->add('parent_id')
-                    ->add_rule('required')
-                    ->add_rule('valid_string','numeric');
             
-            if($validation->run()) {           
-                $user_id = Input::param('id');
-                $parent_id = Input::param('parent_id');
-                
+            if($validation->run()) {
                 try {
+                    $user_id = Input::param('id');
                     Model_User_Client::deleteClients($user_id);
                     return Response::redirect('/admin/user/list');                    
                 } catch (Exception $e) {
