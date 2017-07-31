@@ -84,7 +84,13 @@ class Check_Sensor_Reconnection {
 		// 再接続のあったセンサー情報のみ返す
 		$reconnected_sensors = [];
 		foreach ($reconnected_sensor_names as $sensor_name) {
-			$reconnected_sensors[$sensor_name] = $sensors[$sensor_name];
+			# 再接続が検知されたセンサーID が sensors に登録されている場合は再接続
+			if (array_key_exists($sensor_name, $sensors)) {
+				$reconnected_sensors[$sensor_name] = $sensors[$sensor_name];
+			} else {
+				# センサーが登録されていない場合
+				\Log::warning("unknown sensor name:[{$sensor_name}]", __METHOD__);
+			}
 		}
 		return $reconnected_sensors;
 	}
