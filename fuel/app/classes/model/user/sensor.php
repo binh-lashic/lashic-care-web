@@ -173,15 +173,30 @@ class Model_User_Sensor extends Orm\Model{
 		return $ret;
 	}
         
-        public function count_by_client_user($sensor_id)
+        /*
+         * 同一親アカウント内でセンサーが割当済みかチェック
+         * 
+         * @params int $sensor_id
+         * @params int $user_id
+         * @return bool
+         */
+        public function countByClientUser($sensor_id, $user_id)
         {
-            $rows = DB::select([DB::expr('COUNT(*)'), 'cnt'])
-                        ->from(['user_sensors', 'us'])
-                        ->where(DB::expr('EXISTS (SELECT * FROM user_clients AS uc WHERE us.user_id = uc.client_user_id)'))
-                        ->and_where('sensor_id', '=', $sensor_id)
-                        ->and_where('admin', '=', 0)
-                        ->execute();
-
+            $query = DB::query(
+                    "SELECT COUNT(*) AS cnt "
+                        . "FROM user_sensors AS us "
+                        . "WHERE EXISTS ("
+                        . " SELECT * FROM user_clients AS uc WHERE uc.user_id = :user_id AND us.user_id = uc.client_user_id"
+                        . ") "
+                        . "AND sensor_id = :sensor_id "
+                        . "AND admin = 0 "
+                );
+                
+            $rows = $query->parameters([
+                    'user_id' => $user_id,
+                    'sensor_id' => $sensor_id]
+                    )->execute();
+                
             return ($rows->get('cnt') > 0);
         }
         
@@ -255,4 +270,39 @@ class Model_User_Sensor extends Orm\Model{
                 return null;
             }
 	}
+        
+        /*
+         * センサー機器割当リスト取得
+         * 
+         *  @params int $user_id
+         *  @return array $rows
+         *  @throw
+         */
+        public function getAllocationList($user_id)
+        {
+            try {
+                $query = DB::query(
+                        "SELECT d.id, us.user_id, d.name, u.last_name, u.first_name, d.shipping_date "
+                        . "FROM user_sensors AS us "
+                        . "LEFT JOIN ( "
+                        . " SELECT * FROM user_sensors AS t2 WHERE user_id IN ( "
+                        . "     SELECT client_user_id FROM user_clients WHERE user_id = :user_id "
+                        . " ) AND t2.admin = 0 "
+                        . ") AS t1 "
+                        . "ON us.sensor_id = t1.sensor_id  "
+                        . "LEFT JOIN users AS u ON t1.user_id = u.id "
+                        . "LEFT JOIN sensors AS d ON us.sensor_id = d.id "
+                        . "WHERE us.user_id = :user_id "
+                        . "ORDER BY d.id "
+                    );
+                
+                $rows = $query->parameters(['user_id' => $user_id])
+                            ->execute()
+                            ->as_array();
+                return $rows;
+            } catch (Exception $e) {
+                \Log::error('Allocation List Getting Failed. [' . $e->getMessage(). ']');
+                throw new Exception($e);
+            }
+        }
 }

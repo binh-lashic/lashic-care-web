@@ -51,41 +51,25 @@
 					<td class="col-sm-3">出荷日</td>
 					<td class="col-sm-3"></td>
 				</tr>
-<?php
-	if(isset($sensors)) {
-		foreach($sensors as $sensor) {
-?>
+<?php if(isset($sensors)) : ?>
+    <?php foreach($sensors as $sensor) : ?>
 				<tr>
 					<td>
 						<?php echo $sensor['id']; ?>
 					</td>
 					<td><?php echo $sensor['name']; ?></td>
 					<td>
-<?php
-if(isset($sensor['clients'])) {
-	foreach($sensor['clients'] as $client) {
-		if(!empty($client['last_name']) && !empty($client['first_name'])) {
-?>
-	<?php echo $client['last_name'].$client['first_name']; ?><br />
-<?php
-		} else {
-?>
-	未設定
-<?php		
-		}
-?>
-<?php
-	}
-}
-?>
+        <?php if(!empty($sensor['last_name']) && !empty($sensor['first_name'])) : ?>
+						<?php echo $sensor['last_name'].$sensor['first_name']; ?><br />
+        <?php else : ?>
+						未設定
+        <?php endif; ?>
 					</td>
 					<td><?php echo $sensor['shipping_date']; ?></td>
 					<td><a href="/admin/user/sensor/delete?user_id=<?php echo $user['id']; ?>&sensor_id=<?php echo $sensor['id']; ?>" class="btn btn-danger">センサー機器の割当解除</a></td>
 				</tr>
-<?php
-		}
-	}
-?>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 			</table>
 		</div>
