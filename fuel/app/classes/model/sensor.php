@@ -25,13 +25,13 @@ class Model_Sensor extends Orm\Model{
 	}
 
 	public function loadData() {
-		$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND date >= :date ORDER BY date ASC';
-		$query = DB::query($sql);
-		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'date' => date("Y-m-d H:i:s", $this->time - 60 * 60)		//60分で固定
-		));
-		$this->data= $query->execute('data');
+		$where = 'sensor_name = :sensor_name AND measurement_time >= :measurement_time';
+		$params = [
+			'sensor_name'      => $this->name,
+			'measurement_time' => date("Y-m-d H:i:s", $this->time - 60 * 60) // 60分で固定
+		];
+		$this->data  = \Model_Batch_Data_Daily::find_converted_data_by_conditions($where, $params);
+		\Log::debug(\DB::last_query('batch'), __METHOD__);
 		$this->count = count($this->data);
 	}
 
@@ -740,14 +740,15 @@ SQL;
     		$levels = Config::get("sensor_levels.fire");
 		   	$level = $levels[$this->fire_level - 1];
 
-	    	$sql = 'SELECT * FROM data WHERE sensor_id = :sensor_id AND temperature > :temperature AND date >= :date';
-			$query = DB::query($sql);
-			$query->parameters(array(
-				'sensor_id' => $this->name,
-				'temperature' => $level['temperature_upper_limit'],
-				'date' => date("Y-m-d H:i:s", $this->time - 60)
-			));
-			$result = $query->execute('data');
+			$where = 'sensor_name = :sensor_name AND temperature > :temperature AND measurement_time >= :measurement_time';
+			$params = [
+				'sensor_name'      => trim($this->name),
+				'temperature'      => $level['temperature_upper_limit'],
+				'measurement_time' => date("Y-m-d H:i:s", $this->time - 60)
+			];
+			$result = \Model_Batch_Data_Daily::find_converted_data_by_conditions($where, $params);
+			\Log::debug(\DB::last_query('batch'), __METHOD__);
+
 			if(!empty($result) && !empty($result[0]['temperature'])) {
 				$params = array(
 					'type' => 'fire',
@@ -766,7 +767,7 @@ SQL;
 		if($this->wake_up_level < 1) {
 			return null;
 		}
-		echo "Check Wakeup\n";
+		echo "Check Wakeup: {$this->name}\n";
 
     	$levels = Config::get("sensor_levels.wake_up");
     	$level = $levels[$this->wake_up_level - 1];
@@ -786,16 +787,18 @@ SQL;
 			return true;
 		}
 
-    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
-    	$query = DB::query($sql);
-    	$start_date = date("Y-m-d H:i:s", strtotime($date." ".$this->wake_up_start_time.":00:00"));
-    	$end_date = date("Y-m-d H:i:s", strtotime($date." ".$this->wake_up_end_time.":00:00"));
- 		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'start_date' => $start_date,
-			'end_date' => $end_date,
-		));  
-		$result = $query->execute('data');
+		$where = 'sensor_name = :sensor_name AND measurement_time BETWEEN :start_date AND :end_date';
+		$start_date = date("Y-m-d H:i:s", strtotime($date . " " . $this->wake_up_start_time . ":00:00"));
+		$end_date   = date("Y-m-d H:i:s", strtotime($date . " " . $this->wake_up_end_time . ":00:00"));
+		$params = [
+			'sensor_name' => trim($this->name),
+			'start_date'  => $start_date,
+			'end_date'    => $end_date,
+		];
+		\Log::debug("wake_up_start_time and wake_up_end_time: " . print_r($params, true), __METHOD__);
+		$result = \Model_Batch_Data_Daily::find_converted_data_by_conditions($where, $params);
+		\Log::debug(\DB::last_query('batch'), __METHOD__);
+
 		$count = count($result);
 		$active_count = 0;
 		$nonactive_count = 0;
@@ -857,7 +860,7 @@ SQL;
 		if($this->sleep_level < 1) {
 			return null;
 		}
-		echo "Check Sleep\n";
+		echo "Check Sleep: {$this->name}\n";
     	$levels = Config::get("sensor_levels.sleep");
     	$level = $levels[$this->sleep_level - 1];
 
@@ -871,29 +874,28 @@ SQL;
 			'sensor_id' => $this->id,
 			'date' => $date,
 		)));
-		
-    	$sql = 'SELECT active,date FROM data WHERE sensor_id = :sensor_id AND date BETWEEN :start_date AND :end_date ORDER BY date ASC';
-    	$query = DB::query($sql);
 
-    	$yesterday = date("Y-m-d", strtotime($date) - 60 * 60 * 24);
-    	if($this->sleep_end_time > 24) {
-    		$sleep_end_time = $this->sleep_end_time - 24;
-    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
-    		$end_date = $date." ".$sleep_end_time.":00:00";
-    	} else {
-    		$start_date = $yesterday." ".$this->sleep_start_time.":00:00";
-    		$end_date = $yesterday." ".$this->sleep_end_time.":00:00";
-    	}
+		$yesterday = date("Y-m-d", strtotime($date) - 60 * 60 * 24);
+		if ($this->sleep_end_time > 24) {
+			$sleep_end_time = $this->sleep_end_time - 24;
+			$start_date     = $yesterday . " " . $this->sleep_start_time . ":00:00";
+			$end_date       = $date . " " . $sleep_end_time . ":00:00";
+		} else {
+			$start_date = $yesterday . " " . $this->sleep_start_time . ":00:00";
+			$end_date   = $yesterday . " " . $this->sleep_end_time . ":00:00";
+		}
 
-    	$start_date = date("Y-m-d H:i:s", strtotime($start_date));
-    	$end_date = date("Y-m-d H:i:s", strtotime($end_date));
-
- 		$query->parameters(array(
-			'sensor_id' => $this->name,
-			'start_date' => $start_date,
-			'end_date' => $end_date,
-		));  
-		$result = $query->execute('data');
+		$start_date = date("Y-m-d H:i:s", strtotime($start_date));
+		$end_date   = date("Y-m-d H:i:s", strtotime($end_date));
+		$where = 'sensor_name = :sensor_name AND measurement_time BETWEEN :start_date AND :end_date';
+		$params = [
+			'sensor_name' => trim($this->name),
+			'start_date'  => $start_date,
+			'end_date'    => $end_date,
+		];
+		\Log::debug("sleep_start_time and sleep_end_time: " . print_r($params, true), __METHOD__);
+		$result = \Model_Batch_Data_Daily::find_converted_data_by_conditions($where, $params);
+		\Log::debug(\DB::last_query('batch'), __METHOD__);
 
 		$count = count($result);
 		$active_count = 0;

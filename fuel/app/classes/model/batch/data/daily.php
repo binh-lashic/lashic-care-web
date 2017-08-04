@@ -83,4 +83,36 @@ class Model_Batch_Data_Daily extends Orm\Model {
 		}
 		return \Arr::unique($result);
 	}
+
+	/**
+	 * 条件を指定して結果を取得する
+	 * @param string $where_clause WHERE 句に指定する条件文字列
+	 * @param array $params Bind パラメータの配列
+	 */
+	public static function find_converted_data_by_conditions($where_clause, array $params)
+	{
+		$sql = <<<SQL
+SELECT
+  sensor_name AS sensor_id,
+  FORMAT(measurement_time, 'yyyy-MM-dd HH:mm:ss') AS date,
+  humidity,
+  illuminance,
+  activity AS active,
+  temperature
+FROM
+  data_daily
+SQL;
+
+		if (!empty($where_clause)) {
+			$sql .= " WHERE {$where_clause}";
+		}
+		$sql .= ' ORDER BY measurement_time ASC';
+
+		$query = DB::query($sql);
+
+		if (!empty($params)) {
+			$query->parameters($params);
+		}
+		return $query->execute('batch');
+	}
 }
