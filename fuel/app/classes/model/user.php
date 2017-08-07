@@ -842,7 +842,7 @@ class Model_User extends Orm\Model{
 	}
 
         /*
-         * 見守られユーザーに紐づいているセンサーを除外したリスト
+         * 同一親アカウントの見守られユーザーに紐づいているセンサー機器を除外したリストを取得
          * 
          *  @param int $user_id
          *  @return array $sensors
@@ -853,7 +853,7 @@ class Model_User extends Orm\Model{
                         ->from(['user_sensors', 'us'])
                         ->join(['sensors', 's'], 'LEFT')
                         ->on('us.sensor_id', '=', 's.id')
-                        ->where(DB::expr('us.sensor_id NOT IN ( SELECT t1.sensor_id FROM user_sensors AS t1 WHERE EXISTS ( SELECT * FROM user_clients AS t2 WHERE t1.user_id = t2.client_user_id ) AND t1.sensor_id = us.sensor_id AND t1.admin = 0 )'))
+                        ->where(DB::expr('us.sensor_id NOT IN ( SELECT t1.sensor_id FROM user_sensors AS t1 WHERE EXISTS ( SELECT * FROM user_clients AS t2 WHERE t2.user_id = us.user_id AND t1.user_id = t2.client_user_id ) AND t1.sensor_id = us.sensor_id AND t1.admin = 0 )'))
                         ->and_where('us.user_id', '=', $user_id)
                         ->execute()->as_array();
 
