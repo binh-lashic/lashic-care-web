@@ -117,7 +117,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
 
 		if (is_null($sensordaily)) {
-			Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
+			\Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
 			return;
 		}
 
@@ -263,7 +263,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
 
 		if (is_null($sensordaily)) {
-			Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
+			\Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
 			return;
 		}
 
