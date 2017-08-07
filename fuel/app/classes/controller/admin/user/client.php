@@ -37,13 +37,15 @@ class Controller_Admin_User_Client extends Controller_Admin
                                     ->set('parent_id', Input::param("parent_id"));
     }
 
+    /*
+     * 見守られユーザーセンサー機器割当 
+     * 
+     * @access public
+     */
     public function action_sensor()
     {
         $this->template->title = '管理ページ 見守られユーザ センサー機器割当';
-        $this->template->content = Presenter::forge('admin/user/client/sensor')
-                                    ->set('id', Input::param('id'))
-                                    ->set('parent_id', Input::param('parent_id'))
-                                    ->set('sensor', Input::param('sensor'));
+        $this->template->content = Presenter::forge('admin/user/client/sensor');
     }
     
     public function action_add_sensor()
@@ -56,7 +58,7 @@ class Controller_Admin_User_Client extends Controller_Admin
         $validation->add_callable('sensorrules');
         $validation->add('sensor')
                 ->add_rule('selected_sensortype', $user_id)
-                ->add_rule('is_selected')
+                ->add_rule('is_selected', $parent_id)
                 ->add_rule('is_unshipped');
         $validation->set_message('selected_sensortype', '別のセンサーが割当られているため、登録できません');
         $validation->set_message('is_selected', 'センサー割当済みです。センサー割当を解除してください');

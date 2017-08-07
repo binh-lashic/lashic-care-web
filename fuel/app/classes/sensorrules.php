@@ -1,5 +1,6 @@
 <?php
-class SensorRules {
+class SensorRules
+{
     /*
      * 同一の機器タイプが割当済みかチェック
      * 
@@ -17,15 +18,16 @@ class SensorRules {
     }
     
     /*
-     * センサー割当済みチェック
+     * 同一親アカウント内でセンサーが割当済みかチェック
      * 
      * @access public
      * @params int $val
+     * @params int $user_id
      * @return boolean
      */
-    public static function _validation_is_selected($val)
+    public static function _validation_is_selected($val, $user_id)
     {
-         return ! Model_User_Sensor::count_by_client_user($val);
+         return ! Model_User_Sensor::countByClientUser($val, $user_id);
     }
     
     /*
