@@ -202,4 +202,71 @@ class Model_User_Client extends Orm\Model{
         
         $db->commit_transaction();
     }
+    
+    /*
+     * 見守られユーザー一覧取得
+     * センサー機器が複数レコード紐づいている場合は、複数レコードをカンマ区切りでセンサーIDと出荷日を連結する 
+     * 
+     *  @params int $user_id
+     *  @return array $reuslt
+     */
+    public function getUserClientList($user_id)
+    {
+        try {
+            $query = DB::query(
+                    "SELECT "
+                    . "id, last_name, first_name, sensor "
+                    . "FROM ( "
+                    . "     SELECT "
+                    . "     client_user_id, "
+                    . "     STUFF(( "
+                    . "         SELECT "
+                    . "             ',' + name + ':' + CAST(shipping_date as varchar) "
+                    . "         FROM " 
+                    . "             user_sensors AS us "
+                    . "         LEFT JOIN " 
+                    . "             sensors AS s ON us.sensor_id = s.id "
+                    . "         WHERE "
+                    . "             user_id = t1.client_user_id "
+                    . "         FOR XML PATH('') "
+                    . "     ), 1, 1, '') AS sensor "
+                    . "     FROM "
+                    . "         user_clients as t1 "
+                    . "     WHERE " 
+                    . "         t1.user_id = :user_id " 
+                    . ") AS cu "
+                    . "LEFT JOIN "
+                    . " users AS u "
+                    . " ON cu.client_user_id = u.id "
+                    . "WHERE u.admin = 0 "
+                    . "ORDER BY id "
+            );
+
+            $rows = $query->parameters(['user_id' => $user_id])
+                                ->execute()
+                                ->as_array();
+            $result = [];
+            // 連結したセンサーIDと出荷日をそれぞれの配列に格納
+            array_walk($rows, function ($values, $keys) use (&$result) {
+                foreach ($values as $key => $value) {
+                    if ($key == 'sensor') {
+                        $sensor_name = [];
+                        $shipping_date = [];
+                        foreach (explode(',', $value) as $name) {
+                            list($sensor_name[], $shipping_date[]) = explode(':', $name);
+                        }
+                        $result[$keys]['sensor_name'] = $sensor_name;
+                        $result[$keys]['shipping_date'] = $shipping_date;
+                    } else {
+                        $result[$keys][$key] = $value;
+                    }
+                }
+            });
+
+            return $result;
+        } catch (Exception $e) {
+            \Log::error('User Client List Getting Failed. [' . $e->getMessage(). ']');
+            throw new Exception($e);
+        }
+    }
 }
