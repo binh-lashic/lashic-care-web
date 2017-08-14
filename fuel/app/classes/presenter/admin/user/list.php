@@ -22,7 +22,7 @@ class Presenter_Admin_User_List extends Presenter
                 $data['admins'][] = $admin;
             }
             $data['query'] = Input::param('query');
-
+            
             $this->set('admins', $data['admins']);
             $this->set('page', $data['page']);
             $this->set('query', $data['query']);

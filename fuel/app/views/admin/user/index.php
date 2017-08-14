@@ -5,6 +5,7 @@
       <li role="presentation" class="active"><a href="/admin/user/?id=<?php echo $user['id']; ?>">詳細</a></li>
       <li role="presentation"><a href="/admin/user/sensor?id=<?php echo $user['id']; ?>">センサー機器割当</a></li>
       <li role="presentation"><a href="/admin/user/client_form?id=<?php echo $user['id']; ?>">見守られユーザ登録</a></li>
+      <li role="presentation"><a href="/admin/user/client/list?id=<?php echo $user['id']; ?>">見守られユーザ一覧</a></li>
     </ul>
 	</div>
 </div>

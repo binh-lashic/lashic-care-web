@@ -127,7 +127,7 @@ class Controller_Admin_User extends Controller_Admin
         }
         
         $user = Model_User::getUser($user_id);
-        Response::redirect('/admin/user/sensor?id='.$user['id']);
+        Response::redirect('/admin/user/client/list?id='.$user['id']);
     }
 
     public function action_client_list() {
@@ -225,7 +225,7 @@ class Controller_Admin_User extends Controller_Admin
      
                 try {
                     $user = Model_User::saveClientUser($id, $data);
-                    return Response::redirect(sprintf('/admin/user/client/detail?id=%s&parent_id=%s', $user['id'], $id));
+                    return Response::redirect(sprintf('/admin/user/client/list?id=%s', $id));
                     
                 } catch (Exception $e) {
                     \Log::error('見守られユーザー登録に失敗しました。  ['.$e->getMessage().']');
