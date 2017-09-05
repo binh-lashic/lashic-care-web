@@ -458,63 +458,35 @@ class Model_User extends Orm\Model{
 	}
 
         /*
-         * 見守られユーザー登録
+         * 管理画面から親アカウント登録 
+         *
+         * @access public.static
+         * @params array $params
+         * @return array $user
+         */
+        public static function saveUserWithAdmin(array $params)
+        {
+            try {
+                return self::authCreateUser($params);
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+        }
+        
+        /*
+         * 管理画面から見守られユーザー登録
          * 
          * @param int $user_id
          * @param array $params
          */
-        public static function saveClientUser($user_id, $params)
+        public static function saveClientUserWithAdmin($user_id, array $params)
         {
-            if(isset($params['id'])) {
-                $id = $params['id'];
-            } else {
-                if(!isset($params['email']) || empty($params['email'])) {
-                    $params['email'] = sha1(mt_rand())."@example.com";
-                }
-                
-                if(!isset($params['username']) || empty($params['username'])) {
-                    $params['username'] = sha1($params['email'].mt_rand());
-                }
-                
-                if(!isset($params['password']) || empty($params['password'])) {
-                    $params['password'] = sha1(mt_rand());
-                }
-
-                try {
-                    $id = Auth::create_user(
-                            $params['username'],
-                            $params['password'],
-                            $params['email']
-                    );
-                        
-                } catch (Exception $e) {
-                    throw new Exception('create_user failed. ['.$e->getMessage().']');
-                }
-                    
-                if(!isset($params['admin'])) {
-                    $params['admin'] = 1;
-                }
-
-                $params['email_confirm'] = 0;
-                $params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
-                $params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
-                    
-            }
-
-            foreach (['id', 'username', 'password', 'email'] as $key) {
-                unset($params[$key]);
-            }
-                    
             try {
-                     
-                $user = \Model_User::find($id);
-                $user->set($params);
-                $user->save();
-                
-             } catch (Exception $e) {
-                throw new Exception('create users failed. ['.$e->getMessage().']');
+                $user = self::authCreateUser($params);
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
             }
-
+            
             try {
                 \Model_User_Client::createUserClient([
                     'user_id' => $user_id,
@@ -522,10 +494,68 @@ class Model_User extends Orm\Model{
                     'admin' => 1
                 ]);
                 
-                return \Model_User::format($user);
+                return $user;
                     
             } catch (Exception $e) {
                 throw new Exception('create user_clients failed. ['.$e->getMessage().']');
+            }
+        }
+        
+        /*
+         * authCreateUser
+         * Auth::create_user経由でusersへ登録後、他の項目をUPDATE
+         * 
+         * @access private.static
+         * @params array $params
+         * @return array $user
+         */
+        private static function authCreateUser(array $params)
+        {
+            if(isset($params['id'])) {
+                $id = $params['id'];
+            } else {
+                if(!isset($params['email']) || empty($params['email'])) {
+                    $params['email'] = sha1(mt_rand())."@example.com";
+                }
+                if(!isset($params['username']) || empty($params['username'])) {
+                    $params['username'] = sha1($params['email'].mt_rand());
+                }
+                if(!isset($params['password']) || empty($params['password'])) {
+                    $params['password'] = sha1(mt_rand());
+                }
+                if(!isset($params['email_confirm'])) {
+                    $params['email_confirm'] = 0;
+                }
+                
+                try {
+                    $id = Auth::create_user(
+                        $params['username'],
+                        $params['password'],
+                        $params['email'],
+                        $params['email_confirm'],
+                        $params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day")),
+                        $params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand())
+                    );
+                } catch (Exception $e) {
+                    throw new Exception('create_user failed. ['.$e->getMessage().']');
+                }
+                if(!isset($params['admin'])) {
+                    $params['admin'] = 1;
+                }                
+            }
+            
+            try {
+                foreach (['id', 'username', 'password', 'email'] as $key) {
+                    unset($params[$key]);
+                }
+                
+                $user = \Model_User::find($id);
+                $user->set($params);
+                $user->save();
+ 
+                return \Model_User::format($user);
+             } catch (Exception $e) {
+                throw new Exception('create users failed. ['.$e->getMessage().']');
             }
         }
         
