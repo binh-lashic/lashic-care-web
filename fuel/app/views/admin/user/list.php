@@ -5,6 +5,14 @@
 </div>
 <div class="row">
 	<div class="col-sm-6">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="active"><a href="/admin/user/list">親アカウント一覧</a></li>
+              <li role="presentation"><a href="/admin/user/form">親アカウント作成</a></li>
+            </ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
 		<form action="/admin/user/list" method="get">
 			<div class="input-group">
 		  		<input type="text" class="form-control" placeholder="名前、ふりがなで検索" name="query" value="<?php echo $query; ?>">

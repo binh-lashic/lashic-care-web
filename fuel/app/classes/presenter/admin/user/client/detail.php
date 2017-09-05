@@ -4,6 +4,8 @@
   */
 class Presenter_Admin_User_Client_Detail extends Presenter
 {
+        use Trait_Admin_User_Regist;
+        
         /*
          * view
          * 
@@ -17,6 +19,7 @@ class Presenter_Admin_User_Client_Detail extends Presenter
             if($this->doValidation(['id' => $id, 'parent_id' => $parent_id])) {
                 try {
                     $user = Model_User::getUser($id);
+                    $user['gender'] = Trait_Admin_User_Regist::getSelectedName('gender', $user['gender']);
                 } catch (Exception $e) {
                     \Log::error('見守られユーザー詳細の取得に失敗しました。  ['.$e->getMessage().']');
                     throw new Exception($e);
