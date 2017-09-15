@@ -77,6 +77,7 @@ return [
 			'logout'                     => 'ログアウト',
 			'cart'                       => 'カート',
 			'cart_is_empty'              => '何も入っていません',
+			'monthly_report'             => 'マンスリーレポート ',
 		]
 	],
 	'template' => [
@@ -108,6 +109,19 @@ return [
 			'choose_the_year_month'     => '年月を選択してください',
 			'item_selection'            => 'グラフ表示項目選択',
 			'no_data'                   => 'データがありません',                   
+		],
+                'monthly' => [
+			'trend_and_countermeasures'     => '傾向と対策',
+                        'momentum'                      =>  '運動量',
+                        'sleep_time'                    =>  '睡眠時間',
+                        'average_daily'                 =>  '気温・湿度の1日の平均',
+                        'monthly_trends'                =>  '月間推移',
+                        'historical_average'            =>  '過去平均との比較',
+                        'subtitle'                      =>  '月間のグラフ推移ご覧いただけます。',
+                        'data_of'                       =>  ':month月データ',
+                        'temperature'                   =>  '気温',
+                        'humidity'                      =>  '湿度',
+                        'sleep'                         =>  '眠り',
 		]
 	],
 ];

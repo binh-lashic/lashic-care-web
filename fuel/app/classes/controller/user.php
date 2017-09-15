@@ -623,4 +623,20 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/contract', $this->data);
 	}
+        
+        /*
+         * マンスリーレポート 
+         * 
+         * @access public
+         * @return none
+         */
+        public function action_monthly()
+        {
+            $this->template->title = 'マンスリーレポート ';
+            $this->template->header = View::forge('header_client', $this->data);
+            $this->template->content = Presenter::forge('user/monthly')
+                                        ->set('data', $this->data);
+            $this->template->content->set('i18n', View::forge('i18n', $this->data));
+            $this->template->sidebar = View::forge('sidebar', $this->data);
+        }                
 }
