@@ -72,4 +72,42 @@ class UsersRules
         }
         return false;
     }
+    
+    /*
+     * 入力されたパスワードが妥当かをチェック
+     *  
+     * @param string $password
+     * @param int $id
+     * @return bool
+     */
+    public static function _validation_check_password($password, $id)
+    {
+        if($password && $id) {
+            $result = Model_User::find('first',[
+                            'where' => [
+                                'id' => $id,
+                                'password' => Auth::hash_password($password)
+                            ]
+                        ]);         
+            if($result) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /*
+     * 新パスワードと新パスワード(確認)の整合性チェック
+     * 
+     * @param string $new_password_confirm
+     * @param string $new_password
+     * @return bool
+     */
+    public static function _validation_check_confirm_password($new_password_confirm, $new_password)
+    {
+        if($new_password_confirm == $new_password) {
+            return true;
+        }
+        return false;
+    }
 }

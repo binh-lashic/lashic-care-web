@@ -279,47 +279,81 @@ class Controller_User extends Controller_Base
                 ->set('token', Input::Param('token'));
     }
     
+    /*
+     * パスワード変更入力
+     * 
+     * @access public
+     * @param none
+     * @return none
+     */
     public function action_account_password_form()
-	{
+    {
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
+        $this->template->header = View::forge('header_client', $this->data);   
         
-        $this->template->header = View::forge('header_client', $this->data);
+        $this->validation = Validation::forge('password_form');
+ 
         if(Input::post()) {
-         	if(!Input::post('password')) {
-        		$this->data['errors']['password'] = true;
-        	}
-        	if(!Input::post('new_password')) {
-        		$this->data['errors']['new_password'] = true;
-        	}
-        	if(!Input::post('new_password_confirm')) {
-        		$this->data['errors']['new_password_confirm'] = true;
-        	}
-        	if(Input::post('new_password') != Input::post('new_password_confirm')) {
-        		$this->data['errors']['new_password_confirm'] = true;
-        	}
-			$this->data['data'] = Input::post();
-			if(empty($this->data['errors'])) {
-	    		$this->template->content = View::forge('user/account_password_confirm', $this->data);
-	    		return;
-			}
+            $this->validation->add_callable('usersrules');  
+            $this->validation->add('password', '現在のパスワード')
+                        ->add_rule('required')
+                        ->add_rule('min_length', 8)
+                        ->add_rule('check_password', $this->user['id']);
+            $this->validation->add('new_password', '新しいパスワード')
+                        ->add_rule('required')
+                        ->add_rule('min_length', 8);
+            $this->validation->add('new_password_confirm', '新しいパスワード　確認')
+                        ->add_rule('required')
+                        ->add_rule('min_length', 8)
+                        ->add_rule('check_confirm_password', Input::post('new_password'));            
+            $this->validation->set_message('check_password', ':labelが間違っています。');
+            $this->validation->set_message('check_confirm_password', '新しいパスワードが一致しません。');
+            $this->validation->set_message('required', ':labelを入力してください。');
+            $this->validation->set_message('min_length', ':labelは8桁以上で入力してください。');
+
+            $this->data['data'] = Input::post();      
+            if($this->validation->run()) {
+                $this->template->content = View::forge('user/account_password_confirm', $this->data);
+                return;
+            }
+            
+            $this->data['errors'] = $this->validation->error_message();
+
         }
         $this->template->content = View::forge('user/account_password_form', $this->data);
     }
 
-	public function action_account_password_complete()
-	{
+    
+    /*
+     * パスワード変更完了
+     * 
+     * @access public
+     * @param none
+     * @return none
+     */
+    public function action_account_password_complete()
+    {
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
-
+             
         if(Input::post()) {
-        	$params = Input::post();
-        	$params['id'] = $this->user['id'];
-        	\Model_User::changePassword($params);
+            $this->data['data'] = Input::post();
+            $this->template->header = View::forge('header_client', $this->data);
+            
+            $params = Input::post();
+            $params['id'] = $this->user['id'];
+            if(!Model_User::changePassword($params)) {
+                \Log::error('パスワード変更に失敗しました。  ['.__CLASS__.'::'.__METHOD__.':'.__LINE__.']');
+                // パスワード変更に失敗した場合は、エラーを表示してフォームを再表示
+                $this->data['errors']['update_password_error'] = true;
+                $this->template->content = View::forge('user/account_password_form', $this->data);
+                return;
+            }
+            
+            // 完了画面を表示
+            $this->template->content = View::forge('user/account_password_complete', $this->data);            
         }
-        $this->data['data'] = Input::post();
-        $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('user/account_password_complete', $this->data);
     }
 
 	public function action_info()
