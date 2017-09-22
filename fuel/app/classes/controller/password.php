@@ -114,20 +114,30 @@ class Controller_Password extends Controller_Base
         
         $this->data['data'] = Input::param();
         $this->template->header = View::forge('header', $this->data);
-
+        
+        $this->validation = Validation::forge('password_form'); 
         if(Input::post()) {
-            if(!Input::post("password")) {
-                $this->data['errors']['password'] = "パスワードを入力してください。";
+            $this->validation->add_callable('usersrules');  
+            $this->validation->add('password', 'パスワード')
+                        ->add_rule('required')
+                        ->add_rule('min_length', 8);
+            $this->validation->add('password_confirm', 'パスワード 確認')
+                        ->add_rule('required')
+                        ->add_rule('min_length', 8);
+            $this->validation->set_message('required', ':labelを入力してください。');
+            $this->validation->set_message('min_length', ':labelは8桁以上で入力してください。');
+
+            if(!$this->validation->run()) {  
+                $this->data['errors'] = $this->validation->error_message();
+            } else {
+                if(Input::post("password") && Input::post("password_confirm") && Input::post("password") != Input::post("password_confirm")) {
+                    $this->data['errors']['password_confirm'] = "新しいパスワードが一致しません。";
+                }                
             }
-            if(!Input::post("password_confirm")) {
-                $this->data['errors']['password_confirm'] = "パスワード 確認を入力してください。";
-            }
-            if(Input::post("password") && Input::post("password_confirm") && Input::post("password") != Input::post("password_confirm")) {
-                $this->data['errors']['password_confirm'] = "新しいパスワードが一致しません。";
-            }
+              
             $this->data['data'] = Input::post();
             //エラーが無ければ確認ページを表示
-            if(empty($this->data['errors'])) {
+            if(empty($this->data['errors'])) {            
                 $old_password = Auth::reset_password($user['username']);
                 if(Auth::change_password($old_password, Input::post("password"), $user['username'])) {
                     $this->data['email'] = $user['email'];
