@@ -25,7 +25,7 @@
 								<tbody>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード</th>
-										<td><input type="password" class="input_text input_short" maxlength="8" placeholder="パスワード入力" name="password" value="<?php if(isset($data['password'])) { echo $data['password']; } ?>" ><br>
+										<td><input type="password" class="input_text input_short" placeholder="パスワード入力" name="password" value="<?php if(isset($data['password'])) { echo $data['password']; } ?>" ><br>
 <span class="small "><span class="text_red">※</span>半角英数 8桁以上<br>
 										<span class="text_red">※</span>必ず英字と数字の両方を使って入力してください。大文字小文字は区別されます。<br>
 									<span class="text_red">※</span>ユーザーID、郵便番号、電話番号、誕生日など推測できる文字は避けてください。</span></p>
@@ -40,7 +40,7 @@ if(isset($errors['password'])) {
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード　確認</th>
-										<td><input type="password" class="input_text input_short" maxlength="8" placeholder="パスワード入力" name="password_confirm" value="<?php if(isset($data['password_confirm'])) { echo $data['password_confirm']; } ?>" > <span class="small text_red">※</span><span class="small">半角英数 8桁以上</span>
+										<td><input type="password" class="input_text input_short" placeholder="パスワード入力" name="password_confirm" value="<?php if(isset($data['password_confirm'])) { echo $data['password_confirm']; } ?>" > <span class="small text_red">※</span><span class="small">半角英数 8桁以上</span>
 <?php
 if(isset($errors['password_confirm'])) {
 ?>
