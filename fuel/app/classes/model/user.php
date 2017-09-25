@@ -681,23 +681,25 @@ class Model_User extends Orm\Model{
         }
 	}
 
-	public static function sendEmail($params) {
-		if(empty($params['from'])) {
-			$params['from'] = Config::get("email.from");
-		}
-		$sendgrid = new SendGrid(Config::get("sendgrid"));
-		$email = new SendGrid\Email();
-		$email
-		    ->addTo($params['to'])
-		    ->setFrom($params['from'])
-		    ->setSubject($params['subject'])
-		    ->setHtml($params['text']);
-		try {
-			return $sendgrid->send($email);
-		} catch (Exception $e) {
-			Log::error($e->getMessage(), 'sendEmail');
-			return;
-		}
+	public static function sendEmail($params)
+	{
+            if(empty($params['from'])) {
+                $params['from'] = Config::get("email.from");
+            }
+            try {
+                $sendgrid = new SendGrid(Config::get("sendgrid"));
+                $email = new SendGrid\Email();
+                $email
+                        ->addTo($params['to'])
+                        ->setFrom($params['from'])
+                        ->setSubject($params['subject'])
+                        ->setHtml($params['text']);
+
+                return $sendgrid->send($email);
+            } catch (Exception $e) {
+                Log::error($e->getMessage(), 'sendEmail');
+                return;
+            }
 	}
 
 	public static function saveSensor($params) {
@@ -722,19 +724,28 @@ class Model_User extends Orm\Model{
 		}
 	}
 
-	public static function changePassword($params) {
-		if(!empty($params['id'])) {
-			$id = $params['id'];
-			$user = \Model_User::find($id);
-		}
-		if($user) {
-			if(Auth::change_password($params['password'], $params['new_password'], $user['username'])) {
-				\Model_User::sendEmail($user);
-				return true;
-			} else {
-				return false;
-			}
-		}
+	public static function changePassword($params)
+	{
+            if(!empty($params['id'])) {
+                $id = $params['id'];
+                $user = \Model_User::find($id);
+            }
+            if($user) {
+                if(Auth::change_password($params['password'], $params['new_password'], $user['username'])) {
+                    $params = [
+                        'to' => $user['email'],
+                        'subject' => "パスワードの変更が完了しました",
+                        'text' => \View::forge(
+                            'email/password_complete', [
+                            'email' => $user['email'],
+                            'name' => $user['last_name'].$user['first_name']
+                        ])
+                    ];
+                    \Model_User::sendEmail($params);
+                    return true;
+                }
+            }
+            return false;
 	}
 
 	public static function getSensors($user_id) {
