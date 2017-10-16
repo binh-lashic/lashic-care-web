@@ -1,3 +1,6 @@
+<?php if(Session::get_flash('error_sensor_delete')) : ?>
+<font color="red"><?php echo Session::get_flash('error_sensor_delete'); ?></font>
+<?php endif; ?> 
 <div class="row">
 	<div class="col-sm-12">
 		<h2>親アカウント:<?php echo $user['last_name']; ?><?php echo $user['first_name']; ?></h2>
