@@ -442,13 +442,11 @@ $sleep_columnChart_data = function(data) {
         if(value.sleeping_time === undefined) {
             values.push(0);
         } else {
-            // 平均時間算出 (sleeping_time ÷ 月の日数)
+            // 分を時間に変換
             var num = Number(value.sleeping_time);
-            // 月の日数取得
-            var month_date = new Date(value.year, value.month, 0).getDate();
-            var average = num / month_date;
-            // 小数点第二位で丸める
-            values.push(Number(average.toFixed(2)));
+            var hour = num / 60;
+
+            values.push(hour);
         }
         datas.push(values);
     });
