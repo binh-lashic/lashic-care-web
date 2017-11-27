@@ -140,7 +140,7 @@ function activity_monthlytrend_columnChart(datas)
         view.setColumns([0, 1,
                          { 
                             calc: function(dataTable, rowIndex) {
-                                return dataTable.getFormattedValue(rowIndex, 1) + '%';
+                                return dataTable.getFormattedValue(rowIndex, 1);
                             },
                             sourceColumn: 1,
                             type: "string",
@@ -325,7 +325,7 @@ function humidity_monthlytrend_lineChart(datas)
 
         var options = {
             width: "671",
-            vAxis: { gridlines: {color: "transparent"}, format: "####", baselineColor: "#E2E2E2", textStyle: { fontSize: 13, color: '#747474' } },
+            vAxis: { gridlines: {color: "transparent"}, format: "####％", baselineColor: "#E2E2E2", textStyle: { fontSize: 13, color: '#747474' } },
             hAxis: { gridlines: {color: "#E2E2E2"}, format: "M/d", textStyle: { fontSize: 13, color: '#747474' } },
             chartArea: {left: 45, bottom: 25, top: 5, right: 5, width: "100%", height: "100%", backgroundColor: '#F9F9F9'},
             legend: { position: 'none' },
