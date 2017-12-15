@@ -54,9 +54,9 @@ class Controller_Api_MonthlyReport extends Controller_Api
 		$monthlies;
 		foreach ($data as $i => $monthly) {
 			if ($i == 0) {
-				$last_monthly = $monthly;
+				$last_monthly = (object)$monthly;
 			} else if ($i < self::MONTHLY_COMPARE_INDEX) {
-				$monthlies[] = $monthly;
+				$monthlies[] = (object)$monthly;
 			}
 		}
 		if (empty($monthlies)) {

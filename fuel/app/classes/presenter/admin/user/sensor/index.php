@@ -3,7 +3,7 @@
  * 親アカウントセンサー機器割当一覧 Presenter
  * 
  */
-class Presenter_Admin_User_Sensor extends Presenter
+class Presenter_Admin_User_Sensor_Index extends Presenter
 {
         /*
          * view

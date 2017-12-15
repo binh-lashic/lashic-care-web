@@ -77,6 +77,7 @@ return [
 			'logout'                     => 'Logout',
 			'cart'                       => 'Shopping Cart',
 			'cart_is_empty'              => 'Your Shopping Cart is empty.',
+			'monthly_report'              => 'Monthly report',
 		]
 	],
 	'template' => [
@@ -108,6 +109,19 @@ return [
 			'choose_the_year_month'     => 'Choose the year and month',
 			'item_selection'            => 'Item selection',
 			'no_data'                   => 'No Data',
+		],
+                'monthly' => [
+			'trend_and_countermeasures' => 'Trend and Countermeasures',
+                        'momentum'                  =>  'Momentum',
+                        'sleep_time'                =>  'Sleep Time',
+                        'average_daily'             =>  'The average daily temperature and humidity',
+                        'monthly_trends'            =>  'Monthly Trends',
+                        'historical_average'        =>  'Compared with the historical average',
+                        'subtitle'                  =>  'You can graph transition visit of the month.',
+                        'data_of'                   =>  ':month data',
+                        'temperature'               =>  'Temperature',
+                        'humidity'                  =>  'Humidity',
+                        'sleep'                     =>  'Sleep',
 		]
 	],
 ];

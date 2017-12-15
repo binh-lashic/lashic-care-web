@@ -87,6 +87,7 @@ if(isset($client['id'])) {
 				<ul>
 					<li <?php if(Request::active()->action == "index") { echo "class=\"nav_on\""; } ?>><a href="/user/" class="nav_graph"><span></span><?php echo __('header.client.user_state'); ?></a></li>
 					<li <?php if(Request::active()->action == "report") { echo "class=\"nav_on\""; } ?>><a href="/user/report" class="nav_report"><span></span><?php echo __('header.client.confirm_report'); ?></a></li>
+                                        <li <?php if(Request::active()->action == "monthly") { echo "class=\"nav_on\""; } ?>><a href="/user/monthly" class="nav_monthly"><span></span><?php echo __('header.client.monthly_report'); ?></a></li>
 				</ul>
 			</nav>
 		</div>
