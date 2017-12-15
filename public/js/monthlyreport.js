@@ -132,7 +132,7 @@ function activity_monthlytrend_columnChart(datas)
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('date', '日付');
+        data.addColumn('string', '日付');
         data.addColumn('number', '運動量 ');
         data.addRows($activity_columnChart_data(datas));
 
@@ -242,7 +242,7 @@ function sleep_monthlytrend_columnChart(datas)
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('date', '日付');
+        data.addColumn('string', '日付');
         data.addColumn('number', '睡眠平均時間');
         data.addRows($sleep_columnChart_data(datas));
 
@@ -349,7 +349,7 @@ $activity_columnChart_data = function(data) {
     var datas = [];
     $.each(data, function(key, value) {
         var values = [];
-        values.push(new Date(value.year, (value.month-1), 1));
+        values.push(value.month+'月');
         
         if(value.activity === undefined) {
             values.push(0);
@@ -437,7 +437,7 @@ $sleep_columnChart_data = function(data) {
     var datas = [];
     $.each(data, function(key, value) {
         var values = [];
-        values.push(new Date(value.year, (value.month-1), 1));
+        values.push(value.month+'月');
         
         if(value.sleeping_time === undefined) {
             values.push(0);
