@@ -41,7 +41,7 @@ header {
 .logo {
 	width: 111px;
 	height: 26px;
-	margin: 24px 10px 15px;
+	margin: 20px 10px 15px 0;
 	display: block;
 }
 .logo img {
@@ -248,6 +248,16 @@ header {
 	background-size: 22px 23px;
 	text-decoration: none;
 }
+#content_nav nav ul li a.nav_monthly {
+	background: url(../images/common/nav_icon_monthly_off.png) no-repeat 20px 16px;
+	background-size: 17px 18px;
+	text-decoration: none;
+}
+#content_nav nav ul li a.nav_monthly:hover, #content_nav nav ul li.nav_on a.nav_monthly {
+	background: url(../images/common/nav_icon_monthly_on.png) no-repeat 20px 16px;
+	background-size: 17px 18px;
+	text-decoration: none;
+}
 /* ----------------------------------------------------------
 
 お知らせ
@@ -284,23 +294,21 @@ header {
 	background-size: 2px 121px, 72px 121px;
 	line-height: 1.4em;
 }
+.com_news dd.com_news_dd_en {
+	background: url(../images/common/hdr_news_line.png) left top no-repeat, url(../images/common/hdr_news_next_en.png) right center no-repeat;
+	background-size: 2px 121px, 136px 60px;
+}
 .com_news dd:hover {
 	opacity: 0.7
 }
 .com_news_text {
-	width: 88%;
+	width: 468px;
 	color: #FFF;
-	display: block;
-	word-wrap: break-word;
 }
 .com_news_link {
 	display: block;
 	padding: 13px 12px 12px 12px;
 	text-decoration: none !important;
-}
-.com_news dd.com_news_dd_en {
-	background: url(../images/common/hdr_news_line.png) left top no-repeat, url(../images/common/hdr_news_next_en.png) right center no-repeat;
-	background-size: 2px 121px, 136px 60px;
 }
 /* ----------------------------------------------------------
 
@@ -1066,9 +1074,189 @@ a.report_btn:hover {
 
 
 
+/* ----------------------------------------------------------
 
+マンスリーレポート
 
+---------------------------------------------------------- */
+.monthly_title_icon {
+	background: url(../images/monthly/monthly_title_icon.png) no-repeat 10px 0.4em #7ecef4;
+	background-size: 25px 24px;
+}
+.montly_period{
+	font-size: 20px;
+	text-align: center;
+	margin: 40px 0;
+	font-weight: bold;
+}
+#monthly_keikou{
+	border: 3px solid #003b59;
+	padding:20px 30px;
+}
+.monthly_keikou_h2{
+	font-size: 20px;
+	color: #003b59;
+	margin-bottom: 10px;
+}
+.monthly_keikou_h2:before {
+	content: " ";
+	width: 25px;
+	height: 24px;
+	float: left;
+	position: relative;
+	top: 0;
+	background:url(../images/monthly/monthly_icon_keikou.png) no-repeat;
+	display: block;
+	background-size: 20px 24px;
+}
 
+.monthly_keikou_list li{
+	padding: 10px;
+}
+.monthly_keikou_list li:nth-child(odd){
+	background: #f6f6f6;
+}
+.monthly_keikou_list dl{
+	display: table;
+}
+.monthly_keikou_list dl dt{
+	width: 80px;
+	display: table-cell;
+	vertical-align:middle;
+}
+.monthly_keikou_list dl dd{
+	display: table-cell;
+	vertical-align:middle;
+}
+#monthly_undou{
+	margin-top: 40px;
+}
+.monthly_tit{
+	font-size: 20px;
+	color: #003b59;
+	padding-bottom: 12px;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #003b59;
+}
+.monthly_undou_h2:before {
+	content: " ";
+	width: 30px;
+	height: 34px;
+	float: left;
+	position: relative;
+	top: -5px;
+	background:url(../images/monthly/monthly_icon_undou.png) no-repeat;
+	display: block;
+	background-size: 26px 34px;
+}
+.monthly_suimin_h2:before {
+	content: " ";
+	width: 30px;
+	height: 34px;
+	float: left;
+	position: relative;
+	top: -5px;
+	background:url(../images/monthly/monthly_icon_suimin.png) no-repeat;
+	display: block;
+	background-size: 26px 34px;
+}
+.monthly_kion_h2:before {
+	content: " ";
+	width: 30px;
+	height: 34px;
+	float: left;
+	position: relative;
+	top: -5px;
+	background:url(../images/monthly/monthly_icon_kion.png) no-repeat;
+	display: block;
+	background-size: 26px 34px;
+}
+.monthly_ijou_h2:before {
+	content: " ";
+	width: 30px;
+	height: 34px;
+	float: left;
+	position: relative;
+	top: -5px;
+	background:url(../images/monthly/monthly_icon_ijou.png) no-repeat;
+	display: block;
+	background-size: 26px 34px;
+}
+.monthly_graph{
+	margin-bottom: 40px;
+}
+.monthly_graph2{
+	margin-bottom: 80px;
+}
+.monthly_suimin_icon{
+	position: relative;
+}
+.monthly_suimin_icon img{
+	position:absolute;
+	top: 0.5em;
+	left: -23px;
+}
+.monthly_kion_midashi{
+	width: 70px;
+	float: left;
+}
+.monthly_kion_graph{
+	float: right;
+}
+.monthly_kion_h4{
+	width: 70px;
+	height: 70px;
+	color: #FFF;
+	display: table;
+}
+.monthly_kion_h4_icon{
+	background: url(../images/monthly/monthly_bg_kion.png) no-repeat;
+	background-size: 70px 70px;
+}
+.monthly_shitsudo_h4_icon{
+	background: url(../images/monthly/monthly_bg_shitsudo.png) no-repeat;	
+	background-size: 70px 70px;
+}
+.monthly_kion_h4 span{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	padding-top: 2.5em;
+}
+.monthly_table th{
+	background-color: #b7e3f9;
+	border-right:1px solid #96d5f5;
+	color: #003b59;
+	padding: 5px;
+	text-align: center;
+	border-collapse: collapse;
+}
+.monthly_table th:last-child{
+	border-right:none;
+}
+.monthly_table tr{
+	background-color: #eef4f6;
+	border-collapse: collapse;
+}
+.monthly_table tr:nth-child(odd){
+	background-color: #f9f9f9;
+	padding: 5px;
+	text-align: center;
+	border-collapse: collapse;
+}
+.monthly_table td{
+	text-align: center;
+	padding: 5px;
+	border-left: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	border-collapse: collapse;
+}
+.monthly_table td:last-child{
+	border-right:1px solid #DDD;
+}
+.monthly_table strong{
+	font-size: 16px;
+}
 
 
 

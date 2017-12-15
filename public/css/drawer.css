@@ -23,7 +23,7 @@
 	}
 .drawer-nav-userMenu{
 	position:absolute;
-	right:10px;
+	right:0;
 }
 
 .drawer-brand {
@@ -471,8 +471,10 @@ a.drawer-dropdown-menu-item.nowStay{ background-color:#e5f6ff; color:#003c58; ma
     Container
 \*!------------------------------------*/
 .drawer-container {
+	width: 1020px;
   margin-right: auto;
   margin-left: auto;
+	position: relative;
 }
 
 /* 
