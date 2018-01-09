@@ -97,6 +97,9 @@ class Controller_User extends Controller_Base
 
 		$this->data['genders'] = Config::get("gender");
 		$this->data['tax_rate'] = Config::get("tax_rate");
+
+		# 現在の言語を View で使えるように設定
+		$this->data['current_language'] = $this->language;
 	}
 
 	public function action_index()
@@ -132,13 +135,13 @@ class Controller_User extends Controller_Base
 	    $this->data['prev_date'] = date("Y-m-d", strtotime($this->data['date']) - 60 * 60 * 24);
 	    $this->data['next_date'] = date("Y-m-d", strtotime($this->data['date']) + 60 * 60 * 24);
 
-		$this->data['current_language'] = $this->language;
-
 		$this->template->title   = 'マイページ';
 		$this->template->header  = View::forge('header_client', $this->data);
 		$this->template->content = View::forge('user/index', $this->data);
 		$this->template->content->set('i18n', View::forge('i18n', $this->data));
 		$this->template->sidebar = View::forge('sidebar', $this->data);
+
+		$this->data['is_wbgt_month'] = $this->is_wbgt_month();
 	}
 
 	public function action_list()
@@ -519,9 +522,11 @@ class Controller_User extends Controller_Base
 				$this->data['page_count'] = ceil($this->data['alert_count'] / Config::get("report_list_count"));
 			}
 		}
+
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/report', $this->data);
+		$this->template->content->set('i18n', View::forge('i18n', $this->data));
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
@@ -673,4 +678,18 @@ class Controller_User extends Controller_Base
             $this->template->content->set('i18n', View::forge('i18n', $this->data));
             $this->template->sidebar = View::forge('sidebar', $this->data);
         }                
+
+
+
+	/**
+	 * 熱中小指数を表示する期間かどうかを返す
+	 *
+	 * 熱中症指数（４月～９月）
+	 * 風邪ひき指数（１０月～３月）
+	 */
+	private function is_wbgt_month()
+	{
+		$month = (int) date('n');
+		return ($month >= 4 && $month <= 9);
+	}
 }
