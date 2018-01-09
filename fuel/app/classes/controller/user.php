@@ -140,6 +140,8 @@ class Controller_User extends Controller_Base
 		$this->template->content = View::forge('user/index', $this->data);
 		$this->template->content->set('i18n', View::forge('i18n', $this->data));
 		$this->template->sidebar = View::forge('sidebar', $this->data);
+
+		$this->data['is_wbgt_month'] = $this->is_wbgt_month();
 	}
 
 	public function action_list()
@@ -676,4 +678,18 @@ class Controller_User extends Controller_Base
             $this->template->content->set('i18n', View::forge('i18n', $this->data));
             $this->template->sidebar = View::forge('sidebar', $this->data);
         }                
+
+
+
+	/**
+	 * 根中小指数を表示する期間かどうかを返す
+	 *
+	 * 熱中症指数（４月～９月）
+	 * 風邪ひき指数（１０月～３月）
+	 */
+	private function is_wbgt_month()
+	{
+		$month = (int) date('n');
+		return ($month >= 4 && $month <= 9);
+	}
 }
