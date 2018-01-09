@@ -682,7 +682,7 @@ class Controller_User extends Controller_Base
 
 
 	/**
-	 * 根中小指数を表示する期間かどうかを返す
+	 * 熱中小指数を表示する期間かどうかを返す
 	 *
 	 * 熱中症指数（４月～９月）
 	 * 風邪ひき指数（１０月～３月）
