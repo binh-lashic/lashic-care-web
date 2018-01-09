@@ -77,6 +77,10 @@ if(isset($client)) {
 						</div>
 					</div>
 				</li>
+<?php
+if ($is_wbgt_month) {
+	/* 熱中症指数 */
+?>
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
@@ -89,7 +93,9 @@ if(isset($client)) {
 					</div>
 				</li>
 <?php
-/* 風邪ひき指数
+} else {
+	/* 風邪ひき指数 */
+?>
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
@@ -101,7 +107,8 @@ if(isset($client)) {
 						</div>
 					</div>
 				</li>
-*/
+<?php
+}
 ?>
 <?php
 /* 不快指数
