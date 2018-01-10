@@ -202,7 +202,7 @@ $(function(){
 			}
 
 			if(typeof result.data.cold != "undefined") {
-				$("#data_cold").attr("data-text", result.data.cold + "%");
+				$("#data_cold").attr("data-text", result.data.cold);
 				$("#data_cold").attr("data-percent", result.data.cold);
 			} else {
 				$("#data_cold").attr("data-text", "");
