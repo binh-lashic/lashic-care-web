@@ -136,6 +136,10 @@ $(function(){
 		if (!is_user_state_page()) {
 			return;
 		}
+
+		// 熱中症指数と風邪ひき指数を切り替え
+		toggleWbgtCold();
+
 		var today = new Date(date.replace(/-/g, "/"));
 		$("#today").html((today.getMonth() + 1) + "/" + today.getDate());
 		var weekDayList = labels.date.abbr_day_names;
@@ -152,6 +156,7 @@ $(function(){
 		$("#next_date").attr("data-date", next_date.getFullYear() + "-" + (next_date.getMonth() + 1) + "-" + next_date.getDate());
 
 		api("data/dashboard?sensor_id=" + sensor_id + "&date=" + date, { bedsensor_id: bedsensor_id }, function(result, status){
+			console.log("drawData");
 			if(status == 'success') {
 				if(result.success === true) {
                                     $("#graph_error").empty();
@@ -611,6 +616,34 @@ $(function(){
 		});
 
 	}
+
+    /**
+     * 選択された期間が熱中小指数を表示する期間かどうかを返す
+     *
+     * 熱中症指数（４月～９月）
+     * 風邪ひき指数（１０月～３月）
+     */
+    function isWbgtMonth() {
+      var selectedDate = new Date();
+      if (typeof date !== "undefined" ) {
+        var selectedDate  = new Date(date);
+      }
+      var selectedMonth = selectedDate.getMonth() + 1;
+      return (selectedMonth >= 4 && selectedMonth <= 9);
+    }
+
+    /**
+     * 選択された期間に応じて熱中症指数と風邪ひき指数の表示を切り替える
+     */
+    function toggleWbgtCold() {
+      if (isWbgtMonth()) {
+        $('#wbgtPanel').show();
+        $('#coldPanel').hide();
+      } else {
+        $('#coldPanel').show();
+        $('#wbgtPanel').hide();
+      }
+    }
 
 	//カート系の処理
     getCartPlans();
