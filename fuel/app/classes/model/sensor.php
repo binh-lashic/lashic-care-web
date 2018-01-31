@@ -15,6 +15,8 @@ class Model_Sensor extends Orm\Model{
 	const FACILITY_TYPE_BED_SENSOR_1  = '2';
 	/** センサータイプ:ベッドセンサー */
 	const FACILITY_TYPE_BED_SENSOR_2  = '3';
+	/** センサータイプ:ベッドセンサー */
+	const FACILITY_TYPE_BED_SENSOR_3  = '5';
 
 	private $time;
 	private $data;
