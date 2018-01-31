@@ -65,7 +65,7 @@ class Model_Batch_Bed_Data_Daily extends Orm\Model {
 			->join('daily_enable_sensors')
 			->on('daily_enable_sensors.sensor_name', '=', 'bed_data_daily.sensor_name')
 			->and_on('date', '=', DB::expr("'" . $date . "'"))
-			->and_on('sensor_type', 'IN', DB::expr('(' . Model_Sensor::FACILITY_TYPE_BED_SENSOR_1 . ',' . Model_Sensor::FACILITY_TYPE_BED_SENSOR_2 . ')'))
+			->and_on('sensor_type', 'IN', DB::expr('(' . Model_Sensor::FACILITY_TYPE_BED_SENSOR_1 . ',' . Model_Sensor::FACILITY_TYPE_BED_SENSOR_2 . ',' . Model_Sensor::FACILITY_TYPE_BED_SENSOR_3 . ')'))
 			->and_on(DB::expr($flag_col_name), '=', 0)
 			->where('measurement_time', 'BETWEEN', [DB::expr($start_date_col_name), DB::expr($end_date_col_name)])
 			->order_by('bed_data_daily.sensor_name', 'ASC')
