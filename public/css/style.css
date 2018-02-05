@@ -569,6 +569,10 @@ footer {
 	margin-bottom: 10px;
 	background-color: #f6f6f6;
 }
+.graph_list li.graph_error {
+	overflow: hidden;
+	background-color: #ffffff;
+}
 .graph_set {
 	padding: 8px;
 	position: relative;
@@ -621,6 +625,80 @@ footer {
 }
 .myStat01 {
 	height: 153px;
+}
+/* bed */
+.graph_list li.bedSensorGraph {
+	width: 770px;
+	padding-bottom: 2px;
+	margin-bottom: 10px;
+	margin-right: -10px;
+	overflow: hidden;
+	background-color: #f6f6f6;
+}
+.graph_list li.bedSensorGraph li:first-child{
+	width: 260px;
+	margin-right: 0;
+	margin-bottom: 0;
+	float: left;
+}
+.graph_list li.bedSensorGraph li{
+	width: 255px;
+	margin-right: 0;
+	margin-bottom: 0;
+	float: left;
+}
+.h3_bed{
+	color: #5a498b;
+	font-size: 14px;
+	text-align: center;
+	border-bottom: 1px solid #dcdcdc;
+	padding-bottom: 5px;
+	margin: 3px 10px 10px;
+}
+.h3_bed img{
+	margin-right: 5px;
+	margin-bottom: -2px;
+}
+.graph_icon_bed{
+	width: 103px;
+	height: 103px;
+	float: left;
+	margin-left: 10px;
+}
+.graph_icon_heart{
+	float: right;
+	margin-right: 10px;
+}
+.graph_bed_text{
+	width: 103px;
+	height: 103px;
+	text-align: center;
+	color: #FFF;
+	font-size: 16px;
+	line-height: 18px;
+	line-height: 1.8rem;
+	font-weight: bold;
+}
+.graph_icon_bed .graph_bed_text{
+	background: url(../images/graph/graph_icon_bed.png) no-repeat;
+	background-size: 103px 93px;
+}
+.graph_icon_heart .graph_bed_text{
+	background: url(../images/graph/graph_icon_heart.png) no-repeat;
+	background-size: 103px 93px;
+}
+.graph_bed_text p{
+	padding-top: 35px;
+}
+.graph_icon_watch{
+	width: 35px;
+	height: 35px;
+	float: right;
+	margin-top: -40px;
+}
+.graph_sleepIconText{
+	text-align: right;
+	font-size: 13px;
 }
 /* 24時間 */
 .graph24_select {
