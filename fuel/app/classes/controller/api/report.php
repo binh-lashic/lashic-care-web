@@ -113,7 +113,7 @@ abstract class Controller_Api_Report extends Controller_Api
                 if ($sensor->type == \Model_Sensor::TYPE_SENSOR) {
                     $sensor_name = $sensor->name;
                 } else if ($sensor->type == \Model_Sensor::TYPE_BED_SENSOR) {
-                    $bedsensor_name = $bedsensor_name;
+                    $bedsensor_name = $sensor->name;
                 }
             }
                 

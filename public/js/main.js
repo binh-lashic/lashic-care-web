@@ -263,6 +263,26 @@ $(function(){
 				console.log('api connect failed.');
 			}
 		});
+                
+		api("bedsensorlatest/get?user_id=" + client_user_id, null, function(data, status){
+			console.log("drawData");
+			if(status == 'success') {
+                                if(data.result.status != null) {
+                                    $("#bedsensor_status").text(data.result.status);
+                                } else {
+                                    $("#bedsensor_status").text('');
+                                }
+                                
+                                if(data.result.pulse != null) {
+                                    $("#bedsensor_pulse").text(data.result.pulse);
+                                } else {
+                                    $("#bedsensor_pulse").text('');
+                                }
+                                
+                        } else {
+                            console.log('bedsensorlatest api connect failed.');
+                        }
+		});
 	}
 
 	function drawCalender() {
