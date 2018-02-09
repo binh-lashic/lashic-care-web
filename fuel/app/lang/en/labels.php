@@ -109,6 +109,12 @@ return [
 			'choose_the_year_month'     => 'Choose the year and month',
 			'item_selection'            => 'Item selection',
 			'no_data'                   => 'No Data',
+                        'status'                    => 'State',
+                        'pulse'                     => 'Pulse',
+                        'user_state_by_bed'         => 'The State by bed',
+                        'sleep_comfort_level'       => 'Sleep comfort level',
+                        'total_sleeping_time'       => 'Total sleeping time  (until night 18:00-morning 10:00)',
+                        'times_minute'              => 'times / minute',
 		],
                 'monthly' => [
 			'trend_and_countermeasures' => 'Trend and Countermeasures',

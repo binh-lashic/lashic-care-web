@@ -8,6 +8,7 @@ if(isset($client)) {
 	<script type="text/javascript">
 	var sensor_id         = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var bedsensor_id      = "<?php echo !empty($bedsensor['id']) ? $bedsensor['id'] : ""; ?>";
+        var client_user_id    = "<?php echo $client['id']; ?>";
 	var date              = "<?php echo $date; ?>";
 	var wake_up_time_data = "";
 	var sleep_time_data   = "";
@@ -21,7 +22,56 @@ if(isset($client)) {
 			
 			<!-- 現在のグラフ -->
 			<h2 class="content_h2"><?php echo __('user.index.current_graph'); ?></h2>
-			<ul class="graph_list">
+                            <ul class="graph_list">
+                               <?php if(isset($bedsensor) && $bedsensor) : ?>
+                               <!-- ベッドセンサー -->
+                                <li class="bedSensorGraph">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <div class="graph_set bed_now">
+                                                <h3 class="h3_bed"><img width="22" height="16" alt="" src="/images/graph/graph_title_bed.png" /><?php echo __('user.index.user_state_by_bed'); ?></h3>
+                                                <div class="clearfix" id="bed-sensor-status">
+                                                    <div class="graph_icon_bed">
+                                                        <div class="graph_bed_text" >
+                                                            <p id="bedsensor_status"></p>
+                                                        </div>
+                                                        <p class="center"><?php echo __('user.index.status'); ?></p>
+                                                    </div>
+                                                    <div class="graph_icon_heart">
+                                                        <div class="graph_bed_text">
+                                                            <p><span id="bedsensor_pulse"></span> <?php echo __('user.index.times_minute'); ?></p>
+                                                        </div>
+                                                        <p class="center"><?php echo __('user.index.pulse'); ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="graph_set">
+                                                <div class="graph_chart">
+                                                    <div class="myStat" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+                                                </div>
+                                                <div class="graph_icon_watch">
+                                                    <img width="35" height="35" alt="" src="/images/graph/graph_icon_watch.png" />
+                                                </div>
+                                                <p class="graph_sleepIconText"><?php echo __('user.index.total_sleeping_time'); ?></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="graph_set">
+                                                <div class="graph_chart">
+                                                    <div class="myStat" data-dimension="153" data-text="" data-info="" data-width="30" data-bordersize="30" data-fontsize="38" data-percent="" data-fgcolor="#ffaf61" data-bgcolor="#dcdcdc"></div>
+                                                </div>
+                                                <div class="graph_icon_watch">
+                                                    <img width="30" height="35" alt="" src="/images/graph/graph_icon_sleep.png" />
+                                                </div>
+                                                <p class="graph_sleepIconText"><?php echo __('user.index.sleep_comfort_level'); ?></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ベッドセンサー -->
+                                <?php endif; ?>
 				<li class="graph_tile">
 					<div class="graph_set">
 						<p class="graph_rank">    </p>
@@ -117,8 +167,11 @@ if(isset($client)) {
 				</li>
 */
 ?>
-                        <div id="graph_error"></div>                              
+                                <li class="graph_error">
+                                    <div id="graph_error"></div>
+                                </li>
 			</ul>
+                        
 			<!-- /現在のグラフ --> 
 			
 			<!-- 24時間グラフ -->
