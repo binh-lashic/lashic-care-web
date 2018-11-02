@@ -14,7 +14,7 @@
         { "type": "vcs", "url": "https://github.com/fuel/parser" },
         {
             "type": "vcs",
-            "url": "fascent@fascent.git.backlog.jp:/INFIC/careeye-api-client.git"
+            "url": "fascent@fascent.git.backlog.jp:/LASHIC/lashic-care-api-client.git"
         }
     ],
     "require": {
