@@ -34,6 +34,17 @@ class Util {
         $iterations = intval($_SERVER['WEBSOCKET_ITERATIONS']);
         return self::create_token($target, $salt, $iterations);
     }
+  
+	/**
+	 * ホスト名から本番かどうか判断する
+	 * @return bool
+	 * @throws FuelException
+	 */
+	public static function is_production()
+	{
+	  \Config::load('infic', true);
+	  return ($_SERVER['HTTP_HOST'] == \Config::get('http_host_production'));
+	}
 
     private static function create_token($target, $salt, $iterations)
     {

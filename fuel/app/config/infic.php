@@ -533,4 +533,6 @@ return array(
                 'O' => 'O型',
                 'AB' => 'AB型',
          ],
+  	//本番環境のホスト名
+  	'http_host_production' => 'lashic.jp'
 );
