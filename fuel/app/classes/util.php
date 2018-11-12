@@ -38,7 +38,6 @@ class Util {
     /**
     * 環境変数から本番かどうか判断する
     * @return bool
-    * @throws FuelException
     */
     public static function is_production()
     {
