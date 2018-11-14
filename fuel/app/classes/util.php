@@ -34,6 +34,15 @@ class Util {
         $iterations = intval($_SERVER['WEBSOCKET_ITERATIONS']);
         return self::create_token($target, $salt, $iterations);
     }
+  
+    /**
+    * 環境変数から本番かどうか判断する
+    * @return bool
+    */
+    public static function is_production()
+    {
+      return (isset($_SERVER['FUEL_ENV']) && $_SERVER['FUEL_ENV'] === 'production');
+    }
 
     private static function create_token($target, $salt, $iterations)
     {

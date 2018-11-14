@@ -41,6 +41,17 @@
 <script src="/js/amcharts/serial.js" type="text/javascript"></script>
 <script src="/js/js.cookie.js"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+<?php if(\Util::is_production()) {?>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-128509273-2');
+  </script>
+<?php } ?>
 </head>
 <body id="home" class="drawer drawer--right">
 <?php echo isset($header) ? $header : ""; ?>
