@@ -41,7 +41,7 @@ class Util {
     */
     public static function is_production()
     {
-      return (isset($_SERVER['FUEL_ENV']) && $_SERVER['FUEL_ENV'] === 'production');
+      return (\Fuel::$env == \Fuel::PRODUCTION);
     }
 
     private static function create_token($target, $salt, $iterations)
