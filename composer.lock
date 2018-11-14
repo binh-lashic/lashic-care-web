@@ -125,7 +125,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "fascent@fascent.git.backlog.jp:/INFIC/careeye-api-client.git",
+                "url": "fascent@fascent.git.backlog.jp:/LASHIC/lashic-care-api-client.git",
                 "reference": "18b24472fc1cbd028e69f5f41cdae9f9d85b22b1"
             },
             "require": {
