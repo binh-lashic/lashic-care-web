@@ -45,7 +45,8 @@ foreach($plans as $plan) {
 				<div class="floatR contentHalf">
 					<h3 class="content_h3">お届け日について</h3>
 					<p>お届けは、ご注文後3営業日内となります。</p>
-					<form action="/shopping/payment" method="get">
+					<form action="/shopping/payment" method="post">
+						<textarea name="remarks" cols="80" rows="10" placeholder="sleepの注文のご希望がある場合は備考にご記入ください。&#13;&#10;例)  sleep ◯台 購入希望"></textarea>
 						<button class="btn_darkBlue w300 floatR pd15 mgt30">次の画面へ</button>
 					</form>
 				</div>

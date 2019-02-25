@@ -221,6 +221,11 @@ class Controller_Shopping extends Controller_Base
                     return;
                 }
             } else {
+              
+                $destination = Session::get("destination");
+                $destination['remarks'] = $params['remarks'];
+                Session::set("destination", $destination);
+                
                 if(!$params['number'])
                 {
                     $this->data['errors']['number'] = true;
