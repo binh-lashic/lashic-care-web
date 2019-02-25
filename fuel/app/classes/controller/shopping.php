@@ -369,6 +369,7 @@ class Controller_Shopping extends Controller_Base
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
                         'address' => $destination['address'],
+                        'remarks' => $destination['remarks']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
