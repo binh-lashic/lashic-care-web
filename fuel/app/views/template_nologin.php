@@ -123,7 +123,7 @@ function rebuild(){ location.reload();}
 <?php echo isset($content) ? $content : ""; ?>
 <footer>
   <ul>
-    <li><a href="/page/news">運営者からのお知らせ</a></li>
+    <li><a href="https://www.infic-c.net/LASHIC/index.php">運営者からのお知らせ</a></li>
     <li><a href="/page/terms">利用規約</a></li>
     <li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
     <li><a href="/page/privacy">プライバシーポリシー</a></li>

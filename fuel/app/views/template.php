@@ -61,7 +61,7 @@
 </main>
 <footer>
   <ul>
-    <li><a href="/page/news"><?php echo __('template.news'); ?></a></li>
+    <li><a href="https://www.infic-c.net/LASHIC/index.php"><?php echo __('template.news'); ?></a></li>
     <li><a href="/page/terms"><?php echo __('template.terms'); ?></a></li>
     <li><a href="http://www.infic.net/" target="_blank"><?php echo __('template.company'); ?></a></li>
     <li><a href="/page/privacy"><?php echo __('template.privacy'); ?></a></li>

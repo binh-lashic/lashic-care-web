@@ -155,7 +155,7 @@ Android端末対応は2016年内を目処にご提供する予定です。</span
 </main>
 <footer>
 	<ul>
-		<li><a href="/page/news">運営者からのお知らせ</a></li>
+		<li><a href="https://www.infic-c.net/LASHIC/index.php">運営者からのお知らせ</a></li>
 		<li><a href="/page/terms">利用規約</a></li>
 		<li><a href="http://www.infic.net/" target="_blank">運営会社</a></li>
 		<li><a href="/page/privacy">プライバシーポリシー</a></li>
