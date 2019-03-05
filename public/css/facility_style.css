@@ -31,9 +31,6 @@ body {
   font-family: 'Avenir', 'Avenir Next', 'Century Gothic', 'Noto Sans Japanese', "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "sans-serif";
   color: #000;
 }
-p{
-  margin-bottom: 1.5em;
-}
 .mgt80{
   margin-top: 80px !important;
 }
