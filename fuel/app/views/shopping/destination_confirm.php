@@ -52,7 +52,7 @@ foreach($plans as $plan) {
 				<!-- 配送指定 --> 
 			</div>
 			<div class="set_container">
-				<div class="left_container"><a href="index_kounyu_login.html" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/destination?client_user_id=<?php echo $user_id; ?>" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>

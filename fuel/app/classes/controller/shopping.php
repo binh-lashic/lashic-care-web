@@ -160,6 +160,7 @@ class Controller_Shopping extends Controller_Base
     {
         if(Input::param("user_id")) {
             $this->data['destination'] = \Model_User::find(Input::param("user_id"));
+            $this->data['user_id'] = Input::param("user_id");
         }
         if(Input::param("address_id")) {
             $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
