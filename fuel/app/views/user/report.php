@@ -5,6 +5,7 @@
 			<h2 class="content_h2">情報を確認・報告してください</h2>
 			
 			<!-- 情報ソート -->
+			<!--
 			<div id="report_sort">
 				<dl class="clearfix">
 					<dt>カテゴリー</dt>
@@ -30,6 +31,7 @@
 				<a href="#" class="report_btn">表示変更</a>
 			</div>
 			<!-- /情報ソート --> 
+			-->
 			
 			<form action="/user/report_save" method="post" name="alerts" id="alerts">			
 <?php
