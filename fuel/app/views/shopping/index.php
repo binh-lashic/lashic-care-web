@@ -41,7 +41,7 @@
 					
                     <div class="btn-container">
                          <a href="#moreInfoBg" class="btn">詳しく見る</a>
-                        <a href="" onclick="return false" class="btn" style="border: none; background-color: #7ecef4; color: #ccc !important; text-decoration: none !important;">購入する</a>
+                        <a href="" onclick="return false" class="btn" style="border: transparent 2px solid; background-color: #7ecef4; color: #ccc !important; text-decoration: none !important;">購入する</a>
                     </div>
                 </div>
                 <div class="hero_rights">
