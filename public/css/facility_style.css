@@ -1353,6 +1353,7 @@ p + .form_title, div + .form_title, p + .form_set_container {
 }
 .section02_inner{
   margin-bottom: 120px;
+  padding: 20px;
 }
 .section02_01_lt{
   width: 400px;
