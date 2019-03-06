@@ -1335,7 +1335,7 @@ p + .form_title, div + .form_title, p + .form_set_container {
 #section02{
   background-color: #d6f0f7;
   position: relative;
-  padding: 100px 0;
+  padding: 60px 0 10px 0;
 }
 #section02:before{
   content: "";
@@ -1352,8 +1352,8 @@ p + .form_title, div + .form_title, p + .form_set_container {
   height: 29px;
 }
 .section02_inner{
-  margin-bottom: 120px;
-  padding: 20px;
+  margin-bottom: 40px;
+  padding-left: 20px;
 }
 .section02_01_lt{
   width: 400px;
