@@ -56,7 +56,7 @@ if(!empty($cards))
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> セキュリティコード</th>
-								<td><input type="text" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="#" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
+								<td><input type="text" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
 <?php
 if(!empty($errors['security_code_registered'])) {
 ?>
@@ -159,7 +159,7 @@ if(!empty($errors['holder_name'])) {
 							</tr>
 							<tr>
 								<th>セキュリティコード</th>
-								<td><input type="text" name="security_code" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="#" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
+								<td><input type="text" name="security_code" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
 <?php
 if(!empty($errors['security_code'])) {
 ?>
