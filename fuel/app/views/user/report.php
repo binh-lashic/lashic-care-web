@@ -62,7 +62,7 @@ if(isset($page) && $page > 1) {
 <?php
 }
 ?>
-					<input type="text" value="<?php echo isset($page) ? $page : 1; ?>"> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
+					<?php echo isset($page) ? $page : 1; ?> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
 <?php
 if(isset($page) && $page != $page_count) {
 ?>	
@@ -237,7 +237,7 @@ if(isset($page) && $page > 1) {
 <?php
 }
 ?>
-					<input type="text" value="<?php echo isset($page) ? $page : 1; ?>"> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
+					<?php echo isset($page) ? $page : 1; ?> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
 <?php
 if(isset($page) && $page != $page_count) {
 ?>	
