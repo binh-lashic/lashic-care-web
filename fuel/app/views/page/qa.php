@@ -126,7 +126,7 @@ Android端末対応は2016年内を目処にご提供する予定です。</span
 			<div class="qList clearBoth">
 				<dl>
 					<dt id="q04_01"><span><strong>Q1.</strong> 利用料はいくらですか。</span></dt>
-					<dd style="display:none"><span><strong class="text_red large">初期費用14,800円、月額980円（年払い）</strong>となります。<br>
+					<dd style="display:none"><span><strong class="text_red large">初期費用19,800円、月額980円（年払い）</strong>となります。<br>
 月払い（月あたり1,200円）、6ヶ月払い（月あたり1,100円）もご用意しておりますが、年払いが一番お得です。<br>
 <br>
 【参考・支払金額）】<br>
