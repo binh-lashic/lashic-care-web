@@ -45,7 +45,17 @@ foreach($plans as $plan) {
 				<div class="floatR contentHalf">
 					<h3 class="content_h3">お届け日について</h3>
 					<p>お届けは、ご注文後3営業日内となります。</p>
-					<form action="/shopping/payment" method="get">
+					<form action="/shopping/payment" method="post">
+						<textarea name="remarks" cols="80" rows="10">
+LASHIC-sleepのご購入　（不要・要）
+購入台数　　（　台）
+料金プラン　（月払・６ヶ月払・年払い）
+料金決済　（同意しました）
+
+※料金プランは「LASHIC-room」と全て同じです
+※料金決済は「LASHIC-room」とあわせて引き落としさせていただきます
+※配送先は「LASHIC-room」と同一になります
+						</textarea>
 						<button class="btn_darkBlue w300 floatR pd15 mgt30">次の画面へ</button>
 					</form>
 				</div>
@@ -67,17 +77,17 @@ foreach($plans as $plan) {
 		<div class="left">
 			<input type="radio" id="1month" name="pack" checked>
 			<label for="1month" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 月々パック</strong> <span class="text_red">1200円（税抜）</span><br>
-				※初期費用 14,800円（税抜）</label>
+				※初期費用 19,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="6month" name="pack" >
 			<label for="6month" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 6ヶ月パック</strong> <span class="text_red">6600円（税抜）</span><br>
 				1100円/月<br>
-				※初期費用 14,800円（税抜）</label>
+				※初期費用 19,800円（税抜）</label>
 			<hr>
 			<input type="radio" id="1year" name="pack" >
 			<label for="1year" class="checkbox shoppingCart_input"><strong>LASHIC（ラシク） 12ヶ月パック</strong> <span class="text_red">11760円（税抜）</span><br>
 				980円/月<br>
-				※初期費用 14,800円（税抜）</label>
+				※初期費用 19,800円（税抜）</label>
 		</div>
 		<br>
 		<a href="javascript:$.fancybox.close();" class="fancybox btn_darkBlue graphSettingTrue">変更する</a> <a href="javascript:$.fancybox.close();" class="btn_lightGray radius20 graphSettingFalse">キャンセル</a> </div>
