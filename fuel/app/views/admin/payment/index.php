@@ -9,9 +9,10 @@
 		<div class="panel panel-default">
 			<table class="table table-bordered">
 				<tr class="info">
-					<th class="col-sm-8">契約プラン名</th>
+					<th class="col-sm-4">契約プラン名</th>
 					<th class="col-sm-1">金額</th>
 					<th class="col-sm-1">送料</th>
+					<th class="col-sm-4">備考</th>
 				</tr>
 <?php
 if(isset($payments)) {
@@ -20,6 +21,7 @@ if(isset($payments)) {
 					<td><?php echo $payment['title']; ?></td>
 					<td class="text-right"><?php echo $payment['price']; ?>円</td>
 					<td class="text-right"><?php echo $payment['shipping']; ?>円</td>
+					<td class="text-right"><?php echo nl2br($payment['remarks']); ?></td>
 				</tr>
 <?php
 	}

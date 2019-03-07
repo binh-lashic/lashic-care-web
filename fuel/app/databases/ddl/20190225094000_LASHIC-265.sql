@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[contracts] ADD remarks ntext NULL;

@@ -45,7 +45,17 @@ foreach($plans as $plan) {
 				<div class="floatR contentHalf">
 					<h3 class="content_h3">お届け日について</h3>
 					<p>お届けは、ご注文後3営業日内となります。</p>
-					<form action="/shopping/payment" method="get">
+					<form action="/shopping/payment" method="post">
+						<textarea name="remarks" cols="80" rows="10">
+LASHIC-sleepのご購入　（不要・要）
+購入台数　　（　台）
+料金プラン　（月払・６ヶ月払・年払い）
+料金決済　（同意しました）
+
+※料金プランは「LASHIC-room」と全て同じです
+※料金決済は「LASHIC-room」とあわせて引き落としさせていただきます
+※配送先は「LASHIC-room」と同一になります
+						</textarea>
 						<button class="btn_darkBlue w300 floatR pd15 mgt30">次の画面へ</button>
 					</form>
 				</div>
