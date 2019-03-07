@@ -20,7 +20,7 @@ class Controller_Base extends Controller_Template
 		}
 		else if (!Auth::check())
 		{
-	    	Response::redirect('/user/login');
+	    	Response::redirect('/');
 		}
 		// 使用言語をリクエストパラメータから設定
 		$lang = Input::param('lang');

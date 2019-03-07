@@ -44,7 +44,12 @@ class Controller_Shopping extends Controller_Base
             Session::set('monitor', Cookie::get("affiliate"));
             $this->data['monitor'] = true;
         }
-
+        
+        if(!empty(Session::get('login_error'))) {
+            $this->data['login_error'] = Session::get('login_error');
+            Session::delete('login_error');
+        }
+        
         $this->template->content = View::forge('shopping/index', $this->data);
 	}
 
