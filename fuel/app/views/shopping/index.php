@@ -41,7 +41,7 @@
 					
                     <div class="btn-container">
                          <a href="#moreInfoBg" class="btn">詳しく見る</a>
-                        <a href="" onclick="return false" class="btn" style="border: none; background-color: #7ecef4; color: #ccc !important; text-decoration: none !important;">購入する</a>
+						<a href="#cartSet" class="btn" style="border: none; background-color: #7ecef4; text-decoration: none !important;">購入する</a>
                     </div>
                 </div>
                 <div class="hero_rights">
@@ -141,7 +141,7 @@ if(!empty($monitor))
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>無料モニターパック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span>
 							</p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<p class="right"><span class="large text_red">初期費用、6ヶ月分無料</span></p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
@@ -149,7 +149,7 @@ if(!empty($monitor))
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class=" btn_disabled" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="packmagokoro">
 							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
 							<div class="mgt10 mgb10"><a href="/s/normal">通常の購入に戻る</a></div>
@@ -162,48 +162,48 @@ if(!empty($monitor))
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>月々パック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>ひと月分1,200円(税抜)が毎月引き落とされます。</li>
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="1" href="" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="1" href="#settingComp" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
-							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>6ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">1,100円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>6か月分6,600円(税抜)の一括支払い。</li>
 									<li>6か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="2" href="" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="2" href="#settingComp" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
-							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>12ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">980円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>12か月分11,760円(税抜)の一括支払い。</li>
 									<li>12か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="3" href="" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="3" href="#settingComp" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
-							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 <?php
