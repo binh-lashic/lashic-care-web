@@ -222,6 +222,11 @@ class Controller_Shopping extends Controller_Base
                     return;
                 }
             } else {
+              
+                $destination = Session::get("destination");
+                $destination['remarks'] = $params['remarks'];
+                Session::set("destination", $destination);
+                
                 if(!$params['number'])
                 {
                     $this->data['errors']['number'] = true;
@@ -365,6 +370,7 @@ class Controller_Shopping extends Controller_Base
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
                         'address' => $destination['address'],
+                        'remarks' => $destination['remarks']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 

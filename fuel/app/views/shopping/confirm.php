@@ -82,6 +82,10 @@ if(isset($card)) {
 					<h3 class="content_h3 mgt20">ご注文内容</h3>
 					<table>
 						<tbody>
+						<tr>
+							<th>備考</th>
+							<td class="right"><?php echo nl2br($destination['remarks']); ?></td>
+						</tr>
 <?php
 foreach($plans as $plan) {
 ?>
