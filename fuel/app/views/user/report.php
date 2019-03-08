@@ -90,6 +90,7 @@ if(isset($page) && $page != $page_count) {
 							<th>日付</th>
 							<th>カテゴリー</th>
 							<th>発生時間</th>
+							<th>内容</th>
 							<th>内容確認状況</th>
 							<th>最終確認者</th>
 							<th>操作</th>
@@ -127,6 +128,7 @@ if($alert['category'] === "night") {
 ?>
 							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
+							<td><?php echo $alert['title']; ?></td>
 							<td>
 <?php
 if($alert['confirm_status'] == 1) {
