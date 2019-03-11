@@ -42,7 +42,7 @@ if(isset($alert_count)) {
 						<select name="confirm_status" class="confirm_status_top">
 							<option value="">選択項目一括操作</option>
 							<option value="0">未対応にする</option>
-							<option value="1">対応済みにする</option>
+							<option value="1">確認済みにする</option>
 						</select>
 					</div>
 					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
@@ -131,7 +131,7 @@ if($alert['category'] === "night") {
 <?php
 if($alert['confirm_status'] == 1) {
 ?>
-								<span class="report_state_taiouzumi">対応済み</span>
+								<span class="report_state_taiouzumi">確認済み</span>
 <?php
 } else {
 ?>
@@ -217,7 +217,7 @@ if(isset($alert_count)) {
 						<select name="confirm_status" class="confirm_status_bottom">
 							<option value="">選択項目一括操作</option>
 							<option value="0">未対応にする</option>
-							<option value="1">対応済みにする</option>
+							<option value="1">確認済みにする</option>
 						</select>
 					</div>
 					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
