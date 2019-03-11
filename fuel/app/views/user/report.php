@@ -30,8 +30,8 @@
 				</dl>
 				<a href="#" class="report_btn">表示変更</a>
 			</div>
-			<!-- /情報ソート --> 
 			-->
+			<!-- /情報ソート -->
 			
 			<form action="/user/report_save" method="post" name="alerts" id="alerts">			
 <?php
