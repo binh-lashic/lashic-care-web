@@ -85,6 +85,7 @@ $(function(){
 		var expiration_hour = $("#expiration_hour" + id).val();
 		api("alert/save", { id : id, confirm_status : confirm,expiration_hour: expiration_hour}, function(result){
 			hide_body(id);
+			location.reload();
 		});
 	});
 
