@@ -1,3 +1,4 @@
+<link href="/css/facility_style.css" type="text/css" rel="stylesheet">
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
 		<div class="drawer-navbar-header"> <a class="logo" href="/"><img src="/images/common/logo.png" alt=""/></a></div>
@@ -126,6 +127,200 @@
 		<!-- /text --> 
 		
 	</div>
+
+		<section id="section02">
+			<div class="container">
+				<div class="section02_inner clearfix">
+					<div class="section02_01_lt">
+						<h2 class="section02_tit"><img src="images/section02_01_tit.png" class="section02_01_tit" alt="室内空間センサーLASHIC-room"></h2>
+						<p><strong class="large">【基本機能】</strong><br>
+							居室内の「温度」「湿度」「照度」「運動量・動き」をモニターし、居室内のお客様が適切な環境にいらっしゃるかをモニタリングします。</p>
+						<p> <strong class="large">【主なチェック項目】</strong><br>
+							・熱中症リスク、感染症リスクの警告<br>
+							・起床・就寝時刻の記録<br>
+							・一定時間以上、動作がない場合の警告<br>
+							・生活リズムの崩れによる認知症初期状態の注意喚起<br>
+							・暗闇での徘徊など異常行動の把握と警告</p>
+					</div>
+					<div class="section02_01_rt">
+						<div class="clearfix"><img src="images/section02_01_img_01.png" class="section02_01_img_01" alt="画面イメージ"><img src="images/section02_01_img_02.png" class="section02_01_img_02" alt="機器イメージ"></div>
+						<p class="rt small mgb0">※画像はイメージです</p>
+						<div class="section02_detail">
+							<p class="mgb0">【搭載センサー】<br>
+								人感センサー（運動量・動き）/温度センサー/湿度センサー/照度センサー </p>
+						</div>
+					</div>
+				</div>
+				<!-- /.section02_inner -->
+
+				<div class="section02_inner clearfix">
+					<div class="section02_02_rt">
+						<h2 class="section02_tit"><img src="images/section02_02_tit.png" class="section02_02_tit" alt="睡眠センサーLASHIC-room"></h2>
+						<p><strong class="large">【基本機能】</strong><br>
+							ベッド上のお客様の状態をリアルタイムで把握、<br>
+							マットレスの下に敷くだけの簡単設置</p>
+						<p> <strong class="large">【主なチェック項目】</strong><br>
+							［動作］ ベッド上の在・不在、体動<br>
+							［バイタル］  脈拍（※） </p>
+						<p> <strong class="large">【開発中の機能】</strong><br>
+							［バイタル］ 呼吸（※）<br>
+							［姿勢］ 座位・仰臥位、左寄り・右寄り<br>
+							［睡眠］ 睡眠・覚醒、睡眠快適度 </p>
+						<span class="small">(※) 推定値であり医療的データではありません</span> </div>
+					<div class="section02_02_lt">
+						<div><img src="images/section02_02_img_01.jpg" class="section02_02_img_01" alt="ベッドセンサー">
+							<p class="rt small mgb0">※画像はイメージです</p>
+						</div>
+						<div class="section02_detail">
+							<p class="mgb0">【その他機能】<br>
+								厚みのあるマットレスでも動作可能 / 介護ベッドの背上げ、脚上げにも対応 / <br>
+								ビニールカバー付きで水濡れも対応 / LASHIC-roomの子機として作動 </p>
+						</div>
+					</div>
+				</div>
+				<!-- /.section02_inner -->
+				<!--
+				<div class="clearfix">
+					<div class="section02_03_lt">
+						<h2 class="section02_tit"><img src="images/section02_03_tit.png" class="section02_03_tit" alt="ナースコールLASHIC-call"></h2>
+						<p><strong class="large">【基本機能】</strong><br>
+							・緊急通知ボタンを触るとスマホにアラートを送信<br>
+							・通知を受けたスマホと通話が可能（LASHIC-call側は受話操作不要、自動で通話開始）<br>
+							・スピーカー＆マイクを内蔵のため、ハンズフリーで通話可能（転倒などで動けない場合にも有効）
+							・音量が足りない場合は外部スピーカーも接続可能<br>
+							・スマホ側からはいつでも通話可能 </p>
+						<div class="section02_detail">
+							<p class="mgb0">【その他機能】<br>
+								・番号ボタンに任意のスマホを割り当て可能。通常の通話用に利用可能（画像は試作機、実機は２ボタンとなります）<br>
+								・インターネット回線を利用するため、通話料は発生しない </p>
+						</div>
+					</div>
+					<div class="section02_03_rt">
+						<div class="section02_03_rt_img"><img src="images/section02_03_img_01.png" class="section02_03_img_01" alt="LASHIC-call機器"><img src="images/section02_03_img_02.png" class="section02_03_img_02" alt="画面イメージ"></div>
+						<p class="rt small mgt10">※画像はイメージです</p>
+					</div>
+				</div>
+				-->
+			</div>
+		</section>
+		
+		<section id="section04">
+			<div class="container">
+				<h3 class="section04_tit">製品仕様</h3>
+				<ul class="ul_2column">
+					<li>
+						<h4>室内空間センサー　LASHIC-room（親機・gateway）</h4>
+						<table width="100%" border="0" class="detail_table">
+							<tbody>
+							<tr>
+								<th>外形寸法／重量</th>
+								<td>H14.4cm×W11.4cm×D3.0cm　／　170g</td>
+							</tr>
+							<tr>
+								<th>電源／消費電力</th>
+								<td>AV100V　50/60Hz　／　11.5W</td>
+							</tr>
+							<tr>
+								<th>外部端子</th>
+								<td>有線ＬＡＮ（RJ-45、100base-TX）、ＵＳＢ（USB2.0対応、LTE通信、Wi-Fi通信対応）</td>
+							</tr>
+							<tr>
+								<th>セキュリティ</th>
+								<td>インターネット接続・ＳＳＬ、子機間無線通信・128bitAES</td>
+							</tr>
+							<tr>
+								<th>付属品</th>
+								<td>ACアダプタ、マニュアル</td>
+							</tr>
+							</tbody>
+						</table>
+					</li>
+					<li>
+						<h4>室内空間センサー　LASHIC-room（子機・room）</h4>
+						<table width="100%" border="0" class="detail_table">
+							<tbody>
+							<tr>
+								<th>外形寸法／重量</th>
+								<td>H14.4cm×W11.4cm×D3.0cm　／　120g</td>
+							</tr>
+							<tr>
+								<th>電源／消費電力</th>
+								<td>AV100V　50/60Hz　／　11.5W</td>
+							</tr>
+							<tr>
+								<th>外部端子</th>
+								<td>なし</td>
+							</tr>
+							<tr>
+								<th>セキュリティ</th>
+								<td>親機間無線通信・128bitAES</td>
+							</tr>
+							<tr>
+								<th>付属品</th>
+								<td>ACアダプタ、マニュアル</td>
+							</tr>
+							</tbody>
+						</table>
+					</li>
+					<!--
+					<li>
+						<h4>双方向通話型 ナースコール　LASHIC-call</h4>
+						<table width="100%" border="0" class="detail_table">
+							<tbody>
+							<tr>
+								<th>外形寸法／重量</th>
+								<td>H14.4cm×W11.4cm×D3.0cm　／　200g</td>
+							</tr>
+							<tr>
+								<th>電源／消費電力</th>
+								<td>AV100V　50/60Hz　／　11.5W</td>
+							</tr>
+							<tr>
+								<th>外部端子</th>
+								<td>有線ＬＡＮ（RJ-45、100base-TX）、ＵＳＢ（USB2.0対応、LTE通信、Wi-Fi通信対応）、外部スピーカー接続用3.5Φステレオミニジャック</td>
+							</tr>
+							<tr>
+								<th>セキュリティ</th>
+								<td>インターネット接続・ＳＳＬ</td>
+							</tr>
+							<tr>
+								<th>付属品</th>
+								<td>ACアダプタ、マニュアル</td>
+							</tr>
+							</tbody>
+						</table>
+					</li>
+					-->
+					<li>
+						<h4>睡眠センサー　LASHIC-sleep</h4>
+						<table width="100%" border="0" class="detail_table">
+							<tbody>
+							<tr>
+								<th>外形寸法／重量</th>
+								<td>H14.4cm×W11.4cm×D3.0cm　／　本体160g　ケーブル100g　ベッドセンサー1.6kg</td>
+							</tr>
+							<tr>
+								<th>電源／消費電力</th>
+								<td>AV100V　50/60Hz　／　11.5W</td>
+							</tr>
+							<tr>
+								<th>外部端子</th>
+								<td>有線ＬＡＮ（RJ-45、100base-TX）、ＵＳＢ（USB2.0対応、LTE通信、Wi-Fi通信対応）、ベッドセンサー接続用3.5Φステレオミニジャック</td>
+							</tr>
+							<tr>
+								<th>セキュリティ</th>
+								<td>インターネット接続・ＳＳＬ、親機間無線通信・128bitAES</td>
+							</tr>
+							<tr>
+								<th>付属品</th>
+								<td>ACアダプタ、マニュアル、オーディオケーブル、ベッドセンサー</td>
+							</tr>
+							</tbody>
+						</table>
+					</li>
+				</ul>
+			</div>
+		</section>
 </div>
 	<!-- /デザイン -->
 		<!-- 後でデザイン変更 -->
@@ -141,7 +336,7 @@ if(!empty($monitor))
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>無料モニターパック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span>
 							</p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<p class="right"><span class="large text_red">初期費用、6ヶ月分無料</span></p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
@@ -151,7 +346,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class=" btn_disabled" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="packmagokoro">
-							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
 							<div class="mgt10 mgb10"><a href="/s/normal">通常の購入に戻る</a></div>
 						</div>
 					</li>
@@ -162,7 +357,7 @@ if(!empty($monitor))
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>月々パック</h3>
 							<p class="right"><span class="max_large text_red">1,200円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>ひと月分1,200円(税抜)が毎月引き落とされます。</li>
@@ -171,14 +366,14 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="1" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
-							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>6ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">1,100円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>6か月分6,600円(税抜)の一括支払い。</li>
@@ -187,14 +382,14 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="2" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
-							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
 						<div class="shoppingCart_box">
 							<h3 class="shoppingCart_h3">LASHIC（ラシク）<br>12ヶ月パック</h3>
 							<p class="right"><span class="max_large text_red">980円/月</span><span class="large text_red">（税抜）</span></p>
-							<p class="right">初期費用 14,800円（税抜）</p>
+							<p class="right">初期費用 19,800円（税抜）</p>
 							<div class="shoppingCart_detail">
 								<ul class="ul-disc">
 									<li>12か月分11,760円(税抜)の一括支払い。</li>
@@ -203,7 +398,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="3" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
-							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
 						</div>
 					</li>
 <?php

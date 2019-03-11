@@ -43,7 +43,7 @@ class Model_Sensor extends Orm\Model{
 		'serial',
 		'wake_up_start_time' => array('default' => 5),
 		'wake_up_end_time' => array('default' => 9),
-		'sleep_start_time' => array('default' => 19),
+		'sleep_start_time' => array('default' => 21),
 		'sleep_end_time' => array('default' => 26),
 		'temperature_level' => array('default' => 2),
 		'fire_level' => array('default' => 2),

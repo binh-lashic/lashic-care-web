@@ -262,9 +262,11 @@ if(isset($client)) {
 							</table>
 						
 						
+							<!--
 							<div class="graph24_btnArea">
 							<button class="btn_text graph24_cal_today" type="button"><?php echo __('date.today'); ?></button>
 							</div>
+							-->
 						</div>
 						</div>
 						<!-- /カレンダー表示内容 --> 
