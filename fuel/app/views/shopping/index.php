@@ -440,6 +440,9 @@ if(!empty($monitor))
 					<input type="password" class="input_text" name="password">
 				</dd>
 			</dl>
+			<?php if(!empty($login_error)) { ?>
+				<p class="error small mgb10">メールアドレスまたはパスワードが正しくありません</p>
+			<?php } ?>
 			<input type="checkbox" id="password_check">
 			<label for="password_check" class="checkbox">ログインを保持する</label>
 			<p class="pdt10"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
@@ -455,8 +458,12 @@ if(!empty($monitor))
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script type="text/javascript"> 
 $(document).ready(function() {
-		$(".fancybox").fancybox();
-	}); 
+	$(".fancybox").fancybox();
+  
+  <?php if(!empty($login_error)) { ?>
+	$.fancybox.open($('#loginOpenWindow'));
+  <?php } ?>
+});
 $(document).ready(function() {
 	$(".various").fancybox({
 		maxWidth	: 800,
