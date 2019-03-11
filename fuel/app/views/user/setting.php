@@ -397,7 +397,7 @@ for($i = 0; $i < 29; $i++) {
 													</select>
 											</div>
 											<span class="floatL pdt5">&nbsp;&nbsp;時&nbsp;&nbsp;</span>
-											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト19時〜26時</span></div>
+											<div class="clearBoth"><span class="small text_red">※</span><span class="small">デフォルト21時〜26時</span></div>
 										</td>
 										<td></td>
 									</tr>									
