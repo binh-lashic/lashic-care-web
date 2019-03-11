@@ -42,7 +42,7 @@
 					
                     <div class="btn-container">
                          <a href="#moreInfoBg" class="btn">詳しく見る</a>
-						<a href="#cartSet" class="btn" style="border: none; background-color: #7ecef4; text-decoration: none !important;">購入する</a>
+                         <a href="#cartSet" class="btn" style="border: transparent 2px solid; background-color: #7ecef4; text-decoration: none !important;">購入する</a>
                     </div>
                 </div>
                 <div class="hero_rights">
@@ -344,9 +344,9 @@ if(!empty($monitor))
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class=" btn_disabled" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="packmagokoro">
-							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　1,500円/月（税抜）も一緒に申し込む</label>
+							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 							<div class="mgt10 mgb10"><a href="/s/normal">通常の購入に戻る</a></div>
 						</div>
 					</li>
@@ -364,7 +364,7 @@ if(!empty($monitor))
 									<li>毎月自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="1" href="#settingComp" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="1" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
 							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
@@ -380,7 +380,7 @@ if(!empty($monitor))
 									<li>6か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="2" href="#settingComp" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="2" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
 							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
@@ -396,7 +396,7 @@ if(!empty($monitor))
 									<li>12か月ごとに自動更新されます。</li>
 								</ul>
 							</div>
-							<div class="mgt10 mgb10"><a class="startShopping shoppingFancybox btn_darkBlue graphSettingTrue" data-plan="3" href="#settingComp" onclick="return false;">カートに入れる</a></div>
+							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="3" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
 							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
