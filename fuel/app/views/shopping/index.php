@@ -346,7 +346,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class=" btn_disabled" data-plan="magokoro" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="packmagokoro">
-							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
+							<label for="packmagokoro" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 							<div class="mgt10 mgb10"><a href="/s/normal">通常の購入に戻る</a></div>
 						</div>
 					</li>
@@ -366,7 +366,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="1" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack1">
-							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
+							<label for="pack1" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
@@ -382,7 +382,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="2" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack2">
-							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
+							<label for="pack2" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 					<li class="shoppingCart_containerLi">
@@ -398,7 +398,7 @@ if(!empty($monitor))
 							</div>
 							<div class="mgt10 mgb10"><a class="btn_disabled" data-plan="3" href="" onclick="return false;">カートに入れる</a></div>
 							<input type="checkbox" id="pack3">
-							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む）</label>
+							<label for="pack3" class="checkbox shoppingCart_input">通信機器レンタル　980円/月（税抜）も一緒に申し込む</label>
 						</div>
 					</li>
 <?php
