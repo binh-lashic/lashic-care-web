@@ -456,10 +456,14 @@ if(!empty($monitor))
 <!--このページのjs -->
 <script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
 $(document).ready(function() {
-		$(".fancybox").fancybox();
-	}); 
+	$(".fancybox").fancybox();
+  
+  <?php if(!empty($login_error)) { ?>
+	$.fancybox.open($('#loginOpenWindow'));
+  <?php } ?>
+});
 $(document).ready(function() {
 	$(".various").fancybox({
 		maxWidth	: 800,

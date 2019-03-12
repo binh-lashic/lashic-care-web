@@ -1718,11 +1718,4 @@ p + .form_title, div + .form_title, p + .form_set_container {
   .color-container--error p{
     margin-bottom: 0;
   }
-.error {
-    color: #333;
-    background: url("/images/icon_errer.png") 2px no-repeat #f4ed7e;
-    background-size: 21px 21px;
-    padding: 3px 3px 1px 28px;
-    margin-top: 5px;
-}
 }
