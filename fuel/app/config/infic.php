@@ -46,7 +46,7 @@ return array(
 		'wake_up_threshold' => 5,
 		'wake_up_duration' => 30,
 		'wake_up_ignore_duration' => 5,
-		'sleep_start_time' => 19,
+		'sleep_start_time' => 21,
 		'sleep_end_time' => 23,
 		'sleep_threshold' => 5,
 		'sleep_duration' => 30,

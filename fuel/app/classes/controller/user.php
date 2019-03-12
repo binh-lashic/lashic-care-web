@@ -547,14 +547,6 @@ class Controller_User extends Controller_Base
 		Response::redirect('/user/report');	
     }
 
-
-	public function action_login_form()
-	{
-        $data = array();
-        $this->template->title = 'ログインページ';
-        $this->template->content = View::forge('user/login');
-	}
-
 	public function action_login()
 	{
 		$username = Input::post("username");
@@ -569,18 +561,17 @@ class Controller_User extends Controller_Base
 				Session::delete('client_id');
 				Response::redirect('/user');		
 			} else {
-	        	$data['error'] = true;
-			}			
+				Session::set('login_error', true);
+				Response::redirect('/');
+			}
 		}
-    	$this->template->title = 'ログインページ';
-    	$this->template->content = View::forge('user/login', $data);			
 	}
 
 	public function action_logout()
 	{
 		Auth::logout();
 		Session::delete('client_id');
-		Response::redirect('/user/login');
+		Response::redirect('/');
 	}
 
 	public function action_setting()

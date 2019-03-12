@@ -5,6 +5,7 @@
 			<h2 class="content_h2">情報を確認・報告してください</h2>
 			
 			<!-- 情報ソート -->
+			<!--
 			<div id="report_sort">
 				<dl class="clearfix">
 					<dt>カテゴリー</dt>
@@ -30,6 +31,7 @@
 				<a href="#" class="report_btn">表示変更</a>
 			</div>
 			<!-- /情報ソート --> 
+			-->
 			
 			<form action="/user/report_save" method="post" name="alerts" id="alerts">			
 <?php
@@ -42,7 +44,7 @@ if(isset($alert_count)) {
 						<select name="confirm_status" class="confirm_status_top">
 							<option value="">選択項目一括操作</option>
 							<option value="0">未対応にする</option>
-							<option value="1">対応済みにする</option>
+							<option value="1">確認済みにする</option>
 						</select>
 					</div>
 					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
@@ -62,7 +64,7 @@ if(isset($page) && $page > 1) {
 <?php
 }
 ?>
-					<input type="text" value="<?php echo isset($page) ? $page : 1; ?>"> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
+					<?php echo isset($page) ? $page : 1; ?> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
 <?php
 if(isset($page) && $page != $page_count) {
 ?>	
@@ -90,6 +92,7 @@ if(isset($page) && $page != $page_count) {
 							<th>日付</th>
 							<th>カテゴリー</th>
 							<th>発生時間</th>
+							<th>内容</th>
 							<th>内容確認状況</th>
 							<th>最終確認者</th>
 							<th>操作</th>
@@ -127,11 +130,12 @@ if($alert['category'] === "night") {
 ?>
 							</td>
 							<td><?php echo date("H:i", strtotime($alert['date'])); ?></td>
+							<td><?php echo $alert['title']; ?></td>
 							<td>
 <?php
 if($alert['confirm_status'] == 1) {
 ?>
-								<span class="report_state_taiouzumi">対応済み</span>
+								<span class="report_state_taiouzumi">確認済み</span>
 <?php
 } else {
 ?>
@@ -217,7 +221,7 @@ if(isset($alert_count)) {
 						<select name="confirm_status" class="confirm_status_bottom">
 							<option value="">選択項目一括操作</option>
 							<option value="0">未対応にする</option>
-							<option value="1">対応済みにする</option>
+							<option value="1">確認済みにする</option>
 						</select>
 					</div>
 					<div class="report_btn_apply"><a href="javascript:void(0)" onclick="document.alerts.submit();return false;" class="btn_text">適用</a></div>
@@ -237,7 +241,7 @@ if(isset($page) && $page > 1) {
 <?php
 }
 ?>
-					<input type="text" value="<?php echo isset($page) ? $page : 1; ?>"> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
+					<?php echo isset($page) ? $page : 1; ?> / <span class="report_pager_pages"><?php echo $page_count; ?></span>
 <?php
 if(isset($page) && $page != $page_count) {
 ?>	

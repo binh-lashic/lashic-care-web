@@ -180,7 +180,7 @@ if(!empty($errors['phone'])) {
 			</div>
 
 			<div class="set_container">
-				<div class="left_container"><a href="index_kounyu_login.html" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/user" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>
