@@ -1,3 +1,4 @@
+<?php include dirname(__FILE__).'/../i18n.php'?>
 <link href="/css/facility_style.css" type="text/css" rel="stylesheet">
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">

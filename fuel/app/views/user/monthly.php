@@ -25,7 +25,6 @@
     height: 346px;
 }
 </style>
-        	<?php echo $i18n ?>
 		<!-- content start -->
 		<section id="contentBox">
 			<h1 class="content_h1 monthly_title_icon"><?php echo __('user.index.user_state_of', ['user_name' => $client['last_name'].$client['first_name']]); ?></h1>

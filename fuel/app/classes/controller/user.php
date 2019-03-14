@@ -138,7 +138,6 @@ class Controller_User extends Controller_Base
 		$this->template->title   = 'マイページ';
 		$this->template->header  = View::forge('header_client', $this->data);
 		$this->template->content = View::forge('user/index', $this->data);
-		$this->template->content->set('i18n', View::forge('i18n', $this->data));
 		$this->template->sidebar = View::forge('sidebar', $this->data);
 
 		$this->data['is_wbgt_month'] = $this->is_wbgt_month();
@@ -531,7 +530,6 @@ class Controller_User extends Controller_Base
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/report', $this->data);
-		$this->template->content->set('i18n', View::forge('i18n', $this->data));
         $this->template->sidebar = View::forge('sidebar', $this->data);
 	}
 
@@ -671,7 +669,6 @@ class Controller_User extends Controller_Base
             $this->template->header = View::forge('header_client', $this->data);
             $this->template->content = Presenter::forge('user/monthly')
                                         ->set('data', $this->data);
-            $this->template->content->set('i18n', View::forge('i18n', $this->data));
             $this->template->sidebar = View::forge('sidebar', $this->data);
         }                
 

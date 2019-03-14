@@ -1,3 +1,4 @@
+<?php include 'i18n.php'?>
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
 		<div class="drawer-navbar-header">
