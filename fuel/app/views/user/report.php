@@ -152,7 +152,7 @@ if($alert['confirm_status'] == 1) {
 							</td>
 						</tr>
 						<tr id="body<?php echo $key; ?>" class="hide_onload report_itemSet" style="display:none">
-							<td colspan="7">
+							<td colspan="8">
 								<div class="report_arrow"></div>
 								<div class="report_itemInner">
 									<strong class="large"><?php echo date("m/d", strtotime($alert['date'])); ?>（<?php echo Util::format_week(date("w", strtotime($alert['date']))); ?>）</strong><br><?php echo $alert['description']; ?>
