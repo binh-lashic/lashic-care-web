@@ -400,7 +400,12 @@ class Controller_User extends Controller_Base
     	$this->template->title = 'マイページ';
 
         if(Input::post()) {
-        	\Model_User::saveUser(Input::post());
+        	$params = Input::post();
+        	
+        	if(empty($params['profile_image'])){
+        		unset($params['profile_image']);
+        	}
+        	\Model_User::saveUser($params);
         }
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info_basic_complete', $this->data);
