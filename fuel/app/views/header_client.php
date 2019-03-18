@@ -48,7 +48,9 @@ if(!empty($clients)) {
 					<ul class="drawer-dropdown-menu">
 						<li class="nav_mypage"><a href="/user/account" class="drawer-dropdown-menu-item"><?php echo __('header.client.my_page'); ?></a></li>
 						<li class="nav_shopping_history"><a href="/user/payment" class="drawer-dropdown-menu-item"><?php echo __('header.client.purchase_payment_histories'); ?></a></li>
-						<li class="nav_set"><a href="/user/setting" class="drawer-dropdown-menu-item"><?php echo __('header.client.alert_notification'); ?></a></li>
+						<?php if(isset($sensor)) { ?>
+							<li class="nav_set"><a href="/user/setting" class="drawer-dropdown-menu-item"><?php echo __('header.client.alert_notification'); ?></a></li>
+						<?php } ?>
 						<li class="nav_help"><a href="/page/help" class="drawer-dropdown-menu-item"><?php echo __('header.client.q_and_a'); ?></a></li>
 						<li class="nav_logout"><a href="/user/logout" class="drawer-dropdown-menu-item"><?php echo __('header.client.logout'); ?></a></li>
 					</ul>
