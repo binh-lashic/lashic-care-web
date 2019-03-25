@@ -327,6 +327,16 @@ return array(
 					'title' => 'センサー接続再開通知',
 					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータ受信の再開を確認できた場合に通知します。',
 				),
+				
+				'wake_up_setting' => array(
+					'title' => '起床判断設定',
+					'description' => '人感センサーが室内の動きを捉え、起床かどうか判断します。',
+				),
+				
+				'sleep_setting' => array(
+					'title' => '就寝判断設定',
+					'description' => '人感センサーが室内の動きを捉え、就寝したかどうか判断します。',
+				)
 		),
                 'alert_mail_format' => '%s%s さんの%s',
 	),

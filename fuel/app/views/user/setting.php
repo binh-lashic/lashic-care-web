@@ -335,7 +335,7 @@ if($sensor['admin'] == 1) {
 ?>
 									<tr>
 										<th>起床判断設定<br>
-<p class="max_small text_red txt_normal">※人感センサーが室内の動きを捉え、起床かどうか判断します。</p></th>
+<p class="max_small text_red txt_normal">※<?php echo Config::get("template.alert.wake_up_setting.description"); ?></p></th>
 										<td>起床判断開始時間</td>
 										<td>
 											<div class="common_select floatL">
@@ -369,7 +369,7 @@ for($i = 0; $i < 24; $i++) {
 									</tr>
 									<tr>
 										<th>就寝判断設定<br>
-<p class="max_small text_red txt_normal">※人感センサーが室内の動きを捉え、就寝したかどうか判断します。</p></th>
+<p class="max_small text_red txt_normal">※<?php echo Config::get("template.alert.sleep_setting.description"); ?></p></th>
 										<td>就寝判断開始時間</td>
 										<td>
 											<div class="common_select floatL">
