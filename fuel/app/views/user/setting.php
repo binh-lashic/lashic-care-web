@@ -17,8 +17,8 @@
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['temperature_level']; ?>" list="scale" class="rangeNo03" id="temperature_level" name="temperature_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['temperature_level']; ?>" list="scale" class="rangeNo03" id="temperature_level" name="temperature_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -41,8 +41,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['fire_level']; ?>" list="scale" class="rangeNo03" id="fire_level" name="fire_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['fire_level']; ?>" list="scale" class="rangeNo03" id="fire_level" name="fire_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -65,8 +65,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['heatstroke_level']; ?>" list="scale" class="rangeNo03" id="heatstroke_level" name="heatstroke_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['heatstroke_level']; ?>" list="scale" class="rangeNo03" id="heatstroke_level" name="heatstroke_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -117,8 +117,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['humidity_level']; ?>" list="scale" class="rangeNo03" id="humidity_level" name="humidity_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['humidity_level']; ?>" list="scale" class="rangeNo03" id="humidity_level" name="humidity_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -141,8 +141,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['mold_mites_level']; ?>" list="scale" class="rangeNo03" id="mold_mites_level" name="mold_mites_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['mold_mites_level']; ?>" list="scale" class="rangeNo03" id="mold_mites_level" name="mold_mites_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -165,8 +165,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['illuminance_daytime_level']; ?>" list="scale" class="rangeNo03" id="illuminance_daytime_level" name="illuminance_daytime_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['illuminance_daytime_level']; ?>" list="scale" class="rangeNo03" id="illuminance_daytime_level" name="illuminance_daytime_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -189,8 +189,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['illuminance_night_level']; ?>" list="scale" class="rangeNo03" id="illuminance_night_level" name="illuminance_night_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['illuminance_night_level']; ?>" list="scale" class="rangeNo03" id="illuminance_night_level" name="illuminance_night_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -224,8 +224,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['wake_up_level']; ?>" list="scale" class="rangeNo03" id="wake_up_level" name="wake_up_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['wake_up_level']; ?>" list="scale" class="rangeNo03" id="wake_up_level" name="wake_up_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -248,8 +248,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['sleep_level']; ?>" list="scale" class="rangeNo03" id="sleep_level" name="sleep_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['sleep_level']; ?>" list="scale" class="rangeNo03" id="sleep_level" name="sleep_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -272,8 +272,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['abnormal_behavior_level']; ?>" list="scale" class="rangeNo03" id="abnormal_behavior_level" name="abnormal_behavior_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['abnormal_behavior_level']; ?>" list="scale" class="rangeNo03" id="abnormal_behavior_level" name="abnormal_behavior_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
@@ -296,8 +296,8 @@ if($sensor['admin'] == 1) {
 if($sensor['admin'] == 1) {
 ?>
 											<label class="dispayNone">範囲0～100、目盛り3つ class="rangeNo03"</label>
-											<input type="range" min="0" max="2" value="<?php echo $sensor['active_non_detection_level']; ?>" list="scale" class="rangeNo03" id="active_non_detection_level" name="active_non_detection_level" />
-											<table class="rangeCount">
+											<input style="visibility:hidden;" type="range" min="0" max="2" value="<?php echo $sensor['active_non_detection_level']; ?>" list="scale" class="rangeNo03" id="active_non_detection_level" name="active_non_detection_level" />
+											<table style="visibility:hidden;" class="rangeCount">
 												<tr>
 													<td>感度：弱</td>
 													<td>感度：中</td>
