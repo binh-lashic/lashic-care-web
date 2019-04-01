@@ -252,8 +252,9 @@ class Model_User extends Orm\Model{
 				'related' => array('admin')
 			));
 			foreach($rows as $row) {
-				if($row->admin['master'] != 1) {
-					$users[] = \Model_User::format($row->admin);
+				$user = $row->to_array();
+				if($user['admin']['master'] != 1) {
+					$users[] = \Model_User::format($user['admin']);
 				}
 			}
 		} else {
