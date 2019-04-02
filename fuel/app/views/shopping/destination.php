@@ -156,12 +156,17 @@ if(!empty($errors['address'])) {
 								<td><input type="text" name="phone" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['phone'])) { echo $data['phone']; } ?>">
 									<span class="small text_red">※</span><span class="small">半角数字、ハイフンなしでご入力ください。</span>
 <?php
-if(!empty($errors['phone'])) {
+if($errors['phone'] == 'valid_string') {
+?>
+									<p class="error">エラー：電話番号の形式が正しくありません。</p></td>
+<?php
+} else if(!empty($errors['phone'])) {
 ?>
 									<p class="error">エラー：電話番号を入力してください。</p></td>
 <?php
 }
-?>								</tr>
+?>
+							</tr>
 						</tbody>
 					</table>
 					<div class="set_container mgb30">

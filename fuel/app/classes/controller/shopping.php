@@ -139,7 +139,7 @@ class Controller_Shopping extends Controller_Base
 
             if(!$val->run()) {
                 foreach($val->error() as $key=>$value){
-                    $this->data['errors'][$key] = true;
+                  $this->data['errors'][$key] = $value->rule;
                 }
             }
 
