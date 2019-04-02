@@ -28,12 +28,13 @@ class Model_Address extends Orm\Model{
     public static function validate()
     {
         $val = Validation::forge();
+        $val->add_callable('Validation_Japanese');
         $val->add_field('first_name', '', 'required');
-        $val->add_field('first_kana', '', 'required');
+        $val->add_field('first_kana', '', 'required|hiragana');
         $val->add_field('last_name', '', 'required');
-        $val->add_field('last_kana', '', 'required');
-        $val->add_field('prefecture', '', 'required');  
-        $val->add_field('address', '', 'required'); 
+        $val->add_field('last_kana', '', 'required|hiragana');
+        $val->add_field('prefecture', '', 'required');
+        $val->add_field('address', '', 'required');
         $val->add_field('phone', '', 'required|valid_string[numeric]');
         return $val;
     }

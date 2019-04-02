@@ -104,7 +104,11 @@ if(!empty($errors['last_name']) || !empty($errors['first_name'])) {
 									<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
 									<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 <?php
-if(!empty($errors['prefecture'])) {
+if($errors['last_kana'] == 'hiragana' || $errors['first_kana'] == 'hiragana' ) {
+?>
+									<p class="error">エラー：ふりがなの形式が正しくありません。</p></td>
+<?php
+} else if(!empty($errors['last_kana']) || !empty($errors['first_kana'])) {
 ?>
 									<p class="error">エラー：ふりがなを入力してください。</p></td>
 <?php
