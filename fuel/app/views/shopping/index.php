@@ -180,10 +180,12 @@
 					</div>
 				</div>
 				<!-- /.section02_inner -->
-				<!--
-				<div class="clearfix">
+				<div class="section02_inner clearfix">
 					<div class="section02_03_lt">
-						<h2 class="section02_tit"><img src="images/section02_03_tit.png" class="section02_03_tit" alt="ナースコールLASHIC-call"></h2>
+						<h2 class="section02_tit">
+							<img src="images/section02_03_tit.png" class="section02_03_tit" alt="ナースコールLASHIC-call"><br />
+							※在宅版でのご提供は今後予定しております。
+						</h2>
 						<p><strong class="large">【基本機能】</strong><br>
 							・緊急通知ボタンを触るとスマホにアラートを送信<br>
 							・通知を受けたスマホと通話が可能（LASHIC-call側は受話操作不要、自動で通話開始）<br>
@@ -201,7 +203,6 @@
 						<p class="rt small mgt10">※画像はイメージです</p>
 					</div>
 				</div>
-				-->
 			</div>
 		</section>
 		
@@ -263,7 +264,6 @@
 							</tbody>
 						</table>
 					</li>
-					<!--
 					<li>
 						<h4>双方向通話型 ナースコール　LASHIC-call</h4>
 						<table width="100%" border="0" class="detail_table">
@@ -291,7 +291,6 @@
 							</tbody>
 						</table>
 					</li>
-					-->
 					<li>
 						<h4>睡眠センサー　LASHIC-sleep</h4>
 						<table width="100%" border="0" class="detail_table">
