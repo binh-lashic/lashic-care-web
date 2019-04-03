@@ -32,8 +32,8 @@ class Controller_Register extends Controller_Base
 	     			$this->data['errors']['email'] = true;
 	     		}
         	} else {
-			    // バリデーション失敗の場合ここに入ってくる
-			    foreach($val->error() as $key=>$value){
+				// バリデーション失敗の場合ここに入ってくる
+				foreach($val->error() as $key=>$value){
 					$this->data['errors'][$key] = $value;
 				}
         	}
