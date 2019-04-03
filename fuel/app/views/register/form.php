@@ -240,7 +240,7 @@ if(isset($errors['password'])) {
 <?php
 if(isset($errors['password_confirm'])) {
 ?>
-										<p class="error">エラー：パスワードが一致しません。</p>
+										<p class="error"><?php echo $errors['password_confirm']; ?></p>
 <?php
 }
 ?>

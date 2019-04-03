@@ -54,6 +54,7 @@ class Model_User extends Orm\Model{
 	{
 		$val = Validation::forge($factory);
 		$val->add_callable('Validation_Japanese');
+		$val->add_callable('usersrules');
 		switch($factory) {
 			case "register":
 				$val->add_field('email', 'メールアドレス', 'required|valid_email');
@@ -66,7 +67,7 @@ class Model_User extends Orm\Model{
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
-				$val->add_field('password_confirm', 'パスワード（確認）', 'required');
+				$val->add_field('password_confirm', 'パスワード（確認）', 'required|check_confirm_password['.Input::post('password').']');
 				break;
 			case "register_client":
 				$val->add_field('first_name', '', 'required');
