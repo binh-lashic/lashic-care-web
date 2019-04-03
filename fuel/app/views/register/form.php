@@ -51,16 +51,16 @@ if(isset($errors['email'])) {
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-if(isset($errors['first_name'])) {
+if(isset($errors['last_name'])) {
 ?>
-											<p class="error"><?php echo $errors['first_name']; ?></p>
+											<p class="error"><?php echo $errors['last_name']; ?></p>
 <?php
 }
 ?>
 <?php
-if(isset($errors['last_name'])) {
+if(isset($errors['first_name'])) {
 ?>
-											<p class="error"><?php echo $errors['last_name']; ?></p>
+											<p class="error"><?php echo $errors['first_name']; ?></p>
 <?php
 }
 ?>
@@ -70,16 +70,16 @@ if(isset($errors['last_name'])) {
 										<th><span class="icon_Required">必須</span> ふりがな</th>
 										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">
 <?php
-if(isset($errors['first_kana'])) {
+if(isset($errors['last_kana'])) {
 ?>
-											<p class="error"><?php echo $errors['first_kana']; ?></p>
+											<p class="error"><?php echo $errors['last_kana']; ?></p>
 <?php
 }
 ?>
 <?php
-if(isset($errors['last_kana'])) {
+if(isset($errors['first_kana'])) {
 ?>
-											<p class="error"><?php echo $errors['last_kana']; ?></p>
+											<p class="error"><?php echo $errors['first_kana']; ?></p>
 <?php
 }
 ?>

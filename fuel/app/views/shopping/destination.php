@@ -91,16 +91,16 @@ if(!empty($errors)) {
 									<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
 									<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-	if(!empty($errors['first_name'])) {
+	if(!empty($errors['last_name'])) {
 ?>
-									<p class="error"><?php echo $errors['first_name']; ?></p>
+									<p class="error"><?php echo $errors['last_name']; ?></p>
 <?php
 }
 ?>
 <?php
-	if(!empty($errors['last_name'])) {
+	if(!empty($errors['first_name'])) {
 ?>
-									<p class="error"><?php echo $errors['last_name']; ?></p>
+									<p class="error"><?php echo $errors['first_name']; ?></p>
 <?php
 }
 ?>
@@ -112,16 +112,16 @@ if(!empty($errors)) {
 									<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
 									<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 <?php
-	if(!empty($errors['first_kana'])) {
+	if(!empty($errors['last_kana'])) {
 ?>
-									<p class="error"><?php echo $errors['first_kana']; ?></p>
+									<p class="error"><?php echo $errors['last_kana']; ?></p>
 <?php
 }
 ?>
 <?php
-if(!empty($errors['last_kana'])) {
+if(!empty($errors['first_kana'])) {
 ?>
-									<p class="error"><?php echo $errors['last_kana']; ?></p>
+									<p class="error"><?php echo $errors['first_kana']; ?></p>
 <?php
 }
 ?>							</td>
