@@ -12,7 +12,7 @@ class Validation_Japanese
 	{
 		if( empty($val) ){ return true; }
 		if( static::_validation_hirakata($val) ){
-			return mb_convert_kana($val, "sHcV");
+			return mb_convert_kana($val, "HcV");
 		}
 		
 		return false;
@@ -25,7 +25,7 @@ class Validation_Japanese
 	{
 		if( empty($val) ){ return true; }
 		if( static::_validation_hirakata($val) ){
-			return mb_convert_kana($val, "sKVC");
+			return mb_convert_kana($val, "KVC");
 		}
 		
 		return false;
