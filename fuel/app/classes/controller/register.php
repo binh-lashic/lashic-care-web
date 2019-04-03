@@ -34,7 +34,7 @@ class Controller_Register extends Controller_Base
         	} else {
 			    // バリデーション失敗の場合ここに入ってくる
 			    foreach($val->error() as $key=>$value){
-			      $this->data['errors'][$key] = true;
+			        $this->data['errors'][$key] = true;
 			    }
         	}
 			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
