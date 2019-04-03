@@ -80,10 +80,11 @@ class Model_User extends Orm\Model{
 				$val->add_field('address', '都道府県以下', 'required');
 				break;
 			case "basic":
-				$val->add_field('name', '', 'required');
-				$val->add_field('kana', '', 'required');
-				$val->add_field('gender', '', 'required');
-				$val->add_field('phone', '', 'required');				
+				$val->add_field('first_name', 'お名前 姓', 'required');
+				$val->add_field('first_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('last_name', 'お名前 名', 'required');
+				$val->add_field('last_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
 				break;
 			case "email":
 				$val->add_field('email', '', 'required');
