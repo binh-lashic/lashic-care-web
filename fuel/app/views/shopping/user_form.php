@@ -35,9 +35,16 @@ if(!empty($errors)) {
 									<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
 									<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-if(isset($errors['last_name']) || isset($errors['first_name'])) {
+	if(isset($errors['last_name'])) {
 ?>
-									<p class="error">エラー：お名前を入力してください。</p>
+									<p class="error"><?php echo $errors['last_name']; ?></p>
+<?php
+}
+?>
+<?php
+	if(isset($errors['first_name'])) {
+?>
+									<p class="error"><?php echo $errors['first_name']; ?></p>
 <?php
 }
 ?>
@@ -48,10 +55,19 @@ if(isset($errors['last_name']) || isset($errors['first_name'])) {
 								<td>
 											<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
 											<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
+								  
+								  
 <?php
-if(isset($errors['last_kana']) || isset($errors['first_kana'])) {
+	if(isset($errors['last_kana'])) {
 ?>
-									<p class="error">エラー：ふりがなを入力してください。</p>
+									<p class="error"><?php echo $errors['last_kana']; ?></p>
+<?php
+}
+?>
+<?php
+	if(isset($errors['first_kana'])) {
+?>
+									<p class="error"><?php echo $errors['first_kana']; ?></p>
 <?php
 }
 ?>
@@ -67,7 +83,7 @@ if(isset($errors['last_kana']) || isset($errors['first_kana'])) {
 <?php
 if(!empty($errors['gender'])) {
 ?>
-									<p class="error">エラー：性別を選択してください。</p>
+									<p class="error"><?php echo $errors['gender']; ?></p>
 <?php
 }
 ?>
@@ -90,7 +106,7 @@ foreach($eras as $key => $era) {
 										<div class="floatL pdt5">　年　</div>
 										<div class="floatL common_select">
 											<select name="month">
-												<option value="">選択してください</option>	
+												<option value="">選択してください</option>
 <?php
 for($i = 1; $i <= 12; $i++) {
 ?>
@@ -118,7 +134,7 @@ for($i = 1; $i <= 31; $i++) {
 <?php
 if(!empty($errors['birthday'])) {
 ?>
-									<p class="error">エラー：生年月日を選択してください。</p></td>
+									<p class="error">生年月日を選択してください。</p></td>
 <?php
 }
 ?>							</tr>
@@ -147,7 +163,7 @@ foreach($prefectures as $prefecture) {
 <?php
 if(!empty($errors['prefecture'])) {
 ?>
-									<p class="error">エラー：都道府県を選択してください。</p>
+									<p class="error"><?php echo $errors['prefecture']; ?></p>
 <?php
 }
 ?>								</td>
@@ -160,10 +176,10 @@ if(!empty($errors['prefecture'])) {
 <?php
 if(!empty($errors['address'])) {
 ?>
-									<p class="error">エラー：都道府県以下を入力してください。</p>
+									<p class="error"><?php echo $errors['address']; ?></p>
 <?php
 }
-?>							
+?>
 							</td>
 							</tr>
 							<tr>
@@ -173,10 +189,10 @@ if(!empty($errors['address'])) {
 <?php
 if(!empty($errors['phone'])) {
 ?>
-									<p class="error">エラー：電話番号1を入力してください。</p>
+									<p class="error"><?php echo $errors['phone']; ?></p>
 <?php
 }
-?>							
+?>
 							</td>
 							</tr>
 							<tr>
@@ -189,7 +205,7 @@ if(!empty($errors['phone'])) {
 								<td><div class="clearfix">
 										<div class="floatL common_select">
 											<select name="blood_type">
-												<option>選択してください</option>
+												<option value="">選択してください</option>
 <?php
 foreach($blood_types as $blood_type) {
 ?>

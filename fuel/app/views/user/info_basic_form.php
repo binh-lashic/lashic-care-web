@@ -25,6 +25,12 @@
 										<td>
 											<input type="text" class="input_text input_short" placeholder="例）山田" name="last_name" value="<?php echo $client['last_name']; ?>">&nbsp;&nbsp;
 											<input type="text" class="input_text input_short" placeholder="例）太郎" name="first_name" value="<?php echo $client['first_name']; ?>">
+											<?php if(isset($errors['last_name'])) { ?>
+												<p class="error"><?php echo $errors['last_name']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['first_name'])) { ?>
+												<p class="error"><?php echo $errors['first_name']; ?></p>
+											<?php } ?>
 										</td>
 									</tr>
 									<tr>
@@ -32,6 +38,12 @@
 										<td>
 											<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php echo $client['last_kana']; ?>">&nbsp;&nbsp;
 											<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php echo $client['first_kana']; ?>">
+											<?php if(isset($errors['last_kana'])) { ?>
+												<p class="error"><?php echo $errors['last_kana']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['first_kana'])) { ?>
+												<p class="error"><?php echo $errors['first_kana']; ?></p>
+											<?php } ?>
 										</td>
 									</tr>
 									<tr>
@@ -40,7 +52,11 @@
 											<input type="radio" id="male" name="gender" value="m" <?php if($client['gender'] == "m") { echo " checked=\"checked\""; } ?>>
 											<label for="male" class="checkbox">男性</label>
 											<input type="radio" id="female" name="gender" value="f" <?php if($client['gender'] == "f") { echo " checked=\"checked\""; } ?>>
-											<label for="female" class="checkbox">女性</label></td>
+											<label for="female" class="checkbox">女性</label>
+											<?php if(isset($errors['gender'])) { ?>
+												<p class="error"><?php echo $errors['gender']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 生年月日</th>
@@ -85,6 +101,9 @@ for($i = 1; $i <= 31; $i++) {
 												</div>
 												<div class="floatL pdt5">　日</div>
 											</div>
+										  <?php if(isset($errors['birthday'])) { ?>
+											  <p class="error">生年月日を選択してください。</p>
+										  <?php } ?>
 										</td>
 									</tr>
 									<tr>

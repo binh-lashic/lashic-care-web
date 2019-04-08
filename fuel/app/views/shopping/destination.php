@@ -91,12 +91,20 @@ if(!empty($errors)) {
 									<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
 									<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-if(!empty($errors['last_name']) || !empty($errors['first_name'])) {
+	if(!empty($errors['last_name'])) {
 ?>
-									<p class="error">エラー：お名前を入力してください。</p></td>
+									<p class="error"><?php echo $errors['last_name']; ?></p>
 <?php
 }
 ?>
+<?php
+	if(!empty($errors['first_name'])) {
+?>
+									<p class="error"><?php echo $errors['first_name']; ?></p>
+<?php
+}
+?>
+							</td>
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> ふりがな</th>
@@ -104,12 +112,20 @@ if(!empty($errors['last_name']) || !empty($errors['first_name'])) {
 									<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
 									<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 <?php
-if(!empty($errors['prefecture'])) {
+	if(!empty($errors['last_kana'])) {
 ?>
-									<p class="error">エラー：ふりがなを入力してください。</p></td>
+									<p class="error"><?php echo $errors['last_kana']; ?></p>
 <?php
 }
-?>							</tr>
+?>
+<?php
+if(!empty($errors['first_kana'])) {
+?>
+									<p class="error"><?php echo $errors['first_kana']; ?></p>
+<?php
+}
+?>							</td>
+							</tr>
 							<tr>
 								<th>郵便番号</th>
 								<td><input type="text" name="zip_code" class="input_text input_short p-postal-code" maxlength="7" placeholder="例）1234567" value="<?php if(isset($data['zip_code'])) { echo $data['zip_code']; } ?>">
@@ -136,10 +152,11 @@ foreach($prefectures as $prefecture) {
 <?php
 if(!empty($errors['prefecture'])) {
 ?>
-									<p class="error">エラー：都道府県を選択してください。</p></td>
+									<p class="error"><?php echo $errors['prefecture']; ?></p>
 <?php
 }
-?>							</tr>
+?>							</td>
+							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> 都道府県以下</th>
 								<td><input type="text" name="address" class="input_text input_large p-locality p-street-address p-extended-address" placeholder="例）静岡市インフィックマンション302号" value="<?php if(isset($data['address'])) { echo $data['address']; } ?>">
@@ -147,7 +164,7 @@ if(!empty($errors['prefecture'])) {
 									<span class="small text_red">※</span><span class="small">市町村、番地、建物名、室番号までご入力ください。</span>
 <?php
 if(!empty($errors['address'])) {
-?>									<p class="error">エラー：都道府県以下を入力してください。</p></td>
+?>									<p class="error"><?php echo $errors['address']; ?></p></td>
 							</tr>
 <?php
 }
@@ -158,10 +175,12 @@ if(!empty($errors['address'])) {
 <?php
 if(!empty($errors['phone'])) {
 ?>
-									<p class="error">エラー：電話番号を入力してください。</p></td>
+									<p class="error"><?php echo $errors['phone']; ?></p>
 <?php
 }
-?>								</tr>
+?>
+							</td>
+							</tr>
 						</tbody>
 					</table>
 					<div class="set_container mgb30">

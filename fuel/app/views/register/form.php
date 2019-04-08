@@ -41,7 +41,7 @@
 <?php
 if(isset($errors['email'])) {
 ?>
-											<p class="error">メールアドレスを入力してください。</p>
+											<p class="error"><?php echo $errors['email']; ?></p>
 <?php
 }
 ?>
@@ -51,9 +51,16 @@ if(isset($errors['email'])) {
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 <?php
-if(isset($errors['last_name']) || isset($errors['first_name'])) {
+if(isset($errors['last_name'])) {
 ?>
-											<p class="error">お名前を入力してください。</p>
+											<p class="error"><?php echo $errors['last_name']; ?></p>
+<?php
+}
+?>
+<?php
+if(isset($errors['first_name'])) {
+?>
+											<p class="error"><?php echo $errors['first_name']; ?></p>
 <?php
 }
 ?>
@@ -63,9 +70,16 @@ if(isset($errors['last_name']) || isset($errors['first_name'])) {
 										<th><span class="icon_Required">必須</span> ふりがな</th>
 										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">
 <?php
-if(isset($errors['last_kana']) || isset($errors['first_kana'])) {
+if(isset($errors['last_kana'])) {
 ?>
-											<p class="error">ふりがなを入力してください。</p>
+											<p class="error"><?php echo $errors['last_kana']; ?></p>
+<?php
+}
+?>
+<?php
+if(isset($errors['first_kana'])) {
+?>
+											<p class="error"><?php echo $errors['first_kana']; ?></p>
 <?php
 }
 ?>
@@ -82,7 +96,7 @@ if(isset($errors['last_kana']) || isset($errors['first_kana'])) {
 if(isset($errors['gender'])) {
 ?>
 
-											<p class="error">エラー：性別を選択してください。</p>
+											<p class="error"><?php echo $errors['gender']; ?></p>
 <?php
 }
 ?>
@@ -167,7 +181,7 @@ foreach($prefectures as $prefecture) {
 <?php
 if(isset($errors['prefecture'])) {
 ?>
-											<p class="error">都道府県を入力してください。</p>
+											<p class="error"><?php echo $errors['prefecture']; ?></p>
 <?php
 }
 ?>
@@ -180,7 +194,7 @@ if(isset($errors['prefecture'])) {
 <?php
 if(isset($errors['address'])) {
 ?>
-											<p class="error">都道府県以下を入力してください。</p>
+											<p class="error"><?php echo $errors['address']; ?></p>
 <?php
 }
 ?>
@@ -192,7 +206,7 @@ if(isset($errors['address'])) {
 <?php
 if(isset($errors['phone'])) {
 ?>
-											<p class="error">電話番号1を入力してください。</p>
+											<p class="error"><?php echo $errors['phone']; ?></p>
 <?php
 }
 ?>
@@ -213,7 +227,7 @@ if(isset($errors['phone'])) {
 <?php
 if(isset($errors['password'])) {
 ?>
-											<p class="error">エラー：パスワードを入力してください。</p>
+											<p class="error"><?php echo $errors['password']; ?></p>
 <?php
 }
 ?>
@@ -226,7 +240,7 @@ if(isset($errors['password'])) {
 <?php
 if(isset($errors['password_confirm'])) {
 ?>
-										<p class="error">エラー：パスワードが一致しません。</p>
+										<p class="error"><?php echo $errors['password_confirm']; ?></p>
 <?php
 }
 ?>

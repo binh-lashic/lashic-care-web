@@ -53,35 +53,38 @@ class Model_User extends Orm\Model{
     public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
+		$val->add_callable('Validation_Japanese');
+		$val->add_callable('usersrules');
 		switch($factory) {
 			case "register":
-				$val->add_field('email', '', 'required');	
-				$val->add_field('first_name', '', 'required');
-				$val->add_field('first_kana', '', 'required');
-				$val->add_field('last_name', '', 'required');
-				$val->add_field('last_kana', '', 'required');
-				$val->add_field('gender', '', 'required');
-				$val->add_field('phone', '', 'required');
-				$val->add_field('prefecture', '', 'required');	
-				$val->add_field('address', '', 'required');	
-				$val->add_field('password', '', 'required');
-				$val->add_field('password_confirm', '', 'required');	
+				$val->add_field('email', 'メールアドレス', 'required|valid_email');
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
+				$val->add_field('password_confirm', 'パスワード（確認）', 'required|check_confirm_password['.Input::post('password').']');
 				break;
 			case "register_client":
-				$val->add_field('first_name', '', 'required');
-				$val->add_field('first_kana', '', 'required');
-				$val->add_field('last_name', '', 'required');
-				$val->add_field('last_kana', '', 'required');
-				$val->add_field('gender', '', 'required');
-				$val->add_field('phone', '', 'required');
-				$val->add_field('prefecture', '', 'required');	
-				$val->add_field('address', '', 'required');	
-				break;		
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				break;
 			case "basic":
-				$val->add_field('name', '', 'required');
-				$val->add_field('kana', '', 'required');
-				$val->add_field('gender', '', 'required');
-				$val->add_field('phone', '', 'required');				
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
 				break;
 			case "email":
 				$val->add_field('email', '', 'required');

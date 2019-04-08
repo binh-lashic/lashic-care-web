@@ -377,7 +377,20 @@ class Controller_User extends Controller_Base
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
 			}
 			$this->data['data'] = $params;
-        	$this->template->content = View::forge('user/info_basic_confirm', $this->data);
+			
+			$val = \Model_User::validate("basic");
+			
+			if($val->run()) {
+				$this->template->content = View::forge('user/info_basic_confirm', $this->data);
+			} else {
+				// バリデーション失敗の場合ここに入ってくる
+				foreach($val->error() as $key=>$value){
+					$this->data['errors'][$key] = $value;
+				}
+				$this->data['errors']['birthday'] = true;
+				$this->template->content = View::forge('user/info_basic_form', $this->data);
+			}
+			
         	return;
         }
 

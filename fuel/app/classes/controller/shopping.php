@@ -92,7 +92,7 @@ class Controller_Shopping extends Controller_Base
             $val = \Model_User::validate("register_client");
             if(!$val->run()) {
                 foreach($val->error() as $key=>$value){
-                    $this->data['errors'][$key] = true;
+                    $this->data['errors'][$key] = $value;
                 }
             }
             if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
@@ -139,7 +139,7 @@ class Controller_Shopping extends Controller_Base
 
             if(!$val->run()) {
                 foreach($val->error() as $key=>$value){
-                    $this->data['errors'][$key] = true;
+                    $this->data['errors'][$key] = $value;
                 }
             }
 
