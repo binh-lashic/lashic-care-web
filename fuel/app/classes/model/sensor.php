@@ -1118,7 +1118,6 @@ SQL;
 	    			))->to_array();
 	    			if(isset($user_sensor)) {
 	    				if($user_sensor[$params['type']."_alert"] == 1) {
-	    					/*
 	    					$devices = \Model_Device::find('all', array(
 	    						'where' => array(
 	    							'user_id' => $user['id'],
@@ -1129,7 +1128,7 @@ SQL;
 	    							'push_id' => $device['push_id'],
 	    							'text' => $params['description'],
 	    						));
-	    					}*/
+	    					}
 
                                                 // 見守られユーザを取得
                                                 $client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
