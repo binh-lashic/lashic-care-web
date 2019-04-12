@@ -265,6 +265,7 @@ class Model_Alert extends Orm\Model{
 	        $push->connect();
 
 	        $message = new ApnsPHP_Message($params['push_id']);
+	        $message->setTitle($params['title']);
 	        $message->setText($params['text']);
 	        $message->setSound();
 	        $message->setExpiry(30);
