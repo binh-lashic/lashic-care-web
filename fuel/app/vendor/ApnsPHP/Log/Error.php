@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * ApnsPHP_Log_Interface interface definition.
+ * ApnsPHP_Log_Error class definition.
  *
  * LICENSE
  *
@@ -13,29 +13,31 @@
  * obtain it through the world-wide-web, please send an email
  * to aldo.armiento@gmail.com so we can send you a copy immediately.
  *
- * @author (C) 2010 Aldo Armiento (aldo.armiento@gmail.com)
+ * @author (C) 2017 Ohad Cohen (ohadcn@gmail.com)
  * @version $Id$
  */
 
 /**
- * @defgroup ApnsPHP_Log Log
- * @ingroup ApplePushNotificationService
- */
-
-/**
- * The Log Interface.
+ * A simple logger.
  *
- * Implement the Log Interface and pass the object instance to all
- * ApnsPHP_Abstract based class to use a custom log.
+ * This simple logger implements the Log Interface.
  *
+ * This simple logger outputs The Message to php error_log() prefixed with 
+ * service name (ApplePushNotificationService).
+ * 
+ *
+ * @see ApnsPHP_Log_Silent
  * @ingroup ApnsPHP_Log
  */
-interface ApnsPHP_Log_Interface
+class ApnsPHP_Log_Error implements ApnsPHP_Log_Interface
 {
 	/**
 	 * Logs a message.
 	 *
 	 * @param  $sMessage @type string The message.
 	 */
-	public function log($sMessage);
+	public function log($sMessage)
+	{
+		error_log(" ApnsPHP: ".trim($sMessage));
+	}
 }

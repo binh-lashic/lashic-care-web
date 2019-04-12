@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * ApnsPHP_Log_Interface interface definition.
+ * ApnsPHP_Log_Silent class definition.
  *
  * LICENSE
  *
@@ -13,29 +13,30 @@
  * obtain it through the world-wide-web, please send an email
  * to aldo.armiento@gmail.com so we can send you a copy immediately.
  *
- * @author (C) 2010 Aldo Armiento (aldo.armiento@gmail.com)
+ * @author (C) 2017 Ohad Cohen (ohadcn@gmail.com)
  * @version $Id$
  */
 
 /**
- * @defgroup ApnsPHP_Log Log
- * @ingroup ApplePushNotificationService
- */
-
-/**
- * The Log Interface.
+ * A simple logger.
  *
- * Implement the Log Interface and pass the object instance to all
- * ApnsPHP_Abstract based class to use a custom log.
+ * This simple logger implements the Log Interface.
  *
+ * This simple logger ignore The Message and does nothing.
+ * This class was built for web environment where all output should be omitted for not being sent to the client.
+ *
+ * @see ApnsPHP_Log_Error
  * @ingroup ApnsPHP_Log
  */
-interface ApnsPHP_Log_Interface
+class ApnsPHP_Log_Silent implements ApnsPHP_Log_Interface
 {
 	/**
 	 * Logs a message.
 	 *
 	 * @param  $sMessage @type string The message.
 	 */
-	public function log($sMessage);
+	public function log($sMessage)
+	{
+
+	}
 }
