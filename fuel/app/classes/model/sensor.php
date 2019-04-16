@@ -952,7 +952,7 @@ SQL;
 		if($this->active_non_detection_level > 0) {
 			echo "Check Active Night\n";
 
-	    	$levels = Config::get("sensor_levels.active_non_detection_level");
+	    	$levels = Config::get("sensor_levels.active_non_detection");
 		 	$level = $levels[$this->active_non_detection_level- 1];
 			if(Input::param("date")) {
 		    	$date = Input::param("date");
@@ -1021,7 +1021,7 @@ SQL;
     		$end_date = $date." 04:00:00";
 
 			if($this->time > strtotime($date." 00:00:00") && $this->time <= strtotime($date." 00:00:00")) {
-	    		$levels = Config::get("sensor_levels.abnormal_behavior_level");
+	    		$levels = Config::get("sensor_levels.abnormal_behavior");
 			 	$level = $levels[$this->abnormal_behavior_level- 1];
 
 				if($this->count) {
