@@ -30,7 +30,7 @@ class Model_Sensor extends Orm\Model{
 		$where = 'sensor_name = :sensor_name AND measurement_time >= :measurement_time';
 		$params = [
 			'sensor_name'      => $this->name,
-			'measurement_time' => date("Y-m-d H:i:s", $this->time - 60 * 60) // 60分で固定
+			'measurement_time' => date("Y-m-d H:i:s", strtotime('-12 hour', $this->time)) // 12時間で固定
 		];
 		$this->data  = \Model_Batch_Data_Daily::find_converted_data_by_conditions($where, $params);
 		\Log::debug(\DB::last_query('batch'), __METHOD__);
@@ -1051,7 +1051,7 @@ SQL;
 		if($this->active_non_detection_level > 0) {
 			echo "Check Active Non Detection\n";
 
-	    	$levels = Config::get("sensor_levels.active_non_detection_level");
+	    	$levels = Config::get("sensor_levels.active_non_detection");
 		 	$level = $levels[$this->active_non_detection_level - 1];
 
 			if($this->count) {
