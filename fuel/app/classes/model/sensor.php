@@ -1126,7 +1126,7 @@ SQL;
 	    					foreach($devices as $device) {
 	    						\Model_Alert::pushAlert(array(
 	    							'push_id' => $device['push_id'],
-									'title' => $params['title'],
+	    							'title' => $params['title'],
 	    							'text' => $params['description'],
 	    						));
 	    					}
