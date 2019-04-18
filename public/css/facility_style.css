@@ -628,7 +628,7 @@ a.nowHere {
 
 
 #section02{
-  background-color: #ebf5e9;
+  background-color: #d6f0f7;
   position: relative;
   padding: 50px 0;
 }
@@ -675,9 +675,9 @@ a.nowHere {
   margin: 30px auto 0;
 }
 .section02_detail{
-  border: 1px solid #d3eace;
+  border: 1px solid #cee7ea;
   border-radius: 5px;
-  background-color: #e1f2dd;
+  background-color: #ddf2f2;
   padding: 10px;
   font-size: 12px;
   line-height: 18px;
@@ -738,9 +738,9 @@ a.nowHere {
   line-height: 28px;
   font-weight: bold;
   padding-bottom: 10px;
-  border-bottom: 1px solid #5fad52;
+  border-bottom: 1px solid #5fb6df;
   margin-bottom: 30px;
-  color: #5fad52;
+  color: #5fb6df;
 }
 .detail_table{
   width: 100%;
