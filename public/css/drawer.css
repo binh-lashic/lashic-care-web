@@ -471,7 +471,7 @@ a.drawer-dropdown-menu-item.nowStay{ background-color:#e5f6ff; color:#003c58; ma
     Container
 \*!------------------------------------*/
 .drawer-container {
-	width: 1020px;
+  /* width: 1020px; */
   margin-right: auto;
   margin-left: auto;
 	position: relative;
