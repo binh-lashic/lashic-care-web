@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>LASHIC ラシク - <?php if(!empty($title)) { echo $title; } ?></title>
 <meta name="keywords" content="ラシク,見守り">
 <meta name="description" content="ラシクの管理画面です。">
@@ -29,17 +29,8 @@
 <link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<!-- 円グラフ -->
-<link href="/css/jquery.circliful.css" type="text/css" rel="stylesheet">
-<!-- /円グラフ -->
-<!-- カレンダー表示・非表示 -->
-<link href="/css/darktooltip.css" type="text/css" rel="stylesheet">
-<!-- /カレンダー表示・非表示 -->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" type="text/css">
-<script src="/js/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="/js/amcharts/serial.js" type="text/javascript"></script>
 <script src="/js/js.cookie.js"></script>
-<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <?php if(\Util::is_production()) {?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
