@@ -80,6 +80,8 @@ $(function(){
 	$(document).on('click', function() {
 		if($('.drawer-menu > .drawer-dropdown').hasClass('open')) {
 			$('.drawer-menu > .drawer-dropdown').removeClass("open");
+		} else {
+			$('#nav_cart').addClass("open");
 		}
 	});
 });
