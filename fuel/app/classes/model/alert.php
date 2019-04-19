@@ -258,10 +258,12 @@ class Model_Alert extends Orm\Model{
 
 	public static function pushAlert($params) {
 		try {
-			require_once APPPATH.'vendor/ApnsPHP/Autoload.php';
-
-			$push = new ApnsPHP_Push(ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION, APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem');
-	        $push->setRootCertificationAuthority(APPPATH.'vendor/ApnsPHP/certificates/entrust_root_certification_authority.pem');
+	        \Config::load('push',true);
+	        $push = new \ApnsPHP_Push(
+	            (\Fuel::$env === \Fuel::PRODUCTION) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
+	            \Config::get('push.push_pem_file')
+	        );
+	        $push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
 	        $push->connect();
 
 	        $message = new ApnsPHP_Message($params['push_id']);
