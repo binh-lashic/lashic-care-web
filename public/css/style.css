@@ -20,7 +20,7 @@ body {
 }
 @media (max-width: 640px) {
 	.content {
-		width: 320px;
+		width: 95%;
 		margin: 0 auto;
 	}
 }
@@ -1551,6 +1551,16 @@ p + .form_title, div + .form_title, p + .form_set_container {
 }
 .settingContainer {
 	display: table;
+}
+
+@media (max-width: 640px) {
+	.settingContainer {
+		width:100% !important;
+	}
+
+	.graphSettingFalse {
+		width: 60% !important;
+	}
 }
 .settingInner {
 	display: table-cell;
