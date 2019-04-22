@@ -260,7 +260,7 @@ class Model_Alert extends Orm\Model{
 		try {
 	        \Config::load('push',true);
 	        $push = new \ApnsPHP_Push(
-	            (\Fuel::$env === \Fuel::PRODUCTION) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
+	            (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
 	            \Config::get('push.push_pem_file')
 	        );
 	        $push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
