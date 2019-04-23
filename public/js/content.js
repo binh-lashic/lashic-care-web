@@ -77,10 +77,11 @@ $(function(){
 				'aria-expanded' : 'true'
 			});
 	});
-	$(document).on('click', function() {
+
+	$(document).on('click', function(e) {
 		if($('.drawer-menu > .drawer-dropdown').hasClass('open')) {
 			$('.drawer-menu > .drawer-dropdown').removeClass("open");
-		} else {
+		} else if($(e.target).attr('class') == 'drawer-menu-item'){
 			$('#nav_cart').addClass("open");
 		}
 	});
