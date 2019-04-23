@@ -1,5 +1,5 @@
 <?php
   return array(
-	  'push_pem_file'      => APPPATH.'vendor/ApnsPHP/certificates/careeye_push.pem',
-	  'authority_pem_file' => APPPATH.'vendor/ApnsPHP/certificates/entrust_root_certification_authority.pem'
+	  'push_pem_file'      => $_SERVER['PUSH_PEM_FILE_PATH'],
+	  'authority_pem_file' => $_SERVER['AUTHORITY_PEM_FILE_PATH']
   );
