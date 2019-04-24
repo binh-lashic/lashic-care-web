@@ -1,16 +1,3 @@
-	<div class="clearfix content"> 
-		<!-- flow矢印 -->
-		<div class="flowSet flow_no06">
-			<ol>
-				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">見守り対象ユーザー設定</li>
-				<li>送付先指定</li>
-				<li>配送とお支払い</li>
-				<li>ご注文確認</li>
-				<li>完了</li>
-			</ol>
-		</div>
-		<!-- /flow矢印 --> 
 		
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">

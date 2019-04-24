@@ -93,6 +93,7 @@ class Controller_User extends Controller_Base
 			}
 		} else {
 			\Log::warning("login user_id:[{$this->user['id']}] client_id is not set.", __METHOD__);
+			Response::redirect('/shopping/user');
 		}
 
 		$this->data['genders'] = Config::get("gender");

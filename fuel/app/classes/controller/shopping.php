@@ -114,8 +114,8 @@ class Controller_Shopping extends Controller_Base
         if(Input::post()) {
             $params = Input::post();
             $client = \Model_User::createClient($params);
-            Response::redirect('/shopping/user'); 
-        }  
+            Response::redirect('/user');
+        }
     }
 
     public function action_destination()
