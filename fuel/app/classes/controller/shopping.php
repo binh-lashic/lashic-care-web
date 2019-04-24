@@ -120,11 +120,6 @@ class Controller_Shopping extends Controller_Base
 
     public function action_destination()
     {
-        if(Input::param("client_user_id")) {
-            $client = \Model_User::find(Input::param("client_user_id"));
-            Session::set('client', $client);
-        }
-
         $this->data['prefectures'] = Config::get("prefectures");
 
         $this->data['users'] = array();
@@ -304,22 +299,18 @@ class Controller_Shopping extends Controller_Base
     public function action_complete()
     {
         $plans = Session::get("plans");
-        $client = Session::get("client");
         $destination = Session::get("destination");
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
-
-        if(empty($client['id'])) {
-            $this->data['errors']['client'] = true;
-			\Log::warning('client not found in session. session_id:[' . Session::key() . ']', __METHOD__);
-        }
         if(empty($plans)) {
             $this->data['errors']['plan'] = true;
 			\Log::warning('plans not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
+        /*
         if(empty($destination['zip_code'])) {
             $this->data['errors']['destination'] = true;
 			\Log::warning('destination not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
+        */
         if(empty($this->data['errors'])) {
             //支払い処理を行う
             $payment = \Model_Payment::forge();
@@ -366,7 +357,6 @@ class Controller_Shopping extends Controller_Base
                     $params = array(
                         'plan_id' => $plan['id'],
                         'user_id' => $this->user['id'],
-                        'client_user_id' => $client['id'],
                         'start_date' => date("Y-m-d"),
                         'renew_date'=> $renew_date,
                         'price' => $plan['price'],
@@ -418,7 +408,6 @@ class Controller_Shopping extends Controller_Base
                 \Model_User::sendEmail($params);
             }
             Session::delete("plans");
-            Session::delete("client");
             Session::delete("destination");
             Cookie::delete("affiliate");
         } else {

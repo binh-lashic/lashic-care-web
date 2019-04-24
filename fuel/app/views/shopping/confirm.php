@@ -3,7 +3,6 @@
 		<div class="flowSet flow_no06">
 			<ol>
 				<li>カート</li>
-				<li>見守り対象ユーザー設定</li>
 				<li>送付先指定</li>
 				<li class="flowBoxOn_before">配送とお支払い</li>
 				<li class="flowBoxOn">ご注文確認</li>
