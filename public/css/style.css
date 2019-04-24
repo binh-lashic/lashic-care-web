@@ -1367,6 +1367,14 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	padding: 0 20px;
 	box-shadow: 0 2px 2px #EEE
 }
+
+@media (max-width: 640px) {
+	.form_set_container {
+		width: 100%;
+		padding: 0 0px;
+	}
+}
+
 .form_set_container + .form_set_container {
 	border-top: none;
 	margin-top: -1px
@@ -1407,6 +1415,14 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	text-align: left;
 	vertical-align: top;
 }
+
+@media (max-width: 640px) {
+	.form_set_container table th {
+		font-size: 10px;
+		width: 35%;
+	}
+}
+
 .form_set_container table th.largeTh {
 	width: 250px;
 	padding: 10px;
@@ -2632,4 +2648,16 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 }
 .topCopy_image img{ width:100%;}
 .topCopy_pc , .topCopy_apli{ max-width:1000px; position:absolute; top:0; left:0; right:0; margin:0 auto;}
-.topCopy_text{ margin-top:60px;}
+.topCopy_text{ margin-top:60px;}.topCopy_text{ margin-top:60px;}.topCopy_text{ margin-top:60px;}
+
+.regist_img_01{
+	width: 1020px;
+	height: 400px;
+}
+
+@media (max-width: 640px) {
+	.regist_img_01 {
+		width: 100%;
+		height: 20%;
+	}
+}
