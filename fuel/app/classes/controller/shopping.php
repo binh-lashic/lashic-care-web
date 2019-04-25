@@ -29,6 +29,7 @@ class Controller_Shopping extends Controller_Base
 
 	public function action_index()
 	{
+	    $this->template = View::forge('template_top');
          if(!empty($this->param('affiliate'))) {
             if($this->param('affiliate') == "normal") {
                 Session::delete('monitor');

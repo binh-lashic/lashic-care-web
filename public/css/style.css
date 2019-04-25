@@ -18,6 +18,12 @@ body {
 	width: 1020px;
 	margin: 0 auto;
 }
+@media (max-width: 768px) {
+	.content {
+		width: 95%;
+		margin: 0 auto;
+	}
+}
 /* @media (max-width: 640rem) {
 .container{ width:95%; margin:0 auto;}
 }
@@ -1546,6 +1552,16 @@ p + .form_title, div + .form_title, p + .form_set_container {
 .settingContainer {
 	display: table;
 }
+
+@media (max-width: 640px) {
+	.settingContainer {
+		width:100%;
+	}
+
+	.graphSettingFalse {
+		width: 60%;
+	}
+}
 .settingInner {
 	display: table-cell;
 	text-align: center;
@@ -2119,9 +2135,11 @@ a.moreINfoLink:link {
 	width: 100%;
 	margin-top: 30px;
 }
-.shoppingCart_containerUl {
-	width: 1044px;
-	margin-right: -12px;
+@media (min-width: 1000px) {
+	.shoppingCart_containerUl {
+		width: 1044px;
+		margin-right: -12px;
+	}
 }
 .shoppingCart_containerUl:after {
 	content: "";
@@ -2500,7 +2518,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 
 @media (max-width: 600px) {
 .hero .tagline p {
-	font-size: 1.3rem;
+	font-size: 1.0rem;
 }
 }
 .hero .tagline h1 {
@@ -2532,7 +2550,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 
 @media (max-width: 600px) {
 .hero .tagline h1 {
-	font-size: 2.5rem;
+	font-size: 2.0rem;
 	line-height: 3rem;
 	letter-spacing:1px;
 	font-family: "游明朝体", "Yu Mincho", YuMincho, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
@@ -2583,6 +2601,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 }
 .hero .btn-container .btn {
 	float: left;
+	width: 45%;
 }
 }
 
@@ -2597,8 +2616,10 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 	font-family: "游明朝体", "Yu Mincho", YuMincho, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
 	font-weight:400; position:relative;
 	background:url(../images/chart.jpg) no-repeat; background-size:cover}
+
 @media (max-width: 740px) {
-.topCopy_image{ position:relative; width:70%; height:280px; margin:0 auto;}
+.topCopy{padding: 20px 0 0;font-size:2rem;}
+.topCopy_image{ position:relative; width:70%; height:80px; margin:0 auto;}
 }
 @media (min-width: 741px)  and (max-width: 1150px) {
 .topCopy_image{ position:relative; width:70%; height:380px; margin:0 auto;}
