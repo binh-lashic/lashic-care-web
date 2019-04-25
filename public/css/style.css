@@ -2067,6 +2067,11 @@ a.moreINfoLink:link {
 .regist_waku_left {
 	width: 513px;
 }
+@media (max-width: 640px) {
+	.regist_waku_left {
+		width: 100%;
+	}
+}
 #attention_01 {
 	display: none;
 }
@@ -2659,5 +2664,15 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 	.regist_img_01 {
 		width: 100%;
 		height: 20%;
+	}
+}
+
+.regist_03 {
+	width: 332px;
+}
+
+@media (max-width: 640px) {
+	.regist_03 {
+		width: 100%;
 	}
 }
