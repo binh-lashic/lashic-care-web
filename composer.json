@@ -33,7 +33,7 @@
         "sendgrid/sendgrid": "~4.0",
         "microsoft/windowsazure": "^0.4",
         "vlucas/phpdotenv": "^2.4",
-        "duccio/apns-php": "dev-master",
+        "duccio/apns-php": "v2.0.0-alpha",
         "fascent/careeye-api-client": "@dev"
     },
     "suggest": {

@@ -266,7 +266,7 @@ class Model_Alert extends Orm\Model{
 	        $push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
 	        $push->connect();
 
-	        $message = new ApnsPHP_Message($params['push_id']);
+	        $message = new ApnsPHP_Message_Custom($params['push_id']);
 	        $message->setTitle($params['title']);
 	        $message->setText($params['text']);
 	        $message->setSound();
