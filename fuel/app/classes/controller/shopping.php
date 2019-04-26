@@ -114,6 +114,15 @@ class Controller_Shopping extends Controller_Base
         if(Input::post()) {
             $params = Input::post();
             $client = \Model_User::createClient($params);
+  
+            $contracts = \Model_Contract::query()
+                ->where('user_id', '=', $this->user['id'])
+                ->get();
+  
+            foreach($contracts as $contract) {
+               $contract->client_user_id = $client['id'];
+               $contract->save();
+            }
             Response::redirect('/user');
         }
     }

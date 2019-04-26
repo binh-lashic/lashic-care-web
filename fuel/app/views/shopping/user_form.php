@@ -212,7 +212,7 @@ foreach($blood_types as $blood_type) {
 			<!-- /基本情報 -->
 			
 			<div class="set_container">
-				<div class="left_container"><a href="/shipping/user" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/user" class="link_back">戻る</a></div>
 				<div class="center_container">
 					<input type="submit" value="次の画面に進む" >
 				</div>
