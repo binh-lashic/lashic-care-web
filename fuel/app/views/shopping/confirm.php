@@ -83,7 +83,17 @@ if(isset($card)) {
 						<tbody>
 						<tr>
 							<th>備考</th>
-							<td class="right"><?php echo nl2br($destination['remarks']); ?></td>
+							<td class="right">
+								<textarea name="remarks" cols="90" rows="11">
+LASHIC-sleepのご購入　（不要・要）
+購入台数　　（　台）
+料金プラン　（月払・６ヶ月払・年払い）
+料金決済　（同意しました）
+
+※料金プランは「LASHIC-room」と全て同じです
+※料金決済は「LASHIC-room」とあわせて引き落としさせていただきます
+※配送先は「LASHIC-room」と同一になります
+								</textarea>
 						</tr>
 <?php
 foreach($plans as $plan) {

@@ -28,7 +28,7 @@ foreach($users as $key => $_user)
 								<p><?php echo $_user['prefecture']; ?><?php echo $_user['address']; ?><br>
 									<?php echo $_user['phone']; ?></p>
 							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/destination_confirm?user_id=<?php echo $_user['id']; ?>">この住所を使う</a></div>
+							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?user_id=<?php echo $_user['id']; ?>">この住所を使う</a></div>
 <!--							<p class="right"><a href="#">編集する</a></p> -->
 						</div>
 					</li>
@@ -48,7 +48,7 @@ foreach($addresses as $key => $_address)
 								<p><?php echo $_address['prefecture']; ?><?php echo $_address['address']; ?><br>
 									<?php echo $_address['phone']; ?></p>
 							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/destination_confirm?address_id=<?php echo $_address['id']; ?>">この住所を使う</a></div>
+							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?address_id=<?php echo $_address['id']; ?>">この住所を使う</a></div>
 <!--							<p class="right"><a href="#">編集する</a></p> -->
 						</div>
 					</li>

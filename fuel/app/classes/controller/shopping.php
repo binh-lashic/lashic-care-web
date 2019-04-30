@@ -161,51 +161,33 @@ class Controller_Shopping extends Controller_Base
 
         $this->template->title = '送付先指定';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data); 
-        $this->template->content = View::forge('shopping/destination', $this->data);           
+        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->content = View::forge('shopping/destination', $this->data);
     }
-
-    public function action_destination_confirm()
-    {
-        if(Input::param("user_id")) {
-            $this->data['destination'] = \Model_User::find(Input::param("user_id"));
-        }
-        if(Input::param("address_id")) {
-            $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
-        }
-
-        if(Session::get('monitor')) {
-        } else {
-            $shippings = Config::get("shipping");
-            $this->data['destination']['shipping'] = 0;
-            foreach($shippings as $shipping) {
-                if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
-                    $this->data['destination']['shipping'] = $shipping['price'];
-                    break;
-                }      
-            }            
-        }
-
-
-        Session::set("destination", $this->data['destination']);
-        $this->data['plans'] = Session::get("plans");
-        $this->data['total_price'] = 0;
-        $this->data['subtotal_price'] = 0;
-        foreach($this->data['plans'] as $plan) {
-            $this->data['subtotal_price'] += $plan['price'];
-        } 
-
-        $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
-        $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
-
-        $this->template->title = '配送とお支払い';
-        $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data); 
-        $this->template->content = View::forge('shopping/destination_confirm', $this->data);           
-    }
-
+    
     public function action_payment()
     {
+      if(Input::param("user_id")) {
+        $this->data['destination'] = \Model_User::find(Input::param("user_id"));
+      }
+      if(Input::param("address_id")) {
+        $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+      }
+    
+      if(Session::get('monitor')) {
+      } else {
+        $shippings = Config::get("shipping");
+        $this->data['destination']['shipping'] = 0;
+        foreach($shippings as $shipping) {
+          if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
+            $this->data['destination']['shipping'] = $shipping['price'];
+            break;
+          }
+        }
+      }
+  
+      Session::set("destination", $this->data['destination']);
+      
         if(Session::get('monitor')) {
             Response::redirect('/shopping/confirm');
         }
@@ -230,11 +212,6 @@ class Controller_Shopping extends Controller_Base
                     return;
                 }
             } else {
-              
-                $destination = Session::get("destination");
-                $destination['remarks'] = $params['remarks'];
-                Session::set("destination", $destination);
-                
                 if(!$params['number'])
                 {
                     $this->data['errors']['number'] = true;
