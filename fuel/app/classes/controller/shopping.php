@@ -70,7 +70,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->header = View::forge('no_nav_header', $this->data);
         $this->template->content = View::forge('shopping/user', $this->data);
     }
    
@@ -78,7 +78,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->header = View::forge('no_nav_header', $this->data);
 
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
