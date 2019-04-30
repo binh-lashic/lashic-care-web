@@ -93,7 +93,6 @@ class Controller_User extends Controller_Base
 			}
 		} else {
 			\Log::warning("login user_id:[{$this->user['id']}] client_id is not set.", __METHOD__);
-			Response::redirect('/shopping/user');
 		}
 
 		$this->data['genders'] = Config::get("gender");
@@ -105,9 +104,17 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
-		if(count($this->data['clients']) == 0 && count(Session::get("plans")) > 0) {
-			Response::redirect('/shopping/cart');
-		}
+	    
+	    if(!$this->is_clients()){
+	      $redirect_path = '';
+	      if(count(Session::get("plans")) > 0){
+	        $redirect_path = '/shopping/cart';
+	      } else {
+	        $redirect_path = '/shopping/user';
+	      }
+	      Response::redirect($redirect_path);
+	    }
+	    
 	    if(Input::param("date")) {
 	    	$this->data['date'] = Input::param("date");
 	    } else {
@@ -698,5 +705,14 @@ class Controller_User extends Controller_Base
 	{
 		$month = (int) date('n');
 		return ($month >= 4 && $month <= 9);
+	}
+	
+	/**
+	 * 見守り対象ユーザが存在するかを返す
+	 *
+	 */
+	private function is_clients()
+	{
+		return (count($this->data['clients']) != 0);
 	}
 }
