@@ -9,7 +9,7 @@ class Controller_Register extends Controller_Base
 	        'index',
 	        'complete'
 	    );
-	    $this->template = 'template_top';
+	    $this->template = 'template_responsive';
 	    parent::before();
 	}
 
