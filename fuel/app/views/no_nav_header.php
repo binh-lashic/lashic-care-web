@@ -2,17 +2,7 @@
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
 		<div class="drawer-navbar-header">
-		  <?php
-			if(isset($user)) {
-			  ?>
-				<a class="logo" href="/user"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
-			  <?php
-			} else {
-			  ?>
-				<a class="logo" href="/"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
-			  <?php
-			}
-		  ?>
+			<a class="logo" href="/"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
 		</div>
 	</div>
 </header>
