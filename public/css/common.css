@@ -474,7 +474,7 @@ a.alpha:hover img, a.alpha:active img {
     content: "\25C0";
     color: #003c58;
 }
-.link_back:link, .link_back:visited { text-decoration:none;}
+.link_back:link, .link_back:visited { text-decoration:none;word-break: keep-all;}
 .link_back:active , .link_back:hover{ text-decoration:none; opacity:0.6}
 
 
@@ -572,6 +572,15 @@ a.link_noUnderLine{ text-decoration:none;}
 	text-decoration:none !important;
 }
 
+@media (max-width: 640px) {
+	.btn_text {
+		font-size: 10px;
+		line-height: 1em;
+		padding: 5px 0;
+		white-space: pre;
+	}
+}
+
 .btn_lightGray {
 	border:none;
 	border-radius: 6px;
@@ -636,6 +645,13 @@ button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=sub
 }
 button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+
+@media (max-width: 640px) {
+	.center_container [type=submit]{
+		font-size: 12px;
+	}
+}
+
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 

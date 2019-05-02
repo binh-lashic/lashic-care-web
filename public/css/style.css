@@ -1425,8 +1425,8 @@ p + .form_title, div + .form_title, p + .form_set_container {
 
 @media (max-width: 640px) {
 	.form_set_container table th {
-		font-size: 10px;
-		width: 35%;
+		width: 35% !important;
+		font-size: 12px;
 	}
 }
 
