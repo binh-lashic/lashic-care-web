@@ -18,24 +18,24 @@ body {
 }
 .set_container{ width:100%; display:table; margin-top:30px;}
 .left_container{ width:25%; display:table-cell; vertical-align:middle;}
-
+.center_container{ width:50%; display:table-cell; vertical-align:middle;}
+.right_container{ width:25%; display:table-cell; vertical-align:middle; text-align:right;}
 @media (max-width: 640px) {
 	.left_container {
-		width: 15%;
+		display: grid;
+		width: 100%;
 	}
-}
 
-.center_container{ width:50%; display:table-cell; vertical-align:middle;}
-
-@media (max-width: 640px) {
 	.center_container {
 		width: 95%;
 		display: table-cell;
 		vertical-align: middle;
 	}
+	.right_container {
+		width: 0;
+	}
 }
 
-.right_container{ width:25%; display:table-cell; vertical-align:middle; text-align:right;}
 
 
 
@@ -1021,5 +1021,19 @@ p + .flowSet{ margin-top:30px;}
 .flow_no04 ol li{ width:25%;} /* 要素の数 */
 .flow_no05 ol li{ width:20%;} /* 要素の数 */
 
+@media (max-width: 640px) {
+	.flowSet ol {
+		margin-bottom: 20px;
+		height: auto;
+		line-height: 14px;
+	}
+
+	/* flowSet */
+	.flowSet ol li {
+		display: table-cell;
+		padding: 5px;
+		font-size: 11px;
+	}
+}
 
 
