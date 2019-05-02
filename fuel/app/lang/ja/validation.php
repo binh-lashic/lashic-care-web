@@ -16,5 +16,6 @@
 		'valid_string' => ':label に不正な文字が含まれています。',
 		'required_with' => ':label は入力必須項目です。',
 		'hiragana' => ':label は ひらがなで入力してください。',
-		'check_confirm_password' => 'パスワードが一致しません',
+		'check_confirm_password' => ':label が一致しません',
+		'check_password' => ':labelが間違っています。'
 	);

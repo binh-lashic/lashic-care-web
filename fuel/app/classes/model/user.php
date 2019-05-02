@@ -89,6 +89,23 @@ class Model_User extends Orm\Model{
 			case "email":
 				$val->add_field('email', '', 'required');
 				break;
+			case "update":
+				
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
+				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email');
+				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required');
+				$val->add_field('subscription', '当社からのメール案内', 'required');
+				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
+				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|check_confirm_password['.Input::post('new_password').']');
+				break;
 		}
 		return $val;
 	}
@@ -458,6 +475,18 @@ class Model_User extends Orm\Model{
 			} else {
 				return null;
 			}				
+ 
+	public static function updateUser($params) {
+		$user = \Model_User::find($params['id']);
+		$old_password = Auth::reset_password($user['username']);
+		Auth::change_password($old_password, $params['password'], $user['username']);
+		unset($params['id']);
+		unset($params['password']);
+		$user->set($params);
+		if($user->save()) {
+		  return \Model_User::format($user);
+		} else {
+		  return null;
 		}
 	}
 

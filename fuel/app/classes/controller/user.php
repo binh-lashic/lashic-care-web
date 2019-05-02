@@ -113,6 +113,8 @@ class Controller_User extends Controller_Base
 	        $redirect_path = '/shopping/user';
 	      }
 	      Response::redirect($redirect_path);
+	    } else if($this->is_temporary()){
+	      Response::redirect('/user/temp_account_form');
 	    }
 	    
 	    if(Input::param("date")) {
@@ -677,6 +679,62 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/contract', $this->data);
 	}
+ 
+	public function action_temp_account_form()
+	{
+	  $this->template->title = '本登録';
+	  $this->data['breadcrumbs'] = array($this->template->title);
+	  $this->data['eras'] = Config::get("eras");
+	  $this->data['prefectures'] = Config::get("prefectures");
+	  $this->template->header = View::forge('no_nav_header', $this->data);
+	  
+	  if(Input::post()) {
+		$val = \Model_User::validate("update");
+		$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|check_password['.$this->user['id'].']');
+		$params = Input::post();
+		
+		if(!$val->run()) {
+		  foreach($val->error() as $key=>$value){
+			$this->data['errors'][$key] = $value;
+		  }
+		  
+		  if(Model_User::getOtherUserByEmail(Input::post('new_email'))) {
+		    $this->data['errors']['email_duplicate'] = true;
+		  }
+		  
+		  if(Input::post('new_email') != Input::post('new_email_confirm')) {
+		    $this->data['errors']['new_email_confirm'] = true;
+		  }
+		}
+		
+		if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+		  $params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+		  $params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
+		} else {
+		  $this->data['errors']['birthday'] = true;
+		}
+		$this->data['data'] = $params;
+		
+		if(empty($this->data['errors'])) {
+		  $this->template->content = View::forge('user/temp_account_confirm', $this->data);
+		  return;
+		}
+	  }
+	  
+	  $this->template->content = View::forge('user/temp_account_form', $this->data);
+	}
+	
+	public function action_temp_account_complete()
+	{
+	  $this->template->title = '本登録';
+	  $this->data['breadcrumbs'] = array($this->template->title);
+	  
+	  if(Input::post()) {
+	    \Model_User::updateUser(Input::post());
+	  }
+	  $this->template->header = View::forge('no_nav_header', $this->data);
+	  $this->template->content = View::forge('user/temp_account_complete', $this->data);
+	}
         
         /*
          * マンスリーレポート 
@@ -714,5 +772,14 @@ class Controller_User extends Controller_Base
 	private function is_clients()
 	{
 		return (count($this->data['clients']) != 0);
+	}
+	
+	/**
+	 * ログインしたユーザが仮アカウントかどうかを返す
+	 *
+	 */
+	private function is_temporary()
+	{
+		return ($this->user->temporary == 1);
 	}
 }
