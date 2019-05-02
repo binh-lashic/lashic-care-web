@@ -20,7 +20,7 @@ body {
 }
 @media (max-width: 768px) {
 	.content {
-		width: 95%;
+		width: 98%;
 		margin: 0 auto;
 	}
 }
@@ -2181,7 +2181,14 @@ a.moreINfoLink:link {
 	margin-bottom: 12px;
 	position: relative;
 }
-.shoppingCart_containerLi .shoppingCart_box{ 
+
+@media (max-width: 640px) {
+	.shoppingCart_containerLi {
+		width: 100%;
+	}
+}
+
+.shoppingCart_containerLi .shoppingCart_box{
 	border-radius: 3px;
 	border: 2px solid #4b4948;
 	padding: 20px;
