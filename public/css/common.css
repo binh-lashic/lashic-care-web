@@ -725,6 +725,7 @@ p+ ol.ol-text , p + ul.ul-text{ margin-top:30px;}
 @media (max-width: 640px) {
 	.contentLarge_h1{ font-size:25px; }
 	.contentHalf{ width:100%;}
+	.content_h3{ padding-top: 5px;}
 }
 
 .contentLarge_h2{ font-size:20px; font-weight:normal; border-bottom:1px dotted #003c58; color:#003c58; margin-bottom:30px; padding-bottom:8px }

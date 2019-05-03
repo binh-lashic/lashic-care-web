@@ -46,7 +46,7 @@ foreach($plans as $plan) {
 					<h3 class="content_h3">お届け日について</h3>
 					<p>お届けは、ご注文後3営業日内となります。</p>
 					<form action="/shopping/payment" method="post">
-						<textarea name="remarks" cols="80" rows="10">
+						<textarea name="remarks" cols="80" rows="10" class="remarks">
 LASHIC-sleepのご購入　（不要・要）
 購入台数　　（　台）
 料金プラン　（月払・６ヶ月払・年払い）

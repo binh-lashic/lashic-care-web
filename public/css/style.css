@@ -1425,8 +1425,12 @@ p + .form_title, div + .form_title, p + .form_set_container {
 
 @media (max-width: 640px) {
 	.form_set_container table th {
-		width: 35% !important;
+		width: 38% !important;
 		font-size: 12px;
+	}
+
+	.remarks{
+		width: 100%;
 	}
 }
 
