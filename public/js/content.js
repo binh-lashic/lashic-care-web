@@ -81,23 +81,23 @@ $(function(){
 	$(document).on('click', function(e) {
 		if($('.drawer-menu > .drawer-dropdown').hasClass('open')) {
 			$('.drawer-menu > .drawer-dropdown').removeClass("open");
-		} else if($(e.target).attr('class') == 'drawer-menu-item'){
-			$('#nav_cart').addClass("open");
+		} else if($(e.target).hasClass('drawer-menu-item')){
+			$(e.target).parent().addClass("open");
 		}
 	});
 });
-	
-	
-	
+
+
+
 /* 高さ設定 */
 $(function(){
 	//*********************************
 	//初期設定
-	
+
 	var minus = 80　//Header+要素AのHeight値（要素B、要素Cと追加していきたい分だけ高さを足してください。）
 	var mainID = 'mainMenu'　//高さを動的にするdivのID名
 	hsize = $('.drawer-dropdown-menu').height();
-	
+
 	//*********************************
 	if ($(window).height() < hsize) {
 	function heightSetting(){
