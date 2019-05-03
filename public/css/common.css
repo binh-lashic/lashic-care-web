@@ -652,6 +652,12 @@ button.btn_darkBlue{ width:100%;}
 	}
 }
 
+@media (max-width: 768px) {
+	.center_container [type=submit]{
+		font-size: 17px;
+	}
+}
+
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 

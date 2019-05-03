@@ -1380,6 +1380,10 @@ p + .form_title, div + .form_title, p + .form_set_container {
 		width: 100%;
 		padding: 0 0px;
 	}
+
+	.remarks{
+		width: 100%;
+	}
 }
 
 .form_set_container + .form_set_container {
