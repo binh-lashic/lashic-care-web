@@ -11,6 +11,7 @@ class Controller_Shopping extends Controller_Base
             'cart',
             'user',
 	    );
+        $this->template = 'template_responsive';
 	    parent::before();
         if(empty($this->user)) {
             list(, $user_id) = Auth::get_user_id(); 

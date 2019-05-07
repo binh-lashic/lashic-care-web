@@ -18,6 +18,12 @@ body {
 	width: 1020px;
 	margin: 0 auto;
 }
+@media (max-width: 768px) {
+	.content {
+		width: 98%;
+		margin: 0 auto;
+	}
+}
 /* @media (max-width: 640rem) {
 .container{ width:95%; margin:0 auto;}
 }
@@ -1361,6 +1367,25 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	padding: 0 20px;
 	box-shadow: 0 2px 2px #EEE
 }
+
+@media (max-width: 640px) {
+	.form_set_container {
+		width: 100%;
+		padding: 0 0px;
+	}
+}
+
+@media (max-width: 768px) {
+	.form_set_container {
+		width: 100%;
+		padding: 0 0px;
+	}
+
+	.remarks{
+		width: 100%;
+	}
+}
+
 .form_set_container + .form_set_container {
 	border-top: none;
 	margin-top: -1px
@@ -1401,6 +1426,18 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	text-align: left;
 	vertical-align: top;
 }
+
+@media (max-width: 640px) {
+	.form_set_container table th {
+		width: 38% !important;
+		font-size: 12px;
+	}
+
+	.remarks{
+		width: 100%;
+	}
+}
+
 .form_set_container table th.largeTh {
 	width: 250px;
 	padding: 10px;
@@ -1545,6 +1582,16 @@ p + .form_title, div + .form_title, p + .form_set_container {
 }
 .settingContainer {
 	display: table;
+}
+
+@media (max-width: 640px) {
+	.settingContainer {
+		width:100% !important;
+	}
+
+	.graphSettingFalse {
+		width: 60% !important;
+	}
 }
 .settingInner {
 	display: table-cell;
@@ -2035,6 +2082,11 @@ a.moreINfoLink:link {
 .regist_waku_left {
 	width: 513px;
 }
+@media (max-width: 640px) {
+	.regist_waku_left {
+		width: 100%;
+	}
+}
 #attention_01 {
 	display: none;
 }
@@ -2119,9 +2171,11 @@ a.moreINfoLink:link {
 	width: 100%;
 	margin-top: 30px;
 }
-.shoppingCart_containerUl {
-	width: 1044px;
-	margin-right: -12px;
+@media (min-width: 1000px) {
+	.shoppingCart_containerUl {
+		width: 1044px;
+		margin-right: -12px;
+	}
 }
 .shoppingCart_containerUl:after {
 	content: "";
@@ -2135,7 +2189,14 @@ a.moreINfoLink:link {
 	margin-bottom: 12px;
 	position: relative;
 }
-.shoppingCart_containerLi .shoppingCart_box{ 
+
+@media (max-width: 640px) {
+	.shoppingCart_containerLi {
+		width: 100%;
+	}
+}
+
+.shoppingCart_containerLi .shoppingCart_box{
 	border-radius: 3px;
 	border: 2px solid #4b4948;
 	padding: 20px;
@@ -2500,7 +2561,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 
 @media (max-width: 600px) {
 .hero .tagline p {
-	font-size: 1.3rem;
+	font-size: 1.0rem;
 }
 }
 .hero .tagline h1 {
@@ -2532,7 +2593,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 
 @media (max-width: 600px) {
 .hero .tagline h1 {
-	font-size: 2.5rem;
+	font-size: 2.0rem;
 	line-height: 3rem;
 	letter-spacing:1px;
 	font-family: "游明朝体", "Yu Mincho", YuMincho, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
@@ -2583,6 +2644,7 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 }
 .hero .btn-container .btn {
 	float: left;
+	width: 45%;
 }
 }
 
@@ -2597,8 +2659,10 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 	font-family: "游明朝体", "Yu Mincho", YuMincho, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
 	font-weight:400; position:relative;
 	background:url(../images/chart.jpg) no-repeat; background-size:cover}
+
 @media (max-width: 740px) {
-.topCopy_image{ position:relative; width:70%; height:280px; margin:0 auto;}
+.topCopy{padding: 20px 0 0;font-size:2rem;}
+.topCopy_image{ position:relative; width:70%; height:80px; margin:0 auto;}
 }
 @media (min-width: 741px)  and (max-width: 1150px) {
 .topCopy_image{ position:relative; width:70%; height:380px; margin:0 auto;}
@@ -2612,3 +2676,34 @@ input[type=checkbox]:checked + label.shoppingCart_input:after, input[type=radio]
 .topCopy_image img{ width:100%;}
 .topCopy_pc , .topCopy_apli{ max-width:1000px; position:absolute; top:0; left:0; right:0; margin:0 auto;}
 .topCopy_text{ margin-top:60px;}
+
+.regist_img_01{
+	width: 1020px;
+	height: 400px;
+}
+
+.regist_03 {
+	width: 332px;
+}
+
+@media (max-width: 640px) {
+	.regist_img_01 {
+		width: 100%;
+		height: 20%;
+	}
+
+	.regist_03 {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px){
+	.regist_img_01 {
+		width: 100%;
+		height: 20%;
+	}
+
+	.regist_03 {
+		width: 100%;
+	}
+}

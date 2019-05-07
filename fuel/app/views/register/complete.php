@@ -39,7 +39,7 @@
 									<h2 class="regist_h3">見守り対象ユーザーの状況を知るには</h2>
 									<p>(1) 右上にあるユーザーアイコンをクリックしてください。<br>
 (2) 閲覧を許可されたユーザーの名前をクリックしてユーザーのページに移動してください。</p></div>
-							<div class="floatR"><img src="../images/regist/regist_03.jpg" width="332" alt=""/></div>
+							<div class="floatR"><img src="../images/regist/regist_03.jpg" class="regist_03" alt=""/></div>
 						</div>
 						
 						<div class="clearfix">

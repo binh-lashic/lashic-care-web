@@ -13,7 +13,7 @@
 			<!-- /flow矢印 -->
 			
         <!-- デザインあとではめ込み -->
-        <div class="mgt30"><a href="#moreInfo" class="fancybox"><img src="/images/regist/regist_img_01.jpg" width="1020" height="400" alt="高齢者の”自立”をささえ
+        <div class="mgt30"><a href="#moreInfo" class="fancybox"><img src="/images/regist/regist_img_01.jpg" class="regist_img_01" alt="高齢者の”自立”をささえ
 ”あんしん”を共有する"/></a></div>
         <div class="floatR"><a href="#moreInfo" class="fancybox link_next">LASHICを知る</a></div>
             <div id="moreInfo" class="moreInfoContainer" style="display: none; width:980px; height:1200px; ">

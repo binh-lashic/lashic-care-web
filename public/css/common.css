@@ -20,6 +20,22 @@ body {
 .left_container{ width:25%; display:table-cell; vertical-align:middle;}
 .center_container{ width:50%; display:table-cell; vertical-align:middle;}
 .right_container{ width:25%; display:table-cell; vertical-align:middle; text-align:right;}
+@media (max-width: 640px) {
+	.left_container {
+		display: grid;
+		width: 100%;
+	}
+
+	.center_container {
+		width: 95%;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.right_container {
+		width: 0;
+	}
+}
+
 
 
 
@@ -385,6 +401,11 @@ strong {
 	font-size: 12px;
 	line-height: 1.4em;
 }
+@media (max-width: 640px) {
+	.small {
+		font-size: 10px;
+	}
+}
 .max_small {
 	font-size: 11px;
 	line-height: 1.4em;
@@ -453,7 +474,7 @@ a.alpha:hover img, a.alpha:active img {
     content: "\25C0";
     color: #003c58;
 }
-.link_back:link, .link_back:visited { text-decoration:none;}
+.link_back:link, .link_back:visited { text-decoration:none;word-break: keep-all;}
 .link_back:active , .link_back:hover{ text-decoration:none; opacity:0.6}
 
 
@@ -551,6 +572,15 @@ a.link_noUnderLine{ text-decoration:none;}
 	text-decoration:none !important;
 }
 
+@media (max-width: 640px) {
+	.btn_text {
+		font-size: 10px;
+		line-height: 1em;
+		padding: 5px 0;
+		white-space: pre;
+	}
+}
+
 .btn_lightGray {
 	border:none;
 	border-radius: 6px;
@@ -615,6 +645,19 @@ button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=sub
 }
 button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+
+@media (max-width: 640px) {
+	.center_container [type=submit]{
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 768px) {
+	.center_container [type=submit]{
+		font-size: 17px;
+	}
+}
+
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 
@@ -684,6 +727,13 @@ p+ ol.ol-text , p + ul.ul-text{ margin-top:30px;}
 .content_h2{ font-size:20px; color:#003c58; font-weight:normal; padding-bottom:10px; border-bottom:1px solid #DDD; margin-bottom:20px;}
 .content_h3{ font-size:16px; color:#003c58; font-weight:normal; margin-bottom:20px; border-left:3px solid #003c58; padding-left:8px; line-height:1em;}
 .contentLarge_h1{ font-size:32px; color:#003c58; margin:10px 0 50px; font-weight:normal}
+
+@media (max-width: 640px) {
+	.contentLarge_h1{ font-size:25px; }
+	.contentHalf{ width:100%;}
+	.content_h3{ padding-top: 5px;}
+}
+
 .contentLarge_h2{ font-size:20px; font-weight:normal; border-bottom:1px dotted #003c58; color:#003c58; margin-bottom:30px; padding-bottom:8px }
 .contentLarge_h2 h2{ font-size:20px; color:#003c58; border-left:3px solid #003c58; padding-left:8px; font-weight:normal}
 
@@ -714,6 +764,12 @@ div + .content_h2 , div + .content_h3 , div + .contentLarge_h2 , .contentLarge_h
 
 ---------------------------------------------------------- */
 .icon_Required{ background-color:#c5001f; padding:0 5px; color:#FFF; font-size:12px; float:right;}
+
+@media (max-width: 640px) {
+	.icon_Required{ font-size:10px; }
+}
+
+
 .input_text {
 	border: 1px solid #DDD;
 	font-size: 14px;
@@ -722,9 +778,21 @@ div + .content_h2 , div + .content_h3 , div + .contentLarge_h2 , .contentLarge_h
 .input_short {
 	width: 120px;
 }
+
 .input_medium {
 	width: 50%;
 }
+
+@media (max-width: 640px) {
+	.input_short {
+		width: 90%;
+	}
+
+	.input_medium {
+		width: 90%;
+	}
+}
+
 .input_large {
 	width: 80%;
 }
@@ -977,5 +1045,19 @@ p + .flowSet{ margin-top:30px;}
 .flow_no04 ol li{ width:25%;} /* 要素の数 */
 .flow_no05 ol li{ width:20%;} /* 要素の数 */
 
+@media (max-width: 640px) {
+	.flowSet ol {
+		margin-bottom: 20px;
+		height: auto;
+		line-height: 14px;
+	}
+
+	/* flowSet */
+	.flowSet ol li {
+		display: table-cell;
+		padding: 5px;
+		font-size: 11px;
+	}
+}
 
 

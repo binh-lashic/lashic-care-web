@@ -23,7 +23,7 @@ if(isset($user)) {
 <?php
 if(isset($user)) {
 ?>
-				<li class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo __('header.client.select_user'); ?><span class="drawer-caret"></span> </a>
+				<li id="nav_user" class="drawer-dropdown nav_user"> <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo __('header.client.select_user'); ?><span class="drawer-caret"></span> </a>
 					<div class="drawer-dropdown-menu mainMenu">
 						<div id="mainMenu">
 							<ul>
@@ -41,7 +41,7 @@ if(!empty($clients)) {
 						</div>
 					</div>
 				</li>
-				<li class="drawer-dropdown nav_mainMenu">
+				<li id="nav_mainMenu" class="drawer-dropdown nav_mainMenu">
 					<a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
 					  <?php echo __('header.client.menu'); ?> <span class="drawer-caret"></span>
 					</a>
