@@ -1586,11 +1586,11 @@ p + .form_title, div + .form_title, p + .form_set_container {
 
 @media (max-width: 640px) {
 	.settingContainer {
-		width:100%;
+		width:100% !important;
 	}
 
 	.graphSettingFalse {
-		width: 60%;
+		width: 60% !important;
 	}
 }
 .settingInner {
