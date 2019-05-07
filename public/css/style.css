@@ -20,7 +20,7 @@ body {
 }
 @media (max-width: 768px) {
 	.content {
-		width: 95%;
+		width: 98%;
 		margin: 0 auto;
 	}
 }
@@ -1380,6 +1380,10 @@ p + .form_title, div + .form_title, p + .form_set_container {
 		width: 100%;
 		padding: 0 0px;
 	}
+
+	.remarks{
+		width: 100%;
+	}
 }
 
 .form_set_container + .form_set_container {
@@ -1425,8 +1429,12 @@ p + .form_title, div + .form_title, p + .form_set_container {
 
 @media (max-width: 640px) {
 	.form_set_container table th {
-		font-size: 10px;
-		width: 35%;
+		width: 38% !important;
+		font-size: 12px;
+	}
+
+	.remarks{
+		width: 100%;
 	}
 }
 
@@ -2181,7 +2189,14 @@ a.moreINfoLink:link {
 	margin-bottom: 12px;
 	position: relative;
 }
-.shoppingCart_containerLi .shoppingCart_box{ 
+
+@media (max-width: 640px) {
+	.shoppingCart_containerLi {
+		width: 100%;
+	}
+}
+
+.shoppingCart_containerLi .shoppingCart_box{
 	border-radius: 3px;
 	border: 2px solid #4b4948;
 	padding: 20px;

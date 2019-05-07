@@ -18,24 +18,24 @@ body {
 }
 .set_container{ width:100%; display:table; margin-top:30px;}
 .left_container{ width:25%; display:table-cell; vertical-align:middle;}
-
+.center_container{ width:50%; display:table-cell; vertical-align:middle;}
+.right_container{ width:25%; display:table-cell; vertical-align:middle; text-align:right;}
 @media (max-width: 640px) {
 	.left_container {
-		width: 15%;
+		display: grid;
+		width: 100%;
 	}
-}
 
-.center_container{ width:50%; display:table-cell; vertical-align:middle;}
-
-@media (max-width: 640px) {
 	.center_container {
 		width: 95%;
 		display: table-cell;
 		vertical-align: middle;
 	}
+	.right_container {
+		width: 0;
+	}
 }
 
-.right_container{ width:25%; display:table-cell; vertical-align:middle; text-align:right;}
 
 
 
@@ -474,7 +474,7 @@ a.alpha:hover img, a.alpha:active img {
     content: "\25C0";
     color: #003c58;
 }
-.link_back:link, .link_back:visited { text-decoration:none;}
+.link_back:link, .link_back:visited { text-decoration:none;word-break: keep-all;}
 .link_back:active , .link_back:hover{ text-decoration:none; opacity:0.6}
 
 
@@ -572,6 +572,15 @@ a.link_noUnderLine{ text-decoration:none;}
 	text-decoration:none !important;
 }
 
+@media (max-width: 640px) {
+	.btn_text {
+		font-size: 10px;
+		line-height: 1em;
+		padding: 5px 0;
+		white-space: pre;
+	}
+}
+
 .btn_lightGray {
 	border:none;
 	border-radius: 6px;
@@ -636,6 +645,19 @@ button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=sub
 }
 button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+
+@media (max-width: 640px) {
+	.center_container [type=submit]{
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 768px) {
+	.center_container [type=submit]{
+		font-size: 17px;
+	}
+}
+
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 
@@ -708,6 +730,8 @@ p+ ol.ol-text , p + ul.ul-text{ margin-top:30px;}
 
 @media (max-width: 640px) {
 	.contentLarge_h1{ font-size:25px; }
+	.contentHalf{ width:100%;}
+	.content_h3{ padding-top: 5px;}
 }
 
 .contentLarge_h2{ font-size:20px; font-weight:normal; border-bottom:1px dotted #003c58; color:#003c58; margin-bottom:30px; padding-bottom:8px }
@@ -1021,5 +1045,19 @@ p + .flowSet{ margin-top:30px;}
 .flow_no04 ol li{ width:25%;} /* 要素の数 */
 .flow_no05 ol li{ width:20%;} /* 要素の数 */
 
+@media (max-width: 640px) {
+	.flowSet ol {
+		margin-bottom: 20px;
+		height: auto;
+		line-height: 14px;
+	}
+
+	/* flowSet */
+	.flowSet ol li {
+		display: table-cell;
+		padding: 5px;
+		font-size: 11px;
+	}
+}
 
 

@@ -69,35 +69,39 @@ else if(window.attachEvent) {
 
 ------------------------------------------------------ */
 $(function(){
-	$('.drawer-menu > .drawer-dropdown')
-		.mouseover(function(){
-		$(this).addClass("open");
-		$(this).siblings().removeClass("open");
-		$(".drawer-menu-item").attr({
-				'aria-expanded' : 'true'
+
+	//PCの場合のみマウスオーバーを設定
+	if(isPc()){
+		$('.drawer-menu > .drawer-dropdown')
+			.mouseover(function(){
+				$(this).addClass("open");
+				$(this).siblings().removeClass("open");
+				$(".drawer-menu-item").attr({
+					'aria-expanded' : 'true'
+				});
 			});
-	});
+	}
 
 	$(document).on('click', function(e) {
 		if($('.drawer-menu > .drawer-dropdown').hasClass('open')) {
 			$('.drawer-menu > .drawer-dropdown').removeClass("open");
-		} else if($(e.target).attr('class') == 'drawer-menu-item'){
-			$('#nav_cart').addClass("open");
+		} else if($(e.target).hasClass('drawer-menu-item')){
+			$(e.target).parent().addClass("open");
 		}
 	});
 });
-	
-	
-	
+
+
+
 /* 高さ設定 */
 $(function(){
 	//*********************************
 	//初期設定
-	
+
 	var minus = 80　//Header+要素AのHeight値（要素B、要素Cと追加していきたい分だけ高さを足してください。）
 	var mainID = 'mainMenu'　//高さを動的にするdivのID名
 	hsize = $('.drawer-dropdown-menu').height();
-	
+
 	//*********************************
 	if ($(window).height() < hsize) {
 	function heightSetting(){
@@ -384,6 +388,28 @@ function hide_body(d){
 	document.getElementById('body'+d).style.display = 'none';
 }
 
+/**
+ * 使用しているデバイス種別を返す
+ * @returns {string}
+ */
+function getDevice(){
+	var ua = navigator.userAgent;
+	if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+		return 'sp';
+	}else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+		return 'tab';
+	}else{
+		return 'other';
+	}
+}
+
+/**
+ * 使用しているデバイスがPCか判定する
+ * @returns {Boolean}
+ */
+function isPc(){
+	return (getDevice() == 'other');
+}
 
 
 
