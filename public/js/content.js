@@ -404,7 +404,7 @@ function getDevice(){
 }
 
 /**
- * 使用しているデバイスがPCか判定すつ
+ * 使用しているデバイスがPCか判定する
  * @returns {Boolean}
  */
 function isPc(){
