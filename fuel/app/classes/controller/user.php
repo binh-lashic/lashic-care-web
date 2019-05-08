@@ -730,7 +730,9 @@ class Controller_User extends Controller_Base
 	  $this->data['breadcrumbs'] = array($this->template->title);
 	  
 	  if(Input::post()) {
-	    \Model_User::updateUser(Input::post());
+	    $params = Input::post();
+	    $params['temporary'] = \Model_User::REGULAR_USER;
+	    \Model_User::updateUser($params);
 	  }
 	  $this->template->header = View::forge('no_nav_header', $this->data);
 	  $this->template->content = View::forge('user/temp_account_complete', $this->data);

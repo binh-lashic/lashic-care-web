@@ -1,6 +1,10 @@
 <?php 
 class Model_User extends Orm\Model{
-
+	
+	/** 仮アカウントのステータス **/
+	const REGULAR_USER = 0;
+	const TEMPORARY_USER = 1;
+	
 	protected static $_properties = array(
 		'id',
 		'username',
@@ -48,6 +52,7 @@ class Model_User extends Orm\Model{
 		'email_confirm_expired',
 		'master' => array('default' => 0),
 		'affiliate',
+		'temporary'
 	);
 
     public static function validate($factory)
@@ -199,7 +204,8 @@ class Model_User extends Orm\Model{
 			'email_confirm_token',
 			'email_confirm_expired',
 			'master',
-			'affiliate'
+			'affiliate',
+			'temporary'
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
