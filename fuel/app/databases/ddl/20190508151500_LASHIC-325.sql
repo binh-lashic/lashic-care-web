@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[users] ADD `temporary` int NULL;
