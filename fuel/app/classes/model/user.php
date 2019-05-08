@@ -442,45 +442,48 @@ class Model_User extends Orm\Model{
 		return \Model_User::saveAdminUser($params);
 	}
 
-	public static function saveAdminUser($params) {
-		if(isset($params['id'])) {
-			$id = $params['id'];
-		} else {
-			if(empty($params['username'])) {
-				$params['username'] = sha1($params['email'].mt_rand());
-			}
-			if(!isset($params['admin'])) {
-				$params['admin'] = 1;
-			}
-			$id = Auth::create_user(
-	                $params['username'],
-	                $params['password'],
-	                $params['email']);
-			$params['email_confirm'] = 0;
-			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
-			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
-			//新規のときだけアフィリエイトを登録
-			if(!empty(Cookie::get("affiliate"))) {
-				$params['affiliate'] = Cookie::get("affiliate"); 
-				Cookie::delete("affiliate");
-			}
+	public static function saveAdminUser($params)
+	{
+	  if (isset($params['id'])) {
+		$id = $params['id'];
+	  } else {
+		if (empty($params['username'])) {
+		  $params['username'] = sha1($params['email'] . mt_rand());
 		}
-
-		$user = \Model_User::find($id);
-		unset($params['id']);
-		unset($params['username']);
-		unset($params['password']);
-		unset($params['email']);
-		if($user) {
-			$user->set($params);
-			if($user->save()) {
-				//センサーを保存
-				$params['user_id'] = $user['id'];
-				\Model_User::saveSensor($params);
-				return \Model_User::format($user);
-			} else {
-				return null;
-			}				
+		if (!isset($params['admin'])) {
+		  $params['admin'] = 1;
+		}
+		$id = Auth::create_user(
+			$params['username'],
+			$params['password'],
+			$params['email']);
+		$params['email_confirm'] = 0;
+		$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+		$params['email_confirm_token'] = sha1($params['email'] . $params['email_confirm_expired'] . mt_rand());
+		//新規のときだけアフィリエイトを登録
+		if (!empty(Cookie::get("affiliate"))) {
+		  $params['affiliate'] = Cookie::get("affiliate");
+		  Cookie::delete("affiliate");
+		}
+	  }
+	  
+	  $user = \Model_User::find($id);
+	  unset($params['id']);
+	  unset($params['username']);
+	  unset($params['password']);
+	  unset($params['email']);
+	  if ($user) {
+		$user->set($params);
+		if ($user->save()) {
+		  //センサーを保存
+		  $params['user_id'] = $user['id'];
+		  \Model_User::saveSensor($params);
+		  return \Model_User::format($user);
+		} else {
+		  return null;
+		}
+	  }
+	}
  
 	public static function updateUser($params) {
 		$user = \Model_User::find($params['id']);
