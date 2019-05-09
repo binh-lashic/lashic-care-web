@@ -28,7 +28,7 @@ class Controller_Register extends Controller_Base
         	if($val->run()) {
 	     		$user = \Model_User::getUserFromEmail($params['email']);
 	     		if(isset($user)){
-	     			$this->data['errors']['email'] = true;
+	     			$this->data['errors']['email'] = "エラー：既に登録されているメールアドレスです";
 	     		}
         	} else {
 			    // バリデーション失敗の場合ここに入ってくる
