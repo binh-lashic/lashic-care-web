@@ -1,4 +1,4 @@
-	<div class="clearfix content"> 
+	<div class="clearfix content">
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
@@ -80,7 +80,7 @@ if(!empty($errors['security_code_registered'])) {
 						</tbody>
 					</table>
 			</div>
-			<!-- /ご登録のクレジットカード --> 
+			<!-- /ご登録のクレジットカード -->
 			<br><br>
 			<!-- 別のクレジットカード -->
 			<div class="form_set_container">
@@ -172,7 +172,7 @@ if(!empty($errors['security_code'])) {
 					</table>
 			</div>
 			<!-- /別のクレジットカード -->
-			
+
 			<div class="set_container">
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
@@ -183,3 +183,5 @@ if(!empty($errors['security_code'])) {
 			</form>
 		</section>
 	</div>
+	<script type="text/javascript" src="https://stg.static.mul-pay.jp/ext/js/token.js" ></script>
+	<script type="text/javascript" src="/js/token_payment.js" ></script>
