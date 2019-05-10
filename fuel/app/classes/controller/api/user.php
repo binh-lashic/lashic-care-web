@@ -138,6 +138,14 @@ class Controller_Api_User extends Controller_Api
 		} else {
 			list(, $user_id) = Auth::get_user_id();
 			$user = \Model_User::getUser($user_id);
+			$clients = \Model_User::getClients($user_id);
+			
+			if(empty($clients)){
+			  $user['client'] = 0;
+			} else {
+			  $user['client'] = 1;
+			}
+			
 			$this->result = array(
 				'message' => 'ログインに成功しました',
 				'data' => $user,
