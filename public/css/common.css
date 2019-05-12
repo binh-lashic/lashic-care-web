@@ -628,7 +628,7 @@ a.btn_redRadius20 , .btn_redRadius20 [type=submit] {
 	outline:none;
 	text-decoration:none;
 }
-button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=submit] {
+button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=submit] , .center_container [type=button] {
 	background-image: -moz-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
 	background-image: -webkit-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
 	background-image: -ms-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
@@ -645,9 +645,13 @@ button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=sub
 }
 button.btn_darkBlue{ width:100%;}
 .center_container [type=submit]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
+.center_container [type=button]{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 @media (max-width: 640px) {
 	.center_container [type=submit]{
+		font-size: 12px;
+	}
+	.center_container [type=button]{
 		font-size: 12px;
 	}
 }
@@ -656,12 +660,19 @@ button.btn_darkBlue{ width:100%;}
 	.center_container [type=submit]{
 		font-size: 17px;
 	}
+	.center_container [type=button]{
+		font-size: 17px;
+	}
 }
 
 .center_container .btn_darkBlue{ width:100%; padding:20px; font-size:20px; border-radius:30px; text-decoration:none;}
 
 
 .center_container [type=submit]:hover {
+	opacity: 0.7;
+	text-decoration:none;
+}
+.center_container [type=button]:hover {
 	opacity: 0.7;
 	text-decoration:none;
 }
