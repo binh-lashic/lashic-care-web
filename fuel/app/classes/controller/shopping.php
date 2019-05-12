@@ -220,7 +220,7 @@ class Controller_Shopping extends Controller_Base
             if($params['process'] == "registered") {
                 // GMO非保持化対応により必ずprocessがregisterdでPHP側にくるようになりました
                 // カード情報登録の場合は、$params['token']に値が存在します。
-                if (!empty($param['token'])) {
+                if (!empty($params['token'])) {
                     //GMOペイメントの会員登録
                     $member = \Model_GMO::findMember($this->user['id']);
                     if(!$member->memberId) {
