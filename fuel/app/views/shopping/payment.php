@@ -176,10 +176,14 @@ if(!empty($errors['security_code'])) {
 			<div class="set_container">
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
-					<input type="submit" value="次の画面に進む" >
+					<input type="button" value="次の画面に進む" onclick="doPurchase()" />
 				</div>
 				<div class="right_container left"></div>
 			</div>
+			</form>
+			<form id="purchaseForm" action="/shopping/payment" method="post">
+				<input type="hidden" value="" id="token" name="token" />
+				<input type="hidden" value="registered" id="token" name="process" />
 			</form>
 		</section>
 	</div>

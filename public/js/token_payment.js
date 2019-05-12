@@ -13,21 +13,34 @@ function execPurchase(response) {
 }
 
 function doPurchase() {
-  var cardno, expire, securitycode, holdername;
-  var cardno = document.getElementById("number").value;
-  var expire = document.getElementById("expire_year").value + document.getElementById("expire_month").value;
+  // processがregisteredの場合は処理をスキップする
+  var radios = document.getElementsByName("process");
+  var checkValue = "";
+  for(var i=0; i<radios.length; i++){
+    if (radios[i].checked) {
+      checkValue = radios[i].value;
+    }
+  }
 
-  var securitycode = document.getElementById("security_code").value;
-  var holdername = document.getElementById("holder_name").value;
-  var tokennumber = document.getElementById("tokennumber").value;
-  Multipayment.init("tshop00037646"); // テスト環境用
-  // Multipayment.init("9101044836510"); // 本番環境用
+  if (checkValue == "registered") {
+    document.getElementById("purchaseForm").submit();
+  } else {
+    var cardno, expire, securitycode, holdername;
+    var cardno = document.getElementById("number").value;
+    var expire = document.getElementById("expire_year").value + document.getElementById("expire_month").value;
 
-  Multipayment.getToken({
-    cardno : cardno,
-    expire : expire,
-    securitycode : securitycode,
-    holdername : holdername,
-    tokennumber : tokennumber
-  }, execPurchase);
+    var securitycode = document.getElementById("security_code").value;
+    var holdername = document.getElementById("holder_name").value;
+    var tokennumber = document.getElementById("tokennumber").value;
+    Multipayment.init("tshop00037646"); // テスト環境用
+    // Multipayment.init("9101044836510"); // 本番環境用
+
+    Multipayment.getToken({
+      cardno : cardno,
+      expire : expire,
+      securitycode : securitycode,
+      holdername : holdername,
+      tokennumber : tokennumber
+    }, execPurchase);
+  }
 }
