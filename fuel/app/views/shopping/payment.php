@@ -56,7 +56,7 @@ if(!empty($cards))
 							</tr>
 							<tr>
 								<th><span class="icon_Required">必須</span> セキュリティコード</th>
-								<td><input type="text" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
+								<td><input type="text" id="security_code_registered" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
 <?php
 if(!empty($errors['security_code_registered'])) {
 ?>
@@ -94,7 +94,7 @@ if(!empty($errors['security_code_registered'])) {
 							</tr>
 							<tr>
 								<th>カード番号</th>
-								<td><input type="text" name="number" class="input_text input_medium" value="<?php if($card['number']) echo $card['number']; ?>">
+								<td><input type="text" id="number" name="number" class="input_text input_medium" value="<?php if($card['number']) echo $card['number']; ?>">
 									&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
 <?php
 if(!empty($errors['number'])) {
@@ -109,7 +109,7 @@ if(!empty($errors['number'])) {
 								<th>有効期限</th>
 								<td><div class="clearfix">
 										<div class="floatL common_select">
-											<select name="expire_month">
+											<select id="expire_month" name="expire_month">
 												<option value=""> -- </option>
 <?php
 for($i = 1; $i <= 12; $i++) {
@@ -123,7 +123,7 @@ for($i = 1; $i <= 12; $i++) {
 										</div>
 										<div class="floatL pdt5">　月　</div>
 										<div class="floatL common_select">
-											<select name="expire_year">
+											<select id="expire_year" name="expire_year">
 												<option value=""> -- </option>
 <?php
 for($i = date("Y"); $i <= date("Y") + 21; $i++) {
@@ -147,7 +147,7 @@ if(!empty($errors['expire'])) {
 							</tr>
 							<tr>
 								<th>名義人</th>
-								<td><input type="text" name="holder_name" class="input_text input_medium" value="<?php if($card['holder_name']) echo $card['holder_name']; ?>">&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数大文字、カードの表記通りにご入力ください。</span>
+								<td><input type="text" id="holder_name" name="holder_name" class="input_text input_medium" value="<?php if($card['holder_name']) echo $card['holder_name']; ?>">&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数大文字、カードの表記通りにご入力ください。</span>
 <?php
 if(!empty($errors['holder_name'])) {
 ?>
@@ -159,7 +159,7 @@ if(!empty($errors['holder_name'])) {
 							</tr>
 							<tr>
 								<th>セキュリティコード</th>
-								<td><input type="text" name="security_code" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
+								<td><input type="text" id="security_code" name="security_code" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
 <?php
 if(!empty($errors['security_code'])) {
 ?>
@@ -176,6 +176,7 @@ if(!empty($errors['security_code'])) {
 			<div class="set_container">
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
+					<input type="hidden" value="1" name="tokennumber" id= "tokennumber" />
 					<input type="button" value="次の画面に進む" onclick="doPurchase()" />
 				</div>
 				<div class="right_container left"></div>
