@@ -54,18 +54,6 @@ if(!empty($cards))
 								<th>名義人</th>
 								<td><?php echo $_card['HolderName']; ?></td>
 							</tr>
-							<tr>
-								<th><span class="icon_Required">必須</span> セキュリティコード</th>
-								<td><input type="text" id="security_code_registered" name="security_code_registered" class="input_text input_short" maxlength="11">&nbsp;&nbsp;<a href="https://www.gmo-pg.com/service/mulpay/security/securitycode/" target="_blank">セキュリティコードとは</a>&nbsp;&nbsp;<span class="small text_red">※</span><span class="small">半角英数</span>
-<?php
-if(!empty($errors['security_code_registered'])) {
-?>
-								<p class="error">エラー：セキュリティコードを入力してください。</p>
-<?php
-}
-?>
-								</td>
-							</tr>
 <?php
 	}
 } else {

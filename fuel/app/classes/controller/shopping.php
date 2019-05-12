@@ -237,10 +237,6 @@ class Controller_Shopping extends Controller_Base
                     }
                     $result = \Model_GMO::saveCard($params);
                 }
-                if(!$params['security_code_registered'])
-                {
-                    $this->data['errors']['security_code_registered'] = true;
-                }
                 if(empty($this->data['errors'])) {
                     Response::redirect('/shopping/confirm');
                     return;
