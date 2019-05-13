@@ -141,9 +141,9 @@ class Controller_Api_User extends Controller_Api
 			$clients = \Model_User::getClients($user_id);
 			
 			if(empty($clients)){
-			  $user['client'] = 0;
+			  $user['client'] = \Model_User::NO_CLIENT;
 			} else {
-			  $user['client'] = 1;
+			  $user['client'] = \Model_User::EXIST_CLIENT;
 			}
 			
 			$this->result = array(

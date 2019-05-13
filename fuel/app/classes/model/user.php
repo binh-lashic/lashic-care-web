@@ -5,6 +5,10 @@ class Model_User extends Orm\Model{
 	const REGULAR_USER = 0;
 	const TEMPORARY_USER = 1;
 	
+	/** 見守り対象ユーザが存在するかどうか **/
+	const NO_CLIENT = 0;
+	const EXIST_CLIENT = 1;
+	
 	protected static $_properties = array(
 		'id',
 		'username',
