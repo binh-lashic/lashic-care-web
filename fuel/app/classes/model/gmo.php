@@ -100,6 +100,7 @@ class Model_GMO extends Orm\Model{
 			$input->setCardSeq( $params['sequence'] );
 		}
 
+		$input->setToken( $params['token'] );
 		$exe = new SaveCard();/* @var $exec SearchCard */
 		$output = $exe->exec( $input );/* @var $output SaveCardOutput */
 		if( $exe->isExceptionOccured() ){//取引の処理そのものがうまくいかない（通信エラー等）場合、例外が発生します。
