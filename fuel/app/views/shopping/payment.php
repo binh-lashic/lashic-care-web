@@ -28,7 +28,7 @@ if(!empty($errors['card'])) {
 }
 ?>
 			<form action="/shopping/payment" method="post">
-			<!-- ご登録のクレジットカード --> 
+			<!-- ご登録のクレジットカード -->
 			<div class="form_set_container">
 					<table>
 						<tbody>
@@ -68,10 +68,9 @@ if(!empty($cards))
 						</tbody>
 					</table>
 			</div>
-			<!-- /ご登録のクレジットカード -->
+			<!-- /ご登録のクレジットカード --> 
 			<br><br>
 			<!-- 別のクレジットカード -->
-			
 			<div class="form_set_container">
 					<table>
 						<tbody>
@@ -161,7 +160,7 @@ if(!empty($errors['security_code'])) {
 					</table>
 			</div>
 			<!-- /別のクレジットカード -->
-
+			
 			<div class="set_container">
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
