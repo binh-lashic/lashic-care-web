@@ -14,7 +14,7 @@ class Controller_Shopping extends Controller_Base
         $this->template = 'template_responsive';
 	    parent::before();
         if(empty($this->user)) {
-            list(, $user_id) = Auth::get_user_id();
+            list(, $user_id) = Auth::get_user_id(); 
             $this->user = \Model_User::getUser($user_id);
             $clients = \Model_User::getClients($user_id);
             foreach($clients as $client) {
@@ -45,12 +45,12 @@ class Controller_Shopping extends Controller_Base
             Session::set('monitor', Cookie::get("affiliate"));
             $this->data['monitor'] = true;
         }
-
+        
         if(!empty(Session::get('login_error'))) {
             $this->data['login_error'] = Session::get('login_error');
             Session::delete('login_error');
         }
-
+        
         $this->template->content = View::forge('shopping/index', $this->data);
 	}
 
@@ -74,7 +74,7 @@ class Controller_Shopping extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('shopping/user', $this->data);
     }
-
+   
     public function action_user_form()
     {
         $this->template->title = '見守り対象ユーザー設定';
@@ -108,15 +108,15 @@ class Controller_Shopping extends Controller_Base
                 return;
             }
         }
-        $this->template->content = View::forge('shopping/user_form', $this->data);
-    }
+        $this->template->content = View::forge('shopping/user_form', $this->data);           
+    } 
 
     public function action_user_complete() {
         if(Input::post()) {
             $params = Input::post();
             $client = \Model_User::createClient($params);
-            Response::redirect('/shopping/user');
-        }
+            Response::redirect('/shopping/user'); 
+        }  
     }
 
     public function action_destination()
@@ -158,8 +158,8 @@ class Controller_Shopping extends Controller_Base
 
         $this->template->title = '送付先指定';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('shopping/destination', $this->data);
+        $this->template->header = View::forge('header_client', $this->data); 
+        $this->template->content = View::forge('shopping/destination', $this->data);           
     }
 
     public function action_destination_confirm()
@@ -179,8 +179,8 @@ class Controller_Shopping extends Controller_Base
                 if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
                     $this->data['destination']['shipping'] = $shipping['price'];
                     break;
-                }
-            }
+                }      
+            }            
         }
 
 
@@ -190,15 +190,15 @@ class Controller_Shopping extends Controller_Base
         $this->data['subtotal_price'] = 0;
         foreach($this->data['plans'] as $plan) {
             $this->data['subtotal_price'] += $plan['price'];
-        }
+        } 
 
         $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
         $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
 
         $this->template->title = '配送とお支払い';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('shopping/destination_confirm', $this->data);
+        $this->template->header = View::forge('header_client', $this->data); 
+        $this->template->content = View::forge('shopping/destination_confirm', $this->data);           
     }
 
     public function action_payment()
@@ -241,54 +241,10 @@ class Controller_Shopping extends Controller_Base
                     Response::redirect('/shopping/confirm');
                     return;
                 }
-            } else {
-                // GMO非保持化対応により、viewを修正。こちらのelseには到達しなくなりました
-                $destination = Session::get("destination");
-                $destination['remarks'] = $params['remarks'];
-                Session::set("destination", $destination);
-
-                if(!$params['number'])
-                {
-                    $this->data['errors']['number'] = true;
-                }
-                if(!$params['expire_month'] || !$params['expire_year'])
-                {
-                    $this->data['errors']['expire'] = true;
-                } else {
-                    $params['expire'] = substr($params['expire_year'], 2, 2).$params['expire_month'];
-                }
-                if(!$params['holder_name'])
-                {
-                    $this->data['errors']['holder_name'] = true;
-                }
-                if(empty($this->data['errors'])) {
-                    //GMOペイメントの会員登録
-                    $member = \Model_GMO::findMember($this->user['id']);
-                    if(!$member->memberId) {
-                        $member = \Model_GMO::saveMember($this->user['id']);
-                    }
-                    if(!empty($member)) {
-                        $params['member_id'] = $member->memberId;
-                    } else {
-                        $this->data['errors']['gmo'] = true;
-                    }
-                    //既に登録しているカードがある場合はシーケンス番号を与える
-                    if(!empty($card->cardList)) {
-                        $params['sequence'] = 0;
-                    }
-                    $result = \Model_GMO::saveCard($params);
-
-                    if(empty($result)) {
-                        $this->data['errors']['card'] = true;
-                    } else {
-                        Response::redirect('/shopping/payment');
-                    }
-
-                }
             }
         }
 
-        $this->template->content = View::forge('shopping/payment', $this->data);
+        $this->template->content = View::forge('shopping/payment', $this->data);           
     }
 
     public function action_confirm()
@@ -307,14 +263,14 @@ class Controller_Shopping extends Controller_Base
         $this->data['subtotal_price'] = 0;
         foreach($this->data['plans'] as $plan) {
             $this->data['subtotal_price'] += $plan['price'];
-        }
+        } 
         $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
         $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
 
         $this->template->title = 'ご注文確認';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
-        $this->template->content = View::forge('shopping/confirm', $this->data);
+        $this->template->header = View::forge('header_client', $this->data); 
+        $this->template->content = View::forge('shopping/confirm', $this->data);           
     }
 
     public function action_complete()
@@ -393,7 +349,7 @@ class Controller_Shopping extends Controller_Base
                         'remarks' => $destination['remarks']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
-                        $params['affiliate'] = Cookie::get("affiliate");
+                        $params['affiliate'] = Cookie::get("affiliate"); 
                     }
                     $contract = \Model_Contract::forge();
                     $contract->set($params);
@@ -401,7 +357,7 @@ class Controller_Shopping extends Controller_Base
                         $contract_payment = \Model_Contract_Payment::forge();
                         $contract_payment->set(array(
                             'contract_id' => $contract->id,
-                            'payment_id' => $payment->id,
+                            'payment_id' => $payment->id, 
                         ));
                         $contract_payment->save();
                     }
@@ -442,10 +398,10 @@ class Controller_Shopping extends Controller_Base
 			\Log::warning('不正な処理です. session_id:[' . Session::key() . ']', __METHOD__);
             exit;
         }
-
+        
         $this->template->title = 'ご注文完了';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data);
-        $this->template->content = View::forge('shopping/complete', $this->data);
+        $this->template->header = View::forge('header', $this->data); 
+        $this->template->content = View::forge('shopping/complete', $this->data);           
     }
 }

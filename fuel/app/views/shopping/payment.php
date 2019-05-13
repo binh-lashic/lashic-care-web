@@ -1,4 +1,4 @@
-	<div class="clearfix content">
+	<div class="clearfix content"> 
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
@@ -28,7 +28,7 @@ if(!empty($errors['card'])) {
 }
 ?>
 			<form action="/shopping/payment" method="post">
-			<!-- ご登録のクレジットカード -->
+			<!-- ご登録のクレジットカード --> 
 			<div class="form_set_container">
 					<table>
 						<tbody>
@@ -71,6 +71,7 @@ if(!empty($cards))
 			<!-- /ご登録のクレジットカード -->
 			<br><br>
 			<!-- 別のクレジットカード -->
+			
 			<div class="form_set_container">
 					<table>
 						<tbody>
