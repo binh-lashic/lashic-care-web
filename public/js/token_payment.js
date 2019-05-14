@@ -32,9 +32,7 @@ function doPurchase() {
     var securitycode = document.getElementById("security_code").value;
     var holdername = document.getElementById("holder_name").value;
     var tokennumber = document.getElementById("tokennumber").value;
-    Multipayment.init("tshop00037646"); // テスト環境用
-    // Multipayment.init("9101044836510"); // 本番環境用
-
+    Multipayment.init(PGCARD_SHOP_ID);
     Multipayment.getToken({
       cardno : cardno,
       expire : expire,
