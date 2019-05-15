@@ -110,11 +110,10 @@ class Controller_User extends Controller_Base
 	    } elseif(!$this->is_clients()){
 	      $redirect_path = '';
 	      if(count(Session::get("plans")) > 0){
-	        $redirect_path = '/shopping/cart';
-	      } else {
-	        $redirect_path = '/shopping/user';
+	        Response::redirect('/shopping/cart');
+	      } else if($this->is_purchased()){
+	        Response::redirect('/shopping/user');
 	      }
-	      Response::redirect($redirect_path);
 	    }
 	    
 	    if(Input::param("date")) {
@@ -783,5 +782,16 @@ class Controller_User extends Controller_Base
 	private function is_temporary()
 	{
 		return ($this->user['temporary'] == 1);
+	}
+	
+	/**
+	 * ログインしたユーザが購入済みかを返す
+	 *
+	 */
+	private function is_purchased()
+	{
+		$user_id = $this->user['id'];
+		$count = \Model_Contract::getCountByUserId($user_id);
+		return ($count > 0);
 	}
 }
