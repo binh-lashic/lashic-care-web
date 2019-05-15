@@ -104,8 +104,10 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
-	    
-	    if(!$this->is_clients()){
+	  
+	    if($this->is_temporary()){
+	      Response::redirect('/user/temp_account_form');
+	    } elseif(!$this->is_clients()){
 	      $redirect_path = '';
 	      if(count(Session::get("plans")) > 0){
 	        $redirect_path = '/shopping/cart';
@@ -113,8 +115,6 @@ class Controller_User extends Controller_Base
 	        $redirect_path = '/shopping/user';
 	      }
 	      Response::redirect($redirect_path);
-	    } else if($this->is_temporary()){
-	      Response::redirect('/user/temp_account_form');
 	    }
 	    
 	    if(Input::param("date")) {
@@ -782,6 +782,6 @@ class Controller_User extends Controller_Base
 	 */
 	private function is_temporary()
 	{
-		return ($this->user->temporary == 1);
+		return ($this->user['temporary'] == 1);
 	}
 }
