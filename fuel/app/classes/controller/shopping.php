@@ -204,30 +204,9 @@ class Controller_Shopping extends Controller_Base
             Session::set('card', $params);
             $this->data['card'] = $params;
             if($params['process'] == "registered") {
-                if(!$params['security_code_registered'])
-                {
-                    $this->data['errors']['security_code_registered'] = true;
-                }
-                if(empty($this->data['errors'])) {
-                    Response::redirect('/shopping/confirm');
-                    return;
-                }
-            } else {
-                if(!$params['number'])
-                {
-                    $this->data['errors']['number'] = true;
-                }
-                if(!$params['expire_month'] || !$params['expire_year'])
-                {
-                    $this->data['errors']['expire'] = true;
-                } else {
-                    $params['expire'] = substr($params['expire_year'], 2, 2).$params['expire_month'];
-                }
-                if(!$params['holder_name'])
-                {
-                    $this->data['errors']['holder_name'] = true;
-                }
-                if(empty($this->data['errors'])) {
+                // GMO非保持化対応により必ずprocessがregisterdでPHP側にくるようになりました
+                // カード情報登録の場合は、$params['token']に値が存在します。
+                if (!empty($params['token'])) {
                     //GMOペイメントの会員登録
                     $member = \Model_GMO::findMember($this->user['id']);
                     if(!$member->memberId) {
@@ -236,20 +215,17 @@ class Controller_Shopping extends Controller_Base
                     if(!empty($member)) {
                         $params['member_id'] = $member->memberId;
                     } else {
-                        $this->data['errors']['gmo'] = true;            
-                    } 
+                        $this->data['errors']['gmo'] = true;
+                    }
                     //既に登録しているカードがある場合はシーケンス番号を与える
                     if(!empty($card->cardList)) {
                         $params['sequence'] = 0;
                     }
                     $result = \Model_GMO::saveCard($params);
-                    
-                    if(empty($result)) {
-                        $this->data['errors']['card'] = true;
-                    } else {
-                        Response::redirect('/shopping/payment');                  
-                    }
-
+                }
+                if(empty($this->data['errors'])) {
+                    Response::redirect('/shopping/confirm');
+                    return;
                 }
             }
         }
