@@ -32,6 +32,7 @@ class Controller_Api_User extends Controller_Api
 		$user['sensors'] = \Model_User::getSensors($id);
 		$user['clients'] = \Model_User::getClients($id);
 		$user['admins'] = \Model_User::getAdmins($id);
+		$user['client'] = $this->set_client($id);
 		$this->result = array(
 			'data' => $user
 		);
@@ -139,19 +140,27 @@ class Controller_Api_User extends Controller_Api
 			list(, $user_id) = Auth::get_user_id();
 			$user = \Model_User::getUser($user_id);
 			$clients = \Model_User::getClients($user_id);
-			
-			if(empty($clients)){
-			  $user['client'] = \Model_User::NO_CLIENT;
-			} else {
-			  $user['client'] = \Model_User::EXIST_CLIENT;
-			}
+			$user['client'] = $this->set_client($user_id);
 			
 			$this->result = array(
 				'message' => 'ログインに成功しました',
 				'data' => $user,
-			);			
+			);
 		}
  		return $this->result();
+	}
+	/**
+	 * 見守り対象ユーザー有無をフラグで返す
+	 * @param $user_id
+	 * @return int
+	 */
+	private function set_client($user_id){
+		$clients = \Model_User::getClients($user_id);
+		if(empty($clients)){
+			return \Model_User::NO_CLIENT;
+		} else {
+			return \Model_User::EXIST_CLIENT;
+		}
 	}
 
 	//ログアウト処理
