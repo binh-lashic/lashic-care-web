@@ -124,6 +124,18 @@ class Controller_Shopping extends Controller_Base
                $contract->client_user_id = $client['id'];
                $contract->save();
             }
+            
+            $client_id = $client['id'];
+            $sensors = \Model_User::getSensors($this->user['id']);
+  
+            foreach($sensors as $sensor) {
+              \Model_User_Sensor::saveUserSensor([
+                'user_id' => $client_id,
+                'sensor_id' => $sensor['id'],
+                'admin' => 0
+              ]);
+            }
+            
             Response::redirect('/user');
         }
     }
