@@ -681,6 +681,7 @@ class Controller_User extends Controller_Base
  
 	public function action_temp_account_form()
 	{
+	  $this->template = View::forge('template_responsive');
 	  $this->template->title = '本登録';
 	  $this->data['breadcrumbs'] = array($this->template->title);
 	  $this->data['eras'] = Config::get("eras");
@@ -725,6 +726,7 @@ class Controller_User extends Controller_Base
 	
 	public function action_temp_account_complete()
 	{
+	  $this->template = View::forge('template_responsive');
 	  $this->template->title = '本登録';
 	  $this->data['breadcrumbs'] = array($this->template->title);
 	  
