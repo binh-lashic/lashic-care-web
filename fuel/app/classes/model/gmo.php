@@ -160,7 +160,7 @@ class Model_GMO extends Orm\Model{
 		$entryInput = new EntryTranInput();
 		$entryInput->setShopId( $_SERVER['PGCARD_SHOP_ID'] );
 		$entryInput->setShopPass( $_SERVER['PGCARD_SHOP_PASS'] );
-		$entryInput->setJobCd("CAPTURE");
+		$entryInput->setJobCd("AUTH");
 		$entryInput->setItemCode( "0000990" );
 		$entryInput->setAmount( $params['amount']);
 		$entryInput->setTax( $params['tax']);
