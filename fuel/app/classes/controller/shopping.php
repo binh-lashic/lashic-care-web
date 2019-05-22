@@ -278,6 +278,8 @@ class Controller_Shopping extends Controller_Base
     {
         $plans = Session::get("plans");
         $destination = Session::get("destination");
+        $post = Input::post();
+        $remarks = $post['remarks'];
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
         if(empty($plans)) {
             $this->data['errors']['plan'] = true;
@@ -342,7 +344,7 @@ class Controller_Shopping extends Controller_Base
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
                         'address' => $destination['address'],
-                        'remarks' => $destination['remarks']
+                        'remarks' => $remarks
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
