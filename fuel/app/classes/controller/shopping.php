@@ -186,6 +186,9 @@ class Controller_Shopping extends Controller_Base
       if(Input::param("address_id")) {
         $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
       }
+      if(Session::get("destination")) {
+        $this->data['destination'] = Session::get("destination");
+      }
     
       if(Session::get('monitor')) {
       } else {
