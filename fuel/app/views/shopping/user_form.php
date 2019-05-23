@@ -1,3 +1,4 @@
+	<div class="clearfix content">
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報入力</h1>
 <?php

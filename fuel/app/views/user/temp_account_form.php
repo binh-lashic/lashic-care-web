@@ -155,7 +155,7 @@ if(isset($errors['prefecture'])) {
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県以下</th>
 										<td><input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $data['address']; ?>"><br>
-<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
+										<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
 <?php
 if(isset($errors['address'])) {
   ?>

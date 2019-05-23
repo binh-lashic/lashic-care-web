@@ -115,17 +115,14 @@ class Controller_Shopping extends Controller_Base
         if(Input::post()) {
             $params = Input::post();
             $client = \Model_User::createClient($params);
-  
-            $contracts = \Model_Contract::query()
-                ->where('user_id', '=', $this->user['id'])
-                ->get();
-  
+            $client_id = $client['id'];
+            $contracts = \Model_Contract::getByUserId($this->user['id']);
+            
             foreach($contracts as $contract) {
-               $contract->client_user_id = $client['id'];
+               $contract->client_user_id = $client_id;
                $contract->save();
             }
             
-            $client_id = $client['id'];
             $sensors = \Model_User::getSensors($this->user['id']);
   
             foreach($sensors as $sensor) {
@@ -285,12 +282,6 @@ class Controller_Shopping extends Controller_Base
             $this->data['errors']['plan'] = true;
 			\Log::warning('plans not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
-        /*
-        if(empty($destination['zip_code'])) {
-            $this->data['errors']['destination'] = true;
-			\Log::warning('destination not found in session. session_id:[' . Session::key() . ']', __METHOD__);
-        }
-        */
         if(empty($this->data['errors'])) {
             //支払い処理を行う
             $payment = \Model_Payment::forge();

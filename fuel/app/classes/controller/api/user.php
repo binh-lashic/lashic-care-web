@@ -32,7 +32,7 @@ class Controller_Api_User extends Controller_Api
 		$user['sensors'] = \Model_User::getSensors($id);
 		$user['clients'] = \Model_User::getClients($id);
 		$user['admins'] = \Model_User::getAdmins($id);
-		$user['client'] = $this->set_client($id);
+		$user['client'] = $this->is_client($id);
 		$this->result = array(
 			'data' => $user
 		);
@@ -140,7 +140,7 @@ class Controller_Api_User extends Controller_Api
 			list(, $user_id) = Auth::get_user_id();
 			$user = \Model_User::getUser($user_id);
 			$clients = \Model_User::getClients($user_id);
-			$user['client'] = $this->set_client($user_id);
+			$user['client'] = $this->is_client($user_id);
 			
 			$this->result = array(
 				'message' => 'ログインに成功しました',
@@ -154,7 +154,7 @@ class Controller_Api_User extends Controller_Api
 	 * @param $user_id
 	 * @return int
 	 */
-	private function set_client($user_id){
+	private function is_client($user_id){
 		$clients = \Model_User::getClients($user_id);
 		if(empty($clients)){
 			return \Model_User::NO_CLIENT;

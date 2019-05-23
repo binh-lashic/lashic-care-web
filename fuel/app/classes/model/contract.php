@@ -182,4 +182,16 @@ class Model_Contract extends Orm\Model{
         $result_arr = $result->current();
         return $result_arr['count'];
     }
+  
+  /**
+   * user_idからcontractを取得する
+   * @param $user_id
+   * @return mixed
+   */
+  public function getByUserId($user_id)
+  {
+    return \Model_Contract::query()
+        ->where('user_id', '=', $user_id)
+        ->get();
+  }
 }

@@ -1,3 +1,4 @@
+	<div class="clearfix content">
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報確認</h1>
 			<p>以下の入力内容でお間違いないかご確認ください。</p>
