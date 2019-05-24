@@ -177,18 +177,15 @@ class Controller_Shopping extends Controller_Base
     
     public function action_payment()
     {
-      if(Input::param("user_id")) {
-        $this->data['destination'] = \Model_User::find(Input::param("user_id"));
-      }
-      if(Input::param("address_id")) {
-        $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
-      }
       if(Session::get("destination")) {
         $this->data['destination'] = Session::get("destination");
+      } else if(Input::param("address_id")) {
+        $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+      } else if(Input::param("user_id")) {
+        $this->data['destination'] = \Model_User::find(Input::param("user_id"));
       }
-    
-      if(Session::get('monitor')) {
-      } else {
+      
+      if(!Session::get('monitor')) {
         $shippings = Config::get("shipping");
         $this->data['destination']['shipping'] = 0;
         foreach($shippings as $shipping) {
@@ -247,9 +244,7 @@ class Controller_Shopping extends Controller_Base
 
     public function action_confirm()
     {
-        if(Session::get('monitor')) {
-
-        } else {
+        if(!Session::get('monitor')) {
             $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
             $this->data['card'] = $card->cardList[0];
         }
@@ -300,8 +295,7 @@ class Controller_Shopping extends Controller_Base
                 'type' => 'initial',
             ));
             if($payment->save()) {
-                if(Session::get('monitor')) {
-                } else {
+                if(!Session::get('monitor')) {
                     $result = \Model_GMO::entry(array(
                         'order_id' => $payment->id,
                         'member_id' => $payment->user_id,

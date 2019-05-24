@@ -13,23 +13,14 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td>
-										<input type="text" class="input_text input_short" name="last_name" value="<?php echo $data['last_name']; ?>">
-										<input type="text" class="input_text input_short" name="first_name" value="<?php echo $data['first_name']; ?>">
-<?php
-if(isset($errors['last_name'])) {
-  ?>
-											<p class="error"><?php echo $errors['last_name']; ?></p>
-  <?php
-}
-?>
-<?php
-if(isset($errors['first_name'])) {
-  ?>
-											<p class="error"><?php echo $errors['first_name']; ?></p>
-  <?php
-}
-?>
-										
+											<input type="text" class="input_text input_short" name="last_name" value="<?php echo $data['last_name']; ?>">
+											<input type="text" class="input_text input_short" name="first_name" value="<?php echo $data['first_name']; ?>">
+											<?php if(isset($errors['last_name'])) : ?>
+												<p class="error"><?php echo $errors['last_name']; ?></p>
+											<?php endif; ?>
+											<?php if(isset($errors['first_name'])) : ?>
+												<p class="error"><?php echo $errors['first_name']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
@@ -37,20 +28,12 @@ if(isset($errors['first_name'])) {
 										<td>
 											<input type="text" class="input_text input_short" name="last_kana" value="<?php echo $data['last_kana']; ?>">
 											<input type="text" class="input_text input_short" name="first_kana" value="<?php echo $data['first_kana']; ?>">
-<?php
-if(isset($errors['last_kana'])) {
-  ?>
-											<p class="error"><?php echo $errors['last_kana']; ?></p>
-  <?php
-}
-?>
-<?php
-if(isset($errors['first_kana'])) {
-  ?>
-											<p class="error"><?php echo $errors['first_kana']; ?></p>
-  <?php
-}
-?>
+											<?php if(isset($errors['last_kana'])) : ?>
+												<p class="error"><?php echo $errors['last_kana']; ?></p>
+											<?php endif; ?>
+											<?php if(isset($errors['first_kana'])) : ?>
+												<p class="error"><?php echo $errors['first_kana']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
@@ -60,13 +43,9 @@ if(isset($errors['first_kana'])) {
 											<label for="male" class="checkbox">男性</label>
 											<input type="radio" id="female" name="gender" value="f" <?php if($data['gender'] === "f") { echo "checked=\"checked\""; } ?>>
 											<label for="female" class="checkbox">女性</label>
-<?php
-if(isset($errors['gender'])) {
-  ?>
-											<p class="error"><?php echo $errors['gender']; ?></p>
-<?php
-}
-?>
+											<?php if(isset($errors['gender'])) : ?>
+												<p class="error"><?php echo $errors['gender']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
@@ -75,50 +54,34 @@ if(isset($errors['gender'])) {
 											<div class="clearfix">
 												<div class="floatL common_select">
 													<select name="year">
-<?php
-foreach($eras as $key => $era) {
-?>
+													<?php foreach($eras as $key => $era) : ?>
 														<option value="<?php echo $key; ?>" <?php if($data['year'] == $key) { echo "selected=\"selected\""; } ?>><?php echo $era; ?></option>
-<?php
-}
-?>
+													<?php endforeach; ?>
 													</select>
 												</div>
 												<div class="floatL pdt5">　年　</div>
 												<div class="floatL common_select">
 													<select name="month">
 														<option value="">選択してください</option>
-<?php
-for($i = 1; $i <= 12; $i++) {
-?>
-														<option value="<?php echo $i; ?>" <?php if($data['month'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
-<?php
-}
-?>
+														<?php for($i = 1; $i <= 12; $i++) : ?>
+															<option value="<?php echo $i; ?>" <?php if($data['month'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
+														<?php endfor; ?>
 													</select>
 												</div>
 												<div class="floatL pdt5">　月　</div>
 												<div class="floatL common_select">
 													<select name="day">
 														<option value="">選択してください</option>
-<?php
-for($i = 1; $i <= 31; $i++) {
-?>
-														<option value="<?php echo $i; ?>" <?php if($data['day'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
-<?php
-}
-?>
+														<?php for($i = 1; $i <= 31; $i++) : ?>
+															<option value="<?php echo $i; ?>" <?php if($data['day'] == $i) { echo "selected=\"selected\""; } ?>><?php echo $i; ?></option>
+														<?php endfor; ?>
 													</select>
 												</div>
 												<div class="floatL pdt5">　日</div>
 											</div>
-<?php
-if(!empty($errors['birthday'])) {
-?>
-											<p class="error">生年月日を入力してください。</p>
-<?php
-}
-?>
+											<?php if(!empty($errors['birthday'])) : ?>
+												<p class="error">生年月日を入力してください。</p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
@@ -133,62 +96,43 @@ if(!empty($errors['birthday'])) {
 												<div class="floatL common_select">
 													<select class="p-region" name="prefecture">
 														<option value="">都道府県</option>
-<?php
-foreach($prefectures as $prefecture) {
-?>
-														<option value="<?php echo $prefecture; ?>"<?php if($prefecture == $data['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?></option>
-<?php
-}
-?>
+														<?php foreach($prefectures as $prefecture) : ?>
+															<option value="<?php echo $prefecture; ?>"<?php if($prefecture == $data['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?></option>
+														<?php endforeach; ?>
 													</select>
 												</div>
 											</div>
-<?php
-if(isset($errors['prefecture'])) {
-  ?>
-											<p class="error"><?php echo $errors['prefecture']; ?></p>
-  <?php
-}
-?>
+											<?php if(isset($errors['prefecture'])) : ?>
+												<p class="error"><?php echo $errors['prefecture']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県以下</th>
-										<td><input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $data['address']; ?>"><br>
-										<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
-<?php
-if(isset($errors['address'])) {
-  ?>
-											<p class="error"><?php echo $errors['address']; ?></p>
-  <?php
-}
-?>
-
+										<td>
+											<input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $data['address']; ?>"><br>
+											<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
+											<?php if(isset($errors['address'])) : ?>
+												<p class="error"><?php echo $errors['address']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号1</th>
-										<td><input type="text" class="input_text input_short" maxlength="11" name="phone" value="<?php echo $data['phone']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
-<?php
-if(isset($errors['phone'])) {
-  ?>
-											<p class="error"><?php echo $errors['phone']; ?></p>
-  <?php
-}
-?>
+										<td>
+											<input type="text" class="input_text input_short" maxlength="11" name="phone" value="<?php echo $data['phone']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
+											<?php if(isset($errors['phone'])) : ?>
+												<p class="error"><?php echo $errors['phone']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
 										<td>
 											<input type="text" class="input_text input_short" maxlength="11" name="cellular" value="<?php echo $data['cellular']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
-<?php
-if(isset($errors['cellular'])) {
-  ?>
-											<p class="error"><?php echo $errors['cellular']; ?></p>
-  <?php
-}
-?>
+											<?php if(isset($errors['cellular'])) : ?>
+												<p class="error"><?php echo $errors['cellular']; ?></p>
+											<?php endif; ?>
 										</td>
 									</tr>
 									<tr>

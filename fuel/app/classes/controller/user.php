@@ -107,7 +107,7 @@ class Controller_User extends Controller_Base
 	  
 	    if($this->is_temporary()){
 	      Response::redirect('/user/temp_account_form');
-	    } elseif(!$this->is_clients()){
+	    } elseif(!$this->is_client_exist()){
 	      $redirect_path = '';
 	      if(count(Session::get("plans")) > 0){
 	        Response::redirect('/shopping/cart');
@@ -689,8 +689,7 @@ class Controller_User extends Controller_Base
 	  $this->template->header = View::forge('no_nav_header', $this->data);
 	  
 	  if(Input::post()) {
-		$val = \Model_User::validate("update");
-		$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|check_password['.$this->user['id'].']');
+		$val = \Model_User::validate("update", ['user_id' => $this->user['id']]);
 		$params = Input::post();
 		
 		if(!$val->run()) {
@@ -772,9 +771,9 @@ class Controller_User extends Controller_Base
 	 * 見守り対象ユーザが存在するかを返す
 	 *
 	 */
-	private function is_clients()
+	private function is_client_exist()
 	{
-		return (count($this->data['clients']) != 0);
+		return (!empty($this->data['clients']));
 	}
 	
 	/**

@@ -4,7 +4,7 @@
 		'min_length' => ':label は :param:1 文字以上にしてください。',
 		'max_length' => ':label は :param:1 文字以下にしてください。',
 		'exact_length' => ':label は :param:1 文字にしてください。',
-		'match_value' => ':label が :param:1 と一致しません。',
+		'match_value' => ':label が一致しません。',
 		'match_pattern' => ':label の形式が異なります。',
 		'match_field' => ':label が :param:1 と異なります。',
 		'valid_email' => ':value を正しいメールアドレスの形式にしてください。',
@@ -16,6 +16,5 @@
 		'valid_string' => ':label に不正な文字が含まれています。',
 		'required_with' => ':label は入力必須項目です。',
 		'hiragana' => ':label は ひらがなで入力してください。',
-		'check_confirm_password' => ':label が一致しません',
 		'check_password' => ':labelが間違っています。'
 	);

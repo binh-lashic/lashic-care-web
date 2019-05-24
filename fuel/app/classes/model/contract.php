@@ -175,12 +175,9 @@ class Model_Contract extends Orm\Model{
      */
     public function getCountByUserId($user_id)
     {
-        $result = DB::select(DB::expr('COUNT(*) as count'))
-                    ->from('contracts')
-                    ->where('user_id', $user_id)
-                    ->execute();
-        $result_arr = $result->current();
-        return $result_arr['count'];
+      return \Model_Contract::query()
+          ->where('user_id', $user_id)
+          ->count();
     }
   
   /**
