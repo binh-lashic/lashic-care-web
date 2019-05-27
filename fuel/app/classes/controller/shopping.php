@@ -71,7 +71,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->header = View::forge('no_nav_header', $this->data);
         $this->template->content = View::forge('shopping/user', $this->data);
     }
    
@@ -79,7 +79,7 @@ class Controller_Shopping extends Controller_Base
     {
         $this->template->title = '見守り対象ユーザー設定';
         $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->header = View::forge('no_nav_header', $this->data);
 
         $this->data['eras'] = Config::get("eras");
         $this->data['prefectures'] = Config::get("prefectures");
@@ -115,17 +115,30 @@ class Controller_Shopping extends Controller_Base
         if(Input::post()) {
             $params = Input::post();
             $client = \Model_User::createClient($params);
-            Response::redirect('/shopping/user'); 
-        }  
+            $client_id = $client['id'];
+            $contracts = \Model_Contract::getByUserId($this->user['id']);
+            
+            foreach($contracts as $contract) {
+               $contract->client_user_id = $client_id;
+               $contract->save();
+            }
+            
+            $sensors = \Model_User::getSensors($this->user['id']);
+  
+            foreach($sensors as $sensor) {
+              \Model_User_Sensor::saveUserSensor([
+                'user_id' => $client_id,
+                'sensor_id' => $sensor['id'],
+                'admin' => 0
+              ]);
+            }
+            
+            Response::redirect('/user');
+        }
     }
 
     public function action_destination()
     {
-        if(Input::param("client_user_id")) {
-            $client = \Model_User::find(Input::param("client_user_id"));
-            Session::set('client', $client);
-        }
-
         $this->data['prefectures'] = Config::get("prefectures");
 
         $this->data['users'] = array();
@@ -158,51 +171,33 @@ class Controller_Shopping extends Controller_Base
 
         $this->template->title = '送付先指定';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data); 
-        $this->template->content = View::forge('shopping/destination', $this->data);           
+        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->content = View::forge('shopping/destination', $this->data);
     }
-
-    public function action_destination_confirm()
-    {
-        if(Input::param("user_id")) {
-            $this->data['destination'] = \Model_User::find(Input::param("user_id"));
-        }
-        if(Input::param("address_id")) {
-            $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
-        }
-
-        if(Session::get('monitor')) {
-        } else {
-            $shippings = Config::get("shipping");
-            $this->data['destination']['shipping'] = 0;
-            foreach($shippings as $shipping) {
-                if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
-                    $this->data['destination']['shipping'] = $shipping['price'];
-                    break;
-                }      
-            }            
-        }
-
-
-        Session::set("destination", $this->data['destination']);
-        $this->data['plans'] = Session::get("plans");
-        $this->data['total_price'] = 0;
-        $this->data['subtotal_price'] = 0;
-        foreach($this->data['plans'] as $plan) {
-            $this->data['subtotal_price'] += $plan['price'];
-        } 
-
-        $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
-        $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
-
-        $this->template->title = '配送とお支払い';
-        $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header_client', $this->data); 
-        $this->template->content = View::forge('shopping/destination_confirm', $this->data);           
-    }
-
+    
     public function action_payment()
     {
+      if(Session::get("destination")) {
+        $this->data['destination'] = Session::get("destination");
+      } else if(Input::param("address_id")) {
+        $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+      } else if(Input::param("user_id")) {
+        $this->data['destination'] = \Model_User::find(Input::param("user_id"));
+      }
+      
+      if(!Session::get('monitor')) {
+        $shippings = Config::get("shipping");
+        $this->data['destination']['shipping'] = 0;
+        foreach($shippings as $shipping) {
+          if(preg_match("/".$shipping['key']."/ui", $this->data['destination']['prefecture'])) {
+            $this->data['destination']['shipping'] = $shipping['price'];
+            break;
+          }
+        }
+      }
+  
+      Session::set("destination", $this->data['destination']);
+      
         if(Session::get('monitor')) {
             Response::redirect('/shopping/confirm');
         }
@@ -249,9 +244,7 @@ class Controller_Shopping extends Controller_Base
 
     public function action_confirm()
     {
-        if(Session::get('monitor')) {
-
-        } else {
+        if(!Session::get('monitor')) {
             $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
             $this->data['card'] = $card->cardList[0];
         }
@@ -276,21 +269,13 @@ class Controller_Shopping extends Controller_Base
     public function action_complete()
     {
         $plans = Session::get("plans");
-        $client = Session::get("client");
         $destination = Session::get("destination");
+        $post = Input::post();
+        $remarks = $post['remarks'];
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
-
-        if(empty($client['id'])) {
-            $this->data['errors']['client'] = true;
-			\Log::warning('client not found in session. session_id:[' . Session::key() . ']', __METHOD__);
-        }
         if(empty($plans)) {
             $this->data['errors']['plan'] = true;
 			\Log::warning('plans not found in session. session_id:[' . Session::key() . ']', __METHOD__);
-        }
-        if(empty($destination['zip_code'])) {
-            $this->data['errors']['destination'] = true;
-			\Log::warning('destination not found in session. session_id:[' . Session::key() . ']', __METHOD__);
         }
         if(empty($this->data['errors'])) {
             //支払い処理を行う
@@ -310,8 +295,7 @@ class Controller_Shopping extends Controller_Base
                 'type' => 'initial',
             ));
             if($payment->save()) {
-                if(Session::get('monitor')) {
-                } else {
+                if(!Session::get('monitor')) {
                     $result = \Model_GMO::entry(array(
                         'order_id' => $payment->id,
                         'member_id' => $payment->user_id,
@@ -338,7 +322,6 @@ class Controller_Shopping extends Controller_Base
                     $params = array(
                         'plan_id' => $plan['id'],
                         'user_id' => $this->user['id'],
-                        'client_user_id' => $client['id'],
                         'start_date' => date("Y-m-d"),
                         'renew_date'=> $renew_date,
                         'price' => $plan['price'],
@@ -346,7 +329,7 @@ class Controller_Shopping extends Controller_Base
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
                         'address' => $destination['address'],
-                        'remarks' => $destination['remarks']
+                        'remarks' => $remarks
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
@@ -390,7 +373,6 @@ class Controller_Shopping extends Controller_Base
                 \Model_User::sendEmail($params);
             }
             Session::delete("plans");
-            Session::delete("client");
             Session::delete("destination");
             Cookie::delete("affiliate");
         } else {

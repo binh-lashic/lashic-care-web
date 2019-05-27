@@ -167,4 +167,28 @@ class Model_Contract extends Orm\Model{
         }
         return $sensors;
     }
+  
+    /**
+     * user_idからcontractの件数を取得する
+     * @param $user_id
+     * @return mixed
+     */
+    public function getCountByUserId($user_id)
+    {
+      return \Model_Contract::query()
+          ->where('user_id', $user_id)
+          ->count();
+    }
+  
+  /**
+   * user_idからcontractを取得する
+   * @param $user_id
+   * @return mixed
+   */
+  public function getByUserId($user_id)
+  {
+    return \Model_Contract::query()
+        ->where('user_id', '=', $user_id)
+        ->get();
+  }
 }

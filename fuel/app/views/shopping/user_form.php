@@ -1,16 +1,4 @@
-	<div class="clearfix content"> 
-		<!-- flow矢印 -->
-		<div class="flowSet flow_no06">
-			<ol>
-				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">見守り対象ユーザー設定</li>
-				<li>送付先指定</li>
-				<li>配送とお支払い</li>
-				<li>ご注文確認</li>
-				<li>完了</li>
-			</ol>
-		</div>
-		<!-- /flow矢印 -->
+	<div class="clearfix content">
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報入力</h1>
 <?php
@@ -225,7 +213,7 @@ foreach($blood_types as $blood_type) {
 			<!-- /基本情報 -->
 			
 			<div class="set_container">
-				<div class="left_container"><a href="/shipping/user" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/user" class="link_back">戻る</a></div>
 				<div class="center_container">
 					<input type="submit" value="次の画面に進む" >
 				</div>

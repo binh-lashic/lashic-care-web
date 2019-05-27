@@ -2,8 +2,7 @@
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
-				<li>カート</li>
-				<li class="flowBoxOn_before">見守り対象ユーザー設定</li>
+				<li class="flowBoxOn_before">カート</li>
 				<li class="flowBoxOn">送付先指定</li>
 				<li>配送とお支払い</li>
 				<li>ご注文確認</li>
@@ -29,7 +28,7 @@ foreach($users as $key => $_user)
 								<p><?php echo $_user['prefecture']; ?><?php echo $_user['address']; ?><br>
 									<?php echo $_user['phone']; ?></p>
 							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/destination_confirm?user_id=<?php echo $_user['id']; ?>">この住所を使う</a></div>
+							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?user_id=<?php echo $_user['id']; ?>">この住所を使う</a></div>
 <!--							<p class="right"><a href="#">編集する</a></p> -->
 						</div>
 					</li>
@@ -49,7 +48,7 @@ foreach($addresses as $key => $_address)
 								<p><?php echo $_address['prefecture']; ?><?php echo $_address['address']; ?><br>
 									<?php echo $_address['phone']; ?></p>
 							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/destination_confirm?address_id=<?php echo $_address['id']; ?>">この住所を使う</a></div>
+							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?address_id=<?php echo $_address['id']; ?>">この住所を使う</a></div>
 <!--							<p class="right"><a href="#">編集する</a></p> -->
 						</div>
 					</li>
@@ -199,7 +198,7 @@ if(!empty($errors['phone'])) {
 			</div>
 
 			<div class="set_container">
-				<div class="left_container"><a href="/shopping/user" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/cart" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>
