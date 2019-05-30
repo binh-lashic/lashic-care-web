@@ -165,7 +165,7 @@ if(!empty($errors['security_code'])) {
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
 					<input type="hidden" value="1" name="tokennumber" id= "tokennumber" />
-					<input type="button" value="次の画面に進む" onclick="doPurchase(<?php echo $_SERVER['PGCARD_SHOP_ID']; ?>)" />
+					<input type="button" value="次の画面に進む" onclick="doPurchase('<?php echo $_SERVER['PGCARD_SHOP_ID']; ?>')" />
 				</div>
 				<div class="right_container left"></div>
 			</div>
