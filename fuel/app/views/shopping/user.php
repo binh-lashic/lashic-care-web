@@ -1,22 +1,8 @@
-	<div class="clearfix content"> 
-		<!-- flow矢印 -->
-		<div class="flowSet flow_no06">
-			<ol>
-				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">見守り対象ユーザー設定</li>
-				<li>送付先指定</li>
-				<li>配送とお支払い</li>
-				<li>ご注文確認</li>
-				<li>完了</li>
-			</ol>
-		</div>
-		<!-- /flow矢印 --> 
 		
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー設定</h1>
-			<p>LASHIC機器を使用する見守り対象ユーザーの情報をご登録ください。<br>
-				すでにご登録済みのユーザーにお届けする場合は、一覧から選択してください。 </p>
+			<p>LASHIC機器を使用する見守り対象ユーザーの情報をご登録ください。</p>
 			
 			<!-- 基本情報 -->
 			<div class="set_container mgb30">

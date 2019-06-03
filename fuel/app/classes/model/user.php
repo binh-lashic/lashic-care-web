@@ -1,6 +1,14 @@
 <?php 
 class Model_User extends Orm\Model{
-
+	
+	/** 仮アカウントのステータス **/
+	const REGULAR_USER = 0;
+	const TEMPORARY_USER = 1;
+	
+	/** 見守り対象ユーザが存在するかどうか **/
+	const NO_CLIENT = 0;
+	const EXIST_CLIENT = 1;
+	
 	protected static $_properties = array(
 		'id',
 		'username',
@@ -48,9 +56,10 @@ class Model_User extends Orm\Model{
 		'email_confirm_expired',
 		'master' => array('default' => 0),
 		'affiliate',
+		'temporary'
 	);
 
-    public static function validate($factory)
+    public static function validate($factory, $options = null)
 	{
 		$val = Validation::forge($factory);
 		$val->add_callable('Validation_Japanese');
@@ -67,7 +76,7 @@ class Model_User extends Orm\Model{
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
-				$val->add_field('password_confirm', 'パスワード（確認）', 'required|check_confirm_password['.Input::post('password').']');
+				$val->add_field('password_confirm', 'パスワード（確認）', 'required|not_equal['.Input::post('password').']');
 				break;
 			case "register_client":
 				$val->add_field('last_name', 'お名前 姓', 'required');
@@ -88,6 +97,24 @@ class Model_User extends Orm\Model{
 				break;
 			case "email":
 				$val->add_field('email', '', 'required');
+				break;
+			case "update":
+				
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
+				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email');
+				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required');
+				$val->add_field('subscription', '当社からのメール案内', 'required');
+				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
+				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
+				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|match_value['.Input::post('new_password').']');
 				break;
 		}
 		return $val;
@@ -182,7 +209,8 @@ class Model_User extends Orm\Model{
 			'email_confirm_token',
 			'email_confirm_expired',
 			'master',
-			'affiliate'
+			'affiliate',
+			'temporary'
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
@@ -419,45 +447,60 @@ class Model_User extends Orm\Model{
 		return \Model_User::saveAdminUser($params);
 	}
 
-	public static function saveAdminUser($params) {
-		if(isset($params['id'])) {
-			$id = $params['id'];
-		} else {
-			if(empty($params['username'])) {
-				$params['username'] = sha1($params['email'].mt_rand());
-			}
-			if(!isset($params['admin'])) {
-				$params['admin'] = 1;
-			}
-			$id = Auth::create_user(
-	                $params['username'],
-	                $params['password'],
-	                $params['email']);
-			$params['email_confirm'] = 0;
-			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
-			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
-			//新規のときだけアフィリエイトを登録
-			if(!empty(Cookie::get("affiliate"))) {
-				$params['affiliate'] = Cookie::get("affiliate"); 
-				Cookie::delete("affiliate");
-			}
+	public static function saveAdminUser($params)
+	{
+	  if (isset($params['id'])) {
+		$id = $params['id'];
+	  } else {
+		if (empty($params['username'])) {
+		  $params['username'] = sha1($params['email'] . mt_rand());
 		}
-
-		$user = \Model_User::find($id);
+		if (!isset($params['admin'])) {
+		  $params['admin'] = 1;
+		}
+		$id = Auth::create_user(
+			$params['username'],
+			$params['password'],
+			$params['email']);
+		$params['email_confirm'] = 0;
+		$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+		$params['email_confirm_token'] = sha1($params['email'] . $params['email_confirm_expired'] . mt_rand());
+		//新規のときだけアフィリエイトを登録
+		if (!empty(Cookie::get("affiliate"))) {
+		  $params['affiliate'] = Cookie::get("affiliate");
+		  Cookie::delete("affiliate");
+		}
+	  }
+	  
+	  $user = \Model_User::find($id);
+	  unset($params['id']);
+	  unset($params['username']);
+	  unset($params['password']);
+	  unset($params['email']);
+	  if ($user) {
+		$user->set($params);
+		if ($user->save()) {
+		  //センサーを保存
+		  $params['user_id'] = $user['id'];
+		  \Model_User::saveSensor($params);
+		  return \Model_User::format($user);
+		} else {
+		  return null;
+		}
+	  }
+	}
+ 
+	public static function updateUser($params) {
+		$user = \Model_User::find($params['id']);
+		$old_password = Auth::reset_password($user['username']);
+		Auth::change_password($old_password, $params['password'], $user['username']);
 		unset($params['id']);
-		unset($params['username']);
 		unset($params['password']);
-		unset($params['email']);
-		if($user) {
-			$user->set($params);
-			if($user->save()) {
-				//センサーを保存
-				$params['user_id'] = $user['id'];
-				\Model_User::saveSensor($params);
-				return \Model_User::format($user);
-			} else {
-				return null;
-			}				
+		$user->set($params);
+		if($user->save()) {
+		  return \Model_User::format($user);
+		} else {
+		  return null;
 		}
 	}
 
