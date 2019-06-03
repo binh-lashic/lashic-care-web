@@ -114,6 +114,12 @@ class Controller_User extends Controller_Base
 	      } else if($this->is_purchased()){
 	        Response::redirect('/shopping/user');
 	      }
+	    } else {
+	      //見守り対象ユーザ設定済
+	      if(!$this->is_purchased()){
+	        //未購入の場合
+	        Response::redirect('/shopping/cart');
+	      }
 	    }
 	    
 	    if(Input::param("date")) {
