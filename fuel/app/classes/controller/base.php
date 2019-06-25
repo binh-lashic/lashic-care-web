@@ -30,8 +30,8 @@ class Controller_Base extends Controller_Template
 		}
 		if (!$lang) {
 			// セッションにも無ければ Accept-Language ヘッダから自動判別
-			$languages = Agent::languages();
-			if (in_array('ja', $languages)) {
+			$languages = array_map('strtolower', Agent::languages());
+			if (in_array('ja', $languages) || in_array('ja-jp', $languages)) {
 				$lang = 'ja';
 			} else {
 				// 日本語が含まれていなかったら英語
