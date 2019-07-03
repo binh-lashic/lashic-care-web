@@ -104,16 +104,15 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
-	  
-	    if($this->is_temporary()){
+	    if(!$this->is_purchased() ||
+	      count(Session::get("plans")) > 0){
+	      //未購入またはカート情報が入っている場合
+	      Response::redirect('/shopping/cart');
+	    } else if($this->is_temporary()){
 	      Response::redirect('/user/temp_account_form');
-	    } elseif(!$this->is_client_exist()){
-	      $redirect_path = '';
-	      if(count(Session::get("plans")) > 0){
-	        Response::redirect('/shopping/cart');
-	      } else if($this->is_purchased()){
-	        Response::redirect('/shopping/user');
-	      }
+	    } elseif(!$this->is_client_exist() &&
+	      $this->is_purchased()){
+	      Response::redirect('/shopping/user');
 	    }
 	    
 	    if(Input::param("date")) {

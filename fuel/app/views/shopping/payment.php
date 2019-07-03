@@ -1,4 +1,4 @@
-	<div class="clearfix content"> 
+	<div class="clearfix content">
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
@@ -164,7 +164,7 @@ if(!empty($errors['security_code'])) {
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
 					<input type="hidden" value="1" name="tokennumber" id= "tokennumber" />
-					<input type="button" value="次の画面に進む" onclick="doPurchase()" />
+					<input type="button" value="次の画面に進む" onclick="doPurchase('<?php echo $_SERVER['PGCARD_SHOP_ID']; ?>')" />
 				</div>
 				<div class="right_container left"></div>
 			</div>
@@ -175,5 +175,5 @@ if(!empty($errors['security_code'])) {
 			</form>
 		</section>
 	</div>
-	<script type="text/javascript" src="https://stg.static.mul-pay.jp/ext/js/token.js" ></script>
+	<script type="text/javascript" src="<?php echo $_SERVER['GMO_TOKEN_JS_URL']; ?>" ></script>
 	<script type="text/javascript" src="/js/token_payment.js" ></script>

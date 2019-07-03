@@ -12,7 +12,7 @@ function execPurchase(response) {
   }
 }
 
-function doPurchase() {
+function doPurchase(shop_id) {
   // processがregisteredの場合は処理をスキップする
   var radios = document.getElementsByName("process");
   var checkValue = "";
@@ -32,9 +32,7 @@ function doPurchase() {
     var securitycode = document.getElementById("security_code").value;
     var holdername = document.getElementById("holder_name").value;
     var tokennumber = document.getElementById("tokennumber").value;
-    Multipayment.init("tshop00037646"); // テスト環境用
-    // Multipayment.init("9101044836510"); // 本番環境用
-
+    Multipayment.init(shop_id);
     Multipayment.getToken({
       cardno : cardno,
       expire : expire,
