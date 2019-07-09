@@ -148,6 +148,7 @@ header {
 	border-radius: 10px;
 	font-size: 10px;
 	text-align: center;
+	display: none;
 }
 .drawer-navbar .nav_cart_link {
 	color: #888;
