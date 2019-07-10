@@ -1131,21 +1131,21 @@ SQL;
 	    						));
 	    					}
 
-							// 見守られユーザを取得
-							$client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
-							if ($client_users) {
-								$description = sprintf(
-									Config::get("template.alert_mail_format"),
-									$client_users['last_name'],
-									$client_users['first_name'],
-									$params['description']
-								);
-								$this->send_alert(array(
-									'email' => $user['email'],
-									'title' => $params['title'],
-									'description' => $description,
-								));
-							}  	    					
+	    					// 見守られユーザを取得
+	    					$client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
+	    					if ($client_users) {
+	    						$description = sprintf(
+	    							Config::get("template.alert_mail_format"),
+	    							$client_users['last_name'],
+	    							$client_users['first_name'],
+	    							$params['description']
+	    						);
+	    						$this->send_alert(array(
+	    							'email' => $user['email'],
+	    							'title' => $params['title'],
+	    							'description' => $description,
+	    						));
+	    					}  	    					
 	    				}
 	    			}    				
     			}
