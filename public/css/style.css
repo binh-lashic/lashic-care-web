@@ -24,6 +24,23 @@ body {
 		margin: 0 auto;
 	}
 }
+.errors_list {
+	border: solid 1px rgb(239,86,86);
+    padding: 30px;
+}
+.errors_list ul {
+	list-style: decimal;
+	margin-bottom: 5px;
+}
+.errors_list li {
+	color: rgb(239,86,86);
+	font-size: 15px;
+}
+.errors_list p{
+	font-weight: 700;
+    color: rgb(239,86,86); 
+	margin-left: -5px;
+}
 /* @media (max-width: 640rem) {
 .container{ width:95%; margin:0 auto;}
 }

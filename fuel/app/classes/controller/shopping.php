@@ -302,6 +302,11 @@ class Controller_Shopping extends Controller_Base
                         'amount' => $subtotal_price + $destination['shipping'] ,
                         'tax' => $tax,
                     ));
+                    if($result['error']) {
+                        Session::set_flash('gmo_errors', $result['error_code']);
+                        Response::redirect('/shopping/confirm');
+                        return;
+                    }                    
                 }
                 foreach($plans as $plan) {
                     if($plan['span'] == 1) {
