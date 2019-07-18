@@ -67,6 +67,7 @@ class Robots
 			$sensors = \Model_Sensor::find("all", array(
 				'where' => array(
 					'enable' => 1,
+					'type' => \Model_Sensor::TYPE_SENSOR
 				)
 			));
 			foreach($sensors as $sensor) {

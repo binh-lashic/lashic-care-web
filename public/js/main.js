@@ -699,7 +699,7 @@ $(function(){
 				$('.nav_cart_alert').fadeIn(1000).delay().fadeOut(500);
 				return false;
 			});
-			$(".nav_number").css('display', 'run-in');
+			$(".nav_number").css('display', 'inline');
     	} else {
     		$(".nav_number").css('display', 'none');
     		$("#cart").prepend("<li class=\"nav_userList center cart_plan\"><p class=\"nav_cart_title\">" + labels.cart_is_empty + "</p></li>");
