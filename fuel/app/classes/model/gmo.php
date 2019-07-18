@@ -191,20 +191,19 @@ class Model_GMO extends Orm\Model{
 		
 		$exe = new EntryExecTran();
 		$output = $exe->exec( $input );
-		
+		$result = ['error' => false, 'error_code' => []];
 		if( $exe->isExceptionOccured() )
 		{//取引の処理そのものがうまくいかない（通信エラー等）場合、例外が発生します。
-			echo "isExceptionOccured";
-			echo "\n";
-			$exception = $exe->getException(); 
-			echo $exception->getMessage();
-			echo "\n";
-			$mesasges = $exception->getMessages();
+			Log::error('isExceptionOccured start');
+			$exception = $exe->getException();
+			$messages = $exception->getMessages();
 			foreach($messages as $message) {
-				echo $message;
-				echo "\n";
+				Log::error('【E91099999】: '.$message);
 			}
-			return $output;			
+			Log::error('isExceptionOccured end');
+			//【システムエラー（想定外）】決済処理に失敗しました。
+			$result = ['error' => true, 'error_code' =>['E91099999']];
+			return $result;			
 		}
 		else
 		{
@@ -212,22 +211,21 @@ class Model_GMO extends Orm\Model{
 			if( $output->isErrorOccurred() )
 			{//出力パラメータにエラーコードが含まれていないか、チェックしています。
 				//サンプルでは、エラーが発生していた場合、エラー画面を表示して終了します。
-				echo "isErrorOccurred";
+				Log::error('isErrorOccurred start');
+				$result['error'] = true;
 				if( $output->isEntryErrorOccurred()  ){
 					$errorList = $output->getEntryErrList() ;
 				} else {
 					$errorList = $output->getExecErrList();	
 				}
 				foreach( $errorList as  $errorInfo ){
-					echo '<p>'
-						. $errorInfo->getErrCode()
-						. ':' . $errorInfo->getErrInfo()
-						.'</p>';
-						
+					$result['error_code'][] = $errorInfo->errInfo;
+					Log::error('エラーコード【'.$errorInfo->errInfo.'】');		
 				}
-				return $output;
+				Log::error('isErrorOccurred end');
+				return $result;
 			}
-			return $output;
+			return $result;
 		}
 	}
 }
