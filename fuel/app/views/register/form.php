@@ -68,7 +68,7 @@ if(isset($errors['first_name'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">
+										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 <?php
 if(isset($errors['last_kana'])) {
 ?>
