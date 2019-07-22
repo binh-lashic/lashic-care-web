@@ -383,23 +383,24 @@ class Controller_User extends Controller_Base
 			$params['profile_image'] = \Model_User::uploadProfileImage();
 			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+			} else {
+				$this->data['errors']['birthday'] = true;
 			}
 			$this->data['data'] = $params;
 			
 			$val = \Model_User::validate("basic");
 			
 			if($val->run()) {
-				$this->template->content = View::forge('user/info_basic_confirm', $this->data);
+				if(!$this->data['errors']['birthday']) {
+					$this->template->content = View::forge('user/info_basic_confirm', $this->data);
+					return;
+				}
 			} else {
 				// バリデーション失敗の場合ここに入ってくる
 				foreach($val->error() as $key=>$value){
 					$this->data['errors'][$key] = $value;
 				}
-				$this->data['errors']['birthday'] = true;
-				$this->template->content = View::forge('user/info_basic_form', $this->data);
 			}
-			
-        	return;
         }
 
 		$this->data['eras'] = Config::get("eras");
