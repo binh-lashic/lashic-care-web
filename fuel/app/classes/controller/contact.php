@@ -13,21 +13,21 @@ class Controller_Contact extends Controller_Base
 
 	public function action_index()
 	{
-        $this->template->title = 'お問い合わせ';
-        $this->data['breadcrumbs'] = array($this->template->title);
-       	$this->template->header = View::forge('header', $this->data);
+	    $this->template->title = 'お問い合わせ';
+	    $this->data['breadcrumbs'] = array($this->template->title);
+	    $this->template->header = View::forge('header', $this->data);
         
-		$val = Validation::forge('contact');
-		$val->add_callable('Validation_Japanese');
-		$val->add_callable('usersrules');
-		$val->add_field('name', 'お名前', 'required');  
-		$val->add_field('kana', 'ふりがな', 'required|hiragana');  
-		$val->add_field('email', 'メールアドレス', 'required|valid_email');
-		$val->add_field('email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('email').']');
-        $val->add_field('phone', '電話番号', 'required|check_phone');
-		$val->add_field('detail', 'お問い合わせ内容', 'required');
-		if(Input::post())
-        {
+	    $val = Validation::forge('contact');
+	    $val->add_callable('Validation_Japanese');
+	    $val->add_callable('usersrules');
+	    $val->add_field('name', 'お名前', 'required');  
+	    $val->add_field('kana', 'ふりがな', 'required|hiragana');  
+	    $val->add_field('email', 'メールアドレス', 'required|valid_email');
+	    $val->add_field('email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('email').']');
+	    $val->add_field('phone', '電話番号', 'required|check_phone');
+	    $val->add_field('detail', 'お問い合わせ内容', 'required');
+	    if(Input::post())
+	    {
 			$this->data['data'] = Input::post();
 			if ($val->run()) {
 				$this->template->content = View::forge('contact/confirm', $this->data);
@@ -37,8 +37,8 @@ class Controller_Contact extends Controller_Base
 					$this->data['errors'][$key] = $value;
 				}
 			}
-        }
-        $this->template->content = View::forge('contact/form', $this->data);
+	    }
+	    $this->template->content = View::forge('contact/form', $this->data);
 	}
 
 	public function action_complete()
