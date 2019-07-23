@@ -24,7 +24,7 @@ class Controller_Contact extends Controller_Base
 	    $val->add_field('kana', 'ふりがな', 'required|hiragana');  
 	    $val->add_field('email', 'メールアドレス', 'required|valid_email');
 	    $val->add_field('email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('email').']');
-	    $val->add_field('phone', '電話番号', 'required|check_phone');
+	    $val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
 	    $val->add_field('detail', 'お問い合わせ内容', 'required');
 	    if(Input::post())
 	    {

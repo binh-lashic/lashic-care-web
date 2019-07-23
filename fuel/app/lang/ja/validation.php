@@ -18,5 +18,4 @@
 		'hiragana' => ':label は ひらがなで入力してください。',
 		'check_password' => 'パスワードが間違っています。',
 		'check_confirm_email' => ':label が一致しません。',
-		'check_phone' => ':value を正しい電話番号の形式にしてください。',
 	);
