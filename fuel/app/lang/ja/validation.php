@@ -18,4 +18,5 @@
 		'hiragana' => ':label は ひらがなで入力してください。',
 		'check_password' => 'パスワードが間違っています。',
 		'check_confirm_email' => ':label が一致しません。',
+		'duplicate_email' => ':value は既に登録されています。',
 	);

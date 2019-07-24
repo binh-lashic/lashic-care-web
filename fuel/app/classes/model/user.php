@@ -98,6 +98,10 @@ class Model_User extends Orm\Model{
 			case "email":
 				$val->add_field('email', '', 'required');
 				break;
+			case "email_update":
+				$val->add_field('new_email', 'メールアドレス', 'required|valid_email|duplicate_email');
+				$val->add_field('new_email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('new_email').']');
+				break;
 			case "update":
 				
 				$val->add_field('last_name', 'お名前 姓', 'required');
