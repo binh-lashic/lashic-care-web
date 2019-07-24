@@ -244,16 +244,16 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
 
         if(Input::post()) {
-			$this->data['data'] = Input::post();
-			$val = \Model_User::validate("email_update");
-			if($val->run()) {
-				$this->template->content = View::forge('user/account_mail_confirm', $this->data);
-				return;
-			} else{
-				foreach($val->error() as $key=>$value){
-					$this->data['errors'][$key] = $value;
+        	$this->data['data'] = Input::post();
+        	$val = \Model_User::validate("email_update");
+        	if($val->run()) {
+        		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
+        		return;
+        	} else{
+        		foreach($val->error() as $key=>$value){
+        			$this->data['errors'][$key] = $value;
 				}
-			}
+        	}
         }
         
         $this->template->content = View::forge('user/account_mail_form', $this->data);
