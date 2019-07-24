@@ -245,7 +245,7 @@ class Controller_User extends Controller_Base
 
         if(Input::post()) {
 			$this->data['data'] = Input::post();
-        	$val = \Model_User::validate("email_update");
+			$val = \Model_User::validate("email_update");
 			if($val->run()) {
 				$this->template->content = View::forge('user/account_mail_confirm', $this->data);
 				return;
