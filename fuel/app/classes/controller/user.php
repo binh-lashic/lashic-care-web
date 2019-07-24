@@ -249,7 +249,7 @@ class Controller_User extends Controller_Base
         	if($val->run()) {
         		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
         		return;
-        	} else{
+        	} else {
         		foreach($val->error() as $key=>$value){
         			$this->data['errors'][$key] = $value;
 				}
