@@ -248,24 +248,15 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
 
         if(Input::post()) {
-        	$val = \Model_User::validate("save");
-        	if(!Input::post('new_email')) {
-        		$this->data['errors']['new_email'] = true;
-        	}
-        	if(!Input::post('new_email_confirm')) {
-        		$this->data['errors']['new_email_confirm'] = true;
-        	}
-        	if(Input::post('new_email') != Input::post('new_email_confirm')) {
-        		$this->data['errors']['new_email_confirm'] = true;
-        	}
-        	if(Model_User::getOtherUserByEmail(Input::post('new_email'))) {
-        		$this->data['errors']['email_duplicate'] = true;
-        	}
-                
         	$this->data['data'] = Input::post();
-        	if(count($this->data['errors']) === 0) {
-	    		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
+        	$val = \Model_User::validate("email_update");
+        	if($val->run()) {
+        		$this->template->content = View::forge('user/account_mail_confirm', $this->data);
         		return;
+        	} else {
+        		foreach($val->error() as $key=>$value){
+        			$this->data['errors'][$key] = $value;
+				}
         	}
         }
         
