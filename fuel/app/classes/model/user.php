@@ -99,7 +99,6 @@ class Model_User extends Orm\Model{
 				$val->add_field('email', '', 'required');
 				break;
 			case "update":
-				
 				$val->add_field('last_name', 'お名前 姓', 'required');
 				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
 				$val->add_field('first_name', 'お名前 名', 'required');
@@ -116,6 +115,18 @@ class Model_User extends Orm\Model{
 				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
 				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|match_value['.Input::post('new_password').']');
 				break;
+			case "account_basic":
+				$val->add_field('last_name', 'お名前 姓', 'required');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+				$val->add_field('first_name', 'お名前 名', 'required');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'valid_string[numeric]');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
+				break;	
 		}
 		return $val;
 	}

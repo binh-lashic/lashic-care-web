@@ -195,19 +195,23 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
 
         if(Input::post()) {
-        	$val = \Model_User::validate("save");
+        	$val = \Model_User::validate("account_basic");
+        	$params = Input::post();
+        	if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+        		$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+        	} else {
+        		$this->data['errors']['birthday'] = true;
+        	}
+        	$this->data['data'] = $params;	
         	if($val->run()) {
-        		$params = Input::post();
-				if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
-					$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
-				}
-				$this->data['data'] = $params;
-        		$this->template->content = View::forge('user/account_basic_confirm', $this->data);
-        		return;
+        		if (!$this->data['errors']['birthday']) {
+          			$this->template->content = View::forge('user/account_basic_confirm', $this->data);
+          			return;
+        		}
         	} else {
         		$errors = $val->error();
         		foreach($errors as $key => $error) {
-          			print_r($key);
+          			$this->data['errors'][$key] = $error;
         		}
         	}
         }
