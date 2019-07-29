@@ -196,18 +196,18 @@ class Controller_User extends Controller_Base
 
         if(Input::post()) {
         	$val = \Model_User::validate("account_basic");
-			$params = Input::post();
-				if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
-					$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
-				} else {
-                	$this->data['errors']['birthday'] = true;
-				}
-			$this->data['data'] = $params;	
+        	$params = Input::post();
+        	if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+        	} else {
+				$this->data['errors']['birthday'] = true;
+        	}
+        	$this->data['data'] = $params;	
         	if($val->run()) {
-				if (!$this->data['errors']['birthday']) {
+        		if (!$this->data['errors']['birthday']) {
 					$this->template->content = View::forge('user/account_basic_confirm', $this->data);
-        			return;
-				}
+					return;
+        		}
         	} else {
         		$errors = $val->error();
         		foreach($errors as $key => $error) {
