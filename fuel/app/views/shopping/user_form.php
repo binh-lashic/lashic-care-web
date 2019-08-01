@@ -133,7 +133,7 @@ if(!empty($errors)) {
 									<?php if(!empty($errors['phone'])) { ?>
 										<p class="error"><?php echo $errors['phone']; ?></p>
 									<?php } ?>
-							</td>
+								</td>
 							</tr>
 							<tr>
 								<th>電話番号2</th>
@@ -156,7 +156,8 @@ if(!empty($errors)) {
 											</select>
 										</div>
 										<div class="floatL pdt5">　型　<span class="small text_red">※</span><span class="small">緊急時に役立てます。できるだけご記入ください。</span></div>
-									</div></td>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
