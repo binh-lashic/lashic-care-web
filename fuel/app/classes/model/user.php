@@ -72,11 +72,13 @@ class Model_User extends Orm\Model{
 				$val->add_field('first_name', 'お名前 名', 'required');
 				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
 				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
-				$val->add_field('password_confirm', 'パスワード（確認）', 'required|not_equal['.Input::post('password').']');
+				$val->add_field('password_confirm', 'パスワード（確認）', 'required|match_value['.Input::post('password').']');
 				break;
 			case "register_client":
 				$val->add_field('last_name', 'お名前 姓', 'required');
@@ -84,7 +86,9 @@ class Model_User extends Orm\Model{
 				$val->add_field('first_name', 'お名前 名', 'required');
 				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
 				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				break;
@@ -102,18 +106,19 @@ class Model_User extends Orm\Model{
 				$val->add_field('new_email', 'メールアドレス', 'required|valid_email|duplicate_email');
 				$val->add_field('new_email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('new_email').']');
 				break;
-			case "update":
+			case "temp_account":
 				$val->add_field('last_name', 'お名前 姓', 'required');
 				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
 				$val->add_field('first_name', 'お名前 名', 'required');
 				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
 				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
 				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
-				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email');
-				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required');
+				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email|duplicate_email');
+				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required|check_confirm_email['.Input::post('new_email').']');
 				$val->add_field('subscription', '当社からのメール案内', 'required');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
 				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
@@ -125,12 +130,19 @@ class Model_User extends Orm\Model{
 				$val->add_field('first_name', 'お名前 名', 'required');
 				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
 				$val->add_field('gender', '性別', 'required');
-				$val->add_field('zip_code', '郵便番号', 'valid_string[numeric]');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
 				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
 				break;	
+			case "info_basic":
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
+				break;
 		}
 		return $val;
 	}

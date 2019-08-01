@@ -434,12 +434,19 @@ class Controller_User extends Controller_Base
 		$this->template->header = View::forge('header_client', $this->data);
 
 		$this->data['prefectures'] = Config::get("prefectures");
-		if(Input::post()) {
-		    $params = Input::post();
+		if (Input::post()) {
+			$params = Input::post();
 			$this->data['data'] = $params;
-        	$this->template->content = View::forge('user/info_contact_confirm', $this->data);
-        	return;
-        }
+			$val = \Model_User::validate("info_contact");
+			if ($val->run()) {
+				$this->template->content = View::forge('user/info_contact_confirm', $this->data);
+				return;
+			} else {
+				foreach ($val->error() as $key => $value) {
+					$this->data['errors'][$key] = $value;
+				}
+			}
+		}
         $this->template->content = View::forge('user/info_contact_form', $this->data);
     }
 
@@ -676,46 +683,36 @@ class Controller_User extends Controller_Base
  
 	public function action_temp_account_form()
 	{
-	  $this->template = View::forge('template_responsive');
-	  $this->template->title = '本登録';
-	  $this->data['breadcrumbs'] = array($this->template->title);
-	  $this->data['eras'] = Config::get("eras");
-	  $this->data['prefectures'] = Config::get("prefectures");
-	  $this->template->header = View::forge('no_nav_header', $this->data);
+		$this->template = View::forge('template_responsive');
+		$this->template->title = '本登録';
+		$this->data['breadcrumbs'] = array($this->template->title);
+		$this->data['eras'] = Config::get("eras");
+		$this->data['prefectures'] = Config::get("prefectures");
+		$this->template->header = View::forge('no_nav_header', $this->data);
 	  
-	  if(Input::post()) {
-		$val = \Model_User::validate("update", ['user_id' => $this->user['id']]);
-		$params = Input::post();
-		
-		if(!$val->run()) {
-		  foreach($val->error() as $key=>$value){
-			$this->data['errors'][$key] = $value;
-		  }
-		  
-		  if(Model_User::getOtherUserByEmail(Input::post('new_email'))) {
-		    $this->data['errors']['email_duplicate'] = true;
-		  }
-		  
-		  if(Input::post('new_email') != Input::post('new_email_confirm')) {
-		    $this->data['errors']['new_email_confirm'] = true;
-		  }
-		}
-		
-		if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
-		  $params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
-		  $params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
-		} else {
-		  $this->data['errors']['birthday'] = true;
-		}
-		$this->data['data'] = $params;
-		
-		if(empty($this->data['errors'])) {
-		  $this->template->content = View::forge('user/temp_account_confirm', $this->data);
-		  return;
-		}
-	  }
-	  
-	  $this->template->content = View::forge('user/temp_account_form', $this->data);
+		if (Input::post()) {
+			$val = \Model_User::validate("temp_account", ['user_id' => $this->user['id']]);
+			$params = Input::post();
+			if (!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
+				$params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
+			} else {
+				$this->data['errors']['birthday'] = true;
+			}
+			$this->data['data'] = $params;
+			if ($val->run()) {
+				if (!$this->data['errors']['birthday']) {
+					$this->template->content = View::forge('user/temp_account_confirm', $this->data);
+					return;
+				}
+			} else {
+				// バリデーション失敗の場合ここに入ってくる
+				foreach ($val->error() as $key => $value) {
+					$this->data['errors'][$key] = $value;
+				}
+			}
+		} 
+		$this->template->content = View::forge('user/temp_account_form', $this->data);
 	}
 	
 	public function action_temp_account_complete()

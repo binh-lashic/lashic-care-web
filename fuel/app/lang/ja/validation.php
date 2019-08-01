@@ -19,4 +19,5 @@
 		'check_password' => 'パスワードが間違っています。',
 		'check_confirm_email' => ':label が一致しません。',
 		'duplicate_email' => ':value は既に登録されています。',
+		'check_zipcode' => '郵便番号の形式が正しくありません。',
 	);
