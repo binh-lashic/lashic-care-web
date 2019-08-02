@@ -1,13 +1,9 @@
 	<div class="clearfix content">
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">見守り対象ユーザー　基本情報入力</h1>
-<?php
-if(!empty($errors)) {
-?>
-			<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
-<?php
-}
-?>
+			<?php if(!empty($errors)) { ?>
+				<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
+			<?php } ?>
 			<p>見守り対象ユーザーの情報を入力してください。</p>
 			<!-- 基本情報 -->
 			<h2 class="form_title">基本情報</h2>
