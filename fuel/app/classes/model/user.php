@@ -624,7 +624,7 @@ class Model_User extends Orm\Model{
 	public static function saveShareUser($params) {
 		//連絡共有先人数を取得
 		$admins = \Model_User::getAdmins($params['client_user_id']);
-		if(count($admins) >= 4) {
+		if(count($admins) >= 3) {
 			throw new Exception('連絡共有先は3人まで共有できます');
 		}
 
