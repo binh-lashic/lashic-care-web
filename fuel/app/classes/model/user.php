@@ -403,32 +403,31 @@ class Model_User extends Orm\Model{
 		$config = array(
             'path' => DOCROOT.DS.'images/user',
             'randomize' => true,
-			'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
+            'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
             'ext_whitelist' => Config::get('img_config.properties.type'),
         );
 		$result = ['error' => false, 'data' => null];
 		Lang::load('validation', 'img_upload');
-        try {
-	        Upload::process($config);
-	        if (Upload::is_valid())
-	        {
-	            Upload::save();
-	            $files = Upload::get_files();
+		try {
+			Upload::process($config);
+			if (Upload::is_valid())
+			{
+				Upload::save();
+				$files = Upload::get_files();
 				$result['data'] = $files[0]['saved_as'];
-	            return $result;
-	        }
-
-	        // エラー有り
-	        foreach (Upload::get_errors() as $file)
-	        {
-	            $error = $file['errors'][0];
+				return $result;
+			}
+			// エラー有り
+			foreach (Upload::get_errors() as $file)
+			{
+				$error = $file['errors'][0];
 				$error_code = $error['error'];
 				return self::getUploadErrorCode($error_code);
-	        }
-        } catch (Exception $e) {
-        	Log::error($e->getMessage());
-        	return  ['error' => true, 'data' => Lang::get('img_upload.image_upload_false')];
-        }
+				}
+		} catch (Exception $e) {
+			Log::error($e->getMessage());
+			return  ['error' => true, 'data' => Lang::get('img_upload.image_upload_false')];
+		}
 	}
 	/**
 	 * getUploadErrorCode function
