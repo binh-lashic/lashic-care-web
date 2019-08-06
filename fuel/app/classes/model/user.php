@@ -401,11 +401,11 @@ class Model_User extends Orm\Model{
         
 	public static function uploadProfileImage() {
 		$config = array(
-            'path' => DOCROOT.DS.'images/user',
-            'randomize' => true,
-            'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
-            'ext_whitelist' => Config::get('img_config.properties.type'),
-        );
+			'path' => DOCROOT.DS.'images/user',
+			'randomize' => true,
+			'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
+			'ext_whitelist' => Config::get('img_config.properties.type'),
+			);
 		$result = ['error' => false, 'data' => null];
 		Lang::load('validation', 'img_upload');
 		try {
@@ -423,7 +423,7 @@ class Model_User extends Orm\Model{
 				$error = $file['errors'][0];
 				$error_code = $error['error'];
 				return self::getUploadErrorCode($error_code);
-				}
+			}
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
 			return  ['error' => true, 'data' => Lang::get('img_upload.image_upload_false')];
