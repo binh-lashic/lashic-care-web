@@ -375,18 +375,23 @@ class Controller_User extends Controller_Base
 
 		if(Input::post()) {
 		    $params = Input::post();
-			$params['profile_image'] = \Model_User::uploadProfileImage();
 			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
 			} else {
 				$this->data['errors']['birthday'] = true;
+			}
+			$image = \Model_User::uploadProfileImage();
+			if(!$image['error']) {
+				$params['profile_image'] = $image['data'];
+			}else {
+				$this->data['errors']['profile_image'] = $image['data'];
 			}
 			$this->data['data'] = $params;
 			
 			$val = \Model_User::validate("basic");
 			
 			if($val->run()) {
-				if(!$this->data['errors']['birthday']) {
+				if(!$this->data['errors']['birthday'] && !$image['error']) {
 					$this->template->content = View::forge('user/info_basic_confirm', $this->data);
 					return;
 				}

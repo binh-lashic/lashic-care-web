@@ -7,15 +7,17 @@
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
 				<div class="form_set_container">
+						<?php if (isset($errors['profile_image'])) { ?>
+							<p class="error"><?php echo $errors['profile_image']; ?></p>
+						<?php } ?>
 						<div class="userDate_photo">
 							<div class="aside_photo">
 								<div class="aside_photoInner"><img src="<?php echo $client['profile_image']; ?>" width="179" height="179" alt=""/></div>
 							</div>
-									<div class="uploadButton btn_text">ファイルを選択<br>
-（最大2MB）
-										<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
-										<input type="text" id="uv" class="uploadValue" disabled />
-									</div>
+							<div class="uploadButton btn_text">ファイルを選択<br>（最大<?php echo Config::get('img_config.properties.size') ?>MB）
+								<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
+								<input type="text" id="uv" class="uploadValue" disabled />
+							</div>
 						</div>
 						<div class="form_base_data_edit">
 							<table>

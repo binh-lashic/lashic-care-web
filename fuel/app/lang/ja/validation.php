@@ -19,4 +19,7 @@
 		'check_password' => 'パスワードが間違っています。',
 		'check_confirm_email' => ':label が一致しません。',
 		'duplicate_email' => ':value は既に登録されています。',
+		'check_image_size' => 'プロフィール画像 は最大'.Config('img_config.properties.size').'MBです。',
+		'check_image_type' => 'プロフィール画像  は「'.implode(', ',Config('img_config.properties.type')).'」の形式にしてください。',
+		'image_upload_false' => 'プロフィール画像 のアップロードに失敗しました。'
 	);
