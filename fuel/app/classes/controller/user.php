@@ -373,26 +373,31 @@ class Controller_User extends Controller_Base
         $this->template->title = 'マイページ';
         $this->template->header = View::forge('header_client', $this->data);
 
-		if(Input::post()) {
+		if (Input::post()) {
 		    $params = Input::post();
-			$params['profile_image'] = \Model_User::uploadProfileImage();
-			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
+			if (!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
 				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
 			} else {
 				$this->data['errors']['birthday'] = true;
+			}
+			$image = \Model_User::uploadProfileImage();
+			if (!$image['error']) {
+				$params['profile_image'] = $image['data'];
+			} else {
+				$this->data['errors']['profile_image'] = $image['data'];
 			}
 			$this->data['data'] = $params;
 			
 			$val = \Model_User::validate("basic");
 			
-			if($val->run()) {
-				if(!$this->data['errors']['birthday']) {
+			if ($val->run()) {
+				if (!$this->data['errors']['birthday'] && !$image['error']) {
 					$this->template->content = View::forge('user/info_basic_confirm', $this->data);
 					return;
 				}
 			} else {
 				// バリデーション失敗の場合ここに入ってくる
-				foreach($val->error() as $key=>$value){
+				foreach ($val->error() as $key => $value){
 					$this->data['errors'][$key] = $value;
 				}
 			}
@@ -401,7 +406,7 @@ class Controller_User extends Controller_Base
 		$this->data['eras'] = Config::get("eras");
         $this->data['blood_types'] = Config::get("blood_types");
 
-        if(empty($this->data['client']['birthday'])) {
+        if (empty($this->data['client']['birthday'])) {
         	$this->data['client']['year'] = "1945";
 	        $this->data['client']['month'] = 1;
 	        $this->data['client']['day'] = 1;

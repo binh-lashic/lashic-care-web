@@ -1,4 +1,5 @@
 <?php
+Lang::load('validation', 'img_upload');
 return array(
 	'tax_rate' => 0.08,
 	'shipping' => array(
@@ -546,5 +547,16 @@ return array(
 	'gmo_error' => [
 		'sys_msg' => 'クレジットカード決済中にエラーが発生しました。エラーコード [%error_code%]。',
 		'client_msg' => '※詳細につきましてはエラーコードをお控えいただきお問い合わせください。'
-	],	 
+	],
+	'img_config' =>[
+		'properties' => [
+			'size' => 2, // MB
+			'type' => ['jpg', 'jpeg', 'gif', 'png']
+		],
+		'upload_error' => [
+			'4' => null, // Upload::UPLOAD_ERR_NO_FILE
+			'101' => Lang::get('img_upload.check_image_size',  [':size' => 2]), // Upload::UPLOAD_ERR_MAX_SIZE
+			'103' => Lang::get('img_upload.check_image_type', [':type' => 'jpg, jpeg, gif, png']) // Upload::UPLOAD_ERR_EXT_NOT_WHITELISTED
+		]
+	]	 
 );
