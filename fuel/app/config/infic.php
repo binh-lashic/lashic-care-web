@@ -555,8 +555,8 @@ return array(
 		],
 		'upload_error' => [
 			'4' => null, // Upload::UPLOAD_ERR_NO_FILE
-			'101' => Lang::get('img_upload.check_image_size'), // Upload::UPLOAD_ERR_MAX_SIZE
-			'103' => Lang::get('img_upload.check_image_type') // Upload::UPLOAD_ERR_EXT_NOT_WHITELISTED
+			'101' => Lang::get('img_upload.check_image_size',  [':size' => 2]), // Upload::UPLOAD_ERR_MAX_SIZE
+			'103' => Lang::get('img_upload.check_image_type', [':type' => 'jpg, jpeg, gif, png']) // Upload::UPLOAD_ERR_EXT_NOT_WHITELISTED
 		]
 	]	 
 );
