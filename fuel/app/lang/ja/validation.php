@@ -19,6 +19,7 @@
 		'check_password' => 'パスワードが間違っています。',
 		'check_confirm_email' => ':label が一致しません。',
 		'duplicate_email' => ':value は既に登録されています。',
+		'check_zipcode' => '郵便番号の形式が正しくありません。',
 		'check_image_size' => 'プロフィール画像 は最大:sizeMBです。',
 		'check_image_type' => 'プロフィール画像  は「:type」の形式にしてください。',
 		'image_upload_false' => 'プロフィール画像 のアップロードに失敗しました。'
