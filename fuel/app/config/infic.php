@@ -1,4 +1,5 @@
 <?php
+Lang::load('validation', 'img_upload');
 return array(
 	'tax_rate' => 0.08,
 	'shipping' => array(
@@ -273,59 +274,59 @@ return array(
 			array(
 				'temperature' => array(
 					'title' => '室内温度異常',
-					'description' => 'LASHICセンサーが設置された環境で設定値を上回った（高温）下回った（低温）場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で設定値を上回った（高温）下回った（低温）場合に異常と判断して通知します。',
 				),
 				'fire' => array(
 					'title' => '火事アラート',
-					'description' => 'LASHICセンサーが設置された環境で室温が45度を超えた場合に火事と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で室温が45度を超えた場合に火事と判断して通知します。',
 				),
 				'heatstroke' => array(
 					'title' => '熱中症アラート',
-					'description' => 'LASHICセンサーが設置された環境で熱中症指数（WBGT値）が設定値を超えた場合に熱中症の危険があると判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で熱中症指数（WBGT値）が設定値を超えた場合に熱中症の危険があると判断して通知します。',
 				),
 				'cold' => array(
 					'title' => '風邪アラート',
-					'description' => 'LASHICセンサーが設置された環境で風邪ひき指数が設定値を超えた場合に風邪をひく危険があると判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で風邪ひき指数が設定値を超えた場合に風邪をひく危険があると判断して通知します。',
 				),
 				'mold_mites' => array(
 					'title' => 'カビ・ダニアラート',
-					'description' => 'LASHICセンサーが設置された環境でカビやダニが発生しやすい環境として、指数が設定値をこえた場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境でカビやダニが発生しやすい環境として、指数が設定値をこえた場合に異常と判断して通知します。',
 				),
 				'humidity' => array(
 					'title' => '室内湿度異常',
-					'description' => 'LASHICセンサーが設置された環境で、室内湿度が設定値を設定値を上回った場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、室内湿度が設定値を設定値を上回った場合に異常と判断して通知します。',
 				),
 				'illuminance_daytime' => array(
 					'title' => '室内照度異常（日中）',
-					'description' => 'LASHICセンサーが設置された環境で、日中（5時～22時）の室内照度が設定値を下回った場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、日中（5時～22時）の室内照度が設定値を下回った場合に異常と判断して通知します。',
 				),
 				'illuminance_night' => array(
 					'title' => '室内照度異常（深夜）',
-					'description' => 'LASHICセンサーが設置された環境で、深夜（22時～5時）の室内照度が設定値を上回った場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、深夜（22時～5時）の室内照度が設定値を上回った場合に異常と判断して通知します。',
 				),
 				'wake_up' => array(
 					'title' => '平均起床時間遅延',
-					'description' => 'LASHICセンサーが設置された環境で、過去一ヶ月の起床時間と前後3時間以上、起床時間がずれた場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、過去一ヶ月の起床時間と前後3時間以上、起床時間がずれた場合に異常と判断して通知します。',
 				),
 				'sleep' => array(
 					'title' => '平均睡眠時間遅延',
-					'description' => 'LASHICセンサーが設置された環境で、過去一ヶ月の睡眠時間と前後3時間以上、睡眠時間がずれた場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、過去一ヶ月の睡眠時間と前後3時間以上、睡眠時間がずれた場合に異常と判断して通知します。',
 				),	
 				'abnormal_behavior' => array(
 					'title' => '異常行動（夜間行動）',
-					'description' => 'LASHICセンサーが設置された環境で、照明がついていない状況で30分以上の行動を感知した場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、照明がついていない状況で30分以上の行動を感知した場合に異常と判断して通知します。',
 				),	
 				'active_non_detection' => array(
 					'title' => '一定時間センサー未感知',
-					'description' => 'LASHICセンサーが設置された環境で、設定値を上回って行動センサーに反応がなかった場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、設定値を上回って行動センサーに反応がなかった場合に異常と判断して通知します。',
 				),
 				'disconnection' => array(
 					'title' => '接続断アラート',
-					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータが一時間以上受信できない場合に異常と判断して通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、センサーからのデータが一時間以上受信できない場合に異常と判断して通知します。',
 				),
 				'reconnection' => array(
 					'title' => 'センサー接続再開通知',
-					'description' => 'LASHICセンサーが設置された環境で、センサーからのデータ受信の再開を確認できた場合に通知します。',
+					'description' => 'LASHIC-roomが設置された環境で、センサーからのデータ受信の再開を確認できた場合に通知します。',
 				),
 				
 				'wake_up_setting' => array(
@@ -546,5 +547,16 @@ return array(
 	'gmo_error' => [
 		'sys_msg' => 'クレジットカード決済中にエラーが発生しました。エラーコード [%error_code%]。',
 		'client_msg' => '※詳細につきましてはエラーコードをお控えいただきお問い合わせください。'
-	],	 
+	],
+	'img_config' =>[
+		'properties' => [
+			'size' => 2, // MB
+			'type' => ['jpg', 'jpeg', 'gif', 'png']
+		],
+		'upload_error' => [
+			'4' => null, // Upload::UPLOAD_ERR_NO_FILE
+			'101' => Lang::get('img_upload.check_image_size',  [':size' => 2]), // Upload::UPLOAD_ERR_MAX_SIZE
+			'103' => Lang::get('img_upload.check_image_type', [':type' => 'jpg, jpeg, gif, png']) // Upload::UPLOAD_ERR_EXT_NOT_WHITELISTED
+		]
+	]	 
 );

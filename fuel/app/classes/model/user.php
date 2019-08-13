@@ -413,28 +413,51 @@ class Model_User extends Orm\Model{
         
 	public static function uploadProfileImage() {
 		$config = array(
-            'path' => DOCROOT.DS.'images/user',
-            'randomize' => true,
-            'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
-        );
-
-        try {
-	        Upload::process($config);
-	        if (Upload::is_valid())
-	        {
-	            Upload::save();
-	            $files = Upload::get_files();
-	            return $files[0]['saved_as'];
-	        }
-
-	        // エラー有り
-	        foreach (Upload::get_errors() as $file)
-	        {
-	            return null;
-	        }
-        } catch (Exception $e) {
-        	return null;
-        }
+			'path' => DOCROOT.DS.'images/user',
+			'randomize' => true,
+			'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
+			'ext_whitelist' => Config::get('img_config.properties.type'),
+			);
+		$result = ['error' => false, 'data' => null];
+		Lang::load('validation', 'img_upload');
+		try {
+			Upload::process($config);
+			if (Upload::is_valid())
+			{
+				Upload::save();
+				$files = Upload::get_files();
+				$result['data'] = $files[0]['saved_as'];
+				return $result;
+			}
+			// エラー有り
+			foreach (Upload::get_errors() as $file)
+			{
+				$error = $file['errors'][0];
+				$error_code = $error['error'];
+				return self::getUploadErrorCode($error_code);
+			}
+		} catch (Exception $e) {
+			Log::error($e->getMessage());
+			return  ['error' => true, 'data' => Lang::get('img_upload.image_upload_false')];
+		}
+	}
+	/**
+	 * getUploadErrorCode function
+	 *
+	 * @param [int] $error_code
+	 * @return [array] $result
+	 */
+	private function getUploadErrorCode($error_code) {
+		$img_upload_error = Config::get("img_config.upload_error");
+		if (array_key_exists($error_code, $img_upload_error)) {
+			$msg = $img_upload_error[$error_code];
+			if (empty($msg)) $error = false;
+			else $error = true;
+		} else {
+			$error = true;
+			$msg = Lang::get('img_upload.image_upload_false');
+		}
+		return ['error' => $error, 'data' => $msg];
 	}
 
 	public static function saveEmail($params) {
@@ -470,7 +493,6 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function saveUser($params) {
-		\Model_User::uploadProfileImage();
 		return \Model_User::saveAdminUser($params);
 	}
 
@@ -636,7 +658,7 @@ class Model_User extends Orm\Model{
 	public static function saveShareUser($params) {
 		//連絡共有先人数を取得
 		$admins = \Model_User::getAdmins($params['client_user_id']);
-		if(count($admins) >= 4) {
+		if(count($admins) >= 3) {
 			throw new Exception('連絡共有先は3人まで共有できます');
 		}
 
