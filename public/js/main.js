@@ -90,7 +90,7 @@ $(function(){
 	});
 
 	$("#checkAll").change(function () {
-    	$("input:checkbox").prop('checked', $(this).prop("checked"));
+			$("input:checkbox").prop('checked', $(this).prop("checked"));
 	});
 
 	$(".confirm_status_top").change(function() {
