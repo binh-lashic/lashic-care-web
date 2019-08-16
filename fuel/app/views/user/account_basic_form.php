@@ -15,6 +15,7 @@
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td>
 										<input type="text" class="input_text input_short" name="last_name" value="<?php echo $user['last_name']; ?>">
+										<input type="text" class="input_text input_short" name="first_name" value="<?php echo $user['first_name']; ?>">
 										<?php if (isset($errors['last_name'])) { ?>
 											<p class="error"><?php echo $errors['last_name']; ?></p>
 										<?php } ?>
