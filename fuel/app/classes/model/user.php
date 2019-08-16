@@ -136,7 +136,7 @@ class Model_User extends Orm\Model{
 				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
 				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
 				break;	
-			case "info_basic":
+			case "info_contact":
 				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
@@ -419,7 +419,7 @@ class Model_User extends Orm\Model{
 			'ext_whitelist' => Config::get('img_config.properties.type'),
 			);
 		$result = ['error' => false, 'data' => null];
-		Lang::load('validation', 'img_upload');
+		Lang::load('validation', 'validation');
 		try {
 			Upload::process($config);
 			if (Upload::is_valid())
@@ -438,7 +438,7 @@ class Model_User extends Orm\Model{
 			}
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			return  ['error' => true, 'data' => Lang::get('img_upload.image_upload_false')];
+			return  ['error' => true, 'data' => Lang::get('validation.image_upload_false')];
 		}
 	}
 	/**
@@ -455,7 +455,7 @@ class Model_User extends Orm\Model{
 			else $error = true;
 		} else {
 			$error = true;
-			$msg = Lang::get('img_upload.image_upload_false');
+			$msg = Lang::get('validation.image_upload_false');
 		}
 		return ['error' => $error, 'data' => $msg];
 	}
