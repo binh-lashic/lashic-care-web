@@ -394,6 +394,7 @@ dl.aside_userDetail dd {
 	float: left;
 	width: 150px;
 	font-size: 12px;
+	word-break: break-all;
 }
 /* aside_emergency*/
 .aside_emergency {
@@ -1383,7 +1384,8 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	border: 1px solid #cbe7f4;
 	display: table;
 	padding: 0 20px;
-	box-shadow: 0 2px 2px #EEE
+	box-shadow: 0 2px 2px #EEE;
+	word-break: break-all;
 }
 
 @media (max-width: 640px) {
@@ -1443,6 +1445,7 @@ p + .form_title, div + .form_title, p + .form_set_container {
 	padding: 15px 10px;
 	text-align: left;
 	vertical-align: top;
+	width: 20%;
 }
 
 @media (max-width: 640px) {
@@ -1465,6 +1468,7 @@ p + .form_title, div + .form_title, p + .form_set_container {
 .form_set_container table td {
 	padding: 15px 10px;
 	position: relative;
+	word-break: break-all;
 }
 .userDate_photo {
 	width: 178px;
