@@ -162,6 +162,7 @@ class Controller_Shopping extends Controller_Base
                $params['user_id'] = $this->user['id'];
                $address->set($params);
                $address->save();
+               Response::redirect('/shopping/destination');
             } else {
                 $this->data['data'] = $params;
             }
