@@ -473,12 +473,12 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
 
 		if(Input::post()) {
-		    $params = Input::post();
+			$params = Input::post();
 			$this->data['data'] = $params;
 			$val = \Model_User::validate("info_option");
-			if($val->run()) {
-        		$this->template->content = View::forge('user/info_option_confirm', $this->data);
-        		return;
+			if ($val->run()) {
+				$this->template->content = View::forge('user/info_option_confirm', $this->data);
+				return;
 			} else {
 				foreach($val->error() as $key=>$value){
 					$this->data['errors'][$key] = $value;
