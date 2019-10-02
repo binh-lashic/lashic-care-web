@@ -120,10 +120,12 @@ class Controller_Password extends Controller_Base
             $this->validation->add_callable('usersrules');  
             $this->validation->add('password', 'パスワード')
                         ->add_rule('required')
-                        ->add_rule('min_length', 8);
+                        ->add_rule('min_length', 8)
+                        ->add_rule('max_length', 255);
             $this->validation->add('password_confirm', 'パスワード 確認')
                         ->add_rule('required')
-                        ->add_rule('min_length', 8);
+                        ->add_rule('min_length', 8)
+                        ->add_rule('max_length', 255);
             $this->validation->set_message('required', ':labelを入力してください。');
             $this->validation->set_message('min_length', ':labelは8桁以上で入力してください。');
 

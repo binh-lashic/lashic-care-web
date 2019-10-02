@@ -11,13 +11,13 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_1" value="<?php echo $client['emergency_last_name_1']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_1" value="<?php echo $client['emergency_first_name_1']; ?>"></td>
+										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_1" maxlength="45" value="<?php echo $client['emergency_last_name_1']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_1" maxlength="45" value="<?php echo $client['emergency_first_name_1']; ?>"></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_1" value="<?php echo $client['emergency_last_kana_1']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_1" value="<?php echo $client['emergency_first_kana_1']; ?>"></td>
+										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_1" maxlength="45" value="<?php echo $client['emergency_last_kana_1']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_1" maxlength="45" value="<?php echo $client['emergency_first_kana_1']; ?>"></td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
@@ -36,13 +36,13 @@
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_2" value="<?php echo $client['emergency_last_name_2']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_2" value="<?php echo $client['emergency_first_name_2']; ?>"></td>
+										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_2" maxlength="45" value="<?php echo $client['emergency_last_name_2']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_2" maxlength="45" value="<?php echo $client['emergency_first_name_2']; ?>"></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_2" value="<?php echo $client['emergency_last_kana_2']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_2" value="<?php echo $client['emergency_first_kana_2']; ?>"></td>
+										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_2" maxlength="45" value="<?php echo $client['emergency_last_kana_2']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_2" maxlength="45" value="<?php echo $client['emergency_first_kana_2']; ?>"></td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
@@ -77,15 +77,15 @@ if(isset($errors['users_count'])) {
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td><input type="text" class="input_text input_short" name="last_name">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_name"></td>
+										<td><input type="text" class="input_text input_short" name="last_name" maxlength="45">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_name" maxlength="45"></td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td><input type="text" class="input_text input_short" name="last_kana">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_kana"></td>
+										<td><input type="text" class="input_text input_short" name="last_kana" maxlength="45">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_kana" maxlength="45"></td>
 									</tr>
 									<tr>
 										<th>メールアドレス</th>
-										<td><input type="text" class="input_text input_short" name="email"> <span class="small text_red">※半角英数でご入力ください。例）example@lashic.jp</span></td>
+										<td><input type="text" class="input_text input_short" name="email" maxlength="512"> <span class="small text_red">※半角英数でご入力ください。例）example@lashic.jp</span></td>
 									</tr>
 								</tbody>
 							</table>

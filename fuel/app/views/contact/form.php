@@ -13,7 +13,7 @@
 								<tbody>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" name="name" class="input_text input_medium" value="<?php if(!empty($data['name'])) { echo $data['name']; } ?>">
+										<td><input type="text" name="name" class="input_text input_medium" maxlength="50" value="<?php if(!empty($data['name'])) { echo $data['name']; } ?>">
 											<?php if(!empty($errors['name'])) {?>										
 												<p class="error"><?php echo $errors['kana']; ?></p>
 											<?php } ?>										
@@ -21,7 +21,7 @@
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" name="kana" class="input_text input_medium" value="<?php if(!empty($data['kana'])) { echo $data['kana']; } ?>">
+										<td><input type="text" name="kana" class="input_text input_medium" maxlength="512" value="<?php if(!empty($data['kana'])) { echo $data['kana']; } ?>">
 											<?php if(!empty($errors['kana'])) {?>										
 												<p class="error"><?php echo $errors['kana']; ?></p>
 											<?php } ?>										
@@ -33,7 +33,7 @@
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
-										<td><input type="text" name="email" class="input_text input_medium" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>">
+										<td><input type="text" name="email" class="input_text input_medium" maxlength="512" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>">
 										 <span class="small text_red">※半角英数</span>
 											<?php if(!empty($errors['email'])) {?>										
 												<p class="error"><?php echo $errors['email']; ?></p>

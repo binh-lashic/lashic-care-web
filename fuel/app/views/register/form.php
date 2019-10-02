@@ -35,7 +35,7 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
 										<td>
-											<input type="text" name="email" class="input_text input_medium" value="<?php if(isset($data['email'])) { echo $data['email']; } ?>"><br>
+											<input type="text" name="email" class="input_text input_medium" maxlength="512" value="<?php if(isset($data['email'])) { echo $data['email']; } ?>"><br>
 											<span class="text_red">※</span><span class="small ">初期設定では変更ができません。ご登録完了後、マイページにてメールアドレスをご変更ください。<br>
 											<span class="text_red">※</span>携帯電話メールでご登録の場合はPCメール受信設定をご確認いただき、<?php echo Config::get('email.domain'); ?>のメールアドレスを受信可能にご設定ください。</span>
 											<?php if(isset($errors['email'])) {?>
@@ -45,7 +45,7 @@
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
+										<td><input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" maxlength="45" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" maxlength="45" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 											<?php if(isset($errors['last_name'])) { ?>
 												<p class="error"><?php echo $errors['last_name']; ?></p>
 											<?php } ?>
@@ -56,7 +56,7 @@
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
+										<td><input type="text" name="last_kana" class="input_text input_short" placeholder="例）やまだ" maxlength="45" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;<input type="text" name="first_kana" class="input_text input_short" placeholder="例）たろう" maxlength="45" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 											<?php if(isset($errors['last_kana'])) { ?>
 												<p class="error"><?php echo $errors['last_kana']; ?></p>
 											<?php } ?>
