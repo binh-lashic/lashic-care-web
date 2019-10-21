@@ -110,6 +110,7 @@ class Controller_Register extends Controller_Base
 			unset($params['password']);
 			Log::error($e->getMessage(), 'register_complete');
 			Log::error(print_r($params, true), 'register_complete');
+            throw new Exception;
 		}
 
 		$this->template->title = 'LASHIC 新規登録  >  アカウント情報　入力';

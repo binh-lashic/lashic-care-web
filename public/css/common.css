@@ -1016,7 +1016,7 @@ input[type=range].rangeNo06::-moz-range-thumb {
 
 /* box color */
 .color-container--error{ background-color:#ffebeb; border:1px solid #ef5656; padding:20px; margin-bottom:50px;}
-
+.flash-errors{ background-color:#ffebeb; border:1px solid #ef5656; color: #ef5656; padding: 5px 0; }
 
 
 

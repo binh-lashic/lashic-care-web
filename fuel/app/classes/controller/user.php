@@ -233,8 +233,13 @@ class Controller_User extends Controller_Base
         $this->template->title = 'マイページ';
         $this->data['breadcrumbs'] = array($this->template->title);
 
-        if(Input::post()) {
-        	\Model_User::saveUser(Input::post());
+        try {
+            if (Input::post()) {
+                \Model_User::saveUser(Input::post());
+            }
+        } catch (Exception $e) {
+            \Log::error(__METHOD__.'['.$e->getMessage().']');
+            throw new Exception;
         }
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/account_basic_complete', $this->data);
@@ -422,12 +427,16 @@ class Controller_User extends Controller_Base
     	$this->template->title = 'マイページ';
 
         if(Input::post()) {
-        	$params = Input::post();
-        	
-        	if(empty($params['profile_image'])){
-        		unset($params['profile_image']);
-        	}
-        	\Model_User::saveUser($params);
+            try {
+                $params = Input::post();
+                if(empty($params['profile_image'])){
+                    unset($params['profile_image']);
+                }
+                \Model_User::saveUser($params);
+            } catch (Exception $e) {
+                \Log::error(__METHOD__.'['.$e->getMessage().']');
+                throw new Exception;
+            }
         }
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info_basic_complete', $this->data);
@@ -458,8 +467,13 @@ class Controller_User extends Controller_Base
     public function action_info_contact_complete() {
     	$this->template->title = 'マイページ';
 
-        if(Input::post()) {
-        	\Model_User::saveUser(Input::post());
+        try {
+            if (Input::post()) {
+                \Model_User::saveUser(Input::post());
+            }
+        } catch (Exception $e) {
+            \Log::error(__METHOD__.'['.$e->getMessage().']');
+            throw new Exception;
         }
         $this->template->header = View::forge('header_client', $this->data);
         $this->template->content = View::forge('user/info_contact_complete', $this->data);

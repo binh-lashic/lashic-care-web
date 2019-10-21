@@ -69,6 +69,7 @@ class Controller_Contact extends Controller_Base
 
         } catch (Exception $e) {
             Log::error($e->getMessage(), 'sendEmail');
+            throw new Exception;
         }
 
        	$this->template->header = View::forge('header', $this->data);
