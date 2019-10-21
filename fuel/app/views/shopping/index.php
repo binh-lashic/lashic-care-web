@@ -133,7 +133,7 @@
 			<div class="container">
 				<div class="section02_inner clearfix">
 					<div class="section02_01_lt">
-						<h2 class="section02_tit"><img src="images/section02_01_tit.png" class="section02_01_tit" alt="室内空間センサーLASHIC-room"></h2>
+						<h2 class="section02_tit"><img src="/images/section02_01_tit.png" class="section02_01_tit" alt="室内空間センサーLASHIC-room"></h2>
 						<p><strong class="large">【基本機能】</strong><br>
 							居室内の「温度」「湿度」「照度」「運動量・動き」をモニターし、居室内のお客様が適切な環境にいらっしゃるかをモニタリングします。</p>
 						<p> <strong class="large">【主なチェック項目】</strong><br>
@@ -144,7 +144,7 @@
 							・暗闇での徘徊など異常行動の把握と警告</p>
 					</div>
 					<div class="section02_01_rt">
-						<div class="clearfix"><img src="images/section02_01_img_01.png" class="section02_01_img_01" alt="画面イメージ"><img src="images/section02_01_img_02.png" class="section02_01_img_02" alt="機器イメージ"></div>
+						<div class="clearfix"><img src="/images/section02_01_img_01.png" class="section02_01_img_01" alt="画面イメージ"><img src="/images/section02_01_img_02.png" class="section02_01_img_02" alt="機器イメージ"></div>
 						<p class="rt small mgb0">※画像はイメージです</p>
 						<div class="section02_detail">
 							<p class="mgb0">【搭載センサー】<br>
@@ -156,7 +156,7 @@
 
 				<div class="section02_inner clearfix">
 					<div class="section02_02_rt">
-						<h2 class="section02_tit"><img src="images/section02_02_tit.png" class="section02_02_tit" alt="睡眠センサーLASHIC-room"></h2>
+						<h2 class="section02_tit"><img src="/images/section02_02_tit.png" class="section02_02_tit" alt="睡眠センサーLASHIC-room"></h2>
 						<p><strong class="large">【基本機能】</strong><br>
 							ベッド上のお客様の状態をリアルタイムで把握、<br>
 							マットレスの下に敷くだけの簡単設置</p>
@@ -169,7 +169,7 @@
 							［睡眠］ 睡眠・覚醒、睡眠快適度 </p>
 						<span class="small">(※) 推定値であり医療的データではありません</span> </div>
 					<div class="section02_02_lt">
-						<div><img src="images/section02_02_img_01.jpg" class="section02_02_img_01" alt="ベッドセンサー">
+						<div><img src="/images/section02_02_img_01.jpg" class="section02_02_img_01" alt="ベッドセンサー">
 							<p class="rt small mgb0">※画像はイメージです</p>
 						</div>
 						<div class="section02_detail">
@@ -183,7 +183,7 @@
 				<div class="section02_inner clearfix">
 					<div class="section02_03_lt">
 						<h2 class="section02_tit">
-							<img src="images/section02_03_tit.png" class="section02_03_tit" alt="ナースコールLASHIC-call"><br />
+							<img src="/images/section02_03_tit.png" class="section02_03_tit" alt="ナースコールLASHIC-call"><br />
 							※在宅版でのご提供は今後予定しております。
 						</h2>
 						<p><strong class="large">【基本機能】</strong><br>
@@ -199,7 +199,7 @@
 						</div>
 					</div>
 					<div class="section02_03_rt">
-						<div class="section02_03_rt_img"><img src="images/section02_03_img_01.png" class="section02_03_img_01" alt="LASHIC-call機器"><img src="images/section02_03_img_02.png" class="section02_03_img_02" alt="画面イメージ"></div>
+						<div class="section02_03_rt_img"><img src="/images/section02_03_img_01.png" class="section02_03_img_01" alt="LASHIC-call機器"><img src="/images/section02_03_img_02.png" class="section02_03_img_02" alt="画面イメージ"></div>
 						<p class="rt small mgt10">※画像はイメージです</p>
 					</div>
 				</div>
