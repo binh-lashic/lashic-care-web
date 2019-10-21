@@ -112,28 +112,29 @@ class Controller_Shopping extends Controller_Base
     } 
 
     public function action_user_complete() {
-        if(Input::post()) {
-            $params = Input::post();
-            $client = \Model_User::createClient($params);
-            $client_id = $client['id'];
-            $contracts = \Model_Contract::getByUserId($this->user['id']);
-            
-            foreach($contracts as $contract) {
-               $contract->client_user_id = $client_id;
-               $contract->save();
+        try {
+            if(Input::post()) {
+                $params = Input::post();
+                $client = \Model_User::createClient($params);
+                $client_id = $client['id'];
+                $contracts = \Model_Contract::getByUserId($this->user['id']);
+                foreach($contracts as $contract) {
+                    $contract->client_user_id = $client_id;
+                    $contract->save();
+                }
+                $sensors = \Model_User::getSensors($this->user['id']);
+                foreach($sensors as $sensor) {
+                    \Model_User_Sensor::saveUserSensor([
+                        'user_id' => $client_id,
+                        'sensor_id' => $sensor['id'],
+                        'admin' => 0
+                    ]);
+                }
+                Response::redirect('/user');
             }
-            
-            $sensors = \Model_User::getSensors($this->user['id']);
-  
-            foreach($sensors as $sensor) {
-              \Model_User_Sensor::saveUserSensor([
-                'user_id' => $client_id,
-                'sensor_id' => $sensor['id'],
-                'admin' => 0
-              ]);
-            }
-            
-            Response::redirect('/user');
+        } catch (Exception $e) {
+            \Log::error(__METHOD__.'['.$e->getMessage().']');
+            throw new Exception;
         }
     }
 

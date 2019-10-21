@@ -87,6 +87,7 @@ class Controller_Password extends Controller_Base
                     $sendgrid->send($email);                        
                 } catch (Exception $e) {
                     \Log::error('パスワード変更メール送信に失敗しました。  ['.$e->getMessage().']');
+                    throw new Exception;
                 }
 
                 $this->template->header = View::forge('header', $this->data);
@@ -159,6 +160,7 @@ class Controller_Password extends Controller_Base
                         $sendgrid->send($email);                        
                     } catch (Exception $e) {
                         \Log::error('パスワード確認メール送信に失敗しました。  ['.$e->getMessage().']');
+                        throw new Exception;
                     }
                     $this->template->content = View::forge('password/new_complete', $this->data);
                 }

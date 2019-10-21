@@ -732,8 +732,7 @@ class Model_User extends Orm\Model{
 	            }
 	            return $client;
 	        } catch (Exception $e) {
-	        	print_r($e);
-	        	exit;
+	            \Log::error(__METHOD__.'['.$e->getMessage().']');
 	        }
 		}
 
