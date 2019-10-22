@@ -74,8 +74,8 @@
 							<tr>
 								<th><span class="icon_Required">必須</span> お名前</th>
 								<td>
-									<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
-									<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
+									<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" maxlength="45" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
+									<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" maxlength="45" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
 									<?php if(!empty($errors['last_name'])) { ?>
 										<p class="error"><?php echo $errors['last_name']; ?></p>
 									<?php } ?>
@@ -87,8 +87,8 @@
 							<tr>
 								<th><span class="icon_Required">必須</span> ふりがな</th>
 								<td>
-									<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
-									<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
+									<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" maxlength="45" value="<?php if(isset($data['last_kana'])) { echo $data['last_kana']; } ?>">&nbsp;&nbsp;
+									<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" maxlength="45"value="<?php if(isset($data['first_kana'])) { echo $data['first_kana']; } ?>">
 									<?php if(!empty($errors['last_kana'])) { ?>
 										<p class="error"><?php echo $errors['last_kana']; ?></p>
 									<?php } ?>

@@ -309,9 +309,11 @@ class Controller_User extends Controller_Base
             $this->validation->add('password', '現在のパスワード')
                         ->add_rule('required')
                         ->add_rule('min_length', 8)
+                        ->add_rule('max_length', 255)
                         ->add_rule('check_password', $this->user['id']);
             $this->validation->add('new_password', '新しいパスワード')
                         ->add_rule('required')
+                        ->add_rule('max_length', 255)
                         ->add_rule('min_length', 8);
             $this->validation->add('new_password_confirm', '新しいパスワード　確認')
                         ->add_rule('required')
@@ -485,10 +487,17 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header_client', $this->data);
 
 		if(Input::post()) {
-		    $params = Input::post();
+			$params = Input::post();
 			$this->data['data'] = $params;
-        	$this->template->content = View::forge('user/info_option_confirm', $this->data);
-        	return;
+			$val = \Model_User::validate("info_option");
+			if ($val->run()) {
+				$this->template->content = View::forge('user/info_option_confirm', $this->data);
+				return;
+			} else {
+				foreach($val->error() as $key=>$value){
+					$this->data['errors'][$key] = $value;
+				}
+			}
         }
 
         $this->template->content = View::forge('user/info_option_form', $this->data);

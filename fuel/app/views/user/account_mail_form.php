@@ -12,7 +12,7 @@
 								<tbody>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス</th>
-										<td><?php echo Form::input('new_email', $data['new_email'], ['class' => 'input_text input_medium', 'id' => null]); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+										<td><?php echo Form::input('new_email', $data['new_email'], ['class' => 'input_text input_medium', 'id' => null, 'maxlength' => '512']); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
 											<?php if(!empty($errors['new_email'])) : ?>
 												<p class="error"><?php echo $errors['new_email']; ?></p>
 											<?php  endif; ?>                                                                                   

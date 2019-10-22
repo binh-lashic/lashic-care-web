@@ -14,8 +14,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td>
-										<input type="text" class="input_text input_short" name="last_name" value="<?php echo $user['last_name']; ?>">
-										<input type="text" class="input_text input_short" name="first_name" value="<?php echo $user['first_name']; ?>">
+										<input type="text" class="input_text input_short" name="last_name" maxlength="45" value="<?php echo $user['last_name']; ?>">
+										<input type="text" class="input_text input_short" name="first_name" maxlength="45" value="<?php echo $user['first_name']; ?>">
 										<?php if (isset($errors['last_name'])) { ?>
 											<p class="error"><?php echo $errors['last_name']; ?></p>
 										<?php } ?>
@@ -27,8 +27,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
 										<td>
-											<input type="text" class="input_text input_short" name="last_kana" value="<?php echo $user['last_kana']; ?>">
-											<input type="text" class="input_text input_short" name="first_kana" value="<?php echo $user['first_kana']; ?>">
+											<input type="text" class="input_text input_short" name="last_kana" maxlength="45" value="<?php echo $user['last_kana']; ?>">
+											<input type="text" class="input_text input_short" name="first_kana" maxlength="45" value="<?php echo $user['first_kana']; ?>">
 											<?php if (isset($errors['last_kana'])) { ?>
 												<p class="error"><?php echo $errors['last_kana']; ?></p>
 											<?php } ?>

@@ -12,11 +12,11 @@
 								<tbody>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" class="input_text input_medium"></td>
+										<td><input type="text" class="input_text input_medium" maxlength="50"></td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" class="input_text input_medium"></td>
+										<td><input type="text" class="input_text input_medium" maxlength="512"></td>
 									</tr>
 									<tr>
 										<th>会社名</th>
@@ -24,11 +24,11 @@
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
-										<td><input type="text" class="input_text input_medium"> <span class="small text_red">※半角英数</span></td>
+										<td><input type="email" class="input_text input_medium" maxlength="512"> <span class="small text_red">※半角英数</span></td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス（確認）</th>
-										<td><input type="text" class="input_text input_medium"> <span class="small text_red">※半角英数</span></td>
+										<td><input type="email" class="input_text input_medium"> <span class="small text_red">※半角英数</span></td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号</th>

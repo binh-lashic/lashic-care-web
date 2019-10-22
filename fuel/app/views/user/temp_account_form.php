@@ -13,8 +13,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td>
-											<input type="text" class="input_text input_short" name="last_name" value="<?php echo $data['last_name']; ?>">
-											<input type="text" class="input_text input_short" name="first_name" value="<?php echo $data['first_name']; ?>">
+											<input type="text" class="input_text input_short" name="last_name" maxlength="45" value="<?php echo $data['last_name']; ?>">
+											<input type="text" class="input_text input_short" name="first_name" maxlength="45" value="<?php echo $data['first_name']; ?>">
 											<?php if(isset($errors['last_name'])) { ?>
 												<p class="error"><?php echo $errors['last_name']; ?></p>
 											<?php } ?>
@@ -26,8 +26,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
 										<td>
-											<input type="text" class="input_text input_short" name="last_kana" value="<?php echo $data['last_kana']; ?>">
-											<input type="text" class="input_text input_short" name="first_kana" value="<?php echo $data['first_kana']; ?>">
+											<input type="text" class="input_text input_short" name="last_kana" maxlength="45" value="<?php echo $data['last_kana']; ?>">
+											<input type="text" class="input_text input_short" name="first_kana" maxlength="45" value="<?php echo $data['first_kana']; ?>">
 											<?php if(isset($errors['last_kana'])) { ?>
 												<p class="error"><?php echo $errors['last_kana']; ?></p>
 											<?php } ?>
@@ -142,7 +142,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス</th>
-										<td><?php echo Form::input('new_email', $data['new_email'], ['class' => 'input_text input_medium', 'id' => null]); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+										<td><?php echo Form::input('new_email', $data['new_email'], ['class' => 'input_text input_medium', 'id' => null, 'maxlength' => '512']); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
 											<?php if(isset($errors['new_email'])) { ?>
 												<p class="error"><?php echo $errors['new_email']; ?></p>
 											<?php } ?>
@@ -150,7 +150,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 変更するメールアドレス　確認</th>
-										<td><?php echo Form::input('new_email_confirm', $data['new_email_confirm'], ['class' => 'input_text input_medium', 'id' => null]); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
+										<td><?php echo Form::input('new_email_confirm', $data['new_email_confirm'], ['class' => 'input_text input_medium', 'id' => null, 'maxlength' => '512']); ?><span class="small text_red">※半角英数　例）hoge@hoge.jp</span>
 											<?php if(isset($errors['new_email_confirm'])) { ?>
 												<p class="error"><?php echo $errors['new_email_confirm']; ?></p>
 											<?php } ?>	
@@ -167,7 +167,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 現在のパスワード</th>
-										<td><?php echo Form::password('password', $data['password'], ['class' => 'input_text input_short']); ?> <span class="small text_red">※半角英数 8桁以上</span>
+										<td><?php echo Form::password('password', $data['password'], ['class' => 'input_text input_short', 'minlength' => '8','maxlength' => '16']); ?> <span class="small text_red">※半角英数 8桁以上</span>
 											<?php if($errors['password']) { ?>
 												<p class="error"><?php echo $errors['password']; ?></p>
 											<?php } ?>
@@ -175,7 +175,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード</th>
-										<td><?php echo Form::password('new_password', $data['new_password'], ['class' => 'input_text input_short']); ?> <span class="small text_red">※半角英数 8桁以上で、できるだけ複雑な文字の組み合わせでご入力ください。　例）W4eHvmCE</span>
+										<td><?php echo Form::password('new_password', $data['new_password'], ['class' => 'input_text input_short' , 'minlength' => '8','maxlength' => '16']); ?> <span class="small text_red">※半角英数 8桁以上で、できるだけ複雑な文字の組み合わせでご入力ください。　例）W4eHvmCE</span>
 											<?php if(isset($errors['new_password'])) { ?>
 												<p class="error"><?php echo $errors['new_password']; ?></p>
 											<?php } ?>
@@ -183,7 +183,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード　確認</th>
-										<td><?php echo Form::password('new_password_confirm', $data['new_password_confirm'], ['class' => 'input_text input_short']); ?> <span class="small text_red">※半角英数 8桁以上</span>
+										<td><?php echo Form::password('new_password_confirm', $data['new_password_confirm'], ['class' => 'input_text input_short', 'minlength' => '8','maxlength' => '16']); ?> <span class="small text_red">※半角英数 8桁以上</span>
 											<?php if(isset($errors['new_password_confirm'])) { ?>
 												<p class="error"><?php echo $errors['new_password_confirm']; ?></p>
 											<?php } ?>

@@ -29,7 +29,7 @@
 									</tr>
 									<tr>
 										<th class="largeTh"><span class="icon_Required">必須</span> 新しいパスワード　確認</th>
-										<td><?php echo Form::password('new_password_confirm', $data['new_password_confirm'], ['class' => 'input_text input_short']); ?> <span class="small text_red">※半角英数 8桁以上</span>
+										<td><?php echo Form::password('new_password_confirm', $data['new_password_confirm'], ['class' => 'input_text input_short', 'minlength' => '8', 'maxlength' => '16']); ?> <span class="small text_red">※半角英数 8桁以上</span>
 									<?php if($errors['new_password_confirm']) : ?>
 										<p class="error"><?php echo $errors['new_password_confirm']; ?></p>
 									<?php endif; ?>
