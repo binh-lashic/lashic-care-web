@@ -24,23 +24,11 @@
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <link href="/css/drawer.css" type="text/css" rel="stylesheet">
-    <?php if (\Util::is_production()) { ?>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'UA-128509273-2');
-        </script>
-    <?php } ?>
+    <?php Fuel::load(APPPATH.'/views/google_tag_head.php') ?>
 </head>
 
 <body id="home" class="drawer drawer--right">
+    <?php Fuel::load(APPPATH.'/views/google_tag_body.php') ?>
     <div class="clearfix content">
         <header class="drawer-navbar" role="banner">
             <div class="drawer-container">
