@@ -107,19 +107,10 @@ function rebuild(){ location.reload();}
 }
 </script>
 <!-- ログイン画面js -->
-<?php if(\Util::is_production()) {?>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-128509273-2');
-  </script>
-<?php } ?>
+<?php Fuel::load(APPPATH.'/views/google_tag_head.php') ?>
 </head>
 <body id="home" class="drawer drawer--right loginBg">
+<?php Fuel::load(APPPATH.'/views/google_tag_body.php') ?>
 <?php echo isset($content) ? $content : ""; ?>
 <footer>
   <ul>
