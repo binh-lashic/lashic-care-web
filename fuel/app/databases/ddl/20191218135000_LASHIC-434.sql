@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[users] DROP COLUMN `temporary`;

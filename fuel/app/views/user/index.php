@@ -276,7 +276,27 @@ if(isset($client)) {
 			<!-- /24時間グラフ --> 
                         <div id="graph24_error"></div> 
 		</section>
-		<!-- /content end --> 
+		<!-- /content end -->
+<?php
+} else {
+?>
+	<!-- お知らせ -->
+	<div id="noticeOpenWindow" class="settingContainer" style="display: none; width:400px; height:200px; ">
+			<div class="loginOpenWindow">
+				センサーの利用を開始するためには以下の手順が必要となります。リンクより設定ください。
+				<p class="pdt10"><a href="/shopping/user" class="link_normal">見守りユーザーの登録</a></p>
+			</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$(".fancybox").fancybox();
+			var opts = {
+				closeBtn: false,
+				showCloseButton: false
+			}
+			$.fancybox.open($('#noticeOpenWindow'), opts, null);
+		});
+	</script>
 <?php
 }
 ?>

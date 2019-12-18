@@ -104,17 +104,6 @@ class Controller_User extends Controller_Base
 
 	public function action_index()
 	{
-	    if(!$this->is_purchased() ||
-	      count(Session::get("plans")) > 0){
-	      //未購入またはカート情報が入っている場合
-	      Response::redirect('/shopping/cart');
-	    } else if($this->is_temporary()){
-	      Response::redirect('/user/temp_account_form');
-	    } elseif(!$this->is_client_exist() &&
-	      $this->is_purchased()){
-	      Response::redirect('/shopping/user');
-	    }
-	    
 	    if(Input::param("date")) {
 	    	$this->data['date'] = Input::param("date");
 	    } else {
@@ -708,55 +697,6 @@ class Controller_User extends Controller_Base
         $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('user/contract', $this->data);
 	}
- 
-	public function action_temp_account_form()
-	{
-		$this->template = View::forge('template_responsive');
-		$this->template->title = '本登録';
-		$this->data['breadcrumbs'] = array($this->template->title);
-		$this->data['eras'] = Config::get("eras");
-		$this->data['prefectures'] = Config::get("prefectures");
-		$this->template->header = View::forge('no_nav_header', $this->data);
-	  
-		if (Input::post()) {
-			$val = \Model_User::validate("temp_account", ['user_id' => $this->user['id']]);
-			$params = Input::post();
-			if (!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
-				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
-				$params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
-			} else {
-				$this->data['errors']['birthday'] = true;
-			}
-			$this->data['data'] = $params;
-			if ($val->run()) {
-				if (!$this->data['errors']['birthday']) {
-					$this->template->content = View::forge('user/temp_account_confirm', $this->data);
-					return;
-				}
-			} else {
-				// バリデーション失敗の場合ここに入ってくる
-				foreach ($val->error() as $key => $value) {
-					$this->data['errors'][$key] = $value;
-				}
-			}
-		} 
-		$this->template->content = View::forge('user/temp_account_form', $this->data);
-	}
-	
-	public function action_temp_account_complete()
-	{
-	  $this->template = View::forge('template_responsive');
-	  $this->template->title = '本登録';
-	  $this->data['breadcrumbs'] = array($this->template->title);
-	  
-	  if(Input::post()) {
-	    $params = Input::post();
-	    $params['temporary'] = \Model_User::REGULAR_USER;
-	    \Model_User::updateUser($params);
-	  }
-	  $this->template->header = View::forge('no_nav_header', $this->data);
-	  $this->template->content = View::forge('user/temp_account_complete', $this->data);
-	}
         
         /*
          * マンスリーレポート 
@@ -785,34 +725,5 @@ class Controller_User extends Controller_Base
 	{
 		$month = (int) date('n');
 		return ($month >= 4 && $month <= 9);
-	}
-	
-	/**
-	 * 見守り対象ユーザが存在するかを返す
-	 *
-	 */
-	private function is_client_exist()
-	{
-		return (!empty($this->data['clients']));
-	}
-	
-	/**
-	 * ログインしたユーザが仮アカウントかどうかを返す
-	 *
-	 */
-	private function is_temporary()
-	{
-		return ($this->user['temporary'] == 1);
-	}
-	
-	/**
-	 * ログインしたユーザが購入済みかを返す
-	 *
-	 */
-	private function is_purchased()
-	{
-		$user_id = $this->user['id'];
-		$count = \Model_Contract::getCountByUserId($user_id);
-		return ($count > 0);
 	}
 }
