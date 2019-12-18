@@ -17,16 +17,13 @@
 						<th>アカウント登録が完了しました。</th>
 					</tr>
 					<tr>
-						<td>メールアドレスにお手続き完了のご連絡をお送りいたしました。<br>ログインして、ユーザーの状況をご確認ください。
+						<td>メールアドレスにお手続き完了と認証のご連絡をお送りいたしました。<br>メールに記載されたURLよりメールアドレスの認証を完了後、自動的にログインされます。
 							<div class="set_container">
 								<div class="left_container"></div>
 								<div class="center_container">
-								<form action="/">
-									<input type="submit" value="ログインする" >
-								</form>
 								</div>
 								<div class="right_container"></div>
-							</div>>
+							</div>
 						</td>
 					</tr>
 				</table>

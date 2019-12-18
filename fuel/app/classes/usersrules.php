@@ -74,14 +74,14 @@ class UsersRules
     }
   
     /*
-     * メールアドレスの存在チェック
+     * 仮メールアドレスの存在チェック
      *
      * @param string $value
      * @return boolean
      */
-      public static function _validation_exist_email($value)
+      public static function _validation_exist_temp_email($value)
       {
-        return !is_null(Model_User::getUserFromEmail($value));
+        return !is_null(Model_User::getTempUserFromEmail($value));
       }
       
     /*

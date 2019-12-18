@@ -66,7 +66,7 @@ class Model_User extends Orm\Model{
 		$val->add_callable('usersrules');
 		switch($factory) {
 			case "first":
-				$val->add_field('email', 'メールアドレス', 'required|valid_email|exist_email|max_length[512]');
+				$val->add_field('email', 'メールアドレス', 'required|valid_email|exist_temp_email|max_length[512]');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
 				$val->add_field('password_confirm', 'パスワード（確認）', 'required|match_value['.Input::post('password').']');
 				break;
@@ -402,7 +402,16 @@ class Model_User extends Orm\Model{
 			return \Model_User::format($user);
 		} else {
 			return null;
-		}	
+		}
+	}
+	
+	public static function getTempUserFromEmail($email){
+		return \Model_User::find("first", array(
+			'where' => array(
+				'email' => $email,
+				'email_confirm' => 0
+			)
+		));
 	}
 
 	public static function getOtherUserByEmail($email){
@@ -561,9 +570,24 @@ class Model_User extends Orm\Model{
 		  return null;
 		}
 	}
-
+	
+	public static function updateTempUser($params) {
+		$user = \Model_User::getTempUserFromEmail($params['email']);
+		$old_password = Auth::reset_password($user['username']);
+		Auth::change_password($old_password, $params['password'], $user['username']);
+		$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+		unset($params['password']);
+		$user->set($params);
+		
+		if($user->save()) {
+			return \Model_User::format($user);
+		} else {
+			return null;
+		}
+	}
+	
         /*
-         * 管理画面から親アカウント登録 
+         * 管理画面から親アカウント登録
          *
          * @access public.static
          * @params array $params

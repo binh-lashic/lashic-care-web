@@ -60,9 +60,8 @@ class Controller_First extends Controller_Base
     public function action_complete()
     {
       try {
-            $user = \Model_User::updateUser(Input::post());
+            $user = \Model_User::updateTempUser(Input::post());
             if($user) {
-                //TODO メール送信
               \Model_User::sendConfirmEmail($user);
               //管理用メールの送信
               $data = array(
