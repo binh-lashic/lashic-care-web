@@ -22,5 +22,6 @@
 		'check_zipcode' => '郵便番号の形式が正しくありません。',
 		'check_image_size' => 'プロフィール画像 は最大:sizeMBです。',
 		'check_image_type' => 'プロフィール画像  は「:type」の形式にしてください。',
-		'image_upload_false' => 'プロフィール画像 のアップロードに失敗しました。'
+		'image_upload_false' => 'プロフィール画像 のアップロードに失敗しました。',
+		'exist_email' => ':value は登録されておりませんでした。'
 	);

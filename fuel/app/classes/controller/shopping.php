@@ -56,15 +56,11 @@ class Controller_Shopping extends Controller_Base
 
 	public function action_cart()
 	{
-        if (!Auth::check()) {
-            Response::redirect('/register/');
-        } else {
-            $this->data['plans'] = Session::get("plans");
-            $this->template->title = 'カート';
-            $this->data['breadcrumbs'] = array($this->template->title);
-            $this->template->header = View::forge('header_client', $this->data);
-            $this->template->content = View::forge('shopping/cart', $this->data);
-        }
+        $this->data['plans'] = Session::get("plans");
+        $this->template->title = 'カート';
+        $this->data['breadcrumbs'] = array($this->template->title);
+        $this->template->header = View::forge('header_client', $this->data);
+        $this->template->content = View::forge('shopping/cart', $this->data);
     }
 
     public function action_user()

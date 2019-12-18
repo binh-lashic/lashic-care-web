@@ -65,18 +65,8 @@ class Model_User extends Orm\Model{
 		$val->add_callable('Validation_Japanese');
 		$val->add_callable('usersrules');
 		switch($factory) {
-			case "register":
-				$val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
-				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
-				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
-				$val->add_field('gender', '性別', 'required');
-				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
-				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
-				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('prefecture', '都道府県', 'required');
-				$val->add_field('address', '都道府県以下', 'required');
+			case "first":
+				$val->add_field('email', 'メールアドレス', 'required|valid_email|exist_email|max_length[512]');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
 				$val->add_field('password_confirm', 'パスワード（確認）', 'required|match_value['.Input::post('password').']');
 				break;

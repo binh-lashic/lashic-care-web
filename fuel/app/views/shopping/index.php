@@ -448,9 +448,9 @@ if(!empty($monitor))
 			<?php } ?>
 			<input type="checkbox" id="password_check">
 			<label for="password_check" class="checkbox">ログインを保持する</label>
+			<p class="pdt10"><a href="" class="link_normal">初めて利用される方はこちら</a></p>
 			<p class="pdt10"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
 			<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt10">ログインする</a></p>
-			<p><a href="/register" class="btn_disabledRadius20 mgt10">新規登録する</a></p>
 			<p class="mgt30 center"><a href="javascript:$.fancybox.close();">× 閉じる</a></p>
 		</div>
 	</form>
