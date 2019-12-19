@@ -1032,13 +1032,13 @@
   width: 100%;
   text-align: center;
   color: #ffffff;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
 }
 
 @media screen and (max-width: 960px) {
   .PlicePlan__imgCover p {
-    font-size: 18px;
+    font-size: 26px;
   }
 }
 
