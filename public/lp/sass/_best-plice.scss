@@ -1,0 +1,104 @@
+.BestPlice {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    @include max-screen($breakpoint-tablet){
+        padding-bottom: 10px;
+    }
+    @at-root {
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+            background-color: #ffffff;
+        }
+        &__section {
+            width: 100%;
+        }
+        &__ttl {
+            width: 100%;
+            margin: 0 auto;
+        }
+        &__ttlInner {
+            width: 40%;
+            display: block;
+            margin: 0 auto;
+            @include max-screen($breakpoint-tablet){
+                width: 70%;
+            }
+        }
+        &__ttl2 {
+            width: 100%;
+            margin: auto;
+            padding-bottom: 30px;
+        }
+        &__ttl2Inner {
+            width: 55%;
+            display: block;
+            margin: 0 auto;
+            @include max-screen($breakpoint-tablet){
+                width: 85%;
+            }
+        }
+        &__plan {
+            text-align: center;
+            font-size: 26px;
+            border: 2px solid #00a0b9;
+            width: 75%;
+            margin: 0 auto;
+            margin-bottom: 40px;
+            padding: 10px;
+            color: #00a0b9;
+            @include max-screen($breakpoint-tablet){
+                width: 95%;
+                font-size: 18px;
+            }
+        }
+        &__priceList {
+            display: flex;
+            justify-content: space-between;
+            width: 75%;
+            margin: 0 auto;
+            align-items: center;
+            @include max-screen($breakpoint-tablet){
+                width: 95%;
+            }
+        }
+        &__priceImg {
+            display: block;
+            width: 45%;
+        }
+        &__plus {
+            font-size: 30px;
+            font-weight: 900;
+            border: none;
+            margin-bottom: 0;
+            color: #000000;
+        }
+        &__caution {
+            display: block;
+            width: 75%;
+            margin: 0 auto;
+            margin-top: 20px;
+            @include max-screen($breakpoint-tablet){
+                font-size: 9px;
+                margin-left: 3%;
+            }
+        }
+        &__triangle {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            color: #7bcedb;
+            font-size: 50px;
+            @include max-screen($breakpoint-tablet){
+                margin-top: 10px;
+                font-size: 50px;
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+.Media {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    @at-root {
+        &__contents {
+            width: 100%;
+            margin: 0 auto;
+            height: auto;
+            background-color: #db2a26;
+        }
+        &__txt {
+            width: 100%;
+            text-align: center;
+            line-height: 120px;
+            font-size: 28px;
+            color: #ffffff;
+            @include max-screen($breakpoint-tablet){
+                font-size: 17px;
+                line-height: 70px;
+            }
+        }
+        &__box {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 85px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            @include max-screen($breakpoint-tablet) {
+                flex-flow: column;
+                padding: none;
+            }
+        }
+        &__news {
+            @include max-screen($breakpoint-tablet) {
+                margin-bottom: 40px;
+            }
+        }
+        &__market {
+            @include max-screen($breakpoint-tablet) {
+                margin-bottom: 40px;
+                width: 100%;
+            }
+        }
+    }
+}

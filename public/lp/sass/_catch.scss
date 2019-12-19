@@ -1,0 +1,91 @@
+.Catch {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    @at-root {
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+            background-color: #ffffff;
+        }
+        &__section {
+            padding-top: 30px;
+            @include max-screen($breakpoint-tablet) {
+                padding: 30px 5px 0 5px;
+            }
+        }
+        &__Catch_ttl {
+            width: 100%;
+            margin: 0 auto;
+        }
+        &__ttlInner {
+            width: 80%;
+            display: block;
+            margin: 0 auto;
+            $this: &;
+            @include max-screen($breakpoint-tablet){
+                display: none;
+            }
+            &--sp{
+                @extend #{$this};
+                display: none;
+                @include max-screen($breakpoint-tablet){
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+        }
+        &__txt {
+            text-align: center;
+            font-size: 24px;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 20px;
+            }
+            @include max-screen($breakpoint-mobile) {
+                font-size: 17px;
+            }
+            span {
+                color: #fa7800;
+                font-size: 30px;
+                font-weight: bold;
+                @include max-screen($breakpoint-tablet) {
+                    font-size: 23px;
+                }
+                @include max-screen($breakpoint-mobile) {
+                    font-size: 20px;
+                }
+            }
+        }
+        &__btn {
+            display: block;
+            background-color: #e6e6e6;
+            color: #808080;
+            width: 75%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 10px 0;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 30px;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 18px;
+                width: 90%;
+            }
+            @include max-screen($breakpoint-mobile) {
+                font-size: 15px;
+            }
+            $this: &;
+            &--orange {
+                @extend #{$this};
+                color: #fa7800;
+                background-color: #fff;
+                border: 1px solid #fa7800;
+            }
+        }
+    }
+}

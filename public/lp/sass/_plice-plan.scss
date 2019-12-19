@@ -1,0 +1,216 @@
+.PlicePlan {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    @at-root {
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+        }
+        &__firstBox {
+            display: flex;
+            flex-flow: column;
+            border: 1px solid #00a0b9;
+            width: 90%;
+            margin: 0 auto;
+        }
+        &__firstBoxLabel {
+            text-align: center;
+            background-color: #00a0b9;
+            color: #ffffff;
+            font-size: 28px;
+            padding: 10px 0;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 16px;
+            }
+        }
+        &__firstBoxForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+        &__firstBoxFormInput {
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        &__firstBoxFormTxt {
+            background-color: #fff;
+            color: #000000;
+            font-size: 24px;
+        }
+        &__planList {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 20px;
+            @include max-screen($breakpoint-tablet){
+                width: 98%;
+                margin-top: 10px;
+            }
+
+        }
+        &__planBox {
+            display: flex;
+            flex-flow: column;
+            width: 32%;
+            min-width: 240px;
+            @include max-screen(860px) {
+                min-width: 104px;
+                margin: 0 auto;
+            }
+        }
+        &__planBoxPlus {
+            text-align: center;
+            font-size: 50px;
+            $this: &;
+            @include max-screen(860px) {
+                font-size: 20px;
+            }
+            &--1 {
+                @extend #{$this};
+                display: block;
+            }
+        }
+        &__plan {
+            display: flex;
+            flex-flow: column;
+            border: 1px solid #00a0b9;
+            margin-top: 20px;
+            $this: &;
+            @include max-screen($breakpoint-tablet){
+                margin-top: 5px;
+            }
+            &--recommend{
+                @extend #{$this};
+                position: relative;
+                img{
+                    width:30%;
+                    position: absolute;
+                    top: -14%;
+                    left: -14%;
+                    @include max-screen($breakpoint-tablet){
+                        top: -12%;
+                        left: -4%;
+                    }
+                }
+            }
+        }
+        &__pliceLabel {
+            text-align: center;
+            background-color: #00a0b9;
+            color: #ffffff;
+            font-size: 28px;
+            padding: 10px 0;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 12px;
+            }
+        }
+        &__pliceContent {
+            display: flex;
+            flex-flow: column;
+            padding: 20px;
+            @include max-screen($breakpoint-tablet){
+                padding: 0px;
+                padding-bottom: 15px;
+                padding-top: 10px;
+            }
+        }
+        &__txt1 {
+            text-align: center;
+            color: #fa7800;
+            font-weight: bold;
+            font-size: 21px;
+            $this: &;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 12px;
+            }
+            span {
+                font-size: 55px;
+                @include max-screen($breakpoint-tablet) {
+                    font-size: 21px;
+                }
+            }
+            &--perMonth {
+                @extend #{$this};
+                line-height: 110px;
+                @include max-screen($breakpoint-tablet){
+                    line-height: 393%;
+                }
+            }
+        }
+        &__txt2 {
+            text-align: center;
+            font-weight: bold;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 6px;
+            }
+            span {
+                font-size: 28px;
+                @include max-screen($breakpoint-tablet) {
+                    font-size: 11px;
+                }
+            }
+        }
+        &__txt3 {
+            text-align: center;
+            background-color: #ee275b;
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 24px;
+            color: #ffffff;
+            padding: 10px 0;
+            box-shadow: 0px 4px 0px 0px #b2095b;
+            outline: none;
+            border: none;
+            &:hover {
+                cursor: pointer;
+            }
+            &:active {
+                box-shadow: none;
+                transform: translate3d(0, 4px, 0);
+            }
+            @include max-screen($breakpoint-tablet) {
+                font-size: 12px;
+                margin-top: 9px;
+            }
+        }
+        &__caution {
+            width: 90%;
+            text-align: left;
+            margin: 0 auto;
+            margin-top: 20px;
+            @include max-screen($breakpoint-tablet){
+                font-size: 9px;
+                margin-top:8px;
+            }
+        }
+        &__more {
+            display: block;
+            width: 40%;
+            margin: 0 auto;
+            margin-top: 40px;
+            @include max-screen($breakpoint-tablet){
+                width: 80%;
+            }
+        }
+        &__sleepImg {
+            display: block;
+            width: 93%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        &__callImg {
+            display: block;
+            width: 93%;
+            margin: 0 auto;
+        }
+    }
+}

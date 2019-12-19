@@ -1,0 +1,36 @@
+$breakpoint-tablet: 960px;
+$breakpoint-mobile: 320px;
+
+@mixin max-screen($break-point) {
+    @media screen and (max-width: $break-point) {
+        @content;
+    }
+}
+
+@mixin min-screen($break-point) {
+    @media screen and (min-width: $break-point) {
+        @content;
+    }
+}
+
+@mixin screen($break-point-min, $break-point-max) {
+    @media screen and (min-width: $break-point-min) and (max-width: $break-point-max) {
+        @content;
+    }
+}
+
+@import "header";
+@import "slider";
+@import "catch";
+@import "problem";
+@import "lashic-room";
+@import "best-plice";
+@import "label1";
+@import "plice-plan";
+@import "application";
+@import "media";
+@import "life";
+@import "parts";
+@import "detail";
+@import "spec";
+@import "footer";
