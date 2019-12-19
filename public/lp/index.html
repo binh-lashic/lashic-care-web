@@ -10,20 +10,20 @@
         content="高齢者をセンサーで24時間見守り、異変をAIで検知・予知してスマートフォンへ自動通知するLASHIC(ラシク)の紹介ページです。カメラ無しのセンサー式だから、高齢者のプライバシーを守りながらリアルタイムで様子が分かります。設置も簡単で業者いらず！">
     <meta property="og:title" content="LASHIC(ラシク)-最新の高齢者見守りサービス">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://test.com/">
-    <meta property="og:image" content="https://test.jp/resources/assets/imges/common/og.jpg">
+    <meta property="og:url" content="https://lashic.jp/">
+    <meta property="og:image" content="./images/og.png">
     <meta property="og:site_name" content="LASHIC｜INFICの高齢者見守りセンサー">
     <meta property="og:description" content="介護施設を運営するINFICグループの最先端見守りセンサー">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@twitterアカウントを入力">
     <meta name="twitter:description" content="介護施設を運営するINFICグループの最先端見守りセンサー">
     <link rel="stylesheet" href="./css/nomalize.css">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="icon" href="./images/favicon.ico">
+    <link rel="apple-touch-icon" href="./images/apple-touch-icon-precomposed.png" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./js/main.js" type="text/javascript"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
@@ -43,30 +43,19 @@
                 <img class="Header__itemInner1" src="./images/logo.png" alt="lashicロゴ">
             </li>
             <li class="Header__item">
-                <a class="Header__itemInner2" href="#">資料請求</a>
+                <a class="Header__itemInner2" href="https://lashic.jp/contact">資料請求</a>
             </li>
             <li class="Header__item">
-                <a class="Header__itemInner2--red" href="#">購入する</a>
+                <a class="Header__itemInner2--red" href="#Label1">購入する</a>
             </li>
         </ul>
-        <!-- <ul class="Header__nav__sp">
-            <li class="Header__item__sp">
-                <img class="Header__itemInner1__sp" src="./images/logo.png" alt="lashicロゴ">
-            </li>
-            <li class="Header__item__sp">
-                <a class="Header__itemInner2__sp" href="">資料請求</a>
-            </li>
-            <li class="Header__item__sp">
-                <a class="Header__itemInner2__sp--red" href="">購入する</a>
-            </li>
-        </ul> -->
-        <div class="Header__msg">
-            <p class="Header__msgInner">介護施設を経営する<br class="sp_br">インフィックグループが開発・運営</p>
-        </div>
-    </header>
 
+    </header>
+    <div class="Toptext">
+        <p class="Toptext__innerMsg">介護施設を経営する<br class="sp_br">インフィックグループが開発・運営</p>
+    </div>
     <!-- PC用 -->
-    <div class="swiper-container">
+    <div class="swiper-container slider1">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
@@ -83,20 +72,20 @@
     </div>
 
     <!-- sp用 -->
-    <div class="swiper-container">
+    <div class="swiper-container slider1">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide img"><img class="swiper__innerImg" src="images/slider1_01_sp.png"></div>
             <div class="swiper-slide img"><img class="swiper__innerImg" src="images/slider1_02_sp.png"></div>
-            <div class="swiper-slide img"><img class="swiper__innerImg" src="images/slider1_03_sp.png"></div>
+            <div class="swiper-slide img"><img class="swiper__innerImg" src="images/slider1_03_sp.jpg"></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
 
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev slide-btn-sp"></div>
+        <div class="swiper-button-next slide-btn-sp"></div>
     </div>
 
     <div class="Catch">
@@ -110,8 +99,8 @@
                     <span>異変の予兆</span>から<span>現在の様子</span>まで<br>
                     タイムリーに<span>お伝え</span>します!
                 </p>
-                <a class="Catch__btn--orange" href="https://facility.lashic.jp/">介護施設運営の方はこちら</a>
-                <a class="Catch__btn--orange" href="">料金詳細を見る</a>
+                <a class="Catch__btn--orange" href="https://facility.lashic.jp" target="new">介護施設運営の方はこちら</a>
+                <a class="Catch__btn--orange" href="#plan">料金詳細を見る</a>
             </section>
         </div>
     </div>
@@ -143,7 +132,7 @@
                 </h2>
                 <p class="LashicRoom__txt2">Wi-Fiがあれば、<span>簡単・お手軽にスタート</span>できます。</p>
                 <p class="LashicRoom__txt2">Wi-Fiがない場合は<span>通信端末レンタル付プラン</span>も！</p>
-                <a class="LashicRoom__btn" href="">更に詳細な機能説明を見る</a>
+                <a class="LashicRoom__btn" href="#detail">更に詳細な機能説明を見る</a>
             </section>
         </div>
         <div class="LashicRoom__triangle">
@@ -151,7 +140,7 @@
         </div>
     </div>
 
-    <div class="BestPlice">
+    <div class="BestPlice" id="plan">
         <div class="BestPlice__contents">
             <section class="BestPlice__section">
                 <h1 class="BestPlice__ttl">
@@ -166,17 +155,20 @@
                     <p class="BestPlice__plus">&#x271a;</p>
                     <img class="BestPlice__priceImg" src="./images/container4_price2.png" alt="">
                 </div>
-                <p class="BestPlice__caution">※記載金額は税抜です</p>
+                <p class="BestPlice__caution">※別途消費税がかかります</p>
                 <p class="BestPlice__triangle">▼</p>
             </section>
         </div>
     </div>
 
-    <div class="Label1">
-        <div class="Label1__contents">
-            <p class="Label1__txt">購入申込</p>
+    <div class="Label1" id="Label1">
+        <div class="Label1__bg">
+            <div class="Label1__contents">
+                <p class="Label1__txt">購入申込</p>
+            </div>
         </div>
     </div>
+
 
     <form action="#" method="post">
         <div class="PlicePlan">
@@ -224,18 +216,29 @@
                             </div>
                         </div>
                     </div>
-                    <p class="PlicePlan__caution">※記載金額は税抜です</p>
+                    <p class="PlicePlan__caution">※別途消費税がかかります</p>
                     <img class="PlicePlan__more" src="./images/container6_h2.png" alt="">
-                    <p class="PlicePlan__caution">※準備中</p>
-                    <img class="PlicePlan__sleepImg" src="./images/lashic_sleep.png" alt="">
-                    <img class="PlicePlan__callImg" src="./images/lashic_call.png" alt="">
+                    <p class="PlicePlan__toBeRelease">※リリース予定</p>
+                    <div class="PlicePlan__imgOuter">
+                        <div class="PlicePlan__imgCover">
+                            <p>リリース予定</p>
+                        </div>
+                        <img class="PlicePlan__sleepImg" src="./images/lashic_sleep.png" alt="">
+                    </div>
+                    <div class="PlicePlan__imgOuter--2">
+                        <div class="PlicePlan__imgCover">
+                            <p>リリース予定</p>
+                        </div>
+                        <img class="PlicePlan__callImg" src="./images/lashic_call.png" alt="">
+                    </div>
+
                 </section>
             </div>
         </div>
     </form>
 
     <!--
-    <div class="Label1">
+    <div class="Label1" id="Label2">
         <div class="Label1__contents">
             <p class="Label1__txt">購入申込</p>
         </div>
@@ -269,15 +272,15 @@
                     <p class="Application__price">初期費用：<span>〇〇</span>円</p>
                     <p class="Application__price">初回支払：<span>〇〇</span>円</p>
                 </div>
-                <p class="Application__caution">※記載金額は税抜です</p>
-                <input type="button" class="Application__btn" value="購入申込へ">
+                <p class="Application__caution">※記載金額には別途消費税を含みます</p>
+                <input type="submit" class="Application__btn" value="購入申込へ">
             </div>
         </div>
     </form>
     -->
 
     <!-- pc用 -->
-    <div class="swiper-container">
+    <div class="swiper-container slider2">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
@@ -294,7 +297,7 @@
     </div>
 
     <!-- sp用 -->
-    <div class="swiper-container">
+    <div class="swiper-container slider2">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
@@ -340,7 +343,7 @@
 
     <!-- Detail start -->
 
-    <div class="Detail">
+    <div class="Detail" id="detail">
         <p class="Detail__Ttl">詳細な機能・仕様</p>
         <div class="Detail__wrapper">
             <div class="Detail__content">
@@ -354,7 +357,8 @@
                     <div class="Detail__txtOuter">
                         <div class="Detail__box">
                             <dt class="Detail__boxTtl">基本機能</dt>
-                            <dd class="Detail__boxTxt">居室内の「温度」「湿度」「照度」「運動量・動き」をモニターし、居室内のお客様が適切な環境にいらっしゃるかをモニタリングします。
+                            <dd class="Detail__boxTxt">
+                                居室内の「温度」「湿度」「照度」「運動量・動き」をモニターし、居室内のお客様が適切な環境にいらっしゃるかをモニタリングします。
                             </dd>
                         </div>
                         <div class="Detail__box">
@@ -443,7 +447,8 @@
                             <dt class="Spec__boxTtl">電源／消費電力</dt>
                             <dd class="Spec__boxTxt">AV100V　50/60Hz / 11.5W</dd>
                             <dt class="Spec__boxTtl">外部端子</dt>
-                            <dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi 通信対応）</dd>
+                            <dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi 通信対応）
+                            </dd>
                             <dt class="Spec__boxTtl">セキュリティ</dt>
                             <dd class="Spec__boxTxt">インターネット接続・ＳＳＬ、子機間無線通信・128bitAES</dd>
                             <dt class="Spec__boxTtl">付属品</dt>
@@ -518,14 +523,54 @@
             <p>&copy;LASHIC. All Rights Reserved.</p>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+    <div class="toPageTop">
+        <img src="./images/btn_pagetop.png" alt="">
+    </div>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/main.js"></script>
     <script>
-        var mySwiper = new Swiper('.swiper-container', {
+        var mySwiper = new Swiper('.slider1', {
+            autoplay: {
+                delay: 5000,
+            },
+            speed: 300,
             loop: true,
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-        })
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+        var mySwiper = new Swiper('.slider2', {
+            speed: 300,
+            loop: true,
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
     </script>
 </body>
 

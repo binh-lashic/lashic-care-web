@@ -1,11 +1,19 @@
 .Label1 {
     width: 100%;
-    height: auto;
-    margin: 0 auto;
-    background: -moz-linear-gradient(top, #009fd2, #00d0cd);
-    background: -webkit-linear-gradient(top, #009fd2, #00d0cd);
-    background: linear-gradient(to bottom, #009fd2, #00d0cd);
+    height: 70px;
+    padding-top: 100px;
+    @include max-screen($breakpoint-tablet){
+        padding-top: 65px;
+    }
     @at-root {
+        &__bg {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            background: -moz-linear-gradient(top, #009fd2, #00d0cd);
+            background: -webkit-linear-gradient(top, #009fd2, #00d0cd);
+            background: linear-gradient(to bottom, #009fd2, #00d0cd);
+        }
         &__contents {
             width: 100%;
             max-width: 960px;
@@ -21,7 +29,7 @@
             line-height: 120px;
             font-size: 28px;
             color: #ffffff;
-            @include max-screen($breakpoint-tablet){
+            @include max-screen($breakpoint-tablet) {
                 line-height: 70px;
                 font-size: 18px;
             }
