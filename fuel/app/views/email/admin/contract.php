@@ -41,4 +41,3 @@ foreach($plans as $plan) {
 送　料 ：<?php echo $destination['shipping'] ? $destination['shipping'] : 0; ?>円<br />
 消費税 ：<?php echo $tax; ?>円<br />
 合　計 ：<?php echo $total_price; ?>円<br />
-備　考 ：<?php echo nl2br($destination['remarks']); ?><br />

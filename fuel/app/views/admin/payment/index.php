@@ -21,7 +21,6 @@ if(isset($payments)) {
 					<td><?php echo $payment['title']; ?></td>
 					<td class="text-right"><?php echo $payment['price']; ?>円</td>
 					<td class="text-right"><?php echo $payment['shipping']; ?>円</td>
-					<td class="text-right"><?php echo nl2br($payment['remarks']); ?></td>
 				</tr>
 <?php
 	}
