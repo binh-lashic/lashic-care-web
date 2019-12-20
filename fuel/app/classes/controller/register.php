@@ -36,12 +36,7 @@ class Controller_Register extends Controller_Base
 			        $this->data['errors'][$key] = $value;
 			    }
         	}
-			if(!empty($params['year']) && !empty($params['month']) && !empty($params['day'])) {
-				$params['birthday'] = $params['year']."-".$params['month']."-".$params['day'];
-				$params['birthday_display'] = $params['year']."年".$params['month']."月".$params['day']."日";
-			} else {
-				$this->data['errors']['birthday'] = true;
-			}
+        	
 			$this->data['data'] = $params;
 			if(empty($this->data['errors'])) {
 	        	$this->template->content = View::forge('register/confirm', $this->data);
@@ -100,7 +95,7 @@ class Controller_Register extends Controller_Base
                         );
                 $params = array(
                     'to' => $_SERVER['EMAIL_MASTER'],
-                    'subject' => "LASHIC新規アカウント登録・購入情報",
+                    'subject' => "LASHIC新規アカウント登録情報",
                     'text' => \View::forge('email/admin/register', $data)
                 );
                 \Model_User::sendEmail($params);

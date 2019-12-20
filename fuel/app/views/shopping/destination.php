@@ -18,7 +18,7 @@
 		<form class="h-adr" action="/shopping/destination" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
 			<!-- 新しい住所追加エラー -->
-			<h2 class="form_title">新しい住所を追加</h2>
+			<h2 class="form_title">送付先</h2>
 			<div class="form_set_container">
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>

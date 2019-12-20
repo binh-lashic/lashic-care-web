@@ -1,6 +1,6 @@
-LASHIC新規アカウント登録・購入情報<br />
+LASHIC購入情報<br />
 <br />
-下記のユーザーが新規にアカウント登録・ご購入いただきました。<br />
+下記のユーザーが新規にご購入いただきました。<br />
 速やかに発送の準備を進めてください。<br />
 <br />
 日時:<?php echo $date; ?><br />
@@ -10,9 +10,6 @@ LASHIC新規アカウント登録・購入情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 ID:<?php echo $user['id']; ?><br />
 お名前 ： <?php echo $user['last_name']; ?>　<?php echo $user['first_name']; ?><br />
-性　別 ： <?php echo $user['gender_display']; ?><br />
-生年月日： <?php echo $user['birthday_display']; ?><br />
-住　所 ： <?php echo $user['prefecture']; ?><?php echo $user['address']; ?><br />
 電　話 ： <?php echo $user['phone']; ?><br />
 メール ： <?php echo $user['email']; ?><br />
 <br />

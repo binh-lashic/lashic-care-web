@@ -164,7 +164,8 @@ class Controller_Shopping extends Controller_Base
                $address->set($params);
                $address->save();
                $address_id = $address->id;
-               Response::redirect('/shopping/payment?address_id='.$address_id);
+               $url = Uri::create('/shopping/payment', array(), array('address_id' => $address_id));
+               Response::redirect($url);
             } else {
                 $this->data['data'] = $params;
             }
@@ -365,7 +366,7 @@ class Controller_Shopping extends Controller_Base
                         );
                 $params = array(
                     'to' => $this->user['email'],
-                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICサービス購入のご連絡",
                     'text' => \View::forge('email/contract', $data)
                 );
                 \Model_User::sendEmail($params);
@@ -373,7 +374,7 @@ class Controller_Shopping extends Controller_Base
                 //管理者用メール
                 $params = array(
                     'to' => $_SERVER['EMAIL_MASTER'],
-                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICサービス購入のご連絡",
                     'text' => \View::forge('email/admin/contract', $data)
                 );
                 \Model_User::sendEmail($params);
