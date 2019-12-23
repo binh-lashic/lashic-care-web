@@ -1,9 +1,19 @@
 $(function(){
+    //初期費用
+    const INITIAL_COST_ID = 4
+
     //plansテーブルのidの対応表
     const WIFI_RENTALS = {
         1:5,
         2:6,
         3:7
+    }
+
+    //plansテーブルのidの対応表
+    const HALF_A_MONTH = {
+        1:8,
+        2:9,
+        3:10
     }
 
     scrollTop('.toPageTop', 500);
@@ -16,6 +26,13 @@ $(function(){
       }
 
       plan_ids.push(plan);
+      plan_ids.push(INITIAL_COST_ID);
+
+      var date = new Date();
+      if(date.getDate() >= 16) {
+          plan_ids.push(HALF_A_MONTH[plan]);
+      }
+
       api("/shopping/set_plans", { plan_ids : plan_ids}, function(result){
           location.href = '/shopping/cart';
       });
