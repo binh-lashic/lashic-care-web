@@ -172,12 +172,13 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 140px;
 }
 
 @media screen and (max-width: 960px) {
   .Toptext {
     height: 100px;
+    padding-top: 80px;
   }
 }
 
@@ -345,7 +346,7 @@
 .Catch__btn, .Catch__btn--orange {
   display: block;
   background-color: #e6e6e6;
-  color: #808080;
+  color: #000000;
   width: 75%;
   text-align: center;
   margin: 0 auto;
@@ -963,6 +964,8 @@
   display: flex;
   flex-flow: column;
   padding: 20px;
+  height: 260px;
+  position: relative;
 }
 
 @media screen and (max-width: 960px) {
@@ -970,6 +973,7 @@
     padding: 0px;
     padding-bottom: 15px;
     padding-top: 10px;
+    height: 160px;
   }
 }
 
@@ -997,12 +1001,12 @@
 }
 
 .PlicePlan__txt1--perMonth {
-  line-height: 110px;
+  padding-bottom: 17%;
 }
 
 @media screen and (max-width: 960px) {
   .PlicePlan__txt1--perMonth {
-    line-height: 393%;
+    padding-bottom: 7%;
   }
 }
 
@@ -1041,6 +1045,9 @@
   box-shadow: 0px 4px 0px 0px #b2095b;
   outline: none;
   border: none;
+  position: absolute;
+  bottom: 14%;
+  left: 5%;
 }
 
 .PlicePlan__txt3:hover {
@@ -1056,6 +1063,8 @@
   .PlicePlan__txt3 {
     font-size: 12px;
     margin-top: 9px;
+    bottom: 9%;
+    left: 5%;
   }
 }
 

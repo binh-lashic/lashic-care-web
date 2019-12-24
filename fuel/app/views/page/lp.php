@@ -115,7 +115,7 @@
 				<span>異変の予兆</span>から<span>現在の様子</span>まで<br>
 				タイムリーに<span>お伝え</span>します!
 			</p>
-			<a class="Catch__btn--orange" href="https://facility.lashic.jp" target="new">介護施設運営の方はこちら</a>
+			<a class="Catch__btn" href="https://facility.lashic.jp" target="new">介護施設運営の方はこちら</a>
 			<a class="Catch__btn--orange" href="#plan">料金詳細を見る</a>
 		</section>
 	</div>
@@ -570,7 +570,7 @@
 	</form>
 </div>
 
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script src="/lp/js/main.js"></script>
@@ -583,7 +583,7 @@
 	});
 	var mySwiper = new Swiper('.slider1', {
 		autoplay: {
-			delay: 5000,
+			delay: 6000,
 		},
 		speed: 300,
 		loop: true,
