@@ -115,7 +115,7 @@
 				<span>異変の予兆</span>から<span>現在の様子</span>まで<br>
 				タイムリーに<span>お伝え</span>します!
 			</p>
-			<a class="Catch__btn--orange" href="https://facility.lashic.jp" target="new">介護施設運営の方はこちら</a>
+			<a class="Catch__btn" href="https://facility.lashic.jp" target="new">介護施設運営の方はこちら</a>
 			<a class="Catch__btn--orange" href="#plan">料金詳細を見る</a>
 		</section>
 	</div>
