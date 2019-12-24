@@ -23,10 +23,10 @@ $(function(){
     const tablet = '960px';
 
     window.onload = function () {
-        loginToggle();
+        loginToggle(tablet);
     };
     window.onscroll = function () {
-        loginToggle();
+        loginToggle(tablet);
     };
     matchMedia(`(max-width: ${tablet})`).addListener(loginToggle);
 
@@ -82,7 +82,7 @@ function api(action, params, callback){
     );
 }
 
-function loginToggle() {
+function loginToggle(tablet) {
     if (matchMedia(`(max-width: ${tablet} )`).matches) {
         return;
     }else{
