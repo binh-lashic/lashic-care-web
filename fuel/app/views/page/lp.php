@@ -17,10 +17,9 @@
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@twitterアカウントを入力">
 	<meta name="twitter:description" content="介護施設を運営するINFICグループの最先端見守りセンサー">
-	<link href="/css/style.css" type="text/css" rel="stylesheet">
-	<link href="/css/facility_style.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="/lp/css/nomalize.css">
 	<link rel="stylesheet" href="/lp/css/styles.css">
+	<link rel="stylesheet" href="/lp/css/dialog.css">
 	<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 	<link rel="icon" href="/lp/images/favicon.ico">
 	<link rel="apple-touch-icon" href="/lp/images/apple-touch-icon-precomposed.png" />
@@ -565,8 +564,8 @@
 			<label for="password_check" class="checkbox">ログインを保持する</label>
 			<p class="pdt10"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
 			<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt10">ログインする</a></p>
-			<p><a href="/register" class="btn_disabledRadius20 mgt10">新規登録する</a></p>
-			<p class="mgt30 center"><a href="javascript:$.fancybox.close();">× 閉じる</a></p>
+			<p><a href="/register" class="btn_disabledRadius20 mgt10 link_normal">新規登録する</a></p>
+			<p class="mgt30 center"><a class="link_normal" href="javascript:$.fancybox.close();">× 閉じる</a></p>
 		</div>
 	</form>
 </div>
