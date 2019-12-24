@@ -1,0 +1,110 @@
+// detail
+.Detail {
+    padding-top: 65px;
+    @at-root {
+        &__Ttl {
+            width: 100%;
+            text-align: center;
+            line-height: 100px;
+            text-align: center;
+            font-size: 22px;
+            color: #fff;
+            background-color: #999999;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 17px;
+                line-height: 70px;
+            }
+        }
+        &__wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        &__content {
+            & + & {
+                margin-top: 30px;
+            }
+        }
+        &__headOuter {
+            width: 90%;
+            margin: 0 auto;
+            padding: 13px 0 12px;
+            border: 1px solid #00aec7;
+            @include max-screen($breakpoint-tablet){
+                padding: 10px 7px 6px;
+            }
+        }
+        &__head {
+            font-size: 22px;
+            text-align: center;
+            color: #00aec7;
+            @include max-screen($breakpoint-tablet) {
+                width: 100%;
+                font-size: 13px;
+            }
+        }
+        &__body {
+            display: flex;
+            justify-content: flex-start;
+            margin: 0 auto;
+            margin-top: 30px;
+            width: 90%;
+            @include max-screen($breakpoint-tablet) {
+                flex-flow: column;
+                margin-top: 0px;
+            }
+        }
+        &__imgOuter {
+            width: 50%;
+            padding: 50px;
+            align-items: center;
+            img {
+                display: block;
+                width: 100%;
+            }
+            @include max-screen($breakpoint-tablet) {
+                margin: 0 auto;
+                width: 90%;
+                padding: 20px;
+            }
+        }
+        &__txtOuter {
+            width: 50%;
+            @include max-screen($breakpoint-tablet) {
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+        &__box {
+            & + & {
+                margin-top: 20px;
+            }
+            @include max-screen($breakpoint-tablet){
+                width: 100%;
+            }
+        }
+        &__boxTtl {
+            padding: 7px 10px 6px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            background-color: #00a0b9;
+            @include max-screen($breakpoint-tablet){
+                font-size: 13px;
+            }
+        }
+        &__boxTxt {
+            margin-top: 20px;
+            font-size: 18px;
+            & + & {
+                margin-top: 6px;
+            }
+            @include max-screen($breakpoint-tablet){
+                font-size: 14px;
+            }
+        }
+        &__boxCaution {
+            margin-top: 8px;
+        }
+    }
+}

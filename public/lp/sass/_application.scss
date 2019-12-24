@@ -1,0 +1,141 @@
+.Application {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    @at-root {
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+            padding: 40px;
+            padding-bottom: 80px;
+            @include max-screen($breakpoint-tablet) {
+                width: 100%;
+                padding: 10px;
+                padding-top: 20px;
+                padding-bottom: 30px;
+            }
+        }
+        &__box {
+            border: 1px solid #00a0b9;
+            width: 80%;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            padding: 18px 0px;
+            position: relative;
+            &:nth-of-type(4) {
+                margin-bottom: 10px;
+            }
+            overflow: hidden;
+            text-align: center;
+            @include max-screen($breakpoint-tablet) {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 5%;
+            }
+
+            $this: &;
+            &--1 {
+                @extend #{$this};
+                &::before {
+                    position: absolute;
+                    top: 45%;
+                    left: 20%;
+                    width: 0;
+                    height: 0;
+                    padding: 0;
+                    content: "";
+                    border-left: 12px solid transparent;
+                    border-right: 12px solid transparent;
+                    border-top: 12px solid #00a0b9;
+                    pointer-events: none;
+                    @include max-screen($breakpoint-tablet) {
+                        left: 10%;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-top: 6px solid #00a0b9;
+                    }
+                }
+            }
+        }
+        &__select {
+            width: 100%;
+            cursor: pointer;
+            text-indent: 28%;
+            border: none;
+            outline: none !important;
+            background-color: white;
+            background-image: none;
+            box-shadow: none;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            font-size: 24px;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 14px;
+                text-indent: 15%;
+            }
+            &::-ms-expand {
+                display: none;
+            }
+        }
+        &__innerTxt {
+            text-align: center;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            input {
+                margin-right: 20px;
+            }
+            @include max-screen($breakpoint-tablet) {
+                font-size: 14px;
+            }
+        }
+        &__price {
+            text-align: center;
+            font-size: 24px;
+            text-align: left;
+            padding-left: 7%;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 13px;
+            }
+        }
+        &__monthPrice {
+            font-size: 32px;
+        }
+        &__caution {
+            width: 80%;
+            text-align: left;
+            margin: 0 auto;
+            margin-bottom: 40px;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 9px;
+                margin-left: 2%;
+            }
+        }
+        &__btn {
+            display: block;
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #ee275b;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 20px 0;
+            font-size: 28px;
+            box-shadow: 0px 4px 0px 0px #b2095b;
+            outline: 0;
+            border: none;
+            &:active {
+                box-shadow: none;
+                transform: translate3d(0, 4px, 0);
+            }
+            @include max-screen($breakpoint-tablet) {
+                width: 100%;
+                font-size: 16px;
+            }
+        }
+    }
+}
