@@ -20,6 +20,8 @@ $breakpoint-mobile: 320px;
 }
 
 @import "header";
+@import "login";
+@import "top-text";
 @import "slider";
 @import "catch";
 @import "problem";
@@ -34,3 +36,5 @@ $breakpoint-mobile: 320px;
 @import "detail";
 @import "spec";
 @import "footer";
+@import "scroll-btn";
+   

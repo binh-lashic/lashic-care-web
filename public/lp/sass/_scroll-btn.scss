@@ -1,0 +1,16 @@
+body{
+    position: relative;
+    .toPageTop{
+        width: 60px;
+        right: 1%;
+        bottom: 10px;
+        position: fixed;
+        &:hover{
+            opacity: .8;
+            cursor: pointer;
+        }
+        img{
+            width: 100%;
+        }
+    }
+}

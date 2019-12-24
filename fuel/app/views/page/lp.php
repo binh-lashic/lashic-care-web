@@ -51,11 +51,23 @@
 			<a class="Header__itemInner2--red" href="#Label1">購入する</a>
 		</li>
 		<li class="Header__item">
-			<a class="fancybox Header__itemInner2" href="#loginOpenWindow">ログイン</a>
+			<div class="Header__login">
+				<p class="Header__loginMsg">アカウントをお持ちの方</p>
+				<div class="Header__loginBox">
+					<img src="/lp/images/login.png" alt="">
+					<a class="fancybox" href="#loginOpenWindow">ログイン</a>
+				</div>
+			</div>
 		</li>
 	</ul>
-
 </header>
+<div class="Login">
+	<p class="Login__message">アカウントをお持ちの方はこちら</p>
+	<div class="Login__box">
+		<img class="Login__boxInnerImg" src="/lp/images/login.png" alt="">
+		<a href="#loginOpenWindow" class="Login__boxInnerText fancybox">ログイン</a>
+	</div>
+</div>
 <div class="Toptext">
 	<p class="Toptext__innerMsg">介護施設を経営する<br class="sp_br">インフィックグループが開発・運営</p>
 </div>

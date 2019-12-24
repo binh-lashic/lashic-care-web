@@ -17,6 +17,19 @@ $(function(){
     }
 
     scrollTop('.toPageTop', 500);
+    /**
+     * login-toggle
+     */
+    const tablet = '960px';
+
+    window.onload = function () {
+        loginToggle();
+    };
+    window.onscroll = function () {
+        loginToggle();
+    };
+    matchMedia(`(max-width: ${tablet})`).addListener(loginToggle);
+
    $("input:button").click(function(event) {
       var plan_ids = [];
       var plan = $(this).data('plan');
@@ -67,4 +80,17 @@ function api(action, params, callback){
         callback,
         "json"
     );
+}
+
+function loginToggle() {
+    if (matchMedia(`(max-width: ${tablet} )`).matches) {
+        return;
+    }else{
+        let this_y = window.pageYOffset;
+        if (this_y > 240) {
+            document.querySelector('.Header__item:last-child').style.display = 'none';
+        } else {
+            document.querySelector('.Header__item:last-child').style.display = 'block';
+        }
+    }
 }

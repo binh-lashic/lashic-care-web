@@ -1,0 +1,152 @@
+.LashicRoom {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    background-color: #f2f2f2;
+    position: relative;
+    margin-bottom: 30px;
+    @at-root {
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+            background-color: #f2f2f2;
+        }
+        &__section {
+            padding-top: 30px;
+        }
+        &__ttl {
+            width: 100%;
+            margin: 0;
+        }
+        &__ttlInner {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+            @include max-screen($breakpoint-tablet) {
+                width: 80%;
+            }
+        }
+        &__mainImgs {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            align-items: center;
+            @include max-screen($breakpoint-tablet) {
+                display: flex;
+                flex-flow: column;
+            }
+        }
+        &__mainImg {
+            width: 40%;
+            @include max-screen($breakpoint-tablet) {
+                width: 90%;
+            }
+        }
+        &__txt1 {
+            margin: 0 auto;
+            margin-right: 10px;
+            margin-left: 10px;
+            @include max-screen($breakpoint-tablet) {
+                display: flex;
+                align-items: center;
+                color: #fa7800;
+                font-weight: bold;
+                padding-left: 65px;
+                font-size: 25px;
+            }
+            span {
+                display: block;
+                text-align: center;
+                background-color: #fa7800;
+                margin-bottom: 5px;
+                padding: 10px;
+                border-radius: 50%;
+                color: #ffffff;
+                @include max-screen($breakpoint-tablet) {
+                    margin: 20px;
+                    width: 40px;
+                    padding: 0;
+                }
+            }
+        }
+        &__msg {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+        &__msgInner {
+            width: 60%;
+            display: block;
+            margin: 0 auto;
+            @include max-screen($breakpoint-tablet) {
+                width: 80%;
+            }
+        }
+        &__txt2 {
+            text-align: center;
+            font-size: 24px;
+            @include max-screen($breakpoint-tablet) {
+                font-size: 14px;
+                padding: 0 5px;
+                font-weight: bold;
+            }
+            @include max-screen($breakpoint-mobile) {
+                font-size: 12px;
+            }
+            span {
+                color: #fa7800;
+                font-size: 30px;
+                font-weight: bold;
+                @include max-screen($breakpoint-tablet) {
+                    font-size: 17px;
+                }
+                @include max-screen($breakpoint-mobile) {
+                    font-size: 14px;
+                }
+            }
+        }
+        &__btn {
+            display: block;
+            background-color: #ffffff;
+            color: #fa7800;
+            width: 75%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 40px;
+            padding: 10px 0;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 1px solid #fa7800;
+            &:hover{
+                cursor: pointer;
+            }
+            @include max-screen($breakpoint-tablet) {
+                width: 90%;
+                font-size: 18px;
+            }
+            @include max-screen($breakpoint-mobile) {
+                font-size: 15px;
+            }
+        }
+    }
+    &__triangle {
+        position: absolute;
+        bottom: -4.5%;
+        width: 100%;
+        @include max-screen($breakpoint-tablet) {
+            bottom: -2.5%;
+        }
+        p {
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            color: #7bcedb;
+            font-size: 50px;
+        }
+    }
+}
