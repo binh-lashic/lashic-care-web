@@ -570,7 +570,7 @@
 	</form>
 </div>
 
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 <script src="/lp/js/main.js"></script>
@@ -583,7 +583,7 @@
 	});
 	var mySwiper = new Swiper('.slider1', {
 		autoplay: {
-			delay: 5000,
+			delay: 6000,
 		},
 		speed: 300,
 		loop: true,
