@@ -104,7 +104,8 @@
     padding-top: 10px !important;
 }
 
-.link_normal:before{ font-size: 8px;
+.link_normal:before{
+    font-size: 8px;
     padding: 0 .5em 0 0;
     content: "\25b6";
     color: #003c58;
@@ -112,6 +113,13 @@
 }
 .link_normal:link, .link_normal:visited {
     text-decoration:none;
+    font-size: 14px;
+}
+
+.link_normal2:before{
+    font-size: 14px;
+}
+.link_normal2:link, .link_normal2:visited {
     font-size: 14px;
 }
 
