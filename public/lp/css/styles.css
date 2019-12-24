@@ -172,12 +172,13 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 140px;
 }
 
 @media screen and (max-width: 960px) {
   .Toptext {
     height: 100px;
+    padding-top: 80px;
   }
 }
 
