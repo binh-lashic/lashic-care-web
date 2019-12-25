@@ -155,10 +155,10 @@ class Controller_Shopping extends Controller_Base
     
     public function action_payment()
     {
-      if(Session::get("destination")) {
-        $this->data['destination'] = Session::get("destination");
-      } else if(Input::param("address_id")) {
+      if(Input::param("address_id")) {
         $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+      } else if(Session::get("destination")) {
+        $this->data['destination'] = Session::get("destination");
       } else if(Input::param("user_id")) {
         $this->data['destination'] = \Model_User::find(Input::param("user_id"));
       }
