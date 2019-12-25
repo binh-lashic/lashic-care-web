@@ -15,6 +15,16 @@
 		<form action="/shopping/complete" method="post">
 			<section id="contentBoxLarge">
 				<h1 class="contentLarge_h1">ご注文確認</h1>
+				<?php if((Session::get_flash('gmo_errors'))){ $gmo_errors = Session::get_flash('gmo_errors');?>
+					<div class="errors_list">
+						<ul>
+							<?php foreach($gmo_errors as $err){ ?>
+								<li><?php echo str_replace('%error_code%', $err, Config::get('gmo_error.sys_msg'))?></li>
+							<?php } ?>
+						</ul>
+						<p><?php echo Config::get('gmo_error.client_msg') ?></p>
+					</div>
+				<?php }  ?>			
 				<p>ご注文情報をご確認のうえ、「ご注文を確定する」をクリックしてください。</p>
 <?php
 if(isset($card)) {

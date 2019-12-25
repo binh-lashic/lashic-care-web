@@ -16,5 +16,11 @@
 		'valid_string' => ':label に不正な文字が含まれています。',
 		'required_with' => ':label は入力必須項目です。',
 		'hiragana' => ':label は ひらがなで入力してください。',
-		'check_password' => 'パスワードが間違っています。'
+		'check_password' => 'パスワードが間違っています。',
+		'check_confirm_email' => ':label が一致しません。',
+		'duplicate_email' => ':value は既に登録されています。',
+		'check_zipcode' => '郵便番号の形式が正しくありません。',
+		'check_image_size' => 'プロフィール画像 は最大:sizeMBです。',
+		'check_image_type' => 'プロフィール画像  は「:type」の形式にしてください。',
+		'image_upload_false' => 'プロフィール画像 のアップロードに失敗しました。'
 	);

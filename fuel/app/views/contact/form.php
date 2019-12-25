@@ -13,25 +13,19 @@
 								<tbody>
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
-										<td><input type="text" name="name" class="input_text input_medium" value="<?php if(!empty($data['name'])) { echo $data['name']; } ?>">
-<?php
-if(!empty($error['name'])) {
-?>
-											<p class="error">お名前を入力してください。</p>
-<?php
-}
-?>
+										<td><input type="text" name="name" class="input_text input_medium" maxlength="50" value="<?php if(!empty($data['name'])) { echo $data['name']; } ?>">
+											<?php if(!empty($errors['name'])) {?>										
+												<p class="error"><?php echo $errors['kana']; ?></p>
+											<?php } ?>										
 										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
-										<td><input type="text" name="kana" class="input_text input_medium" value="<?php if(!empty($data['kana'])) { echo $data['kana']; } ?>">
-<?php
-if(!empty($error['kana'])) {
-?>										<p class="error">ふりがなを入力してください。</p>
-<?php
-}
-?>										</td>
+										<td><input type="text" name="kana" class="input_text input_medium" maxlength="512" value="<?php if(!empty($data['kana'])) { echo $data['kana']; } ?>">
+											<?php if(!empty($errors['kana'])) {?>										
+												<p class="error"><?php echo $errors['kana']; ?></p>
+											<?php } ?>										
+										</td>
 									</tr>
 									<tr>
 										<th>会社名</th>
@@ -39,46 +33,38 @@ if(!empty($error['kana'])) {
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
-										<td><input type="text" name="email" class="input_text input_medium" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>">
+										<td><input type="text" name="email" class="input_text input_medium" maxlength="512" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>">
 										 <span class="small text_red">※半角英数</span>
-<?php
-if(!empty($error['email'])) {
-?>										<p class="error">メールアドレスを入力してください。</p>
-<?php
-}
-?>										</td>
+											<?php if(!empty($errors['email'])) {?>										
+												<p class="error"><?php echo $errors['email']; ?></p>
+											<?php } ?>										
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス（確認）</th>
 										<td><input type="text" name="email_confirm" class="input_text input_medium" value="<?php if(!empty($data['email_confirm'])) { echo $data['email_confirm']; } ?>">
 										 <span class="small text_red">※半角英数</span>
-<?php
-if(!empty($error['email_confirm'])) {
-?>										<p class="error">メールアドレスが一致しません</p>
-<?php
-}
-?>										</td>
+											<?php if(!empty($errors['email_confirm'])) {?>										
+												<p class="error"><?php echo $errors['email_confirm']; ?></p>
+											<?php } ?>										
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号</th>
 										<td><input type="text" name="phone" class="input_text input_short" maxlength="11" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>"> 
 										<span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
-<?php
-if(!empty($error['phone'])) {
-?>										<p class="error">電話番号を入力してください。</p>
-<?php
-}
-?>										</td>
+											<?php if(!empty($errors['phone'])) {?>										
+												<p class="error"><?php echo $errors['phone']; ?></p>
+											<?php } ?>										
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> お問い合わせ内容</th>
 										<td><textarea rows="20" name="detail" class="input_text input_textarea"><?php if(!empty($data['detail'])) { echo $data['detail']; } ?></textarea>
-<?php
-if(!empty($error['detail'])) {
-?>										<p class="error">お問い合わせ内容を入力してください。</p>
-<?php
-}
-?>										</td>
+											<?php if(!empty($errors['detail'])) {?>										
+												<p class="error"><?php echo $errors['detail']; ?></p>
+											<?php } ?>										
+										</td>
 									</tr>
 								</tbody>
 							</table>

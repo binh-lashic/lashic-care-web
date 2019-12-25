@@ -12,7 +12,11 @@
 								<tbody>
 									<tr>
 										<th>郵便番号</th>
-										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $client['zip_code']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span>
+										<td><input type="text" class="input_text input_short p-postal-code" maxlength="7" name="zip_code" value="<?php echo $client['zip_code']; ?>"> 
+											<span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）1234567</span>
+											<?php if (isset($errors['zip_code'])) {?>
+												<p class="error"><?php echo $errors['zip_code']; ?></p>
+											<?php } ?>
 										</td>
 									</tr>
 									<tr>
@@ -22,53 +26,45 @@
 												<div class="floatL common_select">
 													<select class="p-region" name="prefecture">
 														<option value="" selected>都道府県</option>
-<?php
-foreach($prefectures as $prefecture) {
-?>
-														<option value="<?php echo $prefecture; ?>"<?php if($prefecture == $client['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?></option>
-<?php
-}
-?>
+														<?php foreach($prefectures as $prefecture) { ?>
+															<option value="<?php echo $prefecture; ?>"<?php if($prefecture == $client['prefecture']) { echo "selected=\"selected\""; } ?>><?php echo $prefecture; ?></option>
+														<?php } ?>
 													</select>
 												</div>
 												<div class="floatL">&nbsp;&nbsp;
 												<a href="http://www.post.japanpost.jp/zipcode/" target="_blank">郵便番号検索</a></div>
 											</div>
-<?php
-if(!empty($errors['prefecture'])) {
-?>
-											<p class="error">エラー：都道府県を選択してください。</p>
-<?php
-}
-?>
+											<?php if(isset($errors['prefecture'])) { ?>
+												<p class="error"><?php echo $errors['prefecture']; ?></p>
+											<?php } ?>
 										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 都道府県以下</th>
 										<td><input type="text" class="input_text input_large p-locality p-street-address p-extended-address" name="address" value="<?php echo $client['address']; ?>"><br>
-<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
-<?php
-if(!empty($errors['address'])) {
-?>
-											<p class="error">エラー：都道府県以下を入力してください。</p></td>
-<?php
-}
-?>
+											<span class="small text_red">※市町村、番地、建物名、室番号までご入力ください。</span>
+											<?php if(isset($errors['address'])) { ?>
+												<p class="error"><?php echo $errors['address']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th><span class="icon_Required">必須</span> 電話番号1</th>
 										<td><input type="text" class="input_text input_short" maxlength="11" name="phone" value="<?php echo $client['phone']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
-<?php
-if(!empty($errors['phone'])) {
-?>
-											<p class="error">エラー：電話番号1を入力してください。</p></td>
-<?php
-}
-?>
+											<?php if(isset($errors['phone'])) { ?>
+												<p class="error"><?php echo $errors['phone']; ?></p>
+											<?php }?>
+										</td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
-										<td><input type="text" class="input_text input_short" maxlength="11" name="cellular" value="<?php echo $client['cellular']; ?>"> <span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span></td>
+										<td>
+											<input type="text" class="input_text input_short" maxlength="11" name="cellular" value="<?php echo $client['cellular']; ?>"> 
+											<span class="small text_red">※半角英数、ハイフンなしでご入力ください。例）00012345678</span>
+											<?php if(isset($errors['cellular'])) { ?>
+												<p class="error"><?php echo $errors['cellular']; ?></p>
+											<?php }?>
+										</td>
 									</tr>
 								</tbody>
 							</table>

@@ -72,6 +72,21 @@ class UsersRules
         }
         return false;
     }
+
+    /*
+     * メールアドレスとメールアドレス（確認）を比較の為
+     * 
+     * @param string $email_confirm
+     * @param string $email
+     * @return bool
+     */
+    public static function _validation_check_confirm_email($email_confirm, $email)
+    {
+        if($email_confirm == $email) {
+            return true;
+        }
+        return false;
+    }
     
     /*
      * 入力されたパスワードが妥当かをチェック

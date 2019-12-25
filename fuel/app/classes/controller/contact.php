@@ -13,49 +13,32 @@ class Controller_Contact extends Controller_Base
 
 	public function action_index()
 	{
-        $this->template->title = 'お問い合わせ';
-        $this->data['breadcrumbs'] = array($this->template->title);
-       	$this->template->header = View::forge('header', $this->data);
-        if(Input::post())
-        {
-        	if(!Input::post("name"))
-        	{
-        		$this->data['errors']['name'] = true;
-        	}
-
-        	if(!Input::post("kana"))
-        	{
-        		$this->data['errors']['kana'] = true;
-        	}
-
-         	if(!Input::post("email"))
-        	{
-        		$this->data['errors']['email'] = true;
-        	}
-
-        	if(Input::post("email") != Input::post("email_confirm"))
-        	{
-        		$this->data['errors']['email_confirm'] = true;
-        	}
-
-        	if(!Input::post("phone"))
-        	{
-        		$this->data['errors']['phone'] = true;
-        	}
-
-        	if(!Input::post("detail"))
-        	{
-        		$this->data['errors']['detail'] = true;
-        	}
-        	$this->data['data'] = Input::post();
-        	//エラーが無ければ確認ページを表示
-        	if(empty($this->data['errors']))
-        	{
-        		$this->template->content = View::forge('contact/confirm', $this->data);
+	    $this->template->title = 'お問い合わせ';
+	    $this->data['breadcrumbs'] = array($this->template->title);
+	    $this->template->header = View::forge('header', $this->data);
+        
+	    $val = Validation::forge('contact');
+	    $val->add_callable('Validation_Japanese');
+	    $val->add_callable('usersrules');
+	    $val->add_field('name', 'お名前', 'required');  
+	    $val->add_field('kana', 'ふりがな', 'required|hiragana');  
+	    $val->add_field('email', 'メールアドレス', 'required|valid_email');
+	    $val->add_field('email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('email').']');
+	    $val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+	    $val->add_field('detail', 'お問い合わせ内容', 'required');
+	    if(Input::post())
+	    {
+			$this->data['data'] = Input::post();
+			if ($val->run()) {
+				$this->template->content = View::forge('contact/confirm', $this->data);
         		return;
-        	}
-        }
-        $this->template->content = View::forge('contact/form', $this->data);
+			} else {
+				foreach($val->error() as $key=>$value){
+					$this->data['errors'][$key] = $value;
+				}
+			}
+	    }
+	    $this->template->content = View::forge('contact/form', $this->data);
 	}
 
 	public function action_complete()
@@ -86,6 +69,7 @@ class Controller_Contact extends Controller_Base
 
         } catch (Exception $e) {
             Log::error($e->getMessage(), 'sendEmail');
+            throw new Exception;
         }
 
        	$this->template->header = View::forge('header', $this->data);

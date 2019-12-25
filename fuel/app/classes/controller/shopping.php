@@ -27,33 +27,7 @@ class Controller_Shopping extends Controller_Base
             'clients' => $this->clients,
         );
 	}
-
-	public function action_index()
-	{
-         if(!empty($this->param('affiliate'))) {
-            if($this->param('affiliate') == "normal") {
-                Session::delete('monitor');
-                Cookie::delete('affiliate');
-            } else {
-                Cookie::set('affiliate', $this->param('affiliate'), 60 * 60 * 24 * 90);
-            }
-        }
-        $this->template->title = 'LASHIC（ラシク）';
-        $this->data['breadcrumbs'] = array($this->template->title);
-
-        if(Cookie::get("affiliate") == "magokoro") {
-            Session::set('monitor', Cookie::get("affiliate"));
-            $this->data['monitor'] = true;
-        }
-        
-        if(!empty(Session::get('login_error'))) {
-            $this->data['login_error'] = Session::get('login_error');
-            Session::delete('login_error');
-        }
-        
-        $this->template->content = View::forge('shopping/index', $this->data);
-	}
-
+	
 	public function action_cart()
 	{
         if (!Auth::check()) {
@@ -112,28 +86,29 @@ class Controller_Shopping extends Controller_Base
     } 
 
     public function action_user_complete() {
-        if(Input::post()) {
-            $params = Input::post();
-            $client = \Model_User::createClient($params);
-            $client_id = $client['id'];
-            $contracts = \Model_Contract::getByUserId($this->user['id']);
-            
-            foreach($contracts as $contract) {
-               $contract->client_user_id = $client_id;
-               $contract->save();
+        try {
+            if(Input::post()) {
+                $params = Input::post();
+                $client = \Model_User::createClient($params);
+                $client_id = $client['id'];
+                $contracts = \Model_Contract::getByUserId($this->user['id']);
+                foreach($contracts as $contract) {
+                    $contract->client_user_id = $client_id;
+                    $contract->save();
+                }
+                $sensors = \Model_User::getSensors($this->user['id']);
+                foreach($sensors as $sensor) {
+                    \Model_User_Sensor::saveUserSensor([
+                        'user_id' => $client_id,
+                        'sensor_id' => $sensor['id'],
+                        'admin' => 0
+                    ]);
+                }
+                Response::redirect('/user');
             }
-            
-            $sensors = \Model_User::getSensors($this->user['id']);
-  
-            foreach($sensors as $sensor) {
-              \Model_User_Sensor::saveUserSensor([
-                'user_id' => $client_id,
-                'sensor_id' => $sensor['id'],
-                'admin' => 0
-              ]);
-            }
-            
-            Response::redirect('/user');
+        } catch (Exception $e) {
+            \Log::error(__METHOD__.'['.$e->getMessage().']');
+            throw new Exception;
         }
     }
 
@@ -162,6 +137,7 @@ class Controller_Shopping extends Controller_Base
                $params['user_id'] = $this->user['id'];
                $address->set($params);
                $address->save();
+               Response::redirect('/shopping/destination');
             } else {
                 $this->data['data'] = $params;
             }
@@ -302,6 +278,11 @@ class Controller_Shopping extends Controller_Base
                         'amount' => $subtotal_price + $destination['shipping'] ,
                         'tax' => $tax,
                     ));
+                    if($result['error']) {
+                        Session::set_flash('gmo_errors', $result['error_code']);
+                        Response::redirect('/shopping/confirm');
+                        return;
+                    }                    
                 }
                 foreach($plans as $plan) {
                     if($plan['span'] == 1) {

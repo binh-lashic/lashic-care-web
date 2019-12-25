@@ -7,15 +7,17 @@
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
 				<div class="form_set_container">
+						<?php if (isset($errors['profile_image'])) { ?>
+							<p class="error"><?php echo $errors['profile_image']; ?></p>
+						<?php } ?>
 						<div class="userDate_photo">
 							<div class="aside_photo">
 								<div class="aside_photoInner"><img src="<?php echo $client['profile_image']; ?>" width="179" height="179" alt=""/></div>
 							</div>
-									<div class="uploadButton btn_text">ファイルを選択<br>
-（最大2MB）
-										<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
-										<input type="text" id="uv" class="uploadValue" disabled />
-									</div>
+							<div class="uploadButton btn_text">ファイルを選択<br>（最大<?php echo Config::get('img_config.properties.size') ?>MB）
+								<input type="file" name="profile_image" onChange="uv.style.display='inline-block'; uv.value = this.value;" />
+								<input type="text" id="uv" class="uploadValue" disabled />
+							</div>
 						</div>
 						<div class="form_base_data_edit">
 							<table>
@@ -23,8 +25,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> お名前</th>
 										<td>
-											<input type="text" class="input_text input_short" placeholder="例）山田" name="last_name" value="<?php echo $client['last_name']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）太郎" name="first_name" value="<?php echo $client['first_name']; ?>">
+											<input type="text" class="input_text input_short" placeholder="例）山田" name="last_name" maxlength="45" value="<?php echo $client['last_name']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）太郎" name="first_name" maxlength="45" value="<?php echo $client['first_name']; ?>">
 											<?php if(isset($errors['last_name'])) { ?>
 												<p class="error"><?php echo $errors['last_name']; ?></p>
 											<?php } ?>
@@ -36,8 +38,8 @@
 									<tr>
 										<th><span class="icon_Required">必須</span> ふりがな</th>
 										<td>
-											<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" value="<?php echo $client['last_kana']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" value="<?php echo $client['first_kana']; ?>">
+											<input type="text" class="input_text input_short" placeholder="例）やまだ" name="last_kana" maxlength="45" value="<?php echo $client['last_kana']; ?>">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" placeholder="例）たろう" name="first_kana" maxlength="45" value="<?php echo $client['first_kana']; ?>">
 											<?php if(isset($errors['last_kana'])) { ?>
 												<p class="error"><?php echo $errors['last_kana']; ?></p>
 											<?php } ?>

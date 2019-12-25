@@ -52,7 +52,7 @@
 					</div>
 					<div class="set_container mgb30">
 						<div class="left_container"></div>
-						<div class="center_container"><a href="/shopping/" class="link_back">プランを再選択する</a></div>
+						<div class="center_container"><a href="/shopping" class="link_back">プランを再選択する</a></div>
 						<div class="right_container"></div>
 					</div>
 					</form>

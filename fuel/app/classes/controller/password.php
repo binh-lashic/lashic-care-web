@@ -87,6 +87,7 @@ class Controller_Password extends Controller_Base
                     $sendgrid->send($email);                        
                 } catch (Exception $e) {
                     \Log::error('パスワード変更メール送信に失敗しました。  ['.$e->getMessage().']');
+                    throw new Exception;
                 }
 
                 $this->template->header = View::forge('header', $this->data);
@@ -120,10 +121,12 @@ class Controller_Password extends Controller_Base
             $this->validation->add_callable('usersrules');  
             $this->validation->add('password', 'パスワード')
                         ->add_rule('required')
-                        ->add_rule('min_length', 8);
+                        ->add_rule('min_length', 8)
+                        ->add_rule('max_length', 255);
             $this->validation->add('password_confirm', 'パスワード 確認')
                         ->add_rule('required')
-                        ->add_rule('min_length', 8);
+                        ->add_rule('min_length', 8)
+                        ->add_rule('max_length', 255);
             $this->validation->set_message('required', ':labelを入力してください。');
             $this->validation->set_message('min_length', ':labelは8桁以上で入力してください。');
 
@@ -159,6 +162,7 @@ class Controller_Password extends Controller_Base
                         $sendgrid->send($email);                        
                     } catch (Exception $e) {
                         \Log::error('パスワード確認メール送信に失敗しました。  ['.$e->getMessage().']');
+                        throw new Exception;
                     }
                     $this->template->content = View::forge('password/new_complete', $this->data);
                 }

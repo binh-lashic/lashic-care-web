@@ -1,0 +1,35 @@
+.Problem {
+    width: 100%;
+    background-color: #f2f2f2;
+    height: auto;
+    @at-root {
+        &__bg {
+            width: 100%;
+            height: auto;
+            background-color: #a6a6a6;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 97%, 0 75%);
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 97%, 0 75%);
+        }
+        &__contents {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            height: auto;
+            background-color: #a6a6a6;
+        }
+        &__section {
+            padding-top: 30px;
+        }
+        &__imgBox {
+            background-color: #a6a6a6;
+        }
+        &__img {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+            @include max-screen($breakpoint-tablet) {
+                width: 95%;
+            }
+        }
+    }
+}

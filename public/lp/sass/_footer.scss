@@ -1,0 +1,42 @@
+.Footer{
+    width: 100%;
+    background-color:#cceef4;
+    height: auto;
+    &__container{
+        width: 100%;
+        height: 80px;
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @include max-screen($breakpoint-tablet){
+            flex-flow: column;
+            height: auto;
+        }
+    }
+    &__link{
+        text-align: center;
+        color: #00aec7;
+        @include max-screen($breakpoint-tablet){
+            font-size: 14px;
+            width: 90%;
+            line-height: 50px;
+            border-bottom: 1px solid;
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+    &__copy{
+        background-color: #fff;
+        padding: 20px;
+        p{
+            text-align: center;
+            color: #00aec7;
+            @include max-screen($breakpoint-tablet){
+                font-size: 12px;
+            }
+        }
+    }
+}

@@ -89,11 +89,8 @@ $(function(){
 		});
 	});
 
-	$("#checkAll").change(function() {
-		if($("#checkAll").prop('checked')) {
-			$(".alert_check").prop("checked",true);
-		}
-		
+	$("#checkAll").change(function () {
+		$("input:checkbox").prop('checked', $(this).prop("checked"));
 	});
 
 	$(".confirm_status_top").change(function() {

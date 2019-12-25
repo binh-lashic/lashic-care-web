@@ -12,7 +12,8 @@ class Controller_Page extends Controller_Template
             'terms',
             'privacy',
             'contact',
-            'help'
+            'help',
+            'lp'
         );
         parent::before();
     }
@@ -102,5 +103,14 @@ class Controller_Page extends Controller_Template
     }
     public function action_infic() {
         echo "infic";
+    }
+    
+    public function action_lp() {
+        $data = array();
+        if(!empty(Session::get('login_error'))) {
+            $data['login_error'] = Session::get('login_error');
+            Session::delete('login_error');
+        }
+        return View::forge('page/lp', $data);
     }
 }

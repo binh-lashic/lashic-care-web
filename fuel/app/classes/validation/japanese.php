@@ -11,8 +11,8 @@ class Validation_Japanese
 	public static function _validation_hiragana($val)
 	{
 		if( empty($val) ){ return true; }
-		if( static::_validation_hirakata($val) ){
-			return mb_convert_kana($val, "HcV");
+		if( preg_match("/^[あ-ん゛゜ぁ-ぉゃ-ょー「」、]+$/u", $val) ){
+			return true;
 		}
 		
 		return false;

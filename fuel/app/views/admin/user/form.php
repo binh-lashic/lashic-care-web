@@ -21,13 +21,13 @@
 				<div class="form-group">
 					<label for="sensor_name" class="col-sm-3 control-label">名前</label>
 					<div class="col-sm-9"> 
-						<?php echo Form::input('last_name', $data['last_name']); ?>　<?php echo Form::input('first_name', $data['first_name']); ?>
+						<?php echo Form::input('last_name', $data['last_name'], array('maxlength' => '45')); ?>　<?php echo Form::input('first_name', $data['first_name'], array('maxlength' => '45')); ?>
 					</div>
 				</div>
 				<div class="form-group">
                            		<label for="sensor_name" class="col-sm-3 control-label">ふりがな</label>
                         		<div class="col-sm-9"> 
-						<?php echo Form::input('last_kana', $data['last_kana']); ?>　<?php echo Form::input('first_kana', $data['first_kana']); ?>
+						<?php echo Form::input('last_kana', $data['last_kana'], array('maxlength' => '45')); ?>　<?php echo Form::input('first_kana', $data['first_kana'], array('maxlength' => '45')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -56,7 +56,7 @@
                                             <font color="red"><?php echo $error['zip_code']; ?></font>
                                         <?php endif; ?>
                         		<div class="col-sm-9">
-                                            <?php echo Form::input('zip_code', $data['zip_code']); ?>
+                                            <?php echo Form::input('zip_code', $data['zip_code'], array('maxlength' => '7')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -77,7 +77,7 @@
                                             <font color="red"><?php echo $error['phone']; ?></font>
                                         <?php endif; ?>
                         		<div class="col-sm-9">
-                                            <?php echo Form::input('phone', $data['phone']); ?>
+                                            <?php echo Form::input('phone', $data['phone'], array('maxlength' => '11')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -86,7 +86,7 @@
                                             <font color="red"><?php echo $error['cellular']; ?></font>
                                         <?php endif; ?>
                         		<div class="col-sm-9">
-                                            <?php echo Form::input('cellular', $data['cellular']); ?>
+                                            <?php echo Form::input('cellular', $data['cellular'], array('maxlength' => '11')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -95,7 +95,7 @@
                                             <font color="red"><?php echo $error['email']; ?></font>
                                         <?php endif; ?>
                         		<div class="col-sm-9">
-                                            <?php echo Form::input('email', $data['email']); ?>
+                                            <?php echo Form::input('email', $data['email'], array('maxlength' => '512')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -104,7 +104,7 @@
                                             <font color="red"><?php echo $error['password']; ?></font>
                                         <?php endif; ?>
                         		<div class="col-sm-9">
-                                            <?php echo Form::password('password', $data['password']); ?>
+                                            <?php echo Form::password('password', $data['password'], array('minlength' => '8', 'maxlength' => '16')); ?>
 					</div>
 				</div>
 				<div class="form-group">

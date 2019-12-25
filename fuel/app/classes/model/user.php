@@ -66,55 +66,101 @@ class Model_User extends Orm\Model{
 		$val->add_callable('usersrules');
 		switch($factory) {
 			case "register":
-				$val->add_field('email', 'メールアドレス', 'required|valid_email');
-				$val->add_field('last_name', 'お名前 姓', 'required');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
-				$val->add_field('first_name', 'お名前 名', 'required');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
 				$val->add_field('gender', '性別', 'required');
-				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
+				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
-				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
-				$val->add_field('password_confirm', 'パスワード（確認）', 'required|not_equal['.Input::post('password').']');
+				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
+				$val->add_field('password_confirm', 'パスワード（確認）', 'required|match_value['.Input::post('password').']');
 				break;
 			case "register_client":
-				$val->add_field('last_name', 'お名前 姓', 'required');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
-				$val->add_field('first_name', 'お名前 名', 'required');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
 				$val->add_field('gender', '性別', 'required');
-				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
+				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
 				break;
 			case "basic":
-				$val->add_field('last_name', 'お名前 姓', 'required');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
-				$val->add_field('first_name', 'お名前 名', 'required');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
 				$val->add_field('gender', '性別', 'required');
 				break;
 			case "email":
-				$val->add_field('email', '', 'required');
+				$val->add_field('email', '', 'required|max_length[512]');
 				break;
-			case "update":
-				
-				$val->add_field('last_name', 'お名前 姓', 'required');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
-				$val->add_field('first_name', 'お名前 名', 'required');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
+			case "email_update":
+				$val->add_field('new_email', 'メールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
+				$val->add_field('new_email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('new_email').']');
+				break;
+			case "temp_account":
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
 				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
 				$val->add_field('prefecture', '都道府県', 'required');
 				$val->add_field('address', '都道府県以下', 'required');
-				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]');
-				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]');
-				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email');
-				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
+				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
+				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required|check_confirm_email['.Input::post('new_email').']');
 				$val->add_field('subscription', '当社からのメール案内', 'required');
-				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
-				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|valid_string[alpha,numeric]');
+				$val->add_field('password', 'パスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
+				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]');
 				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|match_value['.Input::post('new_password').']');
+				break;
+			case "account_basic":
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
+				$val->add_field('gender', '性別', 'required');
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
+				break;	
+			case "info_contact":
+				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
+				$val->add_field('prefecture', '都道府県', 'required');
+				$val->add_field('address', '都道府県以下', 'required');
+				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
+				break;
+			case "info_option":
+				$val->add_field('emergency_first_name_1', 'お名前 名', 'max_length[45]');
+				$val->add_field('emergency_last_name_1', 'お名前 姓', 'max_length[45]');
+				$val->add_field('emergency_first_kana_1', 'ふりがな 名', 'hiragana|max_length[45]');
+				$val->add_field('emergency_last_kana_1', 'ふりがな 姓', 'hiragana|max_length[45]');
+				$val->add_field('emergency_phone_1', '電話番号1', 'valid_string[numeric]|max_length[45]');
+				$val->add_field('emergency_cellular_1', '電話番号2', 'valid_string[numeric]|max_length[45]');
+				$val->add_field('emergency_first_name_2', 'お名前 名', 'max_length[45]');
+				$val->add_field('emergency_last_name_2', 'お名前 姓', 'max_length[45]');
+				$val->add_field('emergency_first_kana_2', 'ふりがな 名', 'hiragana|max_length[45]');
+				$val->add_field('emergency_last_kana_2', 'ふりがな 姓', 'hiragana|max_length[45]');
+				$val->add_field('emergency_phone_2', '電話番号1', 'valid_string[numeric]|max_length[45]');
+				$val->add_field('emergency_cellular_2', '電話番号2', 'valid_string[numeric]|max_length[45]');
+				$val->add_field('last_name', 'お名前 姓', 'max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'hiragana|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'hiragana|max_length[45]');
+				$val->add_field('email', 'メールアドレス', 'valid_email|max_length[512]');
 				break;
 		}
 		return $val;
@@ -386,28 +432,51 @@ class Model_User extends Orm\Model{
         
 	public static function uploadProfileImage() {
 		$config = array(
-            'path' => DOCROOT.DS.'images/user',
-            'randomize' => true,
-            'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
-        );
-
-        try {
-	        Upload::process($config);
-	        if (Upload::is_valid())
-	        {
-	            Upload::save();
-	            $files = Upload::get_files();
-	            return $files[0]['saved_as'];
-	        }
-
-	        // エラー有り
-	        foreach (Upload::get_errors() as $file)
-	        {
-	            return null;
-	        }
-        } catch (Exception $e) {
-        	return null;
-        }
+			'path' => DOCROOT.DS.'images/user',
+			'randomize' => true,
+			'max_size' => Config::get('img_config.properties.size')*1024*1024, //MB->byte
+			'ext_whitelist' => Config::get('img_config.properties.type'),
+			);
+		$result = ['error' => false, 'data' => null];
+		Lang::load('validation', 'validation');
+		try {
+			Upload::process($config);
+			if (Upload::is_valid())
+			{
+				Upload::save();
+				$files = Upload::get_files();
+				$result['data'] = $files[0]['saved_as'];
+				return $result;
+			}
+			// エラー有り
+			foreach (Upload::get_errors() as $file)
+			{
+				$error = $file['errors'][0];
+				$error_code = $error['error'];
+				return self::getUploadErrorCode($error_code);
+			}
+		} catch (Exception $e) {
+			Log::error($e->getMessage());
+			return  ['error' => true, 'data' => Lang::get('validation.image_upload_false')];
+		}
+	}
+	/**
+	 * getUploadErrorCode function
+	 *
+	 * @param [int] $error_code
+	 * @return [array] $result
+	 */
+	private function getUploadErrorCode($error_code) {
+		$img_upload_error = Config::get("img_config.upload_error");
+		if (array_key_exists($error_code, $img_upload_error)) {
+			$msg = $img_upload_error[$error_code];
+			if (empty($msg)) $error = false;
+			else $error = true;
+		} else {
+			$error = true;
+			$msg = Lang::get('validation.image_upload_false');
+		}
+		return ['error' => $error, 'data' => $msg];
 	}
 
 	public static function saveEmail($params) {
@@ -443,7 +512,6 @@ class Model_User extends Orm\Model{
 	}
 
 	public static function saveUser($params) {
-		\Model_User::uploadProfileImage();
 		return \Model_User::saveAdminUser($params);
 	}
 
@@ -609,7 +677,7 @@ class Model_User extends Orm\Model{
 	public static function saveShareUser($params) {
 		//連絡共有先人数を取得
 		$admins = \Model_User::getAdmins($params['client_user_id']);
-		if(count($admins) >= 4) {
+		if(count($admins) >= 3) {
 			throw new Exception('連絡共有先は3人まで共有できます');
 		}
 
@@ -683,8 +751,7 @@ class Model_User extends Orm\Model{
 	            }
 	            return $client;
 	        } catch (Exception $e) {
-	        	print_r($e);
-	        	exit;
+	            \Log::error(__METHOD__.'['.$e->getMessage().']');
 	        }
 		}
 

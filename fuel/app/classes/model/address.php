@@ -29,13 +29,14 @@ class Model_Address extends Orm\Model{
     {
         $val = Validation::forge();
         $val->add_callable('Validation_Japanese');
-        $val->add_field('first_name', 'お名前 名', 'required');
-        $val->add_field('first_kana', 'ふりがな 名', 'required|hiragana');
-        $val->add_field('last_name', 'お名前 姓', 'required');
-        $val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana');
+        $val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+        $val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
+        $val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+        $val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
+        $val->add_field('zip_code', '郵便番号', 'check_zipcode');
         $val->add_field('prefecture', '都道府県', 'required');
         $val->add_field('address', '都道府県以下', 'required');
-        $val->add_field('phone', '電話番号', 'required|valid_string[numeric]');
+        $val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
         return $val;
     }
 

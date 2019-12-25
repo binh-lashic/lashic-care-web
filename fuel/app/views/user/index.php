@@ -211,7 +211,7 @@ if(isset($client)) {
 								<li class="graph24_cal_back"><span>&lt;</span></li>
 								<li class="graph24_cal_thisMonth"><span class="slide_btn calendar_year_month"></span>
 									<div class="graph24_cal_otherMonth">
-										<p class="pdt20 pdb10"><?php echo __('user.index.choose_the_year_month'); ?></p>
+										<p class="pdt0 pdb"><?php echo __('user.index.choose_the_year_month'); ?></p>
 										<div class="common_select">
 											<select class="calendar_year_select">
 												<option value="2016" selected>2016<?php echo __('date.prompts.year'); ?></option>
