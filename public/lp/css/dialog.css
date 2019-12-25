@@ -1,0 +1,263 @@
+.settingContainer {
+    display: table;
+}
+
+@media (max-width: 640px) {
+    .settingContainer {
+        width:100% !important;
+    }
+}
+
+.form-horizontal .control-label,
+.form-horizontal .radio,
+.form-horizontal .checkbox,
+.form-horizontal .radio-inline,
+.form-horizontal .checkbox-inline {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.form-horizontal .form-group {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after {
+    display: table;
+    content: " ";
+}
+
+.form-horizontal .form-group:after {
+    clear: both;
+}
+
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after {
+    display: table;
+    content: " ";
+}
+
+.form-horizontal .form-group:after {
+    clear: both;
+}
+
+@media (min-width: 768px) {
+    .form-horizontal .control-label {
+        text-align: right;
+    }
+}
+
+.loginOpenWindow{ padding:25px 25px 20px;}
+
+.loginOpenWindow dl{ margin-bottom:10px;}
+.loginOpenWindow dl dt {
+    width: 120px;
+    float: left;
+    clear: left;
+    margin-bottom: 10px;
+}
+.loginOpenWindow dl dd {
+    margin-left: 80px;
+    margin-bottom: 10px;
+}
+.loginOpenWindow dl dt:last-child, .loginOpenWindow dl dd:last-child {
+    margin-bottom: 0;
+}
+
+.input_text {
+    border: 1px solid #DDD;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    width: 90%;
+}
+
+@media (max-width: 839px) {
+    .input_text {
+        border: 1px solid #DDD;
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+.error {
+    color: #333;
+    background: url(../images/common/icon_errer.png) 2px no-repeat #f4ed7e;
+    background-size: 21px 21px;
+    padding: 3px 3px 1px 28px;
+    margin-top: 5px;
+}
+
+.small {
+    font-size: 12px;
+    line-height: 1.4em;
+}
+@media (max-width: 640px) {
+    .small {
+        font-size: 10px;
+    }
+}
+
+.pdt10 {
+    padding-top: 10px !important;
+}
+
+.link_normal:before{
+    font-size: 8px;
+    padding: 0 .5em 0 0;
+    content: "\25b6";
+    color: #003c58;
+    font-size: 14px;
+}
+.link_normal:link, .link_normal:visited {
+    text-decoration:none;
+    font-size: 14px;
+}
+
+.link_normal2:before{
+    font-size: 14px;
+}
+.link_normal2:link, .link_normal2:visited {
+    font-size: 14px;
+}
+
+.mgt30 {
+    margin-top: 30px !important;
+}
+
+.center {
+    text-align: center !important;
+}
+
+#login{
+    border-radius: 5px;
+}
+#login dl {
+    margin-bottom: 20px;
+}
+#login dl dt {
+    width: 120px;
+    float: left;
+    clear: left;
+    margin-bottom: 10px;
+}
+#login dl dd {
+    width: 190px;
+    margin-left: 120px;
+    margin-bottom: 10px;
+}
+#login input[type=text] , #login input[type=password]{
+    width: 100%;
+    outline: none;
+}
+#login input[type=text]:focus,
+#login input[type=password]:focus{
+    background-color: rgba(147,212,136,0.1);
+    border:1px solid #95d38b;
+}
+#login input[type=radio], #login input[type=checkbox] {
+    display: none;
+    margin: 0;
+}
+#login input[type=radio] + label, #login input[type=checkbox] + label {
+    padding: 0 0 0 24px;
+}
+#login input[type=radio] + label, #login input[type=checkbox] + label {
+    position: relative;
+    display: inline-block;
+    margin-right: 12px;
+    line-height: 1.5px;
+    cursor: pointer;
+}
+#login input[type=checkbox] + label::before {
+    border: 1px solid #c2ced2;
+    border-radius: 3px;
+}
+#login input[type=checkbox] + label::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin-top: -10px;
+    background-color: white;
+}
+#login input[type=checkbox]:checked + label::after {
+    left: 3px;
+    width: 12px;
+    height: 8px;
+    margin-top: -7px;
+    border-left: 3px solid #0b4b00;
+    border-bottom: 3px solid #0b4b00;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+#login input[type=radio]:checked + label::after,
+#login input[type=checkbox]:checked + label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+}
+* :after, :before {
+    box-sizing: border-box;
+}
+
+.fancybox-content{
+    padding: 20px !important;
+}
+
+@media (max-width: 600px){
+    .fancybox-content{
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 375px){
+    .fancybox-content{
+        padding: 20px !important;
+    }
+    #login{
+        border-radius: 5px;
+    }
+    #login dl {
+        margin-bottom: 20px;
+    }
+    #login dl dt {
+        width: auto;
+        float: none;
+        font-weight: bold;
+        clear: left;
+        margin-bottom: 0;
+    }
+    #login dl dd {
+        width: auto;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=submit] , .center_container [type=button] {
+    background-image: -moz-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    border-radius: 20px;
+    border: none;
+    color: #FFF;
+    padding: 10px;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    cursor:pointer;
+    outline:none;
+    text-decoration:none;
+}

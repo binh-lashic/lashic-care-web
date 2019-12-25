@@ -1,6 +1,6 @@
 <?php
 return array(
-	'_root_'  => 'shopping',  // The default route
+	'_root_'  => 'page/lp',  // The default route
 	'_404_'   => 'page/404',    // The main 404 route
 	'admin' => 'admin/user/list',
 	'contents/lashic' => 'page/lashic',

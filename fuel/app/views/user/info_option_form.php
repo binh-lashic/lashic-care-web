@@ -12,22 +12,44 @@
 									<tr>
 										<th>お名前</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_1" maxlength="45" value="<?php echo $client['emergency_last_name_1']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_1" maxlength="45" value="<?php echo $client['emergency_first_name_1']; ?>"></td>
+											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_1" maxlength="45" value="<?php echo $client['emergency_first_name_1']; ?>">
+											<?php if(isset($errors['emergency_last_name_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_last_name_1']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['emergency_first_name_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_first_name_1']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_1" maxlength="45" value="<?php echo $client['emergency_last_kana_1']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_1" maxlength="45" value="<?php echo $client['emergency_first_kana_1']; ?>"></td>
+											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_1" maxlength="45" value="<?php echo $client['emergency_first_kana_1']; ?>">
+											<?php if(isset($errors['emergency_last_kana_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_last_kana_1']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['emergency_first_kana_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_first_kana_1']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）0542666201" maxlength="11" name="emergency_phone_1" value="<?php echo $client['emergency_phone_1']; ?>">
-										<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+											<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+											<?php if(isset($errors['emergency_phone_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_phone_1']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）0542666201" maxlength="11" name="emergency_cellular_1" value="<?php echo $client['emergency_cellular_1']; ?>">
-										<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+											<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+											<?php if(isset($errors['emergency_cellular_1'])) { ?>
+												<p class="error"><?php echo $errors['emergency_cellular_1']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -37,22 +59,44 @@
 									<tr>
 										<th>お名前</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）山田" name="emergency_last_name_2" maxlength="45" value="<?php echo $client['emergency_last_name_2']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_2" maxlength="45" value="<?php echo $client['emergency_first_name_2']; ?>"></td>
+											<input type="text" class="input_text input_short" placeholder="例）太郎" name="emergency_first_name_2" maxlength="45" value="<?php echo $client['emergency_first_name_2']; ?>">
+											<?php if(isset($errors['emergency_last_name_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_last_name_2']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['emergency_first_name_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_first_name_2']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）やまだ" name="emergency_last_kana_2" maxlength="45" value="<?php echo $client['emergency_last_kana_2']; ?>">&nbsp;&nbsp;
-											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_2" maxlength="45" value="<?php echo $client['emergency_first_kana_2']; ?>"></td>
+											<input type="text" class="input_text input_short" placeholder="例）たろう" name="emergency_first_kana_2" maxlength="45" value="<?php echo $client['emergency_first_kana_2']; ?>">
+											<?php if(isset($errors['emergency_last_kana_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_last_kana_2']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['emergency_first_kana_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_first_kana_2']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>電話番号1</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）0542666201" maxlength="11" name="emergency_phone_2" value="<?php echo $client['emergency_phone_2']; ?>">
-										<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+											<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+											<?php if(isset($errors['emergency_phone_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_phone_2']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>電話番号2</th>
 										<td><input type="text" class="input_text input_short" placeholder="例）0542666201" maxlength="11" name="emergency_cellular_2" value="<?php echo $client['emergency_cellular_2']; ?>">
-										<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span></td>
+											<span class="small text_red">※</span><span class="small">半角英数、ハイフンなしでご入力ください。</span>
+											<?php if(isset($errors['emergency_cellular_2'])) { ?>
+												<p class="error"><?php echo $errors['emergency_cellular_2']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -77,15 +121,39 @@ if(isset($errors['users_count'])) {
 								<tbody>
 									<tr>
 										<th>お名前</th>
-										<td><input type="text" class="input_text input_short" name="last_name" maxlength="45">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_name" maxlength="45"></td>
+										<td>
+											<input type="text" class="input_text input_short" name="last_name" maxlength="145">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" name="first_name" maxlength="145">
+											<?php if(isset($errors['last_name'])) { ?>
+												<p class="error"><?php echo $errors['last_name']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['first_name'])) { ?>
+												<p class="error"><?php echo $errors['first_name']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>ふりがな</th>
-										<td><input type="text" class="input_text input_short" name="last_kana" maxlength="45">&nbsp;&nbsp;<input type="text" class="input_text input_short" name="first_kana" maxlength="45"></td>
+										<td>
+											<input type="text" class="input_text input_short" name="last_kana" maxlength="145">&nbsp;&nbsp;
+											<input type="text" class="input_text input_short" name="first_kana" maxlength="145">
+											<?php if(isset($errors['last_kana'])) { ?>
+												<p class="error"><?php echo $errors['last_kana']; ?></p>
+											<?php } ?>
+											<?php if(isset($errors['first_kana'])) { ?>
+												<p class="error"><?php echo $errors['first_kana']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 									<tr>
 										<th>メールアドレス</th>
-										<td><input type="text" class="input_text input_short" name="email" maxlength="512"> <span class="small text_red">※半角英数でご入力ください。例）example@lashic.jp</span></td>
+										<td>
+											<input type="text" class="input_text input_short" name="email" maxlength="512"> 
+											<span class="small text_red">※半角英数でご入力ください。例）example@lashic.jp</span>
+											<?php if(isset($errors['email'])) { ?>
+												<p class="error"><?php echo $errors['email']; ?></p>
+											<?php } ?>
+										</td>
 									</tr>
 								</tbody>
 							</table>

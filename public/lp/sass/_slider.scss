@@ -1,0 +1,29 @@
+.swiper-container {
+    width: 100%;
+    max-width: 1200px;
+    @include max-screen($breakpoint-tablet){
+        display: none;
+    }
+    .swiper-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        .swiper__innerImg {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    & + &{
+        display: none;
+        @include max-screen($breakpoint-tablet){
+            display: block;
+        }
+    }
+    .slide-btn-sp{
+        @include max-screen($breakpoint-tablet){
+            display: none;
+        }
+    }
+
+}
+
