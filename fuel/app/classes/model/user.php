@@ -55,8 +55,7 @@ class Model_User extends Orm\Model{
 		'email_confirm_token',
 		'email_confirm_expired',
 		'master' => array('default' => 0),
-		'affiliate',
-		'temporary'
+		'affiliate'
 	);
 
     public static function validate($factory, $options = null)
@@ -245,8 +244,7 @@ class Model_User extends Orm\Model{
 			'email_confirm_token',
 			'email_confirm_expired',
 			'master',
-			'affiliate',
-			'temporary'
+			'affiliate'
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
