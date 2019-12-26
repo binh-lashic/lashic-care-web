@@ -1,9 +1,9 @@
 <?php echo $user['last_name']; ?>　<?php echo $user['first_name']; ?>　様<br />
                                                         <?php echo $date; ?><br />
 **********************************************************************<br />
- LASHICアカウント登録、サービス購入のご連絡<br />
+ LASHICサービス購入のご連絡<br />
 **********************************************************************<br />
-このたびはLASHICサービスにお申込、アカウント（見守る人）のご登録、サービスのご購入をいただき、誠にありがとうござました。<br />
+このたびはLASHICサービスにお申込、サービスのご購入をいただき、誠にありがとうござました。<br />
 現在、お受付順にLASHIC-roomの出荷準備をしております。<br />
 出荷手配ができ次第、ご案内のうえ発送させて頂きますので、今しばらくお待ち下さい。<br />
 <br />
@@ -22,9 +22,6 @@ LASHIC-roomをインターネット回線に接続します。<br />
 ■アカウント登録情報<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 お名前 ： <?php echo $user['last_name']; ?>　<?php echo $user['first_name']; ?><br />
-性　別 ： <?php echo $user['gender_display']; ?><br />
-生年月日： <?php echo $user['birthday_display']; ?><br />
-住　所 ： <?php echo $user['prefecture']; ?><?php echo $user['address']; ?><br />
 電　話 ： <?php echo $user['phone']; ?><br />
 メール ： <?php echo $user['email']; ?><br />
 <br />
@@ -53,7 +50,6 @@ foreach($plans as $plan) {
 送　料 ：<?php echo $destination['shipping']; ?>円<br />
 消費税 ：<?php echo $tax; ?>円<br />
 合　計 ：<?php echo $total_price; ?>円<br />
-備　考 ：<?php echo nl2br($destination['remarks']); ?><br />
 　
 
 <br />

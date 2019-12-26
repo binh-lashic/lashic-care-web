@@ -14,51 +14,11 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">送付先指定</h1>
-			<p>LASHIC機器の送付先をご指定ください。</p>
-			<div class="shoppingCart_container clearfix">
-				<ul class="shoppingCart_containerUl">
-				<?php foreach($users as $key => $_user) { ?>
-					<li class="shoppingCart_containerLi shopping_tile">
-						<div class="borderGrayRadius pd20">
-							<div class="shoppingCart_address">
-								<h3 class="shoppingCart_h3"><?php echo $_user['last_name']; ?><?php echo $_user['first_name']; ?></h3>
-								<p><?php echo $_user['prefecture']; ?><?php echo $_user['address']; ?><br>
-									<?php echo $_user['phone']; ?></p>
-							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?user_id=<?php echo $_user['id']; ?>">この住所を使う</a></div>
-<!--							<p class="right"><a href="#">編集する</a></p> -->
-						</div>
-					</li>
-				<?php }
-				foreach($addresses as $key => $_address) {?>
-					<li id="order_address<?php echo $key; ?>" class="shoppingCart_containerLi shopping_tile">
-						<div class="order_deleteSet">
-							<button id="order_btn_delete01" class="order_btn_delete destination_delete" data-address="<?php echo $key; ?>" style="z-index:9999;"><span class="order_btn_delete_icon close"></span><span class="order_wrap_text">削除する</span></button>
-						</div>
-						<div class="borderGrayRadius pd20">
-							<div class="shoppingCart_address">
-								<h3 class="shoppingCart_h3"><?php echo $_address['last_name']; ?><?php echo $_address['first_name']; ?></h3>
-								<p><?php echo $_address['prefecture']; ?><?php echo $_address['address']; ?><br>
-									<?php echo $_address['phone']; ?></p>
-							</div>
-							<div class="mgt10 mgb10"><a class="fancybox btn_darkBlue" href="/shopping/payment?address_id=<?php echo $_address['id']; ?>">この住所を使う</a></div>
-<!--							<p class="right"><a href="#">編集する</a></p> -->
-						</div>
-					</li>
-				<?php } ?>
-				</ul>
-			</div>
-<?php
-/*
-			<p class="mgt20 mgb30 center text_red">送付先がありません<br>
-				下記フォームより送付先を追加してください<br>
-			</p>
-*/
-?>
-			<form class="h-adr" action="/shopping/destination" method="post">
+			<p>LASHIC機器の送付先を入力ください。</p>
+		<form class="h-adr" action="/shopping/destination" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
 			<!-- 新しい住所追加エラー -->
-			<h2 class="form_title">新しい住所を追加</h2>
+			<h2 class="form_title">送付先</h2>
 			<div class="form_set_container">
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
