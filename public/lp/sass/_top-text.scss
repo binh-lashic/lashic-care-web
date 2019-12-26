@@ -1,0 +1,35 @@
+.Toptext {
+    width: 100%;
+    max-width: 960px;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    @include max-screen($breakpoint-tablet) {
+        height: 100px;
+    }
+    &__innerMsg {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: -62px;
+        text-align: center;
+        color: #00a0b9;
+        font-weight: bold;
+        font-size: 24px;
+        @include max-screen($breakpoint-tablet) {
+            padding-bottom: 20px;
+            font-size: 20px;
+        }
+        @include max-screen($breakpoint-mobile) {
+            font-size: 18px;
+        }
+        br {
+            display: none;
+            @include max-screen($breakpoint-tablet) {
+                display: block;
+            }
+        }
+    }
+}
