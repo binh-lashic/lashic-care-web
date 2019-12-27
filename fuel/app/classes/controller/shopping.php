@@ -137,7 +137,9 @@ class Controller_Shopping extends Controller_Base
                $params['user_id'] = $this->user['id'];
                $address->set($params);
                $address->save();
-               Response::redirect('/shopping/destination');
+               $address_id = $address->id;
+               $url = Uri::create('/shopping/payment', array(), array('address_id' => $address_id));
+               Response::redirect($url);
             } else {
                 $this->data['data'] = $params;
             }
@@ -153,10 +155,10 @@ class Controller_Shopping extends Controller_Base
     
     public function action_payment()
     {
-      if(Session::get("destination")) {
-        $this->data['destination'] = Session::get("destination");
-      } else if(Input::param("address_id")) {
+      if(Input::param("address_id")) {
         $this->data['destination'] = \Model_Address::find(Input::param("address_id"));
+      } else if(Session::get("destination")) {
+        $this->data['destination'] = Session::get("destination");
       } else if(Input::param("user_id")) {
         $this->data['destination'] = \Model_User::find(Input::param("user_id"));
       }
@@ -247,7 +249,6 @@ class Controller_Shopping extends Controller_Base
         $plans = Session::get("plans");
         $destination = Session::get("destination");
         $post = Input::post();
-        $remarks = $post['remarks'];
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
         if(empty($plans)) {
             $this->data['errors']['plan'] = true;
@@ -309,8 +310,7 @@ class Controller_Shopping extends Controller_Base
                         'shipping' => $shipping,
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
-                        'address' => $destination['address'],
-                        'remarks' => $remarks
+                        'address' => $destination['address']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate"); 
@@ -340,7 +340,7 @@ class Controller_Shopping extends Controller_Base
                         );
                 $params = array(
                     'to' => $this->user['email'],
-                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICサービス購入のご連絡",
                     'text' => \View::forge('email/contract', $data)
                 );
                 \Model_User::sendEmail($params);
@@ -348,7 +348,7 @@ class Controller_Shopping extends Controller_Base
                 //管理者用メール
                 $params = array(
                     'to' => $_SERVER['EMAIL_MASTER'],
-                    'subject' => "LASHICアカウント登録、サービス購入のご連絡",
+                    'subject' => "LASHICサービス購入のご連絡",
                     'text' => \View::forge('email/admin/contract', $data)
                 );
                 \Model_User::sendEmail($params);

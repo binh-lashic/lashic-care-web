@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[contracts] DROP COLUMN remarks;

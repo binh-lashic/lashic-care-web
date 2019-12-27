@@ -245,3 +245,19 @@
         margin-bottom: 10px;
     }
 }
+
+button.btn_darkBlue , a.btn_darkBlue , a.report_btn ,.center_container [type=submit] , .center_container [type=button] {
+    background-image: -moz-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(0,60,88)  0%, rgb(0,84,122) 100%);
+    border-radius: 20px;
+    border: none;
+    color: #FFF;
+    padding: 10px;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    cursor:pointer;
+    outline:none;
+    text-decoration:none;
+}
