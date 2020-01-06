@@ -287,11 +287,11 @@
 	</div>
 	<script type="text/javascript">
 		$(function() {
-			$(".fancybox").fancybox();
 			var opts = {
+				helpers: {
+					overlay: { closeClick: false }
+				},
 				closeBtn: false,
-				showCloseButton: false,
-				clickOutside: false
 			}
 			$.fancybox.open($('#noticeOpenWindow'), opts, null);
 		});
