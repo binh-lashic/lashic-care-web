@@ -554,6 +554,7 @@
 		  <?php } ?>
 			<input type="checkbox" id="password_check">
 			<label for="password_check" class="checkbox">ログインを保持する</label>
+			<p class="pdt10"><a href="/first" class="link_normal">初めて利用される方はこちら</a></p>
 			<p class="pdt10"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
 			<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt10">ログインする</a></p>
 			<p class="mgt30 center"><a class="link_normal2" href="javascript:$.fancybox.close();">× 閉じる</a></p>
