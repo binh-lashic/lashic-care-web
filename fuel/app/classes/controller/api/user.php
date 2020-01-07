@@ -245,28 +245,4 @@ class Controller_Api_User extends Controller_Api
         return $this->result();
 	}
 
-	public function post_save_admin() {
-		return $this->_save_admin();
-	}
-
-	public function get_save_admin() {
-		return $this->_save_admin();
-	}
-
-	public function _save_admin() {
-		try {
-			$params = Input::param();
-			if(!empty($params['email']) && !empty($params['client_user_id'])) {
-		        $user = \Model_User::saveShareUser($params);
-				$this->result = array(
-					'data' => $user
-				);
-		    } else {
-				$this->errors['query'] = "パラメーターが足りません";
-		    }
-		} catch(Exception $e) {
-			$this->errors[get_class($e)] = $e->getMessage();
-		}
-		return $this->result();
-	}
 }
