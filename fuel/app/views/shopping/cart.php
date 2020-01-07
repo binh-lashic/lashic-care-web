@@ -3,9 +3,9 @@
 			<div class="flowSet flow_no06">
 				<ol>
 					<li class="flowBoxOn">カート</li>
-					<li>送付先指定</li>
-					<li>配送とお支払い</li>
-					<li>ご注文確認</li>
+					<li>申込情報 入力</li>
+					<li>支払情報 入力</li>
+					<li>お届け先情報 入力</li>
 					<li>完了</li>
 				</ol>
 			</div>

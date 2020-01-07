@@ -64,6 +64,12 @@ class Model_User extends Orm\Model{
 		$val->add_callable('Validation_Japanese');
 		$val->add_callable('usersrules');
 		switch($factory) {
+			case "applicant":
+				$val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
+				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+				break;
 			case "first":
 				$val->add_field('email', 'メールアドレス', 'required|valid_email|exist_temp_email|max_length[512]');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
@@ -94,24 +100,6 @@ class Model_User extends Orm\Model{
 			case "email_update":
 				$val->add_field('new_email', 'メールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
 				$val->add_field('new_email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('new_email').']');
-				break;
-			case "temp_account":
-				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
-				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
-				$val->add_field('gender', '性別', 'required');
-				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
-				$val->add_field('prefecture', '都道府県', 'required');
-				$val->add_field('address', '都道府県以下', 'required');
-				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
-				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
-				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required|check_confirm_email['.Input::post('new_email').']');
-				$val->add_field('subscription', '当社からのメール案内', 'required');
-				$val->add_field('password', 'パスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
-				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]');
-				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|match_value['.Input::post('new_password').']');
 				break;
 			case "account_basic":
 				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');

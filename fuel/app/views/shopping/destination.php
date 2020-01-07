@@ -3,9 +3,9 @@
 		<div class="flowSet flow_no06">
 			<ol>
 				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">送付先指定</li>
-				<li>配送とお支払い</li>
-				<li>ご注文確認</li>
+				<li class="flowBoxOn">申込情報 入力</li>
+				<li>支払情報 入力</li>
+				<li>お届け先情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>
@@ -13,8 +13,7 @@
 		
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">送付先指定</h1>
-			<p>LASHIC機器の送付先を入力ください。</p>
+			<h1 class="contentLarge_h1">お届け先情報 入力</h1>
 		<form class="h-adr" action="/shopping/destination" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
 			<!-- 新しい住所追加エラー -->
@@ -23,11 +22,6 @@
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
 				<?php } ?>
-				<p class="mgt20">必要事項を入力し、「この住所を使う」ボタンをクリックしてください。</p>
-				<ul class="ul-disc">
-					<li>私書箱や空港内の窓口へのお届けは承っておりません。</li>
-					<li>コンビニや営業所などの住所を入力すると商品をお受け取りいただけません。</li>
-				</ul>
 				<div class="form_set_container_form">
 					<table>
 						<tbody>
@@ -108,7 +102,7 @@
 					<div class="set_container mgb30">
 						<div class="left_container"></div>
 						<div class="center_container icon_white_arrow">
-							<input type="submit" value="この住所を使う" >
+							<input type="submit" value="購入する" >
 						</div>
 						<div class="right_container"></div>
 					</div>
@@ -119,9 +113,8 @@
 			<div class="order_alert">
 				<p>削除されました</p>
 			</div>
-
 			<div class="set_container">
-				<div class="left_container"><a href="/shopping/cart" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/payment" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>
