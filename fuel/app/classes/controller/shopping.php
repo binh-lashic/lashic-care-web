@@ -43,11 +43,6 @@ class Controller_Shopping extends Controller_Base
     
     public function action_applicant()
     {
-      $this->template->title = '申込情報 入力';
-      $this->data['breadcrumbs'] = array($this->template->title);
-      $this->template->header = View::forge('header_client', $this->data);
-      $this->template->content = View::forge('shopping/applicant', $this->data);
-  
       if(Input::post()) {
         $params = Input::post();
         $val = \Model_User::validate('applicant');
@@ -64,11 +59,17 @@ class Controller_Shopping extends Controller_Base
           $user->save();
           $user_id = $user->id;
           $this->user = \Model_User::getUser($user_id);
+          Session::set('user', $this->user);
           Response::redirect('/shopping/payment');
         } else {
           $this->data['data'] = $params;
         }
       }
+      
+      $this->template->title = '申込情報 入力';
+      $this->data['breadcrumbs'] = array($this->template->title);
+      $this->template->header = View::forge('header_client', $this->data);
+      $this->template->content = View::forge('shopping/applicant', $this->data);
     }
   
     public function action_payment()
@@ -76,6 +77,7 @@ class Controller_Shopping extends Controller_Base
       $this->template->title = '支払情報 入力';
       $this->data['breadcrumbs'] = array("カート", $this->template->title);
       $this->template->header = View::forge('header_client', $this->data);
+      $this->user = Session::get('user');
       
       $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
       $this->data['cards'] = $card->cardList;
@@ -129,6 +131,8 @@ class Controller_Shopping extends Controller_Base
             }
             
             if(empty($this->data['errors'])) {
+              //送料は無料とする
+              $params['shipping'] = 0;
               Session::set('destination', $params);
               Response::redirect('/shopping/complete');
             } else {
@@ -145,6 +149,8 @@ class Controller_Shopping extends Controller_Base
     {
         $plans = Session::get("plans");
         $destination = Session::get("destination");
+        $this->user = Session::get('user');
+        
         $post = Input::post();
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
         if(empty($plans)) {
@@ -252,6 +258,7 @@ class Controller_Shopping extends Controller_Base
             }
             Session::delete("plans");
             Session::delete("destination");
+            Session::delete('user');
             Cookie::delete("affiliate");
         } else {
             echo '不正な処理です';

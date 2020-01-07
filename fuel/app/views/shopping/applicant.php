@@ -16,7 +16,7 @@
 			<h1 class="contentLarge_h1">申込情報 入力</h1>
 		<form class="h-adr" action="/shopping/applicant" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
-			<h2 class="form_title">送付先</h2>
+			<h2 class="form_title">申込情報</h2>
 			<div class="form_set_container">
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
@@ -28,7 +28,6 @@
 								<th><span class="icon_Required">必須</span> メールアドレス</th>
 								<td>
 									<input type="text" name="email" class="input_text input_medium" maxlength="512" value="<?php if(isset($data['email'])) { echo $data['email']; } ?>"><br>
-									<span class="text_red">※</span><span class="small ">購入時に設定したメールアドレスを入力してください。<br>
 									<?php if(isset($errors['email'])) {?>
 										<p class="error"><?php echo $errors['email']; ?></p>
 									<?php }?>

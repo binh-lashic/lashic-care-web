@@ -15,7 +15,7 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">カート</h1>
 				<p class="plan_message" style="display:none">プランがカートに入っています。お申し込み手続きを完了させてください。</p>
-				<form action="/shopping/destination" method="post" id="cart_form">
+				<form action="/shopping/applicant" method="post" id="cart_form">
 				<div class="contentLarge_h2">
 					<h2>ご注文</h2>
 				</div>

@@ -2,10 +2,10 @@
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
-				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">申込情報 入力</li>
-				<li>支払情報 入力</li>
-				<li>お届け先情報 入力</li>
+				<li>カート</li>
+				<li >申込情報 入力</li>
+				<li class="flowBoxOn_before">支払情報 入力</li>
+				<li class="flowBoxOn">お届け先情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>
