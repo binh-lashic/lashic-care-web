@@ -10,6 +10,10 @@ class Controller_Shopping extends Controller_Base
 	        'index',
             'cart',
             'user',
+            'destination',
+            'payment',
+            'confirm',
+            'complete'
 	    );
         $this->template = 'template_responsive';
 	    parent::before();
