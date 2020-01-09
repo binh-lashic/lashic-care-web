@@ -16,10 +16,6 @@ class Controller_First extends Controller_Base
 
     public function action_index()
     {
-        $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
-        $this->data['breadcrumbs'] = array($this->template->title);
-        $this->template->header = View::forge('header', $this->data);
-        
         if(Input::post()) {
             $params = Input::post();
             $val = \Model_User::validate("first");
@@ -36,6 +32,21 @@ class Controller_First extends Controller_Base
                 return;
             }
         }
+        
+        if(empty(Input::get('token'))) {
+          throw new HttpNotFoundException;
+        }
+        
+        $token = Input::get('token');
+        $contract = \Model_Contract::find_by_token($token);
+        
+        if(empty($contract)){
+          throw new HttpNotFoundException;
+        }
+        $this->data['data']['email'] = $contract['email'];
+        $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
+        $this->data['breadcrumbs'] = array($this->template->title);
+        $this->template->header = View::forge('header', $this->data);
         $this->template->content = View::forge('first/form', $this->data);
     }
     

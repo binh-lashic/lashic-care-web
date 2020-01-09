@@ -52,8 +52,19 @@ class Model_Contract extends Orm\Model{
             'mysql_timestamp' => true,
         ),
     );
-
-
+  
+    public static function validate()
+    {
+        $val = Validation::forge();
+        $val->add_callable('Validation_Japanese');
+        $val->add_callable('usersrules');
+        $val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
+        $val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+        $val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+        $val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+        return $val;
+    }
+    
     public function format($data) {
         $statuses = Contract_Status::get();
         if(isset($statuses[$data['status']])) {

@@ -45,7 +45,7 @@ class Controller_Shopping extends Controller_Base
     {
       if(Input::post()) {
         $params = Input::post();
-        $val = \Model_User::validate('applicant');
+        $val = \Model_Contract::validate();
         
         if(!$val->run()) {
           foreach($val->error() as $key=>$value){
@@ -54,12 +54,11 @@ class Controller_Shopping extends Controller_Base
         }
         
         if(empty($this->data['errors'])) {
-          $user = \Model_User::forge();
-          $user->set($params);
-          $user->save();
-          $user_id = $user->id;
-          $this->user = \Model_User::getUser($user_id);
-          Session::set('user', $this->user);
+          $contract = \Model_Contract::forge();
+          $contract['token'] = sha1($params['email'].mt_rand());
+          $contract->set($params);
+          $contract->save();
+          Session::set('contract_id', $contract->id);
           Response::redirect('/shopping/payment');
         } else {
           $this->data['data'] = $params;
@@ -77,9 +76,8 @@ class Controller_Shopping extends Controller_Base
       $this->template->title = '支払情報 入力';
       $this->data['breadcrumbs'] = array("カート", $this->template->title);
       $this->template->header = View::forge('header_client', $this->data);
-      $this->user = Session::get('user');
-      
-      $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
+      $contract_id = Session::get('contract_id');
+      $card = \Model_GMO::findCard(array('member_id' => $contract_id));
       $this->data['cards'] = $card->cardList;
       
       if(Input::post()) {
@@ -149,7 +147,6 @@ class Controller_Shopping extends Controller_Base
     {
         $plans = Session::get("plans");
         $destination = Session::get("destination");
-        $this->user = Session::get('user');
         
         $post = Input::post();
         $card = \Model_GMO::findCard(array('member_id' => $this->user['id']));
@@ -204,9 +201,12 @@ class Controller_Shopping extends Controller_Base
                     } else {
                         $shipping = 0;
                     }
+                    
+                    $contract_id = Session::get('contract_id');
+                    
                     $params = array(
+                        'id' => $contract_id,
                         'plan_id' => $plan['id'],
-                        'user_id' => $this->user['id'],
                         'start_date' => date("Y-m-d"),
                         'renew_date'=> $renew_date,
                         'price' => $plan['price'],
@@ -216,22 +216,27 @@ class Controller_Shopping extends Controller_Base
                         'address' => $destination['address']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
-                        $params['affiliate'] = Cookie::get("affiliate"); 
+                        $params['affiliate'] = Cookie::get("affiliate");
                     }
                     $contract = \Model_Contract::forge();
                     $contract->set($params);
+                    //update指定
+                    $contract->is_new(false);
+                    
                     if($contract->save()) {
                         $contract_payment = \Model_Contract_Payment::forge();
                         $contract_payment->set(array(
                             'contract_id' => $contract->id,
-                            'payment_id' => $payment->id, 
+                            'payment_id' => $payment->id,
                         ));
                         $contract_payment->save();
                     }
                 }
+                $contract = \Model_Contract::find_by_pk($contract_id);
+                
                 //メールの送信
                 $data = array(
-                            'user'  => $this->user,
+                            'user'  => $contract,
                             'destination' => $destination,
                             'plans' => $plans,
                             'card' => $card->cardList[0],
@@ -258,7 +263,7 @@ class Controller_Shopping extends Controller_Base
             }
             Session::delete("plans");
             Session::delete("destination");
-            Session::delete('user');
+            Session::delete('contract_id');
             Cookie::delete("affiliate");
         } else {
             echo '不正な処理です';

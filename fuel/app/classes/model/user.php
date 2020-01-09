@@ -64,12 +64,6 @@ class Model_User extends Orm\Model{
 		$val->add_callable('Validation_Japanese');
 		$val->add_callable('usersrules');
 		switch($factory) {
-			case "applicant":
-				$val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
-				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
-				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
-				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
-				break;
 			case "first":
 				$val->add_field('email', 'メールアドレス', 'required|valid_email|exist_temp_email|max_length[512]');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
