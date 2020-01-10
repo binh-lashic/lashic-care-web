@@ -147,7 +147,7 @@ class Controller_Shopping extends Controller_Base
     {
         $plans = Session::get("plans");
         $destination = Session::get("destination");
-        $applicant = Session::set('applicant');
+        $applicant = Session::get('applicant');
         $member_id = $applicant['token'];
         
         $post = Input::post();
@@ -182,7 +182,7 @@ class Controller_Shopping extends Controller_Base
                     ));
                     if($result['error']) {
                         Session::set_flash('gmo_errors', $result['error_code']);
-                        Response::redirect('/shopping/confirm');
+                        Response::redirect('/shopping/payment');
                         return;
                     }                    
                 }
@@ -249,7 +249,7 @@ class Controller_Shopping extends Controller_Base
                             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                         );
                 $params = array(
-                    'to' => $this->user['email'],
+                    'to' => $applicant['email'],
                     'subject' => "LASHICサービス購入のご連絡",
                     'text' => \View::forge('email/contract', $data)
                 );

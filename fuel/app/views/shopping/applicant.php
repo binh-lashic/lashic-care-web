@@ -4,8 +4,8 @@
 			<ol>
 				<li class="flowBoxOn_before">カート</li>
 				<li class="flowBoxOn">申込情報 入力</li>
-				<li>支払情報 入力</li>
 				<li>お届け先情報 入力</li>
+				<li>支払情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>

@@ -3,9 +3,9 @@
 		<div class="flowSet flow_no06">
 			<ol>
 				<li>カート</li>
-				<li >申込情報 入力</li>
-				<li class="flowBoxOn_before">支払情報 入力</li>
+				<li class="flowBoxOn_before">申込情報 入力</li>
 				<li class="flowBoxOn">お届け先情報 入力</li>
+				<li>支払情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>
@@ -17,7 +17,7 @@
 		<form class="h-adr" action="/shopping/destination" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
 			<!-- 新しい住所追加エラー -->
-			<h2 class="form_title">送付先</h2>
+			<h2 class="form_title">お届け先情報</h2>
 			<div class="form_set_container">
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
@@ -102,7 +102,7 @@
 					<div class="set_container mgb30">
 						<div class="left_container"></div>
 						<div class="center_container icon_white_arrow">
-							<input type="submit" value="購入する" >
+							<input type="submit" value="次の画面に進む" >
 						</div>
 						<div class="right_container"></div>
 					</div>
@@ -114,7 +114,7 @@
 				<p>削除されました</p>
 			</div>
 			<div class="set_container">
-				<div class="left_container"><a href="/shopping/payment" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/applicant" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>
