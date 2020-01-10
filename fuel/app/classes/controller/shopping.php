@@ -203,6 +203,7 @@ class Controller_Shopping extends Controller_Base
                     }
                     
                     $contract_id = Session::get('contract_id');
+                    $contract = \Model_Contract::find($contract_id);
                     
                     $params = array(
                         'id' => $contract_id,
@@ -218,10 +219,7 @@ class Controller_Shopping extends Controller_Base
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate");
                     }
-                    $contract = \Model_Contract::forge();
                     $contract->set($params);
-                    //update指定
-                    $contract->is_new(false);
                     
                     if($contract->save()) {
                         $contract_payment = \Model_Contract_Payment::forge();
@@ -232,7 +230,7 @@ class Controller_Shopping extends Controller_Base
                         $contract_payment->save();
                     }
                 }
-                $contract = \Model_Contract::find_by_pk($contract_id);
+                $contract = \Model_Contract::find($contract_id);
                 
                 //メールの送信
                 $data = array(
