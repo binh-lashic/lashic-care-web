@@ -39,11 +39,20 @@ class Controller_First extends Controller_Base
         
         $token = Input::get('token');
         $contract = \Model_Contract::find_by_token($token);
+        Session::set('contract_id', $contract['id']);
         
         if(empty($contract)){
           throw new HttpNotFoundException;
         }
+        
+        //申込情報から初期値読み込み
+        $this->data['data']['first_name'] = $contract['first_name'];
+        $this->data['data']['last_name'] = $contract['last_name'];
+        $this->data['data']['first_kana'] = $contract['first_kana'];
+        $this->data['data']['last_kana'] = $contract['last_kana'];
+        $this->data['data']['phone'] = $contract['phone'];
         $this->data['data']['email'] = $contract['email'];
+        
         $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
@@ -71,7 +80,8 @@ class Controller_First extends Controller_Base
     public function action_complete()
     {
       try {
-            $user = \Model_User::updateTempUser(Input::post());
+            \DB::start_transaction();
+            $user = \Model_User::saveUser(Input::post());
             if($user) {
               \Model_User::sendConfirmEmail($user);
               //管理用メールの送信
@@ -86,14 +96,30 @@ class Controller_First extends Controller_Base
                   'text' => \View::forge('email/admin/register', $data)
               );
               \Model_User::sendEmail($params);
-              
             }
+            
+            $contract_id = Session::get('contract_id');
+            
+            //contractとcontract_paymentにuser_idをセット
+            \DB::update('contracts')
+                        ->value('user_id', $user['id'])
+                        ->where('contract_id', '=', $contract_id)
+                        ->execute();
+            
+            \DB::update('payments')
+                        ->value('user_id', $user['id'])
+                        ->where('contract_id', '=', $contract_id)
+                        ->execute();
+            \DB::commit_transaction();
         } catch(Exception $e) {
+            \DB::rollback_transaction();
             $params = Input::post();
             unset($params['password']);
             Log::error($e->getMessage(), 'first_complete');
             throw new Exception;
         }
+        
+        Session::delete('contract_id');
         
         $this->template->title = '初めて利用される方はこちら  >  アカウント登録完了';
         $this->template->header = View::forge('header', $this->data);

@@ -22,10 +22,31 @@
 							<table>
 								<tbody>
 									<tr>
+										<th><span class="icon_Required">必須</span> お名前</th>
+										<td>
+											<input type="text" name="last_name" class="input_text input_short" placeholder="例）山田" maxlength="45" value="<?php if(isset($data['last_name'])) { echo $data['last_name']; } ?>">&nbsp;&nbsp;
+											<input type="text" name="first_name" class="input_text input_short" placeholder="例）太郎" maxlength="45" value="<?php if(isset($data['first_name'])) { echo $data['first_name']; } ?>">
+										  <?php if(!empty($errors['last_name'])) { ?>
+											  <p class="error"><?php echo $errors['last_name']; ?></p>
+										  <?php } ?>
+										  <?php if(!empty($errors['first_name'])) { ?>
+											  <p class="error"><?php echo $errors['first_name']; ?></p>
+										  <?php } ?>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="icon_Required">必須</span> 電話番号</th>
+										<td><input type="text" name="phone" class="input_text input_short" maxlength="11" placeholder="例）0542666201" value="<?php if(isset($data['phone'])) { echo $data['phone']; } ?>">
+											<span class="small text_red">※</span><span class="small">半角数字、ハイフンなしでご入力ください。</span>
+										  <?php if(!empty($errors['phone'])) { ?>
+											  <p class="error"><?php echo $errors['phone']; ?></p>
+										  <?php } ?>
+										</td>
+									</tr>
+									<tr>
 										<th><span class="icon_Required">必須</span> メールアドレス</th>
 										<td>
 											<input type="text" name="email" class="input_text input_medium" maxlength="512" value="<?php if(isset($data['email'])) { echo $data['email']; } ?>"><br>
-											<span class="text_red">※</span><span class="small ">購入時に設定したメールアドレスを入力してください。<br>
 											<?php if(isset($errors['email'])) {?>
 												<p class="error"><?php echo $errors['email']; ?></p>
 											<?php }?>

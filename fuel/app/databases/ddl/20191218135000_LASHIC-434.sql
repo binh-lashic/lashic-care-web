@@ -4,3 +4,5 @@ ALTER TABLE [dbo].[contracts] ADD first_name nvarchar(512) NULL, last_name nvarc
 
 ALTER TABLE [dbo].[contracts] ALTER COLUMN user_id int null;
 ALTER TABLE [dbo].[contracts] ALTER COLUMN plan_id int null;
+
+ALTER TABLE [dbo].[payments] ALTER COLUMN user_id int null;
