@@ -40,6 +40,13 @@ class Model_Contract extends Orm\Model{
         'affiliate',
         'updated_at',
         'created_at',
+        'first_name',
+        'last_name',
+        'first_kana',
+        'last_kana',
+        'phone',
+        'email',
+        'token'
     );
 
     protected static $_observers = array(
