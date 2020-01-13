@@ -28,6 +28,9 @@ class Controller_First extends Controller_Base
             
             $this->data['data'] = $params;
             if(empty($this->data['errors'])) {
+                $this->template->title = '初めて利用される方はこちら >  アカウント情報　確認';
+                $this->data['breadcrumbs'] = array($this->template->title);
+                $this->template->header = View::forge('header', $this->data);
                 $this->template->content = View::forge('first/confirm', $this->data);
                 return;
             }

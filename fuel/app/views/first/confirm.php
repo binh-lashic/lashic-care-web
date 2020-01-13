@@ -17,6 +17,11 @@
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
 				<form action="/first/complete" method="post">
+					<input type="hidden" name="email" value="<?php if(!empty($data['first_name'])) { echo $data['first_name']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['last_name'])) { echo $data['last_name']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['first_kana'])) { echo $data['first_kana']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['last_kana'])) { echo $data['last_kana']; } ?>" />
+					<input type="hidden" name="email" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>" />
 					<input type="hidden" name="email" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>" />
 					<input type="hidden" name="password" value="<?php if(!empty($data['password'])) { echo $data['password']; } ?>" />
 				<div class="form_set_container">
