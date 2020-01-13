@@ -54,7 +54,7 @@ class Controller_Shopping extends Controller_Base
         }
         
         if(empty($this->data['errors'])) {
-          $params['token'] = sha1($params['email'].mt_rand());
+          $params['token'] = substr(sha1($params['email'].mt_rand()), 0, 16);
           Session::set('applicant', $params);
           Response::redirect('/shopping/destination');
         } else {
