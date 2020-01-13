@@ -11,7 +11,7 @@
 ■今後の流れ<br />
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
 URLより初回利用登録を行います。<br />
-https://lashic.jp/first?token=<?php echo $user['token']; ?>
+<?php echo $url; ?><br />
 　↓<br />
 ログイン後見守りユーザ登録を行います。<br />
 　↓<br />

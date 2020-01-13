@@ -235,7 +235,7 @@ class Controller_Shopping extends Controller_Base
                         $contract_payment->save();
                     }
                 }
-                
+                $url = Uri::base(false).'first?token='.$applicant['token'];
                 //メールの送信
                 $data = array(
                             'user'  => $applicant,
@@ -247,6 +247,7 @@ class Controller_Shopping extends Controller_Base
                             'total_price' => $subtotal_price + $destination['shipping'] + $tax,
                             'date'  => date('Y年m月d日'),
                             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                            'url' => $url
                         );
                 $params = array(
                     'to' => $applicant['email'],
