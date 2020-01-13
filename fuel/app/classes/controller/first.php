@@ -52,6 +52,7 @@ class Controller_First extends Controller_Base
         $this->data['data']['last_kana'] = $contract['last_kana'];
         $this->data['data']['phone'] = $contract['phone'];
         $this->data['data']['email'] = $contract['email'];
+        $this->data['data']['token'] = $token;
         
         $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
         $this->data['breadcrumbs'] = array($this->template->title);
@@ -100,16 +101,12 @@ class Controller_First extends Controller_Base
             
             $contract_id = Session::get('contract_id');
             
-            //contractとcontract_paymentにuser_idをセット
+            //contractにuser_idをセット
             \DB::update('contracts')
                         ->value('user_id', $user['id'])
-                        ->where('contract_id', '=', $contract_id)
+                        ->where('id', '=', $contract_id)
                         ->execute();
             
-            \DB::update('payments')
-                        ->value('user_id', $user['id'])
-                        ->where('contract_id', '=', $contract_id)
-                        ->execute();
             \DB::commit_transaction();
         } catch(Exception $e) {
             \DB::rollback_transaction();

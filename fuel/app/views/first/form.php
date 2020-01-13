@@ -15,7 +15,7 @@
 			<div class="contentLarge_h2"><h2>アカウント情報　入力</h2></div>
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
-				<form class="form h-adr" action="/first" method="post">
+				<form class="form h-adr" action="/first?token=<?php echo $data['token']; ?>" method="post">
 				<input type="hidden" class="p-country-name" value="Japan">
 				<div class="form_set_container">
 						<div class="form_base_data_edit">
@@ -31,6 +31,19 @@
 										  <?php } ?>
 										  <?php if(!empty($errors['first_name'])) { ?>
 											  <p class="error"><?php echo $errors['first_name']; ?></p>
+										  <?php } ?>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="icon_Required">必須</span> ふりがな</th>
+										<td>
+											<input type="text" class="input_text input_short" name="last_kana" maxlength="45" value="<?php echo $data['last_kana']; ?>">
+											<input type="text" class="input_text input_short" name="first_kana" maxlength="45" value="<?php echo $data['first_kana']; ?>">
+										  <?php if (isset($errors['last_kana'])) { ?>
+											  <p class="error"><?php echo $errors['last_kana']; ?></p>
+										  <?php } ?>
+										  <?php if (isset($errors['first_kana'])) { ?>
+											  <p class="error"><?php echo $errors['first_kana']; ?></p>
 										  <?php } ?>
 										</td>
 									</tr>
