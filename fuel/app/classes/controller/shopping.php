@@ -12,7 +12,6 @@ class Controller_Shopping extends Controller_Base
             'applicant',
             'destination',
             'payment',
-            'confirm',
             'complete'
 	    );
         $this->template = 'template_responsive';
@@ -92,9 +91,19 @@ class Controller_Shopping extends Controller_Base
           $this->data['data'] = $params;
         }
       }
+      
       $this->template->title = 'お届け先 入力';
       $this->data['breadcrumbs'] = array("カート", $this->template->title);
       $this->template->header = View::forge('header_client', $this->data);
+      $this->data['plans'] = Session::get("plans");
+      $this->data['total_price'] = 0;
+      $this->data['subtotal_price'] = 0;
+      foreach($this->data['plans'] as $plan) {
+        $this->data['subtotal_price'] += $plan['price'];
+      }
+      $this->data['tax'] = floor(($this->data['subtotal_price'] + $this->data['destination']['shipping']) * Config::get("tax_rate"));
+      $this->data['total_price'] = $this->data['subtotal_price'] + $this->data['destination']['shipping'] + $this->data['tax'];
+      
       $this->template->content = View::forge('shopping/destination', $this->data);
     }
   

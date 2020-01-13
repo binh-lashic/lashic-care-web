@@ -99,6 +99,49 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			
+			<!-- ご注文内容 -->
+			<h2 class="form_title">ご注文内容</h2>
+			<div class="form_set_container">
+				<div class="form_base_data_edit pdb20">
+					<h3 class="content_h3 mgt20">ご注文内容</h3>
+					<table>
+						<tbody>
+						<?php
+						  foreach($plans as $plan) {
+							?>
+							  <tr>
+								  <th><?php echo $plan['title']; ?></th>
+								  <td class="right"><?php echo number_format($plan['price']) ?>円（税抜）</td>
+							  </tr>
+							<?php
+						  }
+						?>
+						</tbody>
+					</table>
+					<!-- クレジットカード情報登録 -->
+					<div class="bgBeige clearfix">
+						<table class="sumTalble mgr20">
+							<tr>
+								<td>小計</td>
+								<td class="right"><?php echo number_format($subtotal_price); ?>円（税抜）</td>
+							</tr>
+							<tr>
+								<td>送料</td>
+								<td class="right"><?php echo number_format($destination['shipping']); ?>円</td>
+							</tr>
+							<tr>
+								<td>消費税</td>
+								<td class="right"><?php echo number_format($tax); ?>円</td>
+							</tr>
+							<tr>
+								<td class="large">合計</td>
+								<td class="large right"><strong class="text_red large"><?php echo number_format($total_price); ?>円</strong></td>
+							</tr>
+						</table>
+					</div>
 					<div class="set_container mgb30">
 						<div class="left_container"></div>
 						<div class="center_container icon_white_arrow">
