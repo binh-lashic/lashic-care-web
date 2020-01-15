@@ -113,7 +113,7 @@
 						  foreach($plans as $plan) {
 							?>
 							  <tr>
-								  <th><?php echo $plan['title']; ?></th>
+								  <th class="w100"><?php echo $plan['title']; ?></th>
 								  <td class="right"><?php echo number_format($plan['price']) ?>円（税抜）</td>
 							  </tr>
 							<?php

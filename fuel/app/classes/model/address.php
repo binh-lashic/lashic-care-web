@@ -28,6 +28,7 @@ class Model_Address extends Orm\Model{
     public static function validate()
     {
         $val = Validation::forge();
+        $val->add_callable('usersrules');
         $val->add_callable('Validation_Japanese');
         $val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
         $val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
