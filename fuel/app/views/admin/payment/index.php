@@ -12,7 +12,6 @@
 					<th class="col-sm-4">契約プラン名</th>
 					<th class="col-sm-1">金額</th>
 					<th class="col-sm-1">送料</th>
-					<th class="col-sm-4">備考</th>
 				</tr>
 <?php
 if(isset($payments)) {
