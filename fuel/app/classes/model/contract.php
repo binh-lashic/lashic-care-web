@@ -39,14 +39,7 @@ class Model_Contract extends Orm\Model{
         'address',
         'affiliate',
         'updated_at',
-        'created_at',
-        'first_name',
-        'last_name',
-        'first_kana',
-        'last_kana',
-        'phone',
-        'email',
-        'token'
+        'created_at'
     );
 
     protected static $_observers = array(
@@ -59,19 +52,7 @@ class Model_Contract extends Orm\Model{
             'mysql_timestamp' => true,
         ),
     );
-  
-    public static function validate()
-    {
-        $val = Validation::forge();
-        $val->add_callable('Validation_Japanese');
-        $val->add_callable('usersrules');
-        $val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
-        $val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
-        $val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
-        $val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
-        return $val;
-    }
-    
+
     public function format($data) {
         $statuses = Contract_Status::get();
         if(isset($statuses[$data['status']])) {
@@ -184,7 +165,22 @@ class Model_Contract extends Orm\Model{
         }
         return $sensors;
     }
-  
+
+    /**
+     * payment_idからuser_idを更新する
+     * @param $user_id
+     * @param $payment_id
+     * @return mixed
+     */
+    public static function update_user_id_by_payment_id($user_id, $payment_id) {
+        $sql = "UPDATE contracts SET user_id = :user_id ".
+               "FROM contracts JOIN contract_payments ON (contracts.id = contract_payments.contract_id) ".
+               "WHERE contract_payments.payment_id = :payment_id";
+        $query = DB::query($sql);
+        $query->parameters(array('user_id' => $user_id, 'payment_id' => $payment_id));
+        return $query->execute();
+    }
+
     /**
      * user_idからcontractの件数を取得する
      * @param $user_id

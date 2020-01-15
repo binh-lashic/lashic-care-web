@@ -44,7 +44,7 @@ class Controller_Shopping extends Controller_Base
     {
       if(Input::post()) {
         $params = Input::post();
-        $val = \Model_Contract::validate();
+        $val = \Model_Payment::validate();
         
         if(!$val->run()) {
           foreach($val->error() as $key=>$value){
@@ -180,6 +180,13 @@ class Controller_Shopping extends Controller_Base
                 'shipping' => $destination['shipping'],
                 'title' => 'ラシク初期費用',
                 'type' => 'initial',
+                'first_name' => $applicant['first_name'],
+                'last_name' => $applicant['last_name'],
+                'first_kana' => $applicant['first_kana'],
+                'last_kana' => $applicant['last_kana'],
+                'phone' => $applicant['phone'],
+                'email' => $applicant['email'],
+                'token' => $applicant['token']
             ));
             if($payment->save()) {
                 if(!Session::get('monitor')) {
@@ -221,14 +228,7 @@ class Controller_Shopping extends Controller_Base
                         'shipping' => $shipping,
                         'zip_code' => $destination['zip_code'],
                         'prefecture' => $destination['prefecture'],
-                        'address' => $destination['address'],
-                        'first_name' => $applicant['first_name'],
-                        'last_name' => $applicant['last_name'],
-                        'first_kana' => $applicant['first_kana'],
-                        'last_kana' => $applicant['last_kana'],
-                        'phone' => $applicant['phone'],
-                        'email' => $applicant['email'],
-                        'token' => $applicant['token']
+                        'address' => $destination['address']
                     );
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate");

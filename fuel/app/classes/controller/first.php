@@ -41,20 +41,20 @@ class Controller_First extends Controller_Base
         }
         
         $token = Input::get('token');
-        $contract = \Model_Contract::find_by_token($token);
-        Session::set('contract_id', $contract['id']);
+        $payment = \Model_Payment::find_by_token($token);
+        Session::set('payment_id', $payment['id']);
         
-        if(empty($contract)){
+        if(empty($payment)){
           throw new HttpNotFoundException;
         }
         
         //申込情報から初期値読み込み
-        $this->data['data']['first_name'] = $contract['first_name'];
-        $this->data['data']['last_name'] = $contract['last_name'];
-        $this->data['data']['first_kana'] = $contract['first_kana'];
-        $this->data['data']['last_kana'] = $contract['last_kana'];
-        $this->data['data']['phone'] = $contract['phone'];
-        $this->data['data']['email'] = $contract['email'];
+        $this->data['data']['first_name'] = $payment['first_name'];
+        $this->data['data']['last_name'] = $payment['last_name'];
+        $this->data['data']['first_kana'] = $payment['first_kana'];
+        $this->data['data']['last_kana'] = $payment['last_kana'];
+        $this->data['data']['phone'] = $payment['phone'];
+        $this->data['data']['email'] = $payment['email'];
         $this->data['data']['token'] = $token;
         
         $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
@@ -101,15 +101,18 @@ class Controller_First extends Controller_Base
               );
               \Model_User::sendEmail($params);
             }
-            
-            $contract_id = Session::get('contract_id');
-            
+
+            $payment_id = Session::get('payment_id');
+
+            //paymentsにuser_idをセット
+            \DB::update('payments')
+                  ->value('user_id', $user['id'])
+                  ->where('id', '=', $payment_id)
+                  ->execute();
+
             //contractにuser_idをセット
-            \DB::update('contracts')
-                        ->value('user_id', $user['id'])
-                        ->where('id', '=', $contract_id)
-                        ->execute();
-            
+            \Model_Contract::update_user_id_by_payment_id($user['id'], $payment_id);
+
             \DB::commit_transaction();
         } catch(Exception $e) {
             \DB::rollback_transaction();
