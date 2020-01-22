@@ -2,7 +2,7 @@
 <header class="drawer-navbar" role="banner">
 	<div class="drawer-container">
 		<div class="drawer-navbar-header">
-			<a class="logo" href="/"><img src="/images/common/logo.png" width="222" height="52" alt=""/></a>
+			<a class="logo" href="/"><img src="/images/common/logo.png" alt=""/></a>
 		</div>
 	</div>
 </header>
