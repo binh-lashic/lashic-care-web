@@ -17,7 +17,8 @@ class Model_Payment extends Orm\Model{
         'last_kana',
         'phone',
         'email',
-        'token'
+        'token',
+        'member_id'
 	);
 
     protected static $_observers = array(

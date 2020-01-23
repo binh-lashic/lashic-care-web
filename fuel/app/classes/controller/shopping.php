@@ -111,7 +111,8 @@ class Controller_Shopping extends Controller_Base
       $this->data['breadcrumbs'] = array("カート", $this->template->title);
       $this->template->header = View::forge('header_client', $this->data);
       $applicant = Session::get('applicant');
-      $member_id = $applicant['token'];
+      $member_id = $this->generate_member_id($applicant['email']);
+      Session::set('member_id', $member_id);
       
       $card = \Model_GMO::findCard(array('member_id' => $member_id));
       $this->data['cards'] = $card->cardList;
@@ -155,10 +156,8 @@ class Controller_Shopping extends Controller_Base
         $plans = Session::get("plans");
         $destination = Session::get("destination");
         $applicant = Session::get('applicant');
-        $applicant['token'] = substr(sha1($applicant['email'].mt_rand()), 0, 16);
-        
-        //TODO member_idの設定
-        $member_id = $applicant['token'];
+        $token = $this->generate_token($applicant['email']);
+        $member_id = Session::get('member_id');
         
         $post = Input::post();
         $card = \Model_GMO::findCard(array('member_id' => $member_id));
@@ -187,7 +186,8 @@ class Controller_Shopping extends Controller_Base
                 'last_kana' => $applicant['last_kana'],
                 'phone' => $applicant['phone'],
                 'email' => $applicant['email'],
-                'token' => $applicant['token']
+                'token' => $token,
+                'member_id' => $member_id
             ));
             if($payment->save()) {
                 if(!Session::get('monitor')) {
@@ -245,7 +245,7 @@ class Controller_Shopping extends Controller_Base
                         $contract_payment->save();
                     }
                 }
-                $url = Uri::base(false).'register?token='.$applicant['token'];
+                $url = Uri::base(false).'register?token='.$token;
                 //メールの送信
                 $data = array(
                             'user'  => $applicant,
@@ -359,5 +359,13 @@ class Controller_Shopping extends Controller_Base
         \Log::error(__METHOD__.'['.$e->getMessage().']');
         throw new Exception;
       }
+    }
+    
+    private function generate_token($email){
+      return substr(sha1($email.mt_rand()), 0, 16);
+    }
+    
+    private function generate_member_id($email){
+      return substr(sha1(uniqid($email.rand()), 0, 16));
     }
 }
