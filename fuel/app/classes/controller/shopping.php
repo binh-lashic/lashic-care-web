@@ -111,8 +111,13 @@ class Controller_Shopping extends Controller_Base
       $this->data['breadcrumbs'] = array("カート", $this->template->title);
       $this->template->header = View::forge('header_client', $this->data);
       $applicant = Session::get('applicant');
-      $member_id = $this->generate_member_id($applicant['email']);
-      Session::set('member_id', $member_id);
+      
+      if(empty(Session::get('member_id'))){
+        $member_id = $this->generate_member_id($applicant['email']);
+        Session::set('member_id', $member_id);
+      } else {
+        $member_id = Session::get('member_id');
+      }
       
       $card = \Model_GMO::findCard(array('member_id' => $member_id));
       $this->data['cards'] = $card->cardList;
@@ -366,6 +371,6 @@ class Controller_Shopping extends Controller_Base
     }
     
     private function generate_member_id($email){
-      return substr(sha1(uniqid($email.rand()), 0, 16));
+      return substr(sha1(uniqid($email.rand())), 0, 16);
     }
 }
