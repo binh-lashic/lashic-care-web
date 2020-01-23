@@ -15,7 +15,7 @@
 			<div class="contentLarge_h2"><h2>アカウント情報　入力</h2></div>
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
-				<form class="form h-adr" action="/first?token=<?php echo $data['token']; ?>" method="post">
+				<form class="form h-adr" action="/register?token=<?php echo $data['token']; ?>" method="post">
 				<input type="hidden" class="p-country-name" value="Japan">
 				<div class="form_set_container">
 						<div class="form_base_data_edit">

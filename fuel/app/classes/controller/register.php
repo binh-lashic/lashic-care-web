@@ -1,5 +1,5 @@
 <?php
-class Controller_First extends Controller_Base
+class Controller_Register extends Controller_Base
 {
     private $data = array();
     
@@ -18,7 +18,7 @@ class Controller_First extends Controller_Base
     {
         if(Input::post()) {
             $params = Input::post();
-            $val = \Model_User::validate("first");
+            $val = \Model_User::validate("register");
             if(!$val->run()) {
                 // バリデーション失敗の場合ここに入ってくる
                 foreach($val->error() as $key=>$value){
@@ -31,7 +31,7 @@ class Controller_First extends Controller_Base
                 $this->template->title = '初めて利用される方はこちら >  アカウント情報　確認';
                 $this->data['breadcrumbs'] = array($this->template->title);
                 $this->template->header = View::forge('header', $this->data);
-                $this->template->content = View::forge('first/confirm', $this->data);
+                $this->template->content = View::forge('register/confirm', $this->data);
                 return;
             }
         }
@@ -42,11 +42,12 @@ class Controller_First extends Controller_Base
         
         $token = Input::get('token');
         $payment = \Model_Payment::find_by_token($token);
-        Session::set('payment_id', $payment['id']);
         
         if(empty($payment)){
           throw new HttpNotFoundException;
         }
+        
+        Session::set('payment_id', $payment['id']);
         
         //申込情報から初期値読み込み
         $this->data['data']['first_name'] = $payment['first_name'];
@@ -60,7 +61,7 @@ class Controller_First extends Controller_Base
         $this->template->title = '初めて利用される方はこちら >  アカウント情報　入力';
         $this->data['breadcrumbs'] = array($this->template->title);
         $this->template->header = View::forge('header', $this->data);
-        $this->template->content = View::forge('first/form', $this->data);
+        $this->template->content = View::forge('register/form', $this->data);
     }
     
     public function action_confirm()
@@ -73,12 +74,12 @@ class Controller_First extends Controller_Base
             $params = Input::post();
             $this->data['data'] = $params;
             if(empty($this->data['errors'])) {
-                $this->template->content = View::forge('first/complete', $this->data);
+                $this->template->content = View::forge('register/complete', $this->data);
                 return;
             }
         }
         
-        $this->template->content = View::forge('first/confirm', $this->data);
+        $this->template->content = View::forge('register/confirm', $this->data);
     }
     
     public function action_complete()
@@ -118,7 +119,7 @@ class Controller_First extends Controller_Base
             \DB::rollback_transaction();
             $params = Input::post();
             unset($params['password']);
-            Log::error($e->getMessage(), 'first_complete');
+            Log::error($e->getMessage(), 'register_complete');
             throw new Exception;
         }
         
@@ -126,6 +127,6 @@ class Controller_First extends Controller_Base
         
         $this->template->title = '初めて利用される方はこちら  >  アカウント登録完了';
         $this->template->header = View::forge('header', $this->data);
-        $this->template->content = View::forge('first/complete', $this->data);
+        $this->template->content = View::forge('register/complete', $this->data);
     }
 }

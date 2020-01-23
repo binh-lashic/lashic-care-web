@@ -16,7 +16,7 @@
 			<div class="contentLarge_h2"><h2>アカウント情報　確認</h2></div>
 				<!-- 基本情報 -->
 				<h2 class="form_title">基本情報</h2>
-				<form action="/first/complete" method="post">
+				<form action="/register/complete" method="post">
 					<input type="hidden" name="first_name" value="<?php if(!empty($data['first_name'])) { echo $data['first_name']; } ?>" />
 					<input type="hidden" name="last_name" value="<?php if(!empty($data['last_name'])) { echo $data['last_name']; } ?>" />
 					<input type="hidden" name="first_kana" value="<?php if(!empty($data['first_kana'])) { echo $data['first_kana']; } ?>" />

@@ -7,7 +7,6 @@ class Controller_Shopping extends Controller_Base
 
 	public function before() {
 		$this->nologin_methods = array(
-	        'index',
             'cart',
             'applicant',
             'destination',
@@ -53,7 +52,6 @@ class Controller_Shopping extends Controller_Base
         }
         
         if(empty($this->data['errors'])) {
-          $params['token'] = substr(sha1($params['email'].mt_rand()), 0, 16);
           Session::set('applicant', $params);
           Response::redirect('/shopping/destination');
         } else {
@@ -128,7 +126,7 @@ class Controller_Shopping extends Controller_Base
           if (!empty($params['token'])) {
             //GMOペイメントの会員登録
             $member = \Model_GMO::findMember($member_id);
-            if(!$member->memberId) {
+            if(!empty($member->memberId)) {
               $member = \Model_GMO::saveMember($member_id);
             }
             if(!empty($member)) {
@@ -157,6 +155,9 @@ class Controller_Shopping extends Controller_Base
         $plans = Session::get("plans");
         $destination = Session::get("destination");
         $applicant = Session::get('applicant');
+        $applicant['token'] = substr(sha1($applicant['email'].mt_rand()), 0, 16);
+        
+        //TODO member_idの設定
         $member_id = $applicant['token'];
         
         $post = Input::post();
@@ -244,7 +245,7 @@ class Controller_Shopping extends Controller_Base
                         $contract_payment->save();
                     }
                 }
-                $url = Uri::base(false).'first?token='.$applicant['token'];
+                $url = Uri::base(false).'register?token='.$applicant['token'];
                 //メールの送信
                 $data = array(
                             'user'  => $applicant,
