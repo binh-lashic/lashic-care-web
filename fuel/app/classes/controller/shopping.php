@@ -132,7 +132,7 @@ class Controller_Shopping extends Controller_Base
           if (!empty($params['token'])) {
             //GMOペイメントの会員登録
             $member = \Model_GMO::findMember($member_id);
-            if(!empty($member->memberId)) {
+            if(empty($member->memberId)) {
               $member = \Model_GMO::saveMember($member_id);
             }
             if(!empty($member)) {
