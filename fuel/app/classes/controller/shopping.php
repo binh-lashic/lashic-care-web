@@ -367,10 +367,22 @@ class Controller_Shopping extends Controller_Base
     }
     
     private function generate_token($email){
-      return substr(sha1($email.mt_rand()), 0, 16);
+      do {
+        $token = sha1($email.mt_rand());
+        $payment = \Model_Payment::find_by_token($token);
+        if(empty($payment)) {
+          return $token;
+        }
+      } while (true);
     }
     
     private function generate_member_id($email){
-      return substr(sha1(uniqid($email.rand())), 0, 16);
+      do {
+        $member_id = substr(sha1(uniqid($email.rand())), 0, 16);
+        $payment = \Model_Payment::find_by_member_id($member_id);
+        if(empty($payment)) {
+          return $member_id;
+        }
+      } while (true);
     }
 }

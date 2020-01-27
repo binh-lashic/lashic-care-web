@@ -4,3 +4,6 @@ ALTER TABLE [dbo].[payments] ADD first_name nvarchar(512) NULL, last_name nvarch
 ALTER TABLE [dbo].[payments] ALTER COLUMN user_id int null;
 
 ALTER TABLE [dbo].[contracts] ALTER COLUMN user_id int null;
+
+CREATE INDEX token ON [dbo].[payments] (token);
+CREATE INDEX member_id ON [dbo].[payments] (member_id);
