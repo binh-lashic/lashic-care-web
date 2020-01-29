@@ -5,5 +5,5 @@ ALTER TABLE [dbo].[payments] ALTER COLUMN user_id int null;
 
 ALTER TABLE [dbo].[contracts] ALTER COLUMN user_id int null;
 
-CREATE INDEX token ON [dbo].[payments] (token);
-CREATE INDEX member_id ON [dbo].[payments] (member_id);
+CREATE NONCLUSTERED INDEX token ON [dbo].[payments] (token);
+CREATE NONCLUSTERED INDEX member_id ON [dbo].[payments] (member_id);
