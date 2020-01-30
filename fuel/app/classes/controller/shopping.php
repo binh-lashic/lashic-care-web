@@ -3,7 +3,8 @@ class Controller_Shopping extends Controller_Base
 {
     private $user;
     private $clients = array();
-	private $data = array();
+    private $data = array();
+    const RETRY_COUNT = 10;
 
 	public function before() {
 		$this->nologin_methods = array(
@@ -366,23 +367,43 @@ class Controller_Shopping extends Controller_Base
       }
     }
     
+    /**
+     * emailからトークンを生成する。
+     * リトライ回数を超えた場合はエラーとする
+     * @param $email
+     * @return string
+     * @throws Exception
+     */
     private function generate_token($email){
+      $retry_count = 0;
       do {
         $token = sha1($email.mt_rand());
         $payment = \Model_Payment::find_by_token($token);
         if(empty($payment)) {
           return $token;
         }
-      } while (true);
+        $retry_count++;
+      } while ($retry_count < self::RETRY_COUNT);
+      throw new HttpServerErrorException('generate_token error');
     }
     
+    /**
+     * emailからmember_idを生成する。
+     * リトライ回数を超えた場合はエラーとする
+     * @param $email
+     * @return string
+     * @throws Exception
+     */
     private function generate_member_id($email){
+      $retry_count = 0;
       do {
         $member_id = substr(sha1(uniqid($email.rand())), 0, 16);
         $payment = \Model_Payment::find_by_member_id($member_id);
         if(empty($payment)) {
           return $member_id;
         }
-      } while (true);
+        $retry_count++;
+      } while ($retry_count < self::RETRY_COUNT);
+      throw new HttpServerErrorException('generate_member_id error');
     }
 }
