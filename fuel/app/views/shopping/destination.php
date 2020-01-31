@@ -2,10 +2,10 @@
 		<!-- flow矢印 -->
 		<div class="flowSet flow_no06">
 			<ol>
-				<li class="flowBoxOn_before">カート</li>
-				<li class="flowBoxOn">送付先指定</li>
-				<li>配送とお支払い</li>
-				<li>ご注文確認</li>
+				<li>カート</li>
+				<li class="flowBoxOn_before">申込情報 入力</li>
+				<li class="flowBoxOn">お届け先情報 入力</li>
+				<li>支払情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>
@@ -13,21 +13,15 @@
 		
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">送付先指定</h1>
-			<p>LASHIC機器の送付先を入力ください。</p>
+			<h1 class="contentLarge_h1">お届け先情報 入力</h1>
 		<form class="h-adr" action="/shopping/destination" method="post">
 			<input type="hidden" class="p-country-name" value="Japan">
 			<!-- 新しい住所追加エラー -->
-			<h2 class="form_title">送付先</h2>
+			<h2 class="form_title">お届け先情報</h2>
 			<div class="form_set_container">
 				<?php if(!empty($errors)) { ?>
 					<p class="title_errer"><strong>入力内容にエラーがありました</strong></p>
 				<?php } ?>
-				<p class="mgt20">必要事項を入力し、「この住所を使う」ボタンをクリックしてください。</p>
-				<ul class="ul-disc">
-					<li>私書箱や空港内の窓口へのお届けは承っておりません。</li>
-					<li>コンビニや営業所などの住所を入力すると商品をお受け取りいただけません。</li>
-				</ul>
 				<div class="form_set_container_form">
 					<table>
 						<tbody>
@@ -105,10 +99,53 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			
+			<!-- ご注文内容 -->
+			<h2 class="form_title">ご注文内容</h2>
+			<div class="form_set_container">
+				<div class="form_base_data_edit pdb20">
+					<h3 class="content_h3 mgt20">ご注文内容</h3>
+					<table>
+						<tbody>
+						<?php
+						  foreach($plans as $plan) {
+							?>
+							  <tr>
+								  <th class="w100"><?php echo $plan['title']; ?></th>
+								  <td class="right"><?php echo number_format($plan['price']) ?>円（税抜）</td>
+							  </tr>
+							<?php
+						  }
+						?>
+						</tbody>
+					</table>
+					<!-- クレジットカード情報登録 -->
+					<div class="bgBeige clearfix">
+						<table class="sumTalble mgr20">
+							<tr>
+								<td>小計</td>
+								<td class="right"><?php echo number_format($subtotal_price); ?>円（税抜）</td>
+							</tr>
+							<tr>
+								<td>送料</td>
+								<td class="right"><?php echo number_format($destination['shipping']); ?>円</td>
+							</tr>
+							<tr>
+								<td>消費税</td>
+								<td class="right"><?php echo number_format($tax); ?>円</td>
+							</tr>
+							<tr>
+								<td class="large">合計</td>
+								<td class="large right"><strong class="text_red large"><?php echo number_format($total_price); ?>円</strong></td>
+							</tr>
+						</table>
+					</div>
 					<div class="set_container mgb30">
 						<div class="left_container"></div>
 						<div class="center_container icon_white_arrow">
-							<input type="submit" value="この住所を使う" >
+							<input type="submit" value="次の画面に進む" >
 						</div>
 						<div class="right_container"></div>
 					</div>
@@ -119,9 +156,8 @@
 			<div class="order_alert">
 				<p>削除されました</p>
 			</div>
-
 			<div class="set_container">
-				<div class="left_container"><a href="/shopping/cart" class="link_back">戻る</a></div>
+				<div class="left_container"><a href="/shopping/applicant" class="link_back">戻る</a></div>
 				<div class="center_container"></div>
 				<div class="right_container"></div>
 			</div>

@@ -1,10 +1,3 @@
-<?php
-if(isset($client)) {
-	$graph_btn_calender_image = '/images/graph/graph_btn_calender_off.png';
-	if ($current_language !== 'ja') {
-		$graph_btn_calender_image = '/images/graph/graph_btn_calender_en_off.png';
-	}
-?>
 	<script type="text/javascript">
 	var sensor_id         = "<?php echo !empty($sensor['id']) ? $sensor['id'] : ""; ?>";
 	var bedsensor_id      = "<?php echo !empty($bedsensor['id']) ? $bedsensor['id'] : ""; ?>";
@@ -276,7 +269,34 @@ if(isset($client)) {
 			<!-- /24時間グラフ --> 
                         <div id="graph24_error"></div> 
 		</section>
-		<!-- /content end --> 
+		<!-- /content end -->
 <?php
-}
+	if(!isset($client)) {
+		$graph_btn_calender_image = '/images/graph/graph_btn_calender_off.png';
+		if ($current_language !== 'ja') {
+		  $graph_btn_calender_image = '/images/graph/graph_btn_calender_en_off.png';
+		}
+?>
+	
+	<!-- お知らせ -->
+	<div id="noticeOpenWindow" class="settingContainer" style="display: none; width:400px; height:200px; ">
+			<div class="loginOpenWindow">
+				センサーの利用を開始するためには<br />以下の手順が必要となります。リンクより設定ください。
+				<p class="pdt10"><a href="/shopping/user" class="link_normal">見守りユーザーの登録</a></p>
+			</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var opts = {
+				helpers: {
+					overlay: { closeClick: false }
+				},
+				closeBtn: false,
+			}
+			$.fancybox.open($('#noticeOpenWindow'), opts, null);
+		});
+	</script>
+	
+<?php
+	}
 ?>

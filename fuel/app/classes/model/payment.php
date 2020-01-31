@@ -1,16 +1,24 @@
 <?php 
 class Model_Payment extends Orm\Model{
 
-	protected static $_properties = array(
-		'id',
-    'user_id',
-    'title',
-    'date',
-    'price',
-    'tax',
-    'shipping',
-    'updated_at',
-    'created_at',
+    protected static $_properties = array(
+        'id',
+        'user_id',
+        'title',
+        'date',
+        'price',
+        'tax',
+        'shipping',
+        'updated_at',
+        'created_at',
+        'first_name',
+        'last_name',
+        'first_kana',
+        'last_kana',
+        'phone',
+        'email',
+        'token',
+        'member_id'
 	);
 
     protected static $_observers = array(
@@ -23,6 +31,18 @@ class Model_Payment extends Orm\Model{
             'mysql_timestamp' => true,
         ),
     );
+
+    public static function validate()
+    {
+        $val = Validation::forge();
+        $val->add_callable('Validation_Japanese');
+        $val->add_callable('usersrules');
+        $val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
+        $val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+        $val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+        $val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+        return $val;
+    }
 
     public function getSearch() {
       /*
@@ -87,5 +107,22 @@ class Model_Payment extends Orm\Model{
         $query->parameters(array('id' => &$id));
         $results = $query->execute();
         return $results;
+    }
+    
+    public static function exist_token($token) {
+        $count = \Model_Payment::query()->where('token', $token)->count();
+        return ($count > 0);
+    }
+    
+    public static function exist_member_id($member_id) {
+        $count = \Model_Payment::query()->where('member_id', $member_id)->count();
+        return ($count > 0);
+    }
+    
+    public static function find_by_token($token) {
+        return Model_Payment::query()
+                            ->select('id', 'first_name', 'last_name', 'first_kana', 'last_kana', 'phone', 'email', 'token')
+                            ->where('token', '=', $token)
+                            ->get();
     }
 }

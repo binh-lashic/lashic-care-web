@@ -1,6 +1,6 @@
 		<!-- content start　編集一覧 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">LASHIC 新規登録のお客様</h1>
+			<h1 class="contentLarge_h1">初めて利用される方はこちら</h1>
 			<!-- flow矢印 -->
 			<div class="flowSet flow_no03">
 				<ol>
@@ -19,8 +19,9 @@
 				<form action="/register/complete" method="post">
 					<input type="hidden" name="first_name" value="<?php if(!empty($data['first_name'])) { echo $data['first_name']; } ?>" />
 					<input type="hidden" name="last_name" value="<?php if(!empty($data['last_name'])) { echo $data['last_name']; } ?>" />
+					<input type="hidden" name="first_kana" value="<?php if(!empty($data['first_kana'])) { echo $data['first_kana']; } ?>" />
+					<input type="hidden" name="last_kana" value="<?php if(!empty($data['last_kana'])) { echo $data['last_kana']; } ?>" />
 					<input type="hidden" name="phone" value="<?php if(!empty($data['phone'])) { echo $data['phone']; } ?>" />
-					<input type="hidden" name="cellular" value="<?php if(!empty($data['cellular'])) { echo $data['cellular']; } ?>" />
 					<input type="hidden" name="email" value="<?php if(!empty($data['email'])) { echo $data['email']; } ?>" />
 					<input type="hidden" name="password" value="<?php if(!empty($data['password'])) { echo $data['password']; } ?>" />
 				<div class="form_set_container">
@@ -28,19 +29,16 @@
 							<table>
 								<tbody>
 									<tr>
-										<th>メールアドレス</th>
-										<td><?php if(!empty($data['email'])) { echo $data['email']; } ?></td>
-									</tr>
-									<tr>
-										<th>お名前</th>
-										<td>
-											<?php if(!empty($data['last_name'])) { echo $data['last_name']; } ?>
-											<?php if(!empty($data['first_name'])) { echo $data['first_name']; } ?>										
-										</td>
+										<th>お名前（ふりがな）</th>
+										<td><?php echo $data['last_name']; ?><?php echo $data['first_name']; ?>（<?php echo $data['last_kana']; ?><?php echo $data['first_kana']; ?>）</td>
 									</tr>
 									<tr>
 										<th>電話番号</th>
 										<td><?php if(!empty($data['phone'])) { echo $data['phone']; } ?></td>
+									</tr>
+									<tr>
+										<th>メールアドレス</th>
+										<td><?php if(!empty($data['email'])) { echo $data['email']; } ?></td>
 									</tr>
 									<tr>
 										<th>パスワード</th>
@@ -50,7 +48,7 @@
 							</table>
 					</div>
 				</div>
-				<!-- /基本情報 --> 
+				<!-- /基本情報 -->
 				
 				<div class="set_container">
 					<div class="left_container"><a href="#" class="link_back">戻る</a></div>
@@ -61,4 +59,4 @@
 				</div>
 			</form>
 		</section>
-		<!-- /content end　編集一覧 --> 
+		<!-- /content end　編集一覧 -->

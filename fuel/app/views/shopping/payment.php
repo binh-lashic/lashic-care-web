@@ -3,16 +3,26 @@
 		<div class="flowSet flow_no06">
 			<ol>
 				<li>カート</li>
-				<li class="flowBoxOn_before">送付先指定</li>
-				<li class="flowBoxOn">配送とお支払い</li>
-				<li>ご注文確認</li>
+				<li>申込情報 入力</li>
+				<li class="flowBoxOn_before">お届け先情報 入力</li>
+				<li class="flowBoxOn">支払情報 入力</li>
 				<li>完了</li>
 			</ol>
 		</div>
 		<!-- /flow矢印 -->
 		<section id="contentBoxLarge">
-			<h1 class="contentLarge_h1">お支払い指定</h1>
-			<p>クレジットカード情報を入力し、「次の画面へ進む」をクリックしてください。</p>
+			<h1 class="contentLarge_h1">支払情報 入力</h1>
+			<?php if((Session::get_flash('gmo_errors'))){ $gmo_errors = Session::get_flash('gmo_errors');?>
+				  <div class="errors_list">
+					  <ul>
+						<?php foreach($gmo_errors as $err){ ?>
+							<li><?php echo str_replace('%error_code%', $err, Config::get('gmo_error.sys_msg'))?></li>
+						<?php } ?>
+					  </ul>
+					  <p><?php echo Config::get('gmo_error.client_msg') ?></p>
+				  </div>
+			<?php }  ?>
+			<p>クレジットカード情報を入力し、「購入する」をクリックしてください。</p>
 			<p><strong>ご利用いただけるカード：</strong>VISA、Master、JCB、アメリカン・エキスプレス、ダイナース<br>
 				<img src="/images/common/card_m_all.png" width="136"></p>
 <?php
@@ -164,7 +174,7 @@ if(!empty($errors['security_code'])) {
 				<div class="left_container"><a href="/shopping/destination" class="link_back">戻る</a></div>
 				<div class="center_container">
 					<input type="hidden" value="1" name="tokennumber" id= "tokennumber" />
-					<input type="button" value="次の画面に進む" onclick="doPurchase('<?php echo $_SERVER['PGCARD_SHOP_ID']; ?>')" />
+					<input type="button" value="購入する" onclick="doPurchase('<?php echo $_SERVER['PGCARD_SHOP_ID']; ?>')" />
 				</div>
 				<div class="right_container left"></div>
 			</div>
