@@ -378,8 +378,7 @@ class Controller_Shopping extends Controller_Base
       $retry_count = 0;
       do {
         $token = sha1($email.mt_rand());
-        $payment = \Model_Payment::find_by_token($token);
-        if(empty($payment)) {
+        if(!\Model_Payment::exist_token($token)) {
           return $token;
         }
         $retry_count++;
@@ -398,8 +397,7 @@ class Controller_Shopping extends Controller_Base
       $retry_count = 0;
       do {
         $member_id = substr(sha1(uniqid($email.rand())), 0, 16);
-        $payment = \Model_Payment::find_by_member_id($member_id);
-        if(empty($payment)) {
+        if(!\Model_Payment::exist_member_id($member_id)) {
           return $member_id;
         }
         $retry_count++;

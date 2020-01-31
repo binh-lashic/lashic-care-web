@@ -108,4 +108,21 @@ class Model_Payment extends Orm\Model{
         $results = $query->execute();
         return $results;
     }
+    
+    public static function exist_token($token) {
+        $count = \Model_Payment::query()->where('token', $token)->count();
+        return ($count > 0);
+    }
+    
+    public static function exist_member_id($member_id) {
+        $count = \Model_Payment::query()->where('member_id', $member_id)->count();
+        return ($count > 0);
+    }
+    
+    public static function find_by_token($token) {
+        return Model_Payment::query()
+                            ->select('id', 'first_name', 'last_name', 'first_kana', 'last_kana', 'phone', 'email', 'token')
+                            ->where('token', '=', $token)
+                            ->get();
+    }
 }
