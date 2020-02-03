@@ -64,12 +64,11 @@ header {
 .logo {
 	width: 111px;
 	height: 26px;
-	margin: 20px 10px 15px 0;
+	margin: 15px 10px;
 	display: block;
 }
 .logo img {
 	width: 111px;
-	height: 26px;
 }
 /* right nav */
 .hdr_icon_mainMenu {
