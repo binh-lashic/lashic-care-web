@@ -35,18 +35,6 @@ class Model_User extends Orm\Model{
 		'area',
 		'blood_type',
 		'birthday',
-		'emergency_first_name_1',
-		'emergency_last_name_1',
-		'emergency_first_kana_1',
-		'emergency_last_kana_1',
-		'emergency_phone_1',
-		'emergency_cellular_1',
-		'emergency_first_name_2',
-		'emergency_last_name_2',
-		'emergency_first_kana_2',
-		'emergency_last_kana_2',
-		'emergency_phone_2',
-		'emergency_cellular_2',
 		'profile_image',
 		'created_at',
 		'subscription',
@@ -55,8 +43,7 @@ class Model_User extends Orm\Model{
 		'email_confirm_token',
 		'email_confirm_expired',
 		'master' => array('default' => 0),
-		'affiliate',
-		'temporary'
+		'affiliate'
 	);
 
     public static function validate($factory, $options = null)
@@ -66,10 +53,12 @@ class Model_User extends Orm\Model{
 		$val->add_callable('usersrules');
 		switch($factory) {
 			case "register":
-				$val->add_field('email', 'メールアドレス', 'required|valid_email|max_length[512]');
 				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
+				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
 				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
+				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
 				$val->add_field('phone', '電話番号', 'required|valid_string[numeric]|max_length[45]');
+				$val->add_field('email', 'メールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
 				$val->add_field('password', 'パスワード', 'required|min_length[8]|valid_string[alpha,numeric]|max_length[255]');
 				$val->add_field('password_confirm', 'パスワード（確認）', 'required|match_value['.Input::post('password').']');
 				break;
@@ -99,24 +88,6 @@ class Model_User extends Orm\Model{
 				$val->add_field('new_email', 'メールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
 				$val->add_field('new_email_confirm', 'メールアドレス（確認）', 'required|check_confirm_email['.Input::post('new_email').']');
 				break;
-			case "temp_account":
-				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
-				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
-				$val->add_field('first_name', 'お名前 名', 'required|max_length[45]');
-				$val->add_field('first_kana', 'ふりがな 名', 'required|hiragana|max_length[45]');
-				$val->add_field('gender', '性別', 'required');
-				$val->add_field('zip_code', '郵便番号', 'check_zipcode');
-				$val->add_field('prefecture', '都道府県', 'required');
-				$val->add_field('address', '都道府県以下', 'required');
-				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
-				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('new_email', '変更するメールアドレス', 'required|valid_email|duplicate_email|max_length[512]');
-				$val->add_field('new_email_confirm', '変更するメールアドレス 確認', 'required|check_confirm_email['.Input::post('new_email').']');
-				$val->add_field('subscription', '当社からのメール案内', 'required');
-				$val->add_field('password', 'パスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]|check_password['.$options['user_id'].']');
-				$val->add_field('new_password', '新しいパスワード', 'required|min_length[8]|max_length[255]|valid_string[alpha,numeric]');
-				$val->add_field('new_password_confirm', '新しいパスワード　確認', 'required|match_value['.Input::post('new_password').']');
-				break;
 			case "account_basic":
 				$val->add_field('last_name', 'お名前 姓', 'required|max_length[45]');
 				$val->add_field('last_kana', 'ふりがな 姓', 'required|hiragana|max_length[45]');
@@ -135,25 +106,6 @@ class Model_User extends Orm\Model{
 				$val->add_field('address', '都道府県以下', 'required');
 				$val->add_field('phone', '電話番号1', 'required|valid_string[numeric]|max_length[45]');
 				$val->add_field('cellular', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				break;
-			case "info_option":
-				$val->add_field('emergency_first_name_1', 'お名前 名', 'max_length[45]');
-				$val->add_field('emergency_last_name_1', 'お名前 姓', 'max_length[45]');
-				$val->add_field('emergency_first_kana_1', 'ふりがな 名', 'hiragana|max_length[45]');
-				$val->add_field('emergency_last_kana_1', 'ふりがな 姓', 'hiragana|max_length[45]');
-				$val->add_field('emergency_phone_1', '電話番号1', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('emergency_cellular_1', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('emergency_first_name_2', 'お名前 名', 'max_length[45]');
-				$val->add_field('emergency_last_name_2', 'お名前 姓', 'max_length[45]');
-				$val->add_field('emergency_first_kana_2', 'ふりがな 名', 'hiragana|max_length[45]');
-				$val->add_field('emergency_last_kana_2', 'ふりがな 姓', 'hiragana|max_length[45]');
-				$val->add_field('emergency_phone_2', '電話番号1', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('emergency_cellular_2', '電話番号2', 'valid_string[numeric]|max_length[45]');
-				$val->add_field('last_name', 'お名前 姓', 'max_length[45]');
-				$val->add_field('first_name', 'お名前 名', 'max_length[45]');
-				$val->add_field('last_kana', 'ふりがな 姓', 'hiragana|max_length[45]');
-				$val->add_field('first_kana', 'ふりがな 名', 'hiragana|max_length[45]');
-				$val->add_field('email', 'メールアドレス', 'valid_email|max_length[512]');
 				break;
 		}
 		return $val;
@@ -230,26 +182,13 @@ class Model_User extends Orm\Model{
 			'blood_type',
 			'birthday',
 			'profile_image',
-			'emergency_first_name_1',
-			'emergency_last_name_1',
-			'emergency_first_kana_1',
-			'emergency_last_kana_1',
-			'emergency_phone_1',
-			'emergency_cellular_1',
-			'emergency_first_name_2',
-			'emergency_last_name_2',
-			'emergency_first_kana_2',
-			'emergency_last_kana_2',
-			'emergency_phone_2',
-			'emergency_cellular_2',
 			'subscription',
 			'email_confirm',
 			'new_email',
 			'email_confirm_token',
 			'email_confirm_expired',
 			'master',
-			'affiliate',
-			'temporary'
+			'affiliate'
 		);
 		foreach($keys as $key) {
 			$ret[$key] = $user[$key];
@@ -405,7 +344,16 @@ class Model_User extends Orm\Model{
 			return \Model_User::format($user);
 		} else {
 			return null;
-		}	
+		}
+	}
+	
+	public static function getTempUserFromEmail($email){
+		return \Model_User::find("first", array(
+			'where' => array(
+				'email' => $email,
+				'email_confirm' => 0
+			)
+		));
 	}
 
 	public static function getOtherUserByEmail($email){
@@ -564,9 +512,24 @@ class Model_User extends Orm\Model{
 		  return null;
 		}
 	}
-
+	
+	public static function updateTempUser($params) {
+		$user = \Model_User::getTempUserFromEmail($params['email']);
+		$old_password = Auth::reset_password($user['username']);
+		Auth::change_password($old_password, $params['password'], $user['username']);
+		$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
+		unset($params['password']);
+		$user->set($params);
+		
+		if($user->save()) {
+			return \Model_User::format($user);
+		} else {
+			return null;
+		}
+	}
+	
         /*
-         * 管理画面から親アカウント登録 
+         * 管理画面から親アカウント登録
          *
          * @access public.static
          * @params array $params
@@ -667,62 +630,6 @@ class Model_User extends Orm\Model{
             }
         }
         
-	public static function saveShareUser($params) {
-		//連絡共有先人数を取得
-		$admins = \Model_User::getAdmins($params['client_user_id']);
-		if(count($admins) >= 3) {
-			throw new Exception('連絡共有先は3人まで共有できます');
-		}
-
-		$params['username'] = sha1($params['email'].mt_rand());
-		$params['password'] = sha1($params['email'].mt_rand());
-		$user = \Model_User::getUserFromEmail($params['email']);
-		list(, $user_id) = Auth::get_user_id();
-		$admin = \Model_User::getUser($user_id);
-		if(isset($user)) {
-			$user = \Model_User::find($user['id']);
-		} else {
-			$id = Auth::create_user(
-	                $params['username'],
-	                $params['password'],
-	                $params['email']);
-
-			$params['email_confirm'] = 0;
-			$params['email_confirm_expired'] = date("Y-m-d H:i:s", strtotime("+1day"));
-			$params['email_confirm_token'] = sha1($params['email'].$params['email_confirm_expired'].mt_rand());
-			unset($params['id']);
-			unset($params['username']);
-			unset($params['password']);
-			unset($params['email']);
-			$user = \Model_User::find($id);
-			$user->set($params);
-			if($user->save()) {
-				$url = Uri::base(false)."user/email_confirm?".Uri::build_query_string(array(
-					'token' => $user['email_confirm_token'],
-				));
-		        $data = array(
-		        			'user'	   => $admin,
-		                    'url'      => $url,
-		                    'name'     => $user['last_name'].'　'.$user['first_name'],
-		                    'date'     => date('Y年m月d日'),
-		                    'address'  => $user['prefecture'].$user['address'],
-		                    'phone'    => $user['phone'],
-		                    'email'    => $user['email'],
-		                );
-				\Model_User::sendEmail(array(
-					'to' => $user['email'],
-					'subject' => "LASHIC サービスご利用、".$admin['last_name'].$admin['first_name']."様からのご招待",
-					'text' => \View::forge('email/user/invite', $data)
-				));
-			}
-		}
-
-		if(isset($user) && isset($params)) {
-			\Model_User::saveClients($user['id'], array($params['client_user_id'] => "true"));
-			return \Model_User::format($user);	
-		}
-		return null;
-	}
 
 	//見守られユーザの自動作成
 	public static function createClient($params) {

@@ -23,21 +23,13 @@
 	<link href="/css/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
 	<link rel="icon" href="/lp/images/favicon.ico">
 	<link rel="apple-touch-icon" href="/lp/images/apple-touch-icon-precomposed.png" />
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128509273-2"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', 'UA-128509273-2');
-	</script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<?php Fuel::load(APPPATH.'/views/google_tag_head.php') ?>
 </head>
 
 <body ontouchstart="">
+<?php Fuel::load(APPPATH.'/views/google_tag_body.php') ?>
 <header class="Header">
 	<ul class="Header__nav">
 		<li class="Header__item">
@@ -564,7 +556,6 @@
 			<label for="password_check" class="checkbox">ログインを保持する</label>
 			<p class="pdt10"><a href="password.html" class="link_normal">パスワードをお忘れの方はこちら</a></p>
 			<p><a href="javascript:void(0)" onclick="document.login.submit();return false;" class="btn_darkBlue mgt10">ログインする</a></p>
-			<p><a href="/register" class="btn_disabledRadius20 mgt10 link_normal2">新規登録する</a></p>
 			<p class="mgt30 center"><a class="link_normal2" href="javascript:$.fancybox.close();">× 閉じる</a></p>
 		</div>
 	</form>

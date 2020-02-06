@@ -1084,12 +1084,11 @@ header { display:block; background-color:#FFF;}
 .logo {
 	width: 111px;
 	height: 26px;
-	margin: 18px 10px 15px;
+	margin: 15px 10px;
 	display: block;
 }
 .logo img {
 	width: 111px;
-	height: 26px;
 }
 /* right nav */
 .hdr_icon_mainMenu {

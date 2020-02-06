@@ -72,7 +72,18 @@ class UsersRules
         }
         return false;
     }
-
+  
+    /*
+     * 仮メールアドレスの存在チェック
+     *
+     * @param string $value
+     * @return boolean
+     */
+      public static function _validation_exist_temp_email($value)
+      {
+        return !is_null(Model_User::getTempUserFromEmail($value));
+      }
+      
     /*
      * メールアドレスとメールアドレス（確認）を比較の為
      * 

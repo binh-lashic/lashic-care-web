@@ -3,9 +3,9 @@
 			<div class="flowSet flow_no06">
 				<ol>
 					<li class="flowBoxOn">カート</li>
-					<li>送付先指定</li>
-					<li>配送とお支払い</li>
-					<li>ご注文確認</li>
+					<li>申込情報 入力</li>
+					<li>お届け先情報 入力</li>
+					<li>支払情報 入力</li>
 					<li>完了</li>
 				</ol>
 			</div>
@@ -15,7 +15,7 @@
 		<section id="contentBoxLarge">
 			<h1 class="contentLarge_h1">カート</h1>
 				<p class="plan_message" style="display:none">プランがカートに入っています。お申し込み手続きを完了させてください。</p>
-				<form action="/shopping/destination" method="post" id="cart_form">
+				<form action="/shopping/applicant" method="post" id="cart_form">
 				<div class="contentLarge_h2">
 					<h2>ご注文</h2>
 				</div>
