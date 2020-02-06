@@ -1,7 +1,7 @@
 <?php
 Lang::load('validation', 'validation');
 return array(
-	'tax_rate' => 0.08,
+	'tax_rate' => 0.10,
 	'shipping' => array(
 		array(
 			'key' => '沖縄',
