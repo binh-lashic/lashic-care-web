@@ -41,14 +41,7 @@
 		<li class="Header__item">
 			<a class="Header__itemInner2--red" href="#Label1">購入する</a>
 		</li>
-		<li class="Header__item">
-			<div class="Header__login">
-				<p class="Header__loginMsg">アカウントをお持ちの方</p>
-				<div class="Header__loginBox">
-					<img src="/lp/images/login.png" alt="">
-					<a class="fancybox" href="#loginOpenWindow">ログイン</a>
-				</div>
-			</div>
+		<li class="Header__item" style="width:0px;margin-right:0px;">
 		</li>
 	</ul>
 </header>
@@ -57,6 +50,22 @@
 	<div class="Login__box">
 		<img class="Login__boxInnerImg" src="/lp/images/login.png" alt="">
 		<a href="#loginOpenWindow" class="Login__boxInnerText fancybox">ログイン</a>
+	</div>
+</div>
+<div class="Catch">
+	<div class="Catch__contents">
+		<section class="Catch__section">
+			<h1 class="Catch__ttl">
+				<img class="Catch__ttlInner" src="/lp/images/lp1-top.png" alt="">
+				<img class="Catch__ttlInner" src="/lp/images/lp1-top-message.png" alt="">
+				<img class="Catch__ttlInner" src="/lp/images/lp1-top-company1.png" alt="">
+				<img class="Catch__ttlInner" src="/lp/images/lp1-top-company2.png" alt="">
+				<img class="Catch__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
+			</h1>
+			<h1 class="Catch__ttl">
+				<img class="Catch__ttlInner--sp" src="/lp/images/lp1-top.png" alt="">
+			</h1>
+		</section>
 	</div>
 </div>
 <div class="Toptext">
@@ -226,20 +235,6 @@
 				</div>
 				<p class="PlicePlan__caution">※別途消費税がかかります</p>
 				<img class="PlicePlan__more" src="/lp/images/container6_h2.png" alt="">
-				<p class="PlicePlan__toBeRelease">※リリース予定</p>
-				<div class="PlicePlan__imgOuter">
-					<div class="PlicePlan__imgCover">
-						<p>リリース予定</p>
-					</div>
-					<img class="PlicePlan__sleepImg" src="/lp/images/lashic_sleep.png" alt="">
-				</div>
-				<div class="PlicePlan__imgOuter--2">
-					<div class="PlicePlan__imgCover">
-						<p>リリース予定</p>
-					</div>
-					<img class="PlicePlan__callImg" src="/lp/images/lashic_call.png" alt="">
-				</div>
-
 			</section>
 		</div>
 	</div>
@@ -335,17 +330,6 @@
 			センサー等で取得した情報を機械学習やAI（人工知能）を活用して解析し、介護事業で蓄積したノウハウや傾向を組み合わせ、高齢者の”これから”を想定し、お知らせします。
 			個々の高齢者にあった介護サービスや福祉用具の利用などを紹介し、ご家族の負担を軽減します。
 		</p>
-	</div>
-</div>
-
-<div class="Media">
-	<div class="Media__contents">
-		<p class="Media__txt">多くのメディアに取り上げられています</p>
-	</div>
-	<div class="Media__box">
-		<img class="Media__news" src="/lp/images/media_news.png" alt="">
-		<img class="Media__market" src="/lp/images/media_market.png" alt="">
-		<img class="Media__award" src="/lp/images/media_award.png" alt="">
 	</div>
 </div>
 
