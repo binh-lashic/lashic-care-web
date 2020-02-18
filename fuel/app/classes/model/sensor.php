@@ -1120,14 +1120,14 @@ SQL;
 	    				if($user_sensor[$params['type']."_alert"] == 1) {
 	    					$devices = \Model_Device::find('all', array(
 	    						'where' => array(
-									'user_id' => $user['id'],
-									['push_id', '!=', NULL]
+	    							'user_id' => $user['id'],
+	    							['push_id', '!=', NULL]
 	    						),
 	    					));
 	    					foreach($devices as $device) {
 	    						\Model_Alert::pushAlert(array(
 	    							'push_id' => $device['push_id'],
-									'os' => $device['os'],
+	    							'os' => $device['os'],
 	    							'title' => $params['title'],
 	    							'text' => $params['description'],
 	    						));
