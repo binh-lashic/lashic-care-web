@@ -282,11 +282,12 @@
 
 .Catch__button{
   display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 960px) {
   .Catch__button {
-    display: none;
+    flex-wrap: wrap;
   }
 }
 
@@ -296,7 +297,7 @@
 
 @media screen and (max-width: 960px) {
   .Catch__buttonImg {
-    display: none;
+    
   }
 }
 
@@ -421,19 +422,6 @@
   }
 }
 
-.LP1Top__company__ttl {
-  width: 70%;
-  border-bottom: 2px solid #CCC;
-  padding-bottom: 30px;
-  margin: 0 auto;
-}
-
-@media screen and (max-width: 960px) {
-  .LP1Top__company__ttl {
-    display: none;
-  }
-}
-
 .LP1Top__sub__ttl {
   width: 50%;
   margin: 0 auto;
@@ -441,7 +429,7 @@
 
 @media screen and (max-width: 960px) {
   .LP1Top__sub__ttl {
-    display: none;
+    width: 70%;
   }
 }
 
@@ -454,7 +442,7 @@
 
 @media screen and (max-width: 960px) {
   .LP1Top__ttlInner, .LP1Top__ttlInner--sp {
-    display: none;
+    
   }
 }
 

@@ -68,9 +68,6 @@
 			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
 			</h1>
-			<h1 class="LP1Top__ttl">
-				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp1-top.png" alt="">
-			</h1>
 		</section>
 	</div>
 </div>
