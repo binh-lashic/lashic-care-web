@@ -392,7 +392,7 @@
 }
 
 .LP1Top__section {
-  padding-top: 30px;
+  padding-top: 60px;
 }
 
 @media screen and (max-width: 960px) {
@@ -405,6 +405,7 @@
   width: 70%;
   border-bottom: 2px solid #CCC;
   padding-bottom: 30px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 960px) {
@@ -415,6 +416,7 @@
 
 .LP1Top__sub__ttl {
   width: 50%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 960px) {
@@ -427,6 +429,7 @@
   width: 100%;
   display: block;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 960px) {
