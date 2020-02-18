@@ -20,7 +20,6 @@ class Model_Device extends Orm\Model{
 	public static function saveDevice($params) {
 		$device = \Model_Device::find("first", array(
 			'where' => array(
-					'user_id' => $params['user_id'],
 					'device_id' => $params['device_id'],
 				)
 		));

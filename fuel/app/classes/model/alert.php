@@ -257,25 +257,15 @@ class Model_Alert extends Orm\Model{
     }
 
 	public static function pushAlert($params) {
+		\Config::load('push',true);
 		try {
-	        \Config::load('push',true);
-	        $push = new \ApnsPHP_Push(
-	            (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
-	            \Config::get('push.push_pem_file')
-	        );
-	        $push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
-	        $push->connect();
-
-	        $message = new ApnsPHP_Message_Custom($params['push_id']);
-	        $message->setTitle($params['title']);
-	        $message->setText($params['text']);
-	        $message->setSound();
-	        $message->setExpiry(30);
-	        $push->add($message);
-	        $push->send();
-	        $push->disconnect();
+			if ($params['os'] == 'ios') {
+				self::sendPushToIOS($params);
+			} else {
+				self::sendPushToAndroid($params);
+			}
 		} catch(Exception $e) {
-
+			Log::error($e->getMessage());
 		}
 	}
 
@@ -296,5 +286,60 @@ class Model_Alert extends Orm\Model{
 			'humid' => self::TYPE_HUMIDITY
 		])->execute();
 		return $rows->get('count');
+	}
+	/**
+	 * sendPushToIOS
+	 *
+	 * @param [array] $params
+	 * @return void
+	 */
+	private static function sendPushToIos($params)
+	{
+		$push = new \ApnsPHP_Push(
+			(\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
+			\Config::get('push.push_pem_file')
+		);
+		$push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
+		$push->connect();
+
+		$message = new ApnsPHP_Message_Custom($params['push_id']);
+		$message->setTitle($params['title']);
+		$message->setText($params['text']);
+		$message->setSound();
+		$message->setExpiry(30);
+		$push->add($message);
+		$push->send();
+		$push->disconnect();
+	}
+	/**
+	 * sendPushToAndroid
+	 * @param [array] $params
+	 * @return void
+	 */
+	private static function sendPushToAndroid ($params) {
+		$headers = array(
+			'Content-Type:application/json',
+			'Authorization:key='.\Config::get('push.firebase_server_key')
+		);
+		$notification = [
+			'title' => $params['title'], 
+			'body' => $params['text'], 
+			'sound' => 'default', 
+			'icon' => 'ic_stat_notification'
+		];
+		$arrayToSend = [
+			'to' => $params['push_id'], 
+			'notification' => $notification,
+			'priority' =>'high'
+			];
+		$handle = curl_init();
+	    curl_setopt($handle, CURLOPT_URL, \Config::get('push.firebase_url'));
+	    curl_setopt($handle, CURLOPT_POST, true);
+	    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+	    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+	    curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($arrayToSend));
+	    curl_exec($handle);
+	    curl_close($handle);
 	}
 }

@@ -228,6 +228,21 @@ class Controller_Api_User extends Controller_Api
 		return $this->result();
 	}
 
+	public function post_disable_device()
+	{
+		$params = [
+			'device_id' => Input::param("device_id"),
+			'push_id' => NULL
+		];
+		$res = \Model_Device::saveDevice($params);
+		if($res) {
+			$this->result = array(
+				'message' => 'デバイスIDの削除に成功しました',
+				'data' => true,
+			);				
+		}
+	}
+
 	public function post_save_clients() {
 		return $this->_save_clients();
 	}

@@ -82,16 +82,17 @@ class Controller_Api_Alert extends Controller_Api
 					$devices = \Model_Device::find('all', array(
 						'where' => array(
 							'user_id' => $user_sensor['user_id'],
+							['push_id', '!=', NULL]
 						),
 					));
 					foreach($devices as $device) {
 						\Model_Alert::pushAlert(array(
 							'push_id' => $device['push_id'],
+							'os' => $device['os'],
 							'text' => $alert['description'],
 						));
 					}
 				}
-				print_r();
 			}
 		}
 		exit;
