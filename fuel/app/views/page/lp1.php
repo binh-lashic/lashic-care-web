@@ -74,9 +74,6 @@
 		</section>
 	</div>
 </div>
-<div class="Toptext">
-	<p class="Toptext__innerMsg">介護施設を経営する<br class="sp_br">インフィックグループが開発・運営</p>
-</div>
 <!-- PC用 -->
 <div class="swiper-container slider1">
 	<!-- Additional required wrapper -->
@@ -114,6 +111,12 @@
 <div class="Catch">
 	<div class="Catch__contents">
 		<section class="Catch__section">
+			<div class="Catch__button">
+				<a href="#lashic"><img class="Catch__buttonImg" src="/lp/images/button-lashic.png" alt="LASHICとは？"></a>
+				<a href="#detail"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
+				<a href="#howto"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
+				<a href="#price"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
+			</div>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner" src="/lp/images/h1.png" alt=""></h1>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner--sp" src="/lp/images/h1-sp.png" alt=""></h1>
 			<p class="Catch__txt">離れていても<span>親の異変</span>を確実に<span>検知</span>!</p>
@@ -140,7 +143,7 @@
 	</div>
 </div>
 
-<div class="LashicRoom">
+<div class="LashicRoom" id="lashic">
 	<div class="LashicRoom__contents">
 		<section class="LashicRoom__section">
 			<h1 class="LashicRoom__ttl"><img class="LashicRoom__ttlInner" src="/lp/images/lashic_room.png" alt="">
@@ -172,7 +175,7 @@
 			<h2 class="BestPlice__ttl2">
 				<img class="BestPlice__ttl2Inner" src="/lp/images/container4_title2.png" alt="">
 			</h2>
-			<p class="BestPlice__plan">料金プラン</p>
+			<p class="BestPlice__plan" id="price">料金プラン</p>
 			<div class="BestPlice__priceList">
 				<img class="BestPlice__priceImg" src="/lp/images/container4_price1.png" alt="">
 				<p class="BestPlice__plus">&#x271a;</p>
@@ -289,7 +292,7 @@
 -->
 
 <!-- pc用 -->
-<div class="swiper-container slider2">
+<div class="swiper-container slider2" id="howto">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->

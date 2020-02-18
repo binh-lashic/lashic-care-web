@@ -280,6 +280,28 @@
   }
 }
 
+.Catch__button{
+  display: flex;
+}
+
+@media screen and (max-width: 960px) {
+  .Catch__button {
+    display: none;
+  }
+}
+
+.Catch__buttonImg{
+  width: 15%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+@media screen and (max-width: 960px) {
+  .Catch__buttonImg {
+    display: none;
+  }
+}
+
 .Catch__Catch_ttl {
   width: 100%;
   margin: 0 auto;
