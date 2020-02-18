@@ -52,18 +52,18 @@
 		<a href="#loginOpenWindow" class="Login__boxInnerText fancybox">ログイン</a>
 	</div>
 </div>
-<div class="Catch">
-	<div class="Catch__contents">
-		<section class="Catch__section">
-			<h1 class="Catch__ttl">
-				<img class="Catch__ttlInner" src="/lp/images/lp1-top.png" alt="">
-				<img class="Catch__ttlInner" src="/lp/images/lp1-top-message.png" alt="">
-				<img class="Catch__ttlInner" src="/lp/images/lp1-top-company1.png" alt="">
-				<img class="Catch__ttlInner" src="/lp/images/lp1-top-company2.png" alt="">
-				<img class="Catch__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
+<div class="LP1Top">
+	<div class="LP1Top__contents">
+		<section class="LP1Top__section">
+			<h1 class="LP1Top__ttl">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message1.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-company1.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-company2.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
 			</h1>
-			<h1 class="Catch__ttl">
-				<img class="Catch__ttlInner--sp" src="/lp/images/lp1-top.png" alt="">
+			<h1 class="LP1Top__ttl">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp1-top.png" alt="">
 			</h1>
 		</section>
 	</div>
