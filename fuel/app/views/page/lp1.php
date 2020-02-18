@@ -45,13 +45,6 @@
 		</li>
 	</ul>
 </header>
-<div class="Login">
-	<p class="Login__message">アカウントをお持ちの方はこちら</p>
-	<div class="Login__box">
-		<img class="Login__boxInnerImg" src="/lp/images/login.png" alt="">
-		<a href="#loginOpenWindow" class="Login__boxInnerText fancybox">ログイン</a>
-	</div>
-</div>
 <div class="LP1Top">
 	<div class="LP1Top__contents">
 		<section class="LP1Top__section">
