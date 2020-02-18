@@ -401,6 +401,28 @@
   }
 }
 
+.LP1Top__company__ttl {
+  width: 70%;
+  border-bottom: 2px solid #CCC;
+  padding-bottom: 30px;
+}
+
+@media screen and (max-width: 960px) {
+  .LP1Top__company__ttl {
+    display: none;
+  }
+}
+
+.LP1Top__sub__ttl {
+  width: 50%;
+}
+
+@media screen and (max-width: 960px) {
+  .LP1Top__sub__ttl {
+    display: none;
+  }
+}
+
 .LP1Top__ttlInner, .LP1Top__ttlInner--sp {
   width: 100%;
   display: block;

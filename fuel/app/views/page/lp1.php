@@ -58,8 +58,13 @@
 			<h1 class="LP1Top__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top.png" alt="">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message1.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message2.png" alt="">
+			</h>
+			<h1 class="LP1Top__company__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-company1.png" alt="">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-company2.png" alt="">
+			</h1>
+			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
 			</h1>
 			<h1 class="LP1Top__ttl">
