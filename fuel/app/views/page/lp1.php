@@ -141,7 +141,8 @@
 	</div>
 </div>
 
-<div class="LashicRoom" id="lashic">
+<div class="MovePoint" id="lashic"></div>
+<div class="LashicRoom">
 	<div class="LashicRoom__contents">
 		<section class="LashicRoom__section">
 			<h1 class="LashicRoom__ttl"><img class="LashicRoom__ttlInner" src="/lp/images/lashic_room.png" alt="">
@@ -164,7 +165,8 @@
 	</div>
 </div>
 
-<div class="BestPlice" id="plan">
+<div class="MovePoint" id="plan"></div>
+<div class="BestPlice">
 	<div class="BestPlice__contents">
 		<section class="BestPlice__section">
 			<h1 class="BestPlice__ttl">
@@ -173,7 +175,8 @@
 			<h2 class="BestPlice__ttl2">
 				<img class="BestPlice__ttl2Inner" src="/lp/images/container4_title2.png" alt="">
 			</h2>
-			<p class="BestPlice__plan" id="price">料金プラン</p>
+			<div class="MovePoint" id="plice"></div>
+			<p class="BestPlice__plan">料金プラン</p>
 			<div class="BestPlice__priceList">
 				<img class="BestPlice__priceImg" src="/lp/images/container4_price1.png" alt="">
 				<p class="BestPlice__plus">&#x271a;</p>
@@ -288,8 +291,9 @@
 </form>
 -->
 
+<div class="MovePoint" id="howto"></div>
 <!-- pc用 -->
-<div class="swiper-container slider2" id="howto">
+<div class="swiper-container slider2">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->

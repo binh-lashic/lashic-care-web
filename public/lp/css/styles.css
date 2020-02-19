@@ -402,6 +402,18 @@
   border: 1px solid #fa7800;
 }
 
+.MovePoint {
+  margin-top: -100px;
+  visibility: hidden;
+  float: left;
+}
+
+@media screen and (max-width: 960px) {
+  .MovePoint {
+    margin-top: -65px;
+  }
+}
+
 .LP1Top {
   width: 100%;
   height: auto;
