@@ -292,12 +292,16 @@
 }
 
 .Catch__buttonImg{
-  width: 95%;
+  width: 100%;
+}
+
+.Catch__buttonLink {
+  width: 100%;
 }
 
 @media screen and (max-width: 960px) {
-  .Catch__buttonImg {
-    
+  .Catch__buttonLink {
+    width: 45%;
   }
 }
 
@@ -442,7 +446,7 @@
 }
 
 @media screen and (max-width: 960px) {
-  .LP1Top__sub__ttl {
+  .LP1Top__logo__ttl {
     width: 90%;
   }
 }
