@@ -50,20 +50,24 @@
 	<div class="LP1Top__contents">
 		<section class="LP1Top__section">
 			<h1 class="LP1Top__ttl">
-				<img class="LP1Top__image" src="/lp/images/lp1-top.png" alt="">
-				<img class="LP1Top__image--sp" src="/lp/images/lp1-top-sp.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp1-top-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message1.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-message1-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message2.png" alt="">
+			  <img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-message2-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__logo__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-logo.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-logo-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-award.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-award-sp.png" alt="">
 			</h1>
 		</section>
 	</div>
