@@ -111,8 +111,8 @@
 		<section class="Catch__section">
 			<div class="Catch__button">
 				<a href="#lashic" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-lashic.png" alt="LASHICとは？"></a>
-				<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
-				<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
+				<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
+				<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
 				<a href="#price" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
 			</div>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner" src="/lp/images/h1.png" alt=""></h1>
@@ -175,7 +175,7 @@
 			<h2 class="BestPlice__ttl2">
 				<img class="BestPlice__ttl2Inner" src="/lp/images/container4_title2.png" alt="">
 			</h2>
-			<div class="MovePoint" id="plice"></div>
+			<div class="MovePoint" id="price"></div>
 			<p class="BestPlice__plan">料金プラン</p>
 			<div class="BestPlice__priceList">
 				<img class="BestPlice__priceImg" src="/lp/images/container4_price1.png" alt="">
