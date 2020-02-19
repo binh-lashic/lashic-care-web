@@ -58,7 +58,6 @@
 			</h1>
 			<h1 class="LP1Top__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message2.png" alt="">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-logo.png" alt="">
 			</h1>
 			<h1 class="LP1Top__logo__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-logo.png" alt="">
