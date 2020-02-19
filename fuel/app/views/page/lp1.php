@@ -53,14 +53,14 @@
 				<img class="LP1Top__image--sp" src="/lp/images/lp1-top-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message1.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message1.png" alt="">
 			</h1>
 			<h1 class="LP1Top__ttl">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message2.png" alt="">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-company1.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message2.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-logo.png" alt="">
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-award.png" alt="">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-award.png" alt="">
 			</h1>
 		</section>
 	</div>
