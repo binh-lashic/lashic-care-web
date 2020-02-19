@@ -438,6 +438,17 @@
   }
 }
 
+.LP1Top__button__ttl {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 960px) {
+  .LP1Top__button__ttl {
+    width: 100%;
+  }
+}
+
 .LP1Top__logo__ttl {
   width: 70%;
   margin: 0 auto;

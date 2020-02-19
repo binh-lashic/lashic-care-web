@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
+	<link rel="canonical" href="https://lashic.jp/">
 	<meta name="format-detection" content="telephone=no">
 	<title>LASHIC｜INFICの高齢者見守りセンサー</title>
 	<meta name="keywords" content="高齢者,見守り,カメラ,LASHIC">
@@ -41,26 +42,39 @@
 		<li class="Header__item">
 			<a class="Header__itemInner2--red" href="#Label1">購入する</a>
 		</li>
-		<li class="Header__item">
-			<div class="Header__login">
-				<p class="Header__loginMsg">アカウントをお持ちの方</p>
-				<div class="Header__loginBox">
-					<img src="/lp/images/login.png" alt="">
-					<a class="fancybox" href="#loginOpenWindow">ログイン</a>
-				</div>
-			</div>
+		<li class="Header__item" style="width:0px;margin-right:0px;">
 		</li>
 	</ul>
 </header>
-<div class="Login">
-	<p class="Login__message">アカウントをお持ちの方はこちら</p>
-	<div class="Login__box">
-		<img class="Login__boxInnerImg" src="/lp/images/login.png" alt="">
-		<a href="#loginOpenWindow" class="Login__boxInnerText fancybox">ログイン</a>
+<div class="LP1Top">
+	<div class="LP1Top__contents">
+		<section class="LP1Top__section">
+			<h1 class="LP1Top__ttl">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp3-top.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp3-top-sp.png" alt="">
+			</h1>
+			<h1 class="LP1Top__button__ttl">
+				<div class="Catch__button">
+					<a href="#lashic" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-lashic.png" alt="LASHICとは？"></a>
+					<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
+					<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
+					<a href="#price" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
+				</div>
+			</h1>
+			<h1 class="LP1Top__ttl">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-message2.png" alt="">
+			  <img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-message2-sp.png" alt="">
+			</h1>
+			<h1 class="LP1Top__logo__ttl">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-logo.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-logo-sp.png" alt="">
+			</h1>
+			<h1 class="LP1Top__sub__ttl">
+				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-award.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-award-sp.png" alt="">
+			</h1>
+		</section>
 	</div>
-</div>
-<div class="Toptext">
-	<p class="Toptext__innerMsg">介護施設を経営する<br class="sp_br">インフィックグループが開発・運営</p>
 </div>
 <!-- PC用 -->
 <div class="swiper-container slider1">
@@ -125,7 +139,7 @@
 	</div>
 </div>
 
-<div class="LashicRoom">
+<div class="LashicRoom" id="lashic">
 	<div class="LashicRoom__contents">
 		<section class="LashicRoom__section">
 			<h1 class="LashicRoom__ttl"><img class="LashicRoom__ttlInner" src="/lp/images/lashic_room.png" alt="">
@@ -157,7 +171,7 @@
 			<h2 class="BestPlice__ttl2">
 				<img class="BestPlice__ttl2Inner" src="/lp/images/container4_title2.png" alt="">
 			</h2>
-			<p class="BestPlice__plan">料金プラン</p>
+			<p class="BestPlice__plan" id="price">料金プラン</p>
 			<div class="BestPlice__priceList">
 				<img class="BestPlice__priceImg" src="/lp/images/container4_price1.png" alt="">
 				<p class="BestPlice__plus">&#x271a;</p>
@@ -225,21 +239,6 @@
 					</div>
 				</div>
 				<p class="PlicePlan__caution">※別途消費税がかかります</p>
-				<img class="PlicePlan__more" src="/lp/images/container6_h2.png" alt="">
-				<p class="PlicePlan__toBeRelease">※リリース予定</p>
-				<div class="PlicePlan__imgOuter">
-					<div class="PlicePlan__imgCover">
-						<p>リリース予定</p>
-					</div>
-					<img class="PlicePlan__sleepImg" src="/lp/images/lashic_sleep.png" alt="">
-				</div>
-				<div class="PlicePlan__imgOuter--2">
-					<div class="PlicePlan__imgCover">
-						<p>リリース予定</p>
-					</div>
-					<img class="PlicePlan__callImg" src="/lp/images/lashic_call.png" alt="">
-				</div>
-
 			</section>
 		</div>
 	</div>
@@ -288,7 +287,7 @@
 -->
 
 <!-- pc用 -->
-<div class="swiper-container slider2">
+<div class="swiper-container slider2" id="howto">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
@@ -338,17 +337,6 @@
 	</div>
 </div>
 
-<div class="Media">
-	<div class="Media__contents">
-		<p class="Media__txt">多くのメディアに取り上げられています</p>
-	</div>
-	<div class="Media__box">
-		<img class="Media__news" src="/lp/images/media_news.png" alt="">
-		<img class="Media__market" src="/lp/images/media_market.png" alt="">
-		<img class="Media__award" src="/lp/images/media_award.png" alt="">
-	</div>
-</div>
-
 <!-- Detail start -->
 
 <div class="Detail" id="detail">
@@ -384,64 +372,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="Detail__content">
-			<div class="Detail__headOuter">
-				<p class="Detail__head">睡眠センサー</p>
-			</div>
-			<div class="Detail__body">
-				<div class="Detail__imgOuter">
-					<img src="/lp/images/lashicsleep.png" alt="">
-				</div>
-				<div class="Detail__txtOuter">
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">基本機能</dt>
-						<dd class="Detail__boxTxt">ベッド上のお客様の状態をリアルタイムで把握、<br>マットレスの下に敷くだけの簡単設置</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">主なチェック項目</dt>
-						<dd class="Detail__boxTxt">［動作］ ベッド上の在・不在、体動</dd>
-						<dd class="Detail__boxTxt">［バイタル］ 脈拍（※）</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">開発中の機能</dt>
-						<dd class="Detail__boxTxt">［バイタル］ 呼吸（※）</dd>
-						<dd class="Detail__boxTxt">［姿勢］ 座位・仰臥位、左寄り・右寄り</dd>
-						<dd class="Detail__boxTxt">［睡眠］ 睡眠・覚醒、睡眠快適度</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">その他機能</dt>
-						<dd class="Detail__boxTxt">厚みのあるマットレスでも動作可能 / 介護ベッドの背上げ、脚上げにも対応 / ビニールカバー付きで水濡れも対応 /
-							LASHIC-room の子機として作動</dd>
-						<p class="Detail__boxCaution">※推定値であり医療的データではありません</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="Detail__content">
-			<div class="Detail__headOuter">
-				<p class="Detail__head">ナースコール</p>
-			</div>
-			<div class="Detail__body">
-				<div class="Detail__imgOuter">
-					<img src="/lp/images/lashiccall.png" alt="">
-				</div>
-				<div class="Detail__txtOuter">
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">基本機能</dt>
-						<dd class="Detail__boxTxt">・緊急通知ボタンを触るとスマホにアラートを送信</dd>
-						<dd class="Detail__boxTxt">・通知を受けたスマホと通話が可能（LASHIC-call 側は受話操作不要、自動で通話開始）</dd>
-						<dd class="Detail__boxTxt">・スピーカー＆マイクを内蔵のため、ハンズフリーで通話可能（転倒などで動けない場合にも有効）</dd>
-						<dd class="Detail__boxTxt">・音量が足りない場合は外部スピーカーも接続可能</dd>
-						<dd class="Detail__boxTxt">・スマホ側からはいつでも通話可能</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">その他機能</dt>
-						<dd class="Detail__boxTxt">・番号ボタンに任意のスマホを割り当て可能。通常の通話用に利用可能</dd>
-						<dd class="Detail__boxTxt">・インターネット回線を利用するため、通話料は発生しない</dd>
-					</div>
-				</div>
-			</div>
-		</div>
+
 
 		<!-- Block再定義 Spec start -->
 		<div class="Detail__content Spec">
@@ -474,38 +405,6 @@
 						<dd class="Spec__boxTxt">なし</dd>
 						<dt class="Spec__boxTtl">セキュリティ</dt>
 						<dd class="Spec__boxTxt">親機間無線通信・128bitAES</dd>
-						<dt class="Spec__boxTtl">付属品</dt>
-						<dd class="Spec__boxTxt">AC アダプタ、マニュアル</dd>
-					</div>
-				</div>
-				<div class="Spec__boxOuter">
-					<p class="Spec__head">睡眠センサー　LASHIC-sleep</p>
-					<div class="Spec__box">
-						<dt class="Spec__boxTtl">外形寸法／重量</dt>
-						<dd class="Spec__boxTxt">H14.4cm×W11.4cm×D3.0cm /<br>本体 160g　ケーブル100g　ベッドセンサー1.6kg</dd>
-						<dt class="Spec__boxTtl">電源／消費電力</dt>
-						<dd class="Spec__boxTxt">AV100V　50/60Hz / 11.5W</dd>
-						<dt class="Spec__boxTtl">外部端子</dt>
-						<dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi
-							通信対応）、<br>ベッドセンサー接続用 3.5Φステレオミニジャック</dd>
-						<dt class="Spec__boxTtl">セキュリティ</dt>
-						<dd class="Spec__boxTxt">インターネット接続・ＳＳＬ、子機間無線通信・128bitAES</dd>
-						<dt class="Spec__boxTtl">付属品</dt>
-						<dd class="Spec__boxTxt">AC アダプタ、マニュアル、オーディオケーブル、<br>ベッドセンサー</dd>
-					</div>
-				</div>
-				<div class="Spec__boxOuter">
-					<p class="Spec__head">双方向通話型 ナースコール　LASHIC-call</p>
-					<div class="Spec__box">
-						<dt class="Spec__boxTtl">外形寸法／重量</dt>
-						<dd class="Spec__boxTxt">H14.4cm×W11.4cm×D3.0cm　／　200g</dd>
-						<dt class="Spec__boxTtl">電源／消費電力</dt>
-						<dd class="Spec__boxTxt">AV100V　50/60Hz / 11.5W</dd>
-						<dt class="Spec__boxTtl">外部端子</dt>
-						<dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi
-							通信対応）、<br>ベッドセンサー接続用 3.5Φステレオミニジャック</dd>
-						<dt class="Spec__boxTtl">セキュリティ</dt>
-						<dd class="Spec__boxTxt">インターネット接続・ＳＳＬ</dd>
 						<dt class="Spec__boxTtl">付属品</dt>
 						<dd class="Spec__boxTxt">AC アダプタ、マニュアル</dd>
 					</div>
