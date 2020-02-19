@@ -67,7 +67,7 @@
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp-top-award.png" alt="">
-				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-award-sp.png" alt="">
+				<img class="LP1Top__ttlInner--sp" src="/lp/images/lp-top-award.png" alt="">
 			</h1>
 		</section>
 	</div>
