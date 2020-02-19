@@ -241,7 +241,6 @@
 					</div>
 				</div>
 				<p class="PlicePlan__caution">※別途消費税がかかります</p>
-				<img class="PlicePlan__more" src="/lp/images/container6_h2.png" alt="">
 			</section>
 		</div>
 	</div>
@@ -375,64 +374,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="Detail__content">
-			<div class="Detail__headOuter">
-				<p class="Detail__head">睡眠センサー</p>
-			</div>
-			<div class="Detail__body">
-				<div class="Detail__imgOuter">
-					<img src="/lp/images/lashicsleep.png" alt="">
-				</div>
-				<div class="Detail__txtOuter">
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">基本機能</dt>
-						<dd class="Detail__boxTxt">ベッド上のお客様の状態をリアルタイムで把握、<br>マットレスの下に敷くだけの簡単設置</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">主なチェック項目</dt>
-						<dd class="Detail__boxTxt">［動作］ ベッド上の在・不在、体動</dd>
-						<dd class="Detail__boxTxt">［バイタル］ 脈拍（※）</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">開発中の機能</dt>
-						<dd class="Detail__boxTxt">［バイタル］ 呼吸（※）</dd>
-						<dd class="Detail__boxTxt">［姿勢］ 座位・仰臥位、左寄り・右寄り</dd>
-						<dd class="Detail__boxTxt">［睡眠］ 睡眠・覚醒、睡眠快適度</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">その他機能</dt>
-						<dd class="Detail__boxTxt">厚みのあるマットレスでも動作可能 / 介護ベッドの背上げ、脚上げにも対応 / ビニールカバー付きで水濡れも対応 /
-							LASHIC-room の子機として作動</dd>
-						<p class="Detail__boxCaution">※推定値であり医療的データではありません</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="Detail__content">
-			<div class="Detail__headOuter">
-				<p class="Detail__head">ナースコール</p>
-			</div>
-			<div class="Detail__body">
-				<div class="Detail__imgOuter">
-					<img src="/lp/images/lashiccall.png" alt="">
-				</div>
-				<div class="Detail__txtOuter">
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">基本機能</dt>
-						<dd class="Detail__boxTxt">・緊急通知ボタンを触るとスマホにアラートを送信</dd>
-						<dd class="Detail__boxTxt">・通知を受けたスマホと通話が可能（LASHIC-call 側は受話操作不要、自動で通話開始）</dd>
-						<dd class="Detail__boxTxt">・スピーカー＆マイクを内蔵のため、ハンズフリーで通話可能（転倒などで動けない場合にも有効）</dd>
-						<dd class="Detail__boxTxt">・音量が足りない場合は外部スピーカーも接続可能</dd>
-						<dd class="Detail__boxTxt">・スマホ側からはいつでも通話可能</dd>
-					</div>
-					<div class="Detail__box">
-						<dt class="Detail__boxTtl">その他機能</dt>
-						<dd class="Detail__boxTxt">・番号ボタンに任意のスマホを割り当て可能。通常の通話用に利用可能</dd>
-						<dd class="Detail__boxTxt">・インターネット回線を利用するため、通話料は発生しない</dd>
-					</div>
-				</div>
-			</div>
-		</div>
+
 
 		<!-- Block再定義 Spec start -->
 		<div class="Detail__content Spec">
@@ -465,38 +407,6 @@
 						<dd class="Spec__boxTxt">なし</dd>
 						<dt class="Spec__boxTtl">セキュリティ</dt>
 						<dd class="Spec__boxTxt">親機間無線通信・128bitAES</dd>
-						<dt class="Spec__boxTtl">付属品</dt>
-						<dd class="Spec__boxTxt">AC アダプタ、マニュアル</dd>
-					</div>
-				</div>
-				<div class="Spec__boxOuter">
-					<p class="Spec__head">睡眠センサー　LASHIC-sleep</p>
-					<div class="Spec__box">
-						<dt class="Spec__boxTtl">外形寸法／重量</dt>
-						<dd class="Spec__boxTxt">H14.4cm×W11.4cm×D3.0cm /<br>本体 160g　ケーブル100g　ベッドセンサー1.6kg</dd>
-						<dt class="Spec__boxTtl">電源／消費電力</dt>
-						<dd class="Spec__boxTxt">AV100V　50/60Hz / 11.5W</dd>
-						<dt class="Spec__boxTtl">外部端子</dt>
-						<dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi
-							通信対応）、<br>ベッドセンサー接続用 3.5Φステレオミニジャック</dd>
-						<dt class="Spec__boxTtl">セキュリティ</dt>
-						<dd class="Spec__boxTxt">インターネット接続・ＳＳＬ、子機間無線通信・128bitAES</dd>
-						<dt class="Spec__boxTtl">付属品</dt>
-						<dd class="Spec__boxTxt">AC アダプタ、マニュアル、オーディオケーブル、<br>ベッドセンサー</dd>
-					</div>
-				</div>
-				<div class="Spec__boxOuter">
-					<p class="Spec__head">双方向通話型 ナースコール　LASHIC-call</p>
-					<div class="Spec__box">
-						<dt class="Spec__boxTtl">外形寸法／重量</dt>
-						<dd class="Spec__boxTxt">H14.4cm×W11.4cm×D3.0cm　／　200g</dd>
-						<dt class="Spec__boxTtl">電源／消費電力</dt>
-						<dd class="Spec__boxTxt">AV100V　50/60Hz / 11.5W</dd>
-						<dt class="Spec__boxTtl">外部端子</dt>
-						<dd class="Spec__boxTxt">有線ＬＡＮ（RJ-45、100base-TX）、<br>ＵＳＢ（USB2.0 対応、LTE 通信、Wi-Fi
-							通信対応）、<br>ベッドセンサー接続用 3.5Φステレオミニジャック</dd>
-						<dt class="Spec__boxTtl">セキュリティ</dt>
-						<dd class="Spec__boxTxt">インターネット接続・ＳＳＬ</dd>
 						<dt class="Spec__boxTtl">付属品</dt>
 						<dd class="Spec__boxTxt">AC アダプタ、マニュアル</dd>
 					</div>
