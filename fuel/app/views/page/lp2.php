@@ -113,7 +113,7 @@
 				<a href="#lashic" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-lashic.png" alt="LASHICとは？"></a>
 				<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
 				<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
-				<a href="#price" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
+				<a href="#plan" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
 			</div>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner" src="/lp/images/h1.png" alt=""></h1>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner--sp" src="/lp/images/h1-sp.png" alt=""></h1>
@@ -141,7 +141,8 @@
 	</div>
 </div>
 
-<div class="LashicRoom" id="lashic">
+<div class="MovePoint" id="lashic"></div>
+<div class="LashicRoom">
 	<div class="LashicRoom__contents">
 		<section class="LashicRoom__section">
 			<h1 class="LashicRoom__ttl"><img class="LashicRoom__ttlInner" src="/lp/images/lashic_room.png" alt="">
@@ -288,8 +289,9 @@
 </form>
 -->
 
+<div class="MovePoint" id="howto"></div>
 <!-- pc用 -->
-<div class="swiper-container slider2" id="howto">
+<div class="swiper-container slider2">
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->

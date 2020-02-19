@@ -165,8 +165,7 @@
 	</div>
 </div>
 
-<div class="MovePoint" id="plan"></div>
-<div class="BestPlice">
+<div class="BestPlice" id="plan">
 	<div class="BestPlice__contents">
 		<section class="BestPlice__section">
 			<h1 class="BestPlice__ttl">
