@@ -433,6 +433,20 @@
   }
 }
 
+.LP1Top__logo__ttl {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  border-bottom: solid 3px #f2f2f2;
+}
+
+@media screen and (max-width: 960px) {
+  .LP1Top__sub__ttl {
+    width: 90%;
+  }
+}
+
 .LP1Top__ttlInner, .LP1Top__ttlInner--sp {
   width: 100%;
   display: block;
