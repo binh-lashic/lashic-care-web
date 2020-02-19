@@ -49,7 +49,8 @@
 	<div class="LP1Top__contents">
 		<section class="LP1Top__section">
 			<h1 class="LP1Top__ttl">
-				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top.png" alt="">
+				<img class="LP1Top__image" src="/lp/images/lp1-top.png" alt="">
+				<img class="LP1Top__image--sp" src="/lp/images/lp1-top-sp.png" alt="">
 			</h1>
 			<h1 class="LP1Top__sub__ttl">
 				<img class="LP1Top__ttlInner" src="/lp/images/lp1-top-message1.png" alt="">
