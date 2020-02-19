@@ -111,8 +111,8 @@
 		<section class="Catch__section">
 			<div class="Catch__button">
 				<a href="#lashic" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-lashic.png" alt="LASHICとは？"></a>
-				<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
-				<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
+				<a href="#howto" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-howto.png" alt="仕組み"></a>
+				<a href="#detail" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-construction.png" alt="使い方"></a>
 				<a href="#plan" class="Catch__buttonLink"><img class="Catch__buttonImg" src="/lp/images/button-price.png" alt="料金プラン"></a>
 			</div>
 			<h1 class="Catch__ttl"><img class="Catch__ttlInner" src="/lp/images/h1.png" alt=""></h1>
