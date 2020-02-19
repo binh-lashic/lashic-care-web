@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
+	<link rel="canonical" href="https://lashic.jp/">
 	<meta name="format-detection" content="telephone=no">
 	<title>LASHIC｜INFICの高齢者見守りセンサー</title>
 	<meta name="keywords" content="高齢者,見守り,カメラ,LASHIC">
