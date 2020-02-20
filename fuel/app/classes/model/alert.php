@@ -1,4 +1,8 @@
 <?php 
+use paragraph1\phpFCM\Client;
+use paragraph1\phpFCM\Message;
+use paragraph1\phpFCM\Recipient\Device;
+use paragraph1\phpFCM\Notification;
 class Model_Alert extends Orm\Model{
 
 	// alert_type の定数
@@ -259,7 +263,7 @@ class Model_Alert extends Orm\Model{
 	public static function pushAlert($params) {
 		\Config::load('push',true);
 		try {
-			if ($params['os'] == 'ios') {
+			if (self::isIOS($params['os'])) {
 				self::sendPushToIOS($params);
 			} else {
 				self::sendPushToAndroid($params);
@@ -293,7 +297,7 @@ class Model_Alert extends Orm\Model{
 	 * @param [array] $params
 	 * @return void
 	 */
-	private static function sendPushToIos($params)
+	private static function sendPushToIOS($params)
 	{
 		$push = new \ApnsPHP_Push(
 			(\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
@@ -317,29 +321,19 @@ class Model_Alert extends Orm\Model{
 	 * @return void
 	 */
 	private static function sendPushToAndroid ($params) {
-		$headers = array(
-			'Content-Type:application/json',
-			'Authorization:key='.\Config::get('push.firebase_server_key')
-		);
-		$notification = [
-			'title' => $params['title'], 
-			'body' => $params['text'], 
-			'sound' => 'default', 
-			'icon' => 'ic_stat_notification'
-		];
-		$arrayToSend = [
-			'to' => $params['push_id'], 
-			'notification' => $notification,
-			'priority' =>'high'
-			];
-		$handle = curl_init();
-	    curl_setopt($handle, CURLOPT_URL, \Config::get('push.firebase_url'));
-	    curl_setopt($handle, CURLOPT_POST, true);
-	    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
-	    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-	    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
-	    curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($arrayToSend));
-	    curl_exec($handle);
-	    curl_close($handle);
+		$client = new Client();
+		$client->setApiKey(\Config::get('push.firebase_server_key'));
+		$client->injectHttpClient(new \GuzzleHttp\Client());
+		$note = new Notification($params['title'], $params['text']);
+		$note->setIcon('ic_stat_notification');
+		$message = new Message();
+		$message->addRecipient(new Device($params['push_id']));
+		$message->setNotification($note);
+		$client->send($message);
+	}
+	
+	private static function isIOS($os)
+	{
+		return ($os == 'ios');
 	}
 }

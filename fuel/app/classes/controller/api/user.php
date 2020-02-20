@@ -237,7 +237,7 @@ class Controller_Api_User extends Controller_Api
 		$res = \Model_Device::saveDevice($params);
 		if($res) {
 			$this->result = array(
-				'message' => 'デバイスIDの削除に成功しました',
+				'message' => 'push_idの無効化に成功しました',
 				'data' => true,
 			);				
 		}
