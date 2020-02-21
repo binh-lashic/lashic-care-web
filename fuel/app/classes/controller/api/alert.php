@@ -79,6 +79,16 @@ class Controller_Api_Alert extends Controller_Api
 			));
 			foreach($user_sensors as $user_sensor) {
 				if($user_sensor[$alert['type']."_alert"] == 1) {
+					$client_users = Model_User::getClientUserWithUserSensors($user_sensor['sensor_id'], $user_sensor['user_id']);
+					$user_name = NULL;
+					if ($client_users) {
+						$user_name = $client_users['first_name'].$client_users['last_name'];
+					} else {
+						$user = \Model_User::find($id);
+						if ($user) {
+							$user_name = $user['first_name'].$user['last_name'];
+						}
+					}
 					$devices = \Model_Device::find('all', array(
 						'where' => array(
 							'user_id' => $user_sensor['user_id'],
@@ -89,7 +99,7 @@ class Controller_Api_Alert extends Controller_Api
 						\Model_Alert::pushAlert(array(
 							'push_id' => $device['push_id'],
 							'os' => $device['os'],
-							'text' => $alert['description'],
+							'text' => Model_Alert::getBodyMessage($user_name, $alert['description']),
 						));
 					}
 				}

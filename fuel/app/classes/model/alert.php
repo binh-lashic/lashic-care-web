@@ -336,4 +336,15 @@ class Model_Alert extends Orm\Model{
 	{
 		return ($os == 'ios');
 	}
+	/**
+	 * getBodyMessage
+	 * @param String $user_name, $body
+	 * @return String
+	 */
+	public static function getBodyMessage($user_name, $body) {
+		if ($user_name) {
+			return  "ユーザー名： ".$user_name."\n".$body;
+		}
+		return  $body;
+	}
 }
