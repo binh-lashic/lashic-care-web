@@ -113,4 +113,31 @@ class Controller_Page extends Controller_Template
         }
         return View::forge('page/lp', $data);
     }
+    
+    public function action_lp1() {
+        $data = array();
+        if(!empty(Session::get('login_error'))) {
+            $data['login_error'] = Session::get('login_error');
+            Session::delete('login_error');
+        }
+        return View::forge('page/lp1', $data);
+    }
+    
+    public function action_lp2() {
+        $data = array();
+        if(!empty(Session::get('login_error'))) {
+            $data['login_error'] = Session::get('login_error');
+            Session::delete('login_error');
+        }
+        return View::forge('page/lp2', $data);
+    }
+    
+    public function action_lp3() {
+        $data = array();
+        if(!empty(Session::get('login_error'))) {
+            $data['login_error'] = Session::get('login_error');
+            Session::delete('login_error');
+        }
+        return View::forge('page/lp3', $data);
+    }
 }

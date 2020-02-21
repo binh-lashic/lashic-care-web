@@ -9,4 +9,7 @@ return array(
 	'contents/kiyaku' => 'page/terms',
 	'contents/privacy' => 'page/privacy',
 	's/:affiliate' => 'shopping',
+	'lp1'  => 'page/lp1',
+	'lp2'  => 'page/lp2',
+	'lp3'  => 'page/lp3',
 );
