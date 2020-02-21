@@ -1119,10 +1119,10 @@ SQL;
 	    			if(isset($user_sensor)) {
 	    				if($user_sensor[$params['type']."_alert"] == 1) {
 							// 見守られユーザを取得
-							$user_name = $user['first_name'].$user['last_name'];
+	    					$user_name = $user['first_name'].$user['last_name'];
 	    					$client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
 	    					if ($client_users) {
-								$user_name = $client_users['first_name'].$client_users['last_name'];
+	    						$user_name = $client_users['first_name'].$client_users['last_name'];
 	    						$description = sprintf(
 	    							Config::get("template.alert_mail_format"),
 	    							$client_users['last_name'],
