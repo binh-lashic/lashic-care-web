@@ -19,7 +19,9 @@ $(window).on('load', function() {
     });
     
 });
-
+function formatValue (value) {
+    return Math.round(value * 10) / 10;
+}
 /*
  * ローディング画像表示
  */
@@ -354,7 +356,7 @@ $activity_columnChart_data = function(data) {
         if(value.activity === undefined) {
             values.push(0);
         } else {
-            values.push(Number(value.activity));
+            values.push(Number(formatValue(value.activity)));
         }
         datas.push(values);
     });
@@ -446,7 +448,7 @@ $sleep_columnChart_data = function(data) {
             var num = Number(value.sleeping_time);
             var hour = num / 60;
 
-            values.push(hour);
+            values.push(formatValue(hour));
         }
         datas.push(values);
     });
