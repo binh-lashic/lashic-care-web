@@ -52,4 +52,17 @@ return array(
       'timeout'  => null,
     ),
   ),
+  //施設版のDB
+  'facility' => array(
+    'type' => 'pdo', // PDO を利用
+    'connection' => array(
+      'dsn'        => 'sqlsrv:server=tcp:lashic-test-infic-facility-db.database.windows.net,1433;Database=lashic-test-infic_facility_db-2019-1-22',
+      'username'   => 'facility-admin',
+      'password'   => 'xvgdwgf2L1gVAYSF',
+      'persistent' => false,
+    ),
+    'identifier' => '',
+    'table_prefix' => '',
+    'charset' => NULL,
+  ),
 );
