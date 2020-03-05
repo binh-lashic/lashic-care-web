@@ -326,6 +326,7 @@ class Model_Alert extends Orm\Model{
 		$client->injectHttpClient(new \GuzzleHttp\Client());
 		$note = new Notification($params['title'], $params['text']);
 		$note->setIcon('ic_stat_notification');
+		$note->setClickAction('net.infic.lashic.care.ui.activity.AlertListActivity');
 		$message = new Message();
 		$message->addRecipient(new Device($params['push_id']));
 		$message->setNotification($note);
