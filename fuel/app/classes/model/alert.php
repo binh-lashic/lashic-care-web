@@ -1,4 +1,8 @@
 <?php 
+use paragraph1\phpFCM\Client;
+use paragraph1\phpFCM\Message;
+use paragraph1\phpFCM\Recipient\Device;
+use paragraph1\phpFCM\Notification;
 class Model_Alert extends Orm\Model{
 
 	// alert_type の定数
@@ -257,25 +261,15 @@ class Model_Alert extends Orm\Model{
     }
 
 	public static function pushAlert($params) {
+		\Config::load('push',true);
 		try {
-	        \Config::load('push',true);
-	        $push = new \ApnsPHP_Push(
-	            (\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
-	            \Config::get('push.push_pem_file')
-	        );
-	        $push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
-	        $push->connect();
-
-	        $message = new ApnsPHP_Message_Custom($params['push_id']);
-	        $message->setTitle($params['title']);
-	        $message->setText($params['text']);
-	        $message->setSound();
-	        $message->setExpiry(30);
-	        $push->add($message);
-	        $push->send();
-	        $push->disconnect();
+			if (self::isIOS($params['os'])) {
+				self::sendPushToIOS($params);
+			} else {
+				self::sendPushToAndroid($params);
+			}
 		} catch(Exception $e) {
-
+			Log::error($e->getMessage());
 		}
 	}
 
@@ -296,5 +290,62 @@ class Model_Alert extends Orm\Model{
 			'humid' => self::TYPE_HUMIDITY
 		])->execute();
 		return $rows->get('count');
+	}
+	/**
+	 * sendPushToIOS
+	 *
+	 * @param [array] $params
+	 * @return void
+	 */
+	private static function sendPushToIOS($params)
+	{
+		$push = new \ApnsPHP_Push(
+			(\Fuel::$env === \Fuel::PRODUCTION || \Fuel::$env === \Fuel::STAGING) ? \ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION : \ApnsPHP_Abstract::ENVIRONMENT_SANDBOX,
+			\Config::get('push.push_pem_file')
+		);
+		$push->setRootCertificationAuthority(\Config::get('push.authority_pem_file'));
+		$push->connect();
+
+		$message = new ApnsPHP_Message_Custom($params['push_id']);
+		$message->setTitle($params['title']);
+		$message->setText($params['text']);
+		$message->setSound();
+		$message->setExpiry(30);
+		$push->add($message);
+		$push->send();
+		$push->disconnect();
+	}
+	/**
+	 * sendPushToAndroid
+	 * @param [array] $params
+	 * @return void
+	 */
+	private static function sendPushToAndroid ($params) {
+		$client = new Client();
+		$client->setApiKey(\Config::get('push.firebase_server_key'));
+		$client->injectHttpClient(new \GuzzleHttp\Client());
+		$note = new Notification($params['title'], $params['text']);
+		$note->setIcon('ic_stat_notification');
+		$note->setClickAction('net.infic.lashic.care.ui.activity.AlertListActivity');
+		$message = new Message();
+		$message->addRecipient(new Device($params['push_id']));
+		$message->setNotification($note);
+		$client->send($message);
+	}
+	
+	private static function isIOS($os)
+	{
+		return ($os == 'ios');
+	}
+	/**
+	 * getBodyMessage
+	 * @param String $user_name, $body
+	 * @return String
+	 */
+	public static function getBodyMessage($user_name, $body) {
+		if ($user_name) {
+			return  "ユーザー名： ".$user_name."\n".$body;
+		}
+		return  $body;
 	}
 }

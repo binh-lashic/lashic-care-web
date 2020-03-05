@@ -1118,22 +1118,11 @@ SQL;
 	    			))->to_array();
 	    			if(isset($user_sensor)) {
 	    				if($user_sensor[$params['type']."_alert"] == 1) {
-	    					$devices = \Model_Device::find('all', array(
-	    						'where' => array(
-	    							'user_id' => $user['id'],
-	    						),
-	    					));
-	    					foreach($devices as $device) {
-	    						\Model_Alert::pushAlert(array(
-	    							'push_id' => $device['push_id'],
-	    							'title' => $params['title'],
-	    							'text' => $params['description'],
-	    						));
-	    					}
-
-	    					// 見守られユーザを取得
+							// 見守られユーザを取得
+	    					$user_name = $user['first_name'].$user['last_name'];
 	    					$client_users = Model_User::getClientUserWithUserSensors($this->id, $user['id']);
 	    					if ($client_users) {
+	    						$user_name = $client_users['first_name'].$client_users['last_name'];
 	    						$description = sprintf(
 	    							Config::get("template.alert_mail_format"),
 	    							$client_users['last_name'],
@@ -1144,6 +1133,20 @@ SQL;
 	    							'email' => $user['email'],
 	    							'title' => $params['title'],
 	    							'description' => $description,
+	    						));
+							}
+							$devices = \Model_Device::find('all', array(
+	    						'where' => array(
+	    							'user_id' => $user['id'],
+	    							['push_id', '!=', NULL]
+	    						),
+	    					));
+	    					foreach($devices as $device) {
+	    						\Model_Alert::pushAlert(array(
+	    							'push_id' => $device['push_id'],
+	    							'os' => $device['os'],
+	    							'title' => $params['title'],
+	    							'text' => Model_Alert::getBodyMessage($user_name, $params['description']),
 	    						));
 	    					}  	    					
 	    				}
