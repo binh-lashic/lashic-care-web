@@ -57,7 +57,8 @@ if(isset($contracts)) {
 					<td><?php echo $contract['end_date']; ?></td>
 					<td><?php echo $contract['shipping_count']; ?></td>
 					<td><?php echo $contract['sensor_count']; ?></td>
-					<td><?php echo $contract['affiliate']; ?></td>
+					<td><?php echo $contract['store_name']; ?><br>
+                        <?php echo $contract['agent_name']; ?></td>
 					<td>
 <?php
 if($contract['type'] != 'initial') {

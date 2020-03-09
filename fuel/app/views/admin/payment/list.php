@@ -30,7 +30,8 @@ if(isset($payments)) {
 					<td class="text-right"><?php echo number_format($payment['shipping']); ?>円</td>
 					<td><?php echo $payment['shipping_count']; ?></td>
 					<td><?php echo $payment['sensor_count']; ?></td>
-					<td><?php echo $payment['affiliate']; ?></td>
+					<td><?php echo $payment['store_name']; ?><br>
+                        <?php echo $payment['agent_name']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/payment?id=<?php echo $payment['id']; ?>">契約を確認</a>						
 					</td>
