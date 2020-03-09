@@ -3,7 +3,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[agents](
-    [store_id] [int] IDENTITY(1,1) NOT NULL,
+    [store_id] [int] NOT NULL,
 	[agent_code] [nvarchar] NOT NULL,
 	[agent_name] [nvarchar] NOT NULL
 )
