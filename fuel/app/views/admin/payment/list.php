@@ -31,7 +31,7 @@ if(isset($payments)) {
 					<td><?php echo $payment['shipping_count']; ?></td>
 					<td><?php echo $payment['sensor_count']; ?></td>
 					<td><?php echo $payment['store_name']; ?><br>
-                        <?php echo $payment['agent_name']; ?></td>
+					    <?php echo $payment['agent_name']; ?></td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="/admin/payment?id=<?php echo $payment['id']; ?>">契約を確認</a>						
 					</td>
