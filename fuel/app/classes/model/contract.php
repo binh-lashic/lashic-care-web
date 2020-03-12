@@ -38,6 +38,7 @@ class Model_Contract extends Orm\Model{
         'prefecture',
         'address',
         'affiliate',
+        'agent_code',
         'updated_at',
         'created_at'
     );

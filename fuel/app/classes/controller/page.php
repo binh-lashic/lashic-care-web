@@ -111,7 +111,7 @@ class Controller_Page extends Controller_Template
             $data['login_error'] = Session::get('login_error');
             Session::delete('login_error');
         }
-        Cookie::set('affiliate', Input::get('agent_code'));
+        Session::set('agent_code', Input::get('agent_code'));
         return View::forge('page/lp', $data);
     }
     

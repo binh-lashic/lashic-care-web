@@ -18,3 +18,4 @@ CREATE TABLE [dbo].[stores](
 	[updated_at] [datetime] NULL
 )
 GO
+ALTER TABLE [dbo].[contracts] ADD agent_code nvarchar(50) NULL
