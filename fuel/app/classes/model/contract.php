@@ -74,7 +74,9 @@ class Model_Contract extends Orm\Model{
     );
 
     public function getSearch($params) {
-        $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.end_date,c.status,u.last_name,u.first_name,p.title,p.type,st.store_name,ag.agent_name,count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
+        $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.end_date,c.status,
+                u.last_name,u.first_name,p.title,p.type,st.store_name,ag.agent_name,
+                count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM contracts c ".
                " LEFT JOIN users u ON c.user_id = u.id ".
                " LEFT JOIN plans p ON c.plan_id = p.id ".
@@ -90,8 +92,9 @@ class Model_Contract extends Orm\Model{
         if(isset($params['client_user_id'])) {
             $sql .= " AND c.client_user_id = ".$params['client_user_id'];
         }
-        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,c.end_date,c.status,u.last_name,u.first_name,p.title,p.type,st.store_name,ag.agent_name,u.last_name,u.first_name ".
-               " ORDER BY c.id DESC;";
+        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,c.end_date,c.status,u.last_name,
+                u.first_name,p.title,p.type,st.store_name,ag.agent_name,u.last_name,u.first_name ".
+                " ORDER BY c.id DESC;";
 
         $query = DB::query($sql);
         $_results = $query->execute();
@@ -103,7 +106,9 @@ class Model_Contract extends Orm\Model{
     }
 
     public function getClients($params) {
-        $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.client_user_id,u.last_name,u.first_name,u.last_kana,u.first_kana,p.title,c.affiliate,p.type,st.store_name,ag.agent_name,count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
+        $sql = "SELECT c.id,c.price,c.shipping,c.start_date,c.renew_date,c.client_user_id,u.last_name,
+                u.first_name,u.last_kana,u.first_kana,p.title,c.affiliate,p.type,st.store_name,ag.agent_name,
+                count(s.shipping_date) AS shipping_count,count(s.id) AS sensor_count ".
                " FROM contracts c ".
                " LEFT JOIN users u ON c.client_user_id = u.id ".
                " LEFT JOIN plans p ON c.plan_id = p.id ".
@@ -115,8 +120,9 @@ class Model_Contract extends Orm\Model{
         if(isset($params['user_id'])) {
             $sql .= " AND c.user_id = ".$params['user_id'];
         }
-        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,c.client_user_id,u.last_name,u.first_name,u.last_kana,u.first_kana,p.title,p.type,st.store_name,ag.agent_name ".
-               " ORDER BY c.id DESC;";
+        $sql .= " GROUP BY c.id,c.price,c.shipping,c.start_date,c.renew_date,c.client_user_id,u.last_name,
+                u.first_name,u.last_kana,u.first_kana,p.title,p.type,st.store_name,ag.agent_name ".
+                " ORDER BY c.id DESC;";
 
         $query = DB::query($sql);
         $results = $query->execute();

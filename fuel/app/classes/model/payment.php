@@ -75,8 +75,8 @@ class Model_Payment extends Orm\Model{
         LEFT JOIN stores st ON ag.store_id = st.id
         LEFT JOIN users u ON c.user_id = u.id
         WHERE pay.price > 0
-        GROUP BY pay.id,pay.price,c.affiliate,u.last_name,u.first_name,st.store_name,ag.agent_name
-        ;";
+        GROUP BY pay.id,pay.price,c.affiliate,u.last_name,
+                 u.first_name,st.store_name,ag.agent_name;";
         $query = DB::query($sql);
         $results = $query->execute();
         return $results;
