@@ -240,6 +240,9 @@ class Controller_Shopping extends Controller_Base
                     if(!empty(Cookie::get("affiliate"))) {
                         $params['affiliate'] = Cookie::get("affiliate");
                     }
+                    if(!empty(Session::get("agent_code"))) {
+                        $params['agent_code'] = Session::get("agent_code");
+                    }
                     $contract->set($params);
                     
                     if($contract->save()) {
@@ -283,6 +286,7 @@ class Controller_Shopping extends Controller_Base
             Session::delete("plans");
             Session::delete("destination");
             Session::delete('applicant');
+            Session::delete("agent_code");
             Cookie::delete("affiliate");
         } else {
             echo '不正な処理です';
