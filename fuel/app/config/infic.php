@@ -527,6 +527,8 @@ return array(
 		"f" => "女性",
 	),
 
+    'years' => array_combine(range(2016, 2020), range(2016, 2020)),
+
 	'months' => array_combine(range(1, 12), range(1, 12)),
 
 	'days' => array_combine(range(1, 31), range(1, 31)),
