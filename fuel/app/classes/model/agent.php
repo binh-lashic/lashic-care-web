@@ -96,6 +96,29 @@ class Model_Agent extends Orm\Model{
         return \Model_Agent::formatFilterData($results);
     }
 
+    public function getCsvData($params) {
+        $query = DB::select('c.id,c.price,u.last_name,u.first_name,p.title,p.type,st.store_name,ag.agent_name,pay.date')
+                    ->from(['contracts', 'c'])
+                    ->join(['users', 'u'], 'LEFT')->on('c.user_id', '=', 'u.id')
+                    ->join(['plans', 'p'], 'LEFT')->on('c.plan_id', '=', 'p.id')
+                    ->join(['agents', 'ag'], 'LEFT')->on('c.agent_code', '=', 'ag.agent_code')
+                    ->join(['stores', 'st'], 'LEFT')->on('ag.store_id', '=', 'st.id')
+                    ->join(['payments', 'pay'])->on('c.user_id', '=', 'pay.user_id')
+                    ->where('p.type', '!=', 'discount');
+                    if($params['from']){
+                        $query = $query->where('pay.date', 'between', array($params['from'], $params['to']));
+                    }
+                    if($params['store']){
+                        $query = $query->where('st.store_name', '=', $params['store']);
+                    }
+                    if($params['agent']){
+                        $query = $query->where('ag.agent_name', '=', $params['agent']);
+                    }
+                    $query = $query->order_by('pay.date','DESC')
+                    ->execute()->as_array();
+        return $query;
+    }
+
     public function getStores() {
         $sql = "SELECT store_name AS name FROM stores";
         $query = DB::query($sql);
