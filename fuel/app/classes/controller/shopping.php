@@ -196,6 +196,7 @@ class Controller_Shopping extends Controller_Base
                 'member_id' => $member_id
             ));
             if($payment->save()) {
+                $this->data["payment_id"] = $payment->id;
                 if(!Session::get('monitor')) {
                     $result = \Model_GMO::entry(array(
                         'order_id' => $payment->id,
@@ -292,7 +293,7 @@ class Controller_Shopping extends Controller_Base
         
         $this->template->title = 'ご注文完了';
         $this->data['breadcrumbs'] = array("カート", $this->template->title);
-        $this->template->header = View::forge('header', $this->data);
+        $this->template->header = View::forge('header_complete', $this->data);
         $this->template->content = View::forge('shopping/complete', $this->data);
     }
   
