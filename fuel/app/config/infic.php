@@ -339,7 +339,7 @@ return array(
 					'description' => '人感センサーが室内の動きを捉え、就寝したかどうか判断します。',
 				)
 		),
-                'alert_mail_format' => '%s%s さんの%s',
+		'alert_mail_format' => '%s%s さんの%s',
 	),
 	'report_list_count' => 10,
 	'sendgrid' => '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',
@@ -527,25 +527,25 @@ return array(
 		"f" => "女性",
 	),
 
-    'years' => array_combine(range(2016, 2020), range(2016, 2020)),
+	'years' => array_combine(range(2016, 2020), range(2016, 2020)),
 
 	'months' => array_combine(range(1, 12), range(1, 12)),
 
 	'days' => array_combine(range(1, 31), range(1, 31)),
-    
+
 	'sensor_type' => [
 		'parent' => 'Gateway',
 		'sensor' => 'LASHIC-room',
 		'bedsensor' => 'LASHIC-sleep',
 		'wifi' => 'Wi-Fi',
 	],
-    
+
 	'blood_type' => [
-                'A' => 'A型' ,
-                'B' => 'B型',
-                'O' => 'O型',
-                'AB' => 'AB型',
-         ],
+		'A' => 'A型' ,
+		'B' => 'B型',
+		'O' => 'O型',
+		'AB' => 'AB型',
+	],
 	'gmo_error' => [
 		'sys_msg' => 'クレジットカード決済中にエラーが発生しました。エラーコード [%error_code%]。',
 		'client_msg' => '※詳細につきましてはエラーコードをお控えいただきお問い合わせください。'
@@ -560,5 +560,9 @@ return array(
 			'101' => Lang::get('validation.check_image_size',  [':size' => 2]), // Upload::UPLOAD_ERR_MAX_SIZE
 			'103' => Lang::get('validation.check_image_type', [':type' => 'jpg, jpeg, gif, png']) // Upload::UPLOAD_ERR_EXT_NOT_WHITELISTED
 		]
-	]	 
+	],
+	'display_limit' => [
+		'ten' => 10,
+		'hundred' => 100
+	]
 );

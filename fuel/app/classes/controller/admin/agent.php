@@ -6,7 +6,7 @@ class Controller_Admin_Agent extends Controller_Admin
     {
         $params = array();
         $params['page'] = $data['page'] = Input::param('page') ?: 1;
-        $params['limit'] = 100;
+        $params['limit'] = Config::get('display_limit.hundred');
         $params['store'] = Input::param('store');
         $params['agent'] = Input::param('agent');
         $params['from'] = date('Y-m-01', strtotime(Input::param('from_year').sprintf('%02d', Input::param('from_month')).'01'));
