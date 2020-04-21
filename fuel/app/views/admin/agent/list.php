@@ -23,11 +23,11 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">検索期間</label>
                     <div class="raw col-sm-10">
-                        <?php echo Form::select('from_year', $default_from_year, $years, array('class' => 'select')); ?> 年
-                        <?php echo Form::select('from_month', $default_from_month, $months, array('class' => 'select')); ?> 月
+                        <?php echo Form::select('from_year', $default_from_year, $years, array('class' => 'select', 'style' => 'width:90px')); ?> 年
+                        <?php echo Form::select('from_month', $default_from_month, $months, array('class' => 'select', 'style' => 'width:70px')); ?> 月
                         〜 
-                        <?php echo Form::select('to_year', $default_to_year, $years, array('class' => 'select')); ?> 年
-                        <?php echo Form::select('to_month', $default_to_month, $months, array('class' => 'select')); ?> 月
+                        <?php echo Form::select('to_year', $default_to_year, $years, array('class' => 'select', 'style' => 'width:90px')); ?> 年
+                        <?php echo Form::select('to_month', $default_to_month, $months, array('class' => 'select', 'style' => 'width:70px')); ?> 月
                     </div>
                 </div>
                 <div class="form-group">
