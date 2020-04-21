@@ -70,7 +70,7 @@ class Controller_Admin_Agent extends Controller_Admin
         }
         $this->template = null;
         $this->response = new Response();
-        $this->response->set_header('Content-Type', 'application/csv');
+        $this->response->set_header('Content-Type', 'application/csv; charset=S-JIS');
         $this->response->set_header('Content-Disposition', 'attachment; filename*=UTF-8\'\''.rawurlencode($file_name));
         $this->response->send(true);
         echo Format::forge()->to_csv($data);
