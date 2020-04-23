@@ -70,4 +70,7 @@
 				</div>
 		</section>
 		<!-- /content end　ご注文内容確認 --> 
+<script type="text/javascript">
+	tax_rate = <?php echo Config::get("tax_rate") ?>;
+</script>			
 <script type="text/javascript" src="/js/cart.js"></script>

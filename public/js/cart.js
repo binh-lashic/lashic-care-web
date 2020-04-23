@@ -38,7 +38,7 @@ $(function(){
 						               "<td class=\"right\">" + plan['price'].toLocaleString() + "円（税抜）</td></tr>");
 					subtotal_price += parseInt(plan['price']);
 				});
-				tax = Math.floor(subtotal_price * 0.08);
+				tax = Math.floor(subtotal_price * tax_rate);
 				total_price = subtotal_price + tax;
 			}
 			$("#tax").html(tax.toLocaleString());
