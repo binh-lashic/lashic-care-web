@@ -47,6 +47,8 @@ namespace Internal\BedSensor;
  * アクティブ時間の計測・遅延チェックを行うための親クラス
  */
 abstract class ActiveTimeChecker {
+	use \Trait_Retryable;
+
 	/** 一度に処理するセンサーの数 */
 	const SENSOR_CHUNK_SIZE = 500;
 
@@ -114,7 +116,7 @@ class SleepTimeChecker extends ActiveTimeChecker {
 	 */
 	private function calculate_last_sleep_time_by_sensor($sensor_name, $sleep_time_data, $alert_settings, $alert_thresholds) {
 		# Storage Table から当日分のデータ取得
-		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
+		$sensordaily = $this->retryable_execute(['\Model_Bedsensordaily', 'find'], [$sensor_name, $this->get_row_key()]);
 
 		if (is_null($sensordaily)) {
 			\Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
@@ -149,9 +151,10 @@ class SleepTimeChecker extends ActiveTimeChecker {
 		if ($counter->is_defined_time()) {
 			\Log::debug("sensor_name:[{$sensor_name}] last_sleep_time:[{$counter->get_defined_time()->format('Y-m-d H:i:s')}]", __METHOD__);
 			# Storage Table を更新
-			\Model_Bedsensordaily::update_entity($sensordaily, [
-				'last_sleep_time' => $counter->get_defined_time()
-			]);
+			$this->retryable_execute(
+				['\Model_Bedsensordaily', 'update_entity'],
+				[$sensordaily, ['last_sleep_time' => $counter->get_defined_time()]]
+			);
 			# 処理済みフラグを立てる
 			\Model_Daily_Enable_Sensor::processed_last_sleep_time($sensor_name, $this->get_date_column_value());
 			\Log::debug(\DB::last_query('batch'), __METHOD__);
@@ -260,7 +263,7 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 	 */
 	private function calculate_wake_up_time_by_sensor($sensor_name, $wake_up_time_data, $alert_settings, $alert_thresholds) {
 		# Storage Table から当日分のデータ取得
-		$sensordaily = \Model_Bedsensordaily::find($sensor_name, $this->get_row_key());
+		$sensordaily = $this->retryable_execute(['\Model_Bedsensordaily', 'find'], [$sensor_name, $this->get_row_key()]);
 
 		if (is_null($sensordaily)) {
 			\Log::info("bedsensordaily record not found. sensor_name: [{$sensor_name}]", __METHOD__);
@@ -295,9 +298,10 @@ class WakeUpTimeChecker extends ActiveTimeChecker {
 		if ($counter->is_defined_time()) {
 			\Log::debug("sensor_name:[{$sensor_name}] wake_up_time:[{$counter->get_defined_time()->format('Y-m-d H:i:s')}]", __METHOD__);
 			# Storage Table を更新
-			\Model_Bedsensordaily::update_entity($sensordaily, [
-				'wake_up_time' => $counter->get_defined_time()
-			]);
+			$this->retryable_execute(
+				['Model_Bedsensordaily', 'update_entity'],
+				[$sensordaily, ['wake_up_time' => $counter->get_defined_time()]]
+			);
 			# 処理済みフラグを立てる
 			\Model_Daily_Enable_Sensor::processed_wake_up_time($sensor_name, $this->get_date_column_value());
 			\Log::debug(\DB::last_query('batch'), __METHOD__);
