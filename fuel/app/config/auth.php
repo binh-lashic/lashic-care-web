@@ -21,9 +21,14 @@
  * This will allow you to upgrade fuel without losing your custom config.
  */
 
+$driver = 'Simpleauth';
+if (Str::starts_with(Input::uri(), '/admin')) {
+	$driver = 'Admin';
+}
+
 return array(
-    'driver'                 => 'Simpleauth',
-    'verify_multiple_logins' => true,
+    'driver'                 => $driver,
+    'verify_multiple_logins' => false,
     'salt'                   => 'put_your_salt_here',
     'iterations'             => 10000,
 );

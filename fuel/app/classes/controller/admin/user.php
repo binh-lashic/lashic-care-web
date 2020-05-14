@@ -8,34 +8,10 @@ class Controller_Admin_User extends Controller_Admin
 			print_r($e->getMessage());
 		}
 	}
-
-    public function action_index()
-    {
-        $data = [];
-    	$data['admins'] = Model_User::getAdmins();
-    	$id = Input::param("id");
-    	if($id) {
-            $data['user'] = Model_User::getUser($id);
-            if($data['user']['gender']) {
-                $gender = Config::get('gender');
-                $data['user']['gender'] = $gender[$data['user']['gender']];
-            }
-    	}
-        $this->template->title = '管理ページ トップ';
-        $this->template->content = View::forge('admin/user/index', $data);
-    }
-
-    public function action_login() {
-        if (Auth::force_login(Input::param('id')))
-        {
-            Session::delete('client');
-            Response::redirect('/user');
-        }
-    }
-
-    public function action_list() {
+   
+    public function action_list() { 
         $this->template->title = '管理ページ 親アカウント一覧';
-	$this->template->content = Presenter::forge('admin/user/list');
+	    $this->template->content = Presenter::forge('admin/user/list');
     }
 
     public function action_alert() {
