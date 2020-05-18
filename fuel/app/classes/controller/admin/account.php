@@ -70,7 +70,7 @@ class Controller_Admin_Account extends Controller_Admin
 	 */
 	public function action_edit() {
 		$id = Input::get("id");
-		$this->data = \Model_Accounts::get_Email($id);
+		$this->data = \Model_Accounts::getEmail($id);
 
         	$this->template->title = 'アカウント編集画面';
 		$this->template->content = View::forge('admin/account/edit', $this->data);
