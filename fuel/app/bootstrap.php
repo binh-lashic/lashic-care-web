@@ -20,8 +20,8 @@ require COREPATH.'bootstrap.php';
 	    'Database_Query_Builder' => APPPATH.'classes/database/query/builder.php',
 	    'Database_Query_Builder_Select' => APPPATH.'classes/database/query/builder/select.php',
 	    'Database_Query_Builder_Delete' => APPPATH.'classes/database/query/builder/delete.php',
-		'Database_Connection' => APPPATH.'classes/database/connection.php',
-		'Auth_Login_Simpleauth' => APPPATH.'classes/auth/classes/auth/login/simpleauth.php',
+	    'Database_Connection' => APPPATH.'classes/database/connection.php',
+	    'Auth_Login_Simpleauth' => APPPATH.'classes/auth/classes/auth/login/simpleauth.php',
 	    'Auth_Login_Admin' => APPPATH.'classes/auth/classes/auth/login/admin.php',
 	));
 //}
@@ -37,4 +37,3 @@ foreach ($paths as $path) {
 		$dotenv->load();
 	}
 }
-

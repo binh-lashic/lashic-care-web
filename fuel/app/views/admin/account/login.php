@@ -17,7 +17,6 @@
 		<div class="panel-heading">
 			<div class="panel-title">ラシク管理画面 ログイン</div>
 			<div style="float:right; font-size: 80%; position: relative; top:-10px">
-				<a href="#">パスワードをお忘れの方はこちら</a>
 			</div>
 		</div>
 		<div style="padding-top:30px" class="panel-body">

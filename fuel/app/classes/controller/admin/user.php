@@ -8,11 +8,11 @@ class Controller_Admin_User extends Controller_Admin
 			print_r($e->getMessage());
 		}
 	}
-   
-    public function action_list() { 
-        $this->template->title = '管理ページ 親アカウント一覧';
-	    $this->template->content = Presenter::forge('admin/user/list');
-    }
+
+	public function action_list() {
+		$this->template->title = '管理ページ 親アカウント一覧';
+		$this->template->content = Presenter::forge('admin/user/list');
+	}
 
     public function action_alert() {
         $data = array();
@@ -62,7 +62,7 @@ class Controller_Admin_User extends Controller_Admin
 
     /*
      * 親アカウント登録フォーム
-     * 
+     *
      *  @access public
      *  @param none
      *  @return none
@@ -72,10 +72,10 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->title = '管理ページ 親ユーザ 新規登録';
         $this->template->content = Presenter::forge('admin/user/form');
     }
-    
+
     /*
      * 親アカウント登録完了
-     * 
+     *
      *  @access public
      *  @param none
      *  @return none
@@ -85,20 +85,20 @@ class Controller_Admin_User extends Controller_Admin
         $this->template->title = '管理ページ 親ユーザ 新規登録完了';
         $this->template->content = Presenter::forge('admin/user/complete', 'view', null, 'admin/user/form');
     }
-    
+
     /*
-     * 親アカウントセンサー機器の新規登録 
-     * 
+     * 親アカウントセンサー機器の新規登録
+     *
      * @access public
      */
     public function action_add_sensor()
     {
         $user_id = Input::param("user_id");
-        
+
         $validation = Validation::forge('add_sensor');
         $validation->add_callable('sensorrules');
         $validation->add('sensor_names')
-                    ->add_rule('is_empty');        
+                    ->add_rule('is_empty');
         $validation->set_message('is_empty', '機器IDが入力されていません。');
 
         if($validation->run()) {
@@ -128,11 +128,11 @@ class Controller_Admin_User extends Controller_Admin
                     ));
                 }
             }
-            
+
     	} else {
             Session::set_flash('error', $validation->error_message('sensor_names'));
         }
-        
+
         $user = Model_User::getUser($user_id);
         Response::redirect('/admin/user/client/list?id='.$user['id']);
     }
@@ -157,7 +157,7 @@ class Controller_Admin_User extends Controller_Admin
             }
         }
         $this->template->title = '会員ページ';
-        $this->template->content = View::forge('admin/user/client_list', $data);        
+        $this->template->content = View::forge('admin/user/client_list', $data);
     }
 
     public function action_add_client() {
@@ -166,10 +166,10 @@ class Controller_Admin_User extends Controller_Admin
         \Model_User::saveClients($user_id, $client_user_ids);
         Response::redirect('/admin/user/client_list?user_id='.$user_id);
     }
-    
+
     /*
      * 見守られユーザー登録フォーム
-     * 
+     *
      *  @access public
      *  @param none
      *  @return none
@@ -182,7 +182,7 @@ class Controller_Admin_User extends Controller_Admin
 
     /*
      * 見守られユーザー登録完了
-     * 
+     *
      * @access publbic
      * @param none
      * @return none
@@ -190,12 +190,12 @@ class Controller_Admin_User extends Controller_Admin
     public function action_client_complete()
     {
         $this->template->title = '管理ページ 見守られユーザ 新規登録完了';
-        $this->template->content = Presenter::forge('admin/user/client/complete', 'view', null, 'admin/user/client/form'); 
+        $this->template->content = Presenter::forge('admin/user/client/complete', 'view', null, 'admin/user/client/form');
     }
-    
+
     /*
      * 見守られユーザー削除
-     * 
+     *
      * @access public
      * @params none
      * @return none
@@ -203,17 +203,17 @@ class Controller_Admin_User extends Controller_Admin
     public function action_client_delete()
     {
         $validation = Validation::forge('client_delete');
-        
+
         if(Input::post()) {
             $validation->add('id')
                     ->add_rule('required')
                     ->add_rule('valid_string','numeric');
-            
+
             if($validation->run()) {
                 try {
                     $user_id = Input::param('id');
                     Model_User_Client::deleteClients($user_id);
-                    return Response::redirect('/admin/user/list');                    
+                    return Response::redirect('/admin/user/list');
                 } catch (Exception $e) {
                     \Log::error('見守られユーザー削除に失敗しました。  ['.$e->getMessage().']');
                     throw new Exception($e);

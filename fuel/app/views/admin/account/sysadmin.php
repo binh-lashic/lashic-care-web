@@ -7,8 +7,8 @@
 <div class="row">
 	<div class="col-sm-6">
             <ul class="nav nav-tabs">
-              <li role="presentation" class="active"><a href="">システムアカウント一覧</a></li>
-              <li role="presentation"><a href="/admin/register">システムアカウント作成</a></li>
+              <li role="presentation" class="active"><a href="">システム管理者一覧</a></li>
+              <li role="presentation"><a href="/admin/register">システム管理者作成</a></li>
             </ul>
 	</div>
 </div>
