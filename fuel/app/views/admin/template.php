@@ -20,6 +20,9 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#"><img alt="Brand" src="/images/common/logo.png" style="height:26px;"></a>
         </div>
+		<p class="navbar-text navbar-right">
+			<a href="/admin/logout">ログアウト</a>
+		</p>
       </div><!-- /.container-fluid -->
     </nav>
 
@@ -30,6 +33,7 @@
       <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_User") { echo "class=\"active\""; }?>><a href="/admin/user/list">親アカウント</a></li>
       <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Sensor") { echo "class=\"active\""; }?>><a href="/admin/sensor/list">センサー機器</a></li>
       <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Agent") { echo "class=\"active\""; }?>><a href="/admin/agent/list">代理店実績管理</a></li>
+	  <li role="presentation"<?php if(Request::main()->controller == "Controller_Admin_Account") { echo "class=\"active\""; }?>><a href="/admin/account/index">システム管理者</a></li>
     </ul>
 		<?php echo $content; ?>
 	</div>
