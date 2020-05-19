@@ -2,7 +2,7 @@
 class Model_Accounts extends Orm\Model{
 
 	protected static $_properties = array(
-		'id',
+		    'id',
         	'username',
         	'email',
         	'password',
@@ -38,7 +38,7 @@ class Model_Accounts extends Orm\Model{
      * 選択したアカウントのEmailを取得
      */
     public static function getEmail($user_id) {
-         $email = DB::select('id','email')
+        $email = DB::select('id','email')
         ->from('accounts')
         ->where('id', '=', $user_id)
         ->execute()
